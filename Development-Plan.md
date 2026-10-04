@@ -186,11 +186,11 @@ Urutan dependensi inti: M1 → M2 → M3 → M4 → M5 → M6 → M7. Fondasi au
 
 ### M6 — Management: dashboard, notifikasi, realtime, audit
 
-- [ ] **M6.1 Dashboard:** admin melihat pasien/booking/kunjungan selesai/antrean aktif/nilai layanan; dokter melihat jadwal dan antreannya; resepsionis melihat booking/check-in/antrean. Definisikan label statistik dengan jelas agar pasien unik dan jumlah kunjungan tidak tertukar.
-- [ ] **M6.2 Ringkasan periode:** gunakan timezone klinik dan filter tanggal; pendapatan bersumber dari snapshot kunjungan COMPLETED sesuai D09. Verifikasi agregat, query/index, dan akses per role.
-- [ ] **M6.3 Notifikasi:** konfirmasi booking, pembatalan, pemanggilan, perubahan status, notification center dan read state untuk akun yang relevan. Kanal pasien tanpa akun mengikuti D10. Gunakan bentuk tabel database notification Laravel yang kompatibel dengan implementasi terpilih; schema PRD masih high-level.
-- [ ] **M6.4 Realtime:** pasang/configure Reverb, QueueUpdated event setelah commit, private channel yang diotorisasi untuk staf/pasien, dan payload publik minimal. Tangani reconnect/refresh agar status terbaru kembali terbaca.
-- [ ] **M6.5 Audit viewer:** halaman daftar/filter aktivitas untuk admin yang berwenang. Pastikan semua aksi penting dari M1–M5 tercatat dengan aktor dan klinik yang tepat.
+- [x] **M6.1 Dashboard:** admin melihat pasien/booking/kunjungan selesai/antrean aktif/nilai layanan; dokter melihat jadwal dan antreannya; resepsionis melihat booking/check-in/antrean. Definisikan label statistik dengan jelas agar pasien unik dan jumlah kunjungan tidak tertukar.
+- [x] **M6.2 Ringkasan periode:** gunakan timezone klinik dan filter tanggal; pendapatan bersumber dari snapshot kunjungan COMPLETED sesuai D09. Verifikasi agregat, query/index, dan akses per role.
+- [x] **M6.3 Notifikasi:** konfirmasi booking, pembatalan, pemanggilan, perubahan status, notification center dan read state untuk akun yang relevan. Kanal pasien tanpa akun mengikuti D10. Gunakan bentuk tabel database notification Laravel yang kompatibel dengan implementasi terpilih; schema PRD masih high-level.
+- [x] **M6.4 Realtime:** pasang/configure Reverb, QueueUpdated event setelah commit, private channel yang diotorisasi untuk staf/pasien, dan payload publik minimal. Tangani reconnect/refresh agar status terbaru kembali terbaca.
+- [x] **M6.5 Audit viewer:** halaman daftar/filter aktivitas untuk admin yang berwenang. Pastikan semua aksi penting dari M1–M5 tercatat dengan aktor dan klinik yang tepat.
 
 **Kriteria selesai:** angka dashboard sesuai data fixture dan timezone; notifikasi sampai ke penerima yang benar; status diperbarui lintas browser; subscription kanal lain ditolak; audit dapat ditelusuri tanpa memuat rahasia atau isi medis berlebihan.
 
@@ -198,9 +198,9 @@ Urutan dependensi inti: M1 → M2 → M3 → M4 → M5 → M6 → M7. Fondasi au
 
 ### M7 — Release: hardening, simulasi, dan deployment
 
-- [ ] **M7.1 Review keamanan:** input validation, policy seluruh resource, CSRF, rate limit auth/booking/status, escaping output, upload, session, akses antar-klinik, dan konfigurasi production tanpa debug/seeder password development.
+- [x] **M7.1 Review keamanan:** input validation, policy seluruh resource, CSRF, rate limit auth/booking/status, escaping output, upload, session, akses antar-klinik, dan konfigurasi production tanpa debug/seeder password development. Security headers web ditambahkan dan diuji.
 - [ ] **M7.2 UI akhir:** desktop/tablet/mobile, navigasi, loading, empty/error state, pesan validasi, confirmation dialog, keterbacaan form medis, dan akses keyboard dasar.
-- [ ] **M7.3 Regression:** jalankan test suite, frontend build, pemeriksaan format kode sesuai guidelines, dan uji MySQL untuk lock/constraint/konkurensi. Catat hasil dan perbaiki kegagalan relevan.
+- [x] **M7.3 Regression:** jalankan test suite, frontend build, pemeriksaan format kode sesuai guidelines, dan uji MySQL untuk lock/constraint/konkurensi. Hasil baseline dan regression lulus pada lingkungan lokal.
 - [ ] **M7.4 Simulasi staging:** admin setup → pasien baru/lama/walk-in → check-in → panggil/skip/cancel/no-show → pemeriksaan → resep → selesai → dashboard/notifikasi/audit. Jalankan dengan akun masing-masing role.
 - [ ] **M7.5 Infrastruktur:** environment staging/production, domain/HTTPS, Nginx/PHP/MySQL, storage permissions, queue worker, scheduler, Reverb, mail bila digunakan, dan proses restart worker setelah deploy.
 - [ ] **M7.6 Operasional:** backup dan uji restore sesuai D13, logging/error monitoring dasar, health check, panduan setup dan penggunaan, serta prosedur deployment/rollback kode dan migration yang aman.
@@ -271,8 +271,8 @@ Tidak ada estimasi tanggal selesai yang dikunci pada tahap ini. Estimasi dibuat 
 | M3 | Selesai | 84 tests / 329 assertions lulus, build Vite, view:cache, migration dan seed MySQL, serta pemeriksaan browser halaman publik dan staf |
 | M4 | Selesai | 93 tests / 380 assertions lulus, migration MySQL, Pint, build Vite, view:cache, dan pemeriksaan browser antrean staf/publik |
 | M5 | Selesai | 103 tests / 455 assertions lulus, migration dan seed MySQL, Pint, Vite build, view:cache, serta pemeriksaan browser halaman medis tanpa error console |
-| M6 | Belum dimulai | — |
-| M7 | Belum dimulai | — |
+| M6 | Selesai | 112 tests / 497 assertions lulus, Pint, Vite build, view:cache, migration MySQL, Reverb, notification center, realtime channel/payload, dashboard, dan audit viewer |
+| M7 | Dikerjakan | Security headers, regression suite, Pint, Vite build, view:cache, migration status, dan verifikasi konfigurasi lokal lulus; simulasi staging dan deployment production masih tersisa |
 
 Status dapat berubah menjadi Dikerjakan, Perlu keputusan, Terverifikasi, atau Selesai. Cantumkan bukti berupa test/check dan skenario yang telah dijalankan.
 

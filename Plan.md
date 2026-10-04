@@ -646,14 +646,14 @@ Pasien Dipanggil
 
 ### Tasks
 
-* [ ] Membuat dashboard layout.
-* [ ] Membuat statistik pasien.
-* [ ] Membuat statistik booking.
-* [ ] Membuat statistik kunjungan.
-* [ ] Membuat statistik antrean.
-* [ ] Membuat revenue summary.
-* [ ] Membuat filter tanggal.
-* [ ] Membuat dashboard sesuai role.
+* [x] Membuat dashboard layout.
+* [x] Membuat statistik pasien.
+* [x] Membuat statistik booking.
+* [x] Membuat statistik kunjungan.
+* [x] Membuat statistik antrean.
+* [x] Membuat revenue summary.
+* [x] Membuat filter tanggal.
+* [x] Membuat dashboard sesuai role.
 
 ---
 
@@ -665,19 +665,19 @@ Memberikan informasi kepada pengguna mengenai perubahan penting.
 
 ### MVP
 
-* [ ] Booking berhasil.
-* [ ] Booking dibatalkan.
-* [ ] Pasien dipanggil.
-* [ ] Perubahan status antrean.
+* [x] Booking berhasil.
+* [x] Booking dibatalkan.
+* [x] Pasien dipanggil.
+* [x] Perubahan status antrean.
 
 ### Tasks
 
-* [ ] Membuat migration `notifications`.
-* [ ] Membuat Notification Model.
-* [ ] Membuat Laravel Notification.
-* [ ] Membuat notification center.
-* [ ] Menandai notification sebagai read.
-* [ ] Menghubungkan notification dengan antrean.
+* [x] Membuat migration `notifications`.
+* [x] Membuat Notification Model.
+* [x] Membuat Laravel Notification.
+* [x] Membuat notification center.
+* [x] Menandai notification sebagai read.
+* [x] Menghubungkan notification dengan antrean.
 
 ---
 
@@ -689,13 +689,13 @@ Membuat perubahan antrean dapat diterima tanpa reload halaman.
 
 ### Tasks
 
-* [ ] Install Laravel Reverb.
-* [ ] Konfigurasi broadcasting.
-* [ ] Membuat QueueUpdated Event.
-* [ ] Membuat listener pada Livewire.
-* [ ] Mengirim event ketika antrean berubah.
-* [ ] Mengupdate tampilan antrean secara realtime.
-* [ ] Menguji beberapa browser secara bersamaan.
+* [x] Install Laravel Reverb.
+* [x] Konfigurasi broadcasting.
+* [x] Membuat QueueUpdated Event.
+* [x] Membuat listener pada Livewire.
+* [x] Mengirim event ketika antrean berubah.
+* [x] Mengupdate tampilan antrean secara realtime.
+* [x] Menguji beberapa browser secara bersamaan.
 
 ### Flow
 
@@ -727,16 +727,16 @@ Mencatat aktivitas penting pada sistem.
 
 ### Tasks
 
-* [ ] Membuat migration `audit_logs`.
-* [ ] Membuat AuditLog Model.
-* [ ] Mencatat login.
-* [ ] Mencatat logout.
-* [ ] Mencatat pembuatan pasien.
-* [ ] Mencatat perubahan pasien.
-* [ ] Mencatat pembuatan rekam medis.
-* [ ] Mencatat perubahan data penting.
-* [ ] Membuat halaman audit log.
-* [ ] Membatasi akses audit log hanya untuk role tertentu.
+* [x] Membuat migration `audit_logs`.
+* [x] Membuat AuditLog Model.
+* [x] Mencatat login.
+* [x] Mencatat logout.
+* [x] Mencatat pembuatan pasien.
+* [x] Mencatat perubahan pasien.
+* [x] Mencatat pembuatan rekam medis.
+* [x] Mencatat perubahan data penting.
+* [x] Membuat halaman audit log.
+* [x] Membatasi akses audit log hanya untuk role tertentu.
 
 ---
 

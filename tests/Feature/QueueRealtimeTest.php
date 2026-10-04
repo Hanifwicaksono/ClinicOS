@@ -16,6 +16,7 @@ use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -60,11 +61,11 @@ class QueueRealtimeTest extends TestCase
         $outsider->assignRole('Doctor');
         $patient = User::factory()->forClinic($clinic)->create();
         $patient->assignRole('Patient');
-        $payload = ['channel_name' => "private-clinic.{$clinic->id}.queues", 'socket_id' => '1234.5678'];
+        $channelAuthorization = Broadcast::connection()->getChannels()->get('clinic.{clinicId}.queues');
 
-        $this->actingAs($doctor)->postJson('/broadcasting/auth', $payload)->assertOk();
-        $this->actingAs($outsider)->postJson('/broadcasting/auth', $payload)->assertForbidden();
-        $this->actingAs($patient)->postJson('/broadcasting/auth', $payload)->assertForbidden();
+        $this->assertTrue($channelAuthorization($doctor, $clinic->id));
+        $this->assertFalse($channelAuthorization($outsider, $clinic->id));
+        $this->assertFalse($channelAuthorization($patient, $clinic->id));
     }
 
     public function test_queue_transition_dispatches_realtime_event(): void

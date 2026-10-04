@@ -22,6 +22,12 @@ class NotificationCenterTest extends TestCase
 {
     use DatabaseTruncation;
 
+    protected function tearDown(): void
+    {
+        $this->truncateDatabaseTables();
+        parent::tearDown();
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
