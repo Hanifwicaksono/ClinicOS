@@ -1,12 +1,12 @@
 # PRODUCT REQUIREMENTS DOCUMENT (PRD)
 
-## ClinicFlow — Platform Manajemen Klinik Berbasis SaaS
+## ClinicOS — Platform Manajemen Klinik Berbasis SaaS
 
 **STATUS: DRAFT SEMENTARA**
 
 |                         |                                                                              |
 | ----------------------- | ---------------------------------------------------------------------------- |
-| **Nama Produk**         | ClinicFlow                                                                   |
+| **Nama Produk**         | ClinicOS                                                                     |
 | **Deskripsi**           | Platform manajemen klinik, rekam medis, reservasi, dan antrean berbasis SaaS |
 | **Versi Dokumen**       | v0.1                                                                         |
 | **Disusun oleh**        | Tim Pengembang Sistem                                                        |
@@ -20,13 +20,13 @@
 
 Operasional klinik skala kecil hingga menengah masih sering menggunakan kombinasi pencatatan manual, spreadsheet, aplikasi pesan instan, dan sistem yang terpisah-pisah untuk mengelola pasien, jadwal dokter, antrean, serta rekam medis. Kondisi tersebut dapat menyebabkan data pasien sulit dikelola secara terpusat, proses pendaftaran membutuhkan waktu, dan tenaga administrasi maupun dokter harus melakukan pencatatan berulang.
 
-**ClinicFlow** hadir sebagai platform manajemen klinik berbasis SaaS yang mengintegrasikan proses administrasi dan pelayanan pasien dalam satu sistem. Platform menyediakan manajemen pasien, dokter, jadwal, layanan klinik, booking, nomor antrean, rekam medis, resep, serta dashboard operasional dan keuangan dasar.
+**ClinicOS** hadir sebagai platform manajemen klinik berbasis SaaS yang mengintegrasikan proses administrasi dan pelayanan pasien dalam satu sistem. Platform menyediakan manajemen pasien, dokter, jadwal, layanan klinik, booking, nomor antrean, rekam medis, resep, serta dashboard operasional dan keuangan dasar.
 
-Pada MVP, ClinicFlow dikembangkan sebagai aplikasi web menggunakan arsitektur **full Laravel**, dengan Laravel sebagai framework utama, **Blade + Livewire** sebagai antarmuka, **Tailwind CSS** untuk styling, dan **MySQL** sebagai basis data.
+Pada MVP, ClinicOS dikembangkan sebagai aplikasi web menggunakan arsitektur **full Laravel**, dengan Laravel sebagai framework utama, **Blade + Livewire** sebagai antarmuka, **Tailwind CSS** untuk styling, dan **MySQL** sebagai basis data.
 
-ClinicFlow dirancang agar dapat digunakan oleh beberapa jenis pengguna, yaitu **Clinic Admin, Dokter, Resepsionis, dan Pasien**. Pasien dapat mengakses halaman publik klinik untuk melihat layanan, jadwal dokter, melakukan pendaftaran, serta memperoleh nomor antrean tanpa harus menggunakan aplikasi mobile khusus.
+ClinicOS dirancang agar dapat digunakan oleh beberapa jenis pengguna, yaitu **Clinic Admin, Dokter, Resepsionis, dan Pasien**. Pasien dapat mengakses halaman publik klinik untuk melihat layanan, jadwal dokter, melakukan pendaftaran, serta memperoleh nomor antrean tanpa harus menggunakan aplikasi mobile khusus.
 
-Dalam pengembangan jangka panjang, ClinicFlow akan dikembangkan menjadi platform SaaS multi-klinik yang memungkinkan banyak klinik memiliki akun, website, data, pengguna, serta konfigurasi masing-masing secara terisolasi.
+Dalam pengembangan jangka panjang, ClinicOS akan dikembangkan menjadi platform SaaS multi-klinik yang memungkinkan banyak klinik memiliki akun, website, data, pengguna, serta konfigurasi masing-masing secara terisolasi.
 
 ---
 
@@ -130,7 +130,7 @@ Pasien dapat:
 
 ## 3.5 Super Admin SaaS — Fase Lanjutan
 
-**Super Admin** merupakan administrator platform ClinicFlow secara keseluruhan, bukan administrator dari satu klinik.
+**Super Admin** merupakan administrator platform ClinicOS secara keseluruhan, bukan administrator dari satu klinik.
 
 Hak akses meliputi:
 
@@ -151,7 +151,7 @@ Fitur ini **tidak termasuk MVP awal**.
 
 ## 4.1 Termasuk — MVP
 
-MVP ClinicFlow mencakup:
+MVP ClinicOS mencakup:
 
 * Autentikasi pengguna.
 * Role-Based Access Control.
@@ -455,7 +455,7 @@ Catatan Dokter
 
 ## 7.1 Alur Pendaftaran Pasien Melalui Website
 
-1. Pasien membuka website publik ClinicFlow milik suatu klinik.
+1. Pasien membuka website publik ClinicOS milik suatu klinik.
 2. Pasien melihat informasi klinik.
 3. Pasien memilih layanan.
 4. Pasien melihat dokter yang tersedia.
@@ -487,7 +487,7 @@ Catatan Dokter
 
 ## 7.3 Alur Pemanggilan Pasien oleh Dokter
 
-1. Dokter login ke ClinicFlow.
+1. Dokter login ke ClinicOS.
 2. Dokter membuka dashboard.
 3. Sistem menampilkan antrean dokter.
 4. Dokter memilih pasien berikutnya.
@@ -570,7 +570,7 @@ Catatan Dokter
 
 | **Entitas**            | **Keterangan**                          |
 | ---------------------- | --------------------------------------- |
-| **subscription_plans** | Paket berlangganan ClinicFlow.          |
+| **subscription_plans** | Paket berlangganan ClinicOS.            |
 | **subscriptions**      | Subscription masing-masing klinik.      |
 | **invoices**           | Tagihan subscription.                   |
 | **payments**           | Riwayat pembayaran subscription.        |
@@ -585,7 +585,7 @@ Catatan Dokter
 
 ### Responsivitas & Kompatibilitas Perangkat
 
-Web ClinicFlow harus memiliki desain responsif yang dapat digunakan pada:
+Web ClinicOS harus memiliki desain responsif yang dapat digunakan pada:
 
 * Desktop.
 * Laptop.
@@ -682,7 +682,7 @@ Business logic yang kompleks tidak ditempatkan seluruhnya di Controller.
 | **Laravel Queue**            | Pemrosesan background job seperti notifikasi dan laporan.   | MVP.                                       |
 | **Email Service**            | Pengiriman email booking dan notifikasi.                    | Fase MVP/Lanjutan.                         |
 | **WhatsApp API**             | Pengiriman notifikasi antrean dan booking melalui WhatsApp. | Post-MVP.                                  |
-| **Payment Gateway**          | Pembayaran subscription ClinicFlow.                         | Post-MVP.                                  |
+| **Payment Gateway**          | Pembayaran subscription ClinicOS.                           | Post-MVP.                                  |
 | **Cloud Storage**            | Penyimpanan file atau dokumen medis tertentu.               | Post-MVP.                                  |
 | **Firebase Cloud Messaging** | Push notification untuk mobile application.                 | Post-MVP.                                  |
 | **AI API**                   | Bantuan dokumentasi dan ringkasan data medis.               | Post-MVP dan memerlukan evaluasi keamanan. |
@@ -693,10 +693,10 @@ Business logic yang kompleks tidak ditempatkan seluruhnya di Controller.
 
 ## 11.1 SaaS Multi-Tenant
 
-ClinicFlow dikembangkan dari:
+ClinicOS dikembangkan dari:
 
 ```text
-ClinicFlow
+ClinicOS
     │
     └── Klinik A
 ```
@@ -704,7 +704,7 @@ ClinicFlow
 menjadi:
 
 ```text
-ClinicFlow
+ClinicOS
     ├── Klinik A
     ├── Klinik B
     ├── Klinik C
@@ -727,7 +727,7 @@ Data antar-klinik harus terisolasi.
 
 ## 11.2 Subscription
 
-ClinicFlow dapat menyediakan beberapa paket:
+ClinicOS dapat menyediakan beberapa paket:
 
 ```text
 FREE / TRIAL
@@ -767,7 +767,7 @@ Data dapat difilter berdasarkan cabang.
 
 ## 11.4 Offline-First
 
-Pada fase lanjutan, ClinicFlow dapat dikembangkan menjadi:
+Pada fase lanjutan, ClinicOS dapat dikembangkan menjadi:
 
 ```text
                  Cloud Server
@@ -831,7 +831,7 @@ Dashboard lanjutan dapat menampilkan:
 Sistem dapat diperluas dengan:
 
 ```text
-ClinicFlow
+ClinicOS
    ├── Web Notification
    ├── Push Notification
    ├── Email
@@ -877,19 +877,19 @@ AI **tidak dimaksudkan untuk menggantikan keputusan klinis dokter**.
 * Apakah setiap paket subscription memiliki batas jumlah dokter, pasien, atau transaksi?
 * Layanan notifikasi apa yang akan digunakan untuk WhatsApp/email/push notification?
 * Bagaimana kebijakan backup dan disaster recovery?
-* Bagaimana mekanisme ekspor dan migrasi data apabila klinik berhenti menggunakan ClinicFlow?
+* Bagaimana mekanisme ekspor dan migrasi data apabila klinik berhenti menggunakan ClinicOS?
 
 ---
 
 # 13. Glosarium
 
-* **ClinicFlow:** Platform digital untuk membantu klinik mengelola operasional, pasien, dokter, antrean, booking, dan rekam medis.
+* **ClinicOS:** Platform digital untuk membantu klinik mengelola operasional, pasien, dokter, antrean, booking, dan rekam medis.
 * **SaaS (Software as a Service):** Model penyediaan perangkat lunak di mana pengguna menggunakan aplikasi melalui internet dan umumnya membayar berdasarkan subscription.
 * **Clinic Admin:** Pengguna yang mengelola operasional dan konfigurasi suatu klinik.
 * **Doctor:** Pengguna yang bertanggung jawab melakukan pemeriksaan dan membuat rekam medis pasien.
 * **Receptionist:** Pengguna yang bertanggung jawab terhadap administrasi pasien dan antrean.
 * **Patient:** Pengguna yang menerima layanan klinik dan melakukan booking.
-* **Super Admin:** Administrator pada tingkat platform ClinicFlow yang mengelola seluruh tenant/klinik.
+* **Super Admin:** Administrator pada tingkat platform ClinicOS yang mengelola seluruh tenant/klinik.
 * **Booking:** Reservasi kunjungan pasien sebelum datang ke klinik.
 * **Queue:** Sistem nomor antrean yang menentukan urutan pelayanan pasien.
 * **Medical Record:** Catatan medis pasien yang dibuat dan dikelola oleh tenaga medis yang berwenang.
@@ -898,7 +898,7 @@ AI **tidak dimaksudkan untuk menggantikan keputusan klinis dokter**.
 * **Livewire:** Framework Laravel untuk membuat antarmuka web interaktif tanpa harus membangun SPA frontend secara penuh.
 * **Blade:** Template engine bawaan Laravel yang digunakan untuk membuat halaman web.
 * **Laravel Reverb:** Infrastruktur realtime yang dapat digunakan Laravel untuk mengirim event secara langsung kepada client.
-* **MySQL:** Sistem manajemen basis data relasional yang digunakan sebagai database utama ClinicFlow.
+* **MySQL:** Sistem manajemen basis data relasional yang digunakan sebagai database utama ClinicOS.
 * **Multi-Tenant:** Arsitektur SaaS yang memungkinkan satu platform melayani banyak organisasi/klinik dengan isolasi data.
 * **Offline-First:** Pendekatan pengembangan sistem yang memungkinkan aplikasi tetap berfungsi ketika tidak terdapat koneksi internet dan melakukan sinkronisasi ketika koneksi tersedia.
 * **Audit Log:** Catatan aktivitas pengguna yang digunakan untuk membantu pelacakan perubahan dan aktivitas sistem.
@@ -964,7 +964,7 @@ Audit Log
 ```text
 Clinic A ─┐
 Clinic B ─┤
-Clinic C ─┼──→ ClinicFlow SaaS
+Clinic C ─┼──→ ClinicOS SaaS
 Clinic D ─┘
 ```
 
@@ -1020,7 +1020,7 @@ MVP dianggap berhasil apabila:
 
 # Batasan Produk MVP
 
-MVP ClinicFlow **tidak ditujukan untuk langsung menjadi platform SaaS klinik enterprise**.
+MVP ClinicOS **tidak ditujukan untuk langsung menjadi platform SaaS klinik enterprise**.
 
 MVP difokuskan pada pembuktian bahwa proses inti berikut dapat berjalan dalam satu sistem:
 

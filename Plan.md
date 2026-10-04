@@ -1,8 +1,8 @@
-# ClinicFlow — Development Plan
+# ClinicOS — Development Plan
 
 > **Status:** Planning
 > **Version:** 0.1
-> **Project:** ClinicFlow
+> **Project:** ClinicOS
 > **Architecture:** Full Laravel
 > **Database:** MySQL
 > **Frontend:** Blade + Livewire + Tailwind CSS
@@ -11,7 +11,7 @@
 
 # 1. Project Overview
 
-ClinicFlow adalah platform manajemen klinik berbasis web yang membantu klinik mengelola:
+ClinicOS adalah platform manajemen klinik berbasis web yang membantu klinik mengelola:
 
 * Data klinik
 * Dokter
@@ -67,7 +67,7 @@ Browser
 
 # 2. Development Principles
 
-Pengembangan ClinicFlow mengikuti prinsip:
+Pengembangan ClinicOS mengikuti prinsip:
 
 1. **MVP first**
 2. Jangan mengembangkan fitur Post-MVP sebelum fitur MVP stabil.
@@ -1311,7 +1311,7 @@ AI
 # 30. Final Target Architecture
 
 ```text
-                         CLINICFLOW
+                         CLINICOS
                              │
                  ┌───────────┴───────────┐
                  │                       │
@@ -1341,7 +1341,7 @@ AI
 Target jangka panjang:
 
 ```text
-                        ClinicFlow SaaS
+                        ClinicOS SaaS
                               │
              ┌────────────────┼────────────────┐
              │                │                │
@@ -1370,7 +1370,7 @@ Untuk tahap sekarang, **jangan langsung mengerjakan seluruh roadmap**.
 
 Target pertama adalah:
 
-> **Menyelesaikan MVP ClinicFlow yang dapat menjalankan satu siklus pelayanan pasien secara lengkap dari booking sampai rekam medis dan dashboard.**
+> **Menyelesaikan MVP ClinicOS yang dapat menjalankan satu siklus pelayanan pasien secara lengkap dari booking sampai rekam medis dan dashboard.**
 
 Flow utama yang harus menjadi prioritas:
 
