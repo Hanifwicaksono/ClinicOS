@@ -6,12 +6,26 @@ use App\Http\Controllers\Admin\DoctorScheduleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
+use App\Http\Controllers\Patient\AppointmentController as PatientAppointmentController;
 use App\Http\Controllers\Patient\DashboardController as PatientDashboardController;
+use App\Http\Controllers\PublicBookingController;
+use App\Http\Controllers\PublicClinicController;
+use App\Http\Controllers\Receptionist\AppointmentController as ReceptionistAppointmentController;
 use App\Http\Controllers\Receptionist\DashboardController as ReceptionistDashboardController;
+use App\Http\Controllers\Receptionist\PatientController as ReceptionistPatientController;
 use App\Http\Middleware\RedirectToDashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
+
+Route::get('clinic/{clinic:slug}', [PublicClinicController::class, 'show'])->name('public.clinic.show');
+Route::get('clinic/{clinic:slug}/booking', [PublicBookingController::class, 'create'])->name('public.booking.create');
+Route::post('clinic/{clinic:slug}/booking', [PublicBookingController::class, 'store'])
+    ->middleware('throttle:10,1')->name('public.booking.store');
+Route::get('booking/{appointment}/status', [PublicBookingController::class, 'status'])
+    ->middleware('throttle:30,1')->name('public.booking.status');
+Route::post('booking/{appointment}/cancel', [PublicBookingController::class, 'cancel'])
+    ->middleware('throttle:10,1')->name('public.booking.cancel');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified', RedirectToDashboard::class])
@@ -35,6 +49,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:Cl
     Route::resource('doctor-schedules', DoctorScheduleController::class)
         ->parameters(['doctor-schedules' => 'doctor_schedule'])
         ->except(['show', 'destroy']);
+});
+
+Route::prefix('receptionist')->name('receptionist.')->middleware(['auth', 'verified', 'role:Clinic Admin|Receptionist'])->group(function () {
+    Route::resource('patients', ReceptionistPatientController::class)->except(['destroy']);
+    Route::resource('appointments', ReceptionistAppointmentController::class)->only(['index', 'create', 'store', 'show']);
+    Route::post('appointments/{appointment}/cancel', [ReceptionistAppointmentController::class, 'cancel'])->name('appointments.cancel');
+});
+
+Route::prefix('patient')->name('patient.')->middleware(['auth', 'verified', 'role:Patient'])->group(function () {
+    Route::resource('appointments', PatientAppointmentController::class)->only(['index', 'show']);
+    Route::post('appointments/{appointment}/cancel', [PatientAppointmentController::class, 'cancel'])->name('appointments.cancel');
 });
 
 Route::view('profile', 'profile')

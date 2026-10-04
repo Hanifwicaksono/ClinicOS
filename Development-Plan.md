@@ -2,7 +2,7 @@
 
 Tanggal: 4 Oktober 2026
 Versi: 0.1
-Status: Implementasi berjalan — M2 selesai
+Status: Implementasi berjalan — M3 selesai
 Sumber: [Plan.md](Plan.md) dan [PRD.md](PRD.md)
 
 ## 1. Tujuan dan cara menggunakan dokumen
@@ -148,12 +148,12 @@ Urutan dependensi inti: M1 → M2 → M3 → M4 → M5 → M6 → M7. Fondasi au
 
 ### M3 — Patient & Booking: data pasien dan pendaftaran publik
 
-- [ ] **M3.1 Pasien:** patients, nomor rekam medis unik dalam klinik, formulir identitas, pencarian/pagination, edit administratif, dan detail pasien. Pengaitan akun serta deduplikasi mengikuti D01/D02. Riwayat kunjungan menampilkan empty state sampai M5 tersedia.
-- [ ] **M3.2 Website klinik:** `/clinic/{slug}` menampilkan profil, dokter aktif, layanan/harga aktif, dan sesi tersedia; hanya field publik yang ditampilkan.
-- [ ] **M3.3 Booking:** appointments dengan tanggal/sesi, dokter, layanan, pasien, kode unik, status, dan snapshot harga sesuai D09. Validasi dokter–layanan, hari/sesi, batas tanggal, status klinik, dan kuota.
-- [ ] **M3.4 Reservasi antrean:** sediakan tabel queues dan mekanisme nomor sesuai D04; booking dan nomor dibuat dalam transaksi yang sama. Cegah kuota terlampaui, nomor ganda, dan duplikasi akibat submit ulang.
-- [ ] **M3.5 Detail booking:** konfirmasi dan akses status terbatas, data pasien minimal, rate limiting, serta pembatalan sesuai D05. Jangan memakai nomor antrean/kode yang mudah ditebak sebagai satu-satunya bukti kepemilikan.
-- [ ] **M3.6 Booking oleh resepsionis:** gunakan aturan booking yang sama untuk pendaftaran walk-in dan pasien lama; lengkapi audit pembuatan/perubahan pasien serta booking.
+- [x] **M3.1 Pasien:** patients, nomor rekam medis unik dalam klinik, formulir identitas, pencarian/pagination, edit administratif, dan detail pasien. Pengaitan akun serta deduplikasi mengikuti D01/D02. Riwayat kunjungan menampilkan empty state sampai M5 tersedia.
+- [x] **M3.2 Website klinik:** `/clinic/{slug}` menampilkan profil, dokter aktif, layanan/harga aktif, dan sesi tersedia; hanya field publik yang ditampilkan.
+- [x] **M3.3 Booking:** appointments dengan tanggal/sesi, dokter, layanan, pasien, kode unik, status, dan snapshot harga sesuai D09. Validasi dokter–layanan, hari/sesi, batas tanggal, status klinik, dan kuota.
+- [x] **M3.4 Reservasi antrean:** sediakan tabel queues dan mekanisme nomor sesuai D04; booking dan nomor dibuat dalam transaksi yang sama. Cegah kuota terlampaui, nomor ganda, dan duplikasi akibat submit ulang.
+- [x] **M3.5 Detail booking:** konfirmasi dan akses status terbatas, data pasien minimal, rate limiting, serta pembatalan sesuai D05. Jangan memakai nomor antrean/kode yang mudah ditebak sebagai satu-satunya bukti kepemilikan.
+- [x] **M3.6 Booking oleh resepsionis:** gunakan aturan booking yang sama untuk pendaftaran walk-in dan pasien lama; lengkapi audit pembuatan/perubahan pasien serta booking.
 
 **Kriteria selesai:** pasien baru dapat booking tanpa kebocoran data pasien lama; pasien lama digunakan hanya melalui pengaitan yang sah; nomor terbit otomatis; sesi penuh/nonaktif ditolak; submit bersamaan tidak melampaui kuota.
 
@@ -268,7 +268,7 @@ Tidak ada estimasi tanggal selesai yang dikunci pada tahap ini. Estimasi dibuat 
 | --- | --- | --- |
 | M1 | Selesai | 66 tests / 260 assertions lulus, build Vite, view:cache, migration MySQL, dan sinkronisasi permission |
 | M2 | Selesai | 74 tests / 284 assertions lulus, build Vite, view:cache, migration dan seed MySQL, serta pemeriksaan browser tanpa error console |
-| M3 | Belum dimulai | — |
+| M3 | Selesai | 84 tests / 329 assertions lulus, build Vite, view:cache, migration dan seed MySQL, serta pemeriksaan browser halaman publik dan staf |
 | M4 | Belum dimulai | — |
 | M5 | Belum dimulai | — |
 | M6 | Belum dimulai | — |
@@ -281,7 +281,19 @@ Status dapat berubah menjadi Dikerjakan, Perlu keputusan, Terverifikasi, atau Se
 | D01 | Disetujui pengguna: akun Patient opsional; registrasi publik hanya Patient; booking dapat tanpa akun | 4 Oktober 2026 | Registrasi M1 diterapkan; booking menyusul M3 |
 | D06 | Disetujui pengguna: dokter dan resepsionis boleh memanggil, dokter hanya antreannya sendiri | 4 Oktober 2026 | Permission queue.call diterapkan; ownership/transisi mengikuti M4–M5 |
 | D07 | Disetujui pengguna: admin tidak otomatis mendapat akses isi medis; resepsionis tidak mendapat akses isi medis | 4 Oktober 2026 | Permission medis admin dihapus; policy rekam medis mengikuti M5 |
-| D02–D05, D08–D13 | Belum ditetapkan; lihat usulan di bagian 4 | — | Tetapkan sebelum pekerjaan yang bergantung padanya |
+| D02–D05, D09–D12 | Default M3 diterapkan sementara: guest membuat profil baru tanpa pencocokan identitas, resepsionis memilih pasien lama secara eksplisit, booking berbasis sesi sampai 30 hari, nomor antrean per klinik/dokter/sesi/tanggal, pembatalan sebelum sesi melepaskan kuota, harga disalin saat booking, dan status guest memakai token rahasia | 4 Oktober 2026 | Validasi akhir bersama operasional klinik tetap diperlukan sebelum rilis |
+| D08, D13 | Belum ditetapkan; lihat usulan di bagian 4 | — | Tetapkan sebelum M5 dan M7 |
+
+### Hasil implementasi M3
+
+- Data pasien dipisahkan dari akun User. Nomor rekam medis unik per klinik dibuat setelah insert, dan NIK tetap opsional serta tidak dipakai untuk mengautentikasi atau mengaitkan booking guest.
+- Halaman publik klinik hanya memuat profil, layanan aktif, dokter aktif, dan jadwal aktif. Booking tersedia tanpa akun melalui dokter, layanan, sesi, tanggal, dan identitas pasien.
+- `BookingService` mengunci sesi dokter di MySQL, memvalidasi ketersediaan serta hubungan dokter–layanan, lalu membuat pasien, appointment, dan queue dalam satu transaksi. Idempotency key mencegah submit ulang membuat booking ganda.
+- Nomor antrean unik dalam scope klinik, dokter, sesi, dan tanggal. Appointment menyimpan nama serta harga layanan sebagai snapshot.
+- Status publik hanya dapat dibuka dengan token 64 karakter yang hash-nya disimpan di database. Route publik diberi rate limit; kode booking dan nomor antrean tidak cukup untuk membuka detail.
+- Resepsionis dan Clinic Admin dapat mencari/mengelola pasien serta membuat booking untuk pasien baru atau memilih pasien lama secara eksplisit. Pembuatan/perubahan pasien, booking, dan pembatalan dicatat dalam audit.
+- Pembatalan hanya diizinkan saat status BOOKED dan sebelum sesi dimulai. Appointment dan queue dibatalkan bersama, dan kuota dapat digunakan kembali.
+- Verifikasi akhir M3: 84 tests / 329 assertions pada MySQL, Pint, Vite build, Blade view cache, migration, seed, serta pemeriksaan browser responsive halaman publik dan daftar booking staf.
 
 ### Hasil implementasi M1
 

@@ -2,24 +2,23 @@
 
 namespace App\Models;
 
-use Database\Factories\ServiceFactory;
+use Database\Factories\PatientFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['clinic_id', 'name', 'description', 'price', 'duration_minutes', 'is_active'])]
-class Service extends Model
+#[Fillable(['clinic_id', 'user_id', 'medical_record_number', 'name', 'nik', 'birth_date', 'gender', 'phone', 'email', 'address', 'is_active'])]
+class Patient extends Model
 {
-    /** @use HasFactory<ServiceFactory> */
+    /** @use HasFactory<PatientFactory> */
     use HasFactory;
 
     protected function casts(): array
     {
         return [
-            'price' => 'decimal:2',
+            'birth_date' => 'date',
             'is_active' => 'boolean',
         ];
     }
@@ -29,9 +28,9 @@ class Service extends Model
         return $this->belongsTo(Clinic::class);
     }
 
-    public function doctors(): BelongsToMany
+    public function user(): BelongsTo
     {
-        return $this->belongsToMany(Doctor::class);
+        return $this->belongsTo(User::class);
     }
 
     public function appointments(): HasMany

@@ -53,10 +53,19 @@ new class extends Component
                         ['route' => 'admin.staff.index', 'match' => 'admin.staff.*', 'label' => 'Tim klinik', 'icon' => 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm13 10v-2a4 4 0 0 0-3-3.87m-2-12a4 4 0 0 1 0 7.75'],
                         ['route' => 'admin.services.index', 'match' => 'admin.services.*', 'label' => 'Layanan', 'icon' => 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10h6m-3-3v6'],
                         ['route' => 'admin.doctor-schedules.index', 'match' => 'admin.doctor-schedules.*', 'label' => 'Jadwal dokter', 'icon' => 'M3 9h18M7 3v4m10-4v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm3 8h3v3H8v-3Z'],
+                        ['route' => 'receptionist.patients.index', 'match' => 'receptionist.patients.*', 'label' => 'Pasien', 'icon' => 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z'],
+                        ['route' => 'receptionist.appointments.index', 'match' => 'receptionist.appointments.*', 'label' => 'Booking & antrean', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6'],
                     ]
-                    : [
+                    : (auth()->user()->hasRole('Receptionist') ? [
+                        ['route' => 'receptionist.dashboard', 'match' => 'receptionist.dashboard', 'label' => 'Ringkasan', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
+                        ['route' => 'receptionist.patients.index', 'match' => 'receptionist.patients.*', 'label' => 'Pasien', 'icon' => 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z'],
+                        ['route' => 'receptionist.appointments.index', 'match' => 'receptionist.appointments.*', 'label' => 'Booking & antrean', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6'],
+                    ] : (auth()->user()->hasRole('Patient') ? [
+                        ['route' => 'patient.dashboard', 'match' => 'patient.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
+                        ['route' => 'patient.appointments.index', 'match' => 'patient.appointments.*', 'label' => 'Booking saya', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z'],
+                    ] : [
                         ['route' => 'dashboard', 'match' => '*.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
-                    ];
+                    ]));
             @endphp
 
             @foreach ($links as $link)

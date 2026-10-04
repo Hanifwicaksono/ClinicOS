@@ -386,16 +386,16 @@ Membuat sistem data pasien.
 
 ### Tasks
 
-* [ ] Membuat migration `patients`.
-* [ ] Membuat Patient Model.
-* [ ] Membuat nomor rekam medis.
-* [ ] Membuat form pasien.
-* [ ] Membuat daftar pasien.
-* [ ] Membuat pencarian pasien.
-* [ ] Membuat detail pasien.
-* [ ] Membuat edit data pasien.
-* [ ] Menampilkan riwayat kunjungan.
-* [ ] Menerapkan authorization.
+* [x] Membuat migration `patients`.
+* [x] Membuat Patient Model.
+* [x] Membuat nomor rekam medis.
+* [x] Membuat form pasien.
+* [x] Membuat daftar pasien.
+* [x] Membuat pencarian pasien.
+* [x] Membuat detail pasien.
+* [x] Membuat edit data pasien.
+* [x] Menampilkan riwayat kunjungan.
+* [x] Menerapkan authorization.
 
 ### Data pasien awal
 
@@ -436,13 +436,13 @@ Menyediakan halaman yang dapat digunakan calon pasien tanpa login.
 
 ### Tasks
 
-* [ ] Membuat route publik.
-* [ ] Membuat clinic landing page.
-* [ ] Menampilkan informasi klinik.
-* [ ] Menampilkan layanan.
-* [ ] Menampilkan dokter.
-* [ ] Menampilkan jadwal.
-* [ ] Membuat halaman booking.
+* [x] Membuat route publik.
+* [x] Membuat clinic landing page.
+* [x] Menampilkan informasi klinik.
+* [x] Menampilkan layanan.
+* [x] Menampilkan dokter.
+* [x] Menampilkan jadwal.
+* [x] Membuat halaman booking.
 
 ### Definition of Done
 
@@ -458,18 +458,18 @@ Memungkinkan pasien mendaftarkan kunjungan.
 
 ### Tasks
 
-* [ ] Membuat migration `appointments`.
-* [ ] Membuat Appointment Model.
-* [ ] Membuat form booking.
-* [ ] Memilih layanan.
-* [ ] Memilih dokter.
-* [ ] Memilih tanggal.
-* [ ] Memvalidasi jadwal dokter.
-* [ ] Memvalidasi kuota.
-* [ ] Membuat booking code.
-* [ ] Menyimpan booking.
-* [ ] Menampilkan detail booking.
-* [ ] Membuat status booking.
+* [x] Membuat migration `appointments`.
+* [x] Membuat Appointment Model.
+* [x] Membuat form booking.
+* [x] Memilih layanan.
+* [x] Memilih dokter.
+* [x] Memilih tanggal.
+* [x] Memvalidasi jadwal dokter.
+* [x] Memvalidasi kuota.
+* [x] Membuat booking code.
+* [x] Menyimpan booking.
+* [x] Menampilkan detail booking.
+* [x] Membuat status booking.
 
 ### Status
 
@@ -494,9 +494,9 @@ Membangun sistem antrean klinik.
 
 ### Tasks
 
-* [ ] Membuat migration `queues`.
-* [ ] Membuat Queue Model.
-* [ ] Generate nomor antrean.
+* [x] Membuat migration `queues`.
+* [x] Membuat Queue Model.
+* [x] Generate nomor antrean.
 * [ ] Menampilkan antrean hari ini.
 * [ ] Mengubah booking menjadi `WAITING`.
 * [ ] Memanggil pasien.

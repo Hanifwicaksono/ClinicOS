@@ -11,7 +11,7 @@ class DashboardController extends Controller
     {
         return view('dashboard', [
             'dashboardTitle' => 'Dashboard Pasien',
-            'dashboardDescription' => 'Akun pasien Anda telah aktif. Informasi booking dan status antrean akan tersedia setelah modul booking siap.',
+            'dashboardDescription' => 'Lihat booking, jadwal dokter, dan nomor antrean yang terhubung dengan akun Anda.',
         ]);
     }
 }
