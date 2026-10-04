@@ -1,11 +1,13 @@
 # ClinicOS — Development Plan
 
-> **Status:** Planning
+> **Status:** Development — Clinic Core selesai
 > **Version:** 0.1
 > **Project:** ClinicOS
 > **Architecture:** Full Laravel
 > **Database:** MySQL
 > **Frontend:** Blade + Livewire + Tailwind CSS
+
+Catatan implementasi 4 Oktober 2026: M1 dan M2 pada [Development-Plan.md](Development-Plan.md) telah diverifikasi dengan 74 tests / 284 assertions, build frontend, kompilasi Blade, dan migration MySQL lokal. Admin dapat mengelola profil klinik, dokter, resepsionis, layanan, dan jadwal dengan isolasi data per klinik. Repository Git lokal tersedia, tetapi remote GitHub belum dikonfigurasi.
 
 ---
 
@@ -149,19 +151,19 @@ Mempersiapkan environment dan struktur dasar Laravel.
 ### Tasks
 
 * [ ] Membuat repository GitHub.
-* [ ] Membuat project Laravel.
-* [ ] Mengatur `.env`.
-* [ ] Membuat database MySQL.
-* [ ] Menghubungkan Laravel dengan MySQL.
-* [ ] Menjalankan migration awal.
-* [ ] Mengatur Git.
-* [ ] Membuat `.gitignore`.
-* [ ] Menginstall dependency frontend.
-* [ ] Mengatur Tailwind CSS.
-* [ ] Mengatur layout Blade.
-* [ ] Mengatur struktur folder project.
-* [ ] Membuat halaman landing sementara.
-* [ ] Memastikan aplikasi dapat berjalan di local environment.
+* [x] Membuat project Laravel.
+* [x] Mengatur `.env`.
+* [x] Membuat database MySQL.
+* [x] Menghubungkan Laravel dengan MySQL.
+* [x] Menjalankan migration awal.
+* [x] Mengatur Git.
+* [x] Membuat `.gitignore`.
+* [x] Menginstall dependency frontend.
+* [x] Mengatur Tailwind CSS.
+* [x] Mengatur layout Blade.
+* [x] Mengatur struktur folder project.
+* [x] Membuat halaman landing sementara.
+* [x] Memastikan aplikasi dapat berjalan di local environment.
 
 ### Definition of Done
 
@@ -189,21 +191,21 @@ Membuat sistem login dan akun pengguna.
 
 ### Tasks
 
-* [ ] Install Laravel authentication.
-* [ ] Membuat login.
-* [ ] Membuat logout.
-* [ ] Membuat password hashing.
-* [ ] Membuat profile pengguna.
-* [ ] Membuat status akun aktif/nonaktif.
-* [ ] Install Spatie Permission.
-* [ ] Membuat role:
+* [x] Install Laravel authentication.
+* [x] Membuat login.
+* [x] Membuat logout.
+* [x] Membuat password hashing.
+* [x] Membuat profile pengguna.
+* [x] Membuat status akun aktif/nonaktif.
+* [x] Install Spatie Permission.
+* [x] Membuat role:
 
-  * [ ] Clinic Admin
-  * [ ] Doctor
-  * [ ] Receptionist
-  * [ ] Patient
-* [ ] Membuat permission dasar.
-* [ ] Membuat middleware role.
+  * [x] Clinic Admin
+  * [x] Doctor
+  * [x] Receptionist
+  * [x] Patient
+* [x] Membuat permission dasar.
+* [x] Membuat middleware role.
 * [ ] Membuat authorization policy.
 
 ### Permission awal
@@ -1254,10 +1256,10 @@ AI
 ## Milestone 2 — Clinic Core
 
 ```text
-[ ] Clinic
-[ ] Doctor
-[ ] Schedule
-[ ] Service
+[x] Clinic
+[x] Doctor
+[x] Schedule
+[x] Service
 ```
 
 ## Milestone 3 — Patient & Booking

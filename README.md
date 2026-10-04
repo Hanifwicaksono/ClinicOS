@@ -1,3 +1,54 @@
+# ClinicOS
+
+Aplikasi manajemen klinik berbasis Laravel, Blade, Livewire, Tailwind CSS, dan MySQL.
+
+## Status pengembangan
+
+M1 — Foundation sudah diimplementasikan: authentication, email verification, dashboard empat role, pembatasan akun nonaktif, registrasi Patient, matriks permission, dan audit login/logout. Dashboard masih halaman awal; modul klinik dan statistik belum tersedia.
+
+Acuan pengembangan: [PRD.md](PRD.md), [Plan.md](Plan.md), dan [Development-Plan.md](Development-Plan.md).
+
+## Menjalankan aplikasi lokal
+
+Prasyarat: PHP sesuai composer.json, Composer, Node/NPM, MySQL, serta extension PHP untuk dependency aplikasi dan test database. Gunakan konfigurasi `.env` lokal dan database sendiri; jangan menggunakan database production untuk test.
+
+```sh
+composer install
+npm install
+php artisan key:generate
+php artisan migrate --seed
+npm run build
+php artisan serve
+```
+
+Buat `.env` dari `.env.example` jika belum tersedia dan isi konfigurasi MySQL sebelum menjalankan migration. Jalankan `key:generate` hanya pada instalasi baru; jangan mengganti APP_KEY aplikasi yang sudah digunakan.
+
+Untuk database lokal yang sudah ada, gunakan migration bertahap dan sinkronisasi role:
+
+```sh
+php artisan migrate
+php artisan db:seed --class=RoleAndPermissionSeeder
+```
+
+Akun demo dibuat melalui DemoUserSeeder hanya pada environment `local`. Seeder tidak mengganti password atau status verifikasi akun yang sudah ada. Pengguna baru perlu memverifikasi email sebelum dashboard; bila mail driver memakai `log`, tautan ada di `storage/logs/laravel.log`.
+
+## Pengujian
+
+```sh
+composer test
+npm run build
+```
+
+PHP CLI perlu driver SQLite untuk konfigurasi phpunit.xml. Pada PHP Windows lokal yang belum mengaktifkannya secara global, command berikut telah diverifikasi:
+
+```sh
+php -d extension=pdo_sqlite -d extension=sqlite3 vendor/bin/phpunit --no-progress
+```
+
+Flags pada proses `php artisan test` tidak diteruskan ke child test runner. Jalankan PHPUnit langsung seperti di atas bila menggunakan extension sementara. Uji integrasi MySQL untuk konkurensi booking/antrean akan ditambahkan bersama modul terkait.
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

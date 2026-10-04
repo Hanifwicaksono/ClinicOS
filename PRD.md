@@ -87,6 +87,8 @@ Memiliki hak akses untuk:
 
 Dokter tidak memiliki akses untuk mengubah konfigurasi utama klinik.
 
+Keputusan 4 Oktober 2026: dokter hanya dapat memanggil antrean yang menjadi penugasannya. Resepsionis dapat memanggil antrean sebagai bagian administrasi; mulai dan selesai pemeriksaan dilakukan oleh dokter yang menangani.
+
 ---
 
 ## 3.3 Resepsionis
@@ -107,6 +109,8 @@ Memiliki hak akses untuk:
 * Membantu pasien melakukan pendaftaran.
 
 Resepsionis tidak dapat mengubah atau menghapus isi rekam medis dokter.
+
+Keputusan 4 Oktober 2026: resepsionis tidak mendapat akses isi rekam medis. Clinic Admin juga tidak otomatis mendapat permission medis; akses tambahan harus diberikan secara eksplisit dan tetap mengikuti policy data yang berlaku.
 
 ---
 
@@ -860,7 +864,7 @@ AI **tidak dimaksudkan untuk menggantikan keputusan klinis dokter**.
 
 # 12. Pertanyaan Terbuka / TBD
 
-* Apakah pasien wajib membuat akun atau cukup menggunakan nomor telepon/kode booking?
+* Keputusan 4 Oktober 2026: akun pasien opsional; registrasi publik hanya membuat akun Patient dan booking dapat dilakukan tanpa akun. Mekanisme verifikasi akses booking pasien tanpa akun masih perlu ditetapkan.
 * Apakah satu pasien dapat memiliki riwayat pada beberapa klinik yang berbeda?
 * Apakah dokter dapat bekerja pada lebih dari satu klinik?
 * Apakah pasien dapat memilih jam praktik atau hanya mengambil nomor antrean?
