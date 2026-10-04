@@ -497,14 +497,14 @@ Membangun sistem antrean klinik.
 * [x] Membuat migration `queues`.
 * [x] Membuat Queue Model.
 * [x] Generate nomor antrean.
-* [ ] Menampilkan antrean hari ini.
-* [ ] Mengubah booking menjadi `WAITING`.
-* [ ] Memanggil pasien.
-* [ ] Skip pasien.
+* [x] Menampilkan antrean hari ini.
+* [x] Mengubah booking menjadi `WAITING`.
+* [x] Memanggil pasien.
+* [x] Skip pasien.
 * [ ] Memulai pemeriksaan.
 * [ ] Menyelesaikan pemeriksaan.
-* [ ] Membatalkan antrean.
-* [ ] Menampilkan antrean aktif.
+* [x] Membatalkan antrean.
+* [x] Menampilkan antrean aktif.
 
 ### Status
 
@@ -542,24 +542,24 @@ Membuat modul rekam medis digital.
 
 ### Tasks
 
-* [ ] Membuat migration `visits`.
-* [ ] Membuat migration `medical_records`.
-* [ ] Membuat migration `vital_signs`.
-* [ ] Membuat migration `diagnoses`.
-* [ ] Membuat migration `treatments`.
-* [ ] Membuat migration `prescriptions`.
-* [ ] Membuat migration `prescription_items`.
-* [ ] Membuat relasi antar model.
-* [ ] Membuat halaman pemeriksaan dokter.
-* [ ] Membuat form SOAP.
-* [ ] Membuat form tanda vital.
-* [ ] Membuat diagnosis.
-* [ ] Membuat tindakan.
-* [ ] Membuat resep.
-* [ ] Menyimpan rekam medis.
-* [ ] Mencatat dokter pembuat.
-* [ ] Mencatat timestamp.
-* [ ] Membatasi akses rekam medis.
+* [x] Membuat migration `visits`.
+* [x] Membuat migration `medical_records`.
+* [x] Membuat migration `vital_signs`.
+* [x] Membuat migration `diagnoses`.
+* [x] Membuat migration `treatments`.
+* [x] Membuat migration `prescriptions`.
+* [x] Membuat migration `prescription_items`.
+* [x] Membuat relasi antar model.
+* [x] Membuat halaman pemeriksaan dokter.
+* [x] Membuat form SOAP.
+* [x] Membuat form tanda vital.
+* [x] Membuat diagnosis.
+* [x] Membuat tindakan.
+* [x] Membuat resep.
+* [x] Menyimpan rekam medis.
+* [x] Mencatat dokter pembuat.
+* [x] Mencatat timestamp.
+* [x] Membatasi akses rekam medis.
 
 ### Struktur pemeriksaan
 
@@ -589,14 +589,14 @@ Menghubungkan pelayanan medis dengan transaksi.
 
 ### Tasks
 
-* [ ] Membuat data kunjungan.
-* [ ] Menghubungkan visit dengan appointment.
-* [ ] Menghubungkan visit dengan doctor.
-* [ ] Menghubungkan visit dengan service.
-* [ ] Menyimpan harga layanan saat transaksi.
-* [ ] Menghitung total biaya.
-* [ ] Menyelesaikan visit.
-* [ ] Mengubah status antrean menjadi `COMPLETED`.
+* [x] Membuat data kunjungan.
+* [x] Menghubungkan visit dengan appointment.
+* [x] Menghubungkan visit dengan doctor.
+* [x] Menghubungkan visit dengan service.
+* [x] Menyimpan harga layanan saat transaksi.
+* [x] Menghitung total biaya.
+* [x] Menyelesaikan visit.
+* [x] Mengubah status antrean menjadi `COMPLETED`.
 
 ### Definition of Done
 
@@ -1282,11 +1282,11 @@ AI
 ## Milestone 5 — Medical
 
 ```text
-[ ] Visit
-[ ] Medical Record
-[ ] Diagnosis
-[ ] Treatment
-[ ] Prescription
+[x] Visit
+[x] Medical Record
+[x] Diagnosis
+[x] Treatment
+[x] Prescription
 ```
 
 ## Milestone 6 — Management

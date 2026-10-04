@@ -54,4 +54,9 @@ class Clinic extends Model
     {
         return $this->hasMany(Queue::class);
     }
+
+    public function visits(): HasMany
+    {
+        return $this->hasMany(Visit::class);
+    }
 }

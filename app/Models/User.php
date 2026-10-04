@@ -41,6 +41,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return 'dashboard';
     }
 
+    public function receivesBroadcastNotificationsOn(): string
+    {
+        return 'users.'.$this->id;
+    }
+
     public function clinic(): BelongsTo
     {
         return $this->belongsTo(Clinic::class);

@@ -62,4 +62,9 @@ class Appointment extends Model
     {
         return $this->hasOne(Queue::class);
     }
+
+    public function visit(): HasOne
+    {
+        return $this->hasOne(Visit::class);
+    }
 }

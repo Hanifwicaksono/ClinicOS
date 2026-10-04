@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['clinic_id', 'appointment_id', 'doctor_id', 'doctor_schedule_id', 'queue_date', 'queue_number', 'display_number', 'status', 'checked_in_at', 'called_at', 'completed_at'])]
+#[Fillable(['clinic_id', 'appointment_id', 'doctor_id', 'doctor_schedule_id', 'queue_date', 'queue_number', 'display_number', 'status', 'checked_in_at', 'called_at', 'skipped_at', 'no_show_at', 'cancelled_at', 'completed_at'])]
 class Queue extends Model
 {
     /** @use HasFactory<QueueFactory> */
@@ -22,6 +22,9 @@ class Queue extends Model
             'status' => QueueStatus::class,
             'checked_in_at' => 'datetime',
             'called_at' => 'datetime',
+            'skipped_at' => 'datetime',
+            'no_show_at' => 'datetime',
+            'cancelled_at' => 'datetime',
             'completed_at' => 'datetime',
         ];
     }

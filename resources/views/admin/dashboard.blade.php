@@ -20,6 +20,7 @@
             </div>
             <a href="{{ route('admin.clinic.create') }}" class="clinic-button-primary mt-7 shrink-0 lg:mt-0" wire:navigate>Mulai setup klinik</a>
         </section>
+
     @else
         <section class="mb-8 overflow-hidden rounded-3xl bg-clinic-950 px-6 py-8 text-white sm:px-8">
             <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -31,6 +32,10 @@
                 <a href="{{ route('admin.staff.create') }}" class="clinic-button-primary shrink-0" wire:navigate>+ Tambah staf</a>
             </div>
         </section>
+
+        <section class="clinic-card mb-6 p-5"><form method="GET" class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><p class="text-sm font-bold text-clinic-950">Periode operasional</p><p class="mt-1 text-xs text-slate-500">Menggunakan zona waktu {{ $timezone }}.</p></div><div class="flex flex-col gap-3 sm:flex-row"><div><label class="clinic-label">Dari</label><input class="clinic-input" name="from" type="date" value="{{ $from }}"></div><div><label class="clinic-label">Sampai</label><input class="clinic-input" name="to" type="date" value="{{ $to }}"></div><button class="clinic-button-secondary self-end">Terapkan</button></div></form></section>
+
+        <section class="mb-8 grid grid-cols-2 gap-4 xl:grid-cols-5">@foreach ([['label' => 'Pasien unik terjadwal', 'value' => $operationalMetrics['unique_patients']],['label' => 'Total booking', 'value' => $operationalMetrics['bookings']],['label' => 'Kunjungan selesai', 'value' => $operationalMetrics['completed_visits']],['label' => 'Antrean aktif', 'value' => $operationalMetrics['active_queues']],['label' => 'Nilai layanan selesai', 'value' => 'Rp '.number_format($operationalMetrics['service_value'], 0, ',', '.')]] as $metric)<article class="clinic-card p-5"><p class="text-xs font-bold uppercase tracking-wider text-slate-400">{{ $metric['label'] }}</p><p class="mt-4 font-display text-2xl font-extrabold text-clinic-950">{{ $metric['value'] }}</p></article>@endforeach</section>
 
         <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             @foreach ([
@@ -84,5 +89,7 @@
                 </div>
             </div>
         </section>
+
+        <section class="clinic-card mt-8 overflow-hidden"><div class="flex items-center justify-between border-b border-slate-100 p-5"><div><h3 class="font-bold text-clinic-950">Kunjungan selesai terbaru</h3><p class="mt-1 text-sm text-slate-500">Nilai layanan memakai snapshot saat kunjungan.</p></div><a href="{{ route('admin.audit-logs.index', ['action' => 'visit.completed', 'from' => $from, 'to' => $to]) }}" class="text-sm font-bold text-clinic-600">Lihat audit</a></div><div class="divide-y divide-slate-100">@forelse($recentVisits as $visit)<div class="grid gap-2 p-5 sm:grid-cols-[1fr_1fr_auto] sm:items-center"><div><p class="font-bold text-slate-900">{{ $visit->patient->name }}</p><p class="mt-1 text-xs text-slate-500">{{ $visit->service_name }}</p></div><p class="text-sm font-semibold text-slate-600">{{ $visit->doctor->user->name }}</p><div class="sm:text-right"><p class="font-bold text-clinic-700">Rp {{ number_format((float) $visit->total_amount, 0, ',', '.') }}</p><p class="mt-1 text-xs text-slate-400">{{ $visit->completed_at->timezone($timezone)->format('d M H:i') }}</p></div></div>@empty<div class="p-10 text-center text-sm text-slate-500">Belum ada kunjungan selesai pada periode ini.</div>@endforelse</div></section>
     @endif
 </x-app-layout>

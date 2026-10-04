@@ -2,7 +2,7 @@
 
 Tanggal: 4 Oktober 2026
 Versi: 0.1
-Status: Implementasi berjalan — M3 selesai
+Status: Implementasi berjalan — M5 selesai
 Sumber: [Plan.md](Plan.md) dan [PRD.md](PRD.md)
 
 ## 1. Tujuan dan cara menggunakan dokumen
@@ -161,11 +161,11 @@ Urutan dependensi inti: M1 → M2 → M3 → M4 → M5 → M6 → M7. Fondasi au
 
 ### M4 — Queue: administrasi antrean dan pemanggilan
 
-- [ ] **M4.1 Antrean harian:** filter klinik/dokter/tanggal/sesi/status dan daftar booking untuk check-in.
-- [ ] **M4.2 Transisi status:** BOOKED → WAITING → CALLED → IN_PROGRESS → COMPLETED; tambahan CANCELLED/SKIPPED/NO_SHOW mengikuti D05. Simpan called_at dan timestamp relevan; tolak transisi yang tidak sah.
-- [ ] **M4.3 Aksi petugas:** resepsionis check-in, panggil, skip, kembalikan antrean bila diizinkan, cancel, dan no-show; dokter melihat/memanggil antreannya sendiri sesuai D06.
-- [ ] **M4.4 Konsistensi:** satu aksi panggil tidak memilih pasien yang sama pada dua request bersamaan. Penerbitan nomor, urutan pelayanan, dan prioritas mengikuti D04.
-- [ ] **M4.5 Display publik:** tampilkan nomor/status minimal; audit setiap perubahan status. Aksi IN_PROGRESS dan COMPLETED dihubungkan ke workflow Visit pada M5, bukan finalisasi medis mandiri oleh resepsionis.
+- [x] **M4.1 Antrean harian:** filter klinik/dokter/tanggal/sesi/status dan daftar booking untuk check-in.
+- [x] **M4.2 Transisi status:** operasional M4 mendukung BOOKED → WAITING → CALLED serta CANCELLED/SKIPPED/NO_SHOW. Simpan timestamp relevan dan tolak transisi yang tidak sah. IN_PROGRESS dan COMPLETED diselesaikan bersama Visit pada M5.
+- [x] **M4.3 Aksi petugas:** resepsionis check-in, panggil, skip, kembalikan antrean bila diizinkan, cancel, dan no-show; dokter melihat/memanggil antreannya sendiri sesuai D06.
+- [x] **M4.4 Konsistensi:** satu aksi panggil tidak memilih pasien yang sama pada dua request bersamaan. Penerbitan nomor, urutan pelayanan, dan prioritas mengikuti D04.
+- [x] **M4.5 Display publik:** tampilkan nomor/status minimal; audit setiap perubahan status. Aksi IN_PROGRESS dan COMPLETED dihubungkan ke workflow Visit pada M5, bukan finalisasi medis mandiri oleh resepsionis.
 
 **Kriteria selesai:** check-in dan pemanggilan bekerja sesuai aturan, dokter hanya melihat antrean yang diizinkan, race condition pemanggilan ditangani, dan status terminal tidak dapat dikembalikan sembarangan.
 
@@ -173,12 +173,12 @@ Urutan dependensi inti: M1 → M2 → M3 → M4 → M5 → M6 → M7. Fondasi au
 
 ### M5 — Medical & Visit: pemeriksaan sampai finalisasi
 
-- [ ] **M5.1 Visit lebih dahulu:** visits dan relasi pasien/dokter/appointment/layanan. Aksi mulai pemeriksaan membuat satu Visit dan memindahkan antrean ke IN_PROGRESS secara atomik; request berulang tidak membuat kunjungan ganda.
-- [ ] **M5.2 Rekam medis:** medical_records, vital_signs, diagnoses, treatments, prescriptions, prescription_items, formulir SOAP, tanda vital, diagnosis, tindakan, dosis/frekuensi/jumlah/instruksi resep, dokter pembuat, dan timestamps.
-- [ ] **M5.3 Akses dan riwayat:** policy akses/update sesuai D07, riwayat kunjungan yang relevan, serta pemisahan informasi administratif dari isi medis. Isi medis tidak tersedia melalui route antrean publik.
-- [ ] **M5.4 Draft dan koreksi:** validasi saat simpan/finalisasi serta lifecycle rekam medis mengikuti D08/D13. Catat perubahan dan koreksi dengan aktor, waktu, dan alasan.
-- [ ] **M5.5 Biaya kunjungan:** simpan snapshot harga, layanan yang diberikan, dan total_amount sesuai D09; perubahan harga master tidak mengubah kunjungan historis. Tidak menambahkan payment gateway untuk MVP.
-- [ ] **M5.6 Finalisasi:** dalam satu transaksi, finalisasi rekam medis, Visit, Appointment, dan Queue menjadi selesai. Jika salah satu gagal, seluruh perubahan terkait dibatalkan. Tambahkan audit dan event setelah commit.
+- [x] **M5.1 Visit lebih dahulu:** visits dan relasi pasien/dokter/appointment/layanan. Aksi mulai pemeriksaan membuat satu Visit dan memindahkan antrean ke IN_PROGRESS secara atomik; request berulang tidak membuat kunjungan ganda.
+- [x] **M5.2 Rekam medis:** medical_records, vital_signs, diagnoses, treatments, prescriptions, prescription_items, formulir SOAP, tanda vital, diagnosis, tindakan, dosis/frekuensi/jumlah/instruksi resep, dokter pembuat, dan timestamps.
+- [x] **M5.3 Akses dan riwayat:** policy akses/update sesuai D07, riwayat kunjungan yang relevan, serta pemisahan informasi administratif dari isi medis. Isi medis tidak tersedia melalui route antrean publik.
+- [x] **M5.4 Draft dan koreksi:** validasi saat simpan/finalisasi serta lifecycle rekam medis mengikuti D08/D13. Catat perubahan dan koreksi dengan aktor, waktu, dan alasan.
+- [x] **M5.5 Biaya kunjungan:** simpan snapshot harga, layanan yang diberikan, dan total_amount sesuai D09; perubahan harga master tidak mengubah kunjungan historis. Tidak menambahkan payment gateway untuk MVP.
+- [x] **M5.6 Finalisasi:** dalam satu transaksi, finalisasi rekam medis, Visit, Appointment, dan Queue menjadi selesai. Jika salah satu gagal, seluruh perubahan terkait dibatalkan. Tambahkan audit dan event setelah commit.
 
 **Kriteria selesai:** dokter dapat melayani satu pasien sampai selesai dengan SOAP, diagnosis, tindakan, dan resep; kunjungan serta harga historis konsisten; resepsionis/pasien tidak dapat mengubah rekam medis; finalisasi ulang tidak menggandakan biaya atau data.
 
@@ -269,8 +269,8 @@ Tidak ada estimasi tanggal selesai yang dikunci pada tahap ini. Estimasi dibuat 
 | M1 | Selesai | 66 tests / 260 assertions lulus, build Vite, view:cache, migration MySQL, dan sinkronisasi permission |
 | M2 | Selesai | 74 tests / 284 assertions lulus, build Vite, view:cache, migration dan seed MySQL, serta pemeriksaan browser tanpa error console |
 | M3 | Selesai | 84 tests / 329 assertions lulus, build Vite, view:cache, migration dan seed MySQL, serta pemeriksaan browser halaman publik dan staf |
-| M4 | Belum dimulai | — |
-| M5 | Belum dimulai | — |
+| M4 | Selesai | 93 tests / 380 assertions lulus, migration MySQL, Pint, build Vite, view:cache, dan pemeriksaan browser antrean staf/publik |
+| M5 | Selesai | 103 tests / 455 assertions lulus, migration dan seed MySQL, Pint, Vite build, view:cache, serta pemeriksaan browser halaman medis tanpa error console |
 | M6 | Belum dimulai | — |
 | M7 | Belum dimulai | — |
 
@@ -281,8 +281,31 @@ Status dapat berubah menjadi Dikerjakan, Perlu keputusan, Terverifikasi, atau Se
 | D01 | Disetujui pengguna: akun Patient opsional; registrasi publik hanya Patient; booking dapat tanpa akun | 4 Oktober 2026 | Registrasi M1 diterapkan; booking menyusul M3 |
 | D06 | Disetujui pengguna: dokter dan resepsionis boleh memanggil, dokter hanya antreannya sendiri | 4 Oktober 2026 | Permission queue.call diterapkan; ownership/transisi mengikuti M4–M5 |
 | D07 | Disetujui pengguna: admin tidak otomatis mendapat akses isi medis; resepsionis tidak mendapat akses isi medis | 4 Oktober 2026 | Permission medis admin dihapus; policy rekam medis mengikuti M5 |
-| D02–D05, D09–D12 | Default M3 diterapkan sementara: guest membuat profil baru tanpa pencocokan identitas, resepsionis memilih pasien lama secara eksplisit, booking berbasis sesi sampai 30 hari, nomor antrean per klinik/dokter/sesi/tanggal, pembatalan sebelum sesi melepaskan kuota, harga disalin saat booking, dan status guest memakai token rahasia | 4 Oktober 2026 | Validasi akhir bersama operasional klinik tetap diperlukan sebelum rilis |
-| D08, D13 | Belum ditetapkan; lihat usulan di bagian 4 | — | Tetapkan sebelum M5 dan M7 |
+| D02–D03, D09–D12 | Default M3 diterapkan sementara: guest membuat profil baru tanpa pencocokan identitas, resepsionis memilih pasien lama secara eksplisit, booking berbasis sesi sampai 30 hari, harga disalin saat booking, dan status guest memakai token rahasia | 4 Oktober 2026 | Validasi akhir bersama operasional klinik tetap diperlukan sebelum rilis |
+| D04–D05 | Default M4 diterapkan sementara: antrean dipanggil FIFO per dokter/sesi/tanggal, hanya satu pasien CALLED/IN_PROGRESS per sesi, SKIPPED dapat kembali ke WAITING, no-show hanya setelah sesi dimulai, dan status terminal tidak dapat dibuka kembali | 4 Oktober 2026 | Aturan prioritas khusus dan toleransi keterlambatan perlu divalidasi bersama operasional klinik sebelum rilis |
+| D08 | Default M5 diterapkan: draft dapat diedit dokter yang menangani; data final hanya dapat dikoreksi dengan alasan wajib dan snapshot sebelum/sesudah | 4 Oktober 2026 | Lifecycle dan audit koreksi diterapkan; kebijakan klinis akhir perlu divalidasi sebelum rilis |
+| D13 | Retensi dan backup belum ditetapkan; data final tidak dihapus dan koreksi disimpan sebagai revisi | 4 Oktober 2026 | Tetapkan jadwal backup, retensi, dan target pemulihan sebelum M7 |
+
+### Hasil implementasi M5
+
+- Dokter memulai pemeriksaan hanya dari antrean CALLED miliknya. `VisitWorkflowService` memakai transaksi, row lock, dan unique constraint appointment sehingga request ulang membuka Visit yang sama dan memindahkan antrean ke IN_PROGRESS tanpa duplikasi.
+- Halaman pemeriksaan menyimpan draft SOAP, pemeriksaan fisik, tanda vital, diagnosis utama/sekunder, tindakan, resep, dan catatan dokter. Riwayat yang tampil dibatasi pada pasien serta dokter yang sama.
+- Policy medis hanya memberi akses isi rekam medis kepada dokter yang ditugaskan. Clinic Admin, resepsionis, dokter lain, pasien, dan route publik tidak mendapat akses isi medis.
+- Finalisasi mewajibkan keluhan, SOAP lengkap, dan diagnosis. Rekam medis, Visit, Appointment, dan Queue diselesaikan dalam satu transaksi; event sukses baru dikirim setelah commit.
+- Visit menyimpan nama layanan, harga booking, dan total sebagai snapshot. Perubahan harga layanan master tidak mengubah nilai kunjungan historis.
+- Rekam medis final tidak dapat kembali diedit sebagai draft. Koreksi memerlukan alasan dan menyimpan aktor, waktu, serta snapshot sebelum/sesudah di `medical_record_revisions`; audit umum hanya menyimpan referensi revisi tanpa isi medis.
+- Seeder lokal menyediakan satu kunjungan historis lengkap untuk akun dokter demo. Verifikasi akhir M5: 103 tests / 455 assertions pada MySQL, Pint, Vite build, Blade view cache, migration/seed, rollback finalisasi, dan pemeriksaan browser responsive tanpa error console.
+
+### Hasil implementasi M4
+
+- Halaman antrean staf menyediakan filter tanggal, dokter, sesi, dan status, disertai ringkasan jumlah BOOKED, WAITING, CALLED, dan SKIPPED.
+- Resepsionis dan Clinic Admin dapat melakukan check-in, panggil, skip, kembalikan ke waiting, cancel, dan no-show. Dokter hanya melihat serta memanggil antrean miliknya sendiri.
+- `QueueWorkflowService` memusatkan seluruh transisi dalam transaksi dan row lock. Status awal dan tujuan diperiksa kembali setelah lock sehingga request berulang atau stale tidak dapat mengubah antrean secara tidak sah.
+- Pemanggilan mengikuti nomor terkecil yang berstatus WAITING. Lock pada sesi dokter mencegah dua request memanggil pasien berbeda secara bersamaan dan menolak panggilan baru selama ada antrean CALLED atau IN_PROGRESS.
+- Pembatalan dan no-show disinkronkan ke Appointment. Check-in/panggilan hanya berlaku pada tanggal antrean; no-show baru tersedia setelah sesi dimulai. Status terminal tidak dapat dikembalikan.
+- Display antrean publik hanya menampilkan nomor, status, dokter, dan sesi tanpa nama pasien, nomor rekam medis, atau data kontak. Pembaruan otomatis realtime tetap berada pada M6.
+- Setiap transisi mencatat aktor, klinik, status awal/akhir, resource, dan waktu melalui audit log.
+- Verifikasi akhir M4: 93 tests / 380 assertions pada MySQL, Pint, Vite build, Blade view cache, migration, isolasi tenant/dokter, dan pemeriksaan browser responsive.
 
 ### Hasil implementasi M3
 

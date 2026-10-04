@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             PatientSeeder::class,
             AppointmentSeeder::class,
             QueueSeeder::class,
+            MedicalVisitSeeder::class,
         ]);
     }
 }

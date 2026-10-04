@@ -21,6 +21,7 @@ class BookingService
     public function __construct(
         private MedicalRecordNumberGenerator $medicalRecordNumberGenerator,
         private AuditLogger $auditLogger,
+        private ClinicNotificationService $notificationService,
     ) {}
 
     /**
@@ -137,6 +138,7 @@ class BookingService
                 'appointment_date' => $appointmentDate->toDateString(),
                 'queue_number' => $queueNumber,
             ], $actor);
+            $this->notificationService->appointmentStatusChanged($appointment, AppointmentStatus::Booked);
 
             return [
                 'appointment' => $appointment->load(['patient', 'doctor.user', 'service', 'schedule', 'queue']),
@@ -187,7 +189,9 @@ class BookingService
                 'cancelled_at' => now(),
                 'cancel_reason' => $reason,
             ]);
-            $lockedAppointment->queue()->update(['status' => QueueStatus::Cancelled]);
+            $queue = $lockedAppointment->queue()->lockForUpdate()->firstOrFail();
+            $previousQueueStatus = $queue->status;
+            $queue->update(['status' => QueueStatus::Cancelled, 'cancelled_at' => now()]);
             $this->auditLogger->recordForClinic(
                 $lockedAppointment->clinic,
                 'appointment.cancelled',
@@ -195,6 +199,8 @@ class BookingService
                 ['reason' => $reason],
                 $actor,
             );
+            $this->notificationService->appointmentStatusChanged($lockedAppointment, AppointmentStatus::Cancelled);
+            $this->notificationService->queueStatusChanged($queue->refresh(), $previousQueueStatus);
 
             return $lockedAppointment->refresh()->load(['patient', 'doctor.user', 'service', 'schedule', 'queue']);
         }, 3);

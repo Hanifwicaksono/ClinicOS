@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Queue;
 use App\Models\User;
+use App\QueueStatus;
 
 class QueuePolicy
 {
@@ -51,6 +52,28 @@ class QueuePolicy
         return $user->clinic_id !== null
             && $user->clinic_id === $queue->clinic_id
             && $user->can('queue.manage');
+    }
+
+    public function call(User $user, Queue $queue): bool
+    {
+        if (! $user->can('queue.call') || $user->clinic_id !== $queue->clinic_id) {
+            return false;
+        }
+
+        if ($user->hasRole('Doctor')) {
+            return $queue->doctor->user_id === $user->id;
+        }
+
+        return $user->hasAnyRole(['Clinic Admin', 'Receptionist']);
+    }
+
+    public function startVisit(User $user, Queue $queue): bool
+    {
+        return $user->hasRole('Doctor')
+            && $user->can('visit.start')
+            && $user->clinic_id === $queue->clinic_id
+            && $queue->doctor->user_id === $user->id
+            && in_array($queue->status, [QueueStatus::Called, QueueStatus::InProgress], true);
     }
 
     /**

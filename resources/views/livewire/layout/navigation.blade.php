@@ -13,7 +13,7 @@ new class extends Component
     }
 }; ?>
 
-<div x-data="{ open: false }">
+<div x-data="{ open: false }" data-user-notification-channel="users.{{ auth()->id() }}">
     <div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3" wire:navigate>
             <x-application-logo class="h-9 w-9" />
@@ -55,17 +55,23 @@ new class extends Component
                         ['route' => 'admin.doctor-schedules.index', 'match' => 'admin.doctor-schedules.*', 'label' => 'Jadwal dokter', 'icon' => 'M3 9h18M7 3v4m10-4v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm3 8h3v3H8v-3Z'],
                         ['route' => 'receptionist.patients.index', 'match' => 'receptionist.patients.*', 'label' => 'Pasien', 'icon' => 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z'],
                         ['route' => 'receptionist.appointments.index', 'match' => 'receptionist.appointments.*', 'label' => 'Booking & antrean', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6'],
+                        ['route' => 'receptionist.queues.index', 'match' => '*.queues.*', 'label' => 'Antrean hari ini', 'icon' => 'M5 6h14M5 12h14M5 18h9'],
+                        ['route' => 'admin.audit-logs.index', 'match' => 'admin.audit-logs.*', 'label' => 'Audit aktivitas', 'icon' => 'M4 4h16v16H4V4Zm4 5h8m-8 4h8m-8 4h5'],
                     ]
                     : (auth()->user()->hasRole('Receptionist') ? [
                         ['route' => 'receptionist.dashboard', 'match' => 'receptionist.dashboard', 'label' => 'Ringkasan', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
                         ['route' => 'receptionist.patients.index', 'match' => 'receptionist.patients.*', 'label' => 'Pasien', 'icon' => 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z'],
                         ['route' => 'receptionist.appointments.index', 'match' => 'receptionist.appointments.*', 'label' => 'Booking & antrean', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6'],
+                        ['route' => 'receptionist.queues.index', 'match' => '*.queues.*', 'label' => 'Antrean hari ini', 'icon' => 'M5 6h14M5 12h14M5 18h9'],
+                    ] : (auth()->user()->hasRole('Doctor') ? [
+                        ['route' => 'doctor.dashboard', 'match' => 'doctor.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
+                        ['route' => 'doctor.queues.index', 'match' => 'doctor.queues.*', 'label' => 'Antrean saya', 'icon' => 'M5 6h14M5 12h14M5 18h9'],
                     ] : (auth()->user()->hasRole('Patient') ? [
                         ['route' => 'patient.dashboard', 'match' => 'patient.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
                         ['route' => 'patient.appointments.index', 'match' => 'patient.appointments.*', 'label' => 'Booking saya', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z'],
                     ] : [
                         ['route' => 'dashboard', 'match' => '*.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
-                    ]));
+                    ])));
             @endphp
 
             @foreach ($links as $link)
@@ -78,6 +84,12 @@ new class extends Component
                     {{ $link['label'] }}
                 </a>
             @endforeach
+
+            <a href="{{ route('notifications.index') }}" wire:navigate @click="open = false" @class(['flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition', 'bg-clinic-50 text-clinic-700' => request()->routeIs('notifications.*'), 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' => ! request()->routeIs('notifications.*')])>
+                <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+                <span class="flex-1">Notifikasi</span>
+                <span data-notification-count @class(['rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white', 'hidden' => auth()->user()->unreadNotifications()->count() === 0])>{{ auth()->user()->unreadNotifications()->count() }}</span>
+            </a>
         </nav>
 
         <div class="border-t border-slate-100 p-4">
