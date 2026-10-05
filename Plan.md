@@ -1,1413 +1,486 @@
-# ClinicOS — Development Plan
+# ClinicOS — Status Proyek dan Development Plan
 
-> **Status:** Development — Clinic Core selesai
-> **Version:** 0.1
-> **Project:** ClinicOS
-> **Architecture:** Full Laravel
-> **Database:** MySQL
-> **Frontend:** Blade + Livewire + Tailwind CSS
-
-Catatan implementasi 4 Oktober 2026: M1 dan M2 pada [Development-Plan.md](Development-Plan.md) telah diverifikasi dengan 74 tests / 284 assertions, build frontend, kompilasi Blade, dan migration MySQL lokal. Admin dapat mengelola profil klinik, dokter, resepsionis, layanan, dan jadwal dengan isolasi data per klinik. Repository Git lokal tersedia, tetapi remote GitHub belum dikonfigurasi.
-
----
-
-# 1. Project Overview
-
-ClinicOS adalah platform manajemen klinik berbasis web yang membantu klinik mengelola:
-
-* Data klinik
-* Dokter
-* Resepsionis
-* Pasien
-* Jadwal dokter
-* Layanan
-* Booking
-* Antrean
-* Rekam medis
-* Diagnosis
-* Tindakan
-* Resep
-* Dashboard
-* Pendapatan
-* Notifikasi
-* Audit log
-
-Target pengembangan pertama adalah membuat **MVP yang dapat digunakan oleh satu klinik**.
-
-Arsitektur MVP:
-
-```text
-Browser
-   │
-   ▼
-Laravel
-   ├── Blade
-   ├── Livewire
-   ├── Controllers
-   ├── Services
-   ├── Policies
-   ├── Jobs
-   └── Events
-   │
-   ▼
-MySQL
-```
-
-Realtime:
-
-```text
-Laravel
-   │
-   ▼
-Laravel Reverb
-   │
-   ▼
-Browser
-```
+> **Diperbarui:** 5 Oktober 2026
+>
+> **Status:** MVP core feature-complete; release readiness masih berjalan
+>
+> **Arsitektur:** Laravel monolith, Blade + Livewire, Tailwind CSS, MySQL, Laravel Reverb
+>
+> **Target rilis saat ini:** satu klinik, satu instalasi, alur pelayanan lengkap
+>
+> **Dokumen detail implementasi:** [Development-Plan.md](Development-Plan.md)
+>
+> **Requirement produk:** [PRD.md](PRD.md)
 
 ---
 
-# 2. Development Principles
+## 1. Ringkasan Eksekutif
 
-Pengembangan ClinicOS mengikuti prinsip:
+ClinicOS telah menyelesaikan seluruh modul fungsional utama MVP dari M1 sampai M6:
 
-1. **MVP first**
-2. Jangan mengembangkan fitur Post-MVP sebelum fitur MVP stabil.
-3. Database dirancang sejak awal agar dapat dikembangkan menjadi SaaS.
-4. Hak akses harus diterapkan sejak awal.
-5. Data medis harus diperlakukan sebagai data sensitif.
-6. Business logic tidak diletakkan seluruhnya di Controller.
-7. Setiap fitur utama harus dapat diuji secara independen.
-8. Perubahan database menggunakan Laravel Migration.
-9. Data penting menggunakan database transaction jika diperlukan.
-10. Setiap fitur selesai harus diuji sebelum melanjutkan ke fitur berikutnya.
+```text
+Setup klinik
+    → data dokter, resepsionis, jadwal, dan layanan
+    → pasien dan booking
+    → antrean
+    → pemeriksaan dokter
+    → rekam medis, diagnosis, tindakan, dan resep
+    → finalisasi kunjungan dan nilai layanan
+    → dashboard, notifikasi, realtime, dan audit log
+```
+
+MVP belum dinyatakan dirilis ke production. Milestone M7 masih membutuhkan penyelesaian UI akhir, simulasi staging end-to-end, infrastruktur production, backup/restore, observability, dokumentasi operasional, dan release sign-off.
+
+Status yang digunakan dalam dokumen ini:
+
+- **Selesai:** fitur telah diimplementasikan dan memiliki bukti verifikasi di repository.
+- **Berjalan:** sebagian kriteria selesai, masih ada pekerjaan yang teridentifikasi.
+- **Belum dimulai:** belum ada bukti implementasi yang cukup.
+- **Perlu keputusan:** implementasi bergantung pada keputusan produk atau operasional.
 
 ---
 
-# 3. Technology Stack
+## 2. Baseline Teknis Saat Ini
 
-## 3.1 Core
+Versi berikut berasal dari lock file repository, bukan asumsi versi terbaru:
 
-```text
-Laravel
-PHP
-MySQL
-```
+| Area | Implementasi saat ini |
+| --- | --- |
+| Runtime | PHP `^8.3` |
+| Framework | Laravel `13.34.0` |
+| UI | Blade, Livewire `3.8.10`, Volt `1.11.2`, Tailwind CSS |
+| Authorization | Spatie Laravel Permission `8.3.0`, Policies, middleware role/permission |
+| Realtime | Laravel Reverb `1.12.0`, Laravel Echo, private channels |
+| Database | MySQL untuk aplikasi dan verifikasi integrasi; SQLite memory tersedia untuk test cepat yang sesuai |
+| Testing | PHPUnit `12.5.37` |
+| Repository | Git dengan remote GitHub `origin` telah dikonfigurasi |
 
-## 3.2 Frontend
-
-```text
-Blade
-Livewire
-Tailwind CSS
-```
-
-## 3.3 Authentication & Authorization
-
-```text
-Laravel Breeze / Fortify
-Spatie Laravel Permission
-Laravel Policies
-Middleware
-```
-
-## 3.4 Realtime
-
-```text
-Laravel Reverb
-Laravel Events
-Laravel Broadcasting
-```
-
-## 3.5 Background Processing
-
-```text
-Laravel Queue
-Laravel Scheduler
-Laravel Jobs
-```
-
-## 3.6 Development Environment
-
-```text
-Git
-GitHub
-Composer
-Node.js / NPM
-Laravel Artisan
-MySQL
-```
+Catatan environment saat pembaruan dokumen: folder dependency `vendor` tidak tersedia pada checkout aktif, sehingga hasil verifikasi terakhir mengacu pada catatan implementasi yang sudah tersimpan di [Development-Plan.md](Development-Plan.md), bukan test run baru pada sesi ini.
 
 ---
 
-# 4. Development Phases
+## 3. Status Milestone MVP
 
-## Phase 0 — Project Setup
+| Milestone | Status | Hasil utama | Bukti terakhir yang tercatat |
+| --- | --- | --- | --- |
+| M1 — Foundation | Selesai | Auth, verifikasi email, empat role, permission, akun aktif/nonaktif, audit auth | 66 tests / 260 assertions |
+| M2 — Clinic Core | Selesai | Klinik, staff, dokter, jadwal, layanan, isolasi data klinik | 74 tests / 284 assertions |
+| M3 — Patient & Booking | Selesai | Pasien, website publik, booking guest/staff, kuota, nomor antrean, token status | 84 tests / 329 assertions |
+| M4 — Queue | Selesai | Check-in, call, skip, return, cancel, no-show, display publik | 93 tests / 380 assertions |
+| M5 — Medical & Visit | Selesai | Visit, SOAP, vital sign, diagnosis, tindakan, resep, koreksi, finalisasi atomik | 103 tests / 455 assertions |
+| M6 — Management | Selesai | Dashboard per role, filter periode, notifikasi, realtime, audit viewer | 112 tests / 497 assertions |
+| M7 — Release | Berjalan | Security hardening dan regression selesai; staging dan production belum selesai | Lihat checklist M7 |
 
-### Tujuan
-
-Mempersiapkan environment dan struktur dasar Laravel.
-
-### Tasks
-
-* [ ] Membuat repository GitHub.
-* [x] Membuat project Laravel.
-* [x] Mengatur `.env`.
-* [x] Membuat database MySQL.
-* [x] Menghubungkan Laravel dengan MySQL.
-* [x] Menjalankan migration awal.
-* [x] Mengatur Git.
-* [x] Membuat `.gitignore`.
-* [x] Menginstall dependency frontend.
-* [x] Mengatur Tailwind CSS.
-* [x] Mengatur layout Blade.
-* [x] Mengatur struktur folder project.
-* [x] Membuat halaman landing sementara.
-* [x] Memastikan aplikasi dapat berjalan di local environment.
-
-### Definition of Done
-
-```text
-Laravel berhasil dijalankan
-        ↓
-MySQL terhubung
-        ↓
-Migration berhasil
-        ↓
-Blade berhasil dirender
-        ↓
-Tailwind berhasil
-        ↓
-Git repository siap
-```
+Selain test suite, milestone yang selesai telah dicatat melalui kombinasi Pint, Vite build, Blade view cache, migration/seed MySQL, pengujian transaksi/konkurensi, dan pemeriksaan browser sesuai ruang lingkup milestone.
 
 ---
 
-# 5. Phase 1 — Authentication
+## 4. Cakupan MVP yang Sudah Selesai
 
-### Tujuan
+### 4.1 Foundation, Authentication, dan Authorization
 
-Membuat sistem login dan akun pengguna.
+- [x] Login, logout, reset password, perubahan profil, dan perubahan password.
+- [x] Verifikasi email untuk akses dashboard.
+- [x] Role Clinic Admin, Doctor, Receptionist, dan Patient.
+- [x] Registrasi publik hanya memberikan role Patient.
+- [x] Penolakan login dan penghentian sesi untuk akun nonaktif.
+- [x] Permission matrix, middleware, serta policy resource.
+- [x] Redirect dashboard sesuai role dan penanganan akun tanpa role.
+- [x] Audit login/logout tanpa menyimpan kredensial sensitif.
 
-### Tasks
+### 4.2 Clinic Core
 
-* [x] Install Laravel authentication.
-* [x] Membuat login.
-* [x] Membuat logout.
-* [x] Membuat password hashing.
-* [x] Membuat profile pengguna.
-* [x] Membuat status akun aktif/nonaktif.
-* [x] Install Spatie Permission.
-* [x] Membuat role:
+- [x] Profil klinik, slug, logo, kontak, timezone, jam operasional, dan status.
+- [x] Pengelolaan akun dokter dan resepsionis.
+- [x] Profil dokter, status aktif, dan relasi dokter–layanan.
+- [x] Jadwal berbasis hari/sesi, jam, kuota, dan validasi bentrok.
+- [x] Layanan, harga, dan status aktif.
+- [x] Isolasi data berdasarkan klinik pada resource internal.
 
-  * [x] Clinic Admin
-  * [x] Doctor
-  * [x] Receptionist
-  * [x] Patient
-* [x] Membuat permission dasar.
-* [x] Membuat middleware role.
-* [ ] Membuat authorization policy.
+### 4.3 Patient dan Booking
 
-### Permission awal
+- [x] Data pasien dan nomor rekam medis unik per klinik.
+- [x] Pencarian, pagination, detail, edit administratif, dan riwayat kunjungan.
+- [x] Halaman publik klinik untuk profil, dokter, layanan, dan jadwal aktif.
+- [x] Booking guest dan booking oleh staf untuk pasien baru/lama.
+- [x] Validasi dokter–layanan, sesi, tanggal, status klinik, dan kuota.
+- [x] Snapshot nama/harga layanan saat booking.
+- [x] Idempotency dan locking untuk mencegah booking/nomor ganda.
+- [x] Status booking publik menggunakan token rahasia dan rate limiting.
+- [x] Pembatalan tersinkron dengan antrean serta mengembalikan kuota.
 
-```text
-clinic.view
-clinic.update
+### 4.4 Queue
 
-doctor.view
-doctor.create
-doctor.update
-doctor.delete
+- [x] Filter antrean berdasarkan klinik, dokter, tanggal, sesi, dan status.
+- [x] Transisi `BOOKED → WAITING → CALLED → IN_PROGRESS → COMPLETED`.
+- [x] Jalur alternatif `SKIPPED`, `CANCELLED`, dan `NO_SHOW`.
+- [x] Check-in, call, skip, return to waiting, cancel, dan no-show.
+- [x] FIFO per dokter/sesi/tanggal dan pencegahan pemanggilan bersamaan.
+- [x] Dokter dibatasi pada antreannya sendiri.
+- [x] Display publik hanya menampilkan data antrean minimal.
+- [x] Audit setiap transisi status.
 
-patient.view
-patient.create
-patient.update
+### 4.5 Visit dan Rekam Medis
 
-appointment.view
-appointment.create
-appointment.update
-appointment.cancel
+- [x] Pembuatan Visit atomik saat dokter memulai pemeriksaan.
+- [x] SOAP, pemeriksaan fisik, vital sign, diagnosis, tindakan, dan resep.
+- [x] Draft rekam medis dan validasi lebih ketat saat finalisasi.
+- [x] Policy medis: hanya dokter yang ditugaskan dapat melihat isi medis.
+- [x] Rekam medis final tidak dapat diedit langsung.
+- [x] Koreksi final wajib memiliki alasan dan revision snapshot.
+- [x] Snapshot biaya kunjungan agar histori tidak berubah saat harga master berubah.
+- [x] Finalisasi Medical Record, Visit, Appointment, dan Queue dalam satu transaksi.
 
-queue.view
-queue.manage
+### 4.6 Dashboard, Notification, Realtime, dan Audit
 
-medical_record.view
-medical_record.create
-medical_record.update
+- [x] Dashboard Clinic Admin, Doctor, Receptionist, dan Patient.
+- [x] Statistik pasien, booking, kunjungan, antrean, serta nilai layanan.
+- [x] Filter tanggal memakai timezone klinik.
+- [x] Notification center dan read state.
+- [x] Notifikasi booking, pembatalan, panggilan, dan perubahan antrean.
+- [x] Realtime queue melalui Reverb, Echo, event setelah commit, dan private channel.
+- [x] Audit viewer untuk admin yang berwenang.
+- [x] Audit untuk aksi penting dari auth sampai finalisasi kunjungan.
 
-dashboard.view
+### 4.7 Security dan Regression yang Sudah Selesai
 
-audit_log.view
-```
-
-### Definition of Done
-
-Setiap role hanya dapat mengakses halaman dan fitur yang sesuai.
-
----
-
-# 6. Phase 2 — Clinic Management
-
-### Tujuan
-
-Membuat konfigurasi dasar klinik.
-
-### Tasks
-
-* [ ] Membuat migration `clinics`.
-* [ ] Membuat model Clinic.
-* [ ] Membuat controller/service Clinic.
-* [ ] Membuat halaman profil klinik.
-* [ ] Membuat edit profil klinik.
-* [ ] Menambahkan logo klinik.
-* [ ] Menambahkan alamat.
-* [ ] Menambahkan nomor telepon.
-* [ ] Menambahkan deskripsi.
-* [ ] Menambahkan jam operasional.
-* [ ] Menambahkan clinic settings.
-* [ ] Membuat slug klinik.
-
-### Data utama
-
-```text
-Clinic
-├── Name
-├── Slug
-├── Address
-├── Phone
-├── Description
-├── Logo
-└── Status
-```
-
-### Definition of Done
-
-Clinic Admin dapat membuat dan mengubah informasi kliniknya.
+- [x] Form Request validation pada alur utama.
+- [x] Authorization policy dan pemeriksaan ownership/clinic scope.
+- [x] CSRF dan output escaping bawaan Laravel/Blade.
+- [x] Rate limiting pada auth, booking, dan status publik.
+- [x] Validasi upload logo.
+- [x] Security headers untuk response web.
+- [x] Konfigurasi production tidak membuat akun demo.
+- [x] Regression suite, Pint, frontend build, Blade compile, dan pemeriksaan migration lokal tercatat lulus.
 
 ---
 
-# 7. Phase 3 — Doctor Management
+## 5. Release Gate MVP — Pekerjaan yang Masih Tersisa
 
-### Tujuan
+Bagian ini adalah prioritas tertinggi. Pekerjaan post-MVP tidak dimulai sebelum release gate yang relevan selesai atau risikonya diterima secara eksplisit.
 
-Membuat pengelolaan dokter.
+### M7.2 — UI dan Accessibility Final
 
-### Tasks
+- [ ] Audit responsive pada desktop, tablet, dan mobile untuk seluruh alur utama.
+- [ ] Konsistenkan loading, empty, error, validation, dan confirmation state.
+- [ ] Verifikasi keterbacaan form pemeriksaan serta rekam medis yang panjang.
+- [ ] Verifikasi keyboard navigation, focus state, label form, dan kontras dasar.
+- [ ] Uji kondisi data panjang, tabel sempit, dan koneksi realtime terputus.
 
-* [ ] Membuat migration `doctors`.
-* [ ] Membuat Doctor Model.
-* [ ] Membuat relasi User → Doctor.
-* [ ] Membuat daftar dokter.
-* [ ] Membuat tambah dokter.
-* [ ] Membuat edit dokter.
-* [ ] Membuat detail dokter.
-* [ ] Membuat aktivasi/nonaktivasi dokter.
-* [ ] Menambahkan spesialisasi.
-* [ ] Menambahkan nomor izin/profil jika dibutuhkan.
-* [ ] Membuat jadwal dokter.
+**Definition of done:** tidak ada blocker usability P0/P1 pada alur utama dan seluruh role dapat menyelesaikan tugasnya pada viewport target.
 
-### Definition of Done
+### M7.4 — Staging dan UAT End-to-End
 
-Clinic Admin dapat membuat dokter dan mengatur status dokter.
+- [ ] Siapkan environment staging yang menyerupai production.
+- [ ] Jalankan alur pasien baru, pasien lama, guest booking, dan walk-in.
+- [ ] Jalankan check-in, call, skip, return, cancel, dan no-show.
+- [ ] Jalankan pemeriksaan, draft, finalisasi, resep, serta koreksi rekam medis.
+- [ ] Verifikasi dashboard, notification center, realtime lintas browser, dan audit log.
+- [ ] Uji akses langsung lintas role, dokter, pasien, dan klinik.
+- [ ] Dokumentasikan temuan, severity, owner, dan hasil retest.
+- [ ] Dapatkan sign-off dari perwakilan operasional klinik.
 
----
+**Definition of done:** seluruh skenario kritis lulus, tidak ada defect P0/P1 terbuka, dan aturan operasional sementara telah disetujui.
 
-# 8. Phase 4 — Doctor Schedule
+### M7.5 — Infrastruktur Production
 
-### Tujuan
+- [ ] Tentukan target hosting dan topologi production.
+- [ ] Konfigurasi domain, HTTPS, PHP, web server, MySQL, dan storage permission.
+- [ ] Konfigurasi queue worker, scheduler, Reverb, dan mail bila digunakan.
+- [ ] Pisahkan secret per environment dan nonaktifkan debug di production.
+- [ ] Siapkan proses deployment, migration, restart worker, dan rollback.
+- [ ] Tambahkan health check untuk web, database, queue, dan realtime.
 
-Mengatur jadwal praktik dokter.
+**Definition of done:** deployment staging dapat diulang dari prosedur tertulis dan production smoke test lulus tanpa konfigurasi manual yang tidak terdokumentasi.
 
-### Tasks
+### M7.6 — Backup, Recovery, dan Observability
 
-* [ ] Membuat migration `doctor_schedules`.
-* [ ] Membuat model DoctorSchedule.
-* [ ] Membuat jadwal berdasarkan hari.
-* [ ] Menentukan jam mulai.
-* [ ] Menentukan jam selesai.
-* [ ] Menentukan kuota pasien.
-* [ ] Mengaktifkan/nonaktifkan jadwal.
-* [ ] Menampilkan jadwal pada dashboard admin.
-* [ ] Menampilkan jadwal pada website publik.
+- [ ] Putuskan retensi data, frekuensi backup, enkripsi, dan pihak yang boleh mengakses backup.
+- [ ] Tetapkan RPO dan RTO bersama pemilik klinik.
+- [ ] Otomatiskan backup database dan file private yang relevan.
+- [ ] Lakukan restore drill; backup tanpa uji restore belum dianggap selesai.
+- [ ] Konfigurasi structured logging, error monitoring, dan alert minimum.
+- [ ] Buat runbook insiden, recovery, serta rollback kode/migration.
 
-### Contoh
+**Definition of done:** restore berhasil pada environment terisolasi dan alert kritis mencapai penanggung jawab yang ditetapkan.
 
-```text
-Senin
-08:00 - 12:00
-Kuota: 20 pasien
+### M7.7 — Release MVP
 
-Rabu
-13:00 - 17:00
-Kuota: 20 pasien
-```
+- [ ] Tetapkan versi rilis dan changelog.
+- [ ] Catat known limitations dan keputusan risiko yang diterima.
+- [ ] Bekukan scope rilis dan lakukan final regression/smoke test.
+- [ ] Deploy production dan verifikasi monitoring awal.
+- [ ] Dapatkan release sign-off.
 
-### Definition of Done
-
-Sistem dapat menentukan kapan dokter tersedia untuk booking.
-
----
-
-# 9. Phase 5 — Service Management
-
-### Tujuan
-
-Mengelola layanan dan harga klinik.
-
-### Tasks
-
-* [ ] Membuat migration `services`.
-* [ ] Membuat Service Model.
-* [ ] Tambah layanan.
-* [ ] Edit layanan.
-* [ ] Nonaktifkan layanan.
-* [ ] Menentukan harga.
-* [ ] Menampilkan layanan pada website publik.
-
-### Contoh
-
-```text
-Konsultasi Umum     Rp50.000
-Pemeriksaan Gigi    Rp75.000
-Medical Check-up    Rp150.000
-```
-
-### Definition of Done
-
-Layanan aktif dapat dipilih ketika pasien melakukan booking.
+**MVP dinyatakan selesai hanya setelah M7.2, M7.4, M7.5, M7.6, dan M7.7 selesai.**
 
 ---
 
-# 10. Phase 6 — Patient Management
+## 6. Keputusan Produk/Operasional yang Belum Final
 
-### Tujuan
+Keputusan ini harus ditutup pada UAT atau sebelum fitur post-MVP yang bergantung padanya:
 
-Membuat sistem data pasien.
-
-### Tasks
-
-* [x] Membuat migration `patients`.
-* [x] Membuat Patient Model.
-* [x] Membuat nomor rekam medis.
-* [x] Membuat form pasien.
-* [x] Membuat daftar pasien.
-* [x] Membuat pencarian pasien.
-* [x] Membuat detail pasien.
-* [x] Membuat edit data pasien.
-* [x] Menampilkan riwayat kunjungan.
-* [x] Menerapkan authorization.
-
-### Data pasien awal
-
-```text
-Medical Record Number
-Name
-NIK
-Birth Date
-Gender
-Phone
-Address
-```
-
-### Definition of Done
-
-Resepsionis dapat membuat, mencari, dan memperbarui data pasien.
+| Keputusan | Kondisi saat ini | Batas penyelesaian |
+| --- | --- | --- |
+| Pencocokan identitas pasien guest | Guest selalu membuat profil pasien baru; tidak memakai telepon/NIK sebagai bukti identitas | Sebelum patient portal diperluas |
+| Aturan booking | Berbasis sesi, maksimum 30 hari, harga di-snapshot saat booking | Saat UAT operasional |
+| Prioritas antrean | FIFO per dokter/sesi/tanggal; satu CALLED/IN_PROGRESS per sesi | Saat UAT operasional |
+| Toleransi keterlambatan/no-show | No-show tersedia setelah sesi dimulai | Saat UAT operasional |
+| Koreksi data medis | Alasan wajib dan revision snapshot; data final tidak dihapus | Sebelum production sign-off |
+| Retensi dan pemulihan | Belum ditetapkan | Sebelum M7.6 selesai |
+| Istilah “revenue” | Saat ini nilai layanan selesai, bukan pembayaran kas yang sudah diterima | Sebelum modul billing/reporting |
 
 ---
 
-# 11. Phase 7 — Public Clinic Website
+## 7. Prinsip Pengembangan Post-MVP
 
-### Tujuan
-
-Menyediakan halaman yang dapat digunakan calon pasien tanpa login.
-
-### Halaman
-
-```text
-/clinic/{slug}
-
-├── Home
-├── About
-├── Services
-├── Doctors
-├── Schedule
-└── Booking
-```
-
-### Tasks
-
-* [x] Membuat route publik.
-* [x] Membuat clinic landing page.
-* [x] Menampilkan informasi klinik.
-* [x] Menampilkan layanan.
-* [x] Menampilkan dokter.
-* [x] Menampilkan jadwal.
-* [x] Membuat halaman booking.
-
-### Definition of Done
-
-Pengguna dapat membuka website klinik dan melihat informasi layanan serta dokter.
+1. Production stability dan keamanan data medis lebih dahulu daripada perluasan fitur.
+2. Setiap fase harus memiliki metrik keberhasilan, migration plan, test, monitoring, dan rollback plan.
+3. API, event, dan model data distabilkan sebelum mobile app atau integrasi pihak ketiga.
+4. Multi-tenant dan multi-branch tidak dipaksakan menjadi satu perubahan besar; isolasi, billing, dan migrasi diuji bertahap.
+5. Fitur komunikasi harus menyimpan consent, delivery status, retry, dan audit.
+6. Fitur keuangan membedakan nilai layanan, invoice, pembayaran, refund, dan settlement.
+7. Offline-first hanya dikerjakan jika kebutuhan konektivitas klinik terbukti melalui riset.
+8. AI hanya membantu administrasi/dokumentasi, tidak membuat keputusan klinis dan tidak boleh membuka data lintas pasien/klinik.
 
 ---
 
-# 12. Phase 8 — Booking
+## 8. Roadmap Post-MVP
 
-### Tujuan
+Roadmap memakai urutan dependensi, bukan tanggal kalender. Estimasi dibuat setelah kapasitas tim, hasil production baseline, dan prioritas bisnis tersedia.
 
-Memungkinkan pasien mendaftarkan kunjungan.
+### PM1 — Production Stabilization dan Operational Excellence
 
-### Tasks
+**Tujuan:** membuktikan bahwa ClinicOS stabil dipakai sehari-hari setelah MVP dirilis.
 
-* [x] Membuat migration `appointments`.
-* [x] Membuat Appointment Model.
-* [x] Membuat form booking.
-* [x] Memilih layanan.
-* [x] Memilih dokter.
-* [x] Memilih tanggal.
-* [x] Memvalidasi jadwal dokter.
-* [x] Memvalidasi kuota.
-* [x] Membuat booking code.
-* [x] Menyimpan booking.
-* [x] Menampilkan detail booking.
-* [x] Membuat status booking.
+- [ ] Triage dan SLA defect berdasarkan severity.
+- [ ] Monitoring error, latency, slow query, queue, Reverb, dan kapasitas storage.
+- [ ] Audit index/query pada dashboard, antrean, audit log, dan riwayat pasien.
+- [ ] Automated smoke test untuk flow kritis setelah deployment.
+- [ ] Jadwal patch dependency dan security review berkala.
+- [ ] Runbook support, incident, backup, restore, dan disaster recovery.
+- [ ] Pengukuran baseline: uptime, error rate, waktu respons, booking success, dan queue update delay.
 
-### Status
+**Exit criteria:** minimal satu siklus operasional yang disepakati berjalan tanpa defect kritis; backup/restore serta alert telah diuji.
 
-```text
-BOOKED
-CANCELLED
-COMPLETED
-NO_SHOW
-```
+### PM2 — Reporting, Documents, dan Clinic Operations
 
-### Definition of Done
+**Tujuan:** meningkatkan pekerjaan administratif tanpa mengubah fondasi tenancy.
 
-Pasien dapat melakukan booking dan mendapatkan nomor/identitas booking.
+- [ ] Laporan kunjungan, pasien, layanan, dokter, antrean, dan nilai layanan per periode.
+- [ ] Export CSV/Excel dengan authorization, filter, audit, dan batas ukuran.
+- [ ] Export PDF/print untuk ringkasan kunjungan dan dokumen yang disetujui.
+- [ ] Cetak resep dengan identitas klinik, dokter, pasien, dan nomor dokumen.
+- [ ] Template dokumen serta penomoran yang dapat dikonfigurasi.
+- [ ] Dashboard tren dan perbandingan periode.
+- [ ] Peningkatan pencarian serta histori pasien nonmedis/medis sesuai policy.
+- [ ] Data retention dan proses archival untuk audit/notifikasi lama.
 
----
+**Exit criteria:** angka laporan direkonsiliasi dengan data transaksi sumber dan export besar tidak mengganggu request web.
 
-# 13. Phase 9 — Queue Management
+### PM3 — Communication dan Patient Experience
 
-### Tujuan
+**Tujuan:** mengurangi no-show dan memberi informasi yang jelas kepada pasien.
 
-Membangun sistem antrean klinik.
+- [ ] Consent dan preferensi kanal komunikasi pasien.
+- [ ] Email booking, perubahan jadwal, pembatalan, dan reminder.
+- [ ] Integrasi WhatsApp melalui provider resmi setelah biaya dan template disetujui.
+- [ ] Delivery log, retry, failure handling, rate limit, dan opt-out.
+- [ ] Reminder terjadwal dan aturan anti-duplikasi.
+- [ ] Patient portal untuk booking aktif, histori kunjungan yang aman, dan profil.
+- [ ] Proteksi account linking dan recovery agar pasien keluarga tidak tertukar.
 
-### Tasks
+**Exit criteria:** delivery dapat ditelusuri, consent dapat dibuktikan, dan tidak ada data medis sensitif pada pesan yang tidak terenkripsi.
 
-* [x] Membuat migration `queues`.
-* [x] Membuat Queue Model.
-* [x] Generate nomor antrean.
-* [x] Menampilkan antrean hari ini.
-* [x] Mengubah booking menjadi `WAITING`.
-* [x] Memanggil pasien.
-* [x] Skip pasien.
-* [ ] Memulai pemeriksaan.
-* [ ] Menyelesaikan pemeriksaan.
-* [x] Membatalkan antrean.
-* [x] Menampilkan antrean aktif.
+### PM4 — Billing dan Payment
 
-### Status
+**Tujuan:** memisahkan nilai layanan dari transaksi keuangan sebenarnya.
 
-```text
-BOOKED
-   ↓
-WAITING
-   ↓
-CALLED
-   ↓
-IN_PROGRESS
-   ↓
-COMPLETED
-```
+- [ ] Model invoice, invoice item, payment, refund, discount, dan adjustment.
+- [ ] Status serta nomor invoice yang immutable dan dapat diaudit.
+- [ ] Kasir, metode pembayaran, rekonsiliasi, dan laporan penerimaan.
+- [ ] Hak akses keuangan terpisah dari akses isi rekam medis.
+- [ ] Payment gateway hanya setelah flow manual stabil.
+- [ ] Webhook idempotent, signature verification, retry, dan reconciliation job.
 
-Alternatif:
+**Exit criteria:** nilai layanan, tagihan, pembayaran, refund, dan settlement dapat direkonsiliasi tanpa mengubah histori kunjungan.
 
-```text
-CANCELLED
-SKIPPED
-NO_SHOW
-```
+### PM5 — API dan Integration Platform
 
-### Definition of Done
+**Tujuan:** menyediakan kontrak stabil untuk mobile app dan integrasi eksternal.
 
-Resepsionis dapat mengelola antrean dari pasien datang sampai selesai.
+- [ ] Versioned API dan Eloquent API Resources.
+- [ ] Token/session strategy per jenis client.
+- [ ] Scope, rate limit, idempotency, audit, dan revocation.
+- [ ] OpenAPI contract serta integration test.
+- [ ] Event/webhook catalog dengan retry dan dead-letter handling.
+- [ ] Data export/import terkontrol dan mapping identifier eksternal.
 
----
+**Exit criteria:** kontrak API terversi, diuji, terdokumentasi, dan perubahan breaking memiliki migration policy.
 
-# 14. Phase 10 — Medical Record
+### PM6 — SaaS Multi-Tenant dan Subscription
 
-### Tujuan
+**Tujuan:** mengubah instalasi satu klinik menjadi platform yang dapat melayani banyak tenant dengan isolasi kuat.
 
-Membuat modul rekam medis digital.
+- [ ] Pilih strategi tenancy dan dokumentasikan threat model.
+- [ ] Tambahkan Super Admin pada control plane terpisah dari akses data medis tenant.
+- [ ] Self-service clinic registration dan onboarding aman.
+- [ ] Tenant provisioning, suspension, export, dan deletion workflow.
+- [ ] Subscription plan, entitlement/feature flag, trial, renewal, dan grace period.
+- [ ] Invoice subscription dan payment gateway.
+- [ ] Per-tenant quota, usage metering, observability, backup, dan restore.
+- [ ] Automated isolation test untuk HTTP, job, event, broadcast, cache, file, dan export.
 
-### Tasks
+**Exit criteria:** pengujian isolasi tenant lulus pada seluruh jalur data dan satu tenant dapat dipulihkan tanpa memengaruhi tenant lain.
 
-* [x] Membuat migration `visits`.
-* [x] Membuat migration `medical_records`.
-* [x] Membuat migration `vital_signs`.
-* [x] Membuat migration `diagnoses`.
-* [x] Membuat migration `treatments`.
-* [x] Membuat migration `prescriptions`.
-* [x] Membuat migration `prescription_items`.
-* [x] Membuat relasi antar model.
-* [x] Membuat halaman pemeriksaan dokter.
-* [x] Membuat form SOAP.
-* [x] Membuat form tanda vital.
-* [x] Membuat diagnosis.
-* [x] Membuat tindakan.
-* [x] Membuat resep.
-* [x] Menyimpan rekam medis.
-* [x] Mencatat dokter pembuat.
-* [x] Mencatat timestamp.
-* [x] Membatasi akses rekam medis.
+### PM7 — Multi-Branch
 
-### Struktur pemeriksaan
+**Tujuan:** satu organisasi dapat mengelola beberapa cabang tanpa mencampur konteks pelayanan.
 
-```text
-Patient
-   ↓
-Visit
-   ↓
-Medical Record
-   ├── Subjective
-   ├── Objective
-   ├── Assessment
-   └── Plan
-```
+- [ ] Model organization dan branch serta migration data klinik yang sudah ada.
+- [ ] Assignment staff/dokter ke satu atau beberapa cabang.
+- [ ] Jadwal, layanan, antrean, nomor dokumen, dan timezone per cabang.
+- [ ] Aturan kepemilikan pasien dan akses cross-branch.
+- [ ] Dashboard serta laporan cabang dan konsolidasi organisasi.
+- [ ] Transfer/referral antar-cabang dengan audit.
 
-### Definition of Done
+**Exit criteria:** seluruh query operasional memiliki branch context yang eksplisit dan laporan konsolidasi dapat direkonsiliasi.
 
-Dokter dapat menyelesaikan pemeriksaan dan menyimpan rekam medis pasien.
+### PM8 — Mobile/PWA dan Offline Capability
 
----
+**Tujuan:** menyediakan pengalaman mobile setelah API stabil; offline hanya berdasarkan kebutuhan nyata.
 
-# 15. Phase 11 — Visit & Transaction
+#### Patient App
 
-### Tujuan
+- [ ] Login dan account recovery.
+- [ ] Booking, pembatalan, status antrean, dan notification.
+- [ ] Profil serta histori yang diizinkan.
 
-Menghubungkan pelayanan medis dengan transaksi.
+#### Doctor App
 
-### Tasks
+- [ ] Login dengan keamanan perangkat.
+- [ ] Jadwal, antrean, detail pasien yang berwenang, dan notification.
+- [ ] Dokumentasi medis hanya setelah kontrol keamanan mobile disetujui.
 
-* [x] Membuat data kunjungan.
-* [x] Menghubungkan visit dengan appointment.
-* [x] Menghubungkan visit dengan doctor.
-* [x] Menghubungkan visit dengan service.
-* [x] Menyimpan harga layanan saat transaksi.
-* [x] Menghitung total biaya.
-* [x] Menyelesaikan visit.
-* [x] Mengubah status antrean menjadi `COMPLETED`.
+#### Offline, jika tervalidasi
 
-### Definition of Done
+- [ ] Tentukan data minimum yang boleh berada di perangkat/server lokal.
+- [ ] Enkripsi local storage, device enrollment, remote revoke, dan audit.
+- [ ] Sync protocol, retry, tombstone, versioning, dan observability.
+- [ ] Conflict detection/resolution per jenis data.
+- [ ] Uji kehilangan perangkat, koneksi putus, clock drift, dan restore.
 
-Setiap kunjungan selesai memiliki data layanan dan nilai transaksi.
+**Exit criteria:** mobile security review lulus; untuk offline, konflik dapat diprediksi dan tidak merusak rekam medis final.
 
----
+### PM9 — Advanced Security dan Compliance Readiness
 
-# 16. Phase 12 — Dashboard
+**Tujuan:** meningkatkan assurance seiring bertambahnya tenant, integrasi, dan data.
 
-### Tujuan
+- [ ] Two-factor authentication untuk role berisiko tinggi.
+- [ ] Device/session management dan forced logout.
+- [ ] Encryption at rest serta key rotation strategy.
+- [ ] Immutable/centralized audit trail dan anomaly alert.
+- [ ] Vulnerability scanning, dependency policy, dan penetration testing.
+- [ ] Periodic access review dan least-privilege review.
+- [ ] Disaster recovery exercise berkala.
+- [ ] Data classification, retention, consent, export, dan deletion policy sesuai yurisdiksi target.
 
-Menyediakan informasi ringkas untuk pengguna.
+**Exit criteria:** threat model dan kontrol diperbarui; temuan kritis/high ditutup atau diterima secara formal.
 
-## Clinic Admin Dashboard
+### PM10 — AI Assistance
 
-Menampilkan:
+**Tujuan:** membantu pekerjaan administratif dan dokumentasi setelah governance data matang.
 
-```text
-Pasien Hari Ini
-Booking Hari Ini
-Kunjungan Selesai
-Antrean Aktif
-Pendapatan Hari Ini
-```
+- [ ] Riset kebutuhan dan evaluasi risiko per use case.
+- [ ] Ringkasan riwayat medis dengan sumber yang dapat ditelusuri.
+- [ ] Bantuan draft SOAP yang selalu memerlukan review dokter.
+- [ ] FAQ administratif tanpa akses data medis yang tidak diperlukan.
+- [ ] Ringkasan laporan manajemen.
+- [ ] Consent, redaction, tenant isolation, prompt/output audit, dan retention policy.
+- [ ] Evaluasi hallucination, bias, data leakage, dan human override.
 
-## Doctor Dashboard
-
-Menampilkan:
-
-```text
-Jadwal Hari Ini
-Pasien Menunggu
-Pasien Sedang Diperiksa
-Pasien Selesai
-```
-
-## Receptionist Dashboard
-
-Menampilkan:
-
-```text
-Booking Hari Ini
-Antrean
-Pasien Menunggu
-Pasien Dipanggil
-```
-
-### Tasks
-
-* [x] Membuat dashboard layout.
-* [x] Membuat statistik pasien.
-* [x] Membuat statistik booking.
-* [x] Membuat statistik kunjungan.
-* [x] Membuat statistik antrean.
-* [x] Membuat revenue summary.
-* [x] Membuat filter tanggal.
-* [x] Membuat dashboard sesuai role.
+**Exit criteria:** hasil AI tidak pernah otomatis menjadi keputusan klinis atau rekam medis final; kualitas dan risiko diukur dengan evaluation set yang disetujui.
 
 ---
 
-# 17. Phase 13 — Notification
-
-### Tujuan
-
-Memberikan informasi kepada pengguna mengenai perubahan penting.
-
-### MVP
-
-* [x] Booking berhasil.
-* [x] Booking dibatalkan.
-* [x] Pasien dipanggil.
-* [x] Perubahan status antrean.
-
-### Tasks
-
-* [x] Membuat migration `notifications`.
-* [x] Membuat Notification Model.
-* [x] Membuat Laravel Notification.
-* [x] Membuat notification center.
-* [x] Menandai notification sebagai read.
-* [x] Menghubungkan notification dengan antrean.
-
----
-
-# 18. Phase 14 — Realtime Queue
-
-### Tujuan
-
-Membuat perubahan antrean dapat diterima tanpa reload halaman.
-
-### Tasks
-
-* [x] Install Laravel Reverb.
-* [x] Konfigurasi broadcasting.
-* [x] Membuat QueueUpdated Event.
-* [x] Membuat listener pada Livewire.
-* [x] Mengirim event ketika antrean berubah.
-* [x] Mengupdate tampilan antrean secara realtime.
-* [x] Menguji beberapa browser secara bersamaan.
-
-### Flow
+## 9. Urutan dan Dependensi yang Direkomendasikan
 
 ```text
-Receptionist
-     │
-     │ Call Patient
-     ▼
-Laravel
-     │
-     ▼
-QueueUpdated Event
-     │
-     ▼
-Laravel Reverb
-     │
-     ├──────────► Doctor Browser
-     │
-     └──────────► Patient Queue Display
-```
-
----
-
-# 19. Phase 15 — Audit Log
-
-### Tujuan
-
-Mencatat aktivitas penting pada sistem.
-
-### Tasks
-
-* [x] Membuat migration `audit_logs`.
-* [x] Membuat AuditLog Model.
-* [x] Mencatat login.
-* [x] Mencatat logout.
-* [x] Mencatat pembuatan pasien.
-* [x] Mencatat perubahan pasien.
-* [x] Mencatat pembuatan rekam medis.
-* [x] Mencatat perubahan data penting.
-* [x] Membuat halaman audit log.
-* [x] Membatasi akses audit log hanya untuk role tertentu.
-
----
-
-# 20. Phase 16 — Security Hardening
-
-### Tujuan
-
-Memastikan MVP memiliki keamanan dasar yang memadai.
-
-### Tasks
-
-* [ ] Validasi seluruh input.
-* [ ] Form Request Validation.
-* [ ] Authorization Policy.
-* [ ] Role middleware.
-* [ ] CSRF protection.
-* [ ] Password hashing.
-* [ ] Rate limiting untuk endpoint tertentu.
-* [ ] HTTPS pada production.
-* [ ] SQL injection prevention melalui Eloquent/Query Builder.
-* [ ] XSS protection.
-* [ ] File upload validation.
-* [ ] Audit log.
-* [ ] Session security.
-* [ ] Database backup.
-
----
-
-# 21. Phase 17 — Testing
-
-### Unit Test
-
-* [ ] User authentication.
-* [ ] Role permission.
-* [ ] Patient creation.
-* [ ] Booking.
-* [ ] Queue number generation.
-* [ ] Queue status transition.
-* [ ] Medical record creation.
-* [ ] Revenue calculation.
-
-### Feature Test
-
-* [ ] Patient registration.
-* [ ] Patient booking.
-* [ ] Receptionist queue management.
-* [ ] Doctor examination.
-* [ ] Medical record creation.
-* [ ] Visit completion.
-* [ ] Dashboard calculation.
-
-### Authorization Test
-
-Pastikan:
-
-```text
-Doctor
-    X mengubah data klinik
-
-Receptionist
-    X mengubah rekam medis dokter
-
-Patient
-    X mengakses dashboard admin
-
-Clinic Admin
-    ✓ mengelola dokter
-    ✓ mengelola layanan
-    ✓ melihat dashboard
-```
-
----
-
-# 22. Phase 18 — UI/UX Polish
-
-### Tasks
-
-* [ ] Membuat design system sederhana.
-* [ ] Menentukan typography.
-* [ ] Membuat button component.
-* [ ] Membuat input component.
-* [ ] Membuat modal component.
-* [ ] Membuat table component.
-* [ ] Membuat badge/status component.
-* [ ] Membuat notification component.
-* [ ] Membuat responsive navigation.
-* [ ] Membuat mobile responsive.
-* [ ] Empty state.
-* [ ] Loading state.
-* [ ] Error state.
-* [ ] Confirmation dialog.
-
----
-
-# 23. Phase 19 — Deployment
-
-### Environment
-
-```text
-Development
-     ↓
-Testing
-     ↓
-Production
-```
-
-### Tasks
-
-* [ ] Menyiapkan VPS.
-* [ ] Install Linux.
-* [ ] Install PHP.
-* [ ] Install MySQL.
-* [ ] Install Composer.
-* [ ] Install Node.js.
-* [ ] Install Nginx.
-* [ ] Konfigurasi domain.
-* [ ] Konfigurasi HTTPS.
-* [ ] Setup environment production.
-* [ ] Setup database production.
-* [ ] Setup storage.
-* [ ] Setup queue worker.
-* [ ] Setup scheduler.
-* [ ] Setup Reverb.
-* [ ] Setup database backup.
-* [ ] Deploy Laravel.
-* [ ] Menjalankan migration production.
-* [ ] Menjalankan optimization Laravel.
-
----
-
-# 24. MVP Final Testing
-
-Sebelum MVP dinyatakan selesai, lakukan simulasi penuh.
-
-## Scenario 1 — Pasien Baru
-
-```text
-Pasien
- ↓
-Website Klinik
- ↓
-Booking
- ↓
-Nomor Antrean
- ↓
-Datang ke Klinik
- ↓
-Waiting
-```
-
-## Scenario 2 — Pasien Lama
-
-```text
-Pasien
- ↓
-Booking
- ↓
-Sistem menemukan pasien
- ↓
-Booking baru
- ↓
-Queue
-```
-
-## Scenario 3 — Pemeriksaan
-
-```text
-Queue
- ↓
-Called
- ↓
-In Progress
- ↓
-Doctor
- ↓
-Medical Record
- ↓
-Diagnosis
- ↓
-Treatment
- ↓
-Prescription
- ↓
-Completed
-```
-
-## Scenario 4 — Dashboard
-
-```text
-Completed Visit
-       ↓
-Transaction
-       ↓
-Revenue
-       ↓
-Dashboard
-```
-
----
-
-# 25. MVP Definition of Done
-
-MVP dianggap selesai jika seluruh flow utama berikut berjalan:
-
-```text
-                    ┌─────────────┐
-                    │   Patient   │
-                    └──────┬──────┘
-                           │
-                        Booking
-                           │
-                           ▼
-                    ┌─────────────┐
-                    │    Queue    │
-                    └──────┬──────┘
-                           │
-                     Receptionist
-                           │
-                           ▼
-                    ┌─────────────┐
-                    │    Doctor   │
-                    └──────┬──────┘
-                           │
-                      Examination
-                           │
-                           ▼
-                    ┌─────────────┐
-                    │   Medical   │
-                    │    Record   │
-                    └──────┬──────┘
-                           │
-                       Completed
-                           │
-                           ▼
-                    ┌─────────────┐
-                    │  Dashboard  │
-                    └─────────────┘
-```
-
-Checklist:
-
-* [ ] Authentication berjalan.
-* [ ] Role & permission berjalan.
-* [ ] Clinic management berjalan.
-* [ ] Doctor management berjalan.
-* [ ] Doctor schedule berjalan.
-* [ ] Service management berjalan.
-* [ ] Patient management berjalan.
-* [ ] Public clinic website berjalan.
-* [ ] Booking berjalan.
-* [ ] Queue berjalan.
-* [ ] Medical record berjalan.
-* [ ] Prescription berjalan.
-* [ ] Visit completion berjalan.
-* [ ] Dashboard berjalan.
-* [ ] Notification dasar berjalan.
-* [ ] Audit log berjalan.
-* [ ] Authorization berjalan.
-* [ ] Database backup tersedia.
-* [ ] Responsive UI selesai.
-* [ ] Testing utama selesai.
-* [ ] Production deployment berhasil.
-
----
-
-# 26. Post-MVP Plan
-
-Setelah MVP stabil, pengembangan dilanjutkan secara bertahap.
-
-## Post-MVP 1 — Advanced Clinic Features
-
-* [ ] Advanced reporting.
-* [ ] PDF export.
-* [ ] Excel export.
-* [ ] Advanced dashboard.
-* [ ] Patient history improvement.
-* [ ] Prescription printing.
-* [ ] Email notification.
-* [ ] WhatsApp notification.
-
----
-
-## Post-MVP 2 — SaaS
-
-* [ ] Multi-tenant architecture.
-* [ ] Super Admin.
-* [ ] Clinic registration.
-* [ ] Subscription plans.
-* [ ] Free trial.
-* [ ] Subscription status.
-* [ ] Invoice.
-* [ ] Payment gateway.
-* [ ] Subscription renewal.
-* [ ] Upgrade/downgrade.
-
----
-
-## Post-MVP 3 — Multi-Branch
-
-* [ ] Branch management.
-* [ ] Doctor branch assignment.
-* [ ] Patient branch.
-* [ ] Branch dashboard.
-* [ ] Branch revenue.
-* [ ] Cross-branch reporting.
-
----
-
-## Post-MVP 4 — Offline-First
-
-Arsitektur:
-
-```text
-             Cloud
-               ↕
-         Sync Engine
-               ↕
-        Local Clinic Server
-          ↙           ↘
- Receptionist        Doctor
-```
-
-Tasks:
-
-* [ ] Local database.
-* [ ] Local authentication.
-* [ ] Offline patient data.
-* [ ] Offline medical records.
-* [ ] Offline queue.
-* [ ] Sync engine.
-* [ ] Retry mechanism.
-* [ ] Sync status.
-* [ ] Conflict detection.
-* [ ] Conflict resolution.
-* [ ] Backup local database.
-
-**Catatan:** database lokal sebaiknya berada pada perangkat/server yang dikontrol klinik, bukan komputer pribadi dokter.
-
----
-
-## Post-MVP 5 — Mobile Application
-
-### Patient App
-
-* [ ] Login.
-* [ ] Booking.
-* [ ] Queue.
-* [ ] Notification.
-* [ ] Visit history.
-* [ ] Profile.
-
-### Doctor App
-
-* [ ] Login.
-* [ ] Schedule.
-* [ ] Queue.
-* [ ] Patient.
-* [ ] Medical record.
-* [ ] Notification.
-
-Teknologi:
-
-```text
-Flutter
-      ↓
-Laravel API
-      ↓
-MySQL
-```
-
----
-
-## Post-MVP 6 — Advanced Security
-
-* [ ] Two-Factor Authentication.
-* [ ] Device management.
-* [ ] Session management.
-* [ ] Advanced audit log.
-* [ ] Encryption at rest.
-* [ ] Key management.
-* [ ] Automated backup.
-* [ ] Disaster recovery.
-* [ ] Security monitoring.
-* [ ] Penetration testing.
-
----
-
-## Post-MVP 7 — AI
-
-Kemungkinan fitur:
-
-* [ ] Medical history summarization.
-* [ ] SOAP documentation assistance.
-* [ ] Administrative chatbot.
-* [ ] Patient FAQ.
-* [ ] Report summarization.
-
-AI hanya berfungsi sebagai **alat bantu** dan tidak menggantikan keputusan klinis dokter.
-
----
-
-# 27. Recommended Development Order
-
-Urutan pengerjaan yang direkomendasikan:
-
-```text
-1. Project Setup
-        ↓
-2. Authentication
-        ↓
-3. Role & Permission
-        ↓
-4. Clinic Management
-        ↓
-5. Doctor Management
-        ↓
-6. Doctor Schedule
-        ↓
-7. Service Management
-        ↓
-8. Patient Management
-        ↓
-9. Public Clinic Website
-        ↓
-10. Booking
-        ↓
-11. Queue
-        ↓
-12. Visit
-        ↓
-13. Medical Record
-        ↓
-14. Prescription
-        ↓
-15. Transaction
-        ↓
-16. Dashboard
-        ↓
-17. Notification
-        ↓
-18. Realtime
-        ↓
-19. Audit Log
-        ↓
-20. Security
-        ↓
-21. Testing
-        ↓
-22. UI/UX Polish
-        ↓
-23. Deployment
-        ↓
-24. MVP Release
-```
-
----
-
-# 28. Prioritas Pengembangan
-
-## P0 — Wajib untuk MVP
-
-```text
-Authentication
-Role & Permission
-Clinic
-Doctor
-Schedule
-Service
-Patient
-Booking
-Queue
-Visit
-Medical Record
-Prescription
-Dashboard
-```
-
-## P1 — Penting untuk MVP
-
-```text
-Notification
-Realtime Queue
-Audit Log
-Security Hardening
-Responsive UI
-Testing
-```
-
-## P2 — Post-MVP
-
-```text
-Multi-Tenant
-Subscription
-Payment
-Multi-Branch
-Offline-First
-Mobile App
-WhatsApp
-Advanced Analytics
-AI
-```
-
----
-
-# 29. Project Milestone
-
-## Milestone 1 — Foundation
-
-```text
-[ ] Laravel
-[ ] MySQL
-[ ] Authentication
-[ ] Role
-[ ] Permission
-```
-
-## Milestone 2 — Clinic Core
-
-```text
-[x] Clinic
-[x] Doctor
-[x] Schedule
-[x] Service
-```
-
-## Milestone 3 — Patient & Booking
-
-```text
-[ ] Patient
-[ ] Public Website
-[ ] Booking
-```
-
-## Milestone 4 — Queue
-
-```text
-[ ] Queue
-[ ] Receptionist
-[ ] Queue Status
-[ ] Calling
-```
-
-## Milestone 5 — Medical
-
-```text
-[x] Visit
-[x] Medical Record
-[x] Diagnosis
-[x] Treatment
-[x] Prescription
-```
-
-## Milestone 6 — Management
-
-```text
-[ ] Dashboard
-[ ] Revenue
-[ ] Notification
-[ ] Audit Log
-```
-
-## Milestone 7 — Release
-
-```text
-[ ] Testing
-[ ] Security
-[ ] Responsive
-[ ] Deployment
-[ ] MVP Release
-```
-
----
-
-# 30. Final Target Architecture
-
-```text
-                         CLINICOS
-                             │
-                 ┌───────────┴───────────┐
-                 │                       │
-              Public                  Internal
-              Website                  App
-                 │                       │
-                 └───────────┬───────────┘
-                             │
-                         Laravel
-                             │
-          ┌──────────────────┼──────────────────┐
-          │                  │                  │
-       Blade              Livewire          Laravel API
-          │                  │                  │
-          └──────────────────┼──────────────────┘
-                             │
-                     Business Logic
-                             │
-          ┌──────────────────┼──────────────────┐
-          │                  │                  │
-        MySQL             Reverb             Queue
-          │                  │                  │
-          │                  │                  │
-      Database           Realtime         Background Jobs
-```
-
-Target jangka panjang:
-
-```text
-                        ClinicOS SaaS
-                              │
-             ┌────────────────┼────────────────┐
-             │                │                │
-          Web App         Mobile App      Public Website
-             │                │                │
-             └────────────────┼────────────────┘
-                              │
-                           Laravel
-                              │
-                 ┌────────────┼────────────┐
-                 │            │            │
-              MySQL        Reverb        Queue
-                 │
-             Multi-Tenant
-                 │
-       ┌─────────┼─────────┐
-       │         │         │
-    Clinic A  Clinic B  Clinic C
-```
-
----
-
-# 31. Current Development Target
-
-Untuk tahap sekarang, **jangan langsung mengerjakan seluruh roadmap**.
-
-Target pertama adalah:
-
-> **Menyelesaikan MVP ClinicOS yang dapat menjalankan satu siklus pelayanan pasien secara lengkap dari booking sampai rekam medis dan dashboard.**
-
-Flow utama yang harus menjadi prioritas:
-
-```text
-Clinic Admin
+M7 Release MVP
     ↓
-Setup Clinic
-    ↓
-Create Doctor
-    ↓
-Create Schedule
-    ↓
-Create Service
-    ↓
-        Patient
-          ↓
-        Booking
-          ↓
-        Queue
-          ↓
-    Receptionist
-          ↓
-        Doctor
-          ↓
-      Examination
-          ↓
-    Medical Record
-          ↓
-      Completed
-          ↓
-       Revenue
-          ↓
-      Dashboard
+PM1 Production Stabilization
+    ├──→ PM2 Reporting & Documents
+    ├──→ PM3 Communication
+    └──→ PM4 Billing
+             ↓
+        PM5 API Platform
+             ↓
+        PM6 SaaS Multi-Tenant
+             ↓
+        PM7 Multi-Branch
+             ↓
+        PM8 Mobile / Offline
+
+PM9 Security & Compliance berjalan lintas fase
+PM10 AI dimulai setelah governance, API, dan observability matang
 ```
 
-Setelah flow tersebut stabil, baru lanjutkan ke **realtime, notification, audit log, security hardening, testing, dan deployment**.
+Urutan praktis:
 
-Setelah MVP benar-benar selesai, pengembangan dapat dilanjutkan ke **SaaS multi-tenant, subscription, multi-branch, offline-first, mobile application, dan fitur lanjutan lainnya**.
+1. **Now:** selesaikan M7 dan rilis MVP dengan aman.
+2. **Next:** stabilisasi production, reporting/documents, dan komunikasi pasien.
+3. **Then:** billing serta API platform.
+4. **Later:** SaaS multi-tenant, multi-branch, mobile/offline.
+5. **Last/controlled pilot:** AI assistance.
+
+---
+
+## 10. Backlog Awal untuk Siklus Berikutnya
+
+Siklus pengembangan berikutnya sebaiknya tetap fokus pada release gate, bukan langsung pada fitur baru:
+
+1. Tutup keputusan retensi, backup, RPO, RTO, dan penanggung jawab insiden.
+2. Siapkan staging yang setara dengan production.
+3. Jalankan audit UI/accessibility seluruh role dan perbaiki blocker P0/P1.
+4. Buat matriks UAT end-to-end beserta expected result dan bukti eksekusi.
+5. Jalankan restore drill serta validasi queue, scheduler, Reverb, dan mail.
+6. Susun runbook deployment/rollback dan lakukan rehearsal.
+7. Lakukan final regression, production deployment, smoke test, dan sign-off.
+8. Setelah satu baseline production tersedia, ukur data nyata untuk memprioritaskan PM1–PM4.
+
+---
+
+## 11. Definition of Done untuk Semua Fitur Baru
+
+Sebuah fitur dianggap selesai jika:
+
+- [ ] Requirement, actor, permission, success path, dan failure path telah jelas.
+- [ ] UI dan API tidak membocorkan data lintas role, dokter, pasien, klinik, tenant, atau cabang.
+- [ ] Validasi, policy, constraint, transaksi, dan idempotency diterapkan sesuai risiko.
+- [ ] Aktivitas penting diaudit tanpa menyimpan secret atau isi medis yang tidak diperlukan.
+- [ ] Test relevan mencakup perilaku utama, kegagalan penting, dan authorization.
+- [ ] Perilaku concurrency diuji pada MySQL bila menggunakan lock/constraint.
+- [ ] Migration aman untuk data existing dan memiliki rollback/forward-fix plan.
+- [ ] Logging, metric, dan alert tersedia untuk kegagalan operasional penting.
+- [ ] UI diperiksa pada viewport target dan memiliki state loading/empty/error yang sesuai.
+- [ ] Pint, test terkait, frontend build, dan smoke test lulus.
+- [ ] Dokumentasi operasional dan roadmap diperbarui bila perilaku atau scope berubah.
+
+---
+
+## 12. Target Akhir
+
+Target terdekat bukan menambah semua fitur sekaligus, tetapi merilis MVP satu klinik yang aman dan dapat dioperasikan:
+
+```text
+Clinic Admin setup
+    → Patient booking
+    → Receptionist queue
+    → Doctor examination
+    → Medical record and prescription
+    → Visit completed
+    → Dashboard, notification, realtime, and audit
+    → Backup, monitoring, and operational support
+```
+
+Setelah target tersebut terbukti stabil di production, ClinicOS dapat berkembang secara bertahap menjadi platform SaaS multi-tenant dan multi-branch dengan API, aplikasi mobile, integrasi komunikasi/pembayaran, serta AI assistance yang terkontrol.

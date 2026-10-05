@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DoctorScheduleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
+use App\Http\Controllers\Doctor\MedicalRecordController as DoctorMedicalRecordController;
 use App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Patient\AppointmentController as PatientAppointmentController;
@@ -74,6 +75,7 @@ Route::prefix('receptionist')->name('receptionist.')->middleware(['auth', 'verif
 
 Route::prefix('doctor')->name('doctor.')->middleware(['auth', 'verified', 'role:Doctor'])->group(function () {
     Route::get('queues', [QueueController::class, 'index'])->name('queues.index');
+    Route::get('medical-records', [DoctorMedicalRecordController::class, 'index'])->name('medical-records.index');
     Route::post('queues/{queue}/start', [DoctorVisitController::class, 'start'])->name('visits.start');
     Route::get('visits/{visit}', [DoctorVisitController::class, 'show'])->name('visits.show');
     Route::put('visits/{visit}/draft', [DoctorVisitController::class, 'save'])->name('visits.save');

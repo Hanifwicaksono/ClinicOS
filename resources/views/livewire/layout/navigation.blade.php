@@ -66,6 +66,7 @@ new class extends Component
                     ] : (auth()->user()->hasRole('Doctor') ? [
                         ['route' => 'doctor.dashboard', 'match' => 'doctor.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
                         ['route' => 'doctor.queues.index', 'match' => 'doctor.queues.*', 'label' => 'Antrean saya', 'icon' => 'M5 6h14M5 12h14M5 18h9'],
+                        ['route' => 'doctor.medical-records.index', 'match' => 'doctor.medical-records.*', 'label' => 'Rekam medis', 'icon' => 'M6 3h9l3 3v15H6V3Zm8 0v4h4M9 11h6m-6 4h6m-6 4h4'],
                     ] : (auth()->user()->hasRole('Patient') ? [
                         ['route' => 'patient.dashboard', 'match' => 'patient.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
                         ['route' => 'patient.appointments.index', 'match' => 'patient.appointments.*', 'label' => 'Booking saya', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z'],
