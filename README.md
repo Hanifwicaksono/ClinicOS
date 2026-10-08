@@ -28,7 +28,7 @@ php artisan key:generate
 ```sh
 php artisan migrate --seed
 ```
-4.ihhMenjalankan projek
+4.Menjalankan projek
 ```sh
 npm run build
 php artisan serve
