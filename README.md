@@ -10,16 +10,30 @@ Acuan pengembangan: [PRD.md](PRD.md), [Plan.md](Plan.md), dan [Development-Plan.
 
 ## Menjalankan aplikasi lokal
 
-Prasyarat: PHP sesuai composer.json, Composer, Node/NPM, MySQL, serta extension PHP untuk dependency aplikasi dan test database. Gunakan konfigurasi `.env` lokal dan database sendiri; jangan menggunakan database production untuk test.
+Prasyarat: PHP sesuai composer.json yaitu versi ^8.3, Composer, Node/NPM, MySQL, serta extension PHP untuk dependency aplikasi dan test database. Gunakan konfigurasi `.env` lokal dan database sendiri; jangan menggunakan database production untuk test.
 
+1.Install paket PHP dan Javascript
 ```sh
 composer install
 npm install
+```
+2.Buat file konfigurasi data penting
+```sh
+cp .env.example .env
 php artisan key:generate
+```
+3.Buat database pada MySQL sesuai dengan DB_DATABASE yang ada di file .env yaitu `clinicos`
+
+4.Membuat struktur tabel di database
+```sh
 php artisan migrate --seed
+```
+4.ihhMenjalankan projek
+```sh
 npm run build
 php artisan serve
 ```
+
 
 Buat `.env` dari `.env.example` jika belum tersedia dan isi konfigurasi MySQL sebelum menjalankan migration. Jalankan `key:generate` hanya pada instalasi baru; jangan mengganti APP_KEY aplikasi yang sudah digunakan.
 
@@ -31,6 +45,8 @@ php artisan db:seed --class=RoleAndPermissionSeeder
 ```
 
 Akun demo dibuat melalui DemoUserSeeder hanya pada environment `local`. Seeder tidak mengganti password atau status verifikasi akun yang sudah ada. Pengguna baru perlu memverifikasi email sebelum dashboard; bila mail driver memakai `log`, tautan ada di `storage/logs/laravel.log`.
+
+Untuk login dengan role Admin, bisa menggunakan akun    `admin@clinicos.test` dengan password `password`
 
 ## Pengujian
 
