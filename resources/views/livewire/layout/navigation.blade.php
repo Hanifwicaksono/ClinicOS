@@ -40,11 +40,16 @@ new class extends Component
 
         <div class="border-b border-slate-100 px-6 py-5">
             <p class="truncate text-sm font-bold text-slate-900">{{ auth()->user()->clinic?->name ?? 'Siapkan klinik Anda' }}</p>
-            <p class="mt-1 text-xs text-slate-500">{{ auth()->user()->roles->first()?->name ?? 'Pengguna' }}</p>
+            @php
+                $displayRole = auth()->user()->roles->first()?->name ?? 'Pengguna';
+                if ($displayRole === 'Patient') {
+                    $displayRole = 'Pasien';
+                }
+            @endphp
+            <p class="mt-1 text-xs text-slate-500">{{ $displayRole }}</p>
         </div>
 
         <nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5">
-            <p class="px-3 pb-2 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">Workspace</p>
             @php
                 $links = auth()->user()->hasRole('Clinic Admin')
                     ? [

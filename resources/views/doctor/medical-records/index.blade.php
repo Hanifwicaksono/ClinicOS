@@ -7,15 +7,15 @@
     </x-slot>
 
     <div class="mb-7">
-        <h2 class="text-2xl font-extrabold text-clinic-950">Riwayat pasien saya</h2>
-        <p class="mt-2 text-sm text-slate-500">Hanya menampilkan rekam medis pasien yang Anda tangani.</p>
+        <h2 class="text-2xl font-extrabold text-clinic-950">Riwayat pasien</h2>
+        <p class="mt-2 text-sm text-slate-500">Hanya menampilkan rekam medis pasien yang di tangani.</p>
     </div>
 
     <section class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         @foreach ([
-            ['Semua rekam medis', $summary['total'], 'text-clinic-700'],
-            ['Masih draft', $summary['draft'], 'text-[#D89B68]'],
-            ['Sudah final', $summary['final'], 'text-[#287F78]'],
+            ['Semua', $summary['total'], 'text-clinic-700'],
+            ['Draft', $summary['draft'], 'text-[#D89B68]'],
+            ['Final', $summary['final'], 'text-[#287F78]'],
         ] as [$label, $value, $color])
             <article class="clinic-card p-5">
                 <p class="text-sm font-semibold text-slate-500">{{ $label }}</p>

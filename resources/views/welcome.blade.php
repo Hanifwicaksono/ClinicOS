@@ -30,7 +30,7 @@
                 <div class="relative mx-auto grid max-w-7xl gap-14 px-5 py-10 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:py-16">
                     <div>
                         <h1 class="max-w-3xl font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-clinic-950 sm:text-5xl lg:text-6xl">Operasional klinik <span class="text-clinic-500">lebih rapi</span> setiap hari.</h1>
-                        <p class="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">ClinicOS membantu klinik mengelola pendaftaran, antrean, jadwal dokter, dan rekam medis dalam satu sistem.</p>
+                        <p class="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">ClinicOS membantu mengelola pendaftaran, antrean, jadwal dokter, dan rekam medis klinik dalam satu sistem.</p>
                         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                             <x-clinic-button href="{{ route('register') }}" variant="primary" class="px-6 py-3.5">Buat akun pasien</x-clinic-button>
                             <x-clinic-button href="{{ route('login') }}" variant="secondary" class="px-6 py-3.5">Mulai Demo</x-clinic-button>
