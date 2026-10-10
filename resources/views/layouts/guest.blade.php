@@ -13,15 +13,14 @@
         <main class="grid min-h-screen bg-white lg:grid-cols-[1.05fr_1fr]">
             <section class="relative hidden overflow-hidden bg-clinic-950 p-12 text-white lg:flex lg:flex-col lg:justify-between">
                 <div class="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-clinic-500/15 blur-3xl"></div>
-                <div class="absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-emerald-300/10 blur-3xl"></div>
+                <div class="absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-[#287F78]/10 blur-3xl"></div>
                 <a href="/" class="relative flex items-center gap-3">
                     <x-application-logo class="h-11 w-11" />
                     <span class="font-display text-2xl font-extrabold">Clinic<span class="text-clinic-500">OS</span></span>
                 </a>
                 <div class="relative max-w-xl">
-                    <span class="inline-flex rounded-full border border-clinic-500/30 bg-clinic-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-clinic-200">Healthcare workspace</span>
-                    <h1 class="mt-6 font-display text-4xl font-extrabold leading-tight xl:text-5xl">Operasional klinik yang lebih tenang dan terarah.</h1>
-                    <p class="mt-5 max-w-lg text-base leading-7 text-slate-300">Kelola tim, layanan, jadwal, dan pengalaman pasien dalam satu sistem yang dibangun untuk alur kerja klinik Indonesia.</p>
+                    <h1 class="mt-6 font-display text-4xl font-extrabold leading-tight xl:text-5xl">Operasional klinik lebih mudah dalam satu platform</h1>
+                    <p class="mt-5 max-w-lg text-base leading-7 text-slate-300">Melalui ClinicOS kelola berbagai kebutuhan klinik mulai dari pendaftaran pasien, jadwal dokter, antrean, hingga pengelolaan rekam medis dan administrasi. Terintegrasi dalam satu platform untuk operasional klinik lebih efisien.</p>
                 </div>
                 <p class="relative text-xs text-slate-500">© {{ date('Y') }} ClinicOS · Sistem operasional klinik</p>
             </section>

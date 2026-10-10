@@ -40,7 +40,7 @@
                 <section class="clinic-card p-6 sm:p-8"><input type="hidden" name="is_active" value="0"><label class="inline-flex items-center gap-3 text-sm font-semibold text-slate-700"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $staff->is_active)) class="rounded border-slate-300 text-clinic-500 focus:ring-clinic-500">Akun staf aktif</label><p class="ml-7 mt-1 text-xs text-slate-500">Staf nonaktif tidak dapat masuk ke ClinicOS.</p></section>
             @endif
 
-            <div class="flex justify-end gap-3"><a href="{{ route('admin.staff.index') }}" class="clinic-button-secondary" wire:navigate>Batal</a><button type="submit" class="clinic-button-primary disabled:cursor-wait disabled:opacity-60" :disabled="submitting"><span x-show="! submitting">{{ $editing ? 'Simpan perubahan' : 'Buat akun staf' }}</span><span x-show="submitting" x-cloak>Menyimpan…</span></button></div>
+            <div class="flex justify-end gap-3"><x-clinic-button href="{{ route('admin.staff.index') }}" variant="secondary" wire:navigate>Batal</x-clinic-button><x-clinic-button type="submit" variant="primary" class="disabled:cursor-wait disabled:opacity-60" x-bind:disabled="submitting"><span x-show="! submitting">{{ $editing ? 'Simpan perubahan' : 'Buat akun staf' }}</span><span x-show="submitting" x-cloak>Menyimpan…</span></x-clinic-button></div>
         </form>
     </div>
 </x-app-layout>

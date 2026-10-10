@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex w-full items-center justify-between gap-4">
             <div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Manajemen tim</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Dokter & resepsionis</h1></div>
-            <a href="{{ route('admin.staff.create') }}" class="clinic-button-primary" wire:navigate>+ Tambah staf</a>
+            <x-clinic-button href="{{ route('admin.staff.create') }}" variant="primary" wire:navigate>+ Tambah staf</x-clinic-button>
         </div>
     </x-slot>
 

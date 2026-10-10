@@ -16,7 +16,7 @@
                 <div><label class="clinic-label" for="email">Email (opsional)</label><input class="clinic-input" id="email" name="email" type="email" value="{{ old('email', auth()->user()?->email) }}"></div><div><label class="clinic-label" for="address">Alamat (opsional)</label><input class="clinic-input" id="address" name="address" value="{{ old('address') }}"></div>
                 <div class="md:col-span-2"><label class="clinic-label" for="notes">Catatan (opsional)</label><textarea class="clinic-input" id="notes" name="notes" rows="3">{{ old('notes') }}</textarea></div>
             </div></section>
-            <div class="flex items-center justify-between gap-4"><p class="text-xs leading-5 text-slate-500">Simpan halaman konfirmasi setelah booking berhasil untuk melihat status atau membatalkan.</p><button class="clinic-button-primary shrink-0 disabled:opacity-60" :disabled="submitting"><span x-show="!submitting">Konfirmasi booking</span><span x-show="submitting" x-cloak>Memproses…</span></button></div>
+            <div class="flex items-center justify-between gap-4"><p class="text-xs leading-5 text-slate-500">Simpan halaman konfirmasi setelah booking berhasil untuk melihat status atau membatalkan.</p><x-clinic-button variant="primary" class="shrink-0 disabled:opacity-60" x-bind:disabled="submitting"><span x-show="!submitting">Konfirmasi booking</span><span x-show="submitting" x-cloak>Memproses…</span></x-clinic-button></div>
         </form>
     </div>
 </x-public-layout>

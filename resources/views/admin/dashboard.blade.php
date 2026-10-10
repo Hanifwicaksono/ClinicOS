@@ -3,7 +3,7 @@
         <div class="flex w-full items-center justify-between gap-4">
             <div>
                 <p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Workspace admin</p>
-                <h1 class="mt-1 text-xl font-extrabold text-clinic-950">Ringkasan klinik</h1>
+                <h1 class="mt-1 text-xl font-extrabold text-clinic-950">Dashboard</h1>
             </div>
             @if ($clinic)
                 <span class="clinic-status-active"><span class="h-1.5 w-1.5 rounded-full bg-clinic-500"></span> Klinik aktif</span>
@@ -18,7 +18,7 @@
                 <h2 class="mt-5 text-3xl font-extrabold sm:text-4xl">Siapkan identitas klinik Anda</h2>
                 <p class="mt-3 text-base leading-7 text-slate-300">Isi profil dan jam operasional klinik sebelum menambahkan dokter, resepsionis, layanan, dan jadwal.</p>
             </div>
-            <a href="{{ route('admin.clinic.create') }}" class="clinic-button-primary mt-7 shrink-0 lg:mt-0" wire:navigate>Mulai setup klinik</a>
+            <x-clinic-button href="{{ route('admin.clinic.create') }}" variant="primary" class="mt-7 shrink-0 lg:mt-0" wire:navigate>Mulai setup klinik</x-clinic-button>
         </section>
 
     @else
@@ -29,20 +29,20 @@
                     <h2 class="mt-2 text-2xl font-extrabold sm:text-3xl">{{ $clinic->name }}</h2>
                     <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-300">Kelola fondasi operasional klinik dari satu workspace yang rapi dan mudah dipantau.</p>
                 </div>
-                <a href="{{ route('admin.staff.create') }}" class="clinic-button-primary shrink-0" wire:navigate>+ Tambah staf</a>
+                <x-clinic-button href="{{ route('admin.staff.create') }}" variant="primary" class="shrink-0" wire:navigate>+ Tambah staf</x-clinic-button>
             </div>
         </section>
 
-        <section class="clinic-card mb-6 p-5"><form method="GET" class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><p class="text-sm font-bold text-clinic-950">Periode operasional</p><p class="mt-1 text-xs text-slate-500">Menggunakan zona waktu {{ $timezone }}.</p></div><div class="flex flex-col gap-3 sm:flex-row"><div><label class="clinic-label">Dari</label><input class="clinic-input" name="from" type="date" value="{{ $from }}"></div><div><label class="clinic-label">Sampai</label><input class="clinic-input" name="to" type="date" value="{{ $to }}"></div><button class="clinic-button-secondary self-end">Terapkan</button></div></form></section>
+        <section class="clinic-card mb-6 p-5"><form method="GET" class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><p class="text-sm font-bold text-clinic-950">Periode operasional</p><p class="mt-1 text-xs text-slate-500">Menggunakan zona waktu {{ $timezone }}.</p></div><div class="flex flex-col gap-3 sm:flex-row"><div><label class="clinic-label">Dari</label><input class="clinic-input" name="from" type="date" value="{{ $from }}"></div><div><label class="clinic-label">Sampai</label><input class="clinic-input" name="to" type="date" value="{{ $to }}"></div><x-clinic-button variant="secondary" class="self-end">Terapkan</x-clinic-button></div></form></section>
 
         <section class="mb-8 grid grid-cols-2 gap-4 xl:grid-cols-5">@foreach ([['label' => 'Pasien unik terjadwal', 'value' => $operationalMetrics['unique_patients']],['label' => 'Total booking', 'value' => $operationalMetrics['bookings']],['label' => 'Kunjungan selesai', 'value' => $operationalMetrics['completed_visits']],['label' => 'Antrean aktif', 'value' => $operationalMetrics['active_queues']],['label' => 'Nilai layanan selesai', 'value' => 'Rp '.number_format($operationalMetrics['service_value'], 0, ',', '.')]] as $metric)<article class="clinic-card p-5"><p class="text-xs font-bold uppercase tracking-wider text-slate-400">{{ $metric['label'] }}</p><p class="mt-4 font-display text-2xl font-extrabold text-clinic-950">{{ $metric['value'] }}</p></article>@endforeach</section>
 
         <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             @foreach ([
-                ['label' => 'Dokter aktif', 'value' => $metrics['doctors'], 'color' => 'bg-clinic-100 text-clinic-700'],
-                ['label' => 'Resepsionis', 'value' => $metrics['receptionists'], 'color' => 'bg-emerald-100 text-emerald-700'],
-                ['label' => 'Layanan aktif', 'value' => $metrics['services'], 'color' => 'bg-sky-100 text-sky-700'],
-                ['label' => 'Sesi jadwal', 'value' => $metrics['schedules'], 'color' => 'bg-amber-100 text-amber-700'],
+                ['label' => 'Dokter aktif', 'value' => $metrics['doctors'], 'color' => 'bg-[#EAF2F0] text-[#287F78]'],
+                ['label' => 'Resepsionis', 'value' => $metrics['receptionists'], 'color' => 'bg-[#EEF3F2] text-[#3D5F5C]'],
+                ['label' => 'Layanan aktif', 'value' => $metrics['services'], 'color' => 'bg-[#F7F1EA] text-[#D89B68]'],
+                ['label' => 'Sesi jadwal', 'value' => $metrics['schedules'], 'color' => 'bg-[#F7F8F5] text-[#253331]'],
             ] as $metric)
                 <article class="clinic-card p-5">
                     <div class="flex items-center justify-between">

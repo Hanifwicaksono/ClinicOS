@@ -11,7 +11,7 @@
                 <div><label class="clinic-label" for="end_time">Jam selesai</label><input class="clinic-input" id="end_time" name="end_time" type="time" value="{{ old('end_time', $editing ? substr($schedule->end_time, 0, 5) : '12:00') }}" required><x-input-error :messages="$errors->get('end_time')" class="mt-2" /></div>
                 <div class="md:col-span-2"><input type="hidden" name="is_active" value="0"><label class="inline-flex items-center gap-3 text-sm font-semibold text-slate-700"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $schedule->is_active ?? true)) class="rounded border-slate-300 text-clinic-500 focus:ring-clinic-500">Jadwal aktif</label></div>
             </div></section>
-            <div class="flex justify-end gap-3"><a href="{{ route('admin.doctor-schedules.index') }}" class="clinic-button-secondary" wire:navigate>Batal</a><button type="submit" class="clinic-button-primary disabled:cursor-wait disabled:opacity-60" :disabled="submitting"><span x-show="! submitting">{{ $editing ? 'Simpan perubahan' : 'Tambah jadwal' }}</span><span x-show="submitting" x-cloak>Menyimpan…</span></button></div>
+            <div class="flex justify-end gap-3"><x-clinic-button href="{{ route('admin.doctor-schedules.index') }}" variant="secondary" wire:navigate>Batal</x-clinic-button><x-clinic-button type="submit" variant="primary" class="disabled:cursor-wait disabled:opacity-60" x-bind:disabled="submitting"><span x-show="! submitting">{{ $editing ? 'Simpan perubahan' : 'Tambah jadwal' }}</span><span x-show="submitting" x-cloak>Menyimpan…</span></x-clinic-button></div>
         </form>
     </div>
 </x-app-layout>

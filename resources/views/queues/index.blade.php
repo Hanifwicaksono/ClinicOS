@@ -2,17 +2,17 @@
     $isDoctor = auth()->user()->hasRole('Doctor');
     $statusStyles = [
         'BOOKED' => 'bg-slate-100 text-slate-700',
-        'WAITING' => 'bg-amber-100 text-amber-700',
-        'CALLED' => 'bg-blue-100 text-blue-700',
-        'IN_PROGRESS' => 'bg-violet-100 text-violet-700',
-        'COMPLETED' => 'bg-clinic-100 text-clinic-700',
+        'WAITING' => 'bg-[#F7F1EA] text-[#D89B68]',
+        'CALLED' => 'bg-[#EAF2F0] text-[#287F78]',
+        'IN_PROGRESS' => 'bg-[#EEF3F2] text-[#3D5F5C]',
+        'COMPLETED' => 'bg-[#EAF2F0] text-[#287F78]',
         'SKIPPED' => 'bg-orange-100 text-orange-700',
         'CANCELLED' => 'bg-slate-100 text-slate-500',
         'NO_SHOW' => 'bg-red-100 text-red-700',
     ];
 @endphp
 <x-app-layout>
-    <x-slot name="header"><div class="flex w-full items-center justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Operasional hari ini</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Antrean pasien</h1></div>@unless($isDoctor)<a href="{{ route('receptionist.appointments.create') }}" class="clinic-button-primary" wire:navigate>+ Booking walk-in</a>@endunless</div></x-slot>
+    <x-slot name="header"><div class="flex w-full items-center justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Operasional hari ini</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Antrean pasien</h1></div>@unless($isDoctor)<x-clinic-button href="{{ route('receptionist.appointments.create') }}" variant="primary" wire:navigate>+ Booking walk-in</x-clinic-button>@endunless</div></x-slot>
 
     <div data-realtime-queue-channel="clinic.{{ auth()->user()->clinic_id }}.queues" data-realtime-refresh-root>
     @if($errors->any())<div class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm font-semibold text-red-700">{{ $errors->first() }}</div>@endif
@@ -30,7 +30,7 @@
         @unless($isDoctor)<div><label class="clinic-label" for="doctor_id">Dokter</label><select class="clinic-input" id="doctor_id" name="doctor_id"><option value="">Semua dokter</option>@foreach($doctors as $doctor)<option value="{{ $doctor->id }}" @selected(request('doctor_id') == $doctor->id)>{{ $doctor->user->name }}</option>@endforeach</select></div>@endunless
         <div><label class="clinic-label" for="doctor_schedule_id">Sesi</label><select class="clinic-input" id="doctor_schedule_id" name="doctor_schedule_id"><option value="">Semua sesi</option>@foreach($doctors as $doctor)@foreach($doctor->schedules as $schedule)<option value="{{ $schedule->id }}" @selected(request('doctor_schedule_id') == $schedule->id)>{{ $doctor->user->name }} · {{ $schedule->day_name }} {{ substr($schedule->start_time, 0, 5) }}</option>@endforeach @endforeach</select></div>
         <div><label class="clinic-label" for="status">Status</label><select class="clinic-input" id="status" name="status"><option value="">Semua status</option>@foreach(\App\QueueStatus::cases() as $status)<option value="{{ $status->value }}" @selected(request('status') === $status->value)>{{ $status->label() }}</option>@endforeach</select></div>
-        <div class="flex items-end"><button class="clinic-button-secondary w-full">Terapkan filter</button></div>
+        <div class="flex items-end"><x-clinic-button variant="secondary" class="w-full">Terapkan filter</x-clinic-button></div>
     </form>
 
     <div class="space-y-4">
@@ -42,16 +42,16 @@
                     <div><p class="text-xs font-bold uppercase tracking-wider text-slate-400">Dokter & sesi</p><p class="mt-1 font-bold text-slate-900">{{ $queue->doctor->user->name }}</p><p class="mt-1 text-xs text-slate-500">{{ substr($queue->schedule->start_time, 0, 5) }}–{{ substr($queue->schedule->end_time, 0, 5) }} · {{ $queue->appointment->service_name }}</p></div>
                     <div class="flex flex-wrap gap-2 lg:max-w-64 lg:justify-end">
                         @can('update', $queue)
-                            @if($queue->status === \App\QueueStatus::Booked)<form method="POST" action="{{ route('queues.check-in', $queue) }}">@csrf<button class="clinic-button-primary px-4 py-2">Check-in</button></form>@endif
+                            @if($queue->status === \App\QueueStatus::Booked)<form method="POST" action="{{ route('queues.check-in', $queue) }}">@csrf<x-clinic-button variant="primary" class="px-4 py-2">Check-in</x-clinic-button></form>@endif
                         @endcan
                         @can('call', $queue)
-                            @if($queue->status === \App\QueueStatus::Waiting)<form method="POST" action="{{ route('queues.call', $queue) }}">@csrf<button class="clinic-button-primary px-4 py-2">Panggil</button></form>@endif
-                            @if($queue->status === \App\QueueStatus::Called)<form method="POST" action="{{ route('queues.skip', $queue) }}">@csrf<button class="clinic-button-secondary px-4 py-2">Lewati</button></form>@endif
-                            @if($queue->status === \App\QueueStatus::Skipped)<form method="POST" action="{{ route('queues.return', $queue) }}">@csrf<button class="clinic-button-secondary px-4 py-2">Kembalikan</button></form>@endif
+                            @if($queue->status === \App\QueueStatus::Waiting)<form method="POST" action="{{ route('queues.call', $queue) }}">@csrf<x-clinic-button variant="primary" class="px-4 py-2">Panggil</x-clinic-button></form>@endif
+                            @if($queue->status === \App\QueueStatus::Called)<form method="POST" action="{{ route('queues.skip', $queue) }}">@csrf<x-clinic-button variant="secondary" class="px-4 py-2">Lewati</x-clinic-button></form>@endif
+                            @if($queue->status === \App\QueueStatus::Skipped)<form method="POST" action="{{ route('queues.return', $queue) }}">@csrf<x-clinic-button variant="secondary" class="px-4 py-2">Kembalikan</x-clinic-button></form>@endif
                         @endcan
                         @can('startVisit', $queue)
-                            @if($queue->status === \App\QueueStatus::Called)<form method="POST" action="{{ route('doctor.visits.start', $queue) }}">@csrf<button class="clinic-button-primary px-4 py-2">Mulai periksa</button></form>@endif
-                            @if($queue->status === \App\QueueStatus::InProgress && $queue->appointment->visit)<a href="{{ route('doctor.visits.show', $queue->appointment->visit) }}" class="clinic-button-primary px-4 py-2" wire:navigate>Buka pemeriksaan</a>@endif
+                            @if($queue->status === \App\QueueStatus::Called)<form method="POST" action="{{ route('doctor.visits.start', $queue) }}">@csrf<x-clinic-button variant="primary" class="px-4 py-2">Mulai periksa</x-clinic-button></form>@endif
+                            @if($queue->status === \App\QueueStatus::InProgress && $queue->appointment->visit)<x-clinic-button href="{{ route('doctor.visits.show', $queue->appointment->visit) }}" variant="primary" class="px-4 py-2" wire:navigate>Buka pemeriksaan</x-clinic-button>@endif
                         @endcan
                         @can('update', $queue)
                             @if(in_array($queue->status, [\App\QueueStatus::Booked, \App\QueueStatus::Waiting, \App\QueueStatus::Called, \App\QueueStatus::Skipped], true))
@@ -61,7 +61,7 @@
                         @endcan
                     </div>
                 </div>
-                @if($queue->status === \App\QueueStatus::Called)<div class="border-t border-blue-100 bg-blue-50 px-5 py-3 text-sm font-bold text-blue-700">Sedang dipanggil sejak {{ $queue->called_at?->format('H:i') }}</div>@endif
+                @if($queue->status === \App\QueueStatus::Called)<div class="border-t border-[#DDE5E1] bg-[#EEF3F2] px-5 py-3 text-sm font-bold text-[#287F78]">Sedang dipanggil sejak {{ $queue->called_at?->format('H:i') }}</div>@endif
             </article>
         @empty
             <div class="clinic-card p-14 text-center"><div class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-clinic-50 text-xl text-clinic-600">✓</div><p class="mt-4 font-bold text-slate-800">Tidak ada antrean</p><p class="mt-1 text-sm text-slate-500">Belum ada antrean yang sesuai dengan filter ini.</p></div>

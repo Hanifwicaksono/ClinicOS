@@ -45,7 +45,7 @@
                 <div class="mt-6"><input type="hidden" name="is_active" value="0"><label class="inline-flex items-center gap-3 text-sm font-semibold text-slate-700"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $clinic->is_active ?? true)) class="rounded border-slate-300 text-clinic-500 focus:ring-clinic-500">Klinik aktif dan dapat digunakan</label></div>
             </section>
 
-            <div class="flex justify-end gap-3"><a href="{{ route('admin.dashboard') }}" class="clinic-button-secondary" wire:navigate>Batal</a><button class="clinic-button-primary disabled:cursor-wait disabled:opacity-60" type="submit" :disabled="submitting"><span x-show="! submitting">{{ $editing ? 'Simpan perubahan' : 'Buat klinik' }}</span><span x-show="submitting" x-cloak>Menyimpan…</span></button></div>
+            <div class="flex justify-end gap-3"><x-clinic-button href="{{ route('admin.dashboard') }}" variant="secondary" wire:navigate>Batal</x-clinic-button><x-clinic-button type="submit" variant="primary" class="disabled:cursor-wait disabled:opacity-60" x-bind:disabled="submitting"><span x-show="! submitting">{{ $editing ? 'Simpan perubahan' : 'Buat klinik' }}</span><span x-show="submitting" x-cloak>Menyimpan…</span></x-clinic-button></div>
         </form>
     </div>
 </x-app-layout>

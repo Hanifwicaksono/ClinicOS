@@ -2,7 +2,7 @@
     <section class="bg-clinic-950 text-white">
         <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-end lg:py-20">
             <div><span class="inline-flex rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-clinic-200">Profil klinik</span><h1 class="mt-5 text-4xl font-extrabold sm:text-5xl">{{ $clinic->name }}</h1><p class="mt-5 max-w-2xl leading-7 text-slate-300">{{ $clinic->description ?: 'Pelayanan kesehatan dengan pendaftaran yang mudah dan jadwal yang transparan.' }}</p><div class="mt-6 flex flex-wrap gap-5 text-sm text-slate-300"><span>{{ $clinic->address }}</span><span>{{ $clinic->phone }}</span></div></div>
-            <div class="flex flex-col gap-3 sm:flex-row"><a href="{{ route('public.queue.index', $clinic) }}" class="clinic-button-secondary border-white/20 bg-white/10 px-7 py-4 text-white hover:bg-white/20 hover:text-white">Lihat antrean</a><a href="{{ route('public.booking.create', $clinic) }}" class="clinic-button-primary px-7 py-4">Buat booking</a></div>
+            <div class="flex flex-col gap-3 sm:flex-row"><x-clinic-button href="{{ route('public.queue.index', $clinic) }}" variant="secondary" class="border-white/20 bg-white/10 px-7 py-4 text-white hover:bg-white/20 hover:text-white">Lihat antrean</x-clinic-button><x-clinic-button href="{{ route('public.booking.create', $clinic) }}" variant="primary" class="px-7 py-4">Buat booking</x-clinic-button></div>
         </div>
     </section>
     <div class="mx-auto max-w-6xl space-y-14 px-5 py-14 sm:px-8">

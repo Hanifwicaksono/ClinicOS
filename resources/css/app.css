@@ -2,9 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --color-brand-primary: #287F78;
+    --color-brand-primary-hover: #206A64;
+    --color-brand-secondary: #3D5F5C;
+    --color-brand-accent: #D89B68;
+    --color-background: #F7F8F5;
+    --color-surface: #FFFFFF;
+    --color-text: #253331;
+    --color-border: #DDE5E1;
+}
+
 @layer base {
     body {
-        @apply bg-[#f6f8f7] text-slate-900;
+        @apply bg-[#F7F8F5] text-slate-900;
     }
 
     h1, h2, h3, h4 {
@@ -47,5 +58,17 @@
 
     .clinic-status-inactive {
         @apply inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600;
+    }
+
+    .clinic-badge-accent {
+        @apply inline-flex items-center rounded-full border border-[#E7C199] bg-[#FFF4E8] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#A96D34];
+    }
+
+    .clinic-highlight-soft {
+        @apply rounded-2xl border border-[#F0D5AF] bg-[#FFF9F2] shadow-sm;
+    }
+
+    .clinic-illustration-panel {
+        @apply rounded-[1.75rem] border border-slate-200 bg-white shadow-none;
     }
 }

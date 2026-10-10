@@ -14,7 +14,7 @@
         <header class="border-b border-slate-200 bg-white">
             <div class="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 sm:px-8">
                 <a href="/" class="flex items-center gap-3"><x-application-logo class="h-10 w-10" /><span class="font-display text-xl font-extrabold text-clinic-950">Clinic<span class="text-clinic-500">OS</span></span></a>
-                @auth<a href="{{ route('dashboard') }}" class="clinic-button-secondary">Dashboard</a>@else<a href="{{ route('login') }}" class="text-sm font-bold text-slate-600 hover:text-clinic-600">Masuk</a>@endauth
+                @auth<x-clinic-button href="{{ route('dashboard') }}" variant="secondary">Dashboard</x-clinic-button>@else<a href="{{ route('login') }}" class="text-sm font-bold text-slate-600 hover:text-clinic-600">Masuk</a>@endauth
             </div>
         </header>
         <main>{{ $slot }}</main>

@@ -10,6 +10,6 @@
             <div><label class="clinic-label" for="email">Email</label><input class="clinic-input" id="email" name="email" type="email" value="{{ old('email', $patient->email ?? '') }}"></div><div><label class="clinic-label" for="address">Alamat</label><input class="clinic-input" id="address" name="address" value="{{ old('address', $patient->address ?? '') }}"></div>
             <div class="md:col-span-2"><input type="hidden" name="is_active" value="0"><label class="inline-flex items-center gap-3 text-sm font-semibold text-slate-700"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $patient->is_active ?? true)) class="rounded border-slate-300 text-clinic-500 focus:ring-clinic-500">Pasien aktif</label></div>
         </div></section>
-        <div class="flex justify-end gap-3"><a href="{{ route('receptionist.patients.index') }}" class="clinic-button-secondary" wire:navigate>Batal</a><button class="clinic-button-primary disabled:opacity-60" :disabled="submitting">Simpan pasien</button></div>
+        <div class="flex justify-end gap-3"><x-clinic-button href="{{ route('receptionist.patients.index') }}" variant="secondary" wire:navigate>Batal</x-clinic-button><x-clinic-button variant="primary" x-bind:disabled="submitting">Simpan pasien</x-clinic-button></div>
     </form>
 </x-app-layout>

@@ -11,7 +11,7 @@ class DashboardController extends Controller
     {
         return view('dashboard', [
             'dashboardTitle' => 'Dashboard Pasien',
-            'dashboardDescription' => 'Lihat booking, jadwal dokter, dan nomor antrean yang terhubung dengan akun Anda.',
+            'dashboardDescription' => 'Lihat booking, jadwal dokter, dan nomor antrean Anda.',
         ]);
     }
 }

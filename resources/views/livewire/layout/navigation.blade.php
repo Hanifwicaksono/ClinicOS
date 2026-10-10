@@ -48,7 +48,7 @@ new class extends Component
             @php
                 $links = auth()->user()->hasRole('Clinic Admin')
                     ? [
-                        ['route' => 'admin.dashboard', 'match' => 'admin.dashboard', 'label' => 'Ringkasan', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
+                        ['route' => 'admin.dashboard', 'match' => 'admin.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
                         ['route' => 'admin.clinic.index', 'match' => 'admin.clinic.*', 'label' => 'Profil klinik', 'icon' => 'M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-5 7v-3h4v3'],
                         ['route' => 'admin.staff.index', 'match' => 'admin.staff.*', 'label' => 'Tim klinik', 'icon' => 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm13 10v-2a4 4 0 0 0-3-3.87m-2-12a4 4 0 0 1 0 7.75'],
                         ['route' => 'admin.services.index', 'match' => 'admin.services.*', 'label' => 'Layanan', 'icon' => 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10h6m-3-3v6'],
@@ -59,7 +59,7 @@ new class extends Component
                         ['route' => 'admin.audit-logs.index', 'match' => 'admin.audit-logs.*', 'label' => 'Audit aktivitas', 'icon' => 'M4 4h16v16H4V4Zm4 5h8m-8 4h8m-8 4h5'],
                     ]
                     : (auth()->user()->hasRole('Receptionist') ? [
-                        ['route' => 'receptionist.dashboard', 'match' => 'receptionist.dashboard', 'label' => 'Ringkasan', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
+                        ['route' => 'receptionist.dashboard', 'match' => 'receptionist.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
                         ['route' => 'receptionist.patients.index', 'match' => 'receptionist.patients.*', 'label' => 'Pasien', 'icon' => 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z'],
                         ['route' => 'receptionist.appointments.index', 'match' => 'receptionist.appointments.*', 'label' => 'Booking & antrean', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6'],
                         ['route' => 'receptionist.queues.index', 'match' => '*.queues.*', 'label' => 'Antrean hari ini', 'icon' => 'M5 6h14M5 12h14M5 18h9'],

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header"><div class="flex w-full items-center justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Katalog klinik</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Layanan</h1></div><a href="{{ route('admin.services.create') }}" class="clinic-button-primary" wire:navigate>+ Tambah layanan</a></div></x-slot>
+    <x-slot name="header"><div class="flex w-full items-center justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Katalog klinik</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Layanan</h1></div><x-clinic-button href="{{ route('admin.services.create') }}" variant="primary" wire:navigate>+ Tambah layanan</x-clinic-button></div></x-slot>
 
     <div class="mb-7"><h2 class="text-2xl font-extrabold text-clinic-950">Daftar layanan</h2><p class="mt-2 text-sm text-slate-500">Atur biaya dan durasi standar sebagai dasar pendaftaran pasien.</p></div>
 

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header"><div class="flex w-full items-center justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Operasional</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Jadwal dokter</h1></div><a href="{{ route('admin.doctor-schedules.create') }}" class="clinic-button-primary" wire:navigate>+ Tambah jadwal</a></div></x-slot>
+    <x-slot name="header"><div class="flex w-full items-center justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Operasional</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Jadwal dokter</h1></div><x-clinic-button href="{{ route('admin.doctor-schedules.create') }}" variant="primary" wire:navigate>+ Tambah jadwal</x-clinic-button></div></x-slot>
     <div class="mb-7"><h2 class="text-2xl font-extrabold text-clinic-950">Jadwal praktik</h2><p class="mt-2 text-sm text-slate-500">Atur sesi dan kuota dokter dalam jam operasional klinik.</p></div>
     <div class="clinic-card overflow-hidden"><div class="overflow-x-auto"><table class="clinic-table w-full"><thead><tr><th>Dokter</th><th>Hari</th><th>Jam praktik</th><th>Kuota</th><th>Status</th><th class="text-right">Aksi</th></tr></thead><tbody>
         @forelse ($schedules as $schedule)

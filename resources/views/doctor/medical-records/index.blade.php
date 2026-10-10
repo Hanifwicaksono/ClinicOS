@@ -14,8 +14,8 @@
     <section class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         @foreach ([
             ['Semua rekam medis', $summary['total'], 'text-clinic-700'],
-            ['Masih draft', $summary['draft'], 'text-amber-600'],
-            ['Sudah final', $summary['final'], 'text-emerald-600'],
+            ['Masih draft', $summary['draft'], 'text-[#D89B68]'],
+            ['Sudah final', $summary['final'], 'text-[#287F78]'],
         ] as [$label, $value, $color])
             <article class="clinic-card p-5">
                 <p class="text-sm font-semibold text-slate-500">{{ $label }}</p>
@@ -46,9 +46,9 @@
             <input class="clinic-input" id="to" name="to" type="date" value="{{ $to }}">
         </div>
         <div class="flex items-end gap-2">
-            <button class="clinic-button-primary flex-1 px-4">Terapkan</button>
+            <x-clinic-button variant="primary" class="flex-1 px-4">Terapkan</x-clinic-button>
             @if ($search !== '' || $status !== '' || $from !== '' || $to !== '')
-                <a href="{{ route('doctor.medical-records.index') }}" class="clinic-button-secondary px-4" wire:navigate>Reset</a>
+                <x-clinic-button href="{{ route('doctor.medical-records.index') }}" variant="secondary" class="px-4" wire:navigate>Reset</x-clinic-button>
             @endif
         </div>
     </form>
@@ -91,7 +91,7 @@
                                 @endif
                             </td>
                             <td>
-                                <span class="{{ $medicalRecord->status === \App\MedicalRecordStatus::Final ? 'clinic-status-active' : 'rounded-full bg-amber-100 px-3 py-1.5 text-xs font-bold text-amber-700' }}">
+                                <span class="{{ $medicalRecord->status === \App\MedicalRecordStatus::Final ? 'clinic-status-active' : 'rounded-full bg-[#F7F1EA] px-3 py-1.5 text-xs font-bold text-[#D89B68]' }}">
                                     {{ $medicalRecord->status === \App\MedicalRecordStatus::Final ? 'Final' : 'Draft' }}
                                 </span>
                             </td>
