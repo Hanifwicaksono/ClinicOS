@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Scopes\ClinicScope;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 
 #[Fillable(['clinic_id', 'user_id', 'medical_record_number', 'name', 'nik', 'birth_date', 'gender', 'phone', 'email', 'address', 'is_active'])]
+#[ScopedBy([ClinicScope::class])]
 class Patient extends Model
 {
     /** @use HasFactory<PatientFactory> */

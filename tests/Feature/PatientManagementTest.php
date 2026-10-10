@@ -54,6 +54,6 @@ class PatientManagementTest extends TestCase
 
         $this->actingAs($receptionist)
             ->get(route('receptionist.patients.show', $otherPatient))
-            ->assertForbidden();
+            ->assertNotFound();
     }
 }
