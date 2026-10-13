@@ -42,7 +42,7 @@
                     <div><p class="text-xs font-bold uppercase tracking-wider text-slate-400">Dokter & sesi</p><p class="mt-1 font-bold text-slate-900">{{ $queue->doctor->user->name }}</p><p class="mt-1 text-xs text-slate-500">{{ substr($queue->schedule->start_time, 0, 5) }}–{{ substr($queue->schedule->end_time, 0, 5) }} · {{ $queue->appointment->service_name }}</p></div>
                     <div class="flex flex-wrap gap-2 lg:max-w-64 lg:justify-end">
                         @can('update', $queue)
-                            @if($queue->status === \App\QueueStatus::Booked)<form method="POST" action="{{ route('queues.check-in', $queue) }}">@csrf<x-clinic-button variant="primary" class="px-4 py-2">Check-in</x-clinic-button></form>@endif
+                            @if($queue->status === \App\QueueStatus::Booked)<form method="POST" action="{{ route('queues.check-in', $queue) }}">@csrf<x-clinic-button type="submit" variant="primary" class="px-4 py-2">Check-in</x-clinic-button></form>@endif
                         @endcan
                         @can('call', $queue)
                             @if($queue->status === \App\QueueStatus::Waiting)<form method="POST" action="{{ route('queues.call', $queue) }}">@csrf<x-clinic-button variant="primary" class="px-4 py-2">Panggil</x-clinic-button></form>@endif

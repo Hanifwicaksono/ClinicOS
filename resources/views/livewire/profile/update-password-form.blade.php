@@ -40,39 +40,39 @@ new class extends Component
 
 <section class="max-w-3xl">
     <header>
-        <h2 class="text-lg font-medium text-clinic-950">
-            {{ __('Ganti Password') }}
+        <h2 class="text-lg font-extrabold text-clinic-950">
+            Ubah kata sandi
         </h2>
 
-        <p class="mt-1 text-sm text-clinic-700">
-            {{ __('Pastikan menggunakan password yang panjang dan acak agar aman.') }}
+        <p class="mt-2 text-sm leading-6 text-slate-500">
+            Gunakan kata sandi panjang dan unik untuk menjaga keamanan akun.
         </p>
     </header>
 
     <form wire:submit="updatePassword" class="mt-6 space-y-6">
         <div>
-            <x-input-label for="update_password_current_password" :value="__('Password Saat Ini')" class="text-clinic-950" />
-            <x-text-input wire:model="current_password" id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full border-clinic-200 bg-white text-clinic-950 focus:border-clinic-500 focus:ring-clinic-500" autocomplete="current-password" />
+            <x-input-label for="update_password_current_password" value="Kata sandi saat ini" />
+            <x-text-input wire:model="current_password" id="update_password_current_password" name="current_password" type="password" class="mt-2 block w-full" autocomplete="current-password" />
             <x-input-error :messages="$errors->get('current_password')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="update_password_password" :value="__('Password Baru')" class="text-clinic-950" />
-            <x-text-input wire:model="password" id="update_password_password" name="password" type="password" class="mt-1 block w-full border-clinic-200 bg-white text-clinic-950 focus:border-clinic-500 focus:ring-clinic-500" autocomplete="new-password" />
+            <x-input-label for="update_password_password" value="Kata sandi baru" />
+            <x-text-input wire:model="password" id="update_password_password" name="password" type="password" class="mt-2 block w-full" autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Konfirmasi Password')" class="text-clinic-950" />
-            <x-text-input wire:model="password_confirmation" id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full border-clinic-200 bg-white text-clinic-950 focus:border-clinic-500 focus:ring-clinic-500" autocomplete="new-password" />
+            <x-input-label for="update_password_password_confirmation" value="Ulangi kata sandi baru" />
+            <x-text-input wire:model="password_confirmation" id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-2 block w-full" autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="flex items-center gap-4">
-            <x-clinic-button>{{ __('Simpan') }}</x-clinic-button>
+            <x-clinic-button type="submit">Simpan kata sandi</x-clinic-button>
 
             <x-action-message class="me-3 text-clinic-700" on="password-updated">
-                {{ __('Saved.') }}
+                Tersimpan.
             </x-action-message>
         </div>
     </form>

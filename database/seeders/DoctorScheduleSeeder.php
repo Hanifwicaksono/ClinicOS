@@ -22,14 +22,15 @@ class DoctorScheduleSeeder extends Seeder
             return;
         }
 
-        foreach ([1, 3, 5] as $dayOfWeek) {
+        foreach (range(0, 6) as $dayOfWeek) {
             $doctor->schedules()->updateOrCreate(
+                ['day_of_week' => $dayOfWeek],
                 [
-                    'day_of_week' => $dayOfWeek,
-                    'start_time' => '09:00',
-                    'end_time' => '13:00',
+                    'start_time' => '00:00',
+                    'end_time' => '23:59',
+                    'quota' => 16,
+                    'is_active' => true,
                 ],
-                ['quota' => 16, 'is_active' => true],
             );
         }
     }

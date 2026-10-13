@@ -32,11 +32,16 @@ class QueueManagementTest extends TestCase
         $context = $this->queueContext();
         $queue = $context['queues'][0];
 
-        $this->actingAs($context['receptionist'])
+        $response = $this->actingAs($context['receptionist'])
             ->get(route('receptionist.queues.index', ['date' => $context['date']]))
             ->assertOk()
             ->assertSee($queue->display_number)
             ->assertSee($queue->appointment->patient->name);
+
+        $this->assertMatchesRegularExpression(
+            '/<button[^>]*type="submit"[^>]*>\s*Check-in\s*<\/button>/',
+            $response->getContent(),
+        );
 
         $this->actingAs($context['receptionist'])
             ->post(route('queues.check-in', $queue))

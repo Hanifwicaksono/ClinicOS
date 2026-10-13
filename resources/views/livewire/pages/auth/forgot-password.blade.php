@@ -37,25 +37,27 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    <div class="mb-8">
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Pemulihan akun</p>
+        <h2 class="mt-2 text-2xl font-extrabold text-clinic-950">Lupa kata sandi?</h2>
+        <p class="mt-2 text-sm leading-6 text-slate-500">Masukkan email akun Anda. Kami akan mengirimkan tautan untuk membuat kata sandi baru.</p>
     </div>
 
-    <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form wire:submit="sendPasswordResetLink">
-        <!-- Email Address -->
+    <form wire:submit="sendPasswordResetLink" class="space-y-5">
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
+            <x-text-input wire:model="email" id="email" class="mt-2 block w-full" type="email" name="email" required autofocus placeholder="nama@email.com" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
+        <div>
+            <x-primary-button class="w-full">
+                Kirim tautan reset
             </x-primary-button>
         </div>
+
+        <p class="text-center text-sm text-slate-500"><a href="{{ route('login') }}" wire:navigate class="font-bold text-clinic-600 hover:text-clinic-700">Kembali ke halaman masuk</a></p>
     </form>
 </div>

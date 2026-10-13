@@ -13,9 +13,13 @@
     --color-border: #DDE5E1;
 }
 
+[x-cloak] {
+    display: none !important;
+}
+
 @layer base {
     body {
-        @apply bg-[#F7F8F5] text-slate-900;
+        @apply bg-clinic-background text-clinic-text;
     }
 
     h1, h2, h3, h4 {
@@ -25,23 +29,27 @@
 
 @layer components {
     .clinic-card {
-        @apply rounded-2xl border border-slate-200 bg-white shadow-card;
+        @apply rounded-3xl border border-clinic-border bg-clinic-surface shadow-card;
     }
 
     .clinic-label {
-        @apply mb-2 block text-sm font-semibold text-slate-700;
+        @apply mb-2 block text-sm font-semibold text-clinic-secondary;
     }
 
     .clinic-input {
-        @apply block w-full rounded-xl border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-clinic-500 focus:ring-clinic-500;
+        @apply block min-h-11 w-full rounded-xl border-clinic-border bg-clinic-surface px-4 py-3 text-sm text-clinic-text shadow-sm placeholder:text-slate-400 focus:border-clinic-primary focus:ring-clinic-primary disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500;
     }
 
     .clinic-button-primary {
-        @apply inline-flex items-center justify-center gap-2 rounded-xl bg-clinic-500 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-clinic-600 focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2;
+        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-clinic-primary px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-clinic-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     .clinic-button-secondary {
-        @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-700 transition hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-700 focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2;
+        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-clinic-border bg-clinic-surface px-5 py-3 text-sm font-bold text-clinic-secondary transition hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .clinic-button-danger {
+        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     .clinic-table th {
@@ -70,5 +78,16 @@
 
     .clinic-illustration-panel {
         @apply rounded-[1.75rem] border border-slate-200 bg-white shadow-none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

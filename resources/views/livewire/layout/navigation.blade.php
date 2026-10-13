@@ -19,7 +19,7 @@ new class extends Component
             <x-application-logo class="h-9 w-9" />
             <span class="font-display text-lg font-extrabold text-clinic-950">Clinic<span class="text-clinic-500">OS</span></span>
         </a>
-        <button type="button" @click="open = true" class="rounded-xl border border-slate-200 p-2 text-slate-600" aria-label="Buka navigasi">
+        <button type="button" @click="open = true" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi">
             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
     </div>
@@ -35,7 +35,7 @@ new class extends Component
                     <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Clinic workspace</div>
                 </div>
             </a>
-            <button type="button" @click="open = false" class="p-2 text-slate-400 lg:hidden" aria-label="Tutup navigasi">✕</button>
+            <button type="button" @click="open = false" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi">✕</button>
         </div>
 
         <div class="border-b border-slate-100 px-6 py-5">

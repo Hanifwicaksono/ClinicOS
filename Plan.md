@@ -1,6 +1,6 @@
 # ClinicOS — Status Proyek dan Development Plan
 
-> **Diperbarui:** 5 Oktober 2026
+> **Diperbarui:** 8 Oktober 2026
 >
 > **Status:** MVP core feature-complete; release readiness masih berjalan
 >
@@ -168,6 +168,71 @@ Bagian ini adalah prioritas tertinggi. Pekerjaan post-MVP tidak dimulai sebelum 
 - [ ] Uji kondisi data panjang, tabel sempit, dan koneksi realtime terputus.
 
 **Definition of done:** tidak ada blocker usability P0/P1 pada alur utama dan seluruh role dapat menyelesaikan tugasnya pada viewport target.
+
+#### Rencana Implementasi Frontend Berdasarkan `design (1).md`
+
+Frontend saat ini memakai fondasi visual ClinicOS: Plus Jakarta Sans/Inter, teal `#287F78`, permukaan putih, latar `#F7F8F5`, sidebar, dan panel operasional yang padat. Pekerjaan ini adalah konsolidasi dan penyempurnaan, bukan rewrite atau perubahan alur backend.
+
+##### Fase 1 — Fondasi visual dan komponen bersama
+
+- [x] Selaraskan token warna, canvas, border, radius, shadow, tipografi, dan focus ring di `tailwind.config.js` dan `resources/css/app.css`.
+- [x] Bedakan tombol utama teal, tombol sekunder, tombol aksen, dan tombol berbahaya.
+- [x] Konsistenkan input, label, validation error, modal, dropdown, badge status, empty state, dan loading/disabled state.
+- [x] Hapus sisa gaya bawaan Breeze berwarna gray/indigo serta dark-mode parsial yang tidak digunakan.
+- [x] Pertahankan container publik maksimum 1280px; layar operasional boleh lebih lebar saat tabel memerlukannya.
+
+**Area:** `resources/css/app.css`, `tailwind.config.js`, `resources/views/components/*`.
+
+##### Fase 2 — Shell publik, auth, dan aplikasi
+
+- [x] Selaraskan `layouts.app`, `layouts.guest`, dan `components.public-layout` dengan header, spacing, dan surface dari panduan desain.
+- [x] Rapikan sidebar desktop dan drawer mobile tanpa mengubah link atau pembatasan role.
+- [x] Tambahkan focus-visible, target interaksi minimum 44×44px, overlay yang konsisten, dan pengembalian fokus modal.
+- [x] Selesaikan migrasi halaman forgot/reset/verify password dan profil dari tampilan Breeze lama.
+
+**Area:** `resources/views/layouts/*`, `resources/views/livewire/layout/navigation.blade.php`, `resources/views/livewire/pages/auth/*`, `resources/views/livewire/profile/*`, `resources/views/profile.blade.php`, `resources/views/dashboard.blade.php`.
+
+##### Fase 3 — Halaman publik
+
+- [x] Sempurnakan landing page: header responsif, hero, kartu layanan, panel CTA, dan CTA penutup dengan konten ClinicOS nyata.
+- [x] Terapkan hierarki visual yang sama pada profil klinik, booking, antrean publik, dan status booking.
+- [x] Gunakan dekorasi dan motion hanya pada halaman publik; dukung `prefers-reduced-motion`.
+- [x] Jangan menyalin brand, statistik, atau navigasi dummy dari referensi.
+
+**Area:** `resources/views/welcome.blade.php`, `resources/views/public/*`, `resources/views/components/public-layout.blade.php`.
+
+##### Fase 4 — Workspace per role
+
+- [x] Standarkan dashboard menjadi pola greeting panel, KPI cards, daftar aktivitas, dan quick action.
+- [x] Standarkan halaman index menjadi page header, filter, tabel responsif, empty state, dan pagination.
+- [x] Standarkan form menjadi section cards, field rhythm, validation state, dan action bar yang aman di mobile.
+- [x] Standarkan halaman detail menjadi summary panel, badge status, metadata, dan aksi utama/berbahaya yang jelas.
+- [x] Prioritaskan keterbacaan dan kepadatan informasi pada antrean, audit log, dan rekam medis; jangan membawa dekorasi landing page ke UI klinis.
+
+**Area:** `resources/views/admin/*`, `resources/views/receptionist/*`, `resources/views/doctor/*`, `resources/views/patient/*`, `resources/views/queues/*`, `resources/views/notifications/*`.
+
+##### Fase 5 — Accessibility, responsive, dan verifikasi
+
+- [ ] Uji viewport 375px, 768px, 1024px, dan 1440px untuk seluruh role.
+- [ ] Pastikan tabel, filter, kalender/tanggal, action bar, teks panjang, dan status tidak overflow.
+- [ ] Verifikasi keyboard navigation, focus trap modal, Escape, focus return, label kontrol ikon, live region, dan kontras.
+- [x] Pastikan status tidak dibedakan hanya dengan warna.
+- [x] Jalankan `npm run build`, Blade view cache, dan test landing navigation.
+- [ ] Jalankan ulang feature test berbasis database saat MySQL test tersedia; percobaan saat ini menghasilkan 42 pass dan 17 connection error ke `127.0.0.1:3306`.
+- [x] Tambah test hanya bila perilaku navigasi, modal, atau interaksi berubah; perubahan visual murni tidak membutuhkan test baru.
+
+##### Urutan delivery
+
+```text
+Fondasi dan komponen bersama
+    → shell aplikasi, auth, dan profil
+    → halaman publik
+    → dashboard per role
+    → tabel, form, detail, antrean, dan rekam medis
+    → accessibility, responsive QA, build, dan regression
+```
+
+**Definition of done frontend:** seluruh halaman memakai satu sistem visual, semua alur dan authorization tetap bekerja, tidak ada overflow atau blocker accessibility P0/P1 pada viewport target, `npm run build` lulus, dan test terkait tetap hijau.
 
 ### M7.4 — Staging dan UAT End-to-End
 

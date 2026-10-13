@@ -26,6 +26,29 @@ class BookingTest extends TestCase
         $this->seed(RoleAndPermissionSeeder::class);
     }
 
+    public function test_public_booking_form_has_a_submit_button(): void
+    {
+        [$clinic] = $this->bookingContext();
+
+        $this->get(route('public.booking.create', $clinic))
+            ->assertOk()
+            ->assertSee('type="submit"', false)
+            ->assertSee('Konfirmasi booking');
+    }
+
+    public function test_receptionist_booking_form_has_a_submit_button(): void
+    {
+        [$clinic] = $this->bookingContext();
+        $receptionist = User::factory()->forClinic($clinic)->create();
+        $receptionist->assignRole('Receptionist');
+
+        $this->actingAs($receptionist)
+            ->get(route('receptionist.appointments.create'))
+            ->assertOk()
+            ->assertSee('type="submit"', false)
+            ->assertSee('Buat booking');
+    }
+
     public function test_guest_booking_creates_patient_appointment_and_queue_atomically(): void
     {
         [$clinic, $doctor, $service, $schedule, $date] = $this->bookingContext();

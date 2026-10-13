@@ -7,13 +7,30 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_landing_page_contains_accessible_mobile_navigation(): void
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $response
+            ->assertOk()
+            ->assertSee('aria-controls="mobile-navigation"', false)
+            ->assertSee('id="mobile-navigation"', false)
+            ->assertSee('Buka navigasi');
+    }
+
+    public function test_local_proxy_https_header_is_trusted(): void
+    {
+        $response = $this
+            ->withServerVariables([
+                'REMOTE_ADDR' => '127.0.0.1',
+                'HTTP_HOST' => 'clinic.test',
+                'HTTP_X_FORWARDED_HOST' => 'clinic.test',
+                'HTTP_X_FORWARDED_PROTO' => 'https',
+            ])
+            ->get('/');
+
+        $response
+            ->assertOk()
+            ->assertHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
     }
 }

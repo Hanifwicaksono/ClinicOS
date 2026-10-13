@@ -25,8 +25,8 @@ class ClinicSettingSeeder extends Seeder
         $clinic->settings()->updateOrCreate(
             ['clinic_id' => $clinic->id],
             [
-                'opening_time' => '08:00',
-                'closing_time' => '17:00',
+                'opening_time' => '00:00',
+                'closing_time' => '23:59',
                 'timezone' => 'Asia/Jakarta',
                 'queue_prefix' => 'KS',
             ],

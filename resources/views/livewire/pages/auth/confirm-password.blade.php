@@ -34,18 +34,19 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+    <div class="mb-8">
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Area aman</p>
+        <h2 class="mt-2 text-2xl font-extrabold text-clinic-950">Konfirmasi kata sandi</h2>
+        <p class="mt-2 text-sm leading-6 text-slate-500">Masukkan kembali kata sandi Anda sebelum melanjutkan.</p>
     </div>
 
-    <form wire:submit="confirmPassword">
-        <!-- Password -->
+    <form wire:submit="confirmPassword" class="space-y-5">
         <div>
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" value="Kata sandi" />
 
             <x-text-input wire:model="password"
                           id="password"
-                          class="block mt-1 w-full"
+                          class="mt-2 block w-full"
                           type="password"
                           name="password"
                           required autocomplete="current-password" />
@@ -53,9 +54,9 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
+        <div>
+            <x-primary-button class="w-full">
+                Konfirmasi
             </x-primary-button>
         </div>
     </form>

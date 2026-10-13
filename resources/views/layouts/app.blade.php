@@ -18,7 +18,7 @@
 
             <div class="lg:pl-72">
                 @if (isset($header))
-                    <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
+                    <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
                         <div class="mx-auto flex min-h-20 max-w-[1440px] items-center px-4 sm:px-6 lg:px-10">
                             {{ $header }}
                         </div>

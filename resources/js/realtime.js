@@ -87,3 +87,6 @@ window.Echo?.connector?.pusher?.connection?.bind('connected', () => {
 
     hasConnected = true;
 });
+
+// shortcut: polling backs up WebSockets for tunnel testing; expose Reverb publicly before scaling traffic.
+window.setInterval(scheduleRefresh, 5000);

@@ -25,7 +25,7 @@
                 <p class="relative text-xs text-slate-500">© {{ date('Y') }} ClinicOS · Sistem operasional klinik</p>
             </section>
 
-            <section class="flex items-center justify-center bg-[#fafafa] px-5 py-10 sm:px-10">
+            <section class="flex items-center justify-center bg-clinic-background px-5 py-10 sm:px-10">
                 <div class="w-full max-w-md">
                     <a href="/" class="mb-10 flex items-center gap-3 lg:hidden"><x-application-logo class="h-10 w-10" /><span class="font-display text-xl font-extrabold text-clinic-950">Clinic<span class="text-clinic-500">OS</span></span></a>
                     <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-card sm:p-9">
