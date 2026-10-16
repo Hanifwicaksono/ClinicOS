@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\UserAccountType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,15 +19,17 @@ class DemoUserSeeder extends Seeder
         }
 
         foreach ([
-            'admin' => ['Clinic Administrator', 'Clinic Admin'],
-            'doctor' => ['dr. Budi Santoso', 'Doctor'],
-            'receptionist' => ['Siti Rahma', 'Receptionist'],
-            'patient' => ['Ahmad Fauzi', 'Patient'],
-        ] as $prefix => [$name, $role]) {
+            'platform' => ['Platform Administrator', 'Platform Admin', null],
+            'admin' => ['Clinic Administrator', 'Clinic Admin', UserAccountType::ClinicOwner],
+            'doctor' => ['dr. Budi Santoso', 'Doctor', null],
+            'receptionist' => ['Siti Rahma', 'Receptionist', null],
+            'patient' => ['Ahmad Fauzi', 'Patient', UserAccountType::Patient],
+        ] as $prefix => [$name, $role, $accountType]) {
             $user = User::updateOrCreate(
                 ['email' => $prefix.'@clinicos.test'],
                 [
                     'name' => $name,
+                    'account_type' => $accountType,
                     'is_active' => true,
                     'email_verified_at' => now(),
                     'password' => Hash::make('password'),

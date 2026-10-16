@@ -1,13 +1,17 @@
 @php
     $editing = isset($clinic);
+    $onboarding = $onboarding ?? false;
     $settings = $editing ? $clinic->settings : null;
+    $formAction = $editing
+        ? route('admin.clinic.update', $clinic)
+        : ($onboarding ? route('onboarding.clinic.store') : route('admin.clinic.store'));
 @endphp
 
 <x-app-layout>
     <x-slot name="header">
         <div>
             <p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Pengaturan</p>
-            <h1 class="mt-1 text-xl font-extrabold text-clinic-950">{{ $editing ? 'Profil klinik' : 'Setup klinik' }}</h1>
+            <h1 class="mt-1 text-xl font-extrabold text-clinic-950">{{ $editing ? 'Profil klinik' : ($onboarding ? 'Daftarkan klinik' : 'Setup klinik') }}</h1>
         </div>
     </x-slot>
 
@@ -17,7 +21,7 @@
             <p class="mt-2 text-sm leading-6 text-slate-500">Informasi ini menjadi sumber utama untuk layanan, jadwal, dan komunikasi pasien.</p>
         </div>
 
-        <form method="POST" enctype="multipart/form-data" action="{{ $editing ? route('admin.clinic.update', $clinic) : route('admin.clinic.store') }}" class="space-y-6" x-data="{ submitting: false }" @submit="submitting = true">
+        <form method="POST" enctype="multipart/form-data" action="{{ $formAction }}" class="space-y-6" x-data="{ submitting: false }" @submit="submitting = true">
             @csrf
             @if ($editing) @method('PUT') @endif
 
@@ -42,10 +46,14 @@
                     <div><label class="clinic-label" for="timezone">Zona waktu</label><select class="clinic-input" id="timezone" name="timezone">@foreach (['Asia/Jakarta' => 'WIB', 'Asia/Makassar' => 'WITA', 'Asia/Jayapura' => 'WIT'] as $value => $label)<option value="{{ $value }}" @selected(old('timezone', $settings->timezone ?? 'Asia/Jakarta') === $value)>{{ $label }}</option>@endforeach</select></div>
                     <div><label class="clinic-label" for="queue_prefix">Prefix antrean</label><input class="clinic-input uppercase" id="queue_prefix" name="queue_prefix" maxlength="5" value="{{ old('queue_prefix', $settings->queue_prefix ?? 'A') }}" required><x-input-error :messages="$errors->get('queue_prefix')" class="mt-2" /></div>
                 </div>
-                <div class="mt-6"><input type="hidden" name="is_active" value="0"><label class="inline-flex items-center gap-3 text-sm font-semibold text-slate-700"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $clinic->is_active ?? true)) class="rounded border-slate-300 text-clinic-500 focus:ring-clinic-500">Klinik aktif dan dapat digunakan</label></div>
+                @if ($onboarding)
+                    <input type="hidden" name="is_active" value="1">
+                @else
+                    <div class="mt-6"><input type="hidden" name="is_active" value="0"><label class="inline-flex items-center gap-3 text-sm font-semibold text-slate-700"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $clinic->is_active ?? true)) class="rounded border-slate-300 text-clinic-500 focus:ring-clinic-500">Klinik aktif dan dapat digunakan</label></div>
+                @endif
             </section>
 
-            <div class="flex justify-end gap-3"><x-clinic-button href="{{ route('admin.dashboard') }}" variant="secondary" wire:navigate>Batal</x-clinic-button><x-clinic-button type="submit" variant="primary" class="disabled:cursor-wait disabled:opacity-60" x-bind:disabled="submitting"><span x-show="! submitting">{{ $editing ? 'Simpan perubahan' : 'Buat klinik' }}</span><span x-show="submitting" x-cloak>Menyimpan…</span></x-clinic-button></div>
+            <div class="flex justify-end gap-3"><x-clinic-button href="{{ $onboarding ? route('profile') : route('admin.dashboard') }}" variant="secondary" wire:navigate>Batal</x-clinic-button><x-clinic-button type="submit" variant="primary" class="disabled:cursor-wait disabled:opacity-60" x-bind:disabled="submitting"><span x-show="! submitting">{{ $editing ? 'Simpan perubahan' : 'Buat klinik' }}</span><span x-show="submitting" x-cloak>Menyimpan…</span></x-clinic-button></div>
         </form>
     </div>
 </x-app-layout>

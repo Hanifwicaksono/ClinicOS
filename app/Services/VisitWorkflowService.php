@@ -5,6 +5,7 @@ namespace App\Services;
 use App\AppointmentStatus;
 use App\Events\VisitCompleted;
 use App\MedicalRecordStatus;
+use App\Models\Clinic;
 use App\Models\MedicalRecord;
 use App\Models\Queue;
 use App\Models\User;
@@ -12,16 +13,20 @@ use App\Models\Visit;
 use App\QueueStatus;
 use App\VisitStatus;
 use Carbon\CarbonImmutable;
+use DomainException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use RuntimeException;
 
 class VisitWorkflowService
 {
     public function __construct(
         private AuditLogger $auditLogger,
         private ClinicNotificationService $notificationService,
+        private SubscriptionService $subscriptionService,
     ) {}
 
     /** @return array{visit: Visit, created: bool} */
@@ -48,6 +53,14 @@ class VisitWorkflowService
 
             if ($lockedQueue->doctor->user_id !== $actor->id) {
                 throw new AuthorizationException('Dokter hanya dapat memulai antreannya sendiri.');
+            }
+
+            $clinic = Clinic::query()->lockForUpdate()->findOrFail($lockedQueue->appointment->clinic_id);
+
+            try {
+                $this->subscriptionService->assertVisitCanStart($clinic, $lockedQueue->appointment);
+            } catch (DomainException $exception) {
+                throw ValidationException::withMessages(['queue' => $exception->getMessage()]);
             }
 
             $timezone = $lockedQueue->appointment->clinic->settings?->timezone ?? 'Asia/Jakarta';
@@ -201,6 +214,39 @@ class VisitWorkflowService
             'physical_examination', 'doctor_notes',
         ]));
 
+        $storedPhotos = $record->photos ?? [];
+        $removedPhotoIndexes = array_map('intval', $data['removed_photos'] ?? []);
+        $removedPhotoPaths = [];
+        $photos = [];
+
+        foreach ($storedPhotos as $index => $photo) {
+            if (in_array($index, $removedPhotoIndexes, true)) {
+                $removedPhotoPaths[] = $photo['path'];
+
+                continue;
+            }
+
+            $photos[] = $photo;
+        }
+
+        foreach ($data['photos'] ?? [] as $photo) {
+            $path = $photo->store("medical-records/{$record->id}", 'local');
+
+            if ($path === false) {
+                throw new RuntimeException('Foto rekam medis gagal disimpan.');
+            }
+
+            $photos[] = ['path' => $path, 'name' => $photo->getClientOriginalName()];
+        }
+
+        if ($photos !== $storedPhotos) {
+            $record->update(['photos' => $photos]);
+        }
+
+        if ($removedPhotoPaths !== []) {
+            DB::afterCommit(fn () => Storage::disk('local')->delete($removedPhotoPaths));
+        }
+
         $vitalSignData = Arr::only($data['vital_signs'] ?? [], [
             'weight_kg', 'height_cm', 'systolic', 'diastolic', 'pulse',
             'respiratory_rate', 'temperature_c', 'oxygen_saturation',
@@ -212,30 +258,34 @@ class VisitWorkflowService
             $record->vitalSign()->updateOrCreate([], $vitalSignData);
         }
 
-        $record->diagnoses()->delete();
-        $diagnoses = array_values(array_filter(
-            $data['diagnoses'] ?? [],
-            fn (array $item): bool => filled($item['name'] ?? null),
-        ));
-        $primaryDiagnosisIndex = collect($diagnoses)->search(
-            fn (array $diagnosis): bool => (bool) ($diagnosis['is_primary'] ?? false),
-        );
-        $primaryDiagnosisIndex = $primaryDiagnosisIndex === false ? 0 : $primaryDiagnosisIndex;
+        if (array_key_exists('diagnoses', $data)) {
+            $record->diagnoses()->delete();
+            $diagnoses = array_values(array_filter(
+                $data['diagnoses'],
+                fn (array $item): bool => filled($item['name'] ?? null),
+            ));
+            $primaryDiagnosisIndex = collect($diagnoses)->search(
+                fn (array $diagnosis): bool => (bool) ($diagnosis['is_primary'] ?? false),
+            );
+            $primaryDiagnosisIndex = $primaryDiagnosisIndex === false ? 0 : $primaryDiagnosisIndex;
 
-        foreach ($diagnoses as $index => $diagnosis) {
-            $record->diagnoses()->create([
-                ...Arr::only($diagnosis, ['code', 'name', 'notes']),
-                'is_primary' => $index === $primaryDiagnosisIndex,
-                'sort_order' => $index,
-            ]);
+            foreach ($diagnoses as $index => $diagnosis) {
+                $record->diagnoses()->create([
+                    ...Arr::only($diagnosis, ['code', 'name', 'notes']),
+                    'is_primary' => $index === $primaryDiagnosisIndex,
+                    'sort_order' => $index,
+                ]);
+            }
         }
 
-        $record->treatments()->delete();
-        foreach (array_values(array_filter($data['treatments'] ?? [], fn (array $item): bool => filled($item['name'] ?? null))) as $index => $treatment) {
-            $record->treatments()->create([
-                ...Arr::only($treatment, ['name', 'description']),
-                'sort_order' => $index,
-            ]);
+        if (array_key_exists('treatments', $data)) {
+            $record->treatments()->delete();
+            foreach (array_values(array_filter($data['treatments'], fn (array $item): bool => filled($item['name'] ?? null))) as $index => $treatment) {
+                $record->treatments()->create([
+                    ...Arr::only($treatment, ['name', 'description']),
+                    'sort_order' => $index,
+                ]);
+            }
         }
 
         $items = array_values(array_filter($data['prescription_items'] ?? [], fn (array $item): bool => filled($item['medicine_name'] ?? null)));
@@ -261,7 +311,7 @@ class VisitWorkflowService
         return [
             'record' => Arr::only($record->attributesToArray(), [
                 'chief_complaint', 'subjective', 'objective', 'assessment', 'plan',
-                'physical_examination', 'doctor_notes', 'status', 'finalized_at',
+                'physical_examination', 'doctor_notes', 'photos', 'status', 'finalized_at',
             ]),
             'vital_signs' => $record->vitalSign?->attributesToArray(),
             'diagnoses' => $record->diagnoses->map->attributesToArray()->all(),

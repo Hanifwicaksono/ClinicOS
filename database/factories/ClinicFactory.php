@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Clinic;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,5 +27,12 @@ class ClinicFactory extends Factory
             'description' => fake()->sentence(),
             'is_active' => true,
         ];
+    }
+
+    public function ownedBy(User $owner): static
+    {
+        return $this
+            ->state(fn (array $attributes) => ['owner_user_id' => $owner->id])
+            ->afterCreating(fn (Clinic $clinic) => $owner->update(['clinic_id' => $clinic->id]));
     }
 }

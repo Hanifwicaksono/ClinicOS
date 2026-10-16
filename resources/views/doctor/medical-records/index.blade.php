@@ -80,10 +80,12 @@
                             </td>
                             <td>
                                 <p class="font-semibold text-slate-800">{{ $medicalRecord->visit->service_name }}</p>
-                                <p class="mt-1 text-xs text-slate-500">{{ $medicalRecord->chief_complaint ?: 'Keluhan belum dicatat' }}</p>
+                                <p class="mt-1 text-xs text-slate-500">{{ $medicalRecord->subjective ?: $medicalRecord->chief_complaint ?: 'Anamnesa belum dicatat' }}</p>
                             </td>
                             <td>
-                                @if ($primaryDiagnosis)
+                                @if ($medicalRecord->assessment)
+                                    <p class="font-semibold text-slate-800">{{ $medicalRecord->assessment }}</p>
+                                @elseif ($primaryDiagnosis)
                                     <p class="font-semibold text-slate-800">{{ $primaryDiagnosis->name }}</p>
                                     <p class="mt-1 text-xs text-slate-500">{{ $primaryDiagnosis->code ?: 'Tanpa kode' }}{{ $medicalRecord->diagnoses->count() > 1 ? ' · +'.($medicalRecord->diagnoses->count() - 1).' lainnya' : '' }}</p>
                                 @else

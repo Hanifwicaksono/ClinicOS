@@ -15,7 +15,8 @@ class DashboardAccessTest extends TestCase
     public static function dashboards(): array
     {
         return [
-            'admin' => ['Clinic Admin', '/admin/dashboard', 'Ringkasan klinik'],
+            'platform' => ['Platform Admin', '/platform/dashboard', 'Dashboard platform'],
+            'admin' => ['Clinic Admin', '/admin/dashboard', 'Siapkan identitas klinik Anda'],
             'doctor' => ['Doctor', '/doctor/dashboard', 'Dashboard Dokter'],
             'receptionist' => ['Receptionist', '/receptionist/dashboard', 'Dashboard Resepsionis'],
             'patient' => ['Patient', '/patient/dashboard', 'Dashboard Pasien'],
@@ -80,9 +81,9 @@ class DashboardAccessTest extends TestCase
     {
         $this->seed(RoleAndPermissionSeeder::class);
         $user = User::factory()->create();
-        $user->assignRole(['Patient', 'Receptionist', 'Doctor', 'Clinic Admin']);
+        $user->assignRole(['Patient', 'Receptionist', 'Doctor', 'Clinic Admin', 'Platform Admin']);
 
-        $this->actingAs($user)->get('/dashboard')->assertRedirect('/admin/dashboard');
+        $this->actingAs($user)->get('/dashboard')->assertRedirect('/platform/dashboard');
         $this->get('/doctor/dashboard')->assertSee('Dashboard Dokter');
     }
 

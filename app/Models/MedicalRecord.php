@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-#[Fillable(['visit_id', 'patient_id', 'doctor_id', 'created_by_user_id', 'status', 'chief_complaint', 'subjective', 'objective', 'assessment', 'plan', 'physical_examination', 'doctor_notes', 'finalized_at'])]
+#[Fillable(['visit_id', 'patient_id', 'doctor_id', 'created_by_user_id', 'status', 'chief_complaint', 'subjective', 'objective', 'assessment', 'plan', 'physical_examination', 'doctor_notes', 'photos', 'finalized_at'])]
 class MedicalRecord extends Model
 {
     /** @use HasFactory<MedicalRecordFactory> */
@@ -19,7 +19,7 @@ class MedicalRecord extends Model
 
     protected function casts(): array
     {
-        return ['status' => MedicalRecordStatus::class, 'finalized_at' => 'datetime'];
+        return ['status' => MedicalRecordStatus::class, 'photos' => 'array', 'finalized_at' => 'datetime'];
     }
 
     public function visit(): BelongsTo

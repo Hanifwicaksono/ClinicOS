@@ -11,6 +11,7 @@ use App\Models\Service;
 use App\Models\User;
 use App\QueueStatus;
 use Carbon\CarbonImmutable;
+use DomainException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -22,6 +23,7 @@ class BookingService
         private MedicalRecordNumberGenerator $medicalRecordNumberGenerator,
         private AuditLogger $auditLogger,
         private ClinicNotificationService $notificationService,
+        private SubscriptionService $subscriptionService,
     ) {}
 
     /**
@@ -31,6 +33,7 @@ class BookingService
     public function book(Clinic $clinic, array $data, ?User $actor = null, string $source = 'ONLINE'): array
     {
         return DB::transaction(function () use ($clinic, $data, $actor, $source): array {
+            $clinic = Clinic::query()->with('settings')->lockForUpdate()->findOrFail($clinic->id);
             $schedule = DoctorSchedule::query()
                 ->whereKey($data['doctor_schedule_id'])
                 ->where('doctor_id', $data['doctor_id'])
@@ -66,6 +69,12 @@ class BookingService
                     'access_token' => $accessToken,
                     'created' => false,
                 ];
+            }
+
+            try {
+                $this->subscriptionService->assertBookingAvailable($clinic);
+            } catch (DomainException $exception) {
+                throw ValidationException::withMessages(['booking' => $exception->getMessage()]);
             }
 
             $appointmentDate = CarbonImmutable::parse($data['appointment_date'], $clinic->settings?->timezone ?? 'Asia/Jakarta')->startOfDay();

@@ -19,7 +19,9 @@ use App\Services\QueueWorkflowService;
 use App\VisitStatus;
 use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -80,6 +82,51 @@ class VisitWorkflowTest extends TestCase
         $this->assertSame(38.2, (float) $record->vitalSign->temperature_c);
     }
 
+    public function test_doctor_can_save_simplified_record_with_private_photo_and_without_vital_signs(): void
+    {
+        Storage::fake('local');
+        $context = $this->calledQueueContext();
+        $this->actingAs($context['doctor_user'])->post(route('doctor.visits.start', $context['queue']));
+        $visit = Visit::query()->sole();
+
+        $this->actingAs($context['doctor_user'])
+            ->put(route('doctor.visits.save', $visit), [
+                'subjective' => 'Ruam merah sejak dua hari.',
+                'assessment' => 'Dermatitis kontak.',
+                'plan' => 'Hindari pencetus dan gunakan salep.',
+                'photos' => [UploadedFile::fake()->image('ruam.jpg')],
+            ])
+            ->assertRedirect();
+
+        $record = $visit->medicalRecord()->firstOrFail();
+        $this->assertNull($record->vitalSign);
+        $this->assertSame('Dermatitis kontak.', $record->assessment);
+        $this->assertCount(1, $record->photos);
+        Storage::disk('local')->assertExists($record->photos[0]['path']);
+
+        $this->actingAs($context['doctor_user'])
+            ->get(route('doctor.visits.photos.show', [$visit, 0]))
+            ->assertOk();
+
+        $this->actingAs($context['receptionist'])
+            ->get(route('doctor.visits.photos.show', [$visit, 0]))
+            ->assertForbidden();
+
+        $this->actingAs($context['doctor_user'])
+            ->put(route('doctor.visits.save', $visit), [
+                'subjective' => 'Ruam merah sejak dua hari.',
+                'assessment' => 'Dermatitis kontak.',
+                'plan' => 'Hindari pencetus dan gunakan salep.',
+                'removed_photos' => [0],
+            ])
+            ->assertRedirect();
+
+        $this->assertSame([], $record->refresh()->photos);
+        $this->actingAs($context['doctor_user'])
+            ->get(route('doctor.visits.photos.show', [$visit, 0]))
+            ->assertNotFound();
+    }
+
     public function test_completion_atomically_finalizes_record_visit_appointment_and_queue(): void
     {
         Event::fake([VisitCompleted::class]);
@@ -125,7 +172,7 @@ class VisitWorkflowTest extends TestCase
                 'chief_complaint' => 'Demam',
                 'subjective' => 'Demam sejak pagi',
             ])
-            ->assertSessionHasErrors(['objective', 'assessment', 'plan', 'diagnoses']);
+            ->assertSessionHasErrors(['assessment', 'plan']);
 
         $this->assertSame(VisitStatus::InProgress, $visit->refresh()->status);
         $this->assertSame(MedicalRecordStatus::Draft, $visit->medicalRecord->refresh()->status);

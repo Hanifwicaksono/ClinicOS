@@ -39,7 +39,7 @@ new class extends Component
         </div>
 
         <div class="border-b border-slate-100 px-6 py-5">
-            <p class="truncate text-sm font-bold text-slate-900">{{ auth()->user()->clinic?->name ?? 'Siapkan klinik Anda' }}</p>
+            <p class="truncate text-sm font-bold text-slate-900">{{ auth()->user()->hasRole('Platform Admin') ? 'ClinicOS Platform' : (auth()->user()->clinic?->name ?? 'Siapkan klinik Anda') }}</p>
             @php
                 $displayRole = auth()->user()->roles->first()?->name ?? 'Pengguna';
                 if ($displayRole === 'Patient') {
@@ -51,7 +51,19 @@ new class extends Component
 
         <nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5">
             @php
-                $links = auth()->user()->hasRole('Clinic Admin')
+                $links = auth()->user()->isClinicOwner() && ! auth()->user()->subscriptionExists()
+                    ? [
+                        ['route' => auth()->user()->clinic_id === null ? 'onboarding.clinic.create' : 'onboarding.plans.index', 'match' => 'onboarding.*', 'label' => 'Selesaikan onboarding', 'icon' => 'M5 12h14M12 5l7 7-7 7'],
+                        ['route' => 'subscription.payments.index', 'match' => 'subscription.payments.*', 'label' => 'Pembayaran', 'icon' => 'M4 7h16M4 12h16M4 17h10'],
+                    ]
+                    : (auth()->user()->hasRole('Platform Admin')
+                    ? [
+                        ['route' => 'platform.dashboard', 'match' => 'platform.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
+                        ['route' => 'platform.tenants.index', 'match' => 'platform.tenants.*', 'label' => 'Tenant klinik', 'icon' => 'M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-5 7v-3h4v3'],
+                        ['route' => 'platform.subscription-plans.index', 'match' => 'platform.subscription-*', 'label' => 'Paket & harga', 'icon' => 'M4 7h16M4 12h16M4 17h10'],
+                        ['route' => 'platform.payments.index', 'match' => 'platform.payments.*', 'label' => 'Pembayaran', 'icon' => 'M3 6h18M3 10h18M7 15h4'],
+                    ]
+                    : (auth()->user()->hasRole('Clinic Admin')
                     ? [
                         ['route' => 'admin.dashboard', 'match' => 'admin.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
                         ['route' => 'admin.clinic.index', 'match' => 'admin.clinic.*', 'label' => 'Profil klinik', 'icon' => 'M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-5 7v-3h4v3'],
@@ -77,7 +89,16 @@ new class extends Component
                         ['route' => 'patient.appointments.index', 'match' => 'patient.appointments.*', 'label' => 'Booking saya', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z'],
                     ] : [
                         ['route' => 'dashboard', 'match' => '*.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
-                    ])));
+                    ])))));
+
+                if (auth()->user()->isClinicOwner() && auth()->user()->subscriptionExists()) {
+                    array_splice($links, 1, 0, [[
+                        'route' => 'subscription.payments.index',
+                        'match' => 'subscription.payments.*',
+                        'label' => 'Subscription',
+                        'icon' => 'M4 7h16M4 12h16M4 17h10',
+                    ]]);
+                }
             @endphp
 
             @foreach ($links as $link)

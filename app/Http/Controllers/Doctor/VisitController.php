@@ -11,7 +11,9 @@ use App\Models\Visit;
 use App\Services\VisitWorkflowService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class VisitController extends Controller
 {
@@ -43,6 +45,19 @@ class VisitController extends Controller
             ->get();
 
         return view('doctor.visits.show', compact('visit', 'history'));
+    }
+
+    public function photo(Visit $visit, int $photo): StreamedResponse
+    {
+        $this->authorize('view', $visit);
+        $record = $visit->medicalRecord;
+        $this->authorize('view', $record);
+        $photoData = $record->photos[$photo] ?? null;
+
+        abort_unless(is_array($photoData) && isset($photoData['path']), 404);
+        abort_unless(Storage::disk('local')->exists($photoData['path']), 404);
+
+        return Storage::disk('local')->response($photoData['path'], $photoData['name'] ?? null);
     }
 
     public function save(

@@ -46,12 +46,13 @@ class MedicalRecordController extends Controller
                     $searchQuery->whereHas('patient', function (Builder $patientQuery) use ($search): void {
                         $patientQuery->where('name', 'like', "%{$search}%")
                             ->orWhere('medical_record_number', 'like', "%{$search}%");
-                    })->orWhereHas('diagnoses', function (Builder $diagnosisQuery) use ($search): void {
-                        $diagnosisQuery->where('name', 'like', "%{$search}%")
-                            ->orWhere('code', 'like', "%{$search}%");
-                    })->orWhereHas('visit', function (Builder $visitQuery) use ($search): void {
-                        $visitQuery->where('service_name', 'like', "%{$search}%");
-                    });
+                    })->orWhere('assessment', 'like', "%{$search}%")
+                        ->orWhereHas('diagnoses', function (Builder $diagnosisQuery) use ($search): void {
+                            $diagnosisQuery->where('name', 'like', "%{$search}%")
+                                ->orWhere('code', 'like', "%{$search}%");
+                        })->orWhereHas('visit', function (Builder $visitQuery) use ($search): void {
+                            $visitQuery->where('service_name', 'like', "%{$search}%");
+                        });
                 });
             })
             ->when($status !== '', fn (Builder $query) => $query->where('status', $status))

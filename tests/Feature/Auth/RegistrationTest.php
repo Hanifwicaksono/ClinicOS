@@ -3,6 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use App\UserAccountType;
 use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -42,6 +43,7 @@ class RegistrationTest extends TestCase
 
         $user = User::where('email', 'test@example.com')->firstOrFail();
         $this->assertSame(['Patient'], $user->getRoleNames()->all());
+        $this->assertSame(UserAccountType::Patient, $user->account_type);
         $this->assertTrue($user->is_active);
         $this->assertFalse($user->can('clinic.update'));
         $this->assertFalse($user->can('medical_record.view'));

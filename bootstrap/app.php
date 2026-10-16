@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Middleware\CheckUserIsActive;
+use App\Http\Middleware\EnsureClinicOwner;
+use App\Http\Middleware\EnsureOnboardingComplete;
+use App\Http\Middleware\EnsureSubscriptionWritable;
 use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -19,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: ['127.0.0.1', '::1']);
+        $middleware->validateCsrfTokens(except: ['payments/doku/notification']);
 
         $middleware->web(append: [
             CheckUserIsActive::class,
@@ -29,6 +33,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => RoleMiddleware::class,
             'permission' => PermissionMiddleware::class,
             'role_or_permission' => RoleOrPermissionMiddleware::class,
+            'clinic_owner' => EnsureClinicOwner::class,
+            'onboarding.complete' => EnsureOnboardingComplete::class,
+            'subscription.writable' => EnsureSubscriptionWritable::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

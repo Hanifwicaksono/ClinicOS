@@ -14,6 +14,11 @@ class RoleAndPermissionSeeder extends Seeder
         app(PermissionRegistrar::class)->forgetCachedPermissions();
 
         $roles = [
+            'Platform Admin' => [
+                'platform.dashboard.view', 'platform.tenant.view',
+                'platform.plan.manage', 'platform.subscription.grant',
+                'platform.payment.view', 'platform.payment.manage',
+            ],
             'Clinic Admin' => [
                 'clinic.view', 'clinic.update',
                 'doctor.view', 'doctor.create', 'doctor.update', 'doctor.delete',

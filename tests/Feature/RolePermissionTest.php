@@ -17,10 +17,15 @@ class RolePermissionTest extends TestCase
     public static function rolePermissions(): array
     {
         return [
+            'platform admin manages commercial metadata but has no tenant or medical access' => [
+                'Platform Admin',
+                ['platform.dashboard.view', 'platform.tenant.view', 'platform.plan.manage', 'platform.subscription.grant'],
+                ['dashboard.view', 'clinic.view', 'clinic.update', 'patient.view', 'medical_record.view', 'audit_log.view'],
+            ],
             'admin manages clinic but has no automatic medical access' => [
                 'Clinic Admin',
                 ['clinic.update', 'doctor.create', 'receptionist.create', 'schedule.manage', 'revenue.view', 'audit_log.view'],
-                ['medical_record.view', 'medical_record.create', 'medical_record.update', 'visit.start', 'visit.complete'],
+                ['medical_record.view', 'medical_record.create', 'medical_record.update', 'visit.start', 'visit.complete', 'platform.plan.manage', 'platform.subscription.grant'],
             ],
             'doctor examines and calls but cannot configure clinic' => [
                 'Doctor',
@@ -64,7 +69,7 @@ class RolePermissionTest extends TestCase
         $this->seed(RoleAndPermissionSeeder::class);
 
         $this->assertFalse(Role::findByName('Clinic Admin')->hasPermissionTo('medical_record.view'));
-        $this->assertSame(4, Role::count());
+        $this->assertSame(5, Role::count());
         $this->assertDatabaseCount('users', 0);
     }
 
@@ -88,6 +93,6 @@ class RolePermissionTest extends TestCase
             ->assertSuccessful();
 
         $this->assertDatabaseCount('users', 0);
-        $this->assertSame(4, Role::count());
+        $this->assertSame(5, Role::count());
     }
 }

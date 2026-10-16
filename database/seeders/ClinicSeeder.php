@@ -36,5 +36,9 @@ class ClinicSeeder extends Seeder
                 'receptionist@clinicos.test',
             ])
             ->update(['clinic_id' => $clinic->id]);
+
+        $clinic->update([
+            'owner_user_id' => User::query()->where('email', 'admin@clinicos.test')->value('id'),
+        ]);
     }
 }

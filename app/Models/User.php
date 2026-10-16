@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\UserAccountType;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -14,7 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-#[Fillable(['clinic_id', 'name', 'email', 'phone', 'is_active', 'password'])]
+#[Fillable(['clinic_id', 'account_type', 'name', 'email', 'phone', 'is_active', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -27,7 +28,18 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function dashboardRouteName(): string
     {
+        if ($this->account_type === UserAccountType::ClinicOwner) {
+            if ($this->clinic_id === null) {
+                return 'onboarding.clinic.create';
+            }
+
+            if (! $this->subscriptionExists()) {
+                return 'onboarding.plans.index';
+            }
+        }
+
         foreach ([
+            'Platform Admin' => 'platform.dashboard',
             'Clinic Admin' => 'admin.dashboard',
             'Doctor' => 'doctor.dashboard',
             'Receptionist' => 'receptionist.dashboard',
@@ -41,6 +53,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return 'dashboard';
     }
 
+    public function isClinicOwner(): bool
+    {
+        return $this->account_type === UserAccountType::ClinicOwner;
+    }
+
+    public function subscriptionExists(): bool
+    {
+        return $this->clinic_id !== null && $this->clinic()->whereHas('subscription')->exists();
+    }
+
     public function receivesBroadcastNotificationsOn(): string
     {
         return 'users.'.$this->id;
@@ -49,6 +71,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function clinic(): BelongsTo
     {
         return $this->belongsTo(Clinic::class);
+    }
+
+    public function ownedClinic(): HasOne
+    {
+        return $this->hasOne(Clinic::class, 'owner_user_id');
+    }
+
+    public function grantedSubscriptionPeriods(): HasMany
+    {
+        return $this->hasMany(SubscriptionPeriod::class, 'granted_by_user_id');
     }
 
     public function doctor(): HasOne
@@ -70,6 +102,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return [
             'email_verified_at' => 'datetime',
+            'account_type' => UserAccountType::class,
             'password' => 'hashed',
             'is_active' => 'boolean',
         ];

@@ -41,6 +41,7 @@ class ClinicManagementTest extends TestCase
 
         $response->assertRedirect(route('admin.clinic.edit', $clinic));
         $this->assertSame($clinic->id, $admin->refresh()->clinic_id);
+        $this->assertSame($admin->id, $clinic->owner_user_id);
         $this->assertDatabaseHas('clinic_settings', [
             'clinic_id' => $clinic->id,
             'queue_prefix' => 'KS',

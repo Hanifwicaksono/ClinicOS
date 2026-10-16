@@ -26,6 +26,50 @@
                 @endif
 
                 <main class="mx-auto max-w-[1440px] px-4 py-7 sm:px-6 lg:px-10 lg:py-10">
+                    @php
+                        $subscriptionOverview = auth()->check()
+                            ? app(\App\Services\SubscriptionService::class)->overviewFor(auth()->user())
+                            : null;
+                    @endphp
+
+                    @if ($subscriptionOverview !== null)
+                        @php
+                            $subscriptionMessage = match ($subscriptionOverview['status']) {
+                                \App\SubscriptionStatus::Trialing => "Trial {$subscriptionOverview['plan_name']} aktif, tersisa {$subscriptionOverview['remaining_days']} hari.",
+                                \App\SubscriptionStatus::Free => $subscriptionOverview['seat_overage']
+                                    ? (auth()->user()->isClinicOwner()
+                                        ? 'Paket Free aktif. Nonaktifkan akun tambahan sebelum melanjutkan operasional.'
+                                        : 'Paket Free melewati batas akun. Hubungi pemilik klinik.')
+                                    : 'Paket Free aktif.',
+                                \App\SubscriptionStatus::Expired => 'Subscription berakhir. Data tetap dapat dibaca, tetapi operasional klinik sedang hanya-baca.',
+                                \App\SubscriptionStatus::Suspended => 'Akses operasional klinik sedang hanya-baca.',
+                                default => $subscriptionOverview['pending_payment'] ? 'Pembayaran sedang menunggu konfirmasi DOKU.' : null,
+                            };
+
+                            if ($subscriptionOverview['pending_payment']) {
+                                $subscriptionMessage = 'Pembayaran sedang menunggu konfirmasi DOKU.';
+                            }
+
+                            $subscriptionActionIsPlans = ! $subscriptionOverview['pending_payment']
+                                && in_array($subscriptionOverview['status'], [
+                                    \App\SubscriptionStatus::Trialing,
+                                    \App\SubscriptionStatus::Free,
+                                    \App\SubscriptionStatus::Expired,
+                                ], true);
+                        @endphp
+
+                        @if ($subscriptionMessage !== null)
+                            <div class="mb-6 flex items-center justify-between gap-4 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold text-amber-900" role="status">
+                                <span>{{ $subscriptionMessage }}</span>
+                                @if (auth()->user()->isClinicOwner())
+                                    <a href="{{ $subscriptionActionIsPlans ? route('onboarding.plans.index') : route('subscription.payments.index') }}" class="shrink-0 font-extrabold text-amber-950 underline underline-offset-4" wire:navigate>
+                                        {{ $subscriptionOverview['status'] === \App\SubscriptionStatus::Expired ? 'Perpanjang' : ($subscriptionActionIsPlans ? 'Lihat paket' : 'Kelola') }}
+                                    </a>
+                                @endif
+                            </div>
+                        @endif
+                    @endif
+
                     @if (session('status'))
                         <div class="mb-6 flex items-start gap-3 rounded-2xl border border-clinic-200 bg-clinic-50 px-5 py-4 text-sm font-medium text-clinic-700" role="status">
                             <svg class="mt-0.5 h-5 w-5 shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.7-9.7a1 1 0 0 0-1.4-1.4L9 10.2 7.7 8.9a1 1 0 0 0-1.4 1.4l2 2a1 1 0 0 0 1.4 0l4-4Z" clip-rule="evenodd"/></svg>

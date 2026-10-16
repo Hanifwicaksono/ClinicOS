@@ -6,6 +6,7 @@ use App\Http\Requests\StorePublicBookingRequest;
 use App\Models\Appointment;
 use App\Models\Clinic;
 use App\Services\BookingService;
+use App\Services\SubscriptionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -13,9 +14,9 @@ use Illuminate\View\View;
 
 class PublicBookingController extends Controller
 {
-    public function create(Clinic $clinic): View
+    public function create(Clinic $clinic, SubscriptionService $subscriptionService): View
     {
-        abort_unless($clinic->is_active, 404);
+        abort_unless($clinic->is_active && $subscriptionService->canCreateBooking($clinic), 404);
 
         $clinic->load([
             'services' => fn ($query) => $query->where('is_active', true)->orderBy('name'),

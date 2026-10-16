@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Clinic;
 use App\Models\User;
+use App\UserAccountType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -57,5 +58,29 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'clinic_id' => $clinic?->getKey() ?? Clinic::factory(),
         ]);
+    }
+
+    public function clinicOwner(Clinic $clinic): static
+    {
+        return $this->forClinic($clinic)
+            ->state(fn (array $attributes) => ['account_type' => UserAccountType::ClinicOwner])
+            ->afterCreating(function (User $user) use ($clinic): void {
+                $user->assignRole('Clinic Admin');
+                $clinic->update(['owner_user_id' => $user->id]);
+            });
+    }
+
+    public function clinicOwnerCandidate(): static
+    {
+        return $this
+            ->state(fn (array $attributes) => ['account_type' => UserAccountType::ClinicOwner])
+            ->afterCreating(fn (User $user) => $user->assignRole('Clinic Admin'));
+    }
+
+    public function platformAdmin(): static
+    {
+        return $this
+            ->state(fn (array $attributes) => ['clinic_id' => null])
+            ->afterCreating(fn (User $user) => $user->assignRole('Platform Admin'));
     }
 }

@@ -1,335 +1,496 @@
-# ClinicOS — Development Plan Implementasi MVP
+# ClinicOS — Development Plan SaaS Multi-Tenant & Subscription
 
-Tanggal: 4 Oktober 2026
-Versi: 0.1
-Status: Implementasi berjalan — M5 selesai
-Sumber: [Plan.md](Plan.md) dan [PRD.md](PRD.md)
+Tanggal: 15 Oktober 2026
+Versi: 1.0
+Status: M0–M4 kode selesai — validasi sandbox DOKU menunggu kredensial merchant dan URL publik
 
-## 1. Tujuan dan cara menggunakan dokumen
+## 1. Fokus pengembangan
 
-Dokumen ini menerjemahkan roadmap Plan.md menjadi backlog implementasi yang dapat dikerjakan dan diverifikasi secara bertahap. PRD.md menjadi acuan perilaku produk; Plan.md menjadi acuan cakupan dan urutan pengembangan. Perbedaan kedua dokumen dicatat sebagai keputusan yang harus diselesaikan sebelum implementasi fitur terkait.
+Fokus berikutnya adalah mengubah ClinicOS menjadi SaaS multi-tenant yang memungkinkan pemilik klinik:
 
-Target rilis adalah satu instalasi untuk satu klinik, dengan satu siklus pelayanan lengkap:
+1. mendaftarkan akun dan memverifikasi email;
+2. mendaftarkan satu klinik;
+3. memilih Free, trial, atau paket berbayar;
+4. membayar melalui DOKU Checkout bila memilih paket berbayar; dan
+5. memperoleh akses hanya untuk klinik yang didaftarkan setelah pembayaran terverifikasi.
 
-```text
-Admin mengatur klinik, staf, jadwal, dan layanan
-    → pasien mendaftar dan booking
-    → nomor antrean diterbitkan
-    → resepsionis melakukan check-in
-    → dokter memanggil dan memeriksa pasien
-    → SOAP, diagnosis, tindakan, dan resep disimpan
-    → kunjungan selesai dan nilai layanan dicatat
-    → dashboard dan audit log diperbarui
-```
+Fitur klinis yang sudah ada dipertahankan. Milestone lama tidak dilanjutkan dalam dokumen ini kecuali perubahan SaaS menyentuhnya. Implementasi tidak boleh mereset atau menghapus data klinik, pengguna, pasien, booking, antrean, kunjungan, maupun rekam medis yang sudah ada.
 
-Setiap milestone memiliki dependensi, pekerjaan, dan kriteria selesai. Checklist hanya dicentang setelah implementasi dan verifikasi selesai. Kehadiran file atau dependency belum berarti fitur berjalan.
+## 2. Keputusan produk yang dikunci
 
-## 2. Kondisi awal proyek
+### 2.1 Model tenant dan kepemilikan
 
-Baseline berasal dari inspeksi file pada 4 Oktober 2026. Aplikasi, koneksi database, build, dan test suite belum diverifikasi pada saat penyusunan dokumen ini.
+- Satu akun pemilik hanya memiliki satu klinik.
+- Satu klinik memiliki satu subscription aktif pada satu waktu.
+- Subscription melekat pada klinik, bukan pada akun pengguna.
+- Pemilik dicatat secara eksplisit pada klinik dan juga memiliki role `Clinic Admin`.
+- Hanya pemilik klinik yang dapat memilih paket, melakukan pembayaran, melihat riwayat pembayaran, dan memperpanjang subscription.
+- Dokter, resepsionis, dan pasien tidak dapat mengelola subscription.
+- Paket berlaku untuk satu klinik/lokasi. Multi-cabang memerlukan subscription terpisah dan belum termasuk cakupan ini.
+- Data tenant tetap menggunakan satu database dan dibedakan oleh `clinic_id`; tidak diperlukan dependency tenancy baru.
 
-| Area | Bukti di repositori | Status untuk perencanaan |
-| --- | --- | --- |
-| Framework | composer.json menggunakan Laravel `^13.17` dan PHP `^8.3` | Sudah dikonfigurasi; runtime perlu diverifikasi |
-| Prasyarat lokal | PHP 8.3.16 dan Composer 2.8.8 tersedia | Terverifikasi melalui CLI pada sesi ini |
-| Frontend | Blade, Livewire `^3.6.4`, Volt `^1.7.0`, Tailwind, Vite | Fondasi tersedia; build perlu diverifikasi |
-| Authentication | Breeze, halaman auth dan profile, LoginForm, Logout | Implementasi awal tersedia; perlu baseline tests |
-| Role | Spatie Permission, HasRoles, RoleAndPermissionSeeder | Empat role dan permission awal tersedia |
-| Akun aktif | Kolom is_active dan CheckUserIsActive | Perlu pengujian login dan sesi pengguna nonaktif |
-| Dashboard | Dashboard umum dan controller Admin/Doctor/Receptionist | Routing dan view dashboard per role belum lengkap |
-| Registrasi | Registrasi membuat User | Belum memberikan role kepada pengguna baru |
-| Domain klinik | Model utama yang terlihat adalah User | Klinik, pasien, booking, antrean, dan medis belum tersedia |
-| Realtime dan audit | Belum terlihat implementasi domain terkait | Belum dikerjakan |
-| Pengujian | Test auth/profile bawaan tersedia; phpunit.xml memakai SQLite memory | Belum dijalankan; uji MySQL khusus diperlukan untuk konkurensi |
-| Dokumentasi | Seluruh checklist Plan.md belum dicentang | Perlu sinkronisasi setelah verifikasi implementasi |
+### 2.2 Registrasi dan onboarding
 
-Working tree memiliki perubahan lokal yang sudah ada. Implementasi berikutnya harus mempertahankan perubahan tersebut dan membaca kembali file yang akan diedit.
+- Registrasi pemilik klinik dipisahkan dari registrasi pasien.
+- `Daftarkan Klinik` membuat calon pemilik klinik; registrasi pasien tetap membuat akun `Patient`.
+- Satu alamat email hanya dapat digunakan oleh satu akun.
+- Alur pemilik: daftar akun → verifikasi email → isi data klinik → pilih paket → bila berbayar, bayar melalui DOKU → akses aktif setelah status pembayaran sah.
+- Free dan trial tidak memerlukan pembayaran.
+- Klinik dan role pemilik dibuat dalam transaksi agar onboarding tidak menghasilkan tenant setengah jadi.
+- Pengguna yang belum menyelesaikan onboarding hanya dapat membuka langkah onboarding, profil, dan logout.
 
-## 3. Batas cakupan rilis
+### 2.3 Paket dan harga peluncuran
 
-### Termasuk MVP
+| Paket | Hak akses | 1 bulan | 6 bulan | 12 bulan |
+| --- | --- | ---: | ---: | ---: |
+| Free | 1 dokter, 1 resepsionis, maksimal 50 kunjungan per bulan | Rp0 | — | — |
+| Individual | 1 dokter, maksimal 3 staf di luar pemilik, kunjungan tanpa batas | Rp149.000 | Rp799.000 | Rp1.399.000 |
+| Team | Akun dokter dan staf tanpa batas, kunjungan tanpa batas | Rp499.000 | Rp2.699.000 | Rp4.999.000 |
 
-- Authentication, profil, akun aktif/nonaktif, dan akses berdasarkan role serta kepemilikan data.
-- Profil klinik, jam operasional, akun dokter dan resepsionis, jadwal, layanan dan harga.
-- Pasien, nomor rekam medis, website publik, booking, dan antrean.
-- Kunjungan, SOAP, tanda vital, diagnosis, tindakan, dan resep berupa catatan.
-- Snapshot harga layanan, nilai kunjungan, dashboard operasional, dan ringkasan pendapatan.
-- Notifikasi web dasar, antrean realtime, audit log, keamanan dasar, responsive UI, dan deployment.
+Aturan paket:
 
-### Ditunda sampai MVP stabil
+- Akun pasien tidak dihitung sebagai akun dokter atau staf.
+- Seluruh paket berbayar memperoleh fitur aplikasi yang sama; harga berbeda berdasarkan kapasitas tim dan durasi.
+- Team tidak memiliki batas jumlah akun, tetapi hanya boleh digunakan oleh satu klinik/lokasi.
+- Free tetap menyediakan data pasien, booking, antrean, rekam medis, resep, dan audit dasar. Audit keamanan dan akses terhadap data medis sendiri tidak boleh dijadikan fitur berbayar.
+- Realtime dan dashboard manajemen lengkap tersedia pada trial dan paket berbayar. Free menggunakan pengalaman dasar tanpa realtime premium.
+- Harga yang ditampilkan kepada pelanggan adalah jumlah yang dibayar. Biaya gateway DOKU tidak ditampilkan sebagai baris terpisah dan ditanggung platform.
+- Dukungan PPN dan faktur pajak belum dikunci; harga harus disimpan sebagai integer rupiah dan dapat diubah tanpa mengubah invoice lama.
+- Paket atau harga yang sudah pernah dipakai tidak dihapus permanen. Gunakan status aktif/nonaktif agar riwayat pembayaran tetap utuh.
 
-Multi-tenant penuh, Super Admin platform, subscription, payment gateway, multi-cabang, offline-first, mobile app, WhatsApp/SMS/push, integrasi BPJS/apotek/laboratorium, advanced analytics, ekspor lanjutan, dan AI.
+Harga ini terinspirasi pola paket eHealth: paket individual berdasarkan kapasitas tenaga medis dan paket team untuk akun lebih luas, tetapi disesuaikan dengan fitur ClinicOS saat ini. Paket lifetime tidak dibuat karena hosting, backup, penyimpanan data medis, dan keamanan tetap menimbulkan biaya berkelanjutan.
 
-Reverb tetap direncanakan pada tahap akhir MVP mengikuti Phase 14 Plan.md. Roadmap PRD menempatkan realtime pada fase enhancement; keputusan ini perlu diselaraskan di dokumen sumber sebelum cakupan rilis dikunci.
+### 2.4 Trial dan freemium
 
-Audit, validasi, authorization, dan pengujian dasar diterapkan sejak fitur pertama. Milestone akhir memperluas dan memverifikasi semuanya. Fitur tersebut tidak ditunda seluruhnya sampai hardening.
+- Setiap klinik hanya berhak atas satu trial Team selama 14 hari tanpa kartu pembayaran.
+- Trial dicatat server-side dan tidak dapat diulang dengan mengubah paket.
+- Setelah trial berakhir tanpa pembayaran, klinik otomatis beralih ke Free.
+- Jika jumlah dokter atau staf melebihi batas Free, operasional baru ditahan sampai pemilik menonaktifkan akun tambahan.
+- Pemilik tetap dapat membuka halaman subscription dan menonaktifkan akun untuk memenuhi batas paket.
+- Batas 50 kunjungan Free dihitung ketika pemeriksaan dimulai pada bulan kalender sesuai timezone klinik.
+- Booking yang dibatalkan atau no-show tidak mengurangi kuota kunjungan.
+- Ketika kuota Free tercapai, booking baru ditutup, tetapi booking yang sudah ada tetap dapat diperiksa dan diselesaikan agar pelayanan pasien tidak terputus.
+- Data lama tidak dihapus, disembunyikan, atau dipindahkan ketika trial berakhir.
 
-## 4. Keputusan produk sebelum implementasi terkait
+### 2.5 Perpanjangan dan kedaluwarsa
 
-Isi kolom usulan merupakan titik awal diskusi, bukan keputusan pengguna yang sudah disetujui. Pekerjaan yang tidak bergantung pada keputusan tersebut dapat tetap dilakukan.
+- Subscription berbayar tidak diperpanjang otomatis; pemilik melakukan checkout ulang.
+- Pembayaran saat subscription masih aktif menambahkan periode baru setelah tanggal akhir saat ini.
+- Pembayaran setelah subscription berakhir memulai periode pada saat pembayaran sukses.
+- Masa aktif berakhir pada akhir hari berdasarkan timezone klinik agar akses tidak terputus di tengah hari operasional.
+- Paket berbayar yang kedaluwarsa masuk mode read-only, bukan otomatis turun ke Free.
+- Semua pengguna klinik tetap dapat login dan membaca data yang memang diizinkan oleh role dan policy mereka.
+- Public booking dan seluruh perubahan operasional ditutup saat read-only.
+- Hanya pemilik yang dapat membuka checkout/perpanjangan; Platform Admin dapat memberi masa aktif manual.
+- Data tidak dihapus saat subscription kedaluwarsa.
 
-| ID | Keputusan | Usulan untuk MVP | Harus ditetapkan sebelum |
-| --- | --- | --- | --- |
-| D01 | Apakah akun pasien wajib? | Booking publik tanpa akun; akun Patient opsional. Registrasi publik tidak dapat membuat akun staf | M1 registrasi dan M3 booking |
-| D02 | Identitas pasien lama dan pengaitan booking publik | Nomor telepon bukan identitas unik karena dapat dipakai keluarga. Pengaitan pasien lama memerlukan verifikasi; jangan tampilkan riwayat/identitas lama hanya berdasarkan kecocokan nama/NIK/telepon. NIK opsional sampai kebutuhan klinik dipastikan | M3 pasien dan booking |
-| D03 | Booking memilih jam atau sesi? | Pasien memilih dokter, tanggal, dan sesi praktik; nomor antrean bukan jaminan jam pemeriksaan | M2 jadwal dan M3 booking |
-| D04 | Ruang lingkup nomor dan urutan antrean | Nomor unik per klinik, dokter, tanggal, dan sesi. Online dan walk-in memakai sistem yang sama; urutan pelayanan serta prioritas pasien perlu ditentukan bersama klinik | M3 penerbitan nomor dan M4 pemanggilan |
-| D05 | Pembatalan, no-show, dan skipped | CANCELLED/NO_SHOW terminal; SKIPPED dapat dikembalikan ke WAITING oleh petugas berwenang. Tentukan batas pembatalan, pelepasan kuota, dan aturan no-show | M3 booking dan M4 transisi |
-| D06 | Siapa yang dapat memanggil dan menyelesaikan? | Resepsionis dan dokter dapat memanggil; dokter hanya antreannya sendiri. Mulai/selesai pemeriksaan oleh dokter yang menangani | M1 permission, M4 antrean, dan M5 medis |
-| D07 | Akses admin ke isi rekam medis | Admin mengelola administrasi dan melihat ringkasan operasional; akses isi medis harus diberikan eksplisit. Resepsionis tidak mendapat akses isi medis. Dokter mendapat akses sesuai penugasan dan kebijakan riwayat pasien | M1 matriks akses dan M5 policy |
-| D08 | Pengubahan rekam medis selesai | Draft dapat diedit dokter yang menangani; setelah finalisasi, koreksi tercatat dengan pembuat, waktu, dan alasan. Tentukan mekanisme koreksi tanpa menimpa catatan lama | M5 finalisasi |
-| D09 | Definisi pendapatan dan harga | Ringkasan nilai layanan dari kunjungan COMPLETED; belum membuktikan uang sudah dibayar. Simpan harga saat booking dan aturan perubahan layanan sebelum finalisasi; tentukan biaya tindakan bila dibutuhkan | M3 harga dan M5 transaksi |
-| D10 | Notifikasi pasien tanpa akun | Konfirmasi langsung dan halaman status booking berakses terbatas; notification center untuk pengguna berakun. Email memerlukan kanal dan alamat terverifikasi; WhatsApp tetap Post-MVP | M3 akses status dan M6 notifikasi |
-| D11 | Hubungan dokter dengan layanan | Tetapkan layanan yang dapat ditangani setiap dokter, termasuk apakah perlu relasi many-to-many | M2 dokter/layanan dan M3 validasi |
-| D12 | Operasional klinik | Tetapkan timezone klinik, sesi lintas tengah malam, hari libur, perubahan jadwal setelah booking, dan masa booking maksimal | M2 jadwal dan M3 ketersediaan |
-| D13 | Retensi, backup, dan pemulihan | Tetapkan kebijakan penyimpanan/koreksi data medis, frekuensi backup, akses backup, dan target pemulihan bersama pemilik klinik | M5 lifecycle data dan M7 rilis |
+### 2.6 Platform Admin
 
-Catat hasil setiap keputusan beserta tanggal di bagian log keputusan. Jangan mengubah usulan menjadi perilaku aplikasi secara diam-diam.
+- Tambahkan role `Platform Admin` dengan area `/platform` terpisah dari area tenant.
+- Platform Admin mempunyai `clinic_id = null` dan tidak boleh menggunakan route operasional klinik.
+- Platform Admin dapat mengelola paket dan harga, melihat tenant, status onboarding, subscription, invoice, pembayaran, serta memberikan atau mencabut akses manual dengan alasan wajib.
+- Platform Admin dapat melihat statistik agregat nonmedis, misalnya jumlah tenant, subscription aktif, dan pembayaran.
+- Platform Admin tidak boleh membuka isi rekam medis, SOAP, diagnosis, resep, lampiran medis, atau melakukan impersonation terhadap pengguna klinik.
+- Semua perubahan paket, grant manual, suspend, dan koreksi pembayaran dicatat dalam audit.
 
-## 5. Aturan implementasi dan data
+### 2.7 Pembayaran DOKU
 
-- Gunakan stack yang sudah ada. Verifikasi versi terpasang dan kompatibilitasnya pada M1 sebelum menambah dependency.
-- Ikuti AGENTS.md. Laravel Boost sudah dipasang pada M1 dan guidelines hasil instalasi sudah dibaca. Baca ulang guidelines jika konfigurasi Boost diperbarui.
-- Gunakan model/relasi Eloquent, migration bertahap, Form Request atau validasi Livewire, policy, service/action, Blade, dan komponen Livewire sesuai kebutuhan.
-- Role memberikan kemampuan umum; policy memeriksa klinik, pasien, dokter yang ditugaskan, dan status resource. Jangan mengandalkan penyembunyian tombol sebagai authorization.
-- Gunakan konteks klinik yang berasal dari pengguna/session atau slug yang sudah divalidasi. Jangan percaya clinic_id yang dikirim browser sebagai bukti hak akses.
-- Desain domain memiliki clinic_id pada entitas milik klinik dan scope akses yang konsisten. Entitas anak memperoleh konteks melalui relasi induknya. Ini persiapan data, belum implementasi SaaS penuh.
-- Pisahkan akun User dari profil Patient. Pasien tanpa akun tetap dapat dicatat; hubungan ke User nullable bila portal pasien diterapkan. Relasi akun staf ke klinik harus didefinisikan pada M2.
-- Gunakan foreign key, index pencarian, unique constraint untuk nomor rekam medis dan nomor antrean sesuai scope, serta booking code unik.
-- Gunakan nilai uang decimal atau integer rupiah secara konsisten; jangan menggunakan float untuk perhitungan biaya.
-- Bedakan status Appointment dari Queue. Appointment: BOOKED, CANCELLED, COMPLETED, NO_SHOW. Queue: BOOKED, WAITING, CALLED, IN_PROGRESS, COMPLETED, CANCELLED, SKIPPED, NO_SHOW. Perubahan yang saling terkait harus disinkronkan dalam transaksi.
-- Pembuatan booking, reservasi kuota, dan nomor antrean harus atomik dengan lock/constraint yang sesuai. Hindari pola membaca nomor terbesar lalu menambah satu tanpa proteksi konkurensi.
-- Saat memulai pemeriksaan, buat atau ambil Visit secara idempotent. Finalisasi medis, kunjungan, harga, appointment, dan antrean dilakukan dalam transaksi agar tidak selesai sebagian.
-- Nomor antrean yang terlihat tidak menjadi token akses. Gunakan token acak atau akses terverifikasi untuk detail booking, dengan data publik minimal.
-- Jangan broadcast nama lengkap, NIK, SOAP, diagnosis, atau isi resep ke kanal publik. Kirim event setelah transaksi berhasil commit.
-- Audit menyimpan aktor, klinik, aksi, resource, waktu, dan metadata yang diperlukan. Jangan mencatat password, token, atau isi medis lengkap ke log umum.
-- Hindari penghapusan permanen data yang sudah direferensikan kunjungan; gunakan nonaktif/arsip dan kebijakan koreksi yang ditetapkan.
+- Gunakan DOKU Checkout agar kanal pembayaran mengikuti kanal yang aktif pada akun merchant tanpa integrasi terpisah per bank atau e-wallet.
+- Gunakan sandbox terlebih dahulu; kredensial disimpan melalui environment dan tidak masuk repositori.
+- Redirect/callback browser hanya menampilkan status dan tidak boleh mengaktifkan subscription.
+- Subscription hanya diaktifkan setelah HTTP Notification DOKU memiliki signature valid, invoice cocok, nominal cocok, dan status pembayaran final yang diterima.
+- `Request-Id` dan identitas event disimpan unik agar notification duplikat bersifat idempotent.
+- Payload notification diproses non-strict agar field tambahan dari DOKU tidak merusak integrasi.
+- Untuk DOKU Checkout, status gagal dari satu metode pembayaran tidak langsung menutup invoice bila pelanggan masih dapat memilih metode lain.
+- Sediakan rekonsiliasi status untuk pembayaran pending ketika notification terlambat atau hilang.
+- Refund tidak tersedia sebagai aksi mandiri pelanggan. Refund diproses manual oleh Platform Admin dan dicatat tanpa menghapus riwayat pembayaran.
 
-## 6. Ringkasan milestone dan dependensi
+Referensi implementasi:
 
-| Milestone | Pemetaan Plan.md | Hasil utama | Dependensi |
-| --- | --- | --- | --- |
-| M1 — Foundation | Phase 0–1 | Aplikasi terverifikasi, auth dan RBAC bekerja | Baseline, D01/D06/D07 |
-| M2 — Clinic Core | Phase 2–5, manajemen resepsionis dari PRD | Klinik, staf, jadwal, dan layanan siap | M1; D03/D11/D12 |
-| M3 — Patient & Booking | Phase 6–8, penerbitan nomor dari Phase 9 | Pasien dapat booking dan menerima nomor | M2; D01–D05/D09–D12 |
-| M4 — Queue | Phase 9 | Check-in, panggil, skip, cancel, dan antrean dokter | M3; D04–D06 |
-| M5 — Medical & Visit | Phase 10–11 | Pemeriksaan, rekam medis, resep, finalisasi biaya | M4; D07–D09/D13 |
-| M6 — Management | Phase 12–15 | Dashboard, notifikasi, realtime, dan viewer audit | M5; D10 dan cakupan realtime |
-| M7 — Release | Phase 16–19 dan final testing | MVP lolos simulasi dan siap operasional | M1–M6; D13 dan lingkungan deployment |
+- [DOKU Checkout](https://developers.doku.com/accept-payments/doku-checkout)
+- [DOKU HTTP Notification](https://developers.doku.com/get-started-with-doku-api/notification)
+- [DOKU notification best practices](https://developers.doku.com/get-started-with-doku-api/notification/best-practice)
 
-Urutan dependensi inti: M1 → M2 → M3 → M4 → M5 → M6 → M7. Fondasi audit dibangun di M1, identitas klinik pada audit di M2, dan log tiap fitur ditambahkan saat fiturnya dibuat. View riwayat pasien dibuat di M3; data kunjungan nyata dan akses riwayat medis baru lengkap setelah M5.
+## 3. Baseline dan dampak ke aplikasi saat ini
 
-## 7. Backlog implementasi
+ClinicOS sudah memiliki `Clinic`, `clinic_id` pada sebagian besar entitas operasional, policy antar-klinik, dan pengujian isolasi pada beberapa alur. Perubahan ini memperluas fondasi tersebut; bukan mengganti aplikasi klinis.
 
-### M1 — Foundation: environment, auth, role, dan akses
+Area yang harus disentuh:
 
-- [x] **M1.1 Baseline environment:** verifikasi dependency terpasang, Node/NPM, extension PHP, boot Laravel, koneksi MySQL, status migration, dan frontend build. Gunakan database testing terpisah; jangan menjalankan reset database operasional.
-- [x] **M1.2 Agent setup:** pasang Laravel Boost dan baca ulang AGENTS.md sebelum perubahan kode aplikasi. Identifikasi aturan tambahan hasil instalasi.
-- [x] **M1.3 Baseline verifikasi:** jalankan test auth/profile yang sudah ada; catat kegagalan, route aktif, dan bagian implementasi yang perlu dilengkapi. Periksa konfigurasi Tailwind/PostCSS/Vite yang saat ini tersedia.
-- [x] **M1.4 Authentication:** validasi login/logout, reset password, profil, perubahan password, aturan verifikasi email, rate limiting, serta penolakan akun nonaktif saat login dan selama sesi aktif.
-- [x] **M1.5 Role dan dashboard:** tetapkan matriks permission dari D06/D07; lengkapi route/view dashboard per role dan redirect setelah login. Tetapkan perilaku pengguna tanpa role dan multi-role. Registrasi mengikuti D01 tanpa hak memilih role staf.
-- [x] **M1.6 Audit awal:** sediakan struktur audit dan pencatatan login/logout tanpa kredensial sensitif. Siapkan pengisian clinic_id setelah M2.
+- registrasi dan verifikasi email;
+- model `Clinic` dan `User` untuk kepemilikan eksplisit;
+- role, permission, route, middleware, dan dashboard;
+- pembuatan dokter/staf serta batas paket;
+- booking publik dan internal;
+- awal pemeriksaan untuk kuota Free;
+- seluruh route tulis tenant untuk mode read-only;
+- notification, scheduler, mail, audit, dan konfigurasi deployment;
+- factory, seeder, serta tests yang membuat klinik atau Clinic Admin.
 
-**Kriteria selesai:** build dan baseline tests berhasil; seluruh role mencapai halaman yang benar; akses dashboard role lain ditolak; akun nonaktif tidak mendapat sesi yang dapat dipakai; registrasi tidak menaikkan privilege; login/logout tercatat.
+Perubahan lokal yang sudah ada pada fitur rekam medis/foto harus dipertahankan. Implementasi subscription tidak boleh menimpa atau mereset perubahan tersebut.
 
-**Verifikasi utama:** login valid/invalid, rate limit, logout, reset password, redirect per role, pengguna tanpa role, akun nonaktif, dan request langsung ke route terlarang.
+## 4. Desain data minimum
 
-### M2 — Clinic Core: klinik, dokter, resepsionis, jadwal, layanan
+Nama akhir mengikuti konvensi project setelah sibling migration dan model diperiksa. Struktur minimum yang direncanakan:
 
-- [x] **M2.1 Klinik:** migration/model clinics dan settings, konteks klinik untuk staf, profil/edit, slug unik, kontak, logo tervalidasi, timezone, dan jam operasional. Batasi akses melalui policy.
-- [x] **M2.2 Akun staf:** admin membuat/memperbarui/menonaktifkan dokter dan resepsionis. Buat User dan profil Doctor secara transaksional, berikan role yang sesuai, dan batasi perubahan role. Tentukan pemberian kredensial awal tanpa password tetap pada production.
-- [x] **M2.3 Jadwal:** doctor_schedules, hari/sesi, jam, kuota, status, validasi tumpang tindih, dan pemeriksaan kesesuaian jam operasional. Implementasikan ketersediaan sesuai D03/D12.
-- [x] **M2.4 Layanan:** services, harga, status aktif, daftar/tambah/edit, dan hubungan dokter–layanan sesuai D11.
-- [x] **M2.5 Layout bersama:** navigasi per role, form/table/badge dasar, pagination, empty state, loading/error state, dan responsive layout. Catat perubahan master data dalam audit.
+### `clinics`
 
-**Kriteria selesai:** admin dapat menyiapkan satu klinik beserta dokter, resepsionis, sesi praktik, dan layanan. Pengguna lain tidak dapat mengubah konfigurasi atau mengambil data klinik lain melalui ID langsung. Dokter/layanan/jadwal nonaktif tidak dianggap tersedia.
+- Tambahkan `owner_user_id` yang unik dan nullable selama migrasi data lama.
+- Setelah seluruh tenant lama dipetakan, owner wajib untuk tenant baru.
+- `owner_user_id` menjadi sumber otorisasi subscription; jangan mengandalkan role saja.
 
-**Verifikasi utama:** CRUD dan validasi, role assignment, transaksi akun dokter, upload logo, jadwal bentrok, nonaktif akun, harga tidak valid, dan policy antar-klinik menggunakan fixture testing.
+### `subscription_plans`
 
-### M3 — Patient & Booking: data pasien dan pendaftaran publik
+- Kode stabil: `free`, `individual`, `team`.
+- Nama, batas dokter, batas staf, batas kunjungan bulanan, entitlement fitur, dan status aktif.
+- Nilai `null` pada batas berarti tanpa batas.
 
-- [x] **M3.1 Pasien:** patients, nomor rekam medis unik dalam klinik, formulir identitas, pencarian/pagination, edit administratif, dan detail pasien. Pengaitan akun serta deduplikasi mengikuti D01/D02. Riwayat kunjungan menampilkan empty state sampai M5 tersedia.
-- [x] **M3.2 Website klinik:** `/clinic/{slug}` menampilkan profil, dokter aktif, layanan/harga aktif, dan sesi tersedia; hanya field publik yang ditampilkan.
-- [x] **M3.3 Booking:** appointments dengan tanggal/sesi, dokter, layanan, pasien, kode unik, status, dan snapshot harga sesuai D09. Validasi dokter–layanan, hari/sesi, batas tanggal, status klinik, dan kuota.
-- [x] **M3.4 Reservasi antrean:** sediakan tabel queues dan mekanisme nomor sesuai D04; booking dan nomor dibuat dalam transaksi yang sama. Cegah kuota terlampaui, nomor ganda, dan duplikasi akibat submit ulang.
-- [x] **M3.5 Detail booking:** konfirmasi dan akses status terbatas, data pasien minimal, rate limiting, serta pembatalan sesuai D05. Jangan memakai nomor antrean/kode yang mudah ditebak sebagai satu-satunya bukti kepemilikan.
-- [x] **M3.6 Booking oleh resepsionis:** gunakan aturan booking yang sama untuk pendaftaran walk-in dan pasien lama; lengkapi audit pembuatan/perubahan pasien serta booking.
+### `subscription_prices`
 
-**Kriteria selesai:** pasien baru dapat booking tanpa kebocoran data pasien lama; pasien lama digunakan hanya melalui pengaitan yang sah; nomor terbit otomatis; sesi penuh/nonaktif ditolak; submit bersamaan tidak melampaui kuota.
+- Plan, durasi dalam bulan, harga integer rupiah, dan status aktif.
+- Invoice menyimpan snapshot nama paket, durasi, serta harga agar perubahan katalog tidak mengubah histori.
 
-**Verifikasi utama:** pasien baru/lama, kegagalan validasi yang tidak meninggalkan data parsial, booking tanggal salah, dokter/layanan salah, pembatalan dan kuota, akses token salah, submit ulang, dan konkurensi pada MySQL testing.
+### `subscriptions`
 
-### M4 — Queue: administrasi antrean dan pemanggilan
+- Satu record keadaan subscription per klinik.
+- Plan saat ini, status, trial, waktu mulai/akhir, dan sumber aktivasi terakhir.
+- Status minimum: `trialing`, `free`, `active`, `expired`, `suspended`.
 
-- [x] **M4.1 Antrean harian:** filter klinik/dokter/tanggal/sesi/status dan daftar booking untuk check-in.
-- [x] **M4.2 Transisi status:** operasional M4 mendukung BOOKED → WAITING → CALLED serta CANCELLED/SKIPPED/NO_SHOW. Simpan timestamp relevan dan tolak transisi yang tidak sah. IN_PROGRESS dan COMPLETED diselesaikan bersama Visit pada M5.
-- [x] **M4.3 Aksi petugas:** resepsionis check-in, panggil, skip, kembalikan antrean bila diizinkan, cancel, dan no-show; dokter melihat/memanggil antreannya sendiri sesuai D06.
-- [x] **M4.4 Konsistensi:** satu aksi panggil tidak memilih pasien yang sama pada dua request bersamaan. Penerbitan nomor, urutan pelayanan, dan prioritas mengikuti D04.
-- [x] **M4.5 Display publik:** tampilkan nomor/status minimal; audit setiap perubahan status. Aksi IN_PROGRESS dan COMPLETED dihubungkan ke workflow Visit pada M5, bukan finalisasi medis mandiri oleh resepsionis.
+### `subscription_periods`
 
-**Kriteria selesai:** check-in dan pemanggilan bekerja sesuai aturan, dokter hanya melihat antrean yang diizinkan, race condition pemanggilan ditangani, dan status terminal tidak dapat dikembalikan sembarangan.
+- Riwayat append-only untuk trial, pembayaran, dan grant Platform Admin.
+- Menyimpan plan, waktu mulai/akhir, sumber, payment nullable, aktor nullable, dan alasan manual.
 
-**Verifikasi utama:** semua transisi sah/tidak sah, skipped/no-show/cancel, pemanggilan bersamaan, ownership dokter, akses publik minimal, dan sinkronisasi Appointment–Queue.
+### `payments`
 
-### M5 — Medical & Visit: pemeriksaan sampai finalisasi
+- Klinik, subscription price, invoice number unik, request ID unik, provider `doku`, nominal snapshot, status, payment URL, waktu kedaluwarsa, waktu bayar, dan referensi provider yang aman.
+- Status minimum: `pending`, `paid`, `expired`, `failed`, `refunded`.
+- Jangan menyimpan secret key, signature mentah yang tidak diperlukan, nomor kartu, atau data pembayaran sensitif.
 
-- [x] **M5.1 Visit lebih dahulu:** visits dan relasi pasien/dokter/appointment/layanan. Aksi mulai pemeriksaan membuat satu Visit dan memindahkan antrean ke IN_PROGRESS secara atomik; request berulang tidak membuat kunjungan ganda.
-- [x] **M5.2 Rekam medis:** medical_records, vital_signs, diagnoses, treatments, prescriptions, prescription_items, formulir SOAP, tanda vital, diagnosis, tindakan, dosis/frekuensi/jumlah/instruksi resep, dokter pembuat, dan timestamps.
-- [x] **M5.3 Akses dan riwayat:** policy akses/update sesuai D07, riwayat kunjungan yang relevan, serta pemisahan informasi administratif dari isi medis. Isi medis tidak tersedia melalui route antrean publik.
-- [x] **M5.4 Draft dan koreksi:** validasi saat simpan/finalisasi serta lifecycle rekam medis mengikuti D08/D13. Catat perubahan dan koreksi dengan aktor, waktu, dan alasan.
-- [x] **M5.5 Biaya kunjungan:** simpan snapshot harga, layanan yang diberikan, dan total_amount sesuai D09; perubahan harga master tidak mengubah kunjungan historis. Tidak menambahkan payment gateway untuk MVP.
-- [x] **M5.6 Finalisasi:** dalam satu transaksi, finalisasi rekam medis, Visit, Appointment, dan Queue menjadi selesai. Jika salah satu gagal, seluruh perubahan terkait dibatalkan. Tambahkan audit dan event setelah commit.
+### `payment_events`
 
-**Kriteria selesai:** dokter dapat melayani satu pasien sampai selesai dengan SOAP, diagnosis, tindakan, dan resep; kunjungan serta harga historis konsisten; resepsionis/pasien tidak dapat mengubah rekam medis; finalisasi ulang tidak menggandakan biaya atau data.
+- Identitas event unik, payment, status provider, waktu diterima/diproses, dan hasil proses.
+- Simpan metadata minimum yang dibutuhkan untuk audit dan rekonsiliasi; jangan menjadikan payload mentah sebagai sumber kebenaran permanen.
 
-**Verifikasi utama:** ownership/role, mulai pemeriksaan ulang, validasi medis, simpan draft, koreksi, rollback finalisasi, klik selesai berulang, perubahan harga layanan, dan riwayat pasien sesuai hak akses.
+## 5. Aturan authorization dan isolasi tenant
 
-### M6 — Management: dashboard, notifikasi, realtime, audit
+- Semua query tenant harus dibatasi oleh clinic context yang tervalidasi server-side.
+- `clinic_id` dari request tidak pernah dipercaya sebagai bukti kepemilikan.
+- Audit seluruh model dan route yang memiliki data klinik; isolasi tidak boleh hanya bergantung pada tampilan atau hidden input.
+- Platform Admin tidak memperoleh bypass generik ke model medis.
+- Pemilik klinik tidak otomatis memperoleh akses isi medis hanya karena ia membayar subscription; policy medis yang ada tetap berlaku.
+- Middleware subscription memeriksa kemampuan menulis, sedangkan policy tetap memeriksa role dan kepemilikan resource.
+- Mode read-only menolak POST/PUT/PATCH/DELETE operasional di server, termasuk request langsung ke route.
+- Pengecualian tulis saat read-only hanya untuk login/logout, profil akun, pembayaran/perpanjangan, dan tindakan pemilik untuk memenuhi batas paket.
+- Public clinic dan public queue boleh tetap dibaca; public booking ditutup untuk tenant read-only atau suspended.
+- Pesan penolakan tidak membocorkan paket, pembayaran, atau data tenant lain.
 
-- [x] **M6.1 Dashboard:** admin melihat pasien/booking/kunjungan selesai/antrean aktif/nilai layanan; dokter melihat jadwal dan antreannya; resepsionis melihat booking/check-in/antrean. Definisikan label statistik dengan jelas agar pasien unik dan jumlah kunjungan tidak tertukar.
-- [x] **M6.2 Ringkasan periode:** gunakan timezone klinik dan filter tanggal; pendapatan bersumber dari snapshot kunjungan COMPLETED sesuai D09. Verifikasi agregat, query/index, dan akses per role.
-- [x] **M6.3 Notifikasi:** konfirmasi booking, pembatalan, pemanggilan, perubahan status, notification center dan read state untuk akun yang relevan. Kanal pasien tanpa akun mengikuti D10. Gunakan bentuk tabel database notification Laravel yang kompatibel dengan implementasi terpilih; schema PRD masih high-level.
-- [x] **M6.4 Realtime:** pasang/configure Reverb, QueueUpdated event setelah commit, private channel yang diotorisasi untuk staf/pasien, dan payload publik minimal. Tangani reconnect/refresh agar status terbaru kembali terbaca.
-- [x] **M6.5 Audit viewer:** halaman daftar/filter aktivitas untuk admin yang berwenang. Pastikan semua aksi penting dari M1–M5 tercatat dengan aktor dan klinik yang tepat.
+## 6. Milestone implementasi
 
-**Kriteria selesai:** angka dashboard sesuai data fixture dan timezone; notifikasi sampai ke penerima yang benar; status diperbarui lintas browser; subscription kanal lain ditolak; audit dapat ditelusuri tanpa memuat rahasia atau isi medis berlebihan.
+### M0 — Baseline dan scope aman
 
-**Verifikasi utama:** agregat periode dan batas hari, kunjungan batal/no-show, perubahan harga, penerima/read state notifikasi, dua browser dengan role berbeda, reconnect, otorisasi channel, payload publik, dan kegagalan transaksi yang tidak mengirim event sukses.
+- [x] Catat status working tree dan pertahankan perubahan pengguna yang sudah ada.
+- [x] Jalankan test relevan dan build sebagai baseline sebelum perubahan SaaS.
+- [x] Audit seluruh model, controller, policy, route, factory, dan seeder yang membaca atau menulis data tenant.
+- [x] Tetapkan migration path tanpa `migrate:fresh`, reset, atau penghapusan data.
+- [x] Pastikan konfigurasi queue, scheduler, dan mail tersedia untuk notification pembayaran serta pengingat.
 
-### M7 — Release: hardening, simulasi, dan deployment
+Kriteria selesai: baseline tercatat, titik akses tenant terpetakan, dan tidak ada perubahan data sebelum migration plan diverifikasi.
 
-- [x] **M7.1 Review keamanan:** input validation, policy seluruh resource, CSRF, rate limit auth/booking/status, escaping output, upload, session, akses antar-klinik, dan konfigurasi production tanpa debug/seeder password development. Security headers web ditambahkan dan diuji.
-- [ ] **M7.2 UI akhir:** desktop/tablet/mobile, navigasi, loading, empty/error state, pesan validasi, confirmation dialog, keterbacaan form medis, dan akses keyboard dasar.
-- [x] **M7.3 Regression:** jalankan test suite, frontend build, pemeriksaan format kode sesuai guidelines, dan uji MySQL untuk lock/constraint/konkurensi. Hasil baseline dan regression lulus pada lingkungan lokal.
-- [ ] **M7.4 Simulasi staging:** admin setup → pasien baru/lama/walk-in → check-in → panggil/skip/cancel/no-show → pemeriksaan → resep → selesai → dashboard/notifikasi/audit. Jalankan dengan akun masing-masing role.
-- [ ] **M7.5 Infrastruktur:** environment staging/production, domain/HTTPS, Nginx/PHP/MySQL, storage permissions, queue worker, scheduler, Reverb, mail bila digunakan, dan proses restart worker setelah deploy.
-- [ ] **M7.6 Operasional:** backup dan uji restore sesuai D13, logging/error monitoring dasar, health check, panduan setup dan penggunaan, serta prosedur deployment/rollback kode dan migration yang aman.
-- [ ] **M7.7 Rilis:** dokumentasikan versi, hasil verifikasi, dan batasan yang masih berlaku; deployment production dilakukan setelah scope, lingkungan, dan kesiapan operasional disepakati.
+#### Hasil M0 — 15 Oktober 2026
 
-**Kriteria selesai:** seluruh skenario inti berhasil di staging; tidak ada kegagalan akses atau integritas data yang menghalangi rilis; backup dapat direstore; queue/scheduler/realtime berjalan; production dikonfigurasi sesuai kebutuhan operasional.
+**Baseline dan working tree**
 
-## 8. Strategi pengujian dan definition of done per fitur
+- PHP 8.3.26, Laravel 13.34.0, Livewire 3.8.10, Spatie Permission 8.3.0, database MySQL, broadcasting Reverb, queue database, dan mail SMTP berhasil dimuat.
+- `npm run build` lulus menggunakan Vite 8.3.2.
+- `php artisan test --compact` menjalankan 119 tests / 530 assertions: 118 lulus dan 1 gagal.
+- Kegagalan baseline berada di `DashboardAccessTest::test_users_reach_their_own_dashboard` untuk Clinic Admin tanpa klinik. Test masih mengharapkan teks `Ringkasan klinik`, sedangkan UI saat ini menampilkan onboarding `Siapkan identitas klinik Anda`.
+- Perubahan lokal fitur rekam medis/foto, migration foto, error view, route, dan tests terkait sudah ada sebelum M0 dan tidak diubah.
+- Runner PHPUnit harus dijalankan di luar sandbox Windows pada sesi ini karena `is_readable()` mengembalikan `false` untuk `vendor/autoload.php` di dalam sandbox meskipun file dapat di-require.
 
-Pengujian dilakukan bersama implementasi, bukan hanya pada M7.
+**Peta tenant saat ini**
 
-| Jenis pemeriksaan | Sasaran |
+- Entitas dengan `clinic_id` langsung: `User`, `Doctor`, `ClinicSetting`, `Service`, `Patient`, `Appointment`, `Queue`, `Visit`, dan `AuditLog`.
+- `DoctorSchedule` memperoleh tenant melalui `Doctor`; `MedicalRecord` dan data klinis anak memperoleh tenant melalui `Visit`, `Patient`, atau `Doctor`.
+- Controller operasional umumnya memfilter `clinic_id` secara eksplisit dan route model binding dilanjutkan dengan policy.
+- Policy appointment, queue, patient, staff, service, schedule, visit, dan medical record memeriksa klinik atau kepemilikan dokter/pasien.
+- Channel realtime antrean membandingkan `clinic_id`, permission, dan role. Notification pengguna diambil melalui relasi milik user.
+- Booking publik memvalidasi clinic, doctor, schedule, service, patient, appointment, dan queue di dalam `BookingService`; halaman status memakai access token hash.
+- Seeder domain dibatasi ke environment local. Database lokal berisi satu klinik, satu Clinic Admin, dan tidak ada klinik tanpa Clinic Admin.
+
+**Temuan yang wajib dibawa ke M1–M3**
+
+- Belum ada owner klinik eksplisit; Clinic Admin saat ini hanya terhubung melalui `users.clinic_id`.
+- Global `ClinicScope` hanya digunakan oleh `Patient` dan bergantung pada user yang sedang login. Scope ini tidak boleh menjadi fondasi tunggal SaaS karena proses queue/console dan Platform Admin dengan `clinic_id = null` tidak memperoleh filter tenant.
+- Factory `Doctor`, `Appointment`, dan `Queue` dapat membuat relasi dari klinik berbeda secara default. Fixture harus dibuat konsisten sebelum tests subscription mengandalkannya.
+- Route publik dan write route tenant belum mengetahui status subscription; enforcement baru boleh diaktifkan setelah tenant lama mendapat grant.
+- `QueueSeeder` memilih appointment seeder terbaru tanpa filter klinik. Seeder ini local-only, tetapi perlu dibuat deterministik saat fixture tenant diperbarui.
+- Queue dan mail sudah dikonfigurasi, tabel jobs/failed jobs/notifications tersedia, tetapi belum ada scheduled task. Reminder subscription dibuat pada M6.
+
+**Jalur migrasi aman**
+
+1. Tambahkan `owner_user_id` nullable dan tabel paket/subscription/payment secara additive; jangan mengubah atau menghapus data klinis.
+2. Deploy model dan relasi yang dapat membaca schema lama maupun baru sebelum enforcement diaktifkan.
+3. Jalankan backfill idempotent untuk memilih Clinic Admin tenant lama sebagai owner dan membuat grant Team 12 bulan dalam transaksi.
+4. Verifikasi setiap klinik memiliki tepat satu owner, subscription/grant, serta relasi yang valid; hentikan proses bila ada tenant ambigu.
+5. Aktifkan constraint untuk tenant baru dan middleware subscription hanya setelah backfill terverifikasi.
+6. Rollback sebelum enforcement hanya menghapus schema SaaS yang baru dan tidak menyentuh tabel klinis. Setelah payment production tercatat, rollback dilakukan secara forward-fix agar histori komersial tidak hilang.
+
+Tidak menjalankan `migrate`, `migrate:fresh`, reset, seed, atau perubahan data pada M0. Seluruh 27 migration yang ada berstatus `Ran`, termasuk migration foto rekam medis yang sudah ada di working tree.
+
+### M1 — Ownership dan Platform Admin
+
+- [x] Tambahkan ownership eksplisit pada klinik dan relasi model terkait.
+- [x] Tambahkan role/permission Platform Admin tanpa akses medis.
+- [x] Buat area platform terpisah dengan dashboard agregat nonmedis.
+- [x] Sediakan daftar tenant dan detail nonmedis tenant.
+- [x] Tambahkan policy yang mencegah Platform Admin masuk ke area operasional klinik.
+- [x] Perbarui factory/seeder agar owner, Clinic Admin, dan Platform Admin dibuat secara eksplisit.
+- [x] Tambahkan audit untuk perubahan tenant dan akses manual.
+
+Kriteria selesai: owner dapat dibedakan dari admin biasa, Platform Admin dapat mengelola metadata tenant, dan tidak dapat membuka konten medis atau route tenant.
+
+#### Hasil M1 — 15 Oktober 2026
+
+- `clinics.owner_user_id` ditambahkan sebagai foreign key unik yang nullable untuk jalur migrasi aman; tenant baru menetapkan pembuat klinik sebagai owner eksplisit.
+- Role `Platform Admin` hanya memiliki permission dashboard dan daftar/detail tenant nonmedis. Route `/platform` dipisahkan dan middleware role tenant tetap menolak akses ke area admin klinik serta medis.
+- Dashboard platform, pencarian tenant, detail profil nonmedis, metrik agregat, dan audit `platform.tenant.viewed` tersedia. Perubahan profil klinik tetap diaudit oleh alur tenant yang sudah ada.
+- Factory dan seeder membuat owner/Clinic Admin serta Platform Admin secara eksplisit. Seed lokal menghasilkan 1 Platform Admin, 1 klinik ber-owner, dan 0 klinik tanpa owner.
+- Migration lokal dan seed selesai tanpa reset atau penghapusan data.
+- `php artisan test --compact`: 126 tests / 569 assertions lulus. Test terfokus M1: 41 tests / 144 assertions lulus.
+- Laravel Pint, Blade cache, tiga route platform, dan `npm run build` lulus.
+
+### M2 — Katalog paket dan domain subscription
+
+- [x] Buat model, migration, factory, dan seeder paket serta harga yang telah disetujui.
+- [x] Buat subscription, period history, dan service untuk menentukan entitlement saat ini.
+- [x] Implementasikan trial Team satu kali selama 14 hari.
+- [x] Implementasikan transisi trial → Free dan active → expired/read-only.
+- [x] Implementasikan penambahan masa aktif ketika renewal dibayar sebelum kedaluwarsa.
+- [x] Buat halaman Platform Admin untuk mengaktifkan/nonaktifkan katalog dan memberi grant manual dengan alasan.
+- [x] Snapshot paket dan harga pada period/payment.
+
+Kriteria selesai: keadaan subscription dapat dihitung deterministik pada tanggal tertentu, histori tidak berubah saat harga katalog diedit, dan grant manual dapat diaudit.
+
+#### Hasil M2 — 15 Oktober 2026
+
+- Domain additive tersedia untuk `subscription_plans`, `subscription_prices`, `subscriptions`, `subscription_periods`, dan `payments`; migration tidak mengubah atau menghapus data klinis.
+- Seeder idempotent membuat Free, Individual, Team dan enam harga yang disetujui tanpa mengaktifkan kembali item yang dinonaktifkan Platform Admin.
+- `SubscriptionService` menjadi sumber lifecycle tunggal untuk Free, trial Team 14 hari satu kali, aktivasi pembayaran, renewal bertumpuk, expiry, grant manual, dan perhitungan status pada waktu tertentu.
+- Periode dan payment menyimpan snapshot kode/nama paket, durasi, serta nominal. Perubahan harga katalog tidak mengubah histori.
+- Platform Admin dapat mengaktifkan/nonaktifkan paket dan harga, melihat status subscription tenant, serta memberi grant beralasan. Perubahan katalog dan grant masuk audit log.
+- Schema dan katalog diterapkan ke database lokal: 3 paket, 6 harga, dan 2 permission komersial Platform Admin. Tenant lama belum diberi subscription palsu; backfill grant tetap di M6.
+- `php artisan test --compact`: 133 tests / 620 assertions lulus. Test terfokus M2: 46 tests / 188 assertions lulus.
+- Laravel Pint, Blade cache, tujuh route platform, dan `npm run build` lulus.
+
+Status `expired` sudah menjadi keadaan read-only domain. Penolakan write route tenant tetap dikerjakan pada M5 setelah backfill aman tersedia.
+
+### M3 — Registrasi dan onboarding tenant
+
+- [x] Pisahkan entry point registrasi pasien dan pemilik klinik.
+- [x] Tambahkan state onboarding untuk akun pemilik yang belum memiliki klinik.
+- [x] Setelah email terverifikasi, minta profil klinik dan buat owner/clinic/setting secara transaksional.
+- [x] Tampilkan Free, trial, Individual, dan Team beserta harga durasi.
+- [x] Aktifkan Free atau trial tanpa pembayaran.
+- [x] Arahkan pilihan berbayar ke proses checkout dan tahan akses berbayar sampai payment sah.
+- [x] Tangani refresh, back button, submit ulang, dan onboarding yang terputus secara idempotent.
+- [x] Audit pembuatan tenant dan pemilihan paket tanpa mencatat secret/token.
+
+Kriteria selesai: pemilik baru dapat menyelesaikan onboarding tanpa dibuat ganda, pasien tidak memperoleh role klinik, dan tenant belum aktif tidak dapat masuk ke data tenant lain.
+
+#### Hasil M3 — 15 Oktober 2026
+
+- Registrasi pasien tetap di `/register`; entry point pemilik klinik tersedia di `/register/clinic`. Keduanya memakai email unik dan tipe akun eksplisit.
+- Owner baru memperoleh role Clinic Admin tetapi tetap harus memverifikasi email. State onboarding dihitung dari keberadaan klinik dan subscription, sehingga login ulang selalu melanjutkan ke langkah yang benar tanpa kolom state tambahan.
+- Pembuatan clinic, setting, ownership, relasi user, dan audit berjalan dalam satu transaksi melalui service yang juga dipakai alur admin lama.
+- Middleware onboarding menahan owner dari dashboard, notifikasi, dan route operasional tenant sebelum clinic serta subscription tersedia. Profil akun dan logout tetap dapat diakses.
+- Halaman paket menampilkan Free, trial Team 14 hari, Individual, Team, dan seluruh durasi/harga. Free/trial aktif tanpa payment dan submit ulang tidak membuat subscription atau period ganda.
+- Pilihan berbayar menuju halaman checkout M3, dicatat sekali per pilihan dalam session, dan tidak membuat payment/subscription atau mengaktifkan akses. Integrasi DOKU menggantikan placeholder ini pada M4.
+- Migration `users.account_type` dan seed akun demo diterapkan tanpa menghapus data. Admin demo menjadi `clinic_owner`, pasien demo menjadi `patient`, dan tenant lama tetap belum mendapat subscription palsu.
+- `php artisan test --compact`: 140 tests / 689 assertions lulus. Test terfokus M3: 48 tests / 194 assertions lulus.
+- Laravel Pint, Blade cache, tujuh route onboarding, dua entry point registrasi, dan `npm run build` lulus.
+
+### M4 — DOKU Checkout
+
+- [x] Konfirmasi versi/API DOKU yang digunakan dari dokumentasi resmi dan sandbox merchant sebelum menulis client. API Checkout Non-SNAP resmi dan transaksi merchant sandbox nyata sudah terverifikasi.
+- [x] Tambahkan konfigurasi environment untuk sandbox/production, Client ID, Secret Key, dan endpoint.
+- [x] Buat invoice lokal dan request checkout DOKU dari backend dengan request ID unik.
+- [x] Simpan payment URL dan tampilkan status pending tanpa menganggap redirect sebagai sukses.
+- [x] Buat endpoint notification publik yang memverifikasi signature sebelum memproses body.
+- [x] Proses notification secara idempotent dan aktifkan subscription dalam transaksi dengan row lock.
+- [x] Tolak aktivasi bila clinic, invoice, nominal, atau status tidak cocok.
+- [x] Tangani notification duplikat, terlambat, dan out-of-order.
+- [x] Tambahkan pemeriksaan status/reconciliation untuk payment pending.
+- [x] Tampilkan riwayat invoice dan pembayaran hanya kepada owner serta Platform Admin.
+- [x] Sediakan pencatatan refund manual tanpa menghapus period/payment.
+
+Kriteria selesai: hanya payment DOKU sah yang mengaktifkan akses, replay tidak menambah masa aktif dua kali, dan kegagalan gateway tidak merusak subscription yang sudah aktif.
+
+#### Hasil M4 — 15 Oktober 2026
+
+- Integrasi mengikuti DOKU Checkout Non-SNAP resmi: checkout `POST /checkout/v1/payment`, status `GET /orders/v1/status/{invoice}`, dan signature `HMACSHA256` dengan digest SHA-256 body. Sandbox dan production dipilih melalui `DOKU_BASE_URL`; secret hanya dibaca dari environment.
+- Checkout owner membuat invoice snapshot lokal lebih dahulu, memakai invoice/request ID unik, lalu menyimpan URL dan kedaluwarsa DOKU. Redirect browser hanya membuka detail pending dan tidak pernah mengaktifkan subscription.
+- Endpoint publik `POST /payments/doku/notification` dikecualikan dari CSRF tetapi wajib lolos Client ID serta signature atas raw JSON sebelum body diproses.
+- `payment_events` menyimpan identitas event unik dan metadata minimum tanpa payload/signature mentah. Row lock, unique event ID, dan unique period per payment membuat notification/reconciliation idempoten.
+- Hanya status `SUCCESS` dengan invoice, request ID, clinic marker, nominal, dan snapshot lokal yang cocok dapat menjadi `paid` serta mengaktifkan periode secara atomik. `FAILED` Checkout tetap pending; event duplikat atau out-of-order tidak menurunkan status final.
+- Owner hanya melihat pembayaran kliniknya dan dapat checkout ulang untuk perpanjangan. Platform Admin dapat melihat seluruh invoice nonmedis, menjalankan reconciliation pending, dan mencatat refund manual beralasan tanpa menghapus payment atau period.
+- Migration `payment_events` dan permission pembayaran Platform Admin sudah diterapkan pada database lokal tanpa mengubah histori subscription/payment lama.
+- Test terfokus M4: 24 tests / 172 assertions lulus. Regression penuh: 150 tests / 746 assertions lulus. Laravel Pint, Blade cache, delapan route pembayaran/notification, `git diff --check`, dan build Vite lulus.
+- Transaksi sandbox DOKU nyata berhasil diselesaikan pada 15 Oktober 2026; Checkout popup, pembayaran sandbox, dan aktivasi subscription terverifikasi end-to-end.
+
+### M5 — Enforcement paket dan read-only
+
+- [x] Buat satu service sebagai sumber kebenaran entitlement dan status subscription.
+- [x] Terapkan batas dokter/staf pada pembuatan dan pengaktifan ulang akun.
+- [x] Terapkan kuota 50 kunjungan Free saat pemeriksaan dimulai, bukan hanya pada UI.
+- [x] Izinkan penyelesaian booking yang sudah ada ketika Free mencapai kuota.
+- [x] Terapkan read-only pada seluruh write route tenant saat subscription berbayar habis.
+- [x] Nonaktifkan public booking untuk tenant read-only/suspended.
+- [x] Pastikan role dan policy medis tetap berlaku saat akses baca diizinkan.
+- [x] Tampilkan banner status trial, sisa hari, Free, pending payment, dan expired tanpa membocorkan nominal ke staf yang bukan owner.
+- [x] Izinkan owner menonaktifkan seat berlebih setelah trial turun ke Free.
+
+Kriteria selesai: batas tidak dapat dilewati melalui request langsung, data lama tetap terbaca oleh pengguna yang berwenang, dan operasi klinis tidak terputus di tengah kunjungan yang sudah berjalan.
+
+#### Hasil M5 — 15 Oktober 2026
+
+- `SubscriptionService` menjadi sumber tunggal status, batas seat, kuota bulanan, kemampuan booking, dan ringkasan banner. Tenant lama tanpa subscription belum diblokir sebelum backfill M6.
+- Free membatasi 1 dokter, 1 resepsionis, dan 50 pemeriksaan per bulan timezone klinik. Individual membatasi 1 dokter/3 staf; Team tidak membatasi akun.
+- Booking baru ditutup saat kuota Free tercapai. Booking yang dibuat sebelum kuota tercapai tetap dapat mulai dan kunjungan aktif tetap dapat disimpan/diselesaikan.
+- Middleware read-only menolak write operasional tenant expired/suspended serta over-limit, tetapi mempertahankan GET sesuai role/policy, checkout owner, dan deaktivasi seat berlebih oleh owner.
+- Public booking expired/suspended ditutup. Banner trial, sisa hari, Free, pending, over-limit, dan expired tersedia tanpa nominal/invoice untuk staf non-owner.
+- Regression dibagi menjadi tiga batch agar output runner tetap terbaca: 156 tests / 795 assertions lulus. Laravel Pint, Blade cache, route inspection, `git diff --check`, dan Vite build lulus.
+
+### M6 — Reminder, migrasi tenant lama, dan hardening
+
+- [x] Jadwalkan reminder email dan notifikasi aplikasi pada H-7, H-3, H-1, dan saat kedaluwarsa.
+- [x] Cegah reminder ganda dan kirim hanya kepada owner.
+- [x] Petakan owner seluruh klinik lama secara eksplisit.
+- [x] Berikan Team 12 bulan kepada tenant lama melalui grant migration yang tercatat, tanpa payment palsu.
+- [x] Jangan menyentuh isi medis selama backfill subscription.
+- [x] Uji scheduler, queue worker, retry, failure handling, dan timezone klinik.
+- [x] Tambahkan rate limit pada registrasi, checkout, status payment, dan notification sesuai kebutuhan tanpa menghambat webhook sah.
+- [x] Verifikasi log tidak memuat secret DOKU, signature, token, atau data medis.
+- [x] Dokumentasikan environment production hanya bila diminta pada tahap deployment; belum dibuat karena deployment belum diminta.
+
+Kriteria selesai: tenant lama tidak terkunci, reminder konsisten, retry aman, dan tidak ada secret atau data medis di log pembayaran.
+
+#### Hasil M6 — 16 Oktober 2026
+
+- Reminder subscription dijadwalkan setiap jam untuk H-7, H-3, H-1, dan H0 berdasarkan timezone klinik. Setiap periode/milestone unik, job retry maksimal tiga kali, kegagalan tercatat hanya sebagai tipe error, dan database notification/email hanya dikirim kepada owner saat ini.
+- Migration tenant lama memvalidasi tepat satu Clinic Admin sebelum menulis, memetakan owner secara eksplisit, lalu memberi Team 12 bulan dengan sumber `legacy_migration`, audit trail, dan tanpa payment. Tenant yang sudah memiliki subscription tidak ditimpa.
+- Registrasi dibatasi 5 percobaan/menit per email+IP, checkout 5/menit per pengguna, status payment 30/menit per pengguna, dan notification DOKU 300/menit per IP+Client ID.
+- Payment event hanya menyimpan hash payload dan audit hanya menyimpan metadata aman; test membuktikan secret, signature, token, dan isi medis tidak tersimpan.
+- Migration M6 berhasil diterapkan pada database lokal: 2 klinik memiliki 2 subscription dan tidak ada klinik tanpa owner. Seluruh regression lulus: 163 tests / 845 assertions.
+
+### M7 — Verifikasi rilis SaaS
+
+- [x] Jalankan test terfokus setelah setiap milestone.
+- [x] Jalankan seluruh regression suite, Pint untuk PHP yang berubah, build Vite, dan pemeriksaan migration.
+- [x] Simulasikan dua tenant dan buktikan data, channel realtime, audit, payment, serta subscription tidak bocor silang.
+- [x] Simulasikan Free, trial, Individual, Team, payment pending/sukses/kedaluwarsa, renewal awal, renewal terlambat, refund manual, dan grant Platform Admin.
+- [x] Simulasikan notification DOKU sah, signature salah, nominal salah, replay, duplikat, serta urutan event terbalik.
+- [x] Simulasikan subscription kedaluwarsa ketika dokter/staf sedang login dan pastikan write ditolak tanpa menghilangkan read yang sah.
+- [x] Verifikasi halaman penting pada desktop dan mobile.
+- [x] Uji sandbox DOKU end-to-end sebelum kredensial production dipakai.
+
+Kriteria selesai: seluruh acceptance criteria pada bagian berikut terbukti dan tidak ada regression yang menghalangi operasional klinik.
+
+#### Hasil M7 — 16 Oktober 2026
+
+- Gate terfokus SaaS menjalankan 48 tests / 315 assertions; dua skenario tepi yang ditambahkan untuk renewal terlambat dan notification payment kedaluwarsa menjalankan 16 tests / 94 assertions. Semuanya lulus.
+- Regression penuh menjalankan 165 tests / 852 assertions dan seluruhnya lulus. Laravel Pint, `git diff --check`, dan build production Vite 8.3.2 juga lulus.
+- Seluruh 33 migration berstatus `Ran`; tidak ada reset, seed ulang, atau penghapusan data.
+- Test lintas tenant membuktikan isolasi data operasional, channel realtime, audit, payment, subscription, dan akses medis. Test lifecycle mencakup Free, trial, Individual, Team, pending, success, expired, renewal awal/terlambat, refund, grant, serta read-only tanpa kehilangan akses baca yang sah.
+- Test DOKU mencakup notification sah, signature/Client ID salah, nominal salah, replay, duplikat, event terbalik, failure, expiry, dan reconciliation idempoten.
+- Landing page dan onboarding pemilik diverifikasi pada desktop serta viewport mobile 390×844. Keduanya tidak memiliki overflow horizontal dan kontrol utama tetap terlihat.
+- Sandbox DOKU terkonfigurasi dan histori lokal membuktikan satu payment `paid`, satu event reconciliation `processed_success`, serta satu paid subscription period. Checkout popup dan pembayaran sandbox sebelumnya juga telah diverifikasi manual.
+
+## 7. Pengujian minimum
+
+### Tenant dan authorization
+
+- Owner hanya dapat mengelola subscription kliniknya sendiri.
+- Clinic Admin non-owner tidak dapat checkout atau melihat payment.
+- Staff dan pasien tidak dapat mengelola subscription.
+- Platform Admin tidak dapat membuka route atau model medis.
+- Request dengan ID clinic/payment milik tenant lain ditolak tanpa kebocoran data.
+
+### Paket dan lifecycle
+
+- Trial hanya dapat dibuat satu kali per klinik.
+- Trial berakhir menjadi Free pada waktu yang benar.
+- Free menolak dokter/staf/kunjungan baru setelah batas tercapai.
+- Individual dan Team menerapkan kapasitas yang benar.
+- Team tidak membatasi jumlah akun operasional dalam satu klinik.
+- Renewal aktif menambah periode dari tanggal akhir lama; renewal expired mulai dari payment sukses.
+- Expired berbayar menjadi read-only dan tidak menghapus data.
+
+### Pembayaran
+
+- Checkout menyimpan invoice/nominal snapshot yang benar.
+- Redirect browser tidak mengaktifkan subscription.
+- Signature DOKU invalid ditolak.
+- Invoice atau nominal tidak cocok ditolak dan diaudit.
+- Event duplikat/replay tidak memperpanjang dua kali.
+- Notification out-of-order tidak menurunkan payment final.
+- Payment sukses dan perubahan subscription atomik.
+- Refund manual tidak menghapus histori.
+
+### Migrasi
+
+- Semua klinik lama mendapatkan owner yang valid.
+- Semua klinik lama menerima grant Team 12 bulan satu kali.
+- Migration dapat dijalankan pada database berisi data dan memiliki rollback yang aman sesuai keterbatasan perubahan schema.
+- Factory, seeder, dan tests lama tetap bekerja setelah ownership menjadi eksplisit.
+
+## 8. Acceptance criteria rilis
+
+Fitur SaaS dianggap siap apabila:
+
+- pemilik dapat mendaftar, memverifikasi email, membuat satu klinik, dan memilih paket;
+- Free/trial dapat aktif tanpa payment dan tidak dapat disalahgunakan untuk trial berulang;
+- pembayaran DOKU yang sah mengaktifkan paket tepat satu kali;
+- paket dan harga tampil sesuai keputusan pada dokumen ini;
+- Team mendukung akun operasional tanpa batas untuk satu klinik;
+- tenant tidak dapat membaca atau mengubah data tenant lain;
+- Platform Admin dapat mengelola aspek komersial tanpa akses isi medis;
+- subscription expired menjadi read-only tanpa menghapus data;
+- tenant lama tetap dapat beroperasi dengan grant Team 12 bulan;
+- reminder, queue, scheduler, webhook, audit, dan reconciliation berjalan;
+- test suite, formatter, frontend build, migration, dan sandbox DOKU lulus.
+
+## 9. Di luar cakupan saat ini
+
+- Auto-renew atau recurring charge.
+- Paket lifetime.
+- Multi-cabang dalam satu subscription.
+- Satu owner mengelola lebih dari satu klinik.
+- Overage otomatis atau tagihan pascabayar.
+- Refund mandiri pelanggan.
+- Impersonation oleh Platform Admin.
+- WhatsApp/SMS reminder.
+- Kupon, referral, affiliate, prorata upgrade/downgrade, dan perubahan paket di tengah periode.
+- Integrasi SATUSEHAT, BPJS, farmasi, laboratorium, atau fitur klinis baru yang tidak diperlukan subscription.
+- PPN dan faktur pajak sampai status perpajakan badan usaha ditetapkan.
+
+## 10. Risiko dan mitigasi
+
+| Risiko | Mitigasi wajib |
 | --- | --- |
-| Feature/Livewire tests | Aksi pengguna, validasi, response, dan perubahan data |
-| Authorization tests | Role, ownership, clinic scope, request langsung, dan akses data sensitif |
-| Unit tests terpilih | Aturan status, penomoran, atau perhitungan yang memiliki variasi penting |
-| MySQL integration tests | Lock, transaksi, unique constraint, kuota, dan pemanggilan bersamaan |
-| Build dan pemeriksaan manual | Halaman dapat dirender, assets tersedia, responsive, dan realtime lintas browser |
-| Simulasi operasional staging | Siklus pelayanan lengkap dengan empat peran dan pemulihan backup |
+| Kebocoran data antar-klinik | Clinic context server-side, policy, query scope yang konsisten, dan tests lintas tenant |
+| Payment palsu melalui callback browser | Aktivasi hanya dari notification DOKU dengan signature, invoice, nominal, dan status valid |
+| Notification duplikat memperpanjang dua kali | Unique event/request ID, transaksi, row lock, dan idempotency test |
+| Team dipakai beberapa cabang | Satu clinic profile/domain/location per subscription, terms penggunaan, audit, dan review Platform Admin |
+| Read-only memutus pelayanan yang sudah berjalan | Akhiri periode pada akhir hari dan izinkan penyelesaian kunjungan/booking yang sudah ada sesuai aturan paket |
+| Tenant lama langsung terkunci | Backfill owner dan grant Team 12 bulan sebelum enforcement diaktifkan |
+| Harga berubah dan histori ikut berubah | Snapshot plan, durasi, dan nominal pada payment/period |
+| Platform Admin melihat data medis | Area, permission, policy, query, dan test negatif khusus Platform Admin |
+| Free trial disalahgunakan | Satu trial per clinic/owner, email unik, audit, rate limit, dan pemeriksaan server-side |
+| Akun Team tanpa batas disalahgunakan | Berlaku hanya untuk satu klinik, verifikasi email, rate limit undangan, audit akun, dan kemampuan suspend |
 
-SQLite memory yang sudah dikonfigurasi dapat dipakai untuk tests cepat yang sesuai. Hasil SQLite tidak menggantikan bukti perilaku konkurensi pada MySQL.
+## 11. Urutan pengerjaan
 
-Satu fitur selesai apabila:
+Urutan wajib: M0 → M1 → M2 → M3 → M4 → M5 → M6 → M7.
 
-- [ ] Perilakunya memenuhi requirement PRD dan keputusan produk yang relevan.
-- [ ] UI, validasi, policy, dan alur gagal tersedia.
-- [ ] Relasi, constraint, dan transaksi menjaga integritas data.
-- [ ] Aktivitas penting tercatat pada audit tanpa data sensitif yang tidak diperlukan.
-- [ ] Tests yang relevan lulus dan UI diverifikasi bila ada perubahan tampilan.
-- [ ] Migration aman untuk kondisi database yang ada; data operasional tidak direset.
-- [ ] Checklist dan catatan implementasi diperbarui, termasuk keterbatasan yang ditemukan.
-
-## 9. Risiko utama dan mitigasi yang harus dibuktikan
-
-| Risiko | Mitigasi dan bukti |
-| --- | --- |
-| Kuota/nomor ganda pada booking bersamaan | Transaksi, lock/constraint, idempotensi, dan uji MySQL |
-| Pasien keluarga tergabung karena telepon sama | Aturan D02 dan tests pengaitan identitas yang sah |
-| Kebocoran antar-role/klinik | Policy dan scope server-side; tests ID langsung dan channel subscription |
-| Status booking/antrean/visit berbeda | Transisi terpusat dan transaksi; tests rollback/finalisasi ulang |
-| Riwayat pendapatan berubah saat harga diedit | Snapshot harga serta tests perubahan master layanan |
-| Rekam medis berubah tanpa jejak | Lifecycle draft/final dan koreksi sesuai D08, dengan audit |
-| Guest menerima data pasien lain | Token/akses terverifikasi, minimisasi payload, dan rate limiting |
-| UI realtime menampilkan transaksi gagal | Event setelah commit dan tests penerima/payload |
-| Backup tersedia tetapi tidak bisa digunakan | Uji restore ke lingkungan terpisah dan dokumentasi hasil |
-| Cakupan melebar sebelum core flow selesai | Post-MVP tetap pada backlog terpisah; tutup milestone sebelum memperluas fitur |
-
-## 10. Urutan sesi coding pertama
-
-Sesi pertama berfokus pada M1, dengan hasil yang bisa ditinjau:
-
-1. Verifikasi baseline environment, dependency, build, dan test suite.
-2. Jalankan agent setup sesuai AGENTS.md dan baca hasil guidelines.
-3. Tetapkan D01, D06, dan D07 agar registrasi dan permission tidak dibangun berdasarkan asumsi yang berbeda.
-4. Lengkapi routing/view dashboard per role, redirect, dan perilaku pengguna tanpa role.
-5. Pastikan akun nonaktif tidak dapat menggunakan aplikasi; verifikasi registrasi dan role assignment sesuai keputusan.
-6. Tambahkan tests akses yang relevan dan fondasi audit login/logout.
-7. Laporkan perubahan, hasil checks, dan pekerjaan M1 yang tersisa; mulai M2 setelah kriteria M1 terpenuhi.
-
-Tidak ada estimasi tanggal selesai yang dikunci pada tahap ini. Estimasi dibuat setelah baseline M1 dan keputusan produk utama tersedia, berdasarkan kapasitas pengembangan serta hasil verifikasi nyata.
-
-## 11. Tracking milestone dan keputusan
-
-| Milestone | Status | Bukti selesai |
-| --- | --- | --- |
-| M1 | Selesai | 66 tests / 260 assertions lulus, build Vite, view:cache, migration MySQL, dan sinkronisasi permission |
-| M2 | Selesai | 74 tests / 284 assertions lulus, build Vite, view:cache, migration dan seed MySQL, serta pemeriksaan browser tanpa error console |
-| M3 | Selesai | 84 tests / 329 assertions lulus, build Vite, view:cache, migration dan seed MySQL, serta pemeriksaan browser halaman publik dan staf |
-| M4 | Selesai | 93 tests / 380 assertions lulus, migration MySQL, Pint, build Vite, view:cache, dan pemeriksaan browser antrean staf/publik |
-| M5 | Selesai | 103 tests / 455 assertions lulus, migration dan seed MySQL, Pint, Vite build, view:cache, serta pemeriksaan browser halaman medis tanpa error console |
-| M6 | Selesai | 112 tests / 497 assertions lulus, Pint, Vite build, view:cache, migration MySQL, Reverb, notification center, realtime channel/payload, dashboard, dan audit viewer |
-| M7 | Dikerjakan | Security headers, regression suite, Pint, Vite build, view:cache, migration status, dan verifikasi konfigurasi lokal lulus; simulasi staging dan deployment production masih tersisa |
-
-Status dapat berubah menjadi Dikerjakan, Perlu keputusan, Terverifikasi, atau Selesai. Cantumkan bukti berupa test/check dan skenario yang telah dijalankan.
-
-| Keputusan | Hasil | Tanggal | Dampak pada backlog |
-| --- | --- | --- | --- |
-| D01 | Disetujui pengguna: akun Patient opsional; registrasi publik hanya Patient; booking dapat tanpa akun | 4 Oktober 2026 | Registrasi M1 diterapkan; booking menyusul M3 |
-| D06 | Disetujui pengguna: dokter dan resepsionis boleh memanggil, dokter hanya antreannya sendiri | 4 Oktober 2026 | Permission queue.call diterapkan; ownership/transisi mengikuti M4–M5 |
-| D07 | Disetujui pengguna: admin tidak otomatis mendapat akses isi medis; resepsionis tidak mendapat akses isi medis | 4 Oktober 2026 | Permission medis admin dihapus; policy rekam medis mengikuti M5 |
-| D02–D03, D09–D12 | Default M3 diterapkan sementara: guest membuat profil baru tanpa pencocokan identitas, resepsionis memilih pasien lama secara eksplisit, booking berbasis sesi sampai 30 hari, harga disalin saat booking, dan status guest memakai token rahasia | 4 Oktober 2026 | Validasi akhir bersama operasional klinik tetap diperlukan sebelum rilis |
-| D04–D05 | Default M4 diterapkan sementara: antrean dipanggil FIFO per dokter/sesi/tanggal, hanya satu pasien CALLED/IN_PROGRESS per sesi, SKIPPED dapat kembali ke WAITING, no-show hanya setelah sesi dimulai, dan status terminal tidak dapat dibuka kembali | 4 Oktober 2026 | Aturan prioritas khusus dan toleransi keterlambatan perlu divalidasi bersama operasional klinik sebelum rilis |
-| D08 | Default M5 diterapkan: draft dapat diedit dokter yang menangani; data final hanya dapat dikoreksi dengan alasan wajib dan snapshot sebelum/sesudah | 4 Oktober 2026 | Lifecycle dan audit koreksi diterapkan; kebijakan klinis akhir perlu divalidasi sebelum rilis |
-| D13 | Retensi dan backup belum ditetapkan; data final tidak dihapus dan koreksi disimpan sebagai revisi | 4 Oktober 2026 | Tetapkan jadwal backup, retensi, dan target pemulihan sebelum M7 |
-
-### Hasil implementasi M5
-
-- Dokter memulai pemeriksaan hanya dari antrean CALLED miliknya. `VisitWorkflowService` memakai transaksi, row lock, dan unique constraint appointment sehingga request ulang membuka Visit yang sama dan memindahkan antrean ke IN_PROGRESS tanpa duplikasi.
-- Halaman pemeriksaan menyimpan draft SOAP, pemeriksaan fisik, tanda vital, diagnosis utama/sekunder, tindakan, resep, dan catatan dokter. Riwayat yang tampil dibatasi pada pasien serta dokter yang sama.
-- Policy medis hanya memberi akses isi rekam medis kepada dokter yang ditugaskan. Clinic Admin, resepsionis, dokter lain, pasien, dan route publik tidak mendapat akses isi medis.
-- Finalisasi mewajibkan keluhan, SOAP lengkap, dan diagnosis. Rekam medis, Visit, Appointment, dan Queue diselesaikan dalam satu transaksi; event sukses baru dikirim setelah commit.
-- Visit menyimpan nama layanan, harga booking, dan total sebagai snapshot. Perubahan harga layanan master tidak mengubah nilai kunjungan historis.
-- Rekam medis final tidak dapat kembali diedit sebagai draft. Koreksi memerlukan alasan dan menyimpan aktor, waktu, serta snapshot sebelum/sesudah di `medical_record_revisions`; audit umum hanya menyimpan referensi revisi tanpa isi medis.
-- Seeder lokal menyediakan satu kunjungan historis lengkap untuk akun dokter demo. Verifikasi akhir M5: 103 tests / 455 assertions pada MySQL, Pint, Vite build, Blade view cache, migration/seed, rollback finalisasi, dan pemeriksaan browser responsive tanpa error console.
-
-### Hasil implementasi M4
-
-- Halaman antrean staf menyediakan filter tanggal, dokter, sesi, dan status, disertai ringkasan jumlah BOOKED, WAITING, CALLED, dan SKIPPED.
-- Resepsionis dan Clinic Admin dapat melakukan check-in, panggil, skip, kembalikan ke waiting, cancel, dan no-show. Dokter hanya melihat serta memanggil antrean miliknya sendiri.
-- `QueueWorkflowService` memusatkan seluruh transisi dalam transaksi dan row lock. Status awal dan tujuan diperiksa kembali setelah lock sehingga request berulang atau stale tidak dapat mengubah antrean secara tidak sah.
-- Pemanggilan mengikuti nomor terkecil yang berstatus WAITING. Lock pada sesi dokter mencegah dua request memanggil pasien berbeda secara bersamaan dan menolak panggilan baru selama ada antrean CALLED atau IN_PROGRESS.
-- Pembatalan dan no-show disinkronkan ke Appointment. Check-in/panggilan hanya berlaku pada tanggal antrean; no-show baru tersedia setelah sesi dimulai. Status terminal tidak dapat dikembalikan.
-- Display antrean publik hanya menampilkan nomor, status, dokter, dan sesi tanpa nama pasien, nomor rekam medis, atau data kontak. Pembaruan otomatis realtime tetap berada pada M6.
-- Setiap transisi mencatat aktor, klinik, status awal/akhir, resource, dan waktu melalui audit log.
-- Verifikasi akhir M4: 93 tests / 380 assertions pada MySQL, Pint, Vite build, Blade view cache, migration, isolasi tenant/dokter, dan pemeriksaan browser responsive.
-
-### Hasil implementasi M3
-
-- Data pasien dipisahkan dari akun User. Nomor rekam medis unik per klinik dibuat setelah insert, dan NIK tetap opsional serta tidak dipakai untuk mengautentikasi atau mengaitkan booking guest.
-- Halaman publik klinik hanya memuat profil, layanan aktif, dokter aktif, dan jadwal aktif. Booking tersedia tanpa akun melalui dokter, layanan, sesi, tanggal, dan identitas pasien.
-- `BookingService` mengunci sesi dokter di MySQL, memvalidasi ketersediaan serta hubungan dokter–layanan, lalu membuat pasien, appointment, dan queue dalam satu transaksi. Idempotency key mencegah submit ulang membuat booking ganda.
-- Nomor antrean unik dalam scope klinik, dokter, sesi, dan tanggal. Appointment menyimpan nama serta harga layanan sebagai snapshot.
-- Status publik hanya dapat dibuka dengan token 64 karakter yang hash-nya disimpan di database. Route publik diberi rate limit; kode booking dan nomor antrean tidak cukup untuk membuka detail.
-- Resepsionis dan Clinic Admin dapat mencari/mengelola pasien serta membuat booking untuk pasien baru atau memilih pasien lama secara eksplisit. Pembuatan/perubahan pasien, booking, dan pembatalan dicatat dalam audit.
-- Pembatalan hanya diizinkan saat status BOOKED dan sebelum sesi dimulai. Appointment dan queue dibatalkan bersama, dan kuota dapat digunakan kembali.
-- Verifikasi akhir M3: 84 tests / 329 assertions pada MySQL, Pint, Vite build, Blade view cache, migration, seed, serta pemeriksaan browser responsive halaman publik dan daftar booking staf.
-
-### Hasil implementasi M1
-
-- Laravel terpasang versi 13.34.0; Livewire 3.8.10; Volt 1.11.2; Spatie Permission 8.3.0; Boost 2.10.1.
-- Dashboard empat role sudah dapat dirender dan dilindungi auth, verified, permission, dan role. Dashboard masih berupa halaman awal; statistik domain mengikuti M6.
-- `/dashboard` mengarahkan multi-role dengan prioritas Clinic Admin → Doctor → Receptionist → Patient. Pengguna tanpa role memperoleh pesan akses akun tanpa loop redirect dan dapat mengelola profil.
-- Email verification diaktifkan melalui MustVerifyEmail mengikuti scaffold yang tersedia. Pengguna yang belum terverifikasi diarahkan ke `/verify-email` sebelum dashboard; profil tetap dapat diakses. Saat mail driver menggunakan log, tautan verifikasi ada di log lokal.
-- Registrasi membuat role Patient dalam transaksi; akun staf tidak dapat dibuat melalui registrasi publik. Login menolak akun nonaktif sebelum sesi/remember token dibuat; sesi akun yang dinonaktifkan diakhiri middleware.
-- Login/logout dicatat melalui auth events ke audit_logs; tidak menyimpan password/token. Audit tetap ada ketika akun dihapus. clinic_id pada audit masih nullable; konteks dan foreign key klinik mengikuti M2.
-- Role seeder bersifat idempotent dan menggunakan syncPermissions agar permission lama yang tidak sesuai tidak tertinggal. Akun demo dipisah ke DemoUserSeeder, hanya berjalan pada environment local, dan tidak dibuat pada production.
-- Baseline: test runner awal gagal karena pdo_sqlite tidak aktif. Dengan extension per proses, baseline menemukan lima kegagalan terkait default is_active. Default model/factory diperbaiki dan regression suite akhir lulus.
-- Command test yang berhasil pada PHP Windows saat ini: `php -d extension=pdo_sqlite -d extension=sqlite3 vendor/bin/phpunit --no-progress`. Flag extension pada proses Artisan tidak diteruskan ke child test runner; gunakan command langsung ini atau aktifkan extension di PHP CLI sebelum `composer test`.
-- Migration audit sudah diterapkan ke MySQL lokal, role/permission sudah disinkronkan. Tidak menjalankan migrate:fresh/reset database atau membuat ulang akun yang sudah ada.
-- Policy kepemilikan resource klinik/medis akan dibuat saat resource M2/M5 tersedia. M1 memverifikasi akses dashboard dan kemampuan role; belum membuktikan isolasi data domain yang belum diimplementasikan.
-
-Setelah sebuah milestone terverifikasi, sinkronkan checklist terkait di Plan.md. Jika scope/perilaku berubah, perbarui PRD.md dan dokumen ini agar requirement dan implementasi tetap selaras.
+DOKU tidak diintegrasikan sebelum model ownership, subscription, dan invoice lokal stabil. Enforcement tidak diaktifkan pada tenant lama sebelum backfill owner serta grant Team 12 bulan terbukti aman. Setiap milestone ditutup dengan test relevan dan bukti hasil sebelum melanjutkan.

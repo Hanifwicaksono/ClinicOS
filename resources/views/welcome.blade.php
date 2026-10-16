@@ -19,6 +19,7 @@
                     @else
                         <x-clinic-button href="{{ route('login') }}" variant="secondary" class="hidden sm:inline-flex">Masuk</x-clinic-button>
                         <x-clinic-button href="{{ route('register') }}" class="hidden sm:inline-flex">Daftar pasien</x-clinic-button>
+                        <x-clinic-button href="{{ route('register.clinic') }}" class="hidden lg:inline-flex">Daftarkan klinik</x-clinic-button>
                     @endauth
                     <button type="button" @click="open = ! open" :aria-expanded="open" aria-controls="mobile-navigation" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 md:hidden" aria-label="Buka navigasi">
                         <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -36,6 +37,7 @@
                         @else
                             <a href="{{ route('login') }}" class="clinic-button-secondary">Masuk</a>
                             <a href="{{ route('register') }}" class="clinic-button-primary">Daftar pasien</a>
+                            <a href="{{ route('register.clinic') }}" class="clinic-button-primary">Daftarkan klinik</a>
                         @endauth
                     </div>
                 </div>
@@ -51,6 +53,7 @@
                         <p class="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">ClinicOS membantu mengelola pendaftaran, antrean, jadwal dokter, dan rekam medis klinik dalam satu sistem.</p>
                         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                             <x-clinic-button href="{{ route('register') }}" variant="primary" class="px-6 py-3.5">Buat akun pasien</x-clinic-button>
+                            <x-clinic-button href="{{ route('register.clinic') }}" variant="secondary" class="px-6 py-3.5">Daftarkan klinik</x-clinic-button>
                             <x-clinic-button href="{{ route('login') }}" variant="secondary" class="px-6 py-3.5">Mulai Demo</x-clinic-button>
                         </div>
                         <div class="mt-9 flex flex-wrap gap-x-7 gap-y-3 text-sm font-semibold text-slate-600"><span class="flex items-center gap-2">Akun pasien opsional</span><span class="flex items-center gap-2">Akses sesuai peran</span><span class="flex items-center gap-2">Audit aktivitas</span></div>

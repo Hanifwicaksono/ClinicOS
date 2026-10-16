@@ -9,9 +9,17 @@ use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
 use App\Http\Controllers\Doctor\MedicalRecordController as DoctorMedicalRecordController;
 use App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
+use App\Http\Controllers\DokuNotificationController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Onboarding\ClinicController as OnboardingClinicController;
+use App\Http\Controllers\Onboarding\PlanController as OnboardingPlanController;
 use App\Http\Controllers\Patient\AppointmentController as PatientAppointmentController;
 use App\Http\Controllers\Patient\DashboardController as PatientDashboardController;
+use App\Http\Controllers\Platform\DashboardController as PlatformDashboardController;
+use App\Http\Controllers\Platform\PaymentController as PlatformPaymentController;
+use App\Http\Controllers\Platform\SubscriptionGrantController as PlatformSubscriptionGrantController;
+use App\Http\Controllers\Platform\SubscriptionPlanController as PlatformSubscriptionPlanController;
+use App\Http\Controllers\Platform\TenantController as PlatformTenantController;
 use App\Http\Controllers\PublicBookingController;
 use App\Http\Controllers\PublicClinicController;
 use App\Http\Controllers\PublicQueueController;
@@ -19,27 +27,32 @@ use App\Http\Controllers\QueueController;
 use App\Http\Controllers\Receptionist\AppointmentController as ReceptionistAppointmentController;
 use App\Http\Controllers\Receptionist\DashboardController as ReceptionistDashboardController;
 use App\Http\Controllers\Receptionist\PatientController as ReceptionistPatientController;
+use App\Http\Controllers\SubscriptionPaymentController;
 use App\Http\Middleware\RedirectToDashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
+
+Route::post('payments/doku/notification', DokuNotificationController::class)
+    ->middleware('throttle:doku-notification')
+    ->name('doku.notifications');
 
 Route::get('clinic/{clinic:slug}', [PublicClinicController::class, 'show'])->name('public.clinic.show');
 Route::get('clinic/{clinic:slug}/queue', [PublicQueueController::class, 'index'])
     ->middleware('throttle:60,1')->name('public.queue.index');
 Route::get('clinic/{clinic:slug}/booking', [PublicBookingController::class, 'create'])->name('public.booking.create');
 Route::post('clinic/{clinic:slug}/booking', [PublicBookingController::class, 'store'])
-    ->middleware('throttle:10,1')->name('public.booking.store');
+    ->middleware(['subscription.writable', 'throttle:10,1'])->name('public.booking.store');
 Route::get('booking/{appointment}/status', [PublicBookingController::class, 'status'])
     ->middleware('throttle:30,1')->name('public.booking.status');
 Route::post('booking/{appointment}/cancel', [PublicBookingController::class, 'cancel'])
-    ->middleware('throttle:10,1')->name('public.booking.cancel');
+    ->middleware(['subscription.writable', 'throttle:10,1'])->name('public.booking.cancel');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified', RedirectToDashboard::class])
     ->name('dashboard');
 
-Route::middleware(['auth', 'verified', 'permission:dashboard.view'])->group(function () {
+Route::middleware(['auth', 'verified', 'onboarding.complete', 'permission:dashboard.view'])->group(function () {
     Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])
         ->middleware('role:Clinic Admin')->name('admin.dashboard');
     Route::get('doctor/dashboard', [DoctorDashboardController::class, 'index'])
@@ -50,7 +63,49 @@ Route::middleware(['auth', 'verified', 'permission:dashboard.view'])->group(func
         ->middleware('role:Patient')->name('patient.dashboard');
 });
 
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:Clinic Admin'])->group(function () {
+Route::prefix('onboarding')->name('onboarding.')->middleware(['auth', 'verified', 'clinic_owner'])->group(function () {
+    Route::get('clinic', [OnboardingClinicController::class, 'create'])->name('clinic.create');
+    Route::post('clinic', [OnboardingClinicController::class, 'store'])->name('clinic.store');
+    Route::get('plans', [OnboardingPlanController::class, 'index'])->name('plans.index');
+    Route::post('plans/free', [OnboardingPlanController::class, 'activateFree'])->name('plans.free');
+    Route::post('plans/trial', [OnboardingPlanController::class, 'startTrial'])->name('plans.trial');
+    Route::post('plans/paid/{subscriptionPrice}', [OnboardingPlanController::class, 'selectPaid'])
+        ->middleware('throttle:checkout')->name('plans.paid');
+});
+
+Route::prefix('subscription')->name('subscription.')->middleware(['auth', 'verified', 'clinic_owner', 'throttle:payment-status'])->group(function () {
+    Route::get('payments', [SubscriptionPaymentController::class, 'index'])->name('payments.index');
+    Route::get('payments/{payment}', [SubscriptionPaymentController::class, 'show'])->name('payments.show');
+    Route::post('payments/{payment}/reconcile', [SubscriptionPaymentController::class, 'reconcile'])
+        ->name('payments.reconcile');
+});
+
+Route::prefix('platform')->name('platform.')->middleware(['auth', 'verified', 'role:Platform Admin'])->group(function () {
+    Route::get('dashboard', [PlatformDashboardController::class, 'index'])
+        ->middleware('permission:platform.dashboard.view')->name('dashboard');
+    Route::get('tenants', [PlatformTenantController::class, 'index'])
+        ->middleware('permission:platform.tenant.view')->name('tenants.index');
+    Route::get('tenants/{clinic}', [PlatformTenantController::class, 'show'])
+        ->middleware('permission:platform.tenant.view')->name('tenants.show');
+    Route::get('subscription-plans', [PlatformSubscriptionPlanController::class, 'index'])
+        ->middleware('permission:platform.plan.manage')->name('subscription-plans.index');
+    Route::patch('subscription-plans/{subscriptionPlan}', [PlatformSubscriptionPlanController::class, 'updatePlan'])
+        ->middleware('permission:platform.plan.manage')->name('subscription-plans.update');
+    Route::patch('subscription-prices/{subscriptionPrice}', [PlatformSubscriptionPlanController::class, 'updatePrice'])
+        ->middleware('permission:platform.plan.manage')->name('subscription-prices.update');
+    Route::post('tenants/{clinic}/subscription-grants', [PlatformSubscriptionGrantController::class, 'store'])
+        ->middleware('permission:platform.subscription.grant')->name('subscription-grants.store');
+    Route::get('payments', [PlatformPaymentController::class, 'index'])
+        ->middleware('permission:platform.payment.view')->name('payments.index');
+    Route::get('payments/{payment}', [PlatformPaymentController::class, 'show'])
+        ->middleware(['permission:platform.payment.view', 'throttle:payment-status'])->name('payments.show');
+    Route::post('payments/{payment}/reconcile', [PlatformPaymentController::class, 'reconcile'])
+        ->middleware(['permission:platform.payment.manage', 'throttle:payment-status'])->name('payments.reconcile');
+    Route::post('payments/{payment}/refund', [PlatformPaymentController::class, 'refund'])
+        ->middleware('permission:platform.payment.manage')->name('payments.refund');
+});
+
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin', 'subscription.writable'])->group(function () {
     Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
     Route::resource('clinic', ClinicController::class)->only(['index', 'create', 'store', 'edit', 'update']);
     Route::resource('staff', StaffController::class)->except(['show', 'destroy']);
@@ -60,30 +115,32 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:Cl
         ->except(['show', 'destroy']);
 });
 
-Route::prefix('notifications')->name('notifications.')->middleware(['auth', 'verified'])->group(function () {
+Route::prefix('notifications')->name('notifications.')->middleware(['auth', 'verified', 'onboarding.complete'])->group(function () {
     Route::get('/', [NotificationController::class, 'index'])->name('index');
     Route::post('read-all', [NotificationController::class, 'readAll'])->name('read-all');
     Route::post('{notification}/read', [NotificationController::class, 'read'])->name('read');
 });
 
-Route::prefix('receptionist')->name('receptionist.')->middleware(['auth', 'verified', 'role:Clinic Admin|Receptionist'])->group(function () {
+Route::prefix('receptionist')->name('receptionist.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin|Receptionist', 'subscription.writable'])->group(function () {
     Route::resource('patients', ReceptionistPatientController::class)->except(['destroy']);
     Route::resource('appointments', ReceptionistAppointmentController::class)->only(['index', 'create', 'store', 'show']);
     Route::post('appointments/{appointment}/cancel', [ReceptionistAppointmentController::class, 'cancel'])->name('appointments.cancel');
     Route::get('queues', [QueueController::class, 'index'])->name('queues.index');
 });
 
-Route::prefix('doctor')->name('doctor.')->middleware(['auth', 'verified', 'role:Doctor'])->group(function () {
+Route::prefix('doctor')->name('doctor.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Doctor', 'subscription.writable'])->group(function () {
     Route::get('queues', [QueueController::class, 'index'])->name('queues.index');
     Route::get('medical-records', [DoctorMedicalRecordController::class, 'index'])->name('medical-records.index');
     Route::post('queues/{queue}/start', [DoctorVisitController::class, 'start'])->name('visits.start');
     Route::get('visits/{visit}', [DoctorVisitController::class, 'show'])->name('visits.show');
+    Route::get('visits/{visit}/photos/{photo}', [DoctorVisitController::class, 'photo'])
+        ->whereNumber('photo')->name('visits.photos.show');
     Route::put('visits/{visit}/draft', [DoctorVisitController::class, 'save'])->name('visits.save');
     Route::put('visits/{visit}/complete', [DoctorVisitController::class, 'complete'])->name('visits.complete');
     Route::put('visits/{visit}/correct', [DoctorVisitController::class, 'correct'])->name('visits.correct');
 });
 
-Route::prefix('queues')->name('queues.')->middleware(['auth', 'verified', 'role:Clinic Admin|Receptionist|Doctor'])->group(function () {
+Route::prefix('queues')->name('queues.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin|Receptionist|Doctor', 'subscription.writable'])->group(function () {
     Route::post('{queue}/check-in', [QueueController::class, 'checkIn'])->name('check-in');
     Route::post('{queue}/call', [QueueController::class, 'call'])->name('call');
     Route::post('{queue}/skip', [QueueController::class, 'skip'])->name('skip');
@@ -92,7 +149,7 @@ Route::prefix('queues')->name('queues.')->middleware(['auth', 'verified', 'role:
     Route::post('{queue}/no-show', [QueueController::class, 'markNoShow'])->name('no-show');
 });
 
-Route::prefix('patient')->name('patient.')->middleware(['auth', 'verified', 'role:Patient'])->group(function () {
+Route::prefix('patient')->name('patient.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Patient', 'subscription.writable'])->group(function () {
     Route::resource('appointments', PatientAppointmentController::class)->only(['index', 'show']);
     Route::post('appointments/{appointment}/cancel', [PatientAppointmentController::class, 'cancel'])->name('appointments.cancel');
 });

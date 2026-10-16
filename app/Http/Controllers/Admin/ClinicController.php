@@ -7,6 +7,7 @@ use App\Http\Requests\StoreClinicRequest;
 use App\Http\Requests\UpdateClinicRequest;
 use App\Models\Clinic;
 use App\Services\AuditLogger;
+use App\Services\ClinicRegistrationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -31,28 +32,13 @@ class ClinicController extends Controller
         return view('admin.clinic.form');
     }
 
-    public function store(StoreClinicRequest $request, AuditLogger $auditLogger): RedirectResponse
+    public function store(StoreClinicRequest $request, ClinicRegistrationService $clinicRegistrationService): RedirectResponse
     {
-        $clinic = DB::transaction(function () use ($request, $auditLogger): Clinic {
-            $validated = $request->validated();
-            $clinicData = Arr::except($validated, [
-                'logo', 'opening_time', 'closing_time', 'timezone', 'queue_prefix',
-            ]);
-
-            if ($request->hasFile('logo')) {
-                $clinicData['logo_path'] = $request->file('logo')->store('clinic-logos', 'public');
-            }
-
-            $clinic = Clinic::query()->create($clinicData);
-            $clinic->settings()->create(Arr::only($validated, [
-                'opening_time', 'closing_time', 'timezone', 'queue_prefix',
-            ]));
-
-            $request->user()->update(['clinic_id' => $clinic->id]);
-            $auditLogger->record($request->user(), 'clinic.created', $clinic);
-
-            return $clinic;
-        });
+        $clinic = $clinicRegistrationService->create(
+            $request->user(),
+            $request->validated(),
+            $request->file('logo'),
+        );
 
         return redirect()->route('admin.clinic.edit', $clinic)
             ->with('status', 'Profil klinik berhasil dibuat.');

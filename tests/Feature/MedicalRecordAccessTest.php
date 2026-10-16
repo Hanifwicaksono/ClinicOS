@@ -38,7 +38,9 @@ class MedicalRecordAccessTest extends TestCase
             ->get(route('doctor.visits.show', $context['visit']))
             ->assertOk()
             ->assertSee($context['patient']->name)
-            ->assertSee('Keluhan & SOAP', false);
+            ->assertSee('Anamnesa', false)
+            ->assertSee('Diagnosa', false)
+            ->assertSee('Treatment', false);
 
         $this->actingAs($otherDoctorUser)
             ->get(route('doctor.visits.show', $context['visit']))

@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User;
+use App\Services\RegistrationRateLimiter;
+use App\UserAccountType;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -20,8 +22,10 @@ new #[Layout('layouts.guest')] class extends Component
     /**
      * Handle an incoming registration request.
      */
-    public function register(): void
+    public function register(RegistrationRateLimiter $rateLimiter): void
     {
+        $rateLimiter->hit($this->email);
+
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -29,6 +33,7 @@ new #[Layout('layouts.guest')] class extends Component
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
+        $validated['account_type'] = UserAccountType::Patient;
 
         $user = DB::transaction(function () use ($validated): User {
             $user = User::create($validated);
@@ -91,6 +96,7 @@ new #[Layout('layouts.guest')] class extends Component
                 Buat akun
             </x-primary-button>
         </div>
+        <p class="text-center text-sm text-slate-500">Mengelola klinik? <a href="{{ route('register.clinic') }}" wire:navigate class="font-bold text-clinic-600 hover:text-clinic-700">Daftarkan klinik</a></p>
         <p class="text-center text-sm text-slate-500">Sudah punya akun? <a href="{{ route('login') }}" wire:navigate class="font-bold text-clinic-600 hover:text-clinic-700">Masuk</a></p>
     </form>
 </div>
