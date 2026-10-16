@@ -8,58 +8,66 @@
         <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&family=plus-jakarta-sans:600,700,800" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="bg-white font-sans antialiased">
-        <header x-data="{ open: false }" class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur-sm">
-            <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
-                <a href="/" class="flex items-center gap-3"><x-application-logo class="h-14 w-14" /><span class="font-display text-3xl font-extrabold tracking-tight text-clinic-950">Clinic<span class="text-clinic-500">OS</span></span></a>
-                <nav class="hidden items-center gap-10 text-[18px] font-semibold text-slate-600 md:flex"><a href="#fitur" class="transition hover:text-clinic-600">Fitur</a><a href="#alur" class="transition hover:text-clinic-600">Cara kerja</a><a href="#keamanan" class="transition hover:text-clinic-600">Keamanan</a></nav>
-                <div class="flex items-center gap-3">
-                    @auth
-                        <x-clinic-button href="{{ route('dashboard') }}" class="hidden sm:inline-flex">Buka dashboard</x-clinic-button>
-                    @else
-                        <x-clinic-button href="{{ route('login') }}" variant="secondary" class="hidden sm:inline-flex">Masuk</x-clinic-button>
-                        <x-clinic-button href="{{ route('register') }}" class="hidden sm:inline-flex">Daftar pasien</x-clinic-button>
-                        <x-clinic-button href="{{ route('register.clinic') }}" class="hidden lg:inline-flex">Daftarkan klinik</x-clinic-button>
-                    @endauth
-                    <button type="button" @click="open = ! open" :aria-expanded="open" aria-controls="mobile-navigation" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 md:hidden" aria-label="Buka navigasi">
-                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-                    </button>
-                </div>
-            </div>
-            <nav id="mobile-navigation" x-show="open" x-cloak @click.outside="open = false" class="absolute inset-x-0 top-20 border-b border-slate-200 bg-white p-5 shadow-elevated md:hidden">
-                <div class="mx-auto flex max-w-7xl flex-col gap-2">
-                    <a href="#fitur" @click="open = false" class="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Fitur</a>
-                    <a href="#alur" @click="open = false" class="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Cara kerja</a>
-                    <a href="#keamanan" @click="open = false" class="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Keamanan</a>
-                    <div class="mt-2 grid gap-2 border-t border-slate-100 pt-4 sm:hidden">
+    <body class="overflow-x-hidden bg-white font-sans antialiased">
+       <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur-sm">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:h-20 sm:px-8">
+        <a href="/" class="flex items-center gap-2 sm:gap-3">
+            <x-application-logo class="h-10 w-10 sm:h-14 sm:w-14" />
+            <span class="font-display text-2xl font-extrabold tracking-tight text-clinic-950 sm:text-3xl">Clinic<span class="text-clinic-500">OS</span></span>
+        </a>
+
+        <nav class="hidden items-center gap-6 text-base font-semibold text-slate-600 md:flex lg:gap-10 lg:text-[18px]">
+            <a href="#fitur" class="transition hover:text-clinic-600">Fitur</a>
+            <a href="#alur" class="transition hover:text-clinic-600">Cara kerja</a>
+            <a href="#keamanan" class="transition hover:text-clinic-600">Keamanan</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+            @auth
+                <x-clinic-button href="{{ route('dashboard') }}" class="hidden md:inline-flex">Buka dashboard</x-clinic-button>
+            @endauth
+
+            <details class="group md:hidden">
+                <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-xl border border-slate-200 text-slate-600 [&::-webkit-details-marker]:hidden" aria-label="Buka navigasi">
+                    <svg class="h-6 w-6 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg class="hidden h-6 w-6 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                </summary>
+
+                <nav class="absolute inset-x-0 top-full border-b border-slate-200 bg-white p-4 shadow-elevated">
+                    <div class="flex flex-col gap-1">
+                        <a href="#fitur" onclick="this.closest('details').removeAttribute('open')" class="rounded-xl px-4 py-3 text-base font-semibold text-slate-700 hover:bg-slate-50">Fitur</a>
+                        <a href="#alur" onclick="this.closest('details').removeAttribute('open')" class="rounded-xl px-4 py-3 text-base font-semibold text-slate-700 hover:bg-slate-50">Cara kerja</a>
+                        <a href="#keamanan" onclick="this.closest('details').removeAttribute('open')" class="rounded-xl px-4 py-3 text-base font-semibold text-slate-700 hover:bg-slate-50">Keamanan</a>
                         @auth
-                            <a href="{{ route('dashboard') }}" class="clinic-button-primary">Buka dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}" class="clinic-button-secondary">Masuk</a>
-                            <a href="{{ route('register') }}" class="clinic-button-primary">Daftar pasien</a>
-                            <a href="{{ route('register.clinic') }}" class="clinic-button-primary">Daftarkan klinik</a>
+                            <a href="{{ route('dashboard') }}" class="clinic-button-primary mt-2">Buka dashboard</a>
                         @endauth
                     </div>
-                </div>
-            </nav>
-        </header>
+                </nav>
+            </details>
+        </div>
+    </div>
+</header>
 
         <main>
             <section class="relative overflow-hidden bg-clinic-background">
                 <div class="absolute left-1/2 top-0 h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-clinic-100/60 blur-3xl"></div>
-                <div class="relative mx-auto grid max-w-7xl gap-14 px-5 py-10 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:py-16">
-                    <div>
+                <div class="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:gap-14 lg:py-16">
+                <div class="min-w-0">
                         <h1 class="max-w-3xl font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-clinic-950 sm:text-5xl lg:text-6xl">Operasional klinik <span class="text-clinic-500">lebih rapi</span> setiap hari.</h1>
                         <p class="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">ClinicOS membantu mengelola pendaftaran, antrean, jadwal dokter, dan rekam medis klinik dalam satu sistem.</p>
-                        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                            <x-clinic-button href="{{ route('register') }}" variant="primary" class="px-6 py-3.5">Buat akun pasien</x-clinic-button>
-                            <x-clinic-button href="{{ route('register.clinic') }}" variant="secondary" class="px-6 py-3.5">Daftarkan klinik</x-clinic-button>
-                            <x-clinic-button href="{{ route('login') }}" variant="secondary" class="px-6 py-3.5">Mulai Demo</x-clinic-button>
-                        </div>
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+    @auth
+        <x-clinic-button href="{{ route('dashboard') }}" variant="primary" class="w-full justify-center px-6 py-3.5 sm:w-auto">Buka dashboard</x-clinic-button>
+    @else
+        <x-clinic-button href="{{ route('login') }}" variant="primary" class="w-full justify-center px-6 py-3.5 sm:w-auto">Masuk</x-clinic-button>
+        <x-clinic-button href="{{ route('register') }}" variant="secondary" class="w-full justify-center px-6 py-3.5 sm:w-auto">Buat akun pasien</x-clinic-button>
+        <x-clinic-button href="{{ route('register.clinic') }}" variant="secondary" class="w-full justify-center px-6 py-3.5 sm:w-auto">Daftarkan klinik</x-clinic-button>
+    @endauth
+</div>
                         <div class="mt-9 flex flex-wrap gap-x-7 gap-y-3 text-sm font-semibold text-slate-600"><span class="flex items-center gap-2">Akun pasien opsional</span><span class="flex items-center gap-2">Akses sesuai peran</span><span class="flex items-center gap-2">Audit aktivitas</span></div>
                     </div>
 
-                    <div class="relative">
+                    <div class="relative min-w-0">
                         <div class="absolute -inset-5 rounded-[2rem] bg-clinic-500/10 blur-2xl"></div>
                         <div class="clinic-card relative overflow-hidden rounded-[2rem] p-5 sm:p-7" style="background:#FFFFFF; background-image:none; border:1px solid #E2E8F0; box-shadow:0 10px 30px rgba(15,23,42,.06);">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-5"><div><span class="text-sm font-bold uppercase tracking-[0.12em] text-clinic-950">Hari ini</span><p class="mt-2 font-display text-lg font-extrabold text-clinic-950">Klinik Sehat Sentosa</p></div><span class="clinic-status-active">Aktif</span></div>
