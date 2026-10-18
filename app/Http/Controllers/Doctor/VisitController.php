@@ -9,6 +9,7 @@ use App\Http\Requests\Doctor\SaveMedicalRecordRequest;
 use App\Models\Queue;
 use App\Models\Visit;
 use App\Services\VisitWorkflowService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,13 +18,21 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class VisitController extends Controller
 {
-    public function start(Request $request, Queue $queue, VisitWorkflowService $workflow): RedirectResponse
+    public function start(Request $request, Queue $queue, VisitWorkflowService $workflow): RedirectResponse|JsonResponse
     {
         $this->authorize('startVisit', $queue);
         $result = $workflow->start($queue, $request->user());
+        $message = $result['created'] ? 'Pemeriksaan dimulai.' : 'Pemeriksaan yang aktif dibuka kembali.';
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => $message,
+                'redirect' => route('doctor.visits.show', $result['visit']),
+            ]);
+        }
 
         return redirect()->route('doctor.visits.show', $result['visit'])
-            ->with('status', $result['created'] ? 'Pemeriksaan dimulai.' : 'Pemeriksaan yang aktif dibuka kembali.');
+            ->with('status', $message);
     }
 
     public function show(Visit $visit): View
@@ -74,8 +83,15 @@ class VisitController extends Controller
         CompleteVisitRequest $request,
         Visit $visit,
         VisitWorkflowService $workflow,
-    ): RedirectResponse {
+    ): RedirectResponse|JsonResponse {
         $workflow->complete($visit, $request->user(), $request->validated());
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Kunjungan selesai dan rekam medis telah difinalisasi.',
+                'redirect' => route('doctor.visits.show', $visit),
+            ]);
+        }
 
         return redirect()->route('doctor.visits.show', $visit)
             ->with('status', 'Kunjungan selesai dan rekam medis telah difinalisasi.');

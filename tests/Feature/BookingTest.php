@@ -49,6 +49,23 @@ class BookingTest extends TestCase
             ->assertSee('Buat booking');
     }
 
+    public function test_receptionist_patient_search_returns_only_active_patients_from_their_clinic(): void
+    {
+        [$clinic] = $this->bookingContext();
+        $receptionist = User::factory()->forClinic($clinic)->create();
+        $receptionist->assignRole('Receptionist');
+        $patient = Patient::factory()->for($clinic)->create(['name' => 'Nadia Pencarian']);
+        $inactivePatient = Patient::factory()->for($clinic)->create(['name' => 'Nadia Nonaktif', 'is_active' => false]);
+        $otherClinicPatient = Patient::factory()->create(['name' => 'Nadia Klinik Lain']);
+
+        $this->actingAs($receptionist)
+            ->getJson(route('receptionist.patients.search', ['search' => 'Nadia']))
+            ->assertOk()
+            ->assertJsonFragment(['id' => $patient->id])
+            ->assertJsonMissing(['id' => $inactivePatient->id])
+            ->assertJsonMissing(['id' => $otherClinicPatient->id]);
+    }
+
     public function test_guest_booking_creates_patient_appointment_and_queue_atomically(): void
     {
         [$clinic, $doctor, $service, $schedule, $date] = $this->bookingContext();

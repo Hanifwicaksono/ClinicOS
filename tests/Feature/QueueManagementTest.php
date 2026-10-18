@@ -36,12 +36,15 @@ class QueueManagementTest extends TestCase
             ->get(route('receptionist.queues.index', ['date' => $context['date']]))
             ->assertOk()
             ->assertSee($queue->display_number)
-            ->assertSee($queue->appointment->patient->name);
+            ->assertSee($queue->appointment->patient->name)
+            ->assertDontSee('Mulai periksa');
 
         $this->assertMatchesRegularExpression(
             '/<button[^>]*type="submit"[^>]*>\s*Check-in\s*<\/button>/',
             $response->getContent(),
         );
+        $response->assertSee('data-queue-action', false);
+        $response->assertSee('data-queue-action-feedback', false);
 
         $this->actingAs($context['receptionist'])
             ->post(route('queues.check-in', $queue))
@@ -55,6 +58,54 @@ class QueueManagementTest extends TestCase
             'action' => 'queue.status_changed',
             'entity_id' => $queue->id,
         ]);
+    }
+
+    public function test_queue_actions_return_json_for_staff_ui(): void
+    {
+        $context = $this->queueContext();
+        $queue = $context['queues'][0];
+
+        $this->actingAs($context['receptionist'])
+            ->postJson(route('queues.check-in', $queue))
+            ->assertOk()
+            ->assertJsonPath('message', "Antrean {$queue->display_number} sudah check-in.");
+
+        $this->actingAs($context['receptionist'])
+            ->postJson(route('queues.call', $queue))
+            ->assertOk()
+            ->assertJsonPath('message', "Antrean {$queue->display_number} sedang dipanggil.");
+
+        $this->actingAs($context['receptionist'])
+            ->postJson(route('queues.skip', $queue))
+            ->assertOk()
+            ->assertJsonPath('message', "Antrean {$queue->display_number} dilewati sementara.");
+
+        $this->assertSame(QueueStatus::Skipped, $queue->refresh()->status);
+    }
+
+    public function test_queue_json_action_returns_validation_error_for_stale_status(): void
+    {
+        $context = $this->queueContext();
+        $queue = $context['queues'][0];
+
+        $this->actingAs($context['receptionist'])
+            ->postJson(route('queues.call', $queue))
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors('queue');
+
+        $this->assertSame(QueueStatus::Booked, $queue->refresh()->status);
+    }
+
+    public function test_queue_json_action_returns_forbidden_for_another_clinic(): void
+    {
+        $context = $this->queueContext();
+        $otherClinic = Clinic::factory()->create();
+        $otherReceptionist = User::factory()->forClinic($otherClinic)->create();
+        $otherReceptionist->assignRole('Receptionist');
+
+        $this->actingAs($otherReceptionist)
+            ->postJson(route('queues.check-in', $context['queues'][0]))
+            ->assertForbidden();
     }
 
     public function test_only_one_patient_can_be_called_in_the_same_doctor_session(): void
@@ -182,11 +233,13 @@ class QueueManagementTest extends TestCase
     {
         $context = $this->queueContext();
         $queue = $context['queues'][0];
+        $queue->doctor->update(['specialization' => 'Poli Umum']);
         $this->actingAs($context['receptionist'])->post(route('queues.check-in', $queue));
 
         $this->get(route('public.queue.index', $context['clinic']))
             ->assertOk()
             ->assertSee($queue->display_number)
+            ->assertSee('Poli Umum')
             ->assertSee($context['doctor_user']->name)
             ->assertDontSee($queue->appointment->patient->name)
             ->assertDontSee($queue->appointment->patient->medical_record_number);

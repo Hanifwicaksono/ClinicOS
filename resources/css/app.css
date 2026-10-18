@@ -18,12 +18,52 @@
 }
 
 @layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
         @apply bg-clinic-background text-clinic-text;
     }
 
     h1, h2, h3, h4 {
         @apply font-display;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .landing-reveal {
+        animation: landing-reveal 700ms ease-out both;
+    }
+
+    .landing-reveal-delay {
+        animation-delay: 150ms;
+    }
+
+    .landing-float {
+        animation: landing-float 6s ease-in-out infinite;
+    }
+
+    @keyframes landing-reveal {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes landing-float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
     }
 }
 

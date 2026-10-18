@@ -21,7 +21,32 @@
             <p class="mt-2 text-sm leading-6 text-slate-500">Informasi ini menjadi sumber utama untuk layanan, jadwal, dan komunikasi pasien.</p>
         </div>
 
-        <form method="POST" enctype="multipart/form-data" action="{{ $formAction }}" class="space-y-6" x-data="{ submitting: false }" @submit="submitting = true">
+        <form method="POST" enctype="multipart/form-data" action="{{ $formAction }}" class="space-y-6" x-data="{
+            submitting: false,
+            logoPreview: null,
+            removeLogo: @js(old('remove_logo', false)),
+            previewLogo(file) {
+                if (! file) {
+                    return;
+                }
+
+                if (this.logoPreview) {
+                    URL.revokeObjectURL(this.logoPreview);
+                }
+
+                this.logoPreview = URL.createObjectURL(file);
+                this.removeLogo = false;
+            },
+            removeLogoFile() {
+                if (this.logoPreview) {
+                    URL.revokeObjectURL(this.logoPreview);
+                }
+
+                this.logoPreview = null;
+                this.$refs.logo.value = '';
+                this.removeLogo = true;
+            },
+        }" @submit="submitting = true">
             @csrf
             @if ($editing) @method('PUT') @endif
 
@@ -34,7 +59,7 @@
                     <div><label class="clinic-label" for="phone">Nomor telepon</label><input class="clinic-input" id="phone" name="phone" value="{{ old('phone', $clinic->phone ?? '') }}"><x-input-error :messages="$errors->get('phone')" class="mt-2" /></div>
                     <div class="md:col-span-2"><label class="clinic-label" for="address">Alamat</label><textarea class="clinic-input" id="address" name="address" rows="3">{{ old('address', $clinic->address ?? '') }}</textarea><x-input-error :messages="$errors->get('address')" class="mt-2" /></div>
                     <div class="md:col-span-2"><label class="clinic-label" for="description">Deskripsi singkat</label><textarea class="clinic-input" id="description" name="description" rows="3">{{ old('description', $clinic->description ?? '') }}</textarea><x-input-error :messages="$errors->get('description')" class="mt-2" /></div>
-                    <div class="md:col-span-2"><label class="clinic-label" for="logo">Logo klinik</label><input class="clinic-input file:mr-4 file:rounded-lg file:border-0 file:bg-clinic-50 file:px-3 file:py-2 file:text-sm file:font-bold file:text-clinic-700" id="logo" type="file" name="logo" accept=".jpg,.jpeg,.png,.webp"><p class="mt-2 text-xs text-slate-500">JPG, PNG, atau WebP. Maksimal 2 MB.</p><x-input-error :messages="$errors->get('logo')" class="mt-2" /></div>
+                    <div class="md:col-span-2"><label class="clinic-label" for="logo">Logo klinik</label><input type="hidden" name="remove_logo" :value="removeLogo ? 1 : 0">@if ($editing && $clinic->logo_path)<div class="mt-3 w-36" x-show="!logoPreview && !removeLogo" x-cloak><div class="relative overflow-hidden rounded-xl border border-slate-200 bg-slate-50"><img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($clinic->logo_path) }}" alt="Logo {{ $clinic->name }}" class="h-28 w-full object-contain p-2"><button type="button" class="absolute right-2 top-2 flex size-7 items-center justify-center rounded-full bg-slate-950/75 text-lg font-bold leading-none text-white hover:bg-red-600" @click="removeLogoFile" aria-label="Hapus logo {{ $clinic->name }}">×</button><p class="truncate px-3 py-2 text-xs text-slate-600">Logo saat ini</p></div></div>@endif<div class="mt-3 w-36" x-show="logoPreview" x-cloak><div class="relative overflow-hidden rounded-xl border border-slate-200 bg-slate-50"><img :src="logoPreview" alt="Preview logo baru" class="h-28 w-full object-contain p-2"><button type="button" class="absolute right-2 top-2 flex size-7 items-center justify-center rounded-full bg-slate-950/75 text-lg font-bold leading-none text-white hover:bg-red-600" @click="removeLogoFile" aria-label="Hapus logo yang dipilih">×</button><p class="truncate px-3 py-2 text-xs text-slate-600">Logo baru</p></div></div><input class="clinic-input mt-3 file:mr-4 file:rounded-lg file:border-0 file:bg-clinic-50 file:px-3 file:py-2 file:text-sm file:font-bold file:text-clinic-700" id="logo" x-ref="logo" type="file" name="logo" accept="image/jpeg,image/png,image/webp" @change="previewLogo($event.target.files[0])"><p class="mt-2 text-xs text-slate-500">JPG, PNG, atau WebP. Maksimal 2 MB.</p><p class="mt-2 text-xs font-semibold text-red-600" x-show="removeLogo" x-cloak>Logo akan dihapus saat profil disimpan.</p><x-input-error :messages="$errors->get('logo')" class="mt-2" /><x-input-error :messages="$errors->get('remove_logo')" class="mt-2" /></div>
                 </div>
             </section>
 

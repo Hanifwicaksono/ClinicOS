@@ -7,6 +7,7 @@ use App\Models\Queue;
 use App\QueueStatus;
 use App\Services\QueueWorkflowService;
 use Carbon\CarbonImmutable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -60,52 +61,61 @@ class QueueController extends Controller
         return view('queues.index', compact('queues', 'doctors', 'date', 'statusCounts'));
     }
 
-    public function checkIn(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse
+    public function checkIn(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse|JsonResponse
     {
         $this->authorize('update', $queue);
         $workflow->checkIn($queue, $request->user());
 
-        return back()->with('status', "Antrean {$queue->display_number} sudah check-in.");
+        return $this->actionResponse($request, "Antrean {$queue->display_number} sudah check-in.");
     }
 
-    public function call(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse
+    public function call(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse|JsonResponse
     {
         $this->authorize('call', $queue);
         $workflow->call($queue, $request->user());
 
-        return back()->with('status', "Antrean {$queue->display_number} sedang dipanggil.");
+        return $this->actionResponse($request, "Antrean {$queue->display_number} sedang dipanggil.");
     }
 
-    public function skip(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse
+    public function skip(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse|JsonResponse
     {
         $this->authorize('call', $queue);
         $workflow->skip($queue, $request->user());
 
-        return back()->with('status', "Antrean {$queue->display_number} dilewati sementara.");
+        return $this->actionResponse($request, "Antrean {$queue->display_number} dilewati sementara.");
     }
 
-    public function returnToWaiting(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse
+    public function returnToWaiting(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse|JsonResponse
     {
         $this->authorize('call', $queue);
         $workflow->returnToWaiting($queue, $request->user());
 
-        return back()->with('status', "Antrean {$queue->display_number} dikembalikan ke daftar tunggu.");
+        return $this->actionResponse($request, "Antrean {$queue->display_number} dikembalikan ke daftar tunggu.");
     }
 
-    public function cancel(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse
+    public function cancel(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse|JsonResponse
     {
         $this->authorize('update', $queue);
         $validated = $request->validate(['reason' => ['nullable', 'string', 'max:500']]);
         $workflow->cancel($queue, $request->user(), $validated['reason'] ?? null);
 
-        return back()->with('status', "Antrean {$queue->display_number} dibatalkan.");
+        return $this->actionResponse($request, "Antrean {$queue->display_number} dibatalkan.");
     }
 
-    public function markNoShow(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse
+    public function markNoShow(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse|JsonResponse
     {
         $this->authorize('update', $queue);
         $workflow->markNoShow($queue, $request->user());
 
-        return back()->with('status', "Antrean {$queue->display_number} ditandai tidak hadir.");
+        return $this->actionResponse($request, "Antrean {$queue->display_number} ditandai tidak hadir.");
+    }
+
+    private function actionResponse(Request $request, string $message): RedirectResponse|JsonResponse
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['message' => $message]);
+        }
+
+        return back()->with('status', $message);
     }
 }

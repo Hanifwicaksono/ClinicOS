@@ -8,7 +8,9 @@ use App\Http\Requests\Receptionist\UpdatePatientRequest;
 use App\Models\Patient;
 use App\Services\AuditLogger;
 use App\Services\MedicalRecordNumberGenerator;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PatientController extends Controller
@@ -32,6 +34,34 @@ class PatientController extends Controller
             ->withQueryString();
 
         return view('receptionist.patients.index', compact('patients', 'search'));
+    }
+
+    public function search(Request $request): JsonResponse
+    {
+        $this->authorize('viewAny', Patient::class);
+        $search = trim((string) $request->query('search'));
+
+        if (mb_strlen($search) < 2) {
+            return response()->json([]);
+        }
+
+        $patients = Patient::query()
+            ->where('clinic_id', $request->user()->clinic_id)
+            ->where('is_active', true)
+            ->where(function ($query) use ($search): void {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('medical_record_number', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%");
+            })
+            ->orderBy('name')
+            ->limit(8)
+            ->get(['id', 'medical_record_number', 'name', 'phone'])
+            ->map(fn (Patient $patient): array => [
+                'id' => $patient->id,
+                'label' => "{$patient->medical_record_number} — {$patient->name} — {$patient->phone}",
+            ]);
+
+        return response()->json($patients);
     }
 
     public function create(): View

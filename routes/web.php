@@ -29,9 +29,28 @@ use App\Http\Controllers\Receptionist\DashboardController as ReceptionistDashboa
 use App\Http\Controllers\Receptionist\PatientController as ReceptionistPatientController;
 use App\Http\Controllers\SubscriptionPaymentController;
 use App\Http\Middleware\RedirectToDashboard;
+use App\Models\Clinic;
+use App\Models\Patient;
+use App\Models\SubscriptionPlan;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome');
+Route::get('/', function () {
+    $minimumPrices = SubscriptionPlan::query()
+        ->whereIn('code', ['individual', 'team'])
+        ->where('is_active', true)
+        ->with(['prices' => fn (HasMany $query): HasMany => $query->where('is_active', true)])
+        ->get()
+        ->mapWithKeys(fn (SubscriptionPlan $plan): array => [$plan->code => $plan->prices->min('amount')]);
+
+    return view('welcome', [
+        'statistics' => [
+            'clinics' => Clinic::query()->where('is_active', true)->count(),
+            'patients' => Patient::withoutGlobalScopes()->where('is_active', true)->count(),
+        ],
+        'minimumPrices' => $minimumPrices,
+    ]);
+})->name('welcome');
 
 Route::post('payments/doku/notification', DokuNotificationController::class)
     ->middleware('throttle:doku-notification')
@@ -122,6 +141,7 @@ Route::prefix('notifications')->name('notifications.')->middleware(['auth', 'ver
 });
 
 Route::prefix('receptionist')->name('receptionist.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin|Receptionist', 'subscription.writable'])->group(function () {
+    Route::get('patients/search', [ReceptionistPatientController::class, 'search'])->name('patients.search');
     Route::resource('patients', ReceptionistPatientController::class)->except(['destroy']);
     Route::resource('appointments', ReceptionistAppointmentController::class)->only(['index', 'create', 'store', 'show']);
     Route::post('appointments/{appointment}/cancel', [ReceptionistAppointmentController::class, 'cancel'])->name('appointments.cancel');

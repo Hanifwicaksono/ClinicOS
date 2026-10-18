@@ -61,6 +61,29 @@ class VisitWorkflowTest extends TestCase
         ]);
     }
 
+    public function test_start_and_complete_support_json_for_staff_ui(): void
+    {
+        $context = $this->calledQueueContext();
+
+        $this->actingAs($context['doctor_user'])
+            ->postJson(route('doctor.visits.start', $context['queue']))
+            ->assertOk()
+            ->assertJsonPath('message', 'Pemeriksaan dimulai.');
+
+        $visit = Visit::query()->sole();
+
+        $this->actingAs($context['doctor_user'])
+            ->putJson(route('doctor.visits.complete', $visit), $this->medicalPayload())
+            ->assertOk()
+            ->assertJson([
+                'message' => 'Kunjungan selesai dan rekam medis telah difinalisasi.',
+                'redirect' => route('doctor.visits.show', $visit),
+            ]);
+
+        $this->assertSame(VisitStatus::Completed, $visit->refresh()->status);
+        $this->assertSame(QueueStatus::Completed, $context['queue']->refresh()->status);
+    }
+
     public function test_doctor_can_save_complete_draft_with_nested_clinical_data(): void
     {
         $context = $this->calledQueueContext();

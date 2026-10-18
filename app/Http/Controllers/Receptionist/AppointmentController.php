@@ -34,11 +34,27 @@ class AppointmentController extends Controller
     {
         $this->authorize('create', Appointment::class);
         $clinicId = $request->user()->clinic_id;
+        $selectedPatientId = (int) old('patient_id', $request->integer('patient_id'));
+        $doctors = Doctor::query()->where('clinic_id', $clinicId)->where('is_active', true)
+            ->with(['user:id,name', 'services:id,name,price', 'schedules' => fn ($query) => $query->where('is_active', true)])->get();
+        $services = $doctors->flatMap->services->unique('id')->values();
 
         return view('receptionist.appointments.form', [
-            'patients' => Patient::query()->where('clinic_id', $clinicId)->where('is_active', true)->orderBy('name')->get(),
-            'doctors' => Doctor::query()->where('clinic_id', $clinicId)->where('is_active', true)
-                ->with(['user:id,name', 'services:id,name,price', 'schedules' => fn ($query) => $query->where('is_active', true)])->get(),
+            'selectedPatient' => $selectedPatientId > 0
+                ? Patient::query()->where('clinic_id', $clinicId)->where('is_active', true)->find($selectedPatientId)
+                : null,
+            'doctorOptions' => $doctors->map(fn (Doctor $doctor): array => [
+                'id' => $doctor->id,
+                'label' => "{$doctor->user->name} — {$doctor->specialization}",
+            ])->values(),
+            'serviceOptions' => $services->map(fn ($service): array => [
+                'id' => $service->id,
+                'label' => $service->name,
+            ])->values(),
+            'scheduleOptions' => $doctors->flatMap(fn (Doctor $doctor) => $doctor->schedules->map(fn ($schedule): array => [
+                'id' => $schedule->id,
+                'label' => "{$doctor->user->name} · {$schedule->day_name} · ".substr($schedule->start_time, 0, 5).'–'.substr($schedule->end_time, 0, 5),
+            ]))->values(),
             'idempotencyKey' => Str::uuid()->toString(),
         ]);
     }

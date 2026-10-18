@@ -34,6 +34,7 @@ class UpdateClinicRequest extends FormRequest
             'email' => ['nullable', 'email', 'max:255'],
             'description' => ['nullable', 'string', 'max:2000'],
             'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'remove_logo' => ['nullable', 'boolean'],
             'is_active' => ['required', 'boolean'],
             'opening_time' => ['required', 'date_format:H:i', 'before:closing_time'],
             'closing_time' => ['required', 'date_format:H:i', 'after:opening_time'],

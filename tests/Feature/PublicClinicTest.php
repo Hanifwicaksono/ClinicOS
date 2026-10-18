@@ -36,4 +36,13 @@ class PublicClinicTest extends TestCase
 
         $this->get(route('public.clinic.show', $clinic))->assertNotFound();
     }
+
+    public function test_public_page_displays_the_clinic_logo_when_available(): void
+    {
+        $clinic = Clinic::factory()->create(['logo_path' => 'clinic-logos/clinic-logo.png']);
+
+        $this->get(route('public.clinic.show', $clinic))
+            ->assertOk()
+            ->assertSee('storage/clinic-logos/clinic-logo.png');
+    }
 }

@@ -59,7 +59,7 @@ class ClinicController extends Controller
         DB::transaction(function () use ($request, $clinic, $auditLogger): void {
             $validated = $request->validated();
             $clinicData = Arr::except($validated, [
-                'logo', 'opening_time', 'closing_time', 'timezone', 'queue_prefix',
+                'logo', 'remove_logo', 'opening_time', 'closing_time', 'timezone', 'queue_prefix',
             ]);
 
             if ($request->hasFile('logo')) {
@@ -68,6 +68,9 @@ class ClinicController extends Controller
                 }
 
                 $clinicData['logo_path'] = $request->file('logo')->store('clinic-logos', 'public');
+            } elseif ($request->boolean('remove_logo') && $clinic->logo_path !== null) {
+                Storage::disk('public')->delete($clinic->logo_path);
+                $clinicData['logo_path'] = null;
             }
 
             $clinic->update($clinicData);
