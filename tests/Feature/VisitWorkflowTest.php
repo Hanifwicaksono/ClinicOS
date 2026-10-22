@@ -103,6 +103,83 @@ class VisitWorkflowTest extends TestCase
         $this->assertSame(1, $record->treatments()->count());
         $this->assertSame(1, $record->prescription->items()->count());
         $this->assertSame(38.2, (float) $record->vitalSign->temperature_c);
+
+        $this->actingAs($context['doctor_user'])
+            ->get(route('doctor.visits.show', $visit))
+            ->assertOk()
+            ->assertSee('data-initial-state="saved"', false);
+    }
+
+    public function test_prescription_editor_explains_draft_preview_and_finalize(): void
+    {
+        $context = $this->calledQueueContext();
+        $this->actingAs($context['doctor_user'])->post(route('doctor.visits.start', $context['queue']));
+        $visit = Visit::query()->sole();
+
+        $this->actingAs($context['doctor_user'])
+            ->get(route('doctor.visits.show', $visit))
+            ->assertOk()
+            ->assertSeeText('Draft')
+            ->assertSeeText('Preview resep')
+            ->assertSeeText('Peringatan keselamatan resep')
+            ->assertSeeText('Tinjau & finalisasi')
+            ->assertSeeText('Jadikan rekam medis ini finalized?')
+            ->assertSeeText('Perubahan berikutnya hanya dapat disimpan sebagai Modification beralasan')
+            ->assertDontSee('onclick="return confirm', false);
+    }
+
+    public function test_rme_general_form_renders_reusable_fields_and_autosave_contract(): void
+    {
+        $context = $this->calledQueueContext();
+        $this->actingAs($context['doctor_user'])->post(route('doctor.visits.start', $context['queue']));
+        $visit = Visit::query()->sole();
+
+        $this->actingAs($context['doctor_user'])
+            ->get(route('doctor.visits.show', $visit))
+            ->assertOk()
+            ->assertSeeText('RME General')
+            ->assertSeeText('S · Subjektif')
+            ->assertSeeText('O · Objektif')
+            ->assertSeeText('A · Assessment')
+            ->assertSeeText('P · Rencana')
+            ->assertSeeText('Pemeriksaan fisik')
+            ->assertSeeText('Menyimpan…')
+            ->assertSeeText('Tersimpan')
+            ->assertSeeText('Gagal disimpan')
+            ->assertSeeText('Finalized')
+            ->assertSee('data-rme-form', false)
+            ->assertSee('data-rme-autosave-status', false)
+            ->assertSee('data-initial-state="draft"', false)
+            ->assertSee('data-rme-field="subjective"', false)
+            ->assertSee('aria-describedby="subjective_description"', false)
+            ->assertSee('x-on:rme-autosave-state.window', false)
+            ->assertSeeText('Odontogram')
+            ->assertSee('data-persists="false"', false)
+            ->assertSee('data-tooth-id="11"', false)
+            ->assertSee('data-tooth-id="48"', false)
+            ->assertSee('dental-condition-changed', false);
+    }
+
+    public function test_rme_general_form_links_validation_error_and_preserves_old_input(): void
+    {
+        $context = $this->calledQueueContext();
+        $this->actingAs($context['doctor_user'])->post(route('doctor.visits.start', $context['queue']));
+        $visit = Visit::query()->sole();
+
+        $this->followingRedirects()
+            ->actingAs($context['doctor_user'])
+            ->from(route('doctor.visits.show', $visit))
+            ->put(route('doctor.visits.complete', $visit), [
+                'subjective' => 'Keluhan lama tetap tampil setelah validasi gagal.',
+                'plan' => 'Observasi dan kontrol.',
+            ])
+            ->assertOk()
+            ->assertSeeText('Keluhan lama tetap tampil setelah validasi gagal.')
+            ->assertSee('data-initial-state="error"', false)
+            ->assertSee('id="assessment_error"', false)
+            ->assertSee('aria-describedby="assessment_description assessment_error"', false)
+            ->assertSee('aria-invalid="true"', false)
+            ->assertSee('role="alert"', false);
     }
 
     public function test_doctor_can_save_simplified_record_with_private_photo_and_without_vital_signs(): void
@@ -176,6 +253,12 @@ class VisitWorkflowTest extends TestCase
             'entity_id' => $visit->id,
         ]);
         Event::assertDispatched(VisitCompleted::class, fn (VisitCompleted $event): bool => $event->visitId === $visit->id);
+
+        $this->actingAs($context['doctor_user'])
+            ->get(route('doctor.visits.show', $visit))
+            ->assertOk()
+            ->assertSee('data-initial-state="finalized"', false)
+            ->assertSee('data-read-only="false"', false);
 
         $this->actingAs($context['doctor_user'])
             ->put(route('doctor.visits.complete', $visit), $this->medicalPayload())
