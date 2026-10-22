@@ -49,6 +49,8 @@ class MedicalRecordCorrectionTest extends TestCase
         $visit = $context['visit'];
         $payload = $this->medicalPayload('Diagnosis terkoreksi');
         $payload['correction_reason'] = 'Memperbaiki diagnosis berdasarkan hasil evaluasi lanjutan.';
+        $payload['prescription_items'][0]['medicine_name'] = 'Ibuprofen 400 mg';
+        $payload['doctor_notes'] = 'Pasien diminta kembali bila gejala memburuk.';
 
         $this->actingAs($context['doctor_user'])
             ->put(route('doctor.visits.correct', $visit), $payload)
@@ -57,6 +59,8 @@ class MedicalRecordCorrectionTest extends TestCase
         $revision = MedicalRecordRevision::query()->sole();
         $this->assertSame('Diagnosis awal', $revision->before_data['record']['assessment']);
         $this->assertSame('Diagnosis terkoreksi', $revision->after_data['record']['assessment']);
+        $this->assertSame('Paracetamol 500 mg', $revision->before_data['prescription_items'][0]['medicine_name']);
+        $this->assertSame('Ibuprofen 400 mg', $revision->after_data['prescription_items'][0]['medicine_name']);
         $this->assertSame($payload['correction_reason'], $revision->reason);
         $this->assertSame($context['doctor_user']->id, $revision->corrected_by_user_id);
         $this->assertSame('Diagnosis terkoreksi', $visit->medicalRecord->refresh()->assessment);
@@ -64,6 +68,49 @@ class MedicalRecordCorrectionTest extends TestCase
             'action' => 'medical_record.corrected',
             'entity_id' => $visit->medicalRecord->id,
         ]);
+
+        $this->actingAs($context['doctor_user'])
+            ->get(route('doctor.visits.show', $visit))
+            ->assertOk()
+            ->assertSeeText('Finalized · Modification')
+            ->assertSeeText('Modification 1')
+            ->assertSeeText($payload['correction_reason'])
+            ->assertSee('<details class="mt-4">', false)
+            ->assertDontSee('<details class="mt-4" open>', false)
+            ->assertSeeText('Lihat semua perubahan')
+            ->assertSeeText('Assessment')
+            ->assertSeeText('Diagnosis awal')
+            ->assertSeeText('Diagnosis terkoreksi')
+            ->assertSeeText('Catatan dokter')
+            ->assertSeeText('Pasien diminta kembali bila gejala memburuk.')
+            ->assertSeeText('Resep')
+            ->assertSeeText('Paracetamol 500 mg')
+            ->assertSeeText('Ibuprofen 400 mg')
+            ->assertSeeText('Lihat detail')
+            ->assertSee('truncate', false)
+            ->assertSee('scrollWidth > this.$refs.preview.clientWidth', false)
+            ->assertSee('open:col-span-full', false)
+            ->assertSee('[overflow-wrap:anywhere]', false);
+    }
+
+    public function test_history_hides_revision_without_medical_record_changes(): void
+    {
+        $context = $this->completedVisitContext();
+        $payload = $this->medicalPayload('Diagnosis awal');
+        $payload['correction_reason'] = 'Konfirmasi data tanpa perubahan isi rekam medis.';
+
+        $this->actingAs($context['doctor_user'])
+            ->put(route('doctor.visits.correct', $context['visit']), $payload)
+            ->assertRedirect();
+
+        $this->assertDatabaseCount('medical_record_revisions', 1);
+
+        $this->actingAs($context['doctor_user'])
+            ->get(route('doctor.visits.show', $context['visit']))
+            ->assertOk()
+            ->assertDontSeeText('Version history / Modification')
+            ->assertDontSeeText('Modification 1')
+            ->assertDontSeeText($payload['correction_reason']);
     }
 
     /** @return array{doctor_user: User, visit: Visit} */
