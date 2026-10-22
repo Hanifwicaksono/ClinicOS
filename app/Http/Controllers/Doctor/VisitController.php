@@ -52,35 +52,8 @@ class VisitController extends Controller
             ->latest('started_at')
             ->limit(10)
             ->get();
-        $dentalQuadrants = [
-            'upper-right' => range(18, 11),
-            'upper-left' => range(21, 28),
-            'lower-right' => range(48, 41),
-            'lower-left' => range(31, 38),
-        ];
-        $dentalChart = [
-            'teeth' => collect($dentalQuadrants)->flatMap(
-                fn (array $numbers, string $quadrant) => collect($numbers)->map(fn (int $number): array => [
-                    'id' => (string) $number,
-                    'label' => "Gigi {$number}",
-                    'quadrant' => $quadrant,
-                    'condition' => 'unknown',
-                ]),
-            )->values()->all(),
-            'conditions' => [
-                ['value' => 'unknown', 'label' => 'Belum dicatat'],
-                ['value' => 'healthy', 'label' => 'Sehat'],
-                ['value' => 'caries', 'label' => 'Karies'],
-                ['value' => 'filled', 'label' => 'Tambalan'],
-                ['value' => 'missing', 'label' => 'Hilang'],
-                ['value' => 'crown', 'label' => 'Mahkota'],
-            ],
-            'selected_tooth' => null,
-            'read_only' => false,
-        ];
-        $criticalAllergies = [];
 
-        return view('doctor.visits.show', compact('visit', 'history', 'dentalChart', 'criticalAllergies'));
+        return view('doctor.visits.show', compact('visit', 'history'));
     }
 
     public function photo(Visit $visit, int $photo): StreamedResponse
