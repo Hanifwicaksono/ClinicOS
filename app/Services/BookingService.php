@@ -7,11 +7,13 @@ use App\Models\Appointment;
 use App\Models\Clinic;
 use App\Models\DoctorSchedule;
 use App\Models\Patient;
+use App\Models\Scopes\ClinicScope;
 use App\Models\Service;
 use App\Models\User;
 use App\QueueStatus;
 use Carbon\CarbonImmutable;
 use DomainException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -65,7 +67,7 @@ class BookingService
                 }
 
                 return [
-                    'appointment' => $existingAppointment->load(['patient', 'doctor.user', 'service', 'schedule', 'queue']),
+                    'appointment' => $this->loadBookingRelations($existingAppointment),
                     'access_token' => $accessToken,
                     'created' => false,
                 ];
@@ -150,7 +152,7 @@ class BookingService
             $this->notificationService->appointmentStatusChanged($appointment, AppointmentStatus::Booked);
 
             return [
-                'appointment' => $appointment->load(['patient', 'doctor.user', 'service', 'schedule', 'queue']),
+                'appointment' => $this->loadBookingRelations($appointment),
                 'access_token' => $accessToken,
                 'created' => true,
             ];
@@ -173,7 +175,9 @@ class BookingService
         }
 
         return DB::transaction(function () use ($appointment, $actor, $reason): Appointment {
-            $lockedAppointment = Appointment::query()->lockForUpdate()->findOrFail($appointment->id);
+            $clinic = Clinic::query()->lockForUpdate()->findOrFail($appointment->clinic_id);
+            abort_unless($this->subscriptionService->allowsOperationalWrites($clinic), 403, 'Akses operasional klinik sedang hanya-baca.');
+            $lockedAppointment = Appointment::query()->where('clinic_id', $clinic->id)->lockForUpdate()->findOrFail($appointment->id);
 
             if ($lockedAppointment->status !== AppointmentStatus::Booked) {
                 throw ValidationException::withMessages([
@@ -198,7 +202,7 @@ class BookingService
                 'cancelled_at' => now(),
                 'cancel_reason' => $reason,
             ]);
-            $queue = $lockedAppointment->queue()->lockForUpdate()->firstOrFail();
+            $queue = $lockedAppointment->queue()->where('clinic_id', $clinic->id)->lockForUpdate()->firstOrFail();
             $previousQueueStatus = $queue->status;
             $queue->update(['status' => QueueStatus::Cancelled, 'cancelled_at' => now()]);
             $this->auditLogger->recordForClinic(
@@ -211,7 +215,7 @@ class BookingService
             $this->notificationService->appointmentStatusChanged($lockedAppointment, AppointmentStatus::Cancelled);
             $this->notificationService->queueStatusChanged($queue->refresh(), $previousQueueStatus);
 
-            return $lockedAppointment->refresh()->load(['patient', 'doctor.user', 'service', 'schedule', 'queue']);
+            return $this->loadBookingRelations($lockedAppointment->refresh());
         }, 3);
     }
 
@@ -220,6 +224,7 @@ class BookingService
     {
         if (! empty($data['patient_id'])) {
             $patient = Patient::query()
+                ->withoutGlobalScope(ClinicScope::class)
                 ->whereKey($data['patient_id'])
                 ->where('clinic_id', $clinic->id)
                 ->where('is_active', true)
@@ -234,6 +239,7 @@ class BookingService
 
         if ($actor?->hasRole('Patient')) {
             $patient = Patient::query()
+                ->withoutGlobalScope(ClinicScope::class)
                 ->where('clinic_id', $clinic->id)
                 ->where('user_id', $actor->id)
                 ->first();
@@ -259,6 +265,14 @@ class BookingService
         ], $actor);
 
         return $patient;
+    }
+
+    private function loadBookingRelations(Appointment $appointment): Appointment
+    {
+        return $appointment->load([
+            'patient' => fn (BelongsTo $query): BelongsTo => $query->withoutGlobalScope(ClinicScope::class)->where('patients.clinic_id', $appointment->clinic_id),
+            'doctor.user', 'service', 'schedule', 'queue',
+        ]);
     }
 
     private function validateAppointmentDate(

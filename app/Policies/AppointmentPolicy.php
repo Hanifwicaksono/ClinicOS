@@ -20,10 +20,18 @@ class AppointmentPolicy
      */
     public function view(User $user, Appointment $appointment): bool
     {
-        return ($user->clinic_id !== null
-            && $user->clinic_id === $appointment->clinic_id
-            && $user->can('appointment.view'))
-            || ($appointment->patient->user_id === $user->id && $user->hasRole('Patient'));
+        return ($this->isClinicStaff($user, $appointment) && $user->can('appointment.view'))
+            || $this->viewOwn($user, $appointment);
+    }
+
+    public function viewOwn(User $user, Appointment $appointment): bool
+    {
+        return $user->can('appointment.view') && $this->ownsAppointment($user, $appointment);
+    }
+
+    public function cancelOwn(User $user, Appointment $appointment): bool
+    {
+        return $user->can('appointment.cancel') && $this->ownsAppointment($user, $appointment);
     }
 
     /**
@@ -49,9 +57,25 @@ class AppointmentPolicy
      */
     public function delete(User $user, Appointment $appointment): bool
     {
-        return (($user->clinic_id !== null && $user->clinic_id === $appointment->clinic_id)
-            || $appointment->patient->user_id === $user->id)
-            && $user->can('appointment.cancel');
+        return ($this->isClinicStaff($user, $appointment) && $user->can('appointment.cancel'))
+            || $this->cancelOwn($user, $appointment);
+    }
+
+    private function isClinicStaff(User $user, Appointment $appointment): bool
+    {
+        return $user->clinic_id !== null
+            && $user->clinic_id === $appointment->clinic_id
+            && $user->hasAnyRole(['Clinic Admin', 'Receptionist', 'Doctor']);
+    }
+
+    private function ownsAppointment(User $user, Appointment $appointment): bool
+    {
+        return $user->hasRole('Patient')
+            && ($user->clinic_id === null || $user->clinic_id === $appointment->clinic_id)
+            && $appointment->patient()
+                ->where('patients.clinic_id', $appointment->clinic_id)
+                ->where('user_id', $user->id)
+                ->exists();
     }
 
     /**

@@ -42,10 +42,6 @@ class EnsureSubscriptionWritable
 
     private function clinic(Request $request): ?Clinic
     {
-        if ($request->user()?->clinic_id !== null) {
-            return $request->user()->clinic;
-        }
-
         foreach (['clinic', 'appointment', 'queue', 'visit'] as $parameter) {
             $model = $request->route($parameter);
 
@@ -58,7 +54,7 @@ class EnsureSubscriptionWritable
             }
         }
 
-        return null;
+        return $request->user()?->clinic;
     }
 
     private function canFinishVisit(Request $request): bool

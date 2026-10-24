@@ -25,7 +25,7 @@ class AppointmentController extends Controller
 
     public function show(Appointment $appointment): View
     {
-        $this->authorize('view', $appointment);
+        $this->authorize('viewOwn', $appointment);
 
         return view('patient.appointments.show', [
             'appointment' => $appointment->load(['clinic', 'patient', 'doctor.user', 'schedule', 'queue']),
@@ -34,7 +34,7 @@ class AppointmentController extends Controller
 
     public function cancel(Request $request, Appointment $appointment, BookingService $bookingService): RedirectResponse
     {
-        $this->authorize('delete', $appointment);
+        $this->authorize('cancelOwn', $appointment);
         $validated = $request->validate(['cancel_reason' => ['nullable', 'string', 'max:500']]);
         $bookingService->cancel($appointment, $request->user(), reason: $validated['cancel_reason'] ?? null);
 

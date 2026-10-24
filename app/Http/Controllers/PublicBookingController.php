@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePublicBookingRequest;
 use App\Models\Appointment;
 use App\Models\Clinic;
+use App\Models\Scopes\ClinicScope;
 use App\Services\BookingService;
 use App\Services\SubscriptionService;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -55,7 +57,11 @@ class PublicBookingController extends Controller
         abort_unless($token !== '' && $bookingService->tokenMatches($appointment, $token), 404);
 
         return view('public.booking-status', [
-            'appointment' => $appointment->load(['clinic', 'patient', 'doctor.user', 'schedule', 'queue']),
+            'appointment' => $appointment->load([
+                'clinic',
+                'patient' => fn (BelongsTo $query): BelongsTo => $query->withoutGlobalScope(ClinicScope::class)->where('patients.clinic_id', $appointment->clinic_id),
+                'doctor.user', 'schedule', 'queue',
+            ]),
             'token' => $token,
         ]);
     }

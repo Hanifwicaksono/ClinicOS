@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Events\QueueUpdated;
+use App\Jobs\BroadcastClinicQueueUpdate;
 use App\Models\Clinic;
 use App\Models\Doctor;
 use App\Models\DoctorSchedule;
@@ -15,10 +16,13 @@ use App\Services\QueueWorkflowService;
 use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\Broadcaster;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
+use Mockery;
 use Tests\TestCase;
 
 class QueueRealtimeTest extends TestCase
@@ -97,6 +101,25 @@ class QueueRealtimeTest extends TestCase
 
         app(QueueWorkflowService::class)->checkIn($booking['appointment']->queue, $receptionist);
 
-        Event::assertDispatched(QueueUpdated::class, fn (QueueUpdated $event): bool => $event->payload['status'] === QueueStatus::Waiting->value);
+        Event::assertNotDispatched(QueueUpdated::class);
+        $pending = DB::table('jobs')->where('payload', 'like', '%BroadcastClinicQueueUpdate%')->value('payload');
+        $this->assertNotNull($pending);
+        $payload = json_decode($pending, true, flags: JSON_THROW_ON_ERROR);
+        $job = unserialize($payload['data']['command']);
+        $this->assertInstanceOf(BroadcastClinicQueueUpdate::class, $job);
+        $this->assertInstanceOf(QueueUpdated::class, $job->event);
+        $this->assertSame(QueueStatus::Waiting->value, $job->event->payload['status']);
+        $transport = Mockery::mock(Broadcaster::class);
+        $transport->shouldReceive('broadcast')->once()->withArgs(function (array $channels, string $event, array $data) use ($clinic, $booking): bool {
+            $this->assertSame('queue.updated', $event);
+            $this->assertSame(QueueStatus::Waiting->value, $data['status']);
+            $this->assertSame($booking['appointment']->queue->id, $data['queue_id']);
+            $this->assertSame(['private-clinic.'.$clinic->id.'.queues', 'clinic.'.$clinic->id.'.queue-board'], array_map(fn (Channel $channel): string => (string) $channel, $channels));
+
+            return true;
+        });
+        Broadcast::extend('capture', fn (): Broadcaster => $transport);
+        config(['broadcasting.default' => 'capture', 'broadcasting.connections.capture' => ['driver' => 'capture']]);
+        app()->call([$job, 'handle']);
     }
 }

@@ -1,4 +1,5 @@
 const subscriptions = new Set();
+const receivedNotificationIds = new Set();
 let refreshTimer;
 let hasConnected = false;
 let connectionState = 'reconnecting';
@@ -221,6 +222,16 @@ function subscribeNotifications() {
     }
 
     window.Echo.private(channelName).notification((notification) => {
+        if (notification.id) {
+            const deliveryKey = `${channelName}:${notification.id}`;
+
+            if (receivedNotificationIds.has(deliveryKey)) {
+                return;
+            }
+
+            receivedNotificationIds.add(deliveryKey);
+        }
+
         const counter = document.querySelector('[data-notification-count]');
 
         if (counter) {
