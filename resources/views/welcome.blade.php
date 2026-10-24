@@ -66,7 +66,7 @@
 
             <div class="co-hero-grid co-container">
                 <div class="co-hero-copy">
-                    <div class="co-eyebrow co-eyebrow-light"><span class="co-live-dot" aria-hidden="true"></span> SATU PLATFORM UNTUK OPERASIONAL KLINIK</div>
+                    
                     <h1 id="hero-title">Klinik lebih teratur.<br><span>Pelayanan lebih fokus.</span></h1>
                     <p class="co-hero-description">Dari pendaftaran sampai rekam medis, semua terhubung di satu tempat. Biar tim klinik nggak habis waktu pindah-pindah sistem.</p>
                     <div class="co-hero-actions">
@@ -147,7 +147,9 @@
         <section class="co-container co-final-wrap"><div class="co-final-cta"><div class="co-final-orbit" aria-hidden="true"></div><div><span class="co-eyebrow co-eyebrow-dark">LANGKAH BERIKUTNYA</span><h2>Yuk, bikin operasional klinik lebih tertata.</h2><p>Mulai dari pendaftaran klinik dan siapkan alur kerja untuk tim Anda.</p></div><a class="co-btn co-btn-white co-btn-large" href="{{ route('register.clinic') }}">Daftarkan klinik <span aria-hidden="true">↗</span></a></div></section>
     </main>
 
-    <footer class="co-footer"><div class="co-container co-footer-inner"><a class="co-brand co-footer-brand" href="{{ route('welcome') }}"><span class="co-brand-mark" aria-hidden="true"><svg viewBox="0 0 38 38" fill="none"><rect x="1" y="1" width="36" height="36" rx="12" fill="#137F67"/><path d="M19 10V28M10 19H28" stroke="white" stroke-width="4.5" stroke-linecap="round"/></svg></span><span>Clinic<span class="co-brand-highlight">OS</span></span></a><span class="co-footer-copyright">© {{ date('Y') }} ClinicOS. Dibuat untuk operasional klinik.</span><nav aria-label="Navigasi footer"><a href="#fitur">Fitur</a><a href="#harga">Harga</a><a href="#faq">FAQ</a><a href="{{ route('login') }}">Masuk</a></nav></div></footer>
+    
+    <footer class="co-footer"><div class="co-container co-footer-inner"> <a class="co-brand co-footer-brand" href="{{ route('welcome') }}"> <img src="{{ asset('assets/logo/ClinicOS green ribbon C symbol.png') }}" alt="ClinicOS" class="co-footer-logo" > <span>Clinic<span class="co-brand-highlight">OS</span> </span> </a> <span class="co-footer-copyright"> © {{ date('Y') }} ClinicOS. Dibuat untuk operasional klinik.</span> <nav aria-label="Navigasi footer"><a href="#fitur">Fitur</a><a href="#harga">Harga</a><a href="#faq">FAQ</a><a href="{{ route('login') }}">Masuk</a> </nav></div></footer>
+
     <script>
         // Menu mobile menggunakan JavaScript biasa, tidak bergantung pada Alpine.
         document.addEventListener('DOMContentLoaded', function () {

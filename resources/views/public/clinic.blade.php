@@ -1,51 +1,202 @@
 <x-public-layout :title="$clinic->name.' — ClinicOS'">
-    <section class="relative overflow-hidden bg-[linear-gradient(135deg,_#253331_0%,_#287f78_56%,_#75afa8_100%)] text-white">
-        <div class="absolute -left-24 -top-28 h-80 w-80 rounded-full bg-clinic-300/30 blur-3xl"></div>
-        <div class="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-[#f8dec5]/25 blur-3xl"></div>
-        <div class="relative mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_.7fr] lg:items-center lg:py-24">
-            <div class="landing-reveal">
-                <div class="flex items-center gap-4"><div class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-3xl bg-white p-2 shadow-lg">@if ($clinic->logo_path)<img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($clinic->logo_path) }}" alt="Logo {{ $clinic->name }}" class="h-full w-full object-contain">@else<span class="font-display text-3xl font-extrabold text-clinic-700">{{ str($clinic->name)->substr(0, 1)->upper() }}</span>@endif</div><span class="inline-flex rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-clinic-100">Informasi klinik</span></div>
-                <h1 class="mt-6 font-display text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl">{{ $clinic->name }}</h1>
-                <p class="mt-5 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">{{ $clinic->description ?: 'Pelayanan kesehatan dengan pendaftaran yang mudah dan jadwal yang transparan.' }}</p>
+    {{--
+        Tampilan profil klinik / public clinic.
+        Data dan route tetap berasal dari controller ClinicOS.
+        Stylesheet terpisah agar desain halaman ini tidak memengaruhi area admin/dokter.
+    --}}
+    <link rel="stylesheet" href="{{ asset('css/clinicos-clinic.css') }}">
 
-                @if ($clinic->address || $clinic->phone)
-                    <div class="mt-7 flex flex-wrap gap-3 text-sm font-semibold text-white/85">
-                        @if ($clinic->address)<span class="rounded-full bg-white/10 px-4 py-2">{{ $clinic->address }}</span>@endif
-                        @if ($clinic->phone)<span class="rounded-full bg-white/10 px-4 py-2">{{ $clinic->phone }}</span>@endif
+    <div class="co-clinic-page" id="konten-utama">
+        <section class="co-clinic-hero" aria-labelledby="clinic-heading">
+            {{-- Aset ini mengikuti file yang tercatat pada audit: public/assets/logo/clinic-bg.png --}}
+            <div class="co-clinic-hero-photo" aria-hidden="true"
+                style="background-image: url('{{ asset('assets/logo/clinic-bg.png') }}')"></div>
+            <div class="co-clinic-hero-overlay" aria-hidden="true"></div>
+            <div class="co-clinic-hero-glow" aria-hidden="true"></div>
+
+            <div class="co-clinic-container co-clinic-hero-inner">
+                <div class="co-clinic-hero-copy">
+                    <a class="co-clinic-back" href="{{ route('welcome') }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m14 6-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        ClinicOS <span aria-hidden="true">/</span> Profil klinik
+                    </a>
+
+                    <div class="co-clinic-identity">
+                        <span class="co-clinic-logo">
+                            @if ($clinic->logo_path)
+                                <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($clinic->logo_path) }}" alt="Logo {{ $clinic->name }}">
+                            @else
+                                <span aria-hidden="true">{{ str($clinic->name)->substr(0, 1)->upper() }}</span>
+                            @endif
+                        </span>
+                        <span class="co-clinic-eyebrow"><span class="co-clinic-live-dot" aria-hidden="true"></span> PROFIL KLINIK</span>
                     </div>
-                @endif
 
-                <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-                    <a href="{{ route('public.queue.index', $clinic) }}" class="inline-flex min-h-11 items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-clinic-950 shadow-lg transition hover:bg-clinic-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-clinic-600">Lihat antrean</a>
-                    <a href="{{ route('public.booking.create', $clinic) }}" class="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#f8dec5] px-6 py-3.5 text-sm font-bold text-clinic-950 shadow-lg transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f8dec5] focus-visible:ring-offset-2 focus-visible:ring-offset-clinic-600">Buat booking</a>
+                    <h1 id="clinic-heading">{{ $clinic->name }}</h1>
+                    <p class="co-clinic-hero-description">{{ $clinic->description ?: 'Pelayanan kesehatan dengan pendaftaran yang mudah dan jadwal yang transparan.' }}</p>
+
+                    @if ($clinic->address || $clinic->phone)
+                        <div class="co-clinic-contact" aria-label="Informasi kontak klinik">
+                            @if ($clinic->address)
+                                <span class="co-clinic-contact-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                                    {{ $clinic->address }}
+                                </span>
+                            @endif
+                            @if ($clinic->phone)
+                                <span class="co-clinic-contact-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7.4 3h3l1 4-2 2a15 15 0 0 0 5.6 5.6l2-2 4 1v3a3 3 0 0 1-3.3 3A17.5 17.5 0 0 1 4.5 6.3 3 3 0 0 1 7.4 3Z"/></svg>
+                                    {{ $clinic->phone }}
+                                </span>
+                            @endif
+                        </div>
+                    @endif
+
+                    <div class="co-clinic-hero-actions">
+                        <a href="{{ route('public.booking.create', $clinic) }}" class="co-clinic-button co-clinic-button-mint">
+                            Buat booking
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                        <a href="{{ route('public.queue.index', $clinic) }}" class="co-clinic-button co-clinic-button-glass">
+                            Lihat antrean
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 5h11v14H8zM5 8h3M5 12h3M5 16h3M11 10h5M11 14h5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <aside class="co-clinic-overview" aria-label="Ringkasan informasi klinik">
+                    <div class="co-clinic-overview-heading">
+                        <span class="co-clinic-overview-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V7l8-4 8 4v13M4 20h16M9 20v-7h6v7M8 9h1m6 0h1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <div><span class="co-clinic-mini-label">LAYANAN KLINIK</span><strong>Siap bantu kunjungan Anda</strong></div>
+                    </div>
+                    <div class="co-clinic-stats">
+                        <div class="co-clinic-stat">
+                            <span class="co-clinic-stat-icon co-clinic-stat-icon-green" aria-hidden="true">✚</span>
+                            <strong>{{ $clinic->services->count() }}</strong>
+                            <span>Layanan aktif</span>
+                        </div>
+                        <div class="co-clinic-stat">
+                            <span class="co-clinic-stat-icon co-clinic-stat-icon-cream" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0" stroke-linecap="round"/></svg>
+                            </span>
+                            <strong>{{ $clinic->doctors->count() }}</strong>
+                            <span>Dokter praktik</span>
+                        </div>
+                    </div>
+                    <div class="co-clinic-steps">
+                        <div class="co-clinic-steps-header"><span>ALUR KUNJUNGAN</span><span class="co-clinic-step-badge">3 langkah</span></div>
+                        <div class="co-clinic-step"><span class="co-clinic-step-number">01</span><div><strong>Pilih layanan</strong><small>Lihat biaya dan durasi layanan</small></div></div>
+                        <div class="co-clinic-step"><span class="co-clinic-step-number">02</span><div><strong>Atur jadwal</strong><small>Sesuaikan dengan sesi dokter</small></div></div>
+                        <div class="co-clinic-step"><span class="co-clinic-step-number">03</span><div><strong>Pantau antrean</strong><small>Ikuti informasi antrean klinik</small></div></div>
+                    </div>
+                    <div class="co-clinic-overview-foot"><span class="co-clinic-overview-foot-dot" aria-hidden="true"></span> Informasi layanan terhubung ke ClinicOS</div>
+                </aside>
+            </div>
+        </section>
+
+        <div class="co-clinic-benefits" aria-label="Akses cepat">
+            <div class="co-clinic-container co-clinic-benefit-inner">
+                <a href="#layanan"><span class="co-clinic-benefit-symbol" aria-hidden="true">✚</span><span>Jelajahi layanan klinik</span><span aria-hidden="true">↗</span></a>
+                <a href="#dokter"><span class="co-clinic-benefit-symbol" aria-hidden="true">◷</span><span>Cek jadwal praktik</span><span aria-hidden="true">↗</span></a>
+                <a href="{{ route('public.queue.index', $clinic) }}"><span class="co-clinic-benefit-symbol" aria-hidden="true">☷</span><span>Informasi antrean</span><span aria-hidden="true">↗</span></a>
+            </div>
+        </div>
+
+        <section class="co-clinic-section co-clinic-services" id="layanan" aria-labelledby="services-heading">
+            <div class="co-clinic-container">
+                <div class="co-clinic-section-heading">
+                    <div>
+                        <span class="co-clinic-section-kicker">LAYANAN TERSEDIA</span>
+                        <h2 id="services-heading">Perawatan yang Anda butuhkan,<br><span>semua ada di sini.</span></h2>
+                    </div>
+                    <p></p>
+                </div>
+
+                <div class="co-clinic-service-grid">
+                    @forelse ($clinic->services as $service)
+                        <article class="co-clinic-service-card">
+                            <div class="co-clinic-service-top">
+                                <span class="co-clinic-service-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="co-clinic-service-index">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }} / LAYANAN</span>
+                            </div>
+                            <h3>{{ $service->name }}</h3>
+                            <p>{{ $service->description ?: 'Informasi lengkap layanan dapat dilihat saat proses booking.' }}</p>
+                            <div class="co-clinic-service-footer">
+                                <div><small>BIAYA LAYANAN</small><strong>Rp {{ number_format((float) $service->price, 0, ',', '.') }}</strong></div>
+                                <span class="co-clinic-duration">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg>
+                                    {{ $service->duration_minutes }} menit
+                                </span>
+                            </div>
+                            <a class="co-clinic-service-link" href="{{ route('public.booking.create', $clinic) }}" aria-label="Buat booking untuk {{ $service->name }}">Buat booking <span aria-hidden="true">↗</span></a>
+                        </article>
+                    @empty
+                        <div class="co-clinic-empty"><span aria-hidden="true">✚</span><h3>Layanan belum tersedia</h3><p>Belum ada layanan aktif yang ditampilkan oleh klinik.</p></div>
+                    @endforelse
                 </div>
             </div>
+        </section>
 
-            <aside class="landing-reveal landing-reveal-delay rounded-[2rem] bg-white/10 p-5 backdrop-blur-sm sm:p-7">
-                <p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-100">Ringkasan layanan</p>
-                <div class="mt-6 grid grid-cols-2 gap-3">
-                    <div class="rounded-2xl bg-white p-5 text-clinic-950"><p class="font-display text-3xl font-extrabold">{{ $clinic->services->count() }}</p><p class="mt-1 text-sm font-semibold text-slate-500">layanan aktif</p></div>
-                    <div class="rounded-2xl bg-white/10 p-5"><p class="font-display text-3xl font-extrabold">{{ $clinic->doctors->count() }}</p><p class="mt-1 text-sm font-semibold text-white/75">dokter praktik</p></div>
+        <section class="co-clinic-section co-clinic-doctors" id="dokter" aria-labelledby="doctors-heading">
+            <div class="co-clinic-container">
+                <div class="co-clinic-section-heading">
+                    <div>
+                        <span class="co-clinic-section-kicker">DOKTER & JADWAL</span>
+                        <h2 id="doctors-heading">Kenali dokter dan<br><span>waktu praktiknya.</span></h2>
+                    </div>
+                    <p></p>
                 </div>
-                <div class="mt-4 rounded-2xl bg-[#f8dec5]/15 p-5"><p class="text-sm font-bold">Rencanakan kunjungan Anda</p><p class="mt-2 text-sm leading-6 text-white/75">Pilih layanan dan sesi dokter yang sesuai sebelum membuat booking.</p></div>
-            </aside>
-        </div>
-    </section>
 
-    <section class="bg-[#f7f8f5] py-20 lg:py-28">
-        <div class="mx-auto max-w-6xl px-5 sm:px-8">
-            <div class="max-w-2xl"><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Layanan aktif</p><h2 class="mt-3 font-display text-3xl font-extrabold text-clinic-950 sm:text-4xl">Pilih kebutuhan perawatan Anda.</h2><p class="mt-4 leading-7 text-slate-600">Lihat layanan yang tersedia, perkiraan durasi, dan biaya sebelum melanjutkan ke booking.</p></div>
-            <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">@forelse($clinic->services as $service)<article class="rounded-3xl bg-white p-6 shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-elevated"><h3 class="text-lg font-extrabold text-slate-900">{{ $service->name }}</h3><p class="mt-3 min-h-12 text-sm leading-6 text-slate-500">{{ $service->description ?: 'Informasi layanan tersedia saat booking.' }}</p><div class="mt-6 flex items-end justify-between"><p class="font-display text-lg font-extrabold text-clinic-700">Rp {{ number_format((float) $service->price, 0, ',', '.') }}</p><span class="rounded-full bg-clinic-50 px-3 py-1.5 text-xs font-bold text-clinic-700">{{ $service->duration_minutes }} menit</span></div></article>@empty<p class="text-slate-500">Belum ada layanan aktif.</p>@endforelse</div>
-        </div>
-    </section>
+                <div class="co-clinic-doctor-grid">
+                    @forelse ($clinic->doctors as $doctor)
+                        <article class="co-clinic-doctor-card">
+                            <div class="co-clinic-doctor-top">
+                                <div class="co-clinic-doctor-avatar" aria-hidden="true">{{ str($doctor->user?->name ?? 'Dokter')->substr(0, 1)->upper() }}</div>
+                                <div class="co-clinic-doctor-details">
+                                    <h3>{{ $doctor->user?->name ?? 'Dokter' }}</h3>
+                                    <p>{{ $doctor->specialization ?: 'Dokter' }}</p>
+                                </div>
+                                <span class="co-clinic-doctor-tag">DOKTER</span>
+                            </div>
+                            <div class="co-clinic-schedules">
+                                <div class="co-clinic-schedules-title"><span>JADWAL PRAKTIK</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></svg></div>
+                                <div class="co-clinic-schedule-list">
+                                    @forelse ($doctor->schedules as $schedule)
+                                        <div class="co-clinic-schedule">
+                                            <span>{{ $schedule->day_name }}</span>
+                                            <strong>{{ substr($schedule->start_time, 0, 5) }} – {{ substr($schedule->end_time, 0, 5) }}</strong>
+                                        </div>
+                                    @empty
+                                        <p class="co-clinic-schedule-empty">Jadwal praktik belum tersedia.</p>
+                                    @endforelse
+                                </div>
+                            </div>
+                            <a href="{{ route('public.booking.create', $clinic) }}" class="co-clinic-doctor-link">Lanjut ke booking <span aria-hidden="true">↗</span></a>
+                        </article>
+                    @empty
+                        <div class="co-clinic-empty"><span aria-hidden="true">◷</span><h3>Jadwal dokter belum tersedia</h3><p>Silakan cek kembali informasi praktik di lain waktu.</p></div>
+                    @endforelse
+                </div>
+            </div>
+        </section>
 
-    <section class="relative overflow-hidden bg-[linear-gradient(135deg,_#e1f0ed_0%,_#f8fcfa_52%,_#fff0e3_100%)] py-20 lg:py-28">
-        <div class="absolute -right-20 top-0 h-72 w-72 rounded-full bg-clinic-200/60 blur-3xl"></div>
-        <div class="relative mx-auto max-w-6xl px-5 sm:px-8">
-            <div class="max-w-2xl"><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Dokter & sesi</p><h2 class="mt-3 font-display text-3xl font-extrabold text-clinic-950 sm:text-4xl">Jadwal Praktik Dokter Aktif</h2><p class="mt-4 leading-7 text-slate-600">Temukan dokter dan waktu konsultasi yang tersedia untuk kunjungan Anda.</p></div>
-            <div class="mt-10 grid gap-5 lg:grid-cols-2">@forelse($clinic->doctors as $doctor)<article class="rounded-3xl bg-white/90 p-6 shadow-card"><div class="flex items-start gap-4"><div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-clinic-500 font-display text-lg font-extrabold text-white">{{ str($doctor->user->name)->substr(0, 1)->upper() }}</div><div><h3 class="font-extrabold text-slate-900">{{ $doctor->user->name }}</h3><p class="mt-1 text-sm text-clinic-600">{{ $doctor->specialization ?: 'Dokter' }}</p></div></div><div class="mt-6 flex flex-wrap gap-2">@forelse($doctor->schedules as $schedule)<span class="rounded-xl bg-clinic-50 px-3 py-2 text-xs font-semibold text-clinic-700">{{ $schedule->day_name }}, {{ substr($schedule->start_time, 0, 5) }}–{{ substr($schedule->end_time, 0, 5) }}</span>@empty<span class="text-sm text-slate-500">Jadwal belum tersedia.</span>@endforelse</div></article>@empty<p class="text-slate-500">Belum ada jadwal dokter aktif.</p>@endforelse</div>
-        </div>
-    </section>
-
-    <section class="bg-clinic-950 py-16 text-white sm:py-20"><div class="mx-auto flex max-w-6xl flex-col gap-6 px-5 sm:px-8 lg:flex-row lg:items-center lg:justify-between"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-300">Siap berkunjung?</p><h2 class="mt-3 font-display text-3xl font-extrabold">Atur kunjungan Anda dengan lebih mudah.</h2></div><x-clinic-button href="{{ route('public.booking.create', $clinic) }}" variant="primary" class="shrink-0 px-6 py-3.5">Buat booking</x-clinic-button></div></section>
+        <section class="co-clinic-container co-clinic-last-wrap" id="booking" aria-labelledby="booking-heading">
+            <div class="co-clinic-last-cta">
+                <div class="co-clinic-last-orbit" aria-hidden="true"></div>
+                <div class="co-clinic-last-copy">
+                    <span class="co-clinic-last-label">LANGKAH SELANJUTNYA</span>
+                    <h2 id="booking-heading">Sudah tahu mau periksa kapan?</h2>
+                    <p>Atur kunjungan di {{ $clinic->name }} lewat proses booking ClinicOS.</p>
+                </div>
+                <a href="{{ route('public.booking.create', $clinic) }}" class="co-clinic-button co-clinic-button-white">
+                    Buat booking
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </div>
+        </section>
+    </div>
 </x-public-layout>

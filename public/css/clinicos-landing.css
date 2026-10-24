@@ -257,8 +257,9 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
     color: #ffffff;
 }
 
-/* Hilangkan dekorasi lingkaran */
 .co-hero .co-decor {display: none;}
+.co-footer-logo {width: 42px;height: 42px;object-fit: contain;flex-shrink: 0;}
+.co-footer-brand { display: inline-flex;align-items: center;gap: 10px;}
 
 @media(max-width:1100px){.co-container{width:min(100% - 48px,1050px)}.co-hero-grid{gap:22px}.co-hero h1{font-size:clamp(39px,4.8vw,58px)}.co-dashboard-body{padding:15px 13px}.co-dashboard{min-height:422px}.co-kpi{padding:11px 7px}.co-dashboard-heading{margin-top:17px}.co-benefit-grid>div{font-size:11px}.co-workflow-layout{gap:64px}.co-faq-layout{gap:56px}}
 @media(max-width:960px){.co-desktop-nav,.co-header-actions{display:none}.co-header-inner{min-height:70px;justify-content:space-between}.co-menu-button{display:block}.co-mobile-menu:not([hidden]){display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:2px;padding:14px 24px 22px;border-bottom:1px solid #e2e8e3;background:#fff;box-shadow:0 18px 30px #1c49321c}.co-mobile-menu a{padding:12px 15px;border-radius:9px;font-size:14px;font-weight:700;color:#2e5144}.co-mobile-menu a:hover{background:#f0f8f2}.co-mobile-menu .co-mobile-cta{margin-top:7px;background:#167d64;color:#fff}.co-hero-grid{grid-template-columns:1fr;gap:28px;min-height:auto;padding-top:65px;padding-bottom:65px}.co-hero-copy{max-width:700px}.co-hero h1{max-width:630px;font-size:clamp(43px,6.8vw,67px)}.co-hero-visual{width:min(100%,665px);margin:0 auto;padding:18px 7px 20px}.co-decor-one{right:-35px}.co-decor-two{right:-115px}.co-benefit-grid{flex-wrap:wrap;justify-content:center;padding:24px 0;gap:20px 35px;min-height:auto}.co-benefit-grid>span{max-width:none;width:100%;text-align:center}.co-section{padding:78px 0}.co-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.co-feature-card-primary{grid-column:span 2}.co-workflow-layout{gap:45px}.co-pricing-grid{gap:12px}.co-price-card{padding:27px 19px}.co-faq-layout{grid-template-columns:1fr;gap:22px}.co-faq-layout>div:first-child>p{max-width:600px}.co-final-cta{padding:43px 37px}}
