@@ -37,6 +37,7 @@ class OwnerOnboardingTest extends TestCase
             ->set('email', 'owner@baru.test')
             ->set('password', 'password')
             ->set('password_confirmation', 'password')
+            ->set('accept_terms', true)
             ->call('register');
 
         $component->assertRedirect(route('dashboard', absolute: false));
@@ -44,12 +45,27 @@ class OwnerOnboardingTest extends TestCase
         $this->assertSame(UserAccountType::ClinicOwner, $owner->account_type);
         $this->assertTrue($owner->hasRole('Clinic Admin'));
         $this->assertNull($owner->clinic_id);
+        $this->assertNotNull($owner->terms_accepted_at);
         Notification::assertSentTo($owner, VerifyEmail::class);
         $this->get(route('dashboard'))->assertRedirect(route('verification.notice'));
 
         $owner->markEmailAsVerified();
         $this->actingAs($owner->fresh())->get(route('dashboard'))
             ->assertRedirect(route('onboarding.clinic.create'));
+    }
+
+    public function test_owner_must_accept_terms_to_register(): void
+    {
+        Volt::test('pages.auth.register-clinic')
+            ->set('name', 'Pemilik Klinik')
+            ->set('email', 'owner@baru.test')
+            ->set('password', 'password')
+            ->set('password_confirmation', 'password')
+            ->call('register')
+            ->assertHasErrors('accept_terms')
+            ->assertNoRedirect();
+
+        $this->assertDatabaseCount('users', 0);
     }
 
     public function test_owner_creates_exactly_one_clinic_and_resumes_at_plan_selection(): void

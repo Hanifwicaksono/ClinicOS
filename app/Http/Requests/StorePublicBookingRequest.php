@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Clinic;
+use App\UserAccountType;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,8 +15,14 @@ class StorePublicBookingRequest extends FormRequest
     public function authorize(): bool
     {
         $clinic = $this->route('clinic');
+        $user = $this->user();
 
-        return $clinic instanceof Clinic && $clinic->is_active;
+        return $clinic instanceof Clinic
+            && $clinic->is_active
+            && $user?->is_active
+            && $user->account_type === UserAccountType::Patient
+            && $user->hasRole('Patient')
+            && $user->can('appointment.create');
     }
 
     /**
@@ -32,12 +39,11 @@ class StorePublicBookingRequest extends FormRequest
             'appointment_date' => ['required', 'date_format:Y-m-d'],
             'idempotency_key' => ['required', 'uuid'],
             'name' => ['required', 'string', 'max:150'],
-            'nik' => ['nullable', 'string', 'max:30'],
             'birth_date' => ['required', 'date', 'before_or_equal:today'],
             'gender' => ['required', 'in:MALE,FEMALE'],
             'phone' => ['required', 'string', 'max:30'],
-            'email' => ['nullable', 'email', 'max:255'],
-            'address' => ['nullable', 'string', 'max:1500'],
+            'email' => ['required', 'email', 'max:255'],
+            'address' => ['required', 'string', 'max:1500'],
             'notes' => ['nullable', 'string', 'max:1000'],
         ];
     }

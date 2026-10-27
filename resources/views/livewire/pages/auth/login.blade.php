@@ -32,6 +32,17 @@ new #[Layout('layouts.guest')] class extends Component
     </div>
 
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-input-error :messages="$errors->get('google')" class="mb-4" />
+
+    <a href="{{ route('auth.google.redirect') }}" class="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-700 transition hover:border-clinic-400 hover:text-clinic-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 focus-visible:ring-offset-2">
+        Lanjutkan dengan Google
+    </a>
+
+    <div class="my-5 flex items-center gap-3" aria-hidden="true">
+        <span class="h-px flex-1 bg-slate-200"></span>
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">atau</span>
+        <span class="h-px flex-1 bg-slate-200"></span>
+    </div>
 
     <form wire:submit="login" class="space-y-5">
         <div>

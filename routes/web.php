@@ -59,9 +59,10 @@ Route::post('payments/doku/notification', DokuNotificationController::class)
 Route::get('clinic/{clinic:slug}', [PublicClinicController::class, 'show'])->name('public.clinic.show');
 Route::get('clinic/{clinic:slug}/queue', [PublicQueueController::class, 'index'])
     ->middleware('throttle:60,1')->name('public.queue.index');
-Route::get('clinic/{clinic:slug}/booking', [PublicBookingController::class, 'create'])->name('public.booking.create');
+Route::get('clinic/{clinic:slug}/booking', [PublicBookingController::class, 'create'])
+    ->middleware(['auth', 'verified', 'role:Patient'])->name('public.booking.create');
 Route::post('clinic/{clinic:slug}/booking', [PublicBookingController::class, 'store'])
-    ->middleware(['subscription.writable', 'throttle:10,1'])->name('public.booking.store');
+    ->middleware(['auth', 'verified', 'role:Patient', 'subscription.writable', 'throttle:10,1'])->name('public.booking.store');
 Route::get('booking/{appointment}/status', [PublicBookingController::class, 'status'])
     ->middleware('throttle:30,1')->name('public.booking.status');
 Route::post('booking/{appointment}/cancel', [PublicBookingController::class, 'cancel'])

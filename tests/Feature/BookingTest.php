@@ -11,6 +11,7 @@ use App\Models\Patient;
 use App\Models\Service;
 use App\Models\User;
 use App\Services\BookingService;
+use App\UserAccountType;
 use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
@@ -29,11 +30,14 @@ class BookingTest extends TestCase
     public function test_public_booking_form_has_a_submit_button(): void
     {
         [$clinic] = $this->bookingContext();
+        $patient = $this->patientUser();
 
-        $this->get(route('public.booking.create', $clinic))
+        $this->actingAs($patient)->get(route('public.booking.create', $clinic))
             ->assertOk()
             ->assertSee('type="submit"', false)
-            ->assertSee('Konfirmasi booking');
+            ->assertSee('Konfirmasi booking')
+            ->assertDontSee('name="nik"', false)
+            ->assertSee('name="address"', false);
     }
 
     public function test_receptionist_booking_form_has_a_submit_button(): void
@@ -66,12 +70,30 @@ class BookingTest extends TestCase
             ->assertJsonMissing(['id' => $otherClinicPatient->id]);
     }
 
-    public function test_guest_booking_creates_patient_appointment_and_queue_atomically(): void
+    public function test_guest_cannot_open_or_submit_public_booking(): void
     {
         [$clinic, $doctor, $service, $schedule, $date] = $this->bookingContext();
+
+        $this->get(route('public.booking.create', $clinic))->assertRedirect(route('login'));
+        $this->post(route('public.booking.store', $clinic), $this->bookingPayload(
+            $doctor,
+            $service,
+            $schedule,
+            $date,
+            Str::uuid()->toString(),
+        ))->assertRedirect(route('login'));
+
+        $this->assertDatabaseCount('patients', 0);
+        $this->assertDatabaseCount('appointments', 0);
+    }
+
+    public function test_authenticated_patient_booking_creates_patient_appointment_and_queue_atomically(): void
+    {
+        [$clinic, $doctor, $service, $schedule, $date] = $this->bookingContext();
+        $patientUser = $this->patientUser();
         $idempotencyKey = Str::uuid()->toString();
 
-        $response = $this->post(route('public.booking.store', $clinic), $this->bookingPayload(
+        $response = $this->actingAs($patientUser)->post(route('public.booking.store', $clinic), $this->bookingPayload(
             $doctor,
             $service,
             $schedule,
@@ -82,6 +104,11 @@ class BookingTest extends TestCase
         $appointment = Appointment::query()->firstOrFail();
         $response->assertRedirect();
         $this->assertDatabaseCount('patients', 1);
+        $this->assertDatabaseHas('patients', [
+            'clinic_id' => $clinic->id,
+            'user_id' => $patientUser->id,
+            'nik' => null,
+        ]);
         $this->assertDatabaseHas('appointments', [
             'clinic_id' => $clinic->id,
             'patient_id' => $appointment->patient_id,
@@ -96,12 +123,31 @@ class BookingTest extends TestCase
         ]);
     }
 
+    public function test_public_booking_requires_all_patient_identity_fields(): void
+    {
+        [$clinic, $doctor, $service, $schedule, $date] = $this->bookingContext();
+        $patient = $this->patientUser();
+        $payload = $this->bookingPayload($doctor, $service, $schedule, $date, Str::uuid()->toString());
+
+        foreach (['name', 'birth_date', 'gender', 'phone', 'email', 'address'] as $field) {
+            unset($payload[$field]);
+        }
+
+        $this->actingAs($patient)
+            ->post(route('public.booking.store', $clinic), $payload)
+            ->assertSessionHasErrors(['name', 'birth_date', 'gender', 'phone', 'email', 'address']);
+
+        $this->assertDatabaseCount('patients', 0);
+        $this->assertDatabaseCount('appointments', 0);
+    }
+
     public function test_idempotency_key_returns_same_booking_without_duplicate_rows(): void
     {
         [$clinic, $doctor, $service, $schedule, $date] = $this->bookingContext();
+        $patient = $this->patientUser();
         $payload = $this->bookingPayload($doctor, $service, $schedule, $date, Str::uuid()->toString());
 
-        $this->post(route('public.booking.store', $clinic), $payload)->assertRedirect();
+        $this->actingAs($patient)->post(route('public.booking.store', $clinic), $payload)->assertRedirect();
         $this->post(route('public.booking.store', $clinic), $payload)->assertRedirect();
 
         $this->assertDatabaseCount('patients', 1);
@@ -112,9 +158,10 @@ class BookingTest extends TestCase
     public function test_service_must_belong_to_selected_doctor_and_failure_leaves_no_partial_data(): void
     {
         [$clinic, $doctor, , $schedule, $date] = $this->bookingContext();
+        $patient = $this->patientUser();
         $otherService = Service::factory()->for($clinic)->create();
 
-        $this->from(route('public.booking.create', $clinic))
+        $this->actingAs($patient)->from(route('public.booking.create', $clinic))
             ->post(route('public.booking.store', $clinic), $this->bookingPayload(
                 $doctor,
                 $otherService,
@@ -143,8 +190,8 @@ class BookingTest extends TestCase
         $this->get(route('public.booking.status', ['appointment' => $appointment, 'token' => 'wrong']))->assertNotFound();
         $this->get(route('public.booking.status', ['appointment' => $appointment, 'token' => $result['access_token']]))
             ->assertOk()
-            ->assertSee($appointment->booking_code)
-            ->assertDontSee($appointment->patient->nik);
+            ->assertSee($appointment->booking_code);
+        $this->assertNull($appointment->patient->nik);
 
         $this->post(route('public.booking.cancel', $appointment), [
             'token' => $result['access_token'],
@@ -177,6 +224,34 @@ class BookingTest extends TestCase
         $this->assertDatabaseCount('patients', 1);
     }
 
+    public function test_existing_patient_profile_is_prefilled_and_updated_without_nik(): void
+    {
+        [$clinic, $doctor, $service, $schedule, $date] = $this->bookingContext();
+        $patientUser = $this->patientUser();
+        $patient = Patient::factory()->for($clinic)->for($patientUser)->create([
+            'name' => 'Nama Lama',
+            'nik' => '3273010101900001',
+            'address' => 'Alamat Lama',
+        ]);
+
+        $this->actingAs($patientUser)
+            ->get(route('public.booking.create', $clinic))
+            ->assertOk()
+            ->assertSee('Nama Lama')
+            ->assertSee('Alamat Lama')
+            ->assertDontSee('3273010101900001');
+
+        $payload = $this->bookingPayload($doctor, $service, $schedule, $date, Str::uuid()->toString());
+        $payload['name'] = 'Nama Baru';
+        $payload['address'] = 'Alamat Baru';
+
+        $this->post(route('public.booking.store', $clinic), $payload)->assertRedirect();
+
+        $this->assertSame('Nama Baru', $patient->fresh()->name);
+        $this->assertSame('Alamat Baru', $patient->fresh()->address);
+        $this->assertSame('3273010101900001', $patient->fresh()->nik);
+    }
+
     /** @return array{Clinic, Doctor, Service, DoctorSchedule, string} */
     private function bookingContext(array $scheduleOverrides = []): array
     {
@@ -196,6 +271,14 @@ class BookingTest extends TestCase
         return [$clinic, $doctor, $service, $schedule, $date->toDateString()];
     }
 
+    private function patientUser(): User
+    {
+        $patient = User::factory()->create(['account_type' => UserAccountType::Patient]);
+        $patient->assignRole('Patient');
+
+        return $patient;
+    }
+
     /** @return array<string, mixed> */
     private function bookingPayload(
         Doctor $doctor,
@@ -211,7 +294,6 @@ class BookingTest extends TestCase
             'appointment_date' => $date,
             'idempotency_key' => $idempotencyKey,
             'name' => 'Siti Rahma',
-            'nik' => '3273010101900001',
             'birth_date' => '1990-01-01',
             'gender' => 'FEMALE',
             'phone' => '081234567890',

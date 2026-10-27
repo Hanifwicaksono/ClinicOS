@@ -8,6 +8,7 @@ use App\Models\Clinic;
 use App\Models\Scopes\ClinicScope;
 use App\Services\BookingService;
 use App\Services\SubscriptionService;
+use App\UserAccountType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,8 +17,9 @@ use Illuminate\View\View;
 
 class PublicBookingController extends Controller
 {
-    public function create(Clinic $clinic, SubscriptionService $subscriptionService): View
+    public function create(Request $request, Clinic $clinic, SubscriptionService $subscriptionService): View
     {
+        abort_unless($request->user()?->account_type === UserAccountType::Patient, 403);
         abort_unless($clinic->is_active && $subscriptionService->canCreateBooking($clinic), 404);
 
         $clinic->load([
@@ -35,6 +37,7 @@ class PublicBookingController extends Controller
         return view('public.booking', [
             'clinic' => $clinic,
             'idempotencyKey' => Str::uuid()->toString(),
+            'patientProfile' => $request->user()->patientProfiles()->where('clinic_id', $clinic->id)->first(),
         ]);
     }
 

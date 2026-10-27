@@ -245,6 +245,15 @@ class BookingService
                 ->first();
 
             if ($patient !== null) {
+                $patient->fill(Arr::only($data, ['name', 'birth_date', 'gender', 'phone', 'email', 'address']));
+
+                if ($patient->isDirty()) {
+                    $patient->save();
+                    $this->auditLogger->recordForClinic($clinic, 'patient.updated', $patient, [
+                        'source' => 'PATIENT_BOOKING',
+                    ], $actor);
+                }
+
                 return $patient;
             }
         }

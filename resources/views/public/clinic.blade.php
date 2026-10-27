@@ -1,4 +1,5 @@
 <x-public-layout :title="$clinic->name.' — ClinicOS'">
+    @php($isPatientAccount = auth()->check() && auth()->user()->account_type === \App\UserAccountType::Patient && auth()->user()->hasRole('Patient'))
     {{--
         Tampilan profil klinik / public clinic.
         Data dan route tetap berasal dari controller ClinicOS.
@@ -53,10 +54,18 @@
                     @endif
 
                     <div class="co-clinic-hero-actions">
-                        <a href="{{ route('public.booking.create', $clinic) }}" class="co-clinic-button co-clinic-button-mint">
-                            Buat booking
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </a>
+                        @if ($isPatientAccount)
+                            <a href="{{ route('public.booking.create', $clinic) }}" class="co-clinic-button co-clinic-button-mint">
+                                Buat booking
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </a>
+                            <a href="{{ route('patient.dashboard') }}" class="co-clinic-button co-clinic-button-glass">Dashboard pasien</a>
+                        @elseif (auth()->guest())
+                            <a href="{{ route('public.booking.create', $clinic) }}" class="co-clinic-button co-clinic-button-mint">
+                                Masuk untuk booking
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </a>
+                        @endif
                         <a href="{{ route('public.queue.index', $clinic) }}" class="co-clinic-button co-clinic-button-glass">
                             Lihat antrean
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 5h11v14H8zM5 8h3M5 12h3M5 16h3M11 10h5M11 14h5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -132,7 +141,11 @@
                                     {{ $service->duration_minutes }} menit
                                 </span>
                             </div>
-                            <a class="co-clinic-service-link" href="{{ route('public.booking.create', $clinic) }}" aria-label="Buat booking untuk {{ $service->name }}">Buat booking <span aria-hidden="true">↗</span></a>
+                            @if ($isPatientAccount || auth()->guest())
+                                <a class="co-clinic-service-link" href="{{ route('public.booking.create', $clinic) }}" aria-label="{{ $isPatientAccount ? 'Buat booking' : 'Masuk untuk booking' }} untuk {{ $service->name }}">
+                                    {{ $isPatientAccount ? 'Buat booking' : 'Masuk untuk booking' }} <span aria-hidden="true">↗</span>
+                                </a>
+                            @endif
                         </article>
                     @empty
                         <div class="co-clinic-empty"><span aria-hidden="true">✚</span><h3>Layanan belum tersedia</h3><p>Belum ada layanan aktif yang ditampilkan oleh klinik.</p></div>
@@ -175,7 +188,11 @@
                                     @endforelse
                                 </div>
                             </div>
-                            <a href="{{ route('public.booking.create', $clinic) }}" class="co-clinic-doctor-link">Lanjut ke booking <span aria-hidden="true">↗</span></a>
+                            @if ($isPatientAccount || auth()->guest())
+                                <a href="{{ route('public.booking.create', $clinic) }}" class="co-clinic-doctor-link">
+                                    {{ $isPatientAccount ? 'Lanjut ke booking' : 'Masuk untuk booking' }} <span aria-hidden="true">↗</span>
+                                </a>
+                            @endif
                         </article>
                     @empty
                         <div class="co-clinic-empty"><span aria-hidden="true">◷</span><h3>Jadwal dokter belum tersedia</h3><p>Silakan cek kembali informasi praktik di lain waktu.</p></div>
@@ -192,10 +209,12 @@
                     <h2 id="booking-heading">Sudah tahu mau periksa kapan?</h2>
                     <p>Atur kunjungan di {{ $clinic->name }} lewat proses booking ClinicOS.</p>
                 </div>
-                <a href="{{ route('public.booking.create', $clinic) }}" class="co-clinic-button co-clinic-button-white">
-                    Buat booking
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
+                @if ($isPatientAccount || auth()->guest())
+                    <a href="{{ route('public.booking.create', $clinic) }}" class="co-clinic-button co-clinic-button-white">
+                        {{ $isPatientAccount ? 'Buat booking' : 'Masuk untuk booking' }}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                @endif
             </div>
         </section>
     </div>

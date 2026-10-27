@@ -18,6 +18,7 @@ use App\Services\BookingService;
 use App\Services\QueueWorkflowService;
 use App\Services\SubscriptionService;
 use App\SubscriptionStatus;
+use App\UserAccountType;
 use App\VisitStatus;
 use Database\Seeders\RoleAndPermissionSeeder;
 use Database\Seeders\SubscriptionPlanSeeder;
@@ -141,7 +142,9 @@ class SubscriptionEnforcementTest extends TestCase
         $doctor = Doctor::factory()->for($clinic)->for($doctorUser)->create();
         $service = Service::factory()->for($clinic)->create(['price' => 75_000]);
         $doctor->services()->attach($service);
-        $patient = Patient::factory()->for($clinic)->create();
+        $patientUser = User::factory()->create(['account_type' => UserAccountType::Patient]);
+        $patientUser->assignRole('Patient');
+        $patient = Patient::factory()->for($clinic)->for($patientUser)->create();
         $date = now('Asia/Jakarta')->startOfDay();
         $schedule = DoctorSchedule::factory()->for($doctor)->create([
             'day_of_week' => $date->dayOfWeek,
@@ -183,7 +186,7 @@ class SubscriptionEnforcementTest extends TestCase
             ]);
         }
 
-        $this->get(route('public.booking.create', $clinic))->assertNotFound();
+        $this->actingAs($patientUser)->get(route('public.booking.create', $clinic))->assertNotFound();
 
         $this->actingAs($doctorUser)
             ->post(route('doctor.visits.start', $appointment->queue))
@@ -201,9 +204,12 @@ class SubscriptionEnforcementTest extends TestCase
         $doctor = Doctor::factory()->for($clinic)->for($doctorUser)->create();
         $service = Service::factory()->for($clinic)->create(['price' => 75_000]);
         $doctor->services()->attach($service);
+        $patientUser = User::factory()->create(['account_type' => UserAccountType::Patient]);
+        $patientUser->assignRole('Patient');
+        $patient = Patient::factory()->for($clinic)->for($patientUser)->create();
         $appointment = Appointment::factory()->create([
             'clinic_id' => $clinic->id,
-            'patient_id' => Patient::factory()->for($clinic),
+            'patient_id' => $patient->id,
             'doctor_id' => $doctor->id,
             'service_id' => $service->id,
             'doctor_schedule_id' => DoctorSchedule::factory()->for($doctor),
@@ -244,7 +250,7 @@ class SubscriptionEnforcementTest extends TestCase
         $this->actingAs($owner)
             ->post(route('admin.services.store'), $this->servicePayload())
             ->assertForbidden();
-        $this->get(route('public.booking.create', $clinic))->assertNotFound();
+        $this->actingAs($patientUser)->get(route('public.booking.create', $clinic))->assertNotFound();
         $this->post(route('public.booking.store', $clinic))->assertForbidden();
         $this->post(route('public.booking.cancel', $appointment))->assertForbidden();
 
