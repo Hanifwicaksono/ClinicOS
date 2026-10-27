@@ -14,7 +14,7 @@
             <section class="relative hidden overflow-hidden bg-clinic-950 p-12 text-white lg:flex lg:flex-col lg:justify-between">
                 <div class="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-clinic-500/15 blur-3xl"></div>
                 <div class="absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-[#287F78]/10 blur-3xl"></div>
-                <a href="/" class="relative flex items-center gap-3">
+                <a href="{{ route('welcome') }}" class="relative flex items-center gap-3">
                     <x-application-logo class="h-11 w-11" />
                     <span class="font-display text-2xl font-extrabold">Clinic<span class="text-clinic-500">OS</span></span>
                 </a>
@@ -27,7 +27,7 @@
 
             <section class="flex items-center justify-center bg-clinic-background px-5 py-10 sm:px-10">
                 <div class="w-full max-w-md">
-                    <a href="/" class="mb-10 flex items-center gap-3 lg:hidden"><x-application-logo class="h-10 w-10" /><span class="font-display text-xl font-extrabold text-clinic-950">Clinic<span class="text-clinic-500">OS</span></span></a>
+                    <a href="{{ route('welcome') }}" class="mb-10 flex items-center gap-3 lg:hidden"><x-application-logo class="h-10 w-10" /><span class="font-display text-xl font-extrabold text-clinic-950">Clinic<span class="text-clinic-500">OS</span></span></a>
                     <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-card sm:p-9">
                         {{ $slot }}
                     </div>

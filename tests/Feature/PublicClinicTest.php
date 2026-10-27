@@ -45,6 +45,35 @@ class PublicClinicTest extends TestCase
         $this->get(route('public.clinic.show', $clinic))->assertNotFound();
     }
 
+    public function test_public_urls_resolve_only_the_clinic_named_by_the_subdomain(): void
+    {
+        $first = Clinic::factory()->create(['name' => 'Klinik Pertama', 'slug' => 'pertama']);
+        $second = Clinic::factory()->create(['name' => 'Klinik Kedua', 'slug' => 'kedua']);
+        $baseDomain = parse_url(config('app.url'), PHP_URL_HOST);
+        $clinicDomain = filter_var($baseDomain, FILTER_VALIDATE_IP) ? 'localhost' : $baseDomain;
+
+        $this->assertSame('pertama.'.$clinicDomain, parse_url(route('public.clinic.show', $first), PHP_URL_HOST));
+        $this->get(route('public.clinic.show', $first))
+            ->assertOk()
+            ->assertSee('Klinik Pertama')
+            ->assertDontSee('Klinik Kedua')
+            ->assertSee(route('public.booking.create', $first), false);
+        $this->get(route('public.clinic.show', $second))
+            ->assertOk()
+            ->assertSee('Klinik Kedua')
+            ->assertDontSee('Klinik Pertama');
+        $this->get(route('public.clinic.show', ['clinic' => 'tidak-ada']))->assertNotFound();
+        $this->get(rtrim(route('public.clinic.show', $first), '/').'/login')->assertNotFound();
+        $this->get(rtrim(route('welcome'), '/').'/clinic/pertama')->assertNotFound();
+    }
+
+    public function test_reserved_clinic_subdomain_is_not_public(): void
+    {
+        Clinic::factory()->create(['slug' => 'www']);
+
+        $this->get(route('public.clinic.show', ['clinic' => 'www']))->assertNotFound();
+    }
+
     public function test_public_page_displays_the_clinic_logo_when_available(): void
     {
         $clinic = Clinic::factory()->create(['logo_path' => 'clinic-logos/clinic-logo.png']);

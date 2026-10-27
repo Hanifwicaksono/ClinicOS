@@ -37,7 +37,7 @@ class DashboardAccessTest extends TestCase
     #[DataProvider('dashboards')]
     public function test_guests_are_redirected_to_login(string $role, string $path, string $title): void
     {
-        $this->get($path)->assertRedirect('/login');
+        $this->get($path)->assertRedirect($role === 'Patient' ? '/login' : '/admin');
     }
 
     public static function forbiddenDashboards(): array

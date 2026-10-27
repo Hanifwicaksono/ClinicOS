@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Forms;
 
+use App\UserAccountType;
 use Illuminate\Auth\Events\Lockout;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -26,11 +28,27 @@ class LoginForm extends Form
      *
      * @throws ValidationException
      */
-    public function authenticate(): void
+    public function authenticate(bool $adminLogin = false): void
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt([...$this->only(['email', 'password']), 'is_active' => true], $this->remember)) {
+        $credentials = [...$this->only(['email', 'password']), 'is_active' => true];
+        $credentials[] = function (Builder $query) use ($adminLogin): void {
+            if ($adminLogin) {
+                $query->where(function (Builder $accounts): void {
+                    $accounts->whereNull('account_type')->orWhere('account_type', UserAccountType::ClinicOwner->value);
+                })->whereHas('roles', fn (Builder $roles): Builder => $roles->whereIn('name', [
+                    'Clinic Admin', 'Receptionist', 'Doctor', 'Platform Admin',
+                ]));
+
+                return;
+            }
+
+            $query->where('account_type', UserAccountType::Patient->value)
+                ->whereHas('roles', fn (Builder $roles): Builder => $roles->where('name', 'Patient'));
+        };
+
+        if (! Auth::attempt($credentials, $this->remember)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

@@ -12,7 +12,7 @@ class PublicQueueController extends Controller
 {
     public function index(Clinic $clinic): View
     {
-        abort_unless($clinic->is_active, 404);
+        abort_unless($clinic->is_active && ! in_array($clinic->slug, Clinic::RESERVED_SUBDOMAINS, true), 404);
         $clinic->load('settings');
         $date = CarbonImmutable::now($clinic->settings?->timezone ?? 'Asia/Jakarta')->toDateString();
         $queues = Queue::query()

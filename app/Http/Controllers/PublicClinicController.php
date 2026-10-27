@@ -9,7 +9,7 @@ class PublicClinicController extends Controller
 {
     public function show(Clinic $clinic): View
     {
-        abort_unless($clinic->is_active, 404);
+        abort_unless($clinic->is_active && ! in_array($clinic->slug, Clinic::RESERVED_SUBDOMAINS, true), 404);
 
         $clinic->load([
             'settings',

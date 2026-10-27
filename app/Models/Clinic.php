@@ -16,6 +16,8 @@ class Clinic extends Model
     /** @use HasFactory<ClinicFactory> */
     use HasFactory;
 
+    public const RESERVED_SUBDOMAINS = ['www', 'admin', 'api', 'mail', 'platform'];
+
     protected function casts(): array
     {
         return ['is_active' => 'boolean'];

@@ -3,6 +3,8 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use App\UserAccountType;
+use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Volt\Volt;
 use Tests\TestCase;
@@ -11,9 +13,16 @@ class AccountSecurityTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(RoleAndPermissionSeeder::class);
+    }
+
     public function test_inactive_users_cannot_start_a_session_even_with_remember_me(): void
     {
-        $user = User::factory()->inactive()->create();
+        $user = User::factory()->inactive()->create(['account_type' => UserAccountType::Patient]);
+        $user->assignRole('Patient');
 
         Volt::test('pages.auth.login')
             ->set('form.email', $user->email)
@@ -30,7 +39,8 @@ class AccountSecurityTest extends TestCase
 
     public function test_an_existing_session_is_invalidated_when_the_account_is_deactivated(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create(['account_type' => UserAccountType::Patient]);
+        $user->assignRole('Patient');
         $this->actingAs($user);
         $user->update(['is_active' => false]);
 
@@ -47,7 +57,8 @@ class AccountSecurityTest extends TestCase
     public function test_login_is_rate_limited_after_five_failed_attempts(): void
     {
         $this->freezeTime();
-        $user = User::factory()->create();
+        $user = User::factory()->create(['account_type' => UserAccountType::Patient]);
+        $user->assignRole('Patient');
         $component = Volt::test('pages.auth.login')
             ->set('form.email', $user->email)
             ->set('form.password', 'wrong-password');

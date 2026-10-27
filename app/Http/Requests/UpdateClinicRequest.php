@@ -28,7 +28,7 @@ class UpdateClinicRequest extends FormRequest
 
         return [
             'name' => ['required', 'string', 'max:150'],
-            'slug' => ['required', 'alpha_dash', 'max:150', Rule::unique(Clinic::class, 'slug')->ignore($clinic)],
+            'slug' => ['required', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'max:63', Rule::notIn(Clinic::RESERVED_SUBDOMAINS), Rule::unique(Clinic::class, 'slug')->ignore($clinic)],
             'address' => ['nullable', 'string', 'max:1000'],
             'phone' => ['nullable', 'string', 'max:30'],
             'email' => ['nullable', 'email', 'max:255'],

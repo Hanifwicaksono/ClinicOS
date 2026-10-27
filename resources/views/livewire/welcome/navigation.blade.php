@@ -8,7 +8,7 @@
         </a>
     @else
         <a
-            href="{{ route('login') }}"
+            href="{{ route('admin.login') }}"
             class="clinic-button-secondary"
         >
             Masuk

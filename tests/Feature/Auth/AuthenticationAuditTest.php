@@ -4,6 +4,8 @@ namespace Tests\Feature\Auth;
 
 use App\Models\AuditLog;
 use App\Models\User;
+use App\UserAccountType;
+use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Volt\Volt;
 use Tests\TestCase;
@@ -12,10 +14,17 @@ class AuthenticationAuditTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(RoleAndPermissionSeeder::class);
+    }
+
     public function test_successful_login_records_the_actor_and_only_safe_metadata(): void
     {
         $this->freezeTime();
-        $user = User::factory()->create();
+        $user = User::factory()->create(['account_type' => UserAccountType::Patient]);
+        $user->assignRole('Patient');
 
         Volt::test('pages.auth.login')
             ->set('form.email', $user->email)

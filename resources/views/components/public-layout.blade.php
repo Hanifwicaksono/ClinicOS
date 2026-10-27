@@ -13,7 +13,7 @@
     <body class="min-h-screen bg-[#f7f8f5] font-sans antialiased">
         <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-sm">
             <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
-                <a href="/" class="flex items-center gap-3"><x-application-logo class="h-10 w-10" /><span class="font-display text-xl font-extrabold text-clinic-950">Clinic<span class="text-clinic-500">OS</span></span></a>
+                <a href="{{ route('welcome') }}" class="flex items-center gap-3"><x-application-logo class="h-10 w-10" /><span class="font-display text-xl font-extrabold text-clinic-950">Clinic<span class="text-clinic-500">OS</span></span></a>
                 @auth<x-clinic-button href="{{ route('dashboard') }}" variant="secondary">Dashboard</x-clinic-button>@else<a href="{{ route('login') }}" class="text-sm font-bold text-slate-600 hover:text-clinic-600">Masuk</a>@endauth
             </div>
         </header>

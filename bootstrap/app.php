@@ -22,7 +22,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: ['127.0.0.1', '::1']);
+        $middleware->trustHosts();
         $middleware->validateCsrfTokens(except: ['payments/doku/notification']);
+        $middleware->redirectGuestsTo(fn (Request $request): string => route($request->is(
+            'admin/*', 'doctor/*', 'receptionist/*', 'platform/*', 'onboarding/*', 'subscription/*', 'queues/*'
+        ) ? 'admin.login' : 'login'));
 
         $middleware->web(append: [
             CheckUserIsActive::class,

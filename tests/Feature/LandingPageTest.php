@@ -34,8 +34,7 @@ class LandingPageTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSee('1+')
-            ->assertSee('2+')
+            ->assertSee('1 klinik · 2 pasien tercatat')
             ->assertSee('Rp 149.000');
     }
 }

@@ -65,5 +65,6 @@ new #[Layout('layouts.guest')] class extends Component
         <div><label for="accept_terms" class="flex items-start gap-3 text-sm leading-6 text-slate-600"><input wire:model="accept_terms" id="accept_terms" type="checkbox" class="mt-1 rounded border-slate-300 text-clinic-500 focus:ring-clinic-500" required><span>Saya menyetujui syarat dan ketentuan serta kebijakan privasi ClinicOS.</span></label><x-input-error :messages="$errors->get('accept_terms')" class="mt-2" /></div>
         <x-primary-button class="w-full">Buat akun pemilik</x-primary-button>
         <p class="text-center text-sm text-slate-500">Mendaftar sebagai pasien? <a href="{{ route('register') }}" wire:navigate class="font-bold text-clinic-600 hover:text-clinic-700">Buat akun pasien</a></p>
+        <p class="text-center text-sm text-slate-500">Sudah punya akun klinik? <a href="{{ route('admin.login') }}" wire:navigate class="font-bold text-clinic-600 hover:text-clinic-700">Masuk pengelola</a></p>
     </form>
 </div>

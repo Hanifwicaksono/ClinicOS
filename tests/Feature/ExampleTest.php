@@ -15,18 +15,19 @@ class ExampleTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSee('aria-controls="mobile-navigation"', false)
-            ->assertSee('id="mobile-navigation"', false)
-            ->assertSee('Buka navigasi');
+            ->assertSee('aria-controls="co-mobile-menu"', false)
+            ->assertSee('id="co-mobile-menu"', false)
+            ->assertSee('Buka menu');
     }
 
     public function test_local_proxy_https_header_is_trusted(): void
     {
+        $host = parse_url(config('app.url'), PHP_URL_HOST);
         $response = $this
             ->withServerVariables([
                 'REMOTE_ADDR' => '127.0.0.1',
-                'HTTP_HOST' => 'clinic.test',
-                'HTTP_X_FORWARDED_HOST' => 'clinic.test',
+                'HTTP_HOST' => $host,
+                'HTTP_X_FORWARDED_HOST' => $host,
                 'HTTP_X_FORWARDED_PROTO' => 'https',
             ])
             ->get('/');

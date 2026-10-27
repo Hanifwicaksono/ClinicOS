@@ -1,214 +1,82 @@
-# ClinicOS — Development Plan Akun Pasien, Google OAuth, dan Resep
+# ClinicOS — Rencana Login Terpisah dan Subdomain Klinik
 
-Tanggal: 22 Oktober 2026
+Tanggal: 27 Oktober 2026
+Status: Implementasi aplikasi lokal selesai; konfigurasi domain produksi dan verifikasi browser belum dijalankan
 
-Diperbarui: 25 Oktober 2026
+## Tujuan dan keputusan
 
-Status: M1–M3 dan verifikasi lokal M4 selesai; deployment production belum dijalankan
+- Domain utama ditentukan oleh konfigurasi lingkungan produksi, misalnya `clinicos.com` atau `clinicos.id`; akhiran `.com` tidak wajib.
+- `{domain-utama}/login` menjadi pintu masuk pasien. Login Google yang sudah ada tetap khusus pasien.
+- `{domain-utama}/admin` menjadi pintu masuk pemilik klinik dan staf. Platform Admin juga masuk dari pintu ini lalu diarahkan ke `/platform`; ia bukan tenant.
+- Setiap klinik memakai **satu alamat publik bawaan**: `{slug}.{domain-utama}`, misalnya `kliniksehat.clinicos.id` bila domain utamanya `clinicos.id`. Domain milik klinik yang berbeda dari domain utama tidak termasuk rencana ini.
+- Satu klinik tetap satu tenant berdasarkan `clinic_id`. Subdomain memilih klinik untuk halaman publik; pemeriksaan kepemilikan dan policy tetap wajib.
+- Pemilik klinik tetap `account_type = clinic_owner`, role `Clinic Admin`, dan relasi `clinics.owner_user_id`. Tidak ada role baru.
 
-Cakupan: booking pasien wajib memakai akun, login Google untuk pasien, akses dashboard pasien dari landing klinik, dan resep pasien setelah visit
+## Kondisi checkout
 
-## 1. Tujuan
+- `routes/auth.php` memiliki satu route login Volt di `/login`. Halaman dan `LoginForm` saat ini menerima kredensial semua role; callback Google sudah membatasi akun pasien.
+- `routes/web.php` melayani profil, antrean publik, dan booking di `/clinic/{clinic:slug}`. Belum ada resolver subdomain.
+- `clinics.slug` sudah tersedia. Isolasi data klinik memakai query, policy, dan relasi yang divalidasi server-side.
+- Checkout mempunyai perubahan aktif pada auth, booking, dan dokumen ini. Sebelum implementasi, baca ulang status/diff Git dan lanjutkan dari perubahan terkini.
 
-Mengubah alur pasien agar:
+## Perilaku URL
 
-1. pasien wajib login sebelum membuat booking dari landing klinik;
-2. pasien dapat membuat akun dengan email/kata sandi atau masuk memakai Google;
-3. setelah autentikasi, pasien kembali ke halaman booking klinik yang sebelumnya dipilih;
-4. pasien dapat membuka dashboard-nya langsung dari landing klinik; dan
-5. pasien dapat melihat resep miliknya setelah visit selesai tanpa memperoleh akses ke catatan medis internal dokter; dan
-6. setiap akun baru wajib menyetujui syarat dan ketentuan serta kebijakan privasi.
+| URL | Perilaku |
+| --- | --- |
+| `{domain-utama}/` | Landing page ClinicOS |
+| `{domain-utama}/login` | Login pasien, registrasi pasien, dan Google |
+| `{domain-utama}/admin` | Login pemilik klinik, Clinic Admin, Receptionist, Doctor, dan Platform Admin |
+| `{slug}.{domain-utama}/` | Profil publik klinik sesuai slug |
+| `{slug}.{domain-utama}/queue` | Antrean publik klinik yang sama |
+| `{domain-utama}/clinic/{slug}/booking` | Booking pasien setelah login terpusat |
+| Area `/admin/*`, `/doctor/*`, `/receptionist/*`, `/patient/*`, `/platform/*` | Tetap pada domain utama |
 
-## 2. Kondisi aplikasi saat ini
+Tautan “Booking” pada subdomain menuju URL booking di domain utama dengan slug klinik yang sama. Pasien kembali ke booking klinik tersebut setelah login melalui intended URL yang tervalidasi. Sesi login tetap pada domain utama; tidak perlu berbagi cookie dengan semua subdomain.
 
-- Registrasi pasien email/kata sandi, role `Patient`, verifikasi email, dan dashboard pasien sudah tersedia.
-- Booking publik masih dapat dibuat guest. `BookingService` sebenarnya sudah dapat memakai user pasien yang login dan membuat satu profil `Patient` per klinik.
-- `users.email` sudah unik secara global. Satu `User` dapat mempunyai beberapa profil `Patient`, masing-masing satu per klinik melalui constraint unik `patients(clinic_id, user_id)`.
-- Landing klinik sudah mempunyai tombol booking, tetapi belum mempunyai pintasan masuk/dashboard pasien.
-- Resep tersimpan melalui `MedicalRecord -> Prescription -> PrescriptionItem`. Visit selesai memakai status `COMPLETED` dan rekam medis final memakai status `FINAL`.
-- `laravel/socialite` 5.31.0 sudah terpasang pada M1 untuk integrasi Google OAuth.
+Gunakan hanya URL publik baru `{slug}.{domain-utama}/` dan `{slug}.{domain-utama}/queue`; URL publik lama `/clinic/{slug}` dan `/clinic/{slug}/queue` tidak perlu dipertahankan atau dialihkan. Link booking dan status booking yang sudah ada tetap berfungsi.
 
-## 3. Keputusan produk dan keamanan
+## Tahap implementasi
 
-### 3.1 Akun dan booking
+### 1. Pisahkan pintu masuk akun
 
-- Hanya user aktif dengan role dan `account_type` pasien yang dapat membuka serta mengirim form booking publik.
-- Guest yang menekan tombol booking diarahkan ke login, lalu dikembalikan ke booking klinik yang sama setelah autentikasi.
-- Registrasi email/kata sandi tetap tersedia dan memakai verifikasi email yang sudah ada.
-- Google OAuth menjadi pilihan login tambahan, bukan pengganti login email/kata sandi.
-- Booking internal oleh resepsionis tetap berjalan seperti sekarang dan tidak dipaksa memakai akun pasien.
-- Halaman status/cancel berbasis token untuk booking lama tetap dipertahankan agar link yang sudah dibagikan tidak rusak. Booking baru tetap dapat dikelola dari area pasien.
+1. Tambahkan route guest `GET /admin` tanpa mengganggu `/admin/*` yang sudah ada. Gunakan form autentikasi yang sudah ada; sesuaikan judul, tautan registrasi, dan tombol Google untuk tiap pintu masuk.
+2. Pada `/login`, terima hanya akun aktif dengan account type dan role pasien. Pada `/admin`, terima akun aktif pengelola klinik dan Platform Admin. Akun dari kelompok yang salah mendapat pesan login umum dan tidak memperoleh sesi.
+3. Pertahankan rate limiting, regenerasi sesi, audit login/logout, verifikasi email, dan redirect dashboard sesuai role. Intended URL harus tetap pada host tepercaya dan sesuai otorisasi.
+4. Perbarui tautan landing ClinicOS, halaman klinik, registrasi, reset kata sandi, dan redirect sesi akun nonaktif. Tautan pasien menuju `/login`; tautan pengelola menuju `/admin`. Alur reset kata sandi bersama boleh tetap dipakai.
 
-### 3.2 Google OAuth
+### 2. Tambahkan subdomain klinik
 
-- Gunakan paket resmi `laravel/socialite` dan Google OAuth Authorization Code flow dengan state validation bawaan.
-- Tambahkan `users.google_id` nullable dan unique. Tidak dibuat tabel provider generik karena hanya Google yang diminta.
-- Akun baru dari Google dibuat sebagai `UserAccountType::Patient`, diberi role `Patient`, langsung dianggap terverifikasi karena email berasal dari Google yang terverifikasi, dan memakai password acak yang tidak dapat ditebak.
-- Jika email Google cocok dengan akun pasien lama, tautkan `google_id` ke akun tersebut setelah memastikan ID Google belum dipakai akun lain.
-- Jika email cocok dengan akun klinik/staf, akun nonaktif, email Google tidak tersedia/tidak terverifikasi, atau `google_id` bertabrakan, tolak login dengan pesan aman; jangan mengubah role atau mengambil alih akun.
-- Setelah callback berhasil, regenerasi session dan gunakan intended URL agar pasien kembali ke booking yang dipilih atau ke dashboard.
-- Akun Google baru hanya dibuat bila persetujuan syarat dikirim dari halaman registrasi; login akun Google yang sudah ada tidak meminta persetujuan ulang.
-- Catat login melalui event autentikasi yang sudah digunakan aplikasi; jangan membuat mekanisme audit kedua.
+1. Gunakan `clinics.slug` untuk mencocokkan host `{slug}.{domain-utama}` ke satu klinik aktif. Tolak host tak dikenal, slug cadangan seperti `www`, dan klinik tidak aktif; jangan jatuh ke data klinik lain.
+2. Tempatkan route subdomain sebelum route domain utama yang berpotensi bertabrakan. Profil dan antrean publik hanya mengambil data dari klinik hasil resolusi host. Jangan menerima `clinic_id` dari browser sebagai bukti tenant.
+3. Perbarui URL dan tautan profil/antrean publik agar memakai subdomain. Booking dan halaman status pasien tetap memakai domain utama. Pastikan email/notifikasi tidak menghasilkan host yang keliru.
+4. Pertahankan batas data antrean publik tanpa identitas atau isi medis. Policy medis, subscription, dan workflow booking tetap berlaku.
 
-### 3.3 Profil pasien per klinik
+### 3. Siapkan domain produksi
 
-- Form booking pasien tidak meminta atau mengirim NIK.
-- Nama lengkap, tanggal lahir, jenis kelamin, nomor telepon, email, dan alamat wajib diisi pasien. Catatan booking tetap opsional karena bukan data diri.
-- Pada booking pertama di suatu klinik, data diri wajib dari form membuat profil `Patient` dan menautkannya ke user login; kolom `patients.nik` dibiarkan `null`.
-- Pada booking berikutnya, gunakan profil pasien yang sudah tertaut pada klinik tersebut dan tampilkan datanya sebagai nilai awal form.
-- Jangan menautkan otomatis profil pasien lama yang belum memiliki `user_id` hanya berdasarkan nama, email, NIK, atau nomor telepon. Kesalahan tautan dapat mengekspos resep dan data medis orang lain.
-- NIK historis tidak dihapus dari database. Form pengelolaan pasien internal milik resepsionis tidak diubah dalam cakupan ini.
-- Migrasi/claim profil pasien lama di luar cakupan ini; data tersebut tetap aman dan link status booking lama tetap berfungsi.
+1. Pilih domain utama yang dimiliki/dikuasai untuk produksi. Konfigurasikan domain tersebut dan wildcard `*.{domain-utama}` pada DNS, web server/proxy, dan sertifikat HTTPS sebelum mengaktifkan tautan subdomain.
+2. Setel `APP_URL`, pola host subdomain, dan host tepercaya sesuai domain tiap lingkungan. Jangan mengaktifkan cookie sesi untuk semua subdomain; sesi login tetap pada domain utama.
+3. Audit slug klinik yang sudah ada terhadap nama host cadangan. Uji tautan booking dan status booking yang pernah dibagikan.
+4. Aktifkan secara bertahap setelah DNS/HTTPS dan verifikasi operasional siap. Deployment serta perubahan DNS dilakukan terpisah dari edit kode lokal.
 
-### 3.4 Akses resep
+## Verifikasi dan syarat selesai
 
-- Dashboard hanya menampilkan resep yang terhubung ke profil `Patient` milik user login.
-- Resep baru terlihat bila visit berstatus `COMPLETED` dan rekam medis berstatus `FINAL`.
-- Tampilkan klinik, dokter, tanggal visit/finalisasi, catatan resep, serta item obat: nama, dosis, frekuensi, jumlah, satuan, dan instruksi.
-- Resep draft, resep pasien lain, SOAP, diagnosis, pemeriksaan, foto, dan catatan internal dokter tidak boleh tampil.
-- Koreksi dokter pada rekam medis final otomatis terlihat pada tampilan berikutnya karena dashboard membaca data resep aktif, bukan membuat salinan.
+- `/login` menerima pasien dan menolak pengelola; `/admin` menerima pengelola/Platform Admin dan menolak pasien. Login gagal tidak menghasilkan sesi, dan rate limit tetap bekerja.
+- Login Google pasien, registrasi pasien/pemilik, reset kata sandi, verifikasi email, dan redirect setelah login tetap bekerja.
+- `klinik-a.{domain-utama}` hanya menampilkan klinik A. Host tak dikenal, slug cadangan, dan klinik nonaktif tidak menampilkan klinik lain. Tautan booking dari A selalu menuju booking A.
+- Booking, status booking lama, dan antrean publik tetap bekerja. Akses tenant dan medis lintas klinik tetap ditolak.
+- Jalankan test feature terfokus memakai SQLite in-memory dengan environment proses eksplisit. Uji browser desktop/mobile dan DNS/HTTPS dilakukan terpisah di lingkungan yang memiliki wildcard domain.
+- Jika file PHP berubah, jalankan `vendor/bin/pint --dirty --format agent`. Jika frontend berubah, jalankan `npm run build`.
 
-## 4. Area perubahan
+### Hasil implementasi lokal — 27 Oktober 2026
 
-### Dependency dan konfigurasi
+- Route login pasien `/login` dan pengelola `/admin` memakai form yang sama dengan pembatasan role sebelum sesi dibuat. Google tetap hanya tampil pada login pasien; reset kata sandi dan sesi akun nonaktif kembali ke pintu masuk yang sesuai.
+- Profil dan antrean publik memakai host `{slug}.{domain-utama}`. Booking serta area aplikasi tetap pada host utama. Slug baru dibatasi menjadi label DNS kecil yang valid dan nama subdomain cadangan ditolak.
+- Tes terfokus login, Google, booking, klinik publik, antrean, onboarding, dan proxy lulus pada SQLite in-memory. Pint dan `npm run build` selesai.
+- Suite penuh sebelum penyesuaian tes proxy: 262 tes, 257 lulus, 3 gagal, 2 error. Tes proxy kemudian lulus saat dijalankan ulang. Kegagalan/error yang tersisa adalah `ManagementDashboardTest`, `SecurityHeadersTest`, dan dua `NotificationCenterTest` pada SQLite; belum diperbaiki dalam pekerjaan domain ini.
+- DNS wildcard, HTTPS, domain produksi yang dipilih, dan uji browser belum dapat diverifikasi dari checkout lokal. Jika `APP_URL` lokal memakai alamat IP, URL klinik memakai `{slug}.localhost`; produksi harus memakai nama host domain utama yang dipilih.
 
-- `composer.json` / `composer.lock`: tambahkan versi `laravel/socialite` yang kompatibel dengan Laravel 13 setelah dependency disetujui.
-- `.env.example`: tambahkan `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, dan `GOOGLE_REDIRECT_URI` tanpa nilai rahasia.
-- `config/services.php`: tambahkan konfigurasi Google.
-- Google Cloud Console/deployment: daftarkan redirect URI untuk setiap environment; kredensial tidak masuk repository.
+## Di luar cakupan
 
-### Database dan model
-
-- Migration additive baru: kolom `google_id` nullable unique pada `users`; tidak mengubah atau menghapus data user/pasien lama.
-- Migration additive baru: `terms_accepted_at` nullable untuk menyimpan waktu persetujuan akun baru tanpa memblokir akun lama.
-- `app/Models/User.php`: izinkan atribut Google dan timestamp persetujuan yang diperlukan serta pertahankan relasi `patientProfiles` yang sudah ada.
-- `database/factories/UserFactory.php`: state Google hanya bila test membutuhkannya; jangan mengubah default factory.
-
-### Auth dan navigasi
-
-- Tambahkan controller Google redirect/callback di `app/Http/Controllers/Auth`.
-- Tambahkan dua route guest bernama untuk redirect dan callback di `routes/auth.php`, dengan throttle yang sesuai pada callback.
-- Tambahkan tombol “Lanjutkan dengan Google” pada halaman login dan registrasi pasien.
-- Wajibkan checkbox persetujuan pada registrasi pasien, Google, dan pemilik klinik; simpan timestamp persetujuannya.
-- Ubah registrasi pasien agar memakai intended redirect, bukan selalu berhenti di dashboard.
-- Ubah `resources/views/public/clinic.blade.php`:
-  - guest melihat aksi masuk/daftar untuk booking;
-  - pasien login melihat “Buat booking” dan “Dashboard pasien”;
-  - role non-pasien tidak diberi aksi booking pasien.
-
-### Booking pasien
-
-- Lindungi route create/store booking publik dengan `auth`, `verified`, role pasien, dan middleware subscription yang sudah ada.
-- Perketat `StorePublicBookingRequest::authorize()` agar request hanya berasal dari pasien aktif yang berhak membuat appointment.
-- Hapus rule dan input `nik` dari booking publik; ubah `email` serta `address` menjadi wajib, sementara `name`, `birth_date`, `gender`, dan `phone` tetap wajib.
-- `PublicBookingController::create()` memuat profil pasien untuk klinik aktif agar form dapat diprefill.
-- `PublicBookingController::store()` selalu mengirim user login sebagai actor ke `BookingService`.
-- Batasi data profil yang diteruskan `BookingService` pada field wajib tersebut sehingga booking pasien baru tidak mengisi NIK.
-- Pertahankan transaksi, idempotency key, validasi jadwal/layanan, kuota, audit, dan notifikasi yang sudah ada.
-- Hapus asumsi/copy UI bahwa akun pasien bersifat opsional.
-
-### Dashboard dan resep
-
-- Perluas `Patient\DashboardController` dengan query resep yang dibatasi oleh `patients.user_id = auth()->id()`, visit selesai, dan rekam medis final.
-- Eager-load hanya relasi yang ditampilkan (`items`, klinik, dokter, visit) dan gunakan pagination agar dashboard tidak memuat seluruh riwayat sekaligus.
-- Perbarui dashboard pasien untuk menampilkan kartu/daftar resep lengkap beserta empty state.
-- Jangan menambahkan endpoint rekam medis umum. Query pasien hanya mengeluarkan data resep yang dibutuhkan.
-- Tambahkan tautan dashboard pasien pada navigasi/landing tanpa mengubah dashboard role lain.
-
-## 5. Tahapan implementasi
-
-### M1 — Google OAuth pasien
-
-- [x] Minta persetujuan dan pasang `laravel/socialite` versi kompatibel.
-- [x] Tambahkan migration `google_id`, konfigurasi Google, dan env example.
-- [x] Implementasikan redirect/callback, pembuatan akun pasien, linking akun pasien lama, intended redirect, serta penanganan kegagalan.
-- [x] Tambahkan tombol Google pada login dan registrasi pasien.
-- [x] Pastikan login password, reset password, verifikasi email, role lain, dan audit autentikasi tetap berfungsi.
-
-Kriteria selesai: pasien baru/lama dapat login dengan Google; akun staf/owner tidak berubah role; callback gagal tidak membuat akun parsial.
-
-Hasil M1: Socialite 5.31.0 terpasang, 38 test auth / 211 assertion lulus, build Vite lulus, dan verifikasi OAuth nyata dijadwalkan pada M4 setelah kredensial Google tersedia. Constraint PHP Composer dikoreksi dari `^8.5` menjadi `^8.3` agar sesuai dengan runtime dan aturan proyek.
-
-### M2 — Booking wajib akun
-
-- [x] Pasang middleware autentikasi/verifikasi/role pada create dan store booking publik.
-- [x] Bawa intended URL melalui login, registrasi, verifikasi email, dan callback Google.
-- [x] Hapus NIK dari form/validasi booking pasien dan wajibkan nama, tanggal lahir, jenis kelamin, nomor telepon, email, serta alamat.
-- [x] Prefill profil pasien yang sudah terhubung dan buat profil baru hanya untuk booking pertama di klinik tersebut.
-- [x] Perbarui CTA landing klinik dan copy form booking.
-- [x] Pertahankan status/cancel token untuk booking lama.
-- [x] Wajibkan persetujuan syarat pada seluruh registrasi dan simpan `terms_accepted_at`.
-
-Kriteria selesai: guest tidak dapat membuka/mengirim booking; form pasien tidak memuat NIK dan menolak data diri wajib yang kosong; pasien login membuat appointment, queue, dan profil tertaut secara atomik; resepsionis tetap dapat membuat booking internal.
-
-Hasil M2: booking publik wajib akun pasien terverifikasi, profil pasien diprefill/diperbarui tanpa mengubah NIK historis, landing klinik memiliki CTA login/dashboard, link status/cancel lama dipertahankan, migration lokal selesai, 69 test / 424 assertion lulus, dan build Vite lulus.
-
-### M3 — Resep di dashboard pasien
-
-- [x] Tambahkan query resep terotorisasi dan terpaginasikan pada dashboard pasien.
-- [x] Tampilkan informasi resep dan empty state tanpa membuka isi rekam medis lain.
-- [x] Pastikan draft/in-progress dan data pasien lain tidak pernah ikut dalam response.
-- [x] Pastikan koreksi resep final tampil tanpa menduplikasi data.
-
-Kriteria selesai: pasien hanya melihat resep sendiri setelah visit selesai dan tidak dapat melihat resep pasien lain melalui URL/request langsung.
-
-Hasil M3: dashboard pasien menampilkan resep aktif dari seluruh profil klinik milik user, hanya untuk visit `COMPLETED` dan rekam medis `FINAL`. Query hanya mengambil data resep yang ditampilkan, dipaginasi 10 item, tanpa endpoint rekam medis baru. Sebanyak 30 test dashboard / 75 assertion lulus dan build Vite lulus.
-
-### M4 — Verifikasi dan rilis
-
-- [x] Jalankan formatter PHP: `vendor/bin/pint --dirty --format agent`.
-- [x] Jalankan test feature yang relevan dengan `php artisan test --compact`.
-- [x] Jalankan `npm run build` karena halaman auth, landing, booking, dan dashboard berubah.
-- [x] Verifikasi manual OAuth di environment yang memiliki kredensial dan redirect URI Google.
-- [ ] Deploy migration additive terlebih dahulu, lalu konfigurasi env dan kode aplikasi; tidak menjalankan `migrate:fresh` atau menghapus data.
-
-Kriteria selesai: test dan build lulus, OAuth nyata berhasil pada origin deployment, dan booking/resep lama tidak hilang.
-
-Hasil verifikasi lokal M4: Laravel Pint, Composer validation, Vite production build, `git diff --check`, dua route Google, tiga konfigurasi Google, dan seluruh 35 migration lulus. Full regression menjalankan 207 test / 1.176 assertion tanpa kegagalan. OAuth nyata berhasil melewati Google dan callback: akun pasien aktif dibuat dengan `google_id`, persetujuan syarat tersimpan, role `Patient` terpasang, event `auth.login` tercatat, dan session database dibuat. Deployment production belum dijalankan.
-
-## 6. Test minimum
-
-### Google OAuth
-
-- Akun Google baru membuat satu user pasien terverifikasi dan role `Patient`.
-- Email Google yang cocok menautkan akun pasien lama tanpa membuat duplikat.
-- Akun staf/owner, user nonaktif, email tidak terverifikasi, callback error, dan konflik `google_id` ditolak.
-- Callback berhasil meregenerasi session, memicu audit login, dan kembali ke intended URL.
-- Akun Google baru ditolak tanpa persetujuan syarat; akun lama tetap dapat login tanpa persetujuan ulang.
-
-### Booking
-
-- Guest pada create/store booking diarahkan ke login dan tidak membuat data.
-- Pasien belum terverifikasi diarahkan ke verifikasi email.
-- Form booking pasien tidak menampilkan/mengirim NIK dan menolak nama, tanggal lahir, jenis kelamin, nomor telepon, email, atau alamat yang kosong.
-- Booking pasien baru menyimpan `patients.nik = null` tanpa menghapus NIK historis.
-- Pasien login membuat atau memakai profil di klinik yang benar; profil klinik lain tidak pernah dipakai.
-- Re-submit idempotent tidak menggandakan patient, appointment, atau queue.
-- Booking internal resepsionis dan link status/cancel lama tetap lulus.
-- Registrasi pasien dan pemilik klinik ditolak tanpa checkbox persetujuan; registrasi berhasil menyimpan `terms_accepted_at`.
-
-### Resep
-
-- Dashboard pasien menampilkan item resep dari visit selesai dan rekam medis final miliknya.
-- Resep draft/in-progress tidak tampil.
-- Resep user/pasien lain dan klinik lain tidak tampil.
-- Dashboard menangani pasien tanpa profil/resep serta resep tanpa item tetapi memiliki catatan.
-- Koreksi resep final tercermin pada dashboard.
-
-## 7. Risiko dan mitigasi
-
-- **Kebocoran data medis:** seluruh query resep dimulai dari user login menuju profil pasien miliknya dan difilter final/completed; test lintas user/klinik wajib ada.
-- **Pengambilalihan akun:** Google hanya boleh menautkan email terverifikasi ke akun bertipe pasien; konflik provider atau tipe akun ditolak.
-- **Duplikasi pasien:** constraint `(clinic_id, user_id)` dipertahankan dan pembuatan profil tetap di dalam transaksi booking.
-- **Redirect OAuth salah:** setiap environment harus mempunyai callback URI yang sama persis dengan Google Console dan `GOOGLE_REDIRECT_URI`.
-- **Booking lama rusak:** endpoint status/cancel token dan data guest historis tidak dihapus.
-- **Dependency baru:** implementasi tidak dimulai sebelum versi Socialite diperiksa dan perubahan dependency disetujui.
-
-## 8. Di luar cakupan
-
-- Login provider selain Google.
-- Penggabungan atau claim otomatis profil pasien historis yang belum tertaut user.
-- Menghapus kolom atau nilai NIK historis dari database dan mengubah form pasien internal milik resepsionis.
-- Mengubah dashboard atau metode login dokter, resepsionis, Clinic Admin, dan Platform Admin.
-- Menampilkan SOAP, diagnosis, foto, catatan dokter, atau rekam medis lengkap kepada pasien.
-- Unduh/cetak PDF resep, notifikasi resep baru, dan pengiriman resep lewat email/WhatsApp.
+- Domain milik klinik, misalnya `kliniksehat.com`, termasuk verifikasi DNS dan sertifikatnya.
+- Login atau dashboard pada subdomain klinik, berbagi sesi antarsubdomain, dan multi-cabang.
+- Perubahan stack, role, data klinis, aturan booking, atau paket subscription.

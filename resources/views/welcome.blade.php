@@ -38,7 +38,7 @@
                 @auth
                     <a class="co-btn co-btn-primary co-btn-small" href="{{ route('dashboard') }}">Buka dashboard <span aria-hidden="true">↗</span></a>
                 @else
-                    <a class="co-login" href="{{ route('login') }}">Masuk</a>
+                    <a class="co-login" href="{{ route('admin.login') }}">Masuk pengelola</a>
                     <a class="co-btn co-btn-primary co-btn-small" href="{{ route('register.clinic') }}">Daftarkan klinik <span aria-hidden="true">↗</span></a>
                 @endauth
             </div>
@@ -54,7 +54,7 @@
             @auth
                 <a class="co-mobile-cta" href="{{ route('dashboard') }}">Buka dashboard ↗</a>
             @else
-                <a href="{{ route('login') }}">Masuk</a>
+                <a href="{{ route('admin.login') }}">Masuk pengelola</a>
                 <a class="co-mobile-cta" href="{{ route('register.clinic') }}">Daftarkan klinik ↗</a>
             @endauth
         </nav>
@@ -148,7 +148,7 @@
     </main>
 
     
-    <footer class="co-footer"><div class="co-container co-footer-inner"> <a class="co-brand co-footer-brand" href="{{ route('welcome') }}"> <img src="{{ asset('assets/logo/ClinicOS green ribbon C symbol.png') }}" alt="ClinicOS" class="co-footer-logo" > <span>Clinic<span class="co-brand-highlight">OS</span> </span> </a> <span class="co-footer-copyright"> © {{ date('Y') }} ClinicOS. Dibuat untuk operasional klinik.</span> <nav aria-label="Navigasi footer"><a href="#fitur">Fitur</a><a href="#harga">Harga</a><a href="#faq">FAQ</a><a href="{{ route('login') }}">Masuk</a> </nav></div></footer>
+    <footer class="co-footer"><div class="co-container co-footer-inner"> <a class="co-brand co-footer-brand" href="{{ route('welcome') }}"> <img src="{{ asset('assets/logo/ClinicOS green ribbon C symbol.png') }}" alt="ClinicOS" class="co-footer-logo" > <span>Clinic<span class="co-brand-highlight">OS</span> </span> </a> <span class="co-footer-copyright"> © {{ date('Y') }} ClinicOS. Dibuat untuk operasional klinik.</span> <nav aria-label="Navigasi footer"><a href="#fitur">Fitur</a><a href="#harga">Harga</a><a href="#faq">FAQ</a><a href="{{ route('admin.login') }}">Masuk pengelola</a> </nav></div></footer>
 
     <script>
         // Menu mobile menggunakan JavaScript biasa, tidak bergantung pada Alpine.

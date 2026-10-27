@@ -111,6 +111,20 @@ class OwnerOnboardingTest extends TestCase
         $this->assertNull($owner->refresh()->clinic_id);
     }
 
+    public function test_clinic_slug_must_be_a_valid_unreserved_subdomain_label(): void
+    {
+        $owner = User::factory()->clinicOwnerCandidate()->create();
+
+        foreach (['www', 'Bad_Slug', str_repeat('a', 64)] as $slug) {
+            $this->actingAs($owner)->post(route('onboarding.clinic.store'), [
+                ...$this->clinicPayload(),
+                'slug' => $slug,
+            ])->assertSessionHasErrors('slug');
+        }
+
+        $this->assertDatabaseCount('clinics', 0);
+    }
+
     public function test_free_activation_is_idempotent_and_unlocks_tenant_routes(): void
     {
         [$owner, $clinic] = $this->ownerWithClinic();

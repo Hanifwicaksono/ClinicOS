@@ -2,11 +2,20 @@
 
 use Illuminate\Support\Facades\Password;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Locked;
 use Livewire\Volt\Component;
 
 new #[Layout('layouts.guest')] class extends Component
 {
     public string $email = '';
+
+    #[Locked]
+    public bool $adminLogin = false;
+
+    public function mount(): void
+    {
+        $this->adminLogin = request()->query('portal') === 'admin';
+    }
 
     /**
      * Send a password reset link to the provided email address.
@@ -58,6 +67,6 @@ new #[Layout('layouts.guest')] class extends Component
             </x-primary-button>
         </div>
 
-        <p class="text-center text-sm text-slate-500"><a href="{{ route('login') }}" wire:navigate class="font-bold text-clinic-600 hover:text-clinic-700">Kembali ke halaman masuk</a></p>
+        <p class="text-center text-sm text-slate-500"><a href="{{ route($adminLogin ? 'admin.login' : 'login') }}" wire:navigate class="font-bold text-clinic-600 hover:text-clinic-700">Kembali ke halaman masuk</a></p>
     </form>
 </div>
