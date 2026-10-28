@@ -7,10 +7,11 @@ use App\Models\Queue;
 use App\QueueStatus;
 use Carbon\CarbonImmutable;
 use Illuminate\View\View;
+use App\Services\QueueEtaService;
 
 class PublicQueueController extends Controller
 {
-    public function index(Clinic $clinic): View
+    public function index(Clinic $clinic, QueueEtaService $etaService): View
     {
         abort_unless($clinic->is_active && ! in_array($clinic->slug, Clinic::RESERVED_SUBDOMAINS, true), 404);
         $clinic->load('settings');
@@ -23,11 +24,15 @@ class PublicQueueController extends Controller
                 QueueStatus::Called->value,
                 QueueStatus::InProgress->value,
             ])
-            ->with(['doctor.user:id,name', 'schedule'])
+            ->with(['doctor.user:id,name', 'schedule', 'appointment.service'])
             ->orderBy('doctor_schedule_id')
             ->orderBy('queue_number')
             ->get();
 
-        return view('public.queue', compact('clinic', 'queues', 'date'));
+        $etas = $queues->mapWithKeys(fn (Queue $queue) => [
+            $queue->id => $etaService->estimate($queue),
+        ]);
+
+        return view('public.queue', compact('clinic', 'queues', 'date', 'etas'));
     }
 }
