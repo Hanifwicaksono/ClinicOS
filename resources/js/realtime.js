@@ -1,7 +1,11 @@
+import { QueueRealtimeClient } from './queue-realtime';
+
+window.QueueRealtimeClient = QueueRealtimeClient;
+
 const subscriptions = new Set();
+const queueClients = new Map();
 const receivedNotificationIds = new Set();
 let refreshTimer;
-let hasConnected = false;
 let connectionState = 'reconnecting';
 
 const connectionPresentations = {
@@ -21,10 +25,14 @@ const connectionPresentations = {
         label: 'Koneksi terputus · menampilkan data terakhir',
         dotClasses: ['bg-red-400'],
     },
+    offline: {
+        label: 'Koneksi terputus · menampilkan data terakhir',
+        dotClasses: ['bg-red-400'],
+    },
 };
 
 function renderConnectionState() {
-    const presentation = connectionPresentations[connectionState];
+    const presentation = connectionPresentations[connectionState] ?? connectionPresentations.disconnected;
 
     document.querySelectorAll('[data-realtime-connection-state]').forEach((element) => {
         const label = element.querySelector('[data-realtime-connection-label]');
@@ -82,6 +90,9 @@ async function refreshRealtimeRegion(showRefetching = true) {
 
         currentRegion.replaceWith(freshRegion);
         setConnectionState(isRealtimeConnected() ? 'connected' : 'disconnected');
+
+        // Re-subscribe if new elements or channels appeared
+        subscribeQueues();
 
         return true;
     } catch (error) {
@@ -162,13 +173,19 @@ async function handleQueueActionSubmit(event) {
 
         if (! response.ok) {
             const message = response.status === 403
-                ? 'Anda tidak memiliki izin untuk aksi ini.'
-                : response.status === 422
-                    ? validationMessage(payload)
-                    : 'Aksi belum dapat dipastikan. Muat ulang data sebelum mencoba lagi.';
+                ? (payload.message ?? 'Anda tidak memiliki izin untuk aksi ini.')
+                : response.status === 409
+                    ? (payload.message ?? 'Status antrean telah berubah atau terjadi konflik antrean. Memuat ulang data...')
+                    : response.status === 422
+                        ? validationMessage(payload)
+                        : (payload.message ?? 'Aksi belum dapat dipastikan. Muat ulang data sebelum mencoba lagi.');
 
             showQueueActionFeedback(message);
             setQueueActionPending(form, false);
+
+            if (response.status === 409 || response.status === 422) {
+                scheduleRefresh(false);
+            }
 
             return;
         }
@@ -202,14 +219,26 @@ function subscribeQueues() {
         const isPublic = element.hasAttribute('data-realtime-public');
         const key = `${isPublic ? 'public' : 'private'}:${channelName}`;
 
-        if (! channelName || subscriptions.has(key)) {
+        if (! channelName || queueClients.has(key)) {
             return;
         }
 
-        const channel = isPublic ? window.Echo.channel(channelName) : window.Echo.private(channelName);
-        channel.listen('.queue.updated', () => scheduleRefresh());
+        const client = new QueueRealtimeClient({
+            channelName,
+            isPublic,
+            onSnapshotRequest: (showRefetching) => scheduleRefresh(showRefetching),
+            onStateChange: (state) => setConnectionState(state),
+        });
+
+        queueClients.set(key, client);
         subscriptions.add(key);
     });
+}
+
+function cleanupQueues() {
+    queueClients.forEach((client) => client.destroy());
+    queueClients.clear();
+    subscriptions.clear();
 }
 
 function subscribeNotifications() {
@@ -257,24 +286,13 @@ function initializeRealtime() {
 
 document.addEventListener('DOMContentLoaded', initializeRealtime);
 document.addEventListener('livewire:navigated', initializeRealtime);
+document.addEventListener('livewire:navigating', cleanupQueues);
+window.addEventListener('pagehide', cleanupQueues);
+window.addEventListener('beforeunload', cleanupQueues);
 document.addEventListener('submit', handleQueueActionSubmit);
 
-const echoConnection = window.Echo?.connector?.pusher?.connection;
-
-echoConnection?.bind('connecting', () => setConnectionState('reconnecting'));
-echoConnection?.bind('unavailable', () => setConnectionState('disconnected'));
-echoConnection?.bind('failed', () => setConnectionState('disconnected'));
-echoConnection?.bind('disconnected', () => setConnectionState('disconnected'));
-echoConnection?.bind('error', () => setConnectionState('disconnected'));
-echoConnection?.bind('connected', () => {
-    if (hasConnected) {
-        scheduleRefresh();
-    } else {
-        setConnectionState('connected');
+window.addEventListener('clinicos:queue-connection-state', (event) => {
+    if (event.detail?.state) {
+        setConnectionState(event.detail.state);
     }
-
-    hasConnected = true;
 });
-
-// shortcut: polling backs up WebSockets for tunnel testing; expose Reverb publicly before scaling traffic.
-window.setInterval(() => scheduleRefresh(false), 5000);

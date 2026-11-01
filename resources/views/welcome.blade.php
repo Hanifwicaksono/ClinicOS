@@ -151,7 +151,6 @@
     <footer class="co-footer"><div class="co-container co-footer-inner"> <a class="co-brand co-footer-brand" href="{{ route('welcome') }}"> <img src="{{ asset('assets/logo/ClinicOS green ribbon C symbol.png') }}" alt="ClinicOS" class="co-footer-logo" > <span>Clinic<span class="co-brand-highlight">OS</span> </span> </a> <span class="co-footer-copyright"> © {{ date('Y') }} ClinicOS. Dibuat untuk operasional klinik.</span> <nav aria-label="Navigasi footer"><a href="#fitur">Fitur</a><a href="#harga">Harga</a><a href="#faq">FAQ</a><a href="{{ route('admin.login') }}">Masuk pengelola</a> </nav></div></footer>
 
     <script>
-        // Menu mobile menggunakan JavaScript biasa, tidak bergantung pada Alpine.
         document.addEventListener('DOMContentLoaded', function () {
             const toggle = document.querySelector('[data-co-menu-button]');
             const menu = document.getElementById('co-mobile-menu');

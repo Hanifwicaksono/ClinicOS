@@ -245,6 +245,40 @@ class QueueManagementTest extends TestCase
             ->assertDontSee($queue->appointment->patient->medical_record_number);
     }
 
+    public function test_public_queue_display_route_accessible_by_slug_and_id_and_aborts_404_for_invalid(): void
+    {
+        $context = $this->queueContext();
+        $queue = $context['queues'][0];
+        $this->actingAs($context['receptionist'])->post(route('queues.check-in', $queue));
+
+        // Akses via slug
+        $this->get(route('public.queue.display', $context['clinic']->slug))
+            ->assertOk()
+            ->assertSee($context['clinic']->name)
+            ->assertSee($queue->display_number)
+            ->assertDontSee($queue->appointment->patient->name);
+
+        // Akses via ID/token
+        $this->get(route('public.queue.display', $context['clinic']->id))
+            ->assertOk()
+            ->assertSee($context['clinic']->name)
+            ->assertSee($queue->display_number);
+
+        // Klinik tidak ditemukan -> 404
+        $this->get(route('public.queue.display', 'klinik-fiktif-tidak-ada'))
+            ->assertNotFound();
+
+        // Klinik tidak aktif -> 404
+        $inactiveClinic = Clinic::factory()->create(['is_active' => false]);
+        $this->get(route('public.queue.display', $inactiveClinic->slug))
+            ->assertNotFound();
+
+        // Reserved subdomain slug -> 404
+        $reservedClinic = Clinic::factory()->create(['slug' => 'admin', 'is_active' => true]);
+        $this->get(route('public.queue.display', $reservedClinic->slug))
+            ->assertNotFound();
+    }
+
     public function test_staff_cannot_manage_queue_from_another_clinic(): void
     {
         $context = $this->queueContext();
