@@ -13,20 +13,14 @@ use App\Notifications\QueueStatusNotification;
 use App\Services\BookingService;
 use App\Services\QueueWorkflowService;
 use Database\Seeders\RoleAndPermissionSeeder;
-use Illuminate\Foundation\Testing\DatabaseTruncation;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class NotificationCenterTest extends TestCase
 {
-    use DatabaseTruncation;
-
-    protected function tearDown(): void
-    {
-        $this->truncateDatabaseTables();
-        parent::tearDown();
-    }
+    use RefreshDatabase;
 
     protected function setUp(): void
     {

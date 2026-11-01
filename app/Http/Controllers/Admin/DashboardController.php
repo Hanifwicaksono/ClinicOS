@@ -54,7 +54,8 @@ class DashboardController extends Controller
 
         $appointmentQuery = Appointment::query()
             ->where('clinic_id', $clinicId)
-            ->whereBetween('appointment_date', [$from->toDateString(), $to->toDateString()]);
+            ->where('appointment_date', '>=', $from->toDateString())
+            ->where('appointment_date', '<', $to->addDay()->toDateString());
         $completedVisitQuery = Visit::query()
             ->where('clinic_id', $clinicId)
             ->where('status', VisitStatus::Completed->value)
