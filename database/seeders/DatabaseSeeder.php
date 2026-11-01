@@ -14,19 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        if (app()->environment('local')) {
+            $this->call(DemoSeeder::class);
+
+            return;
+        }
+
         $this->call([
             RoleAndPermissionSeeder::class,
             SubscriptionPlanSeeder::class,
-            DemoUserSeeder::class,
-            ClinicSeeder::class,
-            ClinicSettingSeeder::class,
-            ServiceSeeder::class,
-            DoctorSeeder::class,
-            DoctorScheduleSeeder::class,
-            PatientSeeder::class,
-            AppointmentSeeder::class,
-            QueueSeeder::class,
-            MedicalVisitSeeder::class,
         ]);
     }
 }

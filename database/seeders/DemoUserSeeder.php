@@ -32,6 +32,7 @@ class DemoUserSeeder extends Seeder
                     'account_type' => $accountType,
                     'is_active' => true,
                     'email_verified_at' => now(),
+                    'terms_accepted_at' => now(),
                     'password' => Hash::make('password'),
                 ],
             );
