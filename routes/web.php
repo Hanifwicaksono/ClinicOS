@@ -45,6 +45,11 @@ Route::domain('{clinic:slug}.'.$clinicDomain)->group(function (): void {
 });
 
 Route::domain($baseDomain)->group(function (): void {
+    if (app()->environment(['local', 'testing'])) {
+        Route::view('previews/visit-summary', 'previews.visit-summary')
+            ->name('previews.visit-summary');
+    }
+
     Route::get('/', function () {
         $minimumPrices = SubscriptionPlan::query()
             ->whereIn('code', ['individual', 'team'])

@@ -174,6 +174,61 @@
                 if (window.innerWidth >= 960) setOpen(false);
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+            document.querySelectorAll('.co-faq-items details').forEach(function (item) {
+                const summary = item.querySelector('summary');
+                const answer = item.querySelector('p');
+
+                if (!summary || !answer || typeof item.animate !== 'function') return;
+
+                summary.addEventListener('click', function (event) {
+                    if (reducedMotion.matches) return;
+
+                    event.preventDefault();
+                    if (item.dataset.animating === 'true') return;
+
+                    const opening = !item.open;
+                    const startHeight = item.offsetHeight;
+                    item.dataset.animating = 'true';
+                    item.classList.toggle('is-closing', !opening);
+
+                    if (opening) item.open = true;
+
+                    const borderHeight = Number.parseFloat(window.getComputedStyle(item).borderBottomWidth) || 0;
+                    const endHeight = opening ? item.offsetHeight : summary.offsetHeight + borderHeight;
+                    item.style.overflow = 'hidden';
+
+                    const containerAnimation = item.animate(
+                        { height: [`${startHeight}px`, `${endHeight}px`] },
+                        { duration: 320, easing: 'cubic-bezier(.2, .8, .2, 1)' }
+                    );
+
+                    const answerAnimation = answer.animate(
+                        opening
+                            ? [
+                                { opacity: 0, transform: 'scaleY(.92)', clipPath: 'inset(0 0 100% 0)' },
+                                { opacity: 1, transform: 'scaleY(1)', clipPath: 'inset(0)' },
+                            ]
+                            : [
+                                { opacity: 1, transform: 'scaleY(1)', clipPath: 'inset(0)' },
+                                { opacity: 0, transform: 'scaleY(.96)', clipPath: 'inset(0 0 100% 0)' },
+                            ],
+                        { duration: opening ? 280 : 200, easing: 'ease-out', fill: 'both' }
+                    );
+
+                    containerAnimation.addEventListener('finish', function () {
+                        if (!opening) item.open = false;
+                        answerAnimation.cancel();
+                        item.classList.remove('is-closing');
+                        item.style.overflow = '';
+                        delete item.dataset.animating;
+                    });
+                });
+            });
+        });
     </script>
 </body>
 </html>
