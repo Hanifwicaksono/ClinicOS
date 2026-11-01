@@ -1,33 +1,56 @@
 <?php
 
 namespace App\Services;
+
 use App\Models\Queue;
 use App\Models\Visit;
 use App\QueueStatus;
+use App\VisitStatus;
 
 class QueueEtaService
 {
+    private const int HistoryLimit = 20;
+
+    /**
+     * @return array{
+     *     eta_minutes: int,
+     *     eta_min_minutes: int,
+     *     eta_max_minutes: int,
+     *     confidence: 'low'|'medium'|'high'
+     * }
+     */
     public function estimate(Queue $queue): array
     {
-        $visits = Visit::query()
-        ->where('doctor_id', $queue->doctor_id)
-        ->whereNotNull('completed_at')
-        ->latest('completed_at')
-        ->limit(20)
-        ->get();
-        $durations = $visits->map(fn (Visit $visit) => $visit->started_at->diffInMinutes($visit->completed_at));
-        $avg = $durations->avg();
+        $durations = Visit::query()
+            ->where('clinic_id', $queue->clinic_id)
+            ->where('doctor_id', $queue->doctor_id)
+            ->where('status', VisitStatus::Completed->value)
+            ->whereNotNull('started_at')
+            ->whereNotNull('completed_at')
+            ->whereColumn('completed_at', '>', 'started_at')
+            ->latest('completed_at')
+            ->limit(self::HistoryLimit)
+            ->get(['started_at', 'completed_at'])
+            ->map(fn (Visit $visit): int => (int) round($visit->started_at->diffInMinutes($visit->completed_at)));
+
         $peopleInFront = Queue::query()
-        ->where('doctor_id', $queue->doctor_id)
-        ->where('queue_date', $queue->queue_date)
-        ->whereDate('doctor_schedule_id', $queue->doctor_schedule_id)
-        ->whereIn('status', [QueueStatus::Waiting->value, QueueStatus::InProgress->value, QueueStatus::Called->value])
-        ->where('queue_number', '<', $queue->queue_number)
-        ->count();
-        $etaMinutes = $avg * $peopleInFront;
-        $etaMax = $durations->max() * $peopleInFront;
-        $etaMin = $durations->min()* $peopleInFront;
+            ->where('clinic_id', $queue->clinic_id)
+            ->where('doctor_id', $queue->doctor_id)
+            ->where('doctor_schedule_id', $queue->doctor_schedule_id)
+            ->whereDate('queue_date', $queue->queue_date->toDateString())
+            ->whereIn('status', [
+                QueueStatus::Waiting->value,
+                QueueStatus::Called->value,
+                QueueStatus::InProgress->value,
+            ])
+            ->where('queue_number', '<', $queue->queue_number)
+            ->count();
+
         $dataCount = $durations->count();
+        $fallbackDuration = (int) $queue->appointment()->with('service')->firstOrFail()->service->duration_minutes;
+        $averageDuration = $dataCount === 0 ? $fallbackDuration : (int) round((float) $durations->average());
+        $minimumDuration = $dataCount === 0 ? $fallbackDuration : (int) $durations->min();
+        $maximumDuration = $dataCount === 0 ? $fallbackDuration : (int) $durations->max();
 
         if ($dataCount >= 20) {
             $confidence = 'high';
@@ -37,18 +60,11 @@ class QueueEtaService
             $confidence = 'low';
         }
 
-        if ( $dataCount === 0 ) {
-            $serviceMinutes = $queue->appointment->service->duration_minutes;
-            $etaMinutes = $serviceMinutes * $peopleInFront;
-            $etaMin = $serviceMinutes * $peopleInFront;
-            $etaMax = $serviceMinutes * $peopleInFront;
-        }
-
         return [
-            'eta_minutes'     => $etaMinutes,
-            'eta_min_minutes' => $etaMin,
-            'eta_max_minutes' => $etaMax,
-            'confidence'      => $confidence,
+            'eta_minutes' => $averageDuration * $peopleInFront,
+            'eta_min_minutes' => $minimumDuration * $peopleInFront,
+            'eta_max_minutes' => $maximumDuration * $peopleInFront,
+            'confidence' => $confidence,
         ];
     }
 }

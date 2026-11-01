@@ -34,6 +34,19 @@ class VisitFactory extends Factory
         ];
     }
 
+    public function completedWithDuration(int $durationMinutes, int $minutesAgo = 0): static
+    {
+        return $this->state(function () use ($durationMinutes, $minutesAgo): array {
+            $completedAt = now()->subMinutes($minutesAgo);
+
+            return [
+                'status' => VisitStatus::Completed,
+                'started_at' => $completedAt->copy()->subMinutes($durationMinutes),
+                'completed_at' => $completedAt,
+            ];
+        });
+    }
+
     /** @param array<string, mixed> $attributes */
     private function appointment(array $attributes): Appointment
     {

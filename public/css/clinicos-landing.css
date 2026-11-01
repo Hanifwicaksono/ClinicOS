@@ -257,7 +257,7 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
     color: #ffffff;
 }
 
-.co-hero .co-decor {display: none;}
+    .co-hero .co-decor {display: none;}
 .co-footer-logo {width: 42px;height: 42px;object-fit: contain;flex-shrink: 0;}
 .co-footer-brand { display: inline-flex;align-items: center;gap: 10px;}
 
