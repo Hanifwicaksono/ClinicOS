@@ -62,6 +62,10 @@ Route::domain($baseDomain)->group(function (): void {
         ]);
     })->name('welcome');
 
+    Route::get('display/{clinicSlugOrToken}', [PublicQueueController::class, 'display'])
+        ->middleware('throttle:60,1')
+        ->name('public.queue.display');
+
     Route::post('payments/doku/notification', DokuNotificationController::class)
         ->middleware('throttle:doku-notification')
         ->name('doku.notifications');

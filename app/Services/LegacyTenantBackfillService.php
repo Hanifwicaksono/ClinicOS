@@ -7,6 +7,7 @@ use App\Models\SubscriptionPrice;
 use App\Models\User;
 use App\UserAccountType;
 use Carbon\CarbonImmutable;
+use Database\Seeders\SubscriptionPlanSeeder;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 
@@ -35,7 +36,15 @@ class LegacyTenantBackfillService
         $teamPrice = SubscriptionPrice::query()
             ->where('duration_months', 12)
             ->whereRelation('plan', 'code', 'team')
-            ->firstOrFail();
+            ->first();
+
+        if (! $teamPrice) {
+            (new SubscriptionPlanSeeder)->run();
+            $teamPrice = SubscriptionPrice::query()
+                ->where('duration_months', 12)
+                ->whereRelation('plan', 'code', 'team')
+                ->firstOrFail();
+        }
         $grantedAt = ($grantedAt ?? CarbonImmutable::now())->utc();
 
         return DB::transaction(function () use ($clinics, $owners, $teamPrice, $grantedAt): int {

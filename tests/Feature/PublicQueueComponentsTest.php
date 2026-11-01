@@ -138,4 +138,20 @@ class PublicQueueComponentsTest extends TestCase
             $this->assertStringContainsString('aria-live="polite"', $html);
         }
     }
+
+    public function test_status_badge_renders_correct_label_and_styling(): void
+    {
+        $html = Blade::render(<<<'BLADE'
+            <x-status-badge status="CALLED" />
+        BLADE);
+
+        $this->assertStringContainsString('Dipanggil', $html);
+        $this->assertStringContainsString('bg-[#EAF2F0]', $html);
+
+        $htmlWaiting = Blade::render(<<<'BLADE'
+            <x-status-badge :status="\App\QueueStatus::Waiting" />
+        BLADE);
+
+        $this->assertStringContainsString('Menunggu', $htmlWaiting);
+    }
 }
