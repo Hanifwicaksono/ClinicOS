@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Doctor;
 
+use App\DentalCondition;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Doctor\CompleteVisitRequest;
 use App\Http\Requests\Doctor\CorrectMedicalRecordRequest;
@@ -39,7 +40,7 @@ class VisitController extends Controller
     {
         $this->authorize('view', $visit);
         $visit->load([
-            'clinic', 'appointment', 'patient', 'doctor.user', 'service', 'queue',
+            'clinic', 'appointment', 'patient.criticalAllergies', 'doctor.user', 'service', 'queue',
             'medicalRecord.vitalSign', 'medicalRecord.diagnoses', 'medicalRecord.treatments',
             'medicalRecord.prescription.items', 'medicalRecord.revisions.correctedBy',
         ]);
@@ -58,27 +59,33 @@ class VisitController extends Controller
             'lower-right' => range(48, 41),
             'lower-left' => range(31, 38),
         ];
+        $savedOdontogram = collect(old('odontogram', $visit->medicalRecord->odontogram ?? []))
+            ->keyBy(fn (array $tooth): int => (int) $tooth['tooth_number']);
         $dentalChart = [
             'teeth' => collect($dentalQuadrants)->flatMap(
-                fn (array $numbers, string $quadrant) => collect($numbers)->map(fn (int $number): array => [
-                    'id' => (string) $number,
-                    'label' => "Gigi {$number}",
-                    'quadrant' => $quadrant,
-                    'condition' => 'unknown',
-                ]),
+                fn (array $numbers, string $quadrant) => collect($numbers)->map(
+                    fn (int $number): array => [
+                        'id' => (string) $number,
+                        'label' => "Gigi {$number}",
+                        'quadrant' => $quadrant,
+                        'condition' => $savedOdontogram->get($number)['condition'] ?? DentalCondition::Unknown->value,
+                    ],
+                ),
             )->values()->all(),
-            'conditions' => [
-                ['value' => 'unknown', 'label' => 'Belum dicatat'],
-                ['value' => 'healthy', 'label' => 'Sehat'],
-                ['value' => 'caries', 'label' => 'Karies'],
-                ['value' => 'filled', 'label' => 'Tambalan'],
-                ['value' => 'missing', 'label' => 'Hilang'],
-                ['value' => 'crown', 'label' => 'Mahkota'],
-            ],
+            'conditions' => collect(DentalCondition::cases())
+                ->map(fn (DentalCondition $condition): array => [
+                    'value' => $condition->value,
+                    'label' => $condition->label(),
+                ])->all(),
             'selected_tooth' => null,
             'read_only' => false,
         ];
-        $criticalAllergies = [];
+        $criticalAllergies = $visit->patient->criticalAllergies
+            ->map(fn ($allergy): array => [
+                'substance' => $allergy->substance,
+                'reaction' => $allergy->reaction,
+                'severity' => $allergy->severity->label(),
+            ])->all();
 
         return view('doctor.visits.show', compact('visit', 'history', 'dentalChart', 'criticalAllergies'));
     }

@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\AllergySeverity;
+use App\Models\Scopes\ClinicScope;
 use Database\Factories\PatientFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Scopes\ClinicScope;
-use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 
 #[Fillable(['clinic_id', 'user_id', 'medical_record_number', 'name', 'nik', 'birth_date', 'gender', 'phone', 'email', 'address', 'is_active'])]
 #[ScopedBy([ClinicScope::class])]
@@ -49,5 +50,17 @@ class Patient extends Model
     public function medicalRecords(): HasMany
     {
         return $this->hasMany(MedicalRecord::class);
+    }
+
+    public function allergies(): HasMany
+    {
+        return $this->hasMany(PatientAllergy::class);
+    }
+
+    public function criticalAllergies(): HasMany
+    {
+        return $this->allergies()
+            ->where('is_active', true)
+            ->where('severity', AllergySeverity::Critical);
     }
 }

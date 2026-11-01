@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class DentalChartComponentTest extends TestCase
 {
-    public function test_dental_chart_renders_state_legend_keyboard_controls_and_callbacks_without_persistence(): void
+    public function test_dental_chart_renders_state_legend_keyboard_controls_callbacks_and_persistence_fields(): void
     {
         $html = Blade::render(
             '<x-dental-chart :teeth="$teeth" :conditions="$conditions" selected-tooth="11" />',
@@ -36,7 +36,9 @@ class DentalChartComponentTest extends TestCase
         $this->assertStringContainsString("\$dispatch('dental-condition-changed'", $html);
         $this->assertStringNotContainsString('<form', $html);
         $this->assertStringNotContainsString('fetch(', $html);
-        $this->assertStringNotContainsString('name=', $html);
+        $this->assertStringContainsString('data-persists="true"', $html);
+        $this->assertStringContainsString('odontogram[${index}][tooth_number]', $html);
+        $this->assertStringContainsString('odontogram[${index}][condition]', $html);
     }
 
     public function test_dental_chart_supports_read_only_state(): void

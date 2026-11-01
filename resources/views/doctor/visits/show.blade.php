@@ -232,6 +232,25 @@
                     <p>Periksa alergi, duplikasi terapi, interaksi, dosis, dan kondisi pasien sebelum finalisasi. Peringatan ini tidak menggantikan penilaian klinis dokter.</p>
                 </div>
 
+                @if($criticalAllergies !== [])
+                    <label class="mt-5 flex items-start gap-3 rounded-2xl border border-red-300 bg-red-50 p-4 text-sm text-red-950" for="critical_allergies_acknowledged">
+                        <input
+                            id="critical_allergies_acknowledged"
+                            name="critical_allergies_acknowledged"
+                            type="checkbox"
+                            value="1"
+                            class="mt-1 rounded border-red-300 text-red-700 focus:ring-red-500"
+                            x-bind:required="filledMedicines.length > 0"
+                            @checked(old('critical_allergies_acknowledged'))
+                        >
+                        <span>
+                            <span class="block font-extrabold">Saya telah meninjau alergi kritis pasien</span>
+                            <span class="mt-1 block leading-6">Konfirmasi ini wajib saat resep berisi obat. Sistem mencatat dokter dan waktu peninjauan.</span>
+                        </span>
+                    </label>
+                    <x-input-error :messages="$errors->get('critical_allergies_acknowledged')" class="mt-2" role="alert" />
+                @endif
+
                 <div class="mt-6 space-y-4">
                     <template x-for="(item, index) in medicines" :key="index">
                         <fieldset class="rounded-2xl border border-slate-200 bg-slate-50 p-4">

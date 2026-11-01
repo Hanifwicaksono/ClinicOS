@@ -30,7 +30,7 @@
     {{ $attributes->class(['clinic-card min-w-0 overflow-hidden p-6 sm:p-8']) }}
     aria-labelledby="dental-chart-heading"
     data-dental-chart
-    data-persists="false"
+    data-persists="true"
     data-initial-selected-tooth="{{ $selectedTooth }}"
     data-read-only="{{ $readOnly ? 'true' : 'false' }}"
     data-tooth-selected-event="dental-tooth-selected"
@@ -81,7 +81,7 @@
     <div class="flex flex-wrap items-start justify-between gap-4">
         <div>
             <h2 id="dental-chart-heading" class="text-lg font-extrabold text-clinic-950">Odontogram</h2>
-            <p class="mt-1 text-sm leading-6 text-slate-500">Pilih gigi, lalu pilih kondisi. Perubahan hanya tersimpan di state komponen.</p>
+            <p class="mt-1 text-sm leading-6 text-slate-500">Pilih gigi, lalu pilih kondisi. Kondisi tersimpan bersama draft atau finalisasi RME.</p>
         </div>
         @if ($readOnly)
             <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-600">Read-only</span>
@@ -129,6 +129,13 @@
             </fieldset>
         @endforeach
     </div>
+
+    <template x-for="(tooth, index) in teeth" :key="`odontogram-${tooth.id}`">
+        <span class="hidden" aria-hidden="true">
+            <input type="hidden" x-bind:name="`odontogram[${index}][tooth_number]`" x-bind:value="tooth.id">
+            <input type="hidden" x-bind:name="`odontogram[${index}][condition]`" x-bind:value="tooth.condition">
+        </span>
+    </template>
 
     <fieldset class="mt-5 rounded-2xl border border-slate-200 p-4" x-bind:disabled="readOnly || ! selectedTooth" @disabled($readOnly || ! $selectedTooth)>
         <legend class="px-2 text-sm font-extrabold text-clinic-950">Pilih kondisi</legend>

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-#[Fillable(['visit_id', 'patient_id', 'doctor_id', 'created_by_user_id', 'status', 'chief_complaint', 'subjective', 'objective', 'assessment', 'plan', 'physical_examination', 'doctor_notes', 'photos', 'finalized_at'])]
+#[Fillable(['visit_id', 'patient_id', 'doctor_id', 'created_by_user_id', 'status', 'chief_complaint', 'subjective', 'objective', 'assessment', 'plan', 'physical_examination', 'doctor_notes', 'photos', 'odontogram', 'allergy_acknowledged_at', 'allergy_acknowledged_by_user_id', 'finalized_at'])]
 class MedicalRecord extends Model
 {
     /** @use HasFactory<MedicalRecordFactory> */
@@ -19,7 +19,13 @@ class MedicalRecord extends Model
 
     protected function casts(): array
     {
-        return ['status' => MedicalRecordStatus::class, 'photos' => 'array', 'finalized_at' => 'datetime'];
+        return [
+            'status' => MedicalRecordStatus::class,
+            'photos' => 'array',
+            'odontogram' => 'array',
+            'allergy_acknowledged_at' => 'datetime',
+            'finalized_at' => 'datetime',
+        ];
     }
 
     public function visit(): BelongsTo
@@ -40,6 +46,11 @@ class MedicalRecord extends Model
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by_user_id');
+    }
+
+    public function allergyAcknowledgedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'allergy_acknowledged_by_user_id');
     }
 
     public function vitalSign(): HasOne

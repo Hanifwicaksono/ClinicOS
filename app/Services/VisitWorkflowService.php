@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\AppointmentStatus;
+use App\DentalCondition;
 use App\Events\VisitCompleted;
 use App\MedicalRecordStatus;
 use App\Models\Clinic;
@@ -119,7 +120,7 @@ class VisitWorkflowService
                 throw ValidationException::withMessages(['record' => 'Rekam medis sudah difinalisasi.']);
             }
 
-            $this->syncRecord($record, $data);
+            $this->syncRecord($record, $data, $actor);
             $this->auditLogger->recordForClinic($lockedVisit->clinic, 'medical_record.draft_saved', $record, [
                 'visit_id' => $lockedVisit->id,
             ], $actor);
@@ -148,7 +149,7 @@ class VisitWorkflowService
             }
 
             $record = MedicalRecord::query()->lockForUpdate()->where('visit_id', $lockedVisit->id)->firstOrFail();
-            $this->syncRecord($record, $data);
+            $this->syncRecord($record, $data, $actor);
             $record->update(['status' => MedicalRecordStatus::Final, 'finalized_at' => now()]);
             $lockedVisit->update([
                 'status' => VisitStatus::Completed,
@@ -189,7 +190,7 @@ class VisitWorkflowService
 
             $record = MedicalRecord::query()->lockForUpdate()->where('visit_id', $lockedVisit->id)->firstOrFail();
             $before = $this->snapshot($record);
-            $this->syncRecord($record, Arr::except($data, ['correction_reason']));
+            $this->syncRecord($record, Arr::except($data, ['correction_reason']), $actor);
             $after = $this->snapshot($record->refresh());
             $revision = $record->revisions()->create([
                 'corrected_by_user_id' => $actor->id,
@@ -207,12 +208,34 @@ class VisitWorkflowService
     }
 
     /** @param array<string, mixed> $data */
-    private function syncRecord(MedicalRecord $record, array $data): void
+    private function syncRecord(MedicalRecord $record, array $data, User $actor): void
     {
-        $record->update(Arr::only($data, [
+        $items = array_values(array_filter($data['prescription_items'] ?? [], fn (array $item): bool => filled($item['medicine_name'] ?? null)));
+        $hasCriticalAllergy = $record->patient->criticalAllergies()->exists();
+
+        if ($items !== [] && $hasCriticalAllergy && ! filter_var($data['critical_allergies_acknowledged'] ?? false, FILTER_VALIDATE_BOOL)) {
+            throw ValidationException::withMessages([
+                'critical_allergies_acknowledged' => 'Alergi kritis pasien wajib ditinjau sebelum resep disimpan.',
+            ]);
+        }
+
+        $recordData = Arr::only($data, [
             'chief_complaint', 'subjective', 'objective', 'assessment', 'plan',
             'physical_examination', 'doctor_notes',
-        ]));
+        ]);
+
+        if (array_key_exists('odontogram', $data)) {
+            $recordData['odontogram'] = collect($data['odontogram'])
+                ->map(fn (array $tooth): array => [
+                    'tooth_number' => (int) $tooth['tooth_number'],
+                    'condition' => DentalCondition::from($tooth['condition'])->value,
+                ])
+                ->sortBy('tooth_number')
+                ->values()
+                ->all();
+        }
+
+        $record->update($recordData);
 
         $storedPhotos = $record->photos ?? [];
         $removedPhotoIndexes = array_map('intval', $data['removed_photos'] ?? []);
@@ -288,7 +311,18 @@ class VisitWorkflowService
             }
         }
 
-        $items = array_values(array_filter($data['prescription_items'] ?? [], fn (array $item): bool => filled($item['medicine_name'] ?? null)));
+        if ($items !== [] && $hasCriticalAllergy) {
+            $record->update([
+                'allergy_acknowledged_at' => now(),
+                'allergy_acknowledged_by_user_id' => $actor->id,
+            ]);
+        } else {
+            $record->update([
+                'allergy_acknowledged_at' => null,
+                'allergy_acknowledged_by_user_id' => null,
+            ]);
+        }
+
         if ($items === [] && blank($data['prescription_notes'] ?? null)) {
             $record->prescription()->delete();
         } else {
@@ -311,7 +345,8 @@ class VisitWorkflowService
         return [
             'record' => Arr::only($record->attributesToArray(), [
                 'chief_complaint', 'subjective', 'objective', 'assessment', 'plan',
-                'physical_examination', 'doctor_notes', 'photos', 'status', 'finalized_at',
+                'physical_examination', 'doctor_notes', 'photos', 'odontogram',
+                'allergy_acknowledged_at', 'allergy_acknowledged_by_user_id', 'status', 'finalized_at',
             ]),
             'vital_signs' => $record->vitalSign?->attributesToArray(),
             'diagnoses' => $record->diagnoses->map->attributesToArray()->all(),
@@ -338,7 +373,7 @@ class VisitWorkflowService
     private function loadVisit(Visit $visit): Visit
     {
         return $visit->refresh()->load([
-            'clinic', 'appointment', 'patient', 'doctor.user', 'service', 'queue',
+            'clinic', 'appointment', 'patient.criticalAllergies', 'doctor.user', 'service', 'queue',
             'medicalRecord.vitalSign', 'medicalRecord.diagnoses', 'medicalRecord.treatments',
             'medicalRecord.prescription.items', 'medicalRecord.revisions.correctedBy',
         ]);

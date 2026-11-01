@@ -154,7 +154,7 @@ class VisitWorkflowTest extends TestCase
             ->assertSee('aria-describedby="subjective_description"', false)
             ->assertSee('x-on:rme-autosave-state.window', false)
             ->assertSeeText('Odontogram')
-            ->assertSee('data-persists="false"', false)
+            ->assertSee('data-persists="true"', false)
             ->assertSee('data-tooth-id="11"', false)
             ->assertSee('data-tooth-id="48"', false)
             ->assertSee('dental-condition-changed', false);
