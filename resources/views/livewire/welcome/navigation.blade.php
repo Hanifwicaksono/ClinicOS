@@ -1,7 +1,7 @@
 <nav class="flex flex-1 justify-end gap-2">
     @auth
         <a
-            href="{{ url('/dashboard') }}"
+            href="{{ route('dashboard') }}"
             class="clinic-button-primary"
         >
             Dashboard

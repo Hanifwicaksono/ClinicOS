@@ -97,6 +97,25 @@ class SubscriptionReminderTest extends TestCase
         $this->assertDatabaseCount('notifications', 0);
     }
 
+    public function test_revoked_period_does_not_queue_or_send_an_old_expiry_reminder(): void
+    {
+        CarbonImmutable::setTestNow('2026-10-16 17:30:00 UTC');
+        Queue::fake();
+        Notification::fake();
+        [, $period] = $this->periodEndingAt('2026-10-23 17:00:00 UTC');
+
+        $this->artisan('subscriptions:queue-reminders')->assertSuccessful();
+        $reminder = SubscriptionReminder::query()->sole();
+        $period->update(['revoked_at' => CarbonImmutable::now('UTC')]);
+        $this->artisan('subscriptions:queue-reminders')->assertSuccessful();
+        (new SendSubscriptionReminder($reminder->id))->handle();
+
+        Queue::assertPushed(SendSubscriptionReminder::class, 1);
+        Notification::assertNothingSent();
+        $this->assertDatabaseCount('notifications', 0);
+        $this->assertNull($reminder->refresh()->sent_at);
+    }
+
     /** @return array{User, SubscriptionPeriod} */
     private function periodEndingAt(string|CarbonImmutable $endsAt): array
     {

@@ -42,7 +42,7 @@ class DokuPaymentTest extends TestCase
                 'response' => [
                     'payment' => [
                         'url' => 'https://sandbox.doku.com/checkout-link-v2/test-token',
-                        'expired_date' => '20261015235959',
+                        'expired_date' => now('Asia/Jakarta')->addMinutes(30)->format('YmdHis'),
                     ],
                 ],
             ]),

@@ -41,7 +41,7 @@ class SendSubscriptionReminder implements ShouldQueue
             ->with(['clinic.owner', 'period'])
             ->findOrFail($this->reminderId);
 
-        if ($reminder->sent_at !== null) {
+        if ($reminder->sent_at !== null || $reminder->period->revoked_at !== null) {
             return;
         }
 

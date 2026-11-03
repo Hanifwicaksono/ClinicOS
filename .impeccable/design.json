@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-02T09:54:16.1708694+07:00",
+  "title": "Design System: ClinicOS",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Primary Teal",
+        "canonical": "#287F78",
+        "tonalRamp": ["#293F3D", "#314C49", "#3D5F5C", "#206A64", "#287F78", "#538D87", "#A9CCC9", "#EAF2F2"]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Primary Teal Hover",
+        "canonical": "#206A64",
+        "tonalRamp": ["#253331", "#293F3D", "#314C49", "#3D5F5C", "#206A64", "#538D87", "#A9CCC9", "#EAF2F2"]
+      },
+      "primary-subtle": {
+        "role": "primary",
+        "displayName": "Primary Teal Subtle",
+        "canonical": "#EAF2F2",
+        "tonalRamp": ["#293F3D", "#314C49", "#3D5F5C", "#206A64", "#287F78", "#7EACA9", "#D4E5E4", "#EAF2F2"]
+      },
+      "primary-soft": {
+        "role": "primary",
+        "displayName": "Primary Teal Soft",
+        "canonical": "#D4E5E4",
+        "tonalRamp": ["#293F3D", "#314C49", "#3D5F5C", "#206A64", "#287F78", "#7EACA9", "#A9CCC9", "#D4E5E4"]
+      },
+      "secondary": {
+        "role": "secondary",
+        "displayName": "Secondary Teal",
+        "canonical": "#3D5F5C",
+        "tonalRamp": ["#182421", "#253331", "#314B48", "#3D5F5C", "#667976", "#91A29E", "#C7D3CF", "#EFF3F1"]
+      },
+      "accent": {
+        "role": "tertiary",
+        "displayName": "Warm Accent",
+        "canonical": "#D89B68",
+        "tonalRamp": ["#4B2C17", "#6B3F22", "#8C5630", "#B07144", "#D89B68", "#E6B88F", "#F3D6BC", "#FBEEE3"]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Application Background",
+        "canonical": "#F7F8F5",
+        "tonalRamp": ["#182421", "#253331", "#314B48", "#667976", "#91A29E", "#C7D3CF", "#EFF3F1", "#F7F8F5"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface White",
+        "canonical": "#FFFFFF",
+        "tonalRamp": ["#182421", "#253331", "#314B48", "#667976", "#A7B3AF", "#DDE5E1", "#F7F8F5", "#FFFFFF"]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Primary Text",
+        "canonical": "#253331",
+        "tonalRamp": ["#182421", "#253331", "#314B48", "#3D5F5C", "#667976", "#91A29E", "#C7D3CF", "#EFF3F1"]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Structural Border",
+        "canonical": "#DDE5E1",
+        "tonalRamp": ["#253331", "#314B48", "#667976", "#91A29E", "#C7D3CF", "#DDE5E1", "#EFF3F1", "#F7F8F5"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero landing dan pernyataan pemasaran utama."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Judul halaman dan heading section utama."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Judul kartu, panel, dialog, dan kelompok form."
+      },
+      "body": {
+        "displayName": "Application Body",
+        "purpose": "Copy operasional, field, bantuan, dan data tabel."
+      },
+      "marketing-body": {
+        "displayName": "Marketing Body",
+        "purpose": "Copy landing page dan penjelasan pemasaran."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Status, metadata, eyebrow, dan header tabel singkat."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card",
+        "value": "0 2px 8px -2px rgba(15, 23, 42, 0.04)",
+        "purpose": "Pemisah ambient sangat tipis untuk kartu putih di atas background lembut."
+      },
+      {
+        "name": "elevated",
+        "value": "0 20px 50px -20px rgba(7, 21, 16, 0.28)",
+        "purpose": "Modal dan dropdown yang benar-benar berada di atas lapisan lain."
+      },
+      {
+        "name": "marketing-ambient",
+        "value": "0 36px 70px rgba(31, 82, 61, 0.15), 0 3px 12px rgba(37, 91, 67, 0.04)",
+        "purpose": "Ilustrasi dashboard utama pada landing page."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-fast",
+        "value": "200ms ease",
+        "purpose": "Hover, warna, dan umpan balik kontrol sederhana."
+      },
+      {
+        "name": "reveal",
+        "value": "550ms cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "purpose": "Reveal section landing page dengan stagger singkat."
+      },
+      {
+        "name": "dialog-enter",
+        "value": "300ms ease-out",
+        "purpose": "Masuknya dialog dengan opacity, translate, dan scale ringan."
+      }
+    ],
+    "breakpoints": [
+      {"name": "sm", "value": "640px"},
+      {"name": "landing-mobile", "value": "700px"},
+      {"name": "md", "value": "768px"},
+      {"name": "landing-navigation", "value": "960px"},
+      {"name": "lg", "value": "1024px"},
+      {"name": "landing-wide", "value": "1100px"},
+      {"name": "xl", "value": "1280px"},
+      {"name": "2xl", "value": "1536px"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Tindakan utama pada layar operasional.",
+      "html": "<button class=\"ds-button-primary\">Simpan perubahan</button>",
+      "css": ".ds-button-primary { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border: 0; border-radius: 12px; background: var(--color-brand-primary, #287F78); color: #fff; font: 700 14px/1.25 Inter, ui-sans-serif, sans-serif; box-shadow: 0 1px 2px rgba(15,23,42,.05); transition: background .2s ease, transform .2s ease, box-shadow .2s ease; } .ds-button-primary:hover { background: var(--color-brand-primary-hover, #206A64); } .ds-button-primary:focus-visible { outline: 2px solid var(--color-brand-primary, #287F78); outline-offset: 2px; } .ds-button-primary:active { transform: scale(.99); }"
+    },
+    {
+      "name": "Secondary Action Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Tindakan pendamping yang tidak bersaing dengan CTA utama.",
+      "html": "<button class=\"ds-button-secondary\">Batal</button>",
+      "css": ".ds-button-secondary { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border: 1px solid var(--color-border, #DDE5E1); border-radius: 12px; background: var(--color-surface, #FFFFFF); color: var(--color-brand-secondary, #3D5F5C); font: 700 14px/1.25 Inter, ui-sans-serif, sans-serif; transition: background .2s ease, border-color .2s ease, color .2s ease; } .ds-button-secondary:hover { background: #EAF2F2; border-color: #A9CCC9; color: #206A64; } .ds-button-secondary:focus-visible { outline: 2px solid var(--color-brand-primary, #287F78); outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Field operasional dengan focus state yang stabil.",
+      "html": "<label class=\"ds-field\"><span>Nama pasien</span><input class=\"ds-input\" placeholder=\"Masukkan nama pasien\"></label>",
+      "css": ".ds-field { display: grid; gap: 8px; color: var(--color-brand-secondary, #3D5F5C); font: 600 14px/1.4 Inter, ui-sans-serif, sans-serif; } .ds-input { min-height: 44px; width: 100%; padding: 12px 16px; border: 1px solid var(--color-border, #DDE5E1); border-radius: 12px; background: var(--color-surface, #FFFFFF); color: var(--color-text, #253331); font: 400 14px/1.5 Inter, ui-sans-serif, sans-serif; box-shadow: 0 1px 2px rgba(15,23,42,.04); outline: none; } .ds-input::placeholder { color: #91A29E; } .ds-input:focus { border-color: var(--color-brand-primary, #287F78); box-shadow: 0 0 0 3px rgba(40,127,120,.18); }"
+    },
+    {
+      "name": "Operational Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Permukaan kerja dasar untuk metrik, form, dan daftar.",
+      "html": "<article class=\"ds-card\"><p class=\"ds-card-label\">Antrean aktif</p><strong class=\"ds-card-value\">08</strong><p class=\"ds-card-meta\">3 sedang dilayani</p></article>",
+      "css": ".ds-card { padding: 24px; border: 1px solid var(--color-border, #DDE5E1); border-radius: 24px; background: var(--color-surface, #FFFFFF); color: var(--color-text, #253331); box-shadow: 0 2px 8px -2px rgba(15,23,42,.04); font-family: Inter, ui-sans-serif, sans-serif; } .ds-card-label { margin: 0; color: #667976; font-size: 14px; font-weight: 600; } .ds-card-value { display: block; margin-top: 16px; font: 800 30px/1.1 'Plus Jakarta Sans', Inter, sans-serif; } .ds-card-meta { margin: 6px 0 0; color: #91A29E; font-size: 12px; }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "status-chip",
+      "description": "Status ringkas yang tetap menulis labelnya.",
+      "html": "<span class=\"ds-status-chip\"><span class=\"ds-status-dot\"></span>Menunggu</span>",
+      "css": ".ds-status-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; background: #D4E5E4; color: #3D5F5C; font: 700 12px/1.4 Inter, ui-sans-serif, sans-serif; } .ds-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-brand-primary, #287F78); } .ds-status-chip:focus-visible { outline: 2px solid var(--color-brand-primary, #287F78); outline-offset: 2px; }"
+    },
+    {
+      "name": "Navigation Item",
+      "kind": "nav",
+      "description": "Active navigation dengan tonal primary dan label jelas.",
+      "html": "<a class=\"ds-nav-item\" href=\"#\"><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z\" fill=\"currentColor\"/></svg><span>Dashboard</span></a>",
+      "css": ".ds-nav-item { min-height: 44px; display: inline-flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 12px; background: #EAF2F2; color: #3D5F5C; font: 700 14px/1.3 Inter, ui-sans-serif, sans-serif; text-decoration: none; transition: background .2s ease, color .2s ease; } .ds-nav-item svg { width: 18px; height: 18px; } .ds-nav-item:hover { background: #D4E5E4; color: #206A64; } .ds-nav-item:focus-visible { outline: 2px solid var(--color-brand-primary, #287F78); outline-offset: 2px; }"
+    },
+    {
+      "name": "Queue Number Display",
+      "kind": "custom",
+      "description": "Signature component untuk nomor, status, dan metadata antrean.",
+      "html": "<article class=\"ds-queue\"><div><p class=\"ds-queue-label\">Sedang dilayani</p><strong class=\"ds-queue-number\">A-014</strong></div><span class=\"ds-queue-status\">Aktif</span></article>",
+      "css": ".ds-queue { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 24px; border: 1px solid var(--color-border, #DDE5E1); border-radius: 24px; background: var(--color-surface, #FFFFFF); color: var(--color-text, #253331); box-shadow: 0 2px 8px -2px rgba(15,23,42,.04); } .ds-queue-label { margin: 0; color: #667976; font: 600 13px/1.4 Inter, sans-serif; } .ds-queue-number { display: block; margin-top: 8px; color: #3D5F5C; font: 800 40px/1 'Plus Jakarta Sans', Inter, sans-serif; letter-spacing: -.03em; } .ds-queue-status { padding: 6px 10px; border-radius: 9999px; background: #D4E5E4; color: #3D5F5C; font: 700 12px/1.3 Inter, sans-serif; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Ruang Kendali Klinik yang Tenang",
+    "overview": "ClinicOS terasa seperti ruang kendali yang tetap jernih saat klinik sibuk: informasi penting mudah dipindai, tindakan utama tegas, dan status bergerak tanpa membuat layar terasa gaduh. Sistem ini tenang, tepercaya, teratur, dan manusiawi; ekspresinya menghindari kesan steril dari perangkat lunak rumah sakit lama maupun permainan visual berlebihan ala aplikasi startup.\n\nAntarmuka operasional memakai kepadatan yang terkendali, permukaan putih, garis tipis, dan warna teal untuk orientasi serta tindakan. Landing page membawa identitas yang sama dengan skala tipografi dan komposisi yang lebih persuasif, tetapi tidak membentuk palet atau bahasa visual kedua.",
+    "keyCharacteristics": [
+      "Hierarki tegas dengan Plus Jakarta Sans untuk judul dan angka penting.",
+      "Palet teal ClinicOS yang sudah ada, didukung netral hijau-keabu-abuan dan aksen hangat yang hemat.",
+      "Permukaan flat-terkendali dengan border sebagai struktur utama dan bayangan ambient sebagai pengecualian.",
+      "Sudut lembut, target sentuh lapang, dan status yang selalu terbaca melalui teks selain warna.",
+      "Gerak singkat untuk orientasi dan umpan balik, dengan penghormatan penuh pada reduced motion."
+    ],
+    "rules": [
+      {"name": "The Existing Palette Rule", "body": "Gunakan hanya palet ClinicOS yang sudah ada untuk elemen merek; jangan memperkenalkan hue merek baru tanpa keputusan eksplisit.", "section": "colors"},
+      {"name": "The One Primary Rule", "body": "Dalam satu kelompok tindakan, hanya satu kontrol yang memakai primary solid; tindakan lain memakai secondary, ghost, atau warna status yang sesuai.", "section": "colors"},
+      {"name": "The Medical Privacy Rule", "body": "Warna tidak pernah menjadi satu-satunya pembeda status, risiko, atau informasi klinis; sertakan teks atau ikon yang jelas.", "section": "colors"},
+      {"name": "The Two-Family Rule", "body": "Plus Jakarta Sans memimpin hierarki; Inter memikul pekerjaan operasional. DM Sans hanya hidup pada landing page dan tidak masuk ke layar aplikasi.", "section": "typography"},
+      {"name": "The Number Leads Rule", "body": "Nomor antrean, metrik, dan harga boleh memakai ukuran lebih besar dan tracking lebih rapat karena berfungsi sebagai jangkar pemindaian.", "section": "typography"},
+      {"name": "The Task Density Rule", "body": "Kepadatan mengikuti pekerjaan: antrean, tabel, dan dashboard boleh rapat tetapi tidak mengurangi target sentuh minimum 44px; form dan RME memakai ruang antarkelompok yang lebih besar.", "section": "layout"},
+      {"name": "The Flat-by-Default Rule", "body": "Permukaan operasional tetap rata saat diam; gunakan border atau tonal layer lebih dahulu dan naikkan bayangan hanya untuk overlay, hover penting, atau ilustrasi utama.", "section": "elevation"},
+      {"name": "The Radius Hierarchy Rule", "body": "Radius bertambah bersama skala dan kedalaman: kontrol lebih kecil daripada kartu, dan kartu tidak boleh lebih bulat daripada modal yang menaunginya.", "section": "shapes"}
+    ],
+    "dos": [
+      "**Do** gunakan token warna, tipografi, radius, dan spacing yang sudah ada sebelum menulis nilai satu kali.",
+      "**Do** prioritaskan satu tindakan utama per kelompok dan berikan target sentuh minimum 44px.",
+      "**Do** gunakan border serta tonal surface sebagai struktur default sebelum menambahkan shadow.",
+      "**Do** pertahankan teks status, focus-visible, dan reduced-motion pada setiap komponen interaktif.",
+      "**Do** bedakan mode Persuade pada landing page dari mode Operate pada aplikasi tanpa memecah identitas merek."
+    ],
+    "donts": [
+      "**Don't** memperkenalkan warna merek baru, gradient dekoratif baru, atau font baru hanya untuk membuat layar terasa berbeda.",
+      "**Don't** memenuhi layar operasional dengan kartu mengambang dan bayangan berlapis.",
+      "**Don't** mengandalkan warna, hover, atau animasi sebagai satu-satunya cara memahami status dan tindakan.",
+      "**Don't** mencampur radius pill dan rounded action button dalam kelompok tindakan yang sama.",
+      "**Don't** mengubah landing page menjadi standar visual bagi kepadatan dashboard, RME, atau layar antrean."
+    ]
+  }
+}

@@ -225,6 +225,9 @@ class VisitWorkflowService
         ]);
 
         if (array_key_exists('odontogram', $data)) {
+            if (! app(AddonService::class)->canEdit($record->visit->clinic)) {
+                throw ValidationException::withMessages(['odontogram' => 'Add-on odontogram tidak aktif untuk klinik ini.']);
+            }
             $recordData['odontogram'] = collect($data['odontogram'])
                 ->map(fn (array $tooth): array => [
                     'tooth_number' => (int) $tooth['tooth_number'],

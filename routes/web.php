@@ -27,12 +27,13 @@ use App\Http\Controllers\QueueController;
 use App\Http\Controllers\Receptionist\AppointmentController as ReceptionistAppointmentController;
 use App\Http\Controllers\Receptionist\DashboardController as ReceptionistDashboardController;
 use App\Http\Controllers\Receptionist\PatientController as ReceptionistPatientController;
+use App\Http\Controllers\SubscriptionAddonController;
 use App\Http\Controllers\SubscriptionPaymentController;
 use App\Http\Middleware\RedirectToDashboard;
-use App\Models\Clinic;
-use App\Models\Patient;
+use App\Models\AddonPrice;
 use App\Models\SubscriptionPlan;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 
 $baseDomain = parse_url(config('app.url'), PHP_URL_HOST);
@@ -44,6 +45,13 @@ Route::domain('{clinic:slug}.'.$clinicDomain)->group(function (): void {
         ->middleware('throttle:60,1')->name('public.queue.index');
 });
 
+if (filter_var($baseDomain, FILTER_VALIDATE_IP)) {
+    Route::domain($baseDomain)->prefix('clinic/{clinic}')->group(function (): void {
+        Route::get('/', fn (string $clinic): RedirectResponse => redirect()->route('public.clinic.show', ['clinic' => $clinic]));
+        Route::get('queue', fn (string $clinic): RedirectResponse => redirect()->route('public.queue.index', ['clinic' => $clinic]));
+    });
+}
+
 Route::domain($baseDomain)->group(function (): void {
     if (app()->environment(['local', 'testing'])) {
         Route::view('previews/visit-summary', 'previews.visit-summary')
@@ -51,19 +59,16 @@ Route::domain($baseDomain)->group(function (): void {
     }
 
     Route::get('/', function () {
-        $minimumPrices = SubscriptionPlan::query()
+        $monthlyPrices = SubscriptionPlan::query()
             ->whereIn('code', ['individual', 'team'])
             ->where('is_active', true)
-            ->with(['prices' => fn (HasMany $query): HasMany => $query->where('is_active', true)])
+            ->with(['prices' => fn (HasMany $query): HasMany => $query->where('is_active', true)->where('duration_months', 1)])
             ->get()
-            ->mapWithKeys(fn (SubscriptionPlan $plan): array => [$plan->code => $plan->prices->min('amount')]);
+            ->mapWithKeys(fn (SubscriptionPlan $plan): array => [$plan->code => $plan->prices->first()?->amount]);
 
         return view('welcome', [
-            'statistics' => [
-                'clinics' => Clinic::query()->where('is_active', true)->count(),
-                'patients' => Patient::withoutGlobalScopes()->where('is_active', true)->count(),
-            ],
-            'minimumPrices' => $minimumPrices,
+            'monthlyPrices' => $monthlyPrices,
+            'addonMonthlyPrice' => AddonPrice::query()->where('code', 'odontogram')->where('is_active', true)->value('monthly_amount'),
         ]);
     })->name('welcome');
 
@@ -110,6 +115,9 @@ Route::domain($baseDomain)->group(function (): void {
     });
 
     Route::prefix('subscription')->name('subscription.')->middleware(['auth', 'verified', 'clinic_owner', 'throttle:payment-status'])->group(function () {
+        Route::get('addons', [SubscriptionAddonController::class, 'index'])->name('addons.index');
+        Route::post('addons/odontogram', [SubscriptionAddonController::class, 'store'])
+            ->middleware('throttle:checkout')->name('addons.store');
         Route::get('payments', [SubscriptionPaymentController::class, 'index'])->name('payments.index');
         Route::get('payments/{payment}', [SubscriptionPaymentController::class, 'show'])->name('payments.show');
         Route::post('payments/{payment}/reconcile', [SubscriptionPaymentController::class, 'reconcile'])
@@ -129,6 +137,8 @@ Route::domain($baseDomain)->group(function (): void {
             ->middleware('permission:platform.plan.manage')->name('subscription-plans.update');
         Route::patch('subscription-prices/{subscriptionPrice}', [PlatformSubscriptionPlanController::class, 'updatePrice'])
             ->middleware('permission:platform.plan.manage')->name('subscription-prices.update');
+        Route::patch('addon-prices/{addonPrice}', [PlatformSubscriptionPlanController::class, 'updateAddon'])
+            ->middleware('permission:platform.plan.manage')->name('addon-prices.update');
         Route::post('tenants/{clinic}/subscription-grants', [PlatformSubscriptionGrantController::class, 'store'])
             ->middleware('permission:platform.subscription.grant')->name('subscription-grants.store');
         Route::get('payments', [PlatformPaymentController::class, 'index'])

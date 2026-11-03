@@ -211,12 +211,22 @@
                 </div>
             </x-rme.section>
 
+            @if ($canEditOdontogram || $hasOdontogram)
+            @if ($canEditOdontogram)
+                <p class="rounded-xl border border-clinic-200 bg-clinic-50 p-4 text-sm font-semibold text-clinic-800" role="status">Odontogram aktif. Perubahan disimpan saat Anda menyimpan RME.</p>
+            @endif
+            @unless ($canEditOdontogram)
+                <p class="rounded-xl border border-clinic-200 bg-clinic-50 p-4 text-sm text-clinic-800" role="status">Add-on odontogram tidak aktif. Histori di bawah ini hanya dapat dibaca.</p>
+            @endunless
             <x-dental-chart
                 :teeth="$dentalChart['teeth']"
                 :conditions="$dentalChart['conditions']"
                 :selected-tooth="$dentalChart['selected_tooth']"
                 :read-only="$dentalChart['read_only']"
             />
+            @else
+                <p class="rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-600" role="status">Odontogram belum aktif untuk klinik ini. RME General tetap tersedia.</p>
+            @endif
 
             <section class="clinic-card p-6 sm:p-8" aria-labelledby="prescription-heading">
                 <div class="flex flex-wrap items-start justify-between gap-4">

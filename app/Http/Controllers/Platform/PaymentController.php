@@ -19,7 +19,7 @@ class PaymentController extends Controller
         $validated = $request->validate(['search' => ['nullable', 'string', 'max:100']]);
         $search = trim($validated['search'] ?? '');
         $payments = Payment::query()
-            ->with('clinic:id,name')
+            ->with(['clinic:id,name', 'items'])
             ->when($search !== '', function ($query) use ($search): void {
                 $query->where(function ($searchQuery) use ($search): void {
                     $searchQuery->where('invoice_number', 'like', "%{$search}%")
@@ -35,7 +35,7 @@ class PaymentController extends Controller
 
     public function show(Payment $payment): View
     {
-        $payment->load(['clinic', 'events' => fn ($query) => $query->latest('received_at')]);
+        $payment->load(['clinic', 'items', 'events' => fn ($query) => $query->latest('received_at')]);
 
         return view('subscription.payments.show', ['payment' => $payment, 'platform' => true]);
     }

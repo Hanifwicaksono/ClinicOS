@@ -115,7 +115,17 @@ class SubscriptionService
             }
 
             $subscription = $this->subscriptionForUpdate($clinic, $at);
-            $startsAt = $this->nextPeriodStart($clinic, $at);
+            $currentCode = $this->statusAt($clinic, $at) === SubscriptionStatus::Free
+                ? 'free'
+                : ($this->periodAt($clinic, $at)?->plan_code ?? $subscription->plan->code);
+            $downgrade = $this->planRank($price->plan->code) < $this->planRank($currentCode);
+            if ($downgrade) {
+                if ($subscription->status === SubscriptionStatus::Suspended) {
+                    throw new DomainException('Buka suspensi sebelum menerapkan downgrade.');
+                }
+                $this->revokeFuturePeriods($clinic, $at);
+            }
+            $startsAt = $downgrade ? $at : $this->nextPeriodStart($clinic, $at);
             $period = $subscription->periods()->create([
                 'clinic_id' => $clinic->id,
                 'subscription_plan_id' => $price->plan->id,
@@ -135,6 +145,36 @@ class SubscriptionService
             }
 
             return $period;
+        });
+    }
+
+    public function downgradeToFree(Clinic $clinic, string $reason, ?CarbonImmutable $at = null): Subscription
+    {
+        if (trim($reason) === '') {
+            throw new DomainException('Alasan downgrade wajib diisi.');
+        }
+
+        return DB::transaction(function () use ($clinic, $at): Subscription {
+            $at = ($at ?? CarbonImmutable::now())->utc();
+            $subscription = $this->subscriptionForUpdate($clinic, $at);
+            if ($subscription->status === SubscriptionStatus::Suspended) {
+                throw new DomainException('Buka suspensi sebelum menerapkan downgrade.');
+            }
+            if ($this->statusAt($clinic, $at) === SubscriptionStatus::Free) {
+                throw new DomainException('Klinik sudah memakai paket Free.');
+            }
+
+            $freePlan = SubscriptionPlan::query()->where('code', 'free')->firstOrFail();
+            $this->revokeFuturePeriods($clinic, $at);
+            $subscription->update([
+                'subscription_plan_id' => $freePlan->id,
+                'status' => SubscriptionStatus::Free,
+                'source' => 'manual_downgrade',
+                'starts_at' => $at,
+                'ends_at' => null,
+            ]);
+
+            return $subscription->load('plan');
         });
     }
 
@@ -160,7 +200,8 @@ class SubscriptionService
                 throw new DomainException('Legacy tenant sudah memiliki subscription.');
             }
 
-            $endsAt = $this->endAfterMonths($clinic, $at, 12);
+            $endsAt = $this->endAfterMonths($clinic, $at, 12)
+                ->setTimezone($this->timezone($clinic))->addDay()->startOfDay()->utc();
             $subscription = Subscription::query()->create([
                 'clinic_id' => $clinic->id,
                 'subscription_plan_id' => $price->plan->id,
@@ -195,6 +236,7 @@ class SubscriptionService
             $at = ($at ?? CarbonImmutable::now())->utc();
             $payment = Payment::query()->lockForUpdate()->findOrFail($payment->id);
             $price = SubscriptionPrice::query()->with('plan')->lockForUpdate()->findOrFail($price->id);
+            $planItem = $payment->items()->where('kind', 'plan')->first();
             $existingPeriod = SubscriptionPeriod::query()->whereBelongsTo($payment)->first();
 
             if ($existingPeriod !== null) {
@@ -206,9 +248,16 @@ class SubscriptionService
                 || $payment->clinic_id !== $clinic->id
                 || $payment->subscription_price_id !== $price->id
                 || $payment->plan_code !== $price->plan->code
-                || $payment->plan_name !== $price->plan->name
-                || $payment->duration_months !== $price->duration_months
-                || $payment->amount !== $price->amount
+                || $payment->duration_months === null
+                || ($planItem === null && ($payment->plan_name !== $price->plan->name
+                    || $payment->duration_months !== $price->duration_months
+                    || $payment->amount !== $price->amount))
+                || ($planItem !== null && (
+                    $planItem->subscription_price_id !== $price->id
+                    || $planItem->code !== $payment->plan_code
+                    || $planItem->name !== $payment->plan_name
+                    || $planItem->duration_months !== $payment->duration_months
+                ))
             ) {
                 throw new DomainException('Snapshot pembayaran tidak cocok dengan paket.');
             }
@@ -222,7 +271,7 @@ class SubscriptionService
                 'plan_code' => $payment->plan_code,
                 'plan_name' => $payment->plan_name,
                 'duration_months' => $payment->duration_months,
-                'amount' => $payment->amount,
+                'amount' => $planItem?->amount ?? $payment->amount,
                 'source' => 'payment',
                 'starts_at' => $startsAt,
                 'ends_at' => $this->endAfterMonths($clinic, $startsAt, $payment->duration_months),
@@ -253,6 +302,10 @@ class SubscriptionService
             return $period->source === 'trial' ? SubscriptionStatus::Trialing : SubscriptionStatus::Active;
         }
 
+        if ($subscription->source === 'manual_downgrade' && $subscription->starts_at?->lessThanOrEqualTo($at)) {
+            return SubscriptionStatus::Free;
+        }
+
         $lastPeriod = $this->lastEndedPeriod($clinic, $at->utc());
         if ($lastPeriod !== null) {
             return $lastPeriod->source === 'trial' ? SubscriptionStatus::Free : SubscriptionStatus::Expired;
@@ -275,6 +328,10 @@ class SubscriptionService
             if ($period !== null) {
                 $this->applyPeriod($subscription, $period);
 
+                return $subscription->load('plan');
+            }
+
+            if ($subscription->source === 'manual_downgrade' && $subscription->starts_at?->lessThanOrEqualTo($at)) {
                 return $subscription->load('plan');
             }
 
@@ -494,6 +551,7 @@ class SubscriptionService
     private function nextPeriodStart(Clinic $clinic, CarbonImmutable $at): CarbonImmutable
     {
         $latestEnd = $clinic->subscriptionPeriods()
+            ->whereNull('revoked_at')
             ->where('ends_at', '>', $at)
             ->max('ends_at');
 
@@ -505,6 +563,7 @@ class SubscriptionService
         return $clinic->subscriptionPeriods()
             ->where('starts_at', '<=', $at)
             ->where('ends_at', '>', $at)
+            ->where(fn ($query) => $query->whereNull('revoked_at')->orWhere('revoked_at', '>', $at))
             ->latest('starts_at')
             ->latest('id')
             ->first();
@@ -513,10 +572,29 @@ class SubscriptionService
     private function lastEndedPeriod(Clinic $clinic, CarbonImmutable $at): ?SubscriptionPeriod
     {
         return $clinic->subscriptionPeriods()
+            ->whereNull('revoked_at')
             ->where('ends_at', '<=', $at)
             ->latest('ends_at')
             ->latest('id')
             ->first();
+    }
+
+    private function revokeFuturePeriods(Clinic $clinic, CarbonImmutable $at): void
+    {
+        $clinic->subscriptionPeriods()
+            ->where('ends_at', '>', $at)
+            ->where(fn ($query) => $query->whereNull('revoked_at')->orWhere('revoked_at', '>', $at))
+            ->update(['revoked_at' => $at]);
+        $clinic->payments()->where('status', PaymentStatus::Pending)->update(['status' => PaymentStatus::Expired]);
+    }
+
+    private function planRank(string $code): int
+    {
+        return match ($code) {
+            'team' => 2,
+            'individual' => 1,
+            default => 0,
+        };
     }
 
     private function applyPeriod(Subscription $subscription, SubscriptionPeriod $period): void
@@ -543,7 +621,6 @@ class SubscriptionService
     {
         return $startsAt->setTimezone($this->timezone($clinic))
             ->addMonthsNoOverflow($months)
-            ->addDay()
             ->startOfDay()
             ->utc();
     }

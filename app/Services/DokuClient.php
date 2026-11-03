@@ -17,6 +17,21 @@ class DokuClient
     /** @return array{payment_url: string, expires_at: CarbonImmutable} */
     public function createCheckout(Payment $payment, User $owner): array
     {
+        $addonItem = $payment->items()->where('kind', 'addon')->whereNotNull('target_subscription_period_id')->first();
+        $addonDeadline = null;
+        $dueMinutes = $this->paymentDueMinutes();
+        if ($addonItem !== null) {
+            $timezone = $payment->clinic->settings()->value('timezone') ?? config('app.timezone', 'UTC');
+            $addonDeadline = $addonItem->starts_at->setTimezone($timezone)->addDay()->startOfDay()->utc();
+            if ($addonItem->ends_at->lessThan($addonDeadline)) {
+                $addonDeadline = $addonItem->ends_at;
+            }
+            $dueMinutes = min($dueMinutes, (int) floor(CarbonImmutable::now('UTC')->diffInSeconds($addonDeadline, false) / 60));
+            if ($dueMinutes < 1) {
+                throw new RuntimeException('Kutipan add-on telah kedaluwarsa.');
+            }
+        }
+
         $body = [
             'order' => [
                 'amount' => $payment->amount,
@@ -28,7 +43,7 @@ class DokuClient
                 'language' => 'ID',
             ],
             'payment' => [
-                'payment_due_date' => $this->paymentDueMinutes(),
+                'payment_due_date' => $dueMinutes,
             ],
             'customer' => [
                 'id' => 'clinic-'.$payment->clinic_id,
@@ -50,9 +65,14 @@ class DokuClient
             throw new RuntimeException('Respons checkout DOKU tidak lengkap.');
         }
 
+        $expiresAt = CarbonImmutable::createFromFormat('YmdHis', $expiredDate, 'Asia/Jakarta')->utc();
+        if ($addonDeadline !== null && $expiresAt->greaterThan($addonDeadline)) {
+            throw new RuntimeException('Masa berlaku checkout melewati tanggal kutipan add-on.');
+        }
+
         return [
             'payment_url' => $paymentUrl,
-            'expires_at' => CarbonImmutable::createFromFormat('YmdHis', $expiredDate, 'Asia/Jakarta')->utc(),
+            'expires_at' => $expiresAt,
         ];
     }
 

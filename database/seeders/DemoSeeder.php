@@ -20,6 +20,7 @@ class DemoSeeder extends Seeder
         $this->call([
             RoleAndPermissionSeeder::class,
             SubscriptionPlanSeeder::class,
+            AddonPriceSeeder::class,
             DemoUserSeeder::class,
             ClinicSeeder::class,
             ClinicSettingSeeder::class,

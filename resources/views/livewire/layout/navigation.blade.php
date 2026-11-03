@@ -97,6 +97,11 @@ new class extends Component
                         'match' => 'subscription.payments.*',
                         'label' => 'Subscription',
                         'icon' => 'M4 7h16M4 12h16M4 17h10',
+                    ], [
+                        'route' => 'subscription.addons.index',
+                        'match' => 'subscription.addons.*',
+                        'label' => 'Add-on odontogram',
+                        'icon' => 'M4 6h16M4 12h16M4 18h16',
                     ]]);
                 }
             @endphp

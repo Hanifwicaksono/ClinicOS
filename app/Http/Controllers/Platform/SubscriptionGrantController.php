@@ -21,15 +21,31 @@ class SubscriptionGrantController extends Controller
         AuditLogger $auditLogger,
     ): RedirectResponse {
         $validated = $request->validated();
-        $price = SubscriptionPrice::query()->with('plan')->findOrFail($validated['subscription_price_id']);
+        $previousPlanCode = $clinic->subscription?->plan?->code;
 
         try {
+            if (($validated['plan_code'] ?? null) === 'free') {
+                $subscription = $subscriptionService->downgradeToFree($clinic, $validated['reason']);
+                $auditLogger->recordForClinic($clinic, 'subscription.downgraded', $subscription, [
+                    'previous_plan_code' => $previousPlanCode,
+                    'plan_code' => 'free',
+                    'starts_at' => $subscription->starts_at->toIso8601String(),
+                    'reason' => $validated['reason'],
+                ], $request->user());
+
+                return back()->with('status', 'Downgrade ke Free berlaku sekarang.');
+            }
+
+            $price = SubscriptionPrice::query()->with('plan')->findOrFail($validated['subscription_price_id']);
             $period = $subscriptionService->grant($clinic, $price, $request->user(), $validated['reason']);
         } catch (DomainException $exception) {
-            throw ValidationException::withMessages(['subscription_price_id' => $exception->getMessage()]);
+            throw ValidationException::withMessages([
+                ($validated['plan_code'] ?? null) === 'free' ? 'plan_code' : 'subscription_price_id' => $exception->getMessage(),
+            ]);
         }
 
         $auditLogger->recordForClinic($clinic, 'subscription.granted', $period, [
+            'previous_plan_code' => $previousPlanCode,
             'plan_code' => $period->plan_code,
             'duration_months' => $period->duration_months,
             'starts_at' => $period->starts_at->toIso8601String(),
@@ -37,6 +53,8 @@ class SubscriptionGrantController extends Controller
             'reason' => $period->reason,
         ], $request->user());
 
-        return back()->with('status', 'Grant subscription berhasil dijadwalkan.');
+        return back()->with('status', $period->starts_at->isFuture()
+            ? 'Grant subscription berhasil dijadwalkan.'
+            : 'Grant subscription berlaku sekarang.');
     }
 }

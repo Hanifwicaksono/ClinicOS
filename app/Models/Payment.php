@@ -47,4 +47,14 @@ class Payment extends Model
     {
         return $this->hasMany(PaymentEvent::class);
     }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(PaymentItem::class);
+    }
+
+    public function addonPeriod(): HasOne
+    {
+        return $this->hasOne(AddonPeriod::class);
+    }
 }

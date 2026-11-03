@@ -3,15 +3,21 @@
 namespace Tests\Feature;
 
 use App\MedicalRecordStatus;
+use App\Models\AddonPeriod;
 use App\Models\Clinic;
 use App\Models\Doctor;
 use App\Models\DoctorSchedule;
 use App\Models\MedicalRecordRevision;
 use App\Models\Patient;
 use App\Models\PatientAllergy;
+use App\Models\Payment;
 use App\Models\Service;
+use App\Models\Subscription;
+use App\Models\SubscriptionPeriod;
+use App\Models\SubscriptionPlan;
 use App\Models\User;
 use App\Models\Visit;
+use App\PaymentStatus;
 use App\Services\BookingService;
 use App\Services\QueueWorkflowService;
 use Database\Seeders\RoleAndPermissionSeeder;
@@ -32,6 +38,7 @@ class RmeGeneralDentalTest extends TestCase
     public function test_assigned_doctor_can_persist_general_rme_and_odontogram_in_draft(): void
     {
         $context = $this->inProgressVisitContext();
+        $this->enableOdontogram($context['clinic']);
         $payload = $this->medicalPayload();
         $payload['odontogram'] = [
             ['tooth_number' => 11, 'condition' => 'caries'],
@@ -61,6 +68,7 @@ class RmeGeneralDentalTest extends TestCase
     public function test_invalid_general_and_odontogram_payload_is_rejected_without_mutating_record(): void
     {
         $context = $this->inProgressVisitContext();
+        $this->enableOdontogram($context['clinic']);
         $payload = $this->medicalPayload();
         $payload['vital_signs'] = ['systolic' => 999];
         $payload['odontogram'] = [
@@ -146,6 +154,7 @@ class RmeGeneralDentalTest extends TestCase
     public function test_final_record_rejects_direct_edit_and_dental_correction_creates_revision(): void
     {
         $context = $this->inProgressVisitContext();
+        $this->enableOdontogram($context['clinic']);
         $payload = $this->medicalPayload();
         $payload['odontogram'] = [['tooth_number' => 11, 'condition' => 'caries']];
 
@@ -175,6 +184,72 @@ class RmeGeneralDentalTest extends TestCase
         $this->assertSame('caries', $revision->before_data['record']['odontogram'][0]['condition']);
         $this->assertSame('filled', $revision->after_data['record']['odontogram'][0]['condition']);
         $this->assertSame(MedicalRecordStatus::Final, $context['visit']->medicalRecord->refresh()->status);
+    }
+
+    public function test_general_rme_stays_writable_and_existing_odontogram_is_read_only_after_refund(): void
+    {
+        $context = $this->inProgressVisitContext();
+        $this->enableOdontogram($context['clinic']);
+        $payload = $this->medicalPayload();
+        $payload['odontogram'] = [['tooth_number' => 11, 'condition' => 'caries']];
+
+        $this->actingAs($context['doctor_user'])
+            ->put(route('doctor.visits.save', $context['visit']), $payload)
+            ->assertSessionHasNoErrors();
+
+        AddonPeriod::query()->update(['revoked_at' => now()]);
+        $this->actingAs($context['doctor_user'])
+            ->get(route('doctor.visits.show', $context['visit']))
+            ->assertOk()
+            ->assertSeeText('Histori di bawah ini hanya dapat dibaca.')
+            ->assertSee('data-persists="false"', false);
+
+        $payload['odontogram'][0]['condition'] = 'filled';
+        $this->actingAs($context['doctor_user'])
+            ->put(route('doctor.visits.save', $context['visit']), $payload)
+            ->assertSessionHasErrors('odontogram');
+
+        unset($payload['odontogram']);
+        $payload['assessment'] = 'Rencana pemeriksaan umum dilanjutkan.';
+        $this->actingAs($context['doctor_user'])
+            ->put(route('doctor.visits.complete', $context['visit']), $payload)
+            ->assertSessionHasNoErrors();
+
+        $record = $context['visit']->medicalRecord->refresh();
+        $this->assertSame(MedicalRecordStatus::Final, $record->status);
+        $this->assertSame('caries', $record->odontogram[0]['condition']);
+        $this->assertSame('Rencana pemeriksaan umum dilanjutkan.', $record->assessment);
+    }
+
+    private function enableOdontogram(Clinic $clinic): void
+    {
+        $plan = SubscriptionPlan::factory()->create(['code' => 'team', 'name' => 'Team']);
+        $subscription = Subscription::factory()->create([
+            'clinic_id' => $clinic->id,
+            'subscription_plan_id' => $plan->id,
+            'starts_at' => now()->subDay(),
+            'ends_at' => now()->addMonth(),
+        ]);
+        $basePayment = Payment::factory()->create(['clinic_id' => $clinic->id, 'status' => PaymentStatus::Paid]);
+        $period = SubscriptionPeriod::factory()->create([
+            'clinic_id' => $clinic->id,
+            'subscription_id' => $subscription->id,
+            'subscription_plan_id' => $plan->id,
+            'payment_id' => $basePayment->id,
+            'plan_code' => 'team',
+            'plan_name' => 'Team',
+            'source' => 'payment',
+            'starts_at' => now()->subDay(),
+            'ends_at' => now()->addMonth(),
+        ]);
+        $payment = Payment::factory()->create(['clinic_id' => $clinic->id, 'status' => PaymentStatus::Paid]);
+        AddonPeriod::factory()->create([
+            'clinic_id' => $clinic->id,
+            'subscription_period_id' => $period->id,
+            'payment_id' => $payment->id,
+            'starts_at' => now()->subDay(),
+            'ends_at' => $period->ends_at,
+        ]);
     }
 
     /** @return array{clinic: Clinic, doctor_user: User, patient: Patient, visit: Visit} */

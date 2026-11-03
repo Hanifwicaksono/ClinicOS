@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['clinic_id', 'subscription_id', 'subscription_plan_id', 'payment_id', 'granted_by_user_id', 'plan_code', 'plan_name', 'duration_months', 'amount', 'source', 'starts_at', 'ends_at', 'reason'])]
+#[Fillable(['clinic_id', 'subscription_id', 'subscription_plan_id', 'payment_id', 'granted_by_user_id', 'plan_code', 'plan_name', 'duration_months', 'amount', 'source', 'starts_at', 'ends_at', 'revoked_at', 'reason'])]
 class SubscriptionPeriod extends Model
 {
     /** @use HasFactory<SubscriptionPeriodFactory> */
@@ -22,6 +22,7 @@ class SubscriptionPeriod extends Model
             'amount' => 'integer',
             'starts_at' => 'immutable_datetime',
             'ends_at' => 'immutable_datetime',
+            'revoked_at' => 'immutable_datetime',
         ];
     }
 
