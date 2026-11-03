@@ -38,6 +38,11 @@ class Clinic extends Model
         return $this->hasMany(SubscriptionPeriod::class);
     }
 
+    public function addonPeriods(): HasMany
+    {
+        return $this->hasMany(AddonPeriod::class);
+    }
+
     public function subscriptionReminders(): HasMany
     {
         return $this->hasMany(SubscriptionReminder::class);

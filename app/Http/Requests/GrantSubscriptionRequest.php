@@ -26,9 +26,12 @@ class GrantSubscriptionRequest extends FormRequest
     {
         return [
             'subscription_price_id' => [
-                'required',
+                Rule::requiredIf($this->input('plan_code') !== 'free'),
+                Rule::prohibitedIf($this->input('plan_code') === 'free'),
+                'nullable',
                 Rule::exists(SubscriptionPrice::class, 'id')->where('is_active', true),
             ],
+            'plan_code' => ['sometimes', Rule::in(['free'])],
             'reason' => ['required', 'string', 'max:1000'],
         ];
     }

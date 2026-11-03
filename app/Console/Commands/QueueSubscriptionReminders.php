@@ -24,6 +24,7 @@ class QueueSubscriptionReminders extends Command
 
         SubscriptionPeriod::query()
             ->with(['clinic.settings', 'clinic.owner'])
+            ->whereNull('revoked_at')
             ->whereBetween('ends_at', [$now->subDay()->utc(), $now->addDays(8)->utc()])
             ->each(function (SubscriptionPeriod $period) use ($now, &$queued): void {
                 $timezone = $period->clinic->settings?->timezone ?? config('app.timezone', 'UTC');
@@ -62,6 +63,7 @@ class QueueSubscriptionReminders extends Command
     private function hasRenewal(SubscriptionPeriod $period): bool
     {
         return $period->clinic->subscriptionPeriods()
+            ->whereNull('revoked_at')
             ->whereKeyNot($period->id)
             ->where('starts_at', '<=', $period->ends_at)
             ->where('ends_at', '>', $period->ends_at)

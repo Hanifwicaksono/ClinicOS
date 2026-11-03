@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Http\Request;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use Spatie\Permission\Models\Role;
@@ -19,6 +20,15 @@ new #[Layout('layouts.guest')] class extends Component
     public string $password = '';
     public string $password_confirmation = '';
     public bool $accept_terms = false;
+
+    public function mount(Request $request): void
+    {
+        $selectedPlan = $request->query('plan');
+
+        if (in_array($selectedPlan, ['free', 'individual', 'team'], true)) {
+            session(['preferred_subscription_plan' => $selectedPlan]);
+        }
+    }
 
     public function register(RegistrationRateLimiter $rateLimiter): void
     {

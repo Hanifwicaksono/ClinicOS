@@ -1,82 +1,102 @@
-# ClinicOS — Rencana Login Terpisah dan Subdomain Klinik
+# ClinicOS — Rencana RME General dan Add-on Odontogram
 
-Tanggal: 27 Oktober 2026
-Status: Implementasi aplikasi lokal selesai; konfigurasi domain produksi dan verifikasi browser belum dijalankan
+- Tanggal: 3 November 2026
+- Status: implementasi add-on selesai di kode dan MySQL lokal; verifikasi DOKU sandbox nyata dan konkurensi MySQL belum dilakukan
+- Pemilik keputusan produk: pengguna
+- Sasaran: RME General tersedia pada setiap paket ClinicOS; odontogram menjadi add-on berbayar opsional per klinik.
 
-## Tujuan dan keputusan
+## 1. Keputusan produk
 
-- Domain utama ditentukan oleh konfigurasi lingkungan produksi, misalnya `clinicos.com` atau `clinicos.id`; akhiran `.com` tidak wajib.
-- `{domain-utama}/login` menjadi pintu masuk pasien. Login Google yang sudah ada tetap khusus pasien.
-- `{domain-utama}/admin` menjadi pintu masuk pemilik klinik dan staf. Platform Admin juga masuk dari pintu ini lalu diarahkan ke `/platform`; ia bukan tenant.
-- Setiap klinik memakai **satu alamat publik bawaan**: `{slug}.{domain-utama}`, misalnya `kliniksehat.clinicos.id` bila domain utamanya `clinicos.id`. Domain milik klinik yang berbeda dari domain utama tidak termasuk rencana ini.
-- Satu klinik tetap satu tenant berdasarkan `clinic_id`. Subdomain memilih klinik untuk halaman publik; pemeriksaan kepemilikan dan policy tetap wajib.
-- Pemilik klinik tetap `account_type = clinic_owner`, role `Clinic Admin`, dan relasi `clinics.owner_user_id`. Tidak ada role baru.
-
-## Kondisi checkout
-
-- `routes/auth.php` memiliki satu route login Volt di `/login`. Halaman dan `LoginForm` saat ini menerima kredensial semua role; callback Google sudah membatasi akun pasien.
-- `routes/web.php` melayani profil, antrean publik, dan booking di `/clinic/{clinic:slug}`. Belum ada resolver subdomain.
-- `clinics.slug` sudah tersedia. Isolasi data klinik memakai query, policy, dan relasi yang divalidasi server-side.
-- Checkout mempunyai perubahan aktif pada auth, booking, dan dokumen ini. Sebelum implementasi, baca ulang status/diff Git dan lanjutkan dari perubahan terkini.
-
-## Perilaku URL
-
-| URL | Perilaku |
+| Topik | Keputusan |
 | --- | --- |
-| `{domain-utama}/` | Landing page ClinicOS |
-| `{domain-utama}/login` | Login pasien, registrasi pasien, dan Google |
-| `{domain-utama}/admin` | Login pemilik klinik, Clinic Admin, Receptionist, Doctor, dan Platform Admin |
-| `{slug}.{domain-utama}/` | Profil publik klinik sesuai slug |
-| `{slug}.{domain-utama}/queue` | Antrean publik klinik yang sama |
-| `{domain-utama}/clinic/{slug}/booking` | Booking pasien setelah login terpusat |
-| Area `/admin/*`, `/doctor/*`, `/receptionist/*`, `/patient/*`, `/platform/*` | Tetap pada domain utama |
+| RME General | Termasuk dalam Free, Individual, dan Team sesuai batas operasional masing-masing paket. |
+| Add-on Odontogram | Opsional untuk klinik dengan paket Individual atau Team berbayar yang aktif. Berlaku untuk seluruh dokter yang berwenang di klinik, tanpa harga per dokter. |
+| Trial Team | Tidak menyertakan odontogram dan belum dapat membeli add-on. |
+| Harga | Rp99.000 per klinik per bulan. |
+| Pembelian | Owner dapat memilihnya bersamaan dengan checkout paket berbayar atau membeli kemudian saat paket berbayar aktif. |
+| Penagihan | Dibayar sekali di muka untuk sisa periode paket utama. Pembelian di tengah periode memakai prorata hari kalender pada setiap bulan. |
+| Akhir masa aktif | Add-on berakhir pada waktu yang sama dengan periode paket utama yang dibelinya. Tidak ada perpanjangan atau tagihan otomatis. Owner memilih lagi saat memperpanjang paket utama. |
+| Data lama setelah berakhir | Dokter yang berwenang tetap dapat membaca odontogram tersimpan; perubahan odontogram baru ditolak. RME General tetap mengikuti hak akses dan status paket utama. |
+| Refund add-on | Setelah refund tervalidasi, hak mengubah odontogram berhenti. Data klinis, periode, invoice, event, dan audit tetap tersimpan; dokter yang berwenang tetap dapat membaca histori. |
 
-Tautan “Booking” pada subdomain menuju URL booking di domain utama dengan slug klinik yang sama. Pasien kembali ke booking klinik tersebut setelah login melalui intended URL yang tervalidasi. Sesi login tetap pada domain utama; tidak perlu berbagi cookie dengan semua subdomain.
+Perubahan paket utama ke Free, expired, atau suspended tidak boleh memberi hak edit odontogram. Add-on bukan pengganti otorisasi medis: hanya dokter yang ditugaskan pada visit/rekam medis yang dapat melihat atau mengubah isi odontogram.
 
-Gunakan hanya URL publik baru `{slug}.{domain-utama}/` dan `{slug}.{domain-utama}/queue`; URL publik lama `/clinic/{slug}` dan `/clinic/{slug}/queue` tidak perlu dipertahankan atau dialihkan. Link booking dan status booking yang sudah ada tetap berfungsi.
+## 2. Keadaan aplikasi saat rencana dibuat
 
-## Tahap implementasi
+- Paket Free, Individual, dan Team, satu subscription per klinik, periode 1/6/12 bulan, trial Team 14 hari, dan pembayaran DOKU sudah ada.
+- RME General dan odontogram saat ini berada pada form pemeriksaan yang sama. Odontogram 32 gigi FDI sudah divalidasi dan disimpan di medical_records.odontogram melalui VisitWorkflowService; komponen selalu ditampilkan, tanpa pemeriksaan entitlement.
+- Payment dan SubscriptionPeriod saat ini berasumsi satu invoice untuk satu harga paket. Checkout gabungan dan invoice khusus add-on memerlukan perluasan data serta pemrosesan pembayaran.
+- Dokumen PROJECT_ANALYSIS.md dan docs/odontogram-allergy/README.md menggambarkan keadaan lama ketika odontogram belum persisten. Kode dan test RmeGeneralDentalTest saat ini menjadi acuan implementasi terbaru; pembaruan dokumen lama bukan bagian pekerjaan rencana ini.
+- Flag premium lain pada SubscriptionPlan.features belum semuanya diterapkan sebagai gate. Implementasi add-on harus memakai pemeriksaan entitlement server-side yang nyata, bukan mengandalkan flag atau tampilan kartu harga.
 
-### 1. Pisahkan pintu masuk akun
+## 3. Kontrak harga dan periode
 
-1. Tambahkan route guest `GET /admin` tanpa mengganggu `/admin/*` yang sudah ada. Gunakan form autentikasi yang sudah ada; sesuaikan judul, tautan registrasi, dan tombol Google untuk tiap pintu masuk.
-2. Pada `/login`, terima hanya akun aktif dengan account type dan role pasien. Pada `/admin`, terima akun aktif pengelola klinik dan Platform Admin. Akun dari kelompok yang salah mendapat pesan login umum dan tidak memperoleh sesi.
-3. Pertahankan rate limiting, regenerasi sesi, audit login/logout, verifikasi email, dan redirect dashboard sesuai role. Intended URL harus tetap pada host tepercaya dan sesuai otorisasi.
-4. Perbarui tautan landing ClinicOS, halaman klinik, registrasi, reset kata sandi, dan redirect sesi akun nonaktif. Tautan pasien menuju `/login`; tautan pengelola menuju `/admin`. Alur reset kata sandi bersama boleh tetap dipakai.
+1. Pada checkout paket baru atau perpanjangan yang menyertakan odontogram, tampilkan dua baris harga: paket utama dan add-on. Harga add-on untuk periode penuh adalah Rp99.000 × jumlah bulan paket utama; contoh 12 bulan penuh Rp1.188.000. Satu pembayaran DOKU mengaktifkan kedua hak secara atomik setelah sukses tervalidasi.
+2. Pada pembelian setelah paket aktif, targetkan periode paket utama yang sedang aktif. Awal hak edit adalah saat pembayaran tervalidasi; akhir hak edit sama dengan ends_at periode paket tersebut. Jangan menjadwalkan add-on di atas periode renewal yang belum dipilih owner.
+3. Hitung prorata dari hari kalender yang tersisa pada tiap bulan menurut zona waktu klinik: untuk setiap bulan, Rp99.000 × (jumlah hari layanan yang ditagih pada bulan itu ÷ jumlah hari pada bulan itu). Jumlahkan komponen, lalu bulatkan sekali ke rupiah terdekat dengan aturan half-up. Hari aktivasi dihitung satu hari penuh. Harga tidak boleh melebihi harga add-on periode penuh yang bersangkutan.
+4. Kutipan harga dihitung di server, menampilkan tanggal awal/akhir, rincian prorata, dan total sebelum owner membuat invoice. Simpan harga, tanggal, produk, dan periode target sebagai snapshot pada invoice; query string atau form tidak menentukan harga atau entitlement.
+5. Kutipan hanya berlaku pada tanggal lokal saat dibuat. Invoice yang belum dibayar tidak boleh melewati tanggal lokal berikutnya atau akhir periode paket utama. Jika tanggal berubah sebelum pembayaran, buat kutipan/invoice baru. Notification yang datang terlambat tetap dicatat; jangan mengaktifkan hak tanpa periode paket yang valid.
+6. Periksa semantik batas waktu SubscriptionService::endAfterMonths yang saat ini menambah satu hari. Definisikan satu rentang waktu layanan dengan akhir eksklusif dan pakai rentang yang sama untuk harga, tampilan, dan entitlement. Test harus memastikan checkout penuh 1/6/12 bulan tepat Rp99.000/Rp594.000/Rp1.188.000 dan prorata tengah periode tidak lebih mahal daripada harga penuh.
+7. Tidak boleh ada dua add-on odontogram aktif atau dua checkout pending untuk klinik dan periode paket yang sama. Perpanjangan paket tidak otomatis memperpanjang add-on; owner dapat mencentangnya lagi pada checkout perpanjangan.
 
-### 2. Tambahkan subdomain klinik
+## 4. Data dan pembayaran
 
-1. Gunakan `clinics.slug` untuk mencocokkan host `{slug}.{domain-utama}` ke satu klinik aktif. Tolak host tak dikenal, slug cadangan seperti `www`, dan klinik tidak aktif; jangan jatuh ke data klinik lain.
-2. Tempatkan route subdomain sebelum route domain utama yang berpotensi bertabrakan. Profil dan antrean publik hanya mengambil data dari klinik hasil resolusi host. Jangan menerima `clinic_id` dari browser sebagai bukti tenant.
-3. Perbarui URL dan tautan profil/antrean publik agar memakai subdomain. Booking dan halaman status pasien tetap memakai domain utama. Pastikan email/notifikasi tidak menghasilkan host yang keliru.
-4. Pertahankan batas data antrean publik tanpa identitas atau isi medis. Policy medis, subscription, dan workflow booking tetap berlaku.
+- Tambahkan katalog add-on yang dapat diberi kode stabil odontogram, harga bulanan Rp99.000, status aktif, dan histori harga/snapshot sehingga perubahan katalog hanya berlaku untuk pembelian baru.
+- Tambahkan periode add-on per klinik yang merujuk periode paket utama, invoice/payment, waktu mulai/akhir, harga snapshot, sumber aktivasi, dan waktu pencabutan bila ada refund. Pertahankan semua periode historis.
+- Perluas payments secara additive untuk jenis pembelian paket, add-on, dan gabungan. Simpan item invoice terpisah beserta kode, nama, jumlah, harga, dan periode snapshot. Pertahankan kompatibilitas invoice paket lama; migrasi/backfill item lama tanpa mengubah nominal atau status historis.
+- Gunakan DokuPaymentService/DokuClient yang ada. Verifikasi signature, invoice, request ID, jumlah total, klinik, status, dan deduplikasi PaymentEvent sebelum aktivasi. Redirect browser hanya menampilkan status; tidak pernah mengaktifkan hak.
+- Untuk invoice gabungan, buat periode paket dan periode add-on dalam satu transaksi setelah pembayaran sah. Untuk pembelian add-on saja, tautkan ke periode paket aktif yang benar. Bila salah satu validasi gagal, jangan aktifkan sebagian hak; simpan event penolakan untuk investigasi.
+- Refund tervalidasi mencatat event dan mencabut hak edit add-on sejak waktu refund tanpa menghapus periode atau catatan medis. Pembayaran paket utama dan add-on harus tetap dapat dibedakan di riwayat, rekonsiliasi, dan audit.
+- Batasi pembuatan checkout kepada owner klinik target. Platform Admin boleh mengelola katalog dan metadata komersial, tetapi tidak mendapat akses isi medis dari hak tersebut.
 
-### 3. Siapkan domain produksi
+## 5. Entitlement dan alur klinis
 
-1. Pilih domain utama yang dimiliki/dikuasai untuk produksi. Konfigurasikan domain tersebut dan wildcard `*.{domain-utama}` pada DNS, web server/proxy, dan sertifikat HTTPS sebelum mengaktifkan tautan subdomain.
-2. Setel `APP_URL`, pola host subdomain, dan host tepercaya sesuai domain tiap lingkungan. Jangan mengaktifkan cookie sesi untuk semua subdomain; sesi login tetap pada domain utama.
-3. Audit slug klinik yang sudah ada terhadap nama host cadangan. Uji tautan booking dan status booking yang pernah dibagikan.
-4. Aktifkan secara bertahap setelah DNS/HTTPS dan verifikasi operasional siap. Deployment serta perubahan DNS dilakukan terpisah dari edit kode lokal.
+- Satu pemeriksaan server-side menentukan hak edit odontogram dari klinik milik visit, periode paket Individual/Team berbayar yang aktif, periode add-on yang aktif pada waktu sekarang, serta tidak adanya pencabutan refund. Jangan mempercayai clinic_id, plan, harga, atau status dari form.
+- Pada halaman visit, dokter yang ditugaskan melihat editor odontogram hanya saat hak edit aktif. Tanpa hak itu, odontogram historis yang sudah ada tampil hanya-baca; jika belum ada data, tampilkan keterangan singkat bahwa add-on belum aktif. Jangan menampilkan CTA pembelian di dalam isi medis.
+- Form yang menyembunyikan odontogram bukan batas keamanan. SaveMedicalRecordRequest, CompleteVisitRequest, CorrectMedicalRecordRequest, dan VisitWorkflowService harus menolak payload odontogram yang dibuat atau diubah saat hak edit tidak aktif, termasuk request manual. Field odontogram yang tidak dikirim tidak boleh mengosongkan data lama.
+- Saat add-on berakhir di tengah visit aktif, dokter tetap bisa menyimpan dan memfinalisasi RME General sesuai pengecualian pelayanan yang sudah ada. Odontogram draft tetap tersimpan dan dapat dibaca, tetapi perubahan berikutnya ditolak. Finalisasi/koreksi General tidak boleh menimpa odontogram tersebut.
+- Koreksi odontogram pada RME final hanya diperbolehkan selama hak edit aktif dan tetap memerlukan alasan serta MedicalRecordRevision sebelum/sesudah. Otorisasi dokter atas pasien/visit tetap wajib pada semua jalur baca dan tulis.
+- Tidak ada data odontogram, identitas pasien, atau isi medis pada halaman owner/platform, invoice, log pembayaran, notifikasi komersial, maupun broadcast publik.
 
-## Verifikasi dan syarat selesai
+## 6. Pengalaman owner dan dokter
 
-- `/login` menerima pasien dan menolak pengelola; `/admin` menerima pengelola/Platform Admin dan menolak pasien. Login gagal tidak menghasilkan sesi, dan rate limit tetap bekerja.
-- Login Google pasien, registrasi pasien/pemilik, reset kata sandi, verifikasi email, dan redirect setelah login tetap bekerja.
-- `klinik-a.{domain-utama}` hanya menampilkan klinik A. Host tak dikenal, slug cadangan, dan klinik nonaktif tidak menampilkan klinik lain. Tautan booking dari A selalu menuju booking A.
-- Booking, status booking lama, dan antrean publik tetap bekerja. Akses tenant dan medis lintas klinik tetap ditolak.
-- Jalankan test feature terfokus memakai SQLite in-memory dengan environment proses eksplisit. Uji browser desktop/mobile dan DNS/HTTPS dilakukan terpisah di lingkungan yang memiliki wildcard domain.
-- Jika file PHP berubah, jalankan `vendor/bin/pint --dirty --format agent`. Jika frontend berubah, jalankan `npm run build`.
+- Landing page dan pemilihan paket menyebut “RME General termasuk” pada semua paket; Individual/Team menampilkan “Odontogram opsional +Rp99.000/klinik/bulan”. Free dan trial Team menjelaskan bahwa add-on belum tersedia.
+- Checkout berbayar mempunyai pilihan add-on yang tidak tercentang otomatis. Ringkasan menampilkan harga paket, add-on, durasi, total, tanggal akhir, dan ketentuan tidak diperpanjang otomatis sebelum owner menuju DOKU.
+- Setelah paket aktif, owner memiliki halaman add-on pada area subscription: status, harga, tanggal akhir paket, kutipan prorata, tombol checkout, invoice pending, dan riwayat. Bila paket tidak memenuhi syarat, jelaskan syarat tanpa membuat checkout.
+- Pada perpanjangan paket, pilihan add-on muncul lagi secara eksplisit. Jika owner tidak memilihnya, periode baru hanya membawa RME General. Periode add-on lama tetap tercatat.
+- Dokter melihat status “Odontogram aktif” atau “Histori odontogram hanya-baca” pada halaman pemeriksaan. Pesan tidak menyiratkan bahwa draft tersimpan otomatis; simpan RME tetap mengikuti mekanisme submit yang ada.
+- Platform Admin dapat melihat status komersial add-on dan mengubah harga/aktif katalog untuk invoice baru. Halaman platform tidak menampilkan isi odontogram.
+- Pertahankan gaya, komponen Blade/Livewire, dan palet ClinicOS; uji mobile, keyboard/fokus, serta state pending, gagal, aktif, berakhir, dan refunded.
 
-### Hasil implementasi lokal — 27 Oktober 2026
+## 7. Tahap pengerjaan
 
-- Route login pasien `/login` dan pengelola `/admin` memakai form yang sama dengan pembatasan role sebelum sesi dibuat. Google tetap hanya tampil pada login pasien; reset kata sandi dan sesi akun nonaktif kembali ke pintu masuk yang sesuai.
-- Profil dan antrean publik memakai host `{slug}.{domain-utama}`. Booking serta area aplikasi tetap pada host utama. Slug baru dibatasi menjadi label DNS kecil yang valid dan nama subdomain cadangan ditolak.
-- Tes terfokus login, Google, booking, klinik publik, antrean, onboarding, dan proxy lulus pada SQLite in-memory. Pint dan `npm run build` selesai.
-- Suite penuh sebelum penyesuaian tes proxy: 262 tes, 257 lulus, 3 gagal, 2 error. Tes proxy kemudian lulus saat dijalankan ulang. Kegagalan/error yang tersisa adalah `ManagementDashboardTest`, `SecurityHeadersTest`, dan dua `NotificationCenterTest` pada SQLite; belum diperbaiki dalam pekerjaan domain ini.
-- DNS wildcard, HTTPS, domain produksi yang dipilih, dan uji browser belum dapat diverifikasi dari checkout lokal. Jika `APP_URL` lokal memakai alamat IP, URL klinik memakai `{slug}.localhost`; produksi harus memakai nama host domain utama yang dipilih.
+| Tahap | Pekerjaan | Syarat selesai |
+| --- | --- | --- |
+| 1. Domain dan migrasi | Katalog, periode add-on, item invoice, relasi, factory, seeder idempotent, serta kompatibilitas pembayaran lama. | Migrasi additive/rollback aman; histori paket dan odontogram lama utuh; harga penuh dan prorata teruji. |
+| 2. Checkout dan siklus | Pilihan add-on saat checkout paket, pembelian setelah aktif, snapshot invoice, DOKU notification/reconciliation, deduplikasi, refund, dan audit. | Pending/redirect tidak memberi hak; sukses sah mengaktifkan tepat satu periode; invoice gabungan atomik; refund menghentikan edit. |
+| 3. Gerbang klinis | Entitlement dari klinik visit, UI editor/histori, validasi request, pengamanan di VisitWorkflowService, finalisasi dan koreksi. | Free/trial/tanpa add-on tidak dapat menulis odontogram lewat UI atau request manual; General tetap berjalan; data lama terbaca sesuai policy. |
+| 4. Antarmuka komersial | Copy paket/landing, checkout opt-in, halaman add-on owner, ringkasan invoice, status dan riwayat platform. | Harga dan periode jelas sebelum bayar; tidak ada tagihan otomatis; tidak ada isi medis pada layar komersial. |
+| 5. Verifikasi rilis | Test unit/feature, build frontend, formatter, browser responsif, simulasi DOKU sandbox, dan review migrasi pada data berisi odontogram lama. | Semua test terkait lulus; skenario tenant, waktu, gagal bayar, refund, renewal, dan data lama terbukti; tidak memakai pembayaran nyata untuk test rutin. |
 
-## Di luar cakupan
+## 8. Matriks verifikasi wajib
 
-- Domain milik klinik, misalnya `kliniksehat.com`, termasuk verifikasi DNS dan sertifikatnya.
-- Login atau dashboard pada subdomain klinik, berbagi sesi antarsubdomain, dan multi-cabang.
-- Perubahan stack, role, data klinis, aturan booking, atau paket subscription.
+- Free, Individual, dan Team tetap dapat membuat RME General sesuai hak dokter dan batas paket.
+- Free, trial Team, paket expired/suspended, Individual/Team tanpa add-on, serta add-on berakhir/refunded tidak dapat membuat atau mengubah odontogram melalui draft, finalisasi, koreksi, atau request buatan.
+- Dokter yang ditugaskan dapat membaca odontogram historis setelah add-on berakhir/refunded; dokter klinik lain, owner, resepsionis, pasien, dan Platform Admin tidak memperoleh akses medis.
+- Pembayaran paket + add-on mengaktifkan keduanya tepat sekali; gagal bayar, jumlah salah, signature salah, event duplikat/terlambat, dan redirect browser tidak mengaktifkan hak.
+- Pembelian add-on terpisah menempel pada periode paket yang tepat; tidak ada periode tumpang tindih atau pembayaran ganda saat dua checkout bersamaan.
+- Harga penuh 1/6/12 bulan, prorata lintas bulan/tahun kabisat, zona waktu klinik, batas tanggal lokal, dan pembulatan rupiah sesuai ringkasan checkout.
+- Renewal tanpa pilihan add-on menghentikan hak edit pada akhir periode lama; renewal dengan pilihan membuat periode baru tanpa mengubah data atau invoice lama.
+- Jika add-on kedaluwarsa saat visit berlangsung, RME General tetap dapat diselesaikan, odontogram lama tidak tertimpa, dan audit koreksi final tetap lengkap.
+- Jalankan test terfokus dengan database test terpisah, lalu npm run build dan pemeriksaan UI pada 375, 768, 1024, dan 1440 px. Verifikasi MySQL khusus untuk lock/konkurensi karena SQLite in-memory tidak membuktikannya.
+
+## 9. Batas rencana
+
+Rencana ini tidak mencakup auto-renewal, harga per dokter, paket dental baru, perubahan domain diagnosis/resep, billing pasien, aplikasi SPA, atau penghapusan data odontogram.
+
+## 10. Hasil implementasi dan verifikasi
+
+- Katalog harga, periode add-on, item invoice, checkout gabungan/terpisah, refund, entitlement server-side, tampilan owner/dokter/platform, dan copy paket sudah diterapkan. Invoice add-on yang dibayar setelah masa kutipan masuk status `review` tanpa memberi hak edit dan dapat direfund setelah ditinjau.
+- Migrasi additive telah dijalankan pada MySQL lokal. Lima invoice lama tetap ada dan seluruhnya memiliki item paket hasil backfill. Seeder idempotent menghasilkan harga odontogram Rp99.000/bulan.
+- Suite SQLite in-memory: 287 test lulus, 1.796 assertion. `npm run build`, `vendor/bin/pint --dirty --format agent`, dan `git diff --check` lulus. Landing diperiksa pada lebar 375, 768, 1024, dan 1440 px tanpa overflow horizontal.
+- Belum ada pembayaran nyata atau uji DOKU sandbox end-to-end. Lock dan transaksi checkout belum dibuktikan dengan dua proses bersamaan pada MySQL; ini menjadi gate sebelum rilis produksi.

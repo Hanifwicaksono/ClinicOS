@@ -15,7 +15,7 @@
 
             <div class="relative mx-auto grid w-full max-w-5xl items-center gap-10 lg:grid-cols-[1fr_.9fr]">
                 <section class="text-center lg:text-left">
-                    <a href="{{ url('/') }}" class="inline-flex items-center gap-3">
+                    <a href="{{ route('welcome') }}" class="inline-flex items-center gap-3">
                         <x-application-logo class="h-11 w-11" />
                         <span class="font-display text-2xl font-extrabold text-clinic-950">Clinic<span class="text-clinic-500">OS</span></span>
                     </a>
@@ -25,7 +25,7 @@
                     <p class="mx-auto mt-6 max-w-xl text-base leading-7 text-slate-600 lg:mx-0">Kami sudah cek ruang tunggu, apotek, bahkan di balik meja resepsionis. Halaman yang kamu cari tetap tidak ditemukan.</p>
 
                     <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-                        <a href="{{ auth()->check() ? route('dashboard') : url('/') }}" class="clinic-button-primary px-6">
+                        <a href="{{ auth()->check() ? route('dashboard') : route('welcome') }}" class="clinic-button-primary px-6">
                             {{ auth()->check() ? 'Kembali ke dashboard' : 'Kembali ke beranda' }}
                         </a>
                         <button type="button" onclick="history.back()" class="clinic-button-secondary px-6">Kembali satu langkah</button>

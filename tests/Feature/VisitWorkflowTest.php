@@ -153,11 +153,8 @@ class VisitWorkflowTest extends TestCase
             ->assertSee('data-rme-field="subjective"', false)
             ->assertSee('aria-describedby="subjective_description"', false)
             ->assertSee('x-on:rme-autosave-state.window', false)
-            ->assertSeeText('Odontogram')
-            ->assertSee('data-persists="true"', false)
-            ->assertSee('data-tooth-id="11"', false)
-            ->assertSee('data-tooth-id="48"', false)
-            ->assertSee('dental-condition-changed', false);
+            ->assertSeeText('Odontogram belum aktif')
+            ->assertDontSee('data-dental-chart', false);
     }
 
     public function test_rme_general_form_links_validation_error_and_preserves_old_input(): void
@@ -258,7 +255,7 @@ class VisitWorkflowTest extends TestCase
             ->get(route('doctor.visits.show', $visit))
             ->assertOk()
             ->assertSee('data-initial-state="finalized"', false)
-            ->assertSee('data-read-only="false"', false);
+            ->assertSeeText('Odontogram belum aktif');
 
         $this->actingAs($context['doctor_user'])
             ->put(route('doctor.visits.complete', $visit), $this->medicalPayload())

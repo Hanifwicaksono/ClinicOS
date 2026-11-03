@@ -5,6 +5,7 @@ namespace App\Http\Requests\Doctor;
 use App\DentalCondition;
 use App\DentalTooth;
 use App\Models\Visit;
+use App\Services\AddonService;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -44,7 +45,14 @@ class SaveMedicalRecordRequest extends FormRequest
             'photos.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'removed_photos' => ['nullable', 'array'],
             'removed_photos.*' => ['integer', 'min:0', 'distinct'],
-            'odontogram' => ['nullable', 'array', 'max:32'],
+            'odontogram' => [
+                Rule::prohibitedIf(function (): bool {
+                    $visit = $this->route('visit');
+
+                    return ! ($visit instanceof Visit && app(AddonService::class)->canEdit($visit->clinic));
+                }),
+                'nullable', 'array', 'max:32',
+            ],
             'odontogram.*' => ['array:tooth_number,condition'],
             'odontogram.*.tooth_number' => ['required', 'integer', 'distinct', Rule::in(DentalTooth::values())],
             'odontogram.*.condition' => ['required', Rule::enum(DentalCondition::class)],

@@ -52,7 +52,7 @@ class SubscriptionPlanSeeder extends Seeder
             );
 
             foreach ($attributes['prices'] as $durationMonths => $amount) {
-                $plan->prices()->updateOrCreate(
+                $plan->prices()->firstOrCreate(
                     ['duration_months' => $durationMonths],
                     ['amount' => $amount],
                 );

@@ -30,7 +30,7 @@
     {{ $attributes->class(['clinic-card min-w-0 overflow-hidden p-6 sm:p-8']) }}
     aria-labelledby="dental-chart-heading"
     data-dental-chart
-    data-persists="true"
+    data-persists="{{ $readOnly ? 'false' : 'true' }}"
     data-initial-selected-tooth="{{ $selectedTooth }}"
     data-read-only="{{ $readOnly ? 'true' : 'false' }}"
     data-tooth-selected-event="dental-tooth-selected"
@@ -130,12 +130,14 @@
         @endforeach
     </div>
 
+    @unless ($readOnly)
     <template x-for="(tooth, index) in teeth" :key="`odontogram-${tooth.id}`">
         <span class="hidden" aria-hidden="true">
             <input type="hidden" x-bind:name="`odontogram[${index}][tooth_number]`" x-bind:value="tooth.id">
             <input type="hidden" x-bind:name="`odontogram[${index}][condition]`" x-bind:value="tooth.condition">
         </span>
     </template>
+    @endunless
 
     <fieldset class="mt-5 rounded-2xl border border-slate-200 p-4" x-bind:disabled="readOnly || ! selectedTooth" @disabled($readOnly || ! $selectedTooth)>
         <legend class="px-2 text-sm font-extrabold text-clinic-950">Pilih kondisi</legend>

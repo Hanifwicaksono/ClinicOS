@@ -49,7 +49,8 @@ class DokuNotificationController extends Controller
             return response()->json(['message' => $exception->getMessage()], 422);
         }
 
-        $status = str_starts_with($event->result, 'rejected_') ? 422 : 200;
+        $status = str_starts_with($event->result, 'rejected_')
+            && ! in_array($event->result, ['rejected_addon_period', 'rejected_expired_payment'], true) ? 422 : 200;
 
         return response()->json(['status' => $event->result], $status);
     }

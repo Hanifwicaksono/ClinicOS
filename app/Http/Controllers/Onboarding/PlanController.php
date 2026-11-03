@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Onboarding;
 
 use App\Http\Controllers\Controller;
+use App\Models\AddonPrice;
 use App\Models\SubscriptionPlan;
 use App\Models\SubscriptionPrice;
 use App\Services\AuditLogger;
@@ -29,8 +30,11 @@ class PlanController extends Controller
             ->orderBy('id')
             ->get();
         $subscription = $request->user()->clinic->subscription;
+        $selectedPlan = session('preferred_subscription_plan');
+        $selectedPlan = in_array($selectedPlan, ['free', 'individual', 'team'], true) ? $selectedPlan : null;
+        $addonPrice = AddonPrice::query()->where('code', 'odontogram')->where('is_active', true)->first();
 
-        return view('onboarding.plans.index', compact('plans', 'subscription'));
+        return view('onboarding.plans.index', compact('plans', 'subscription', 'selectedPlan', 'addonPrice'));
     }
 
     public function activateFree(
@@ -48,6 +52,7 @@ class PlanController extends Controller
             'plan_code' => 'free',
             'source' => 'free',
         ], $request->user());
+        $request->session()->forget('preferred_subscription_plan');
 
         return redirect()->route('dashboard')->with('status', 'Paket Free aktif.');
     }
@@ -73,6 +78,7 @@ class PlanController extends Controller
             'plan_code' => 'team',
             'source' => 'trial',
         ], $request->user());
+        $request->session()->forget('preferred_subscription_plan');
 
         return redirect()->route('dashboard')->with('status', 'Trial Team 14 hari aktif.');
     }
@@ -82,6 +88,7 @@ class PlanController extends Controller
         SubscriptionPrice $subscriptionPrice,
         DokuPaymentService $paymentService,
     ): RedirectResponse {
+        $request->validate(['odontogram' => ['sometimes', 'accepted']]);
         if ($request->user()->clinic_id === null) {
             return redirect()->route('onboarding.clinic.create');
         }
@@ -94,12 +101,15 @@ class PlanController extends Controller
                 $request->user()->clinic,
                 $subscriptionPrice,
                 $request->user(),
+                $request->boolean('odontogram'),
             );
         } catch (Throwable) {
             throw ValidationException::withMessages([
                 'checkout' => 'Checkout DOKU gagal dibuat. Silakan coba lagi.',
             ]);
         }
+
+        $request->session()->forget('preferred_subscription_plan');
 
         return redirect()->route('subscription.payments.show', $payment);
     }

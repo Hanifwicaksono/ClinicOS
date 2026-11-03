@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleAndPermissionSeeder::class,
             SubscriptionPlanSeeder::class,
+            AddonPriceSeeder::class,
         ]);
     }
 }

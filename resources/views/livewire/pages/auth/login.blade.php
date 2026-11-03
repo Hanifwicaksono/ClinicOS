@@ -41,9 +41,8 @@ new #[Layout('layouts.guest')] class extends Component
 
 <div>
     <div class="mb-8">
-        <p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Selamat datang kembali</p>
-        <h2 class="mt-2 text-2xl font-extrabold text-clinic-950">{{ $adminLogin ? 'Masuk pengelola klinik' : 'Masuk pasien' }}</h2>
-        <p class="mt-2 text-sm leading-6 text-slate-500">{{ $adminLogin ? 'Gunakan akun pemilik klinik atau staf Anda.' : 'Gunakan akun pasien Anda untuk booking dan melihat dashboard.' }}</p>
+        <h2 class="font-display text-2xl font-extrabold text-clinic-950 sm:text-3xl">{{ $adminLogin ? 'Masuk pengelola klinik' : 'Masuk pasien' }}</h2>
+        <p class="mt-3 text-sm leading-6 text-slate-600">{{ $adminLogin ? 'Gunakan akun pemilik klinik atau staf Anda.' : 'Gunakan akun pasien Anda untuk melanjutkan kunjungan.' }}</p>
     </div>
 
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -70,11 +69,22 @@ new #[Layout('layouts.guest')] class extends Component
 
         <div>
             <x-input-label for="password" value="Kata sandi" />
-
-            <x-text-input wire:model="form.password" id="password" class="mt-2 block w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <div class="relative mt-2" x-data="{ visible: false }">
+                <x-text-input wire:model="form.password" id="password" class="block w-full !pr-14"
+                                type="password" x-bind:type="visible ? 'text' : 'password'"
+                                name="password" required autocomplete="current-password" />
+                <button type="button" class="absolute inset-y-0 right-1 flex w-11 items-center justify-center rounded-lg text-clinic-700 transition hover:text-clinic-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinic-500"
+                        @click="visible = !visible" x-bind:aria-label="visible ? 'Sembunyikan kata sandi' : 'Lihat kata sandi'" x-bind:aria-pressed="visible.toString()" aria-label="Lihat kata sandi" aria-controls="password">
+                    <svg x-show="!visible" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M2.25 12s3.5-6 9.75-6 9.75 6 9.75 6-3.5 6-9.75 6-9.75-6Z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <svg x-show="visible" x-cloak class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 3 21 21M10.6 6.1A10.9 10.9 0 0 1 12 6c6.25 0 9.75 6 9.75 6a13.6 13.6 0 0 1-3.1 3.55M6.2 7.65A13.5 13.5 0 0 0 2.25 12s3.5 6 9.75 6c1.1 0 2.13-.19 3.08-.52" />
+                        <path d="M10.1 10.1a3 3 0 0 0 3.8 3.8" />
+                    </svg>
+                </button>
+            </div>
 
             <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
         </div>

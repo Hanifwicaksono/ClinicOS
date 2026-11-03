@@ -9,6 +9,7 @@ use App\Http\Requests\Doctor\CorrectMedicalRecordRequest;
 use App\Http\Requests\Doctor\SaveMedicalRecordRequest;
 use App\Models\Queue;
 use App\Models\Visit;
+use App\Services\AddonService;
 use App\Services\VisitWorkflowService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -61,6 +62,8 @@ class VisitController extends Controller
         ];
         $savedOdontogram = collect(old('odontogram', $visit->medicalRecord->odontogram ?? []))
             ->keyBy(fn (array $tooth): int => (int) $tooth['tooth_number']);
+        $canEditOdontogram = app(AddonService::class)->canEdit($visit->clinic);
+        $hasOdontogram = $visit->medicalRecord->odontogram !== null;
         $dentalChart = [
             'teeth' => collect($dentalQuadrants)->flatMap(
                 fn (array $numbers, string $quadrant) => collect($numbers)->map(
@@ -78,7 +81,7 @@ class VisitController extends Controller
                     'label' => $condition->label(),
                 ])->all(),
             'selected_tooth' => null,
-            'read_only' => false,
+            'read_only' => ! $canEditOdontogram,
         ];
         $criticalAllergies = $visit->patient->criticalAllergies
             ->map(fn ($allergy): array => [
@@ -87,7 +90,7 @@ class VisitController extends Controller
                 'severity' => $allergy->severity->label(),
             ])->all();
 
-        return view('doctor.visits.show', compact('visit', 'history', 'dentalChart', 'criticalAllergies'));
+        return view('doctor.visits.show', compact('visit', 'history', 'dentalChart', 'criticalAllergies', 'canEditOdontogram', 'hasOdontogram'));
     }
 
     public function photo(Visit $visit, int $photo): StreamedResponse

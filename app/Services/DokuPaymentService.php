@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Clinic;
 use App\Models\Payment;
 use App\Models\PaymentEvent;
+use App\Models\PaymentItem;
 use App\Models\SubscriptionPrice;
 use App\Models\User;
 use App\PaymentStatus;
@@ -22,18 +23,24 @@ class DokuPaymentService
         private AuditLogger $auditLogger,
     ) {}
 
-    public function createCheckout(Clinic $clinic, SubscriptionPrice $price, User $owner): Payment
+    public function createCheckout(Clinic $clinic, SubscriptionPrice $price, User $owner, bool $withOdontogram = false): Payment
     {
         if ($clinic->owner_user_id !== $owner->id) {
             throw new DomainException('Hanya pemilik klinik yang dapat membuat pembayaran.');
         }
 
-        $payment = DB::transaction(function () use ($clinic, $price, $owner): Payment {
+        $payment = DB::transaction(function () use ($clinic, $price, $owner, $withOdontogram): Payment {
             $price = SubscriptionPrice::query()->with('plan')->lockForUpdate()->findOrFail($price->id);
 
             if (! $price->is_active || ! $price->plan->is_active) {
                 throw new DomainException('Paket atau harga tidak aktif.');
             }
+
+            if ($withOdontogram && ! in_array($price->plan->code, ['individual', 'team'], true)) {
+                throw new DomainException('Odontogram hanya tersedia untuk Individual atau Team.');
+            }
+            $addonPrice = $withOdontogram ? app(AddonService::class)->price() : null;
+            $addonAmount = $addonPrice === null ? 0 : $addonPrice->monthly_amount * $price->duration_months;
 
             $payment = Payment::query()->create([
                 'clinic_id' => $clinic->id,
@@ -44,9 +51,28 @@ class DokuPaymentService
                 'plan_code' => $price->plan->code,
                 'plan_name' => $price->plan->name,
                 'duration_months' => $price->duration_months,
-                'amount' => $price->amount,
+                'amount' => $price->amount + $addonAmount,
                 'status' => PaymentStatus::Pending,
             ]);
+            $payment->items()->create([
+                'kind' => 'plan',
+                'code' => $price->plan->code,
+                'name' => $price->plan->name,
+                'amount' => $price->amount,
+                'duration_months' => $price->duration_months,
+                'subscription_price_id' => $price->id,
+            ]);
+            if ($addonPrice !== null) {
+                $payment->items()->create([
+                    'kind' => 'addon',
+                    'code' => 'odontogram',
+                    'name' => $addonPrice->name,
+                    'amount' => $addonAmount,
+                    'duration_months' => $price->duration_months,
+                    'monthly_amount' => $addonPrice->monthly_amount,
+                    'addon_price_id' => $addonPrice->id,
+                ]);
+            }
 
             $this->auditLogger->recordForClinic($clinic, 'payment.created', $payment, [
                 'invoice_number' => $payment->invoice_number,
@@ -58,16 +84,69 @@ class DokuPaymentService
             return $payment;
         });
 
+        return $this->sendCheckout($payment, $owner);
+    }
+
+    public function createAddonCheckout(Clinic $clinic, User $owner): Payment
+    {
+        if ($clinic->owner_user_id !== $owner->id) {
+            throw new DomainException('Hanya pemilik klinik yang dapat membeli add-on.');
+        }
+
+        $payment = DB::transaction(function () use ($clinic): Payment {
+            Clinic::query()->whereKey($clinic->id)->lockForUpdate()->firstOrFail();
+            $quote = app(AddonService::class)->quoteCurrent($clinic);
+            $pending = PaymentItem::query()->where('kind', 'addon')
+                ->where('target_subscription_period_id', $quote['period']->id)
+                ->whereHas('payment', fn ($query) => $query->where('status', PaymentStatus::Review)
+                    ->orWhere(fn ($pending) => $pending->where('status', PaymentStatus::Pending)
+                        ->where(fn ($expiry) => $expiry->whereNull('expires_at')->orWhere('expires_at', '>', now()))))
+                ->exists();
+            if ($pending) {
+                throw new DomainException('Invoice odontogram untuk periode ini masih menunggu pembayaran.');
+            }
+
+            $payment = Payment::query()->create([
+                'clinic_id' => $clinic->id,
+                'invoice_number' => $this->invoiceNumber(),
+                'request_id' => (string) Str::uuid(),
+                'provider' => 'doku',
+                'amount' => $quote['amount'],
+                'status' => PaymentStatus::Pending,
+            ]);
+            $payment->items()->create([
+                'kind' => 'addon',
+                'code' => 'odontogram',
+                'name' => $quote['price']->name,
+                'amount' => $quote['amount'],
+                'monthly_amount' => $quote['price']->monthly_amount,
+                'addon_price_id' => $quote['price']->id,
+                'target_subscription_period_id' => $quote['period']->id,
+                'starts_at' => $quote['starts_at'],
+                'ends_at' => $quote['ends_at'],
+            ]);
+            $this->auditLogger->recordForClinic($clinic, 'payment.created', $payment, [
+                'invoice_number' => $payment->invoice_number,
+                'product' => 'odontogram',
+                'amount' => $payment->amount,
+            ]);
+
+            return $payment;
+        });
+
+        return $this->sendCheckout($payment, $owner);
+    }
+
+    private function sendCheckout(Payment $payment, User $owner): Payment
+    {
         try {
-            $checkout = $this->dokuClient->createCheckout($payment, $owner);
-            $payment->update($checkout);
+            $payment->update($this->dokuClient->createCheckout($payment, $owner));
         } catch (Throwable $exception) {
             $payment->update(['status' => PaymentStatus::Failed]);
-            $this->auditLogger->recordForClinic($clinic, 'payment.checkout_failed', $payment, [
+            $this->auditLogger->recordForClinic($payment->clinic, 'payment.checkout_failed', $payment, [
                 'invoice_number' => $payment->invoice_number,
                 'error_type' => $exception::class,
             ], $owner);
-
             throw $exception;
         }
 
@@ -141,6 +220,10 @@ class DokuPaymentService
             if ($amount === null || $amount !== $payment->amount) {
                 return $this->reject($event, $payment, 'rejected_amount');
             }
+            $items = $payment->items;
+            if ($items->isNotEmpty() && $items->sum('amount') !== $payment->amount) {
+                return $this->reject($event, $payment, 'rejected_items');
+            }
 
             $originalRequestId = trim((string) data_get($payload, 'transaction.original_request_id', ''));
             if ($originalRequestId === '' || ! hash_equals($payment->request_id, $originalRequestId)) {
@@ -161,11 +244,12 @@ class DokuPaymentService
             }
 
             if ($providerStatus === 'REFUNDED') {
-                if ($payment->status !== PaymentStatus::Paid) {
+                if (! in_array($payment->status, [PaymentStatus::Paid, PaymentStatus::Review], true)) {
                     return $this->reject($event, $payment, 'rejected_refund_state');
                 }
 
                 $payment->update(['status' => PaymentStatus::Refunded]);
+                app(AddonService::class)->revoke($payment, $now);
                 $this->auditLogger->recordForClinic($payment->clinic, 'payment.refunded', $payment, [
                     'invoice_number' => $payment->invoice_number,
                     'source' => $source,
@@ -177,15 +261,56 @@ class DokuPaymentService
             if ($payment->status === PaymentStatus::Paid) {
                 return $this->finish($event, $providerStatus === 'SUCCESS' ? 'ignored_duplicate' : 'ignored_out_of_order');
             }
+            if ($payment->status === PaymentStatus::Review) {
+                return $this->finish($event, 'ignored_review');
+            }
+
+            if ($providerStatus === 'SUCCESS' && $payment->status === PaymentStatus::Expired) {
+                $payment->update([
+                    'status' => PaymentStatus::Review,
+                    'paid_at' => $this->providerDate(data_get($payload, 'transaction.date')) ?? $now,
+                    'provider_reference' => $eventId,
+                ]);
+
+                return $this->reject($event, $payment, 'rejected_expired_payment');
+            }
 
             if ($providerStatus === 'SUCCESS') {
                 $paidAt = $this->providerDate(data_get($payload, 'transaction.date')) ?? $now;
+                $planItem = $items->firstWhere('kind', 'plan');
+                $addonItem = $items->firstWhere('kind', 'addon');
+                if ($addonItem !== null && $planItem === null) {
+                    $target = $addonItem->targetSubscriptionPeriod;
+                    if (
+                        $target === null
+                        || $target->clinic_id !== $payment->clinic_id
+                        || $target->ends_at->lessThanOrEqualTo($paidAt)
+                        || $addonItem->ends_at === null
+                        || ! $addonItem->ends_at->equalTo($target->ends_at)
+                        || $payment->expires_at === null
+                        || $paidAt->greaterThan($payment->expires_at)
+                        || $addonItem->starts_at?->setTimezone($this->timezoneFor($payment->clinic))->toDateString() !== $paidAt->setTimezone($this->timezoneFor($payment->clinic))->toDateString()
+                    ) {
+                        $payment->update([
+                            'status' => PaymentStatus::Review,
+                            'paid_at' => $paidAt,
+                            'provider_reference' => $eventId,
+                        ]);
+
+                        return $this->reject($event, $payment, 'rejected_addon_period');
+                    }
+                }
                 $payment->update([
                     'status' => PaymentStatus::Paid,
                     'paid_at' => $paidAt,
                     'provider_reference' => $eventId,
                 ]);
-                $this->subscriptionService->activatePaid($payment->clinic, $payment->price, $payment, $paidAt);
+                $period = $planItem !== null || $items->isEmpty()
+                    ? $this->subscriptionService->activatePaid($payment->clinic, $payment->price, $payment, $paidAt)
+                    : $addonItem->targetSubscriptionPeriod;
+                if ($addonItem !== null) {
+                    app(AddonService::class)->activate($payment, $addonItem, $period, $paidAt);
+                }
                 $this->auditLogger->recordForClinic($payment->clinic, 'payment.paid', $payment, [
                     'invoice_number' => $payment->invoice_number,
                     'amount' => $payment->amount,
@@ -219,11 +344,12 @@ class DokuPaymentService
                 return $payment;
             }
 
-            if ($payment->status !== PaymentStatus::Paid) {
-                throw new DomainException('Hanya pembayaran paid yang dapat dicatat sebagai refund.');
+            if (! in_array($payment->status, [PaymentStatus::Paid, PaymentStatus::Review], true)) {
+                throw new DomainException('Hanya pembayaran paid atau review yang dapat dicatat sebagai refund.');
             }
 
             $payment->update(['status' => PaymentStatus::Refunded]);
+            app(AddonService::class)->revoke($payment, CarbonImmutable::now('UTC'));
             $this->auditLogger->recordForClinic($payment->clinic, 'payment.refunded', $payment, [
                 'invoice_number' => $payment->invoice_number,
                 'source' => 'manual',
@@ -232,6 +358,11 @@ class DokuPaymentService
 
             return $payment;
         });
+    }
+
+    private function timezoneFor(Clinic $clinic): string
+    {
+        return $clinic->settings()->value('timezone') ?? config('app.timezone', 'UTC');
     }
 
     private function invoiceNumber(): string
