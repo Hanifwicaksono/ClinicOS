@@ -3,7 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\Clinic;
+use App\Models\Payment;
+use App\Models\Subscription;
 use App\Models\User;
+use App\PaymentStatus;
+use App\SubscriptionStatus;
 use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -49,6 +53,34 @@ class PlatformAccessTest extends TestCase
             'entity_type' => Clinic::class,
             'entity_id' => $clinic->id,
         ]);
+    }
+
+    public function test_platform_dashboard_surfaces_operational_exceptions(): void
+    {
+        $clinic = Clinic::factory()->create();
+        User::factory()->clinicOwner($clinic)->create();
+        Subscription::factory()->for($clinic)->create([
+            'status' => SubscriptionStatus::Active,
+            'ends_at' => now()->addDays(5),
+        ]);
+        Clinic::factory()->create(['is_active' => false]);
+        Payment::factory()->create([
+            'clinic_id' => $clinic->id,
+            'status' => PaymentStatus::Failed,
+        ]);
+
+        $response = $this->actingAs(User::factory()->platformAdmin()->create())
+            ->get(route('platform.dashboard'));
+
+        $response->assertOk()
+            ->assertSee('Perlu perhatian')
+            ->assertSee('Pembayaran gagal')
+            ->assertSee('Distribusi subscription');
+        $this->assertSame(1, $response->viewData('attention')['inactiveTenants']);
+        $this->assertSame(1, $response->viewData('attention')['missingOwners']);
+        $this->assertSame(1, $response->viewData('attention')['expiringSubscriptions']);
+        $this->assertSame(1, $response->viewData('attention')['failedPayments']);
+        $this->assertSame(1, $response->viewData('subscriptionCounts')[SubscriptionStatus::Active->value]);
     }
 
     public function test_platform_admin_cannot_open_tenant_or_medical_routes(): void

@@ -17,7 +17,7 @@
     };
     $statusClasses = match ($statusValue) {
         'BOOKED' => 'bg-slate-100 text-slate-700',
-        'WAITING' => 'bg-[#F7F1EA] text-[#D89B68]',
+        'WAITING' => 'bg-[#FFF4E8] text-[#8A5427]',
         'CALLED' => 'bg-[#EAF2F0] text-[#287F78]',
         'IN_PROGRESS' => 'bg-[#EEF3F2] text-[#3D5F5C]',
         'COMPLETED' => 'bg-[#EAF2F0] text-[#287F78]',

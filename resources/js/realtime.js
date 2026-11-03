@@ -7,6 +7,7 @@ const queueClients = new Map();
 const receivedNotificationIds = new Set();
 let refreshTimer;
 let connectionState = 'reconnecting';
+let highlightedQueueId = null;
 
 const connectionPresentations = {
     connected: {
@@ -26,7 +27,7 @@ const connectionPresentations = {
         dotClasses: ['bg-red-400'],
     },
     offline: {
-        label: 'Koneksi terputus · menampilkan data terakhir',
+        label: 'Realtime tidak tersedia · diperbarui berkala',
         dotClasses: ['bg-red-400'],
     },
 };
@@ -89,7 +90,20 @@ async function refreshRealtimeRegion(showRefetching = true) {
         }
 
         currentRegion.replaceWith(freshRegion);
-        setConnectionState(isRealtimeConnected() ? 'connected' : 'disconnected');
+        setConnectionState(window.Echo
+            ? (isRealtimeConnected() ? 'connected' : 'disconnected')
+            : 'offline');
+
+        if (Number.isInteger(highlightedQueueId)) {
+            const highlightedQueue = freshRegion.querySelector(`[data-queue-id="${highlightedQueueId}"]`);
+
+            if (highlightedQueue) {
+                highlightedQueue.classList.add('queue-realtime-highlight');
+                window.setTimeout(() => highlightedQueue.classList.remove('queue-realtime-highlight'), 1400);
+            }
+
+            highlightedQueueId = null;
+        }
 
         // Re-subscribe if new elements or channels appeared
         subscribeQueues();
@@ -274,14 +288,14 @@ function subscribeNotifications() {
 }
 
 function initializeRealtime() {
-    if (! window.Echo) {
-        setConnectionState('disconnected');
-        return;
-    }
-
-    setConnectionState(isRealtimeConnected() ? 'connected' : 'reconnecting');
+    setConnectionState(window.Echo
+        ? (isRealtimeConnected() ? 'connected' : 'reconnecting')
+        : 'offline');
     subscribeQueues();
-    subscribeNotifications();
+
+    if (window.Echo) {
+        subscribeNotifications();
+    }
 }
 
 document.addEventListener('DOMContentLoaded', initializeRealtime);
@@ -295,4 +309,9 @@ window.addEventListener('clinicos:queue-connection-state', (event) => {
     if (event.detail?.state) {
         setConnectionState(event.detail.state);
     }
+});
+
+window.addEventListener('clinicos:queue-updated', (event) => {
+    const queueId = Number(event.detail?.queue_id);
+    highlightedQueueId = Number.isInteger(queueId) ? queueId : null;
 });

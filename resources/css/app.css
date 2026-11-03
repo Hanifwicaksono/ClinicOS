@@ -44,6 +44,10 @@
         animation: landing-float 6s ease-in-out infinite;
     }
 
+    .queue-realtime-highlight {
+        animation: queue-realtime-highlight 1400ms ease-out;
+    }
+
     @keyframes landing-reveal {
         from {
             opacity: 0;
@@ -63,6 +67,16 @@
 
         50% {
             transform: translateY(-10px);
+        }
+    }
+
+    @keyframes queue-realtime-highlight {
+        0% {
+            box-shadow: 0 0 0 4px rgb(40 127 120 / 30%);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgb(40 127 120 / 0%);
         }
     }
 }

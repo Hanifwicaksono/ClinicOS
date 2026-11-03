@@ -9,9 +9,11 @@ use App\Models\Doctor;
 use App\Models\DoctorSchedule;
 use App\Models\Patient;
 use App\Models\Service;
+use App\Models\Subscription;
 use App\Models\User;
 use App\Models\Visit;
 use App\QueueStatus;
+use App\SubscriptionStatus;
 use App\VisitStatus;
 use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -41,7 +43,7 @@ class ManagementDashboardTest extends TestCase
             'to' => now('Asia/Jakarta')->toDateString(),
         ]));
 
-        $response->assertOk()->assertSee('Nilai layanan selesai')->assertSee('Rp 87.500');
+        $response->assertOk()->assertSee('Estimasi nilai layanan')->assertSee('Rp 87.500');
         $metrics = $response->viewData('operationalMetrics');
         $this->assertSame(1, $metrics['unique_patients']);
         $this->assertSame(1, $metrics['bookings']);
@@ -66,13 +68,111 @@ class ManagementDashboardTest extends TestCase
             'status' => QueueStatus::Waiting,
             'checked_in_at' => now(),
         ]);
+        $unarrivedAppointment = Appointment::factory()->create([
+            'clinic_id' => $context['clinic']->id,
+            'patient_id' => $context['patient']->id,
+            'doctor_id' => $context['doctor']->id,
+            'service_id' => $context['service']->id,
+            'doctor_schedule_id' => $context['schedule']->id,
+            'appointment_date' => now('Asia/Jakarta')->toDateString(),
+            'status' => AppointmentStatus::Booked,
+        ]);
+        $unarrivedAppointment->queue()->create([
+            'clinic_id' => $context['clinic']->id,
+            'doctor_id' => $context['doctor']->id,
+            'doctor_schedule_id' => $context['schedule']->id,
+            'queue_date' => now('Asia/Jakarta')->toDateString(),
+            'queue_number' => 2,
+            'display_number' => 'A-002',
+            'status' => QueueStatus::Booked,
+        ]);
+        $afternoonSchedule = DoctorSchedule::factory()->for($context['doctor'])->create([
+            'day_of_week' => now('Asia/Jakarta')->dayOfWeek,
+            'start_time' => '15:00',
+            'end_time' => '17:00',
+        ]);
+        $inProgressAppointment = Appointment::factory()->create([
+            'clinic_id' => $context['clinic']->id,
+            'patient_id' => $context['patient']->id,
+            'doctor_id' => $context['doctor']->id,
+            'service_id' => $context['service']->id,
+            'doctor_schedule_id' => $afternoonSchedule->id,
+            'appointment_date' => now('Asia/Jakarta')->toDateString(),
+            'status' => AppointmentStatus::Booked,
+        ]);
+        $inProgressAppointment->queue()->create([
+            'clinic_id' => $context['clinic']->id,
+            'doctor_id' => $context['doctor']->id,
+            'doctor_schedule_id' => $afternoonSchedule->id,
+            'queue_date' => now('Asia/Jakarta')->toDateString(),
+            'queue_number' => 1,
+            'display_number' => 'A-003',
+            'status' => QueueStatus::InProgress,
+            'checked_in_at' => now()->subMinutes(20),
+            'called_at' => now()->subMinutes(15),
+        ]);
+        Appointment::factory()->create([
+            'clinic_id' => $context['clinic']->id,
+            'patient_id' => $context['patient']->id,
+            'doctor_id' => $context['doctor']->id,
+            'service_id' => $context['service']->id,
+            'doctor_schedule_id' => $context['schedule']->id,
+            'appointment_date' => now('Asia/Jakarta')->toDateString(),
+            'status' => AppointmentStatus::Cancelled,
+        ]);
 
         $doctorResponse = $this->actingAs($context['doctor_user'])->get(route('doctor.dashboard'));
-        $doctorResponse->assertOk()->assertSee('Pasien menunggu');
+        $doctorResponse->assertOk()->assertSee('Pemeriksaan sedang berlangsung')->assertSee('15:00')->assertSee('17:00');
         $this->assertSame(1, $doctorResponse->viewData('metrics')['waiting']);
+        $this->assertSame(0, $doctorResponse->viewData('metrics')['called']);
+        $this->assertSame(1, $doctorResponse->viewData('metrics')['in_progress']);
+        $this->assertSame('A-003', $doctorResponse->viewData('activeQueue')->display_number);
         $receptionistResponse = $this->actingAs($receptionist)->get(route('receptionist.dashboard'));
-        $receptionistResponse->assertOk()->assertSee('Sudah check-in');
-        $this->assertSame(1, $receptionistResponse->viewData('metrics')['checked_in']);
+        $receptionistResponse->assertOk()->assertSee('Pasien berikutnya')->assertSee('Panggil pasien')->assertSee('Belum check-in');
+        $this->assertSame(3, $receptionistResponse->viewData('metrics')['bookings']);
+        $this->assertSame(4, $receptionistResponse->viewData('metrics')['total_bookings']);
+        $this->assertSame(1, $receptionistResponse->viewData('metrics')['not_checked_in']);
+        $this->assertSame(1, $receptionistResponse->viewData('metrics')['in_progress']);
+        $this->assertSame('A-001', $receptionistResponse->viewData('activeQueue')->display_number);
+        $this->assertSame('A-002', $receptionistResponse->viewData('queues')->first()->display_number);
+    }
+
+    public function test_historical_and_read_only_dashboards_hide_queue_actions(): void
+    {
+        $context = $this->appointmentContext(Clinic::factory()->create());
+        $receptionist = User::factory()->forClinic($context['clinic'])->create();
+        $receptionist->assignRole('Receptionist');
+        $queue = $context['appointment']->queue()->create([
+            'clinic_id' => $context['clinic']->id,
+            'doctor_id' => $context['doctor']->id,
+            'doctor_schedule_id' => $context['schedule']->id,
+            'queue_date' => now('Asia/Jakarta')->toDateString(),
+            'queue_number' => 1,
+            'display_number' => 'A-001',
+            'status' => QueueStatus::Waiting,
+            'checked_in_at' => now(),
+        ]);
+        $yesterday = now('Asia/Jakarta')->subDay()->toDateString();
+        $queue->update(['queue_date' => $yesterday]);
+        $context['appointment']->update(['appointment_date' => $yesterday]);
+
+        $this->actingAs($context['doctor_user'])->get(route('doctor.dashboard', ['date' => $yesterday]))
+            ->assertOk()
+            ->assertSee('Mode riwayat')
+            ->assertDontSee('Panggil pasien');
+        $this->actingAs($receptionist)->get(route('receptionist.dashboard', ['date' => $yesterday]))
+            ->assertOk()
+            ->assertSee('Mode riwayat')
+            ->assertDontSee('Panggil pasien');
+
+        Subscription::factory()->for($context['clinic'])->create(['status' => SubscriptionStatus::Suspended]);
+        $queue->update(['queue_date' => now('Asia/Jakarta')->toDateString()]);
+        $context['appointment']->update(['appointment_date' => now('Asia/Jakarta')->toDateString()]);
+
+        $this->actingAs($receptionist)->get(route('receptionist.dashboard'))
+            ->assertOk()
+            ->assertSee('hanya-baca')
+            ->assertDontSee('Panggil pasien');
     }
 
     /** @return array{clinic: Clinic, patient: Patient, doctor: Doctor, doctor_user: User, service: Service, schedule: DoctorSchedule, appointment: Appointment} */
