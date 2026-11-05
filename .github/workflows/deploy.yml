@@ -1,0 +1,48 @@
+name: Deploy ClinicOS
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # shortcut: deploys in place without rollback; use release directories if atomic rollback is needed.
+    steps:
+      - name: Deploy to VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          : "${VPS_HOST:?Missing GitHub secret VPS_HOST}"
+          : "${VPS_PORT:?Missing GitHub secret VPS_PORT}"
+          : "${VPS_USER:?Missing GitHub secret VPS_USER}"
+          : "${VPS_SSH_KEY:?Missing GitHub secret VPS_SSH_KEY}"
+          : "${VPS_KNOWN_HOSTS:?Missing GitHub secret VPS_KNOWN_HOSTS}"
+
+          mkdir -p "$HOME/.ssh"
+          printf '%s\n' "$VPS_SSH_KEY" > "$HOME/.ssh/clinicos_deploy"
+          chmod 600 "$HOME/.ssh/clinicos_deploy"
+          printf '%s\n' "$VPS_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/known_hosts"
+
+          ssh \
+            -i "$HOME/.ssh/clinicos_deploy" \
+            -p "$VPS_PORT" \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$VPS_USER@$VPS_HOST" \
+            'cd /var/www/clinicos && git pull --ff-only origin main && composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction && npm ci && npm run build && php artisan migrate --force && php artisan optimize'
