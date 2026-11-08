@@ -42,7 +42,7 @@ class StaffController extends Controller
         $service->create($request->user(), $request->validated());
 
         return redirect()->route('admin.staff.index')
-            ->with('status', 'Akun staf berhasil dibuat. Tautan aktivasi telah dikirim ke email staf.');
+            ->with('status', 'Akun staf berhasil dibuat. Email verifikasi telah dikirim ke staf.');
     }
 
     public function edit(User $staff): View

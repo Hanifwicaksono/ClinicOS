@@ -313,6 +313,7 @@ class SubscriptionEnforcementTest extends TestCase
             'name' => 'dr. Batas Paket',
             'email' => $email,
             'phone' => null,
+            'password' => 'StaffPass123!',
             'role' => 'Doctor',
             'specialization' => 'Dokter Umum',
             'license_number' => null,
@@ -327,6 +328,7 @@ class SubscriptionEnforcementTest extends TestCase
             'name' => 'Staf Batas Paket',
             'email' => $email,
             'phone' => null,
+            'password' => 'StaffPass123!',
             'role' => 'Receptionist',
         ];
     }

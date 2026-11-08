@@ -24,9 +24,11 @@
                     <p class="mt-2 text-sm text-slate-500">Tidak ada jadwal praktik aktif pada tanggal ini.</p>
                 @endif
             </div>
-            <form method="GET" class="grid gap-2 sm:grid-cols-[minmax(12rem,1fr)_auto]">
-                <label class="sr-only" for="date">Tanggal ringkasan</label>
-                <input id="date" class="clinic-input" name="date" type="date" value="{{ $date }}">
+            <form method="GET" class="grid gap-2 sm:grid-cols-[minmax(12rem,1fr)_auto] sm:items-end">
+                <div>
+                    <label class="clinic-label text-xs" for="date">Tanggal ringkasan</label>
+                    <input id="date" class="clinic-input" name="date" type="date" value="{{ $date }}">
+                </div>
                 <x-clinic-button variant="secondary" class="w-full sm:w-auto">Tampilkan</x-clinic-button>
             </form>
         </div>
@@ -50,7 +52,7 @@
                         \App\QueueStatus::Called => $activeQueue->called_at,
                         default => $activeQueue->appointment->visit?->started_at,
                     };
-                    $activeMinutes = $activeSince ? max(0, (int) $activeSince->diffInMinutes(now())) : null;
+                    $activeTime = $activeSince ? \Carbon\CarbonImmutable::parse($activeSince)->setTimezone($timezone)->format('H:i') : null;
                 @endphp
                 <section data-queue-id="{{ $activeQueue->id }}" @class([
                     'mb-6 overflow-hidden rounded-3xl border p-6 transition sm:p-8',
@@ -62,13 +64,13 @@
                         <div @class(['flex h-20 w-20 items-center justify-center rounded-2xl font-display text-2xl font-extrabold', 'bg-white/10 text-white' => $activeQueue->status === \App\QueueStatus::InProgress, 'bg-white text-clinic-700 shadow-sm' => $activeQueue->status !== \App\QueueStatus::InProgress])>{{ $activeQueue->display_number }}</div>
                         <div>
                             <div class="flex flex-wrap items-center gap-3">
-                                <p @class(['text-xs font-bold uppercase tracking-[0.16em]', 'text-clinic-200' => $activeQueue->status === \App\QueueStatus::InProgress, 'text-clinic-700' => $activeQueue->status === \App\QueueStatus::Called, 'text-amber-800' => $activeQueue->status === \App\QueueStatus::Waiting])>{{ $activeQueue->status === \App\QueueStatus::InProgress ? 'Pemeriksaan sedang berlangsung' : ($activeQueue->status === \App\QueueStatus::Called ? 'Pasien sudah dipanggil' : 'Pasien berikutnya') }}</p>
+                                <p @class(['text-xs font-bold uppercase tracking-[0.16em]', 'text-clinic-200' => $activeQueue->status === \App\QueueStatus::InProgress, 'text-clinic-700' => $activeQueue->status === \App\QueueStatus::Called, 'text-amber-800' => $activeQueue->status === \App\QueueStatus::Waiting])>{{ ! $isToday ? 'Status antrean pada tanggal ini' : ($activeQueue->status === \App\QueueStatus::InProgress ? 'Pemeriksaan sedang berlangsung' : ($activeQueue->status === \App\QueueStatus::Called ? 'Pasien sudah dipanggil' : 'Pasien berikutnya')) }}</p>
                                 <x-status-badge :status="$activeQueue->status" />
                             </div>
                             <h3 id="active-queue-title" @class(['mt-2 text-2xl font-extrabold', 'text-white' => $activeQueue->status === \App\QueueStatus::InProgress, 'text-clinic-950' => $activeQueue->status !== \App\QueueStatus::InProgress])>{{ $activeQueue->appointment->patient->name }}</h3>
                             <p @class(['mt-2 text-sm', 'text-slate-300' => $activeQueue->status === \App\QueueStatus::InProgress, 'text-slate-600' => $activeQueue->status !== \App\QueueStatus::InProgress])>{{ $activeQueue->appointment->service_name }} · Sesi {{ substr($activeQueue->schedule->start_time, 0, 5) }}–{{ substr($activeQueue->schedule->end_time, 0, 5) }}</p>
-                            @if($activeMinutes !== null)
-                                <p @class(['mt-2 text-xs font-semibold', 'text-clinic-200' => $activeQueue->status === \App\QueueStatus::InProgress, 'text-amber-800' => $activeQueue->status === \App\QueueStatus::Waiting, 'text-clinic-700' => $activeQueue->status === \App\QueueStatus::Called])>{{ $activeQueue->status === \App\QueueStatus::Waiting ? 'Menunggu' : ($activeQueue->status === \App\QueueStatus::Called ? 'Dipanggil sejak' : 'Berjalan') }} {{ $activeMinutes }} menit</p>
+                            @if($activeTime !== null)
+                                <p @class(['mt-2 text-xs font-semibold', 'text-clinic-200' => $activeQueue->status === \App\QueueStatus::InProgress, 'text-amber-800' => $activeQueue->status === \App\QueueStatus::Waiting, 'text-clinic-700' => $activeQueue->status === \App\QueueStatus::Called])>{{ $activeQueue->status === \App\QueueStatus::Waiting ? 'Check-in' : ($activeQueue->status === \App\QueueStatus::Called ? 'Dipanggil' : 'Dimulai') }} pukul {{ $activeTime }}</p>
                             @endif
                         </div>
                         <div class="flex flex-col gap-2 sm:flex-row lg:flex-col">
@@ -87,6 +89,7 @@
                             @if($activeQueue->status === \App\QueueStatus::InProgress && $activeQueue->appointment->visit)
                                 <x-clinic-button href="{{ route('doctor.visits.show', $activeQueue->appointment->visit) }}" class="w-full" wire:navigate>Lanjutkan pemeriksaan</x-clinic-button>
                             @endif
+                            <a href="{{ route('doctor.medical-records.index', ['search' => $activeQueue->appointment->patient->name]) }}" @class(['inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-3 text-sm font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500', 'border border-white/20 text-white hover:bg-white/10' => $activeQueue->status === \App\QueueStatus::InProgress, 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50' => $activeQueue->status !== \App\QueueStatus::InProgress]) wire:navigate>Riwayat pasien</a>
                             <a href="{{ route('doctor.queues.index', ['date' => $date]) }}" @class(['inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-3 text-sm font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500', 'border border-white/20 text-white hover:bg-white/10' => $activeQueue->status === \App\QueueStatus::InProgress, 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50' => $activeQueue->status !== \App\QueueStatus::InProgress]) wire:navigate>Lihat antrean</a>
                         </div>
                     </div>
@@ -94,7 +97,9 @@
             @else
                 <section class="clinic-card mb-6 p-8 text-center">
                     <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-clinic-100 text-xl font-bold text-clinic-700">✓</span>
-                    @if($metrics['booked'] > 0)
+                    @if(! $isToday)
+                        <h3 class="mt-4 font-extrabold text-clinic-950">Tidak ada antrean aktif pada tanggal ini</h3><p class="mt-1 text-sm text-slate-500">Gunakan daftar di bawah untuk melihat riwayat antrean yang tersimpan.</p>
+                    @elseif($metrics['booked'] > 0)
                         <h3 class="mt-4 font-extrabold text-clinic-950">Belum ada pasien check-in</h3><p class="mt-1 text-sm text-slate-500">{{ $metrics['booked'] }} pasien masih terjadwal dan belum masuk antrean tunggu.</p>
                     @elseif($metrics['completed'] > 0)
                         <h3 class="mt-4 font-extrabold text-clinic-950">Semua pemeriksaan selesai</h3><p class="mt-1 text-sm text-slate-500">{{ $metrics['completed'] }} pasien sudah dilayani pada tanggal ini.</p>
@@ -106,21 +111,26 @@
             @endif
 
             <section class="grid grid-cols-2 gap-3 lg:grid-cols-4" aria-label="Status antrean dokter">
-                @foreach([['Menunggu', $metrics['waiting'], 'text-amber-800'], ['Dipanggil', $metrics['called'], 'text-clinic-600'], ['Diperiksa', $metrics['in_progress'], 'text-clinic-700'], ['Selesai', $metrics['completed'], 'text-clinic-700']] as [$label, $value, $color])
-                    <article class="clinic-card p-4 sm:p-5"><p class="text-xs font-bold uppercase tracking-wider text-slate-500">{{ $label }}</p><p class="mt-3 font-display text-2xl font-extrabold {{ $color }} sm:text-3xl">{{ $value }}</p></article>
+                @foreach([
+                    ['Menunggu', $metrics['waiting'], 'text-amber-900', 'border-amber-200 bg-amber-50/70'],
+                    ['Dipanggil', $metrics['called'], 'text-clinic-700', 'border-clinic-200 bg-clinic-50'],
+                    ['Diperiksa', $metrics['in_progress'], 'text-clinic-950', 'border-clinic-300 bg-white'],
+                    ['Selesai', $metrics['completed'], 'text-slate-600', 'border-slate-200 bg-white'],
+                ] as [$label, $value, $color, $surface])
+                    <article class="rounded-2xl border p-4 shadow-card sm:p-5 {{ $surface }}"><p class="text-xs font-bold uppercase tracking-wider text-slate-500">{{ $label }}</p><p class="mt-3 font-display text-2xl font-extrabold {{ $color }} sm:text-3xl">{{ $value }}</p></article>
                 @endforeach
             </section>
 
-            <section class="clinic-card mt-7 overflow-hidden">
+            <section class="clinic-card mt-7 overflow-hidden rounded-2xl">
                 <div class="flex flex-col gap-2 border-b border-slate-100 p-5 sm:flex-row sm:items-center sm:justify-between">
-                    <div><h3 class="font-extrabold text-clinic-950">Antrean berikutnya</h3><p class="mt-1 text-sm text-slate-500">Menampilkan {{ $queues->count() }} dari {{ max(0, $activeQueueCount - ($activeQueue ? 1 : 0)) }} antrean berikutnya.</p></div>
+                    <div><h3 class="font-extrabold text-clinic-950">{{ $isToday ? 'Antrean berikutnya' : 'Antrean pada tanggal ini' }}</h3><p class="mt-1 text-sm text-slate-500">Menampilkan {{ $queues->count() }} dari {{ max(0, $activeQueueCount - ($activeQueue ? 1 : 0)) }} {{ $isToday ? 'antrean berikutnya' : 'antrean lainnya' }}.</p></div>
                     <a href="{{ route('doctor.queues.index', ['date' => $date]) }}" class="shrink-0 text-sm font-bold text-clinic-600 hover:text-clinic-700" wire:navigate>Kelola semua →</a>
                 </div>
                 <div class="divide-y divide-slate-100">
                     @forelse($queues as $queue)
                         @php
                             $queueSince = $queue->status === \App\QueueStatus::Waiting ? $queue->checked_in_at : ($queue->status === \App\QueueStatus::Called ? $queue->called_at : $queue->appointment->visit?->started_at);
-                            $queueMinutes = $queueSince ? max(0, (int) $queueSince->diffInMinutes(now())) : null;
+                            $queueTime = $queueSince ? \Carbon\CarbonImmutable::parse($queueSince)->setTimezone($timezone)->format('H:i') : null;
                         @endphp
                         <div data-queue-id="{{ $queue->id }}" class="flex flex-col gap-3 p-5 transition sm:flex-row sm:items-center">
                             <span class="font-display text-2xl font-extrabold text-clinic-700">{{ $queue->display_number }}</span>
@@ -128,8 +138,8 @@
                                 <p class="font-bold text-slate-900">{{ $queue->appointment->patient->name }}</p>
                                 <p class="mt-1 text-xs text-slate-500">
                                     {{ $queue->appointment->service_name }} · Sesi {{ substr($queue->schedule->start_time, 0, 5) }}
-                                    @if($queueMinutes !== null)
-                                        · {{ $queueMinutes }} menit
+                                    @if($queueTime !== null)
+                                        · {{ $queue->status === \App\QueueStatus::Waiting ? 'check-in' : ($queue->status === \App\QueueStatus::Called ? 'dipanggil' : 'dimulai') }} {{ $queueTime }}
                                     @endif
                                 </p>
                             </div>

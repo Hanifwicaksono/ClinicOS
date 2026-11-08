@@ -111,6 +111,52 @@ class ManagementDashboardTest extends TestCase
             'checked_in_at' => now()->subMinutes(20),
             'called_at' => now()->subMinutes(15),
         ]);
+        $calledAppointment = Appointment::factory()->create([
+            'clinic_id' => $context['clinic']->id,
+            'patient_id' => $context['patient']->id,
+            'doctor_id' => $context['doctor']->id,
+            'service_id' => $context['service']->id,
+            'doctor_schedule_id' => $context['schedule']->id,
+            'appointment_date' => now('Asia/Jakarta')->toDateString(),
+            'status' => AppointmentStatus::Booked,
+        ]);
+        $calledAppointment->queue()->create([
+            'clinic_id' => $context['clinic']->id,
+            'doctor_id' => $context['doctor']->id,
+            'doctor_schedule_id' => $context['schedule']->id,
+            'queue_date' => now('Asia/Jakarta')->toDateString(),
+            'queue_number' => 3,
+            'display_number' => 'A-004',
+            'status' => QueueStatus::Called,
+            'checked_in_at' => now()->subMinutes(10),
+            'called_at' => now()->subMinutes(5),
+        ]);
+        $secondDoctorUser = User::factory()->forClinic($context['clinic'])->create();
+        $secondDoctorUser->assignRole('Doctor');
+        $secondDoctor = Doctor::factory()->for($context['clinic'])->for($secondDoctorUser)->create();
+        $secondSchedule = DoctorSchedule::factory()->for($secondDoctor)->create([
+            'day_of_week' => now('Asia/Jakarta')->dayOfWeek,
+        ]);
+        $secondCalledAppointment = Appointment::factory()->create([
+            'clinic_id' => $context['clinic']->id,
+            'patient_id' => $context['patient']->id,
+            'doctor_id' => $secondDoctor->id,
+            'service_id' => $context['service']->id,
+            'doctor_schedule_id' => $secondSchedule->id,
+            'appointment_date' => now('Asia/Jakarta')->toDateString(),
+            'status' => AppointmentStatus::Booked,
+        ]);
+        $secondCalledAppointment->queue()->create([
+            'clinic_id' => $context['clinic']->id,
+            'doctor_id' => $secondDoctor->id,
+            'doctor_schedule_id' => $secondSchedule->id,
+            'queue_date' => now('Asia/Jakarta')->toDateString(),
+            'queue_number' => 1,
+            'display_number' => 'B-001',
+            'status' => QueueStatus::Called,
+            'checked_in_at' => now()->subMinutes(8),
+            'called_at' => now()->subMinutes(3),
+        ]);
         Appointment::factory()->create([
             'clinic_id' => $context['clinic']->id,
             'patient_id' => $context['patient']->id,
@@ -124,16 +170,18 @@ class ManagementDashboardTest extends TestCase
         $doctorResponse = $this->actingAs($context['doctor_user'])->get(route('doctor.dashboard'));
         $doctorResponse->assertOk()->assertSee('Pemeriksaan sedang berlangsung')->assertSee('15:00')->assertSee('17:00');
         $this->assertSame(1, $doctorResponse->viewData('metrics')['waiting']);
-        $this->assertSame(0, $doctorResponse->viewData('metrics')['called']);
+        $this->assertSame(1, $doctorResponse->viewData('metrics')['called']);
         $this->assertSame(1, $doctorResponse->viewData('metrics')['in_progress']);
         $this->assertSame('A-003', $doctorResponse->viewData('activeQueue')->display_number);
         $receptionistResponse = $this->actingAs($receptionist)->get(route('receptionist.dashboard'));
-        $receptionistResponse->assertOk()->assertSee('Pasien berikutnya')->assertSee('Panggil pasien')->assertSee('Belum check-in');
-        $this->assertSame(3, $receptionistResponse->viewData('metrics')['bookings']);
-        $this->assertSame(4, $receptionistResponse->viewData('metrics')['total_bookings']);
+        $receptionistResponse->assertOk()->assertSee('2 pasien sedang dipanggil')->assertSee('Panggil pasien')->assertSee('Belum check-in');
+        $this->assertSame(5, $receptionistResponse->viewData('metrics')['bookings']);
+        $this->assertSame(6, $receptionistResponse->viewData('metrics')['total_bookings']);
         $this->assertSame(1, $receptionistResponse->viewData('metrics')['not_checked_in']);
+        $this->assertSame(2, $receptionistResponse->viewData('metrics')['called']);
         $this->assertSame(1, $receptionistResponse->viewData('metrics')['in_progress']);
         $this->assertSame('A-001', $receptionistResponse->viewData('activeQueue')->display_number);
+        $this->assertSame([$context['doctor']->id, $secondDoctor->id], $receptionistResponse->viewData('calledQueues')->pluck('doctor_id')->all());
         $this->assertSame('A-002', $receptionistResponse->viewData('queues')->first()->display_number);
     }
 
@@ -159,10 +207,14 @@ class ManagementDashboardTest extends TestCase
         $this->actingAs($context['doctor_user'])->get(route('doctor.dashboard', ['date' => $yesterday]))
             ->assertOk()
             ->assertSee('Mode riwayat')
+            ->assertSee('Antrean pada tanggal ini')
+            ->assertDontSee('Antrean berikutnya')
             ->assertDontSee('Panggil pasien');
         $this->actingAs($receptionist)->get(route('receptionist.dashboard', ['date' => $yesterday]))
             ->assertOk()
             ->assertSee('Mode riwayat')
+            ->assertSee('Riwayat operasional')
+            ->assertDontSee('Tindakan berikutnya')
             ->assertDontSee('Panggil pasien');
 
         Subscription::factory()->for($context['clinic'])->create(['status' => SubscriptionStatus::Suspended]);

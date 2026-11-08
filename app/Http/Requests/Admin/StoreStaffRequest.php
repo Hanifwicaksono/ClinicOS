@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class StoreStaffRequest extends FormRequest
 {
@@ -29,6 +30,7 @@ class StoreStaffRequest extends FormRequest
             'name' => ['required', 'string', 'max:150'],
             'email' => ['required', 'email', 'max:255', Rule::unique(User::class)],
             'phone' => ['nullable', 'string', 'max:30'],
+            'password' => ['required', 'string', Password::defaults()],
             'role' => ['required', Rule::in(['Doctor', 'Receptionist'])],
             'specialization' => ['nullable', 'required_if:role,Doctor', 'string', 'max:150'],
             'license_number' => ['nullable', 'string', 'max:100'],

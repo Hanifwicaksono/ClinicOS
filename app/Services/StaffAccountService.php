@@ -9,8 +9,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class StaffAccountService
@@ -35,7 +33,7 @@ class StaffAccountService
             $user = User::query()->create([
                 ...Arr::only($data, ['name', 'email', 'phone']),
                 'clinic_id' => $actor->clinic_id,
-                'password' => Hash::make(Str::password(32)),
+                'password' => Hash::make($data['password']),
                 'is_active' => true,
             ]);
 
@@ -62,7 +60,6 @@ class StaffAccountService
         });
 
         event(new Registered($user));
-        Password::sendResetLink(['email' => $user->email]);
 
         return $user->load('doctor.services', 'roles');
     }
@@ -99,6 +96,10 @@ class StaffAccountService
             $emailChanged = array_key_exists('email', $data) && $data['email'] !== $staff->email;
 
             $staff->fill(Arr::only($data, ['name', 'email', 'phone', 'is_active']));
+
+            if (! empty($data['password'])) {
+                $staff->password = Hash::make($data['password']);
+            }
 
             if ($emailChanged) {
                 $staff->email_verified_at = null;

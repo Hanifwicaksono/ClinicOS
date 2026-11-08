@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UpdateStaffRequest extends FormRequest
 {
@@ -31,6 +32,7 @@ class UpdateStaffRequest extends FormRequest
             'name' => ['required', 'string', 'max:150'],
             'email' => ['required', 'email', 'max:255', Rule::unique(User::class)->ignore($staff)],
             'phone' => ['nullable', 'string', 'max:30'],
+            'password' => ['nullable', 'string', Password::defaults()],
             'is_active' => ['required', 'boolean'],
             'specialization' => [$staff->hasRole('Doctor') ? 'required' : 'nullable', 'string', 'max:150'],
             'license_number' => ['nullable', 'string', 'max:100'],

@@ -67,6 +67,7 @@ class DashboardController extends Controller
             'canWrite' => $canWrite,
             'isInteractive' => $isToday && $canWrite,
             'date' => $date->toDateString(),
+            'timezone' => $timezone,
         ]);
     }
 }

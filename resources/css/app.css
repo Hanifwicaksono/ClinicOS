@@ -95,15 +95,15 @@
     }
 
     .clinic-button-primary {
-        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-clinic-primary px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-clinic-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
+        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-clinic-primary px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-clinic-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     .clinic-button-secondary {
-        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-clinic-border bg-clinic-surface px-5 py-3 text-sm font-bold text-clinic-secondary transition hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
+        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-clinic-border bg-clinic-surface px-5 py-3 text-sm font-bold text-clinic-secondary transition hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     .clinic-button-danger {
-        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
+        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     .clinic-table th {

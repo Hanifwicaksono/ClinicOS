@@ -7,7 +7,7 @@
     <x-slot name="header"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Manajemen tim</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">{{ $editing ? 'Edit staf' : 'Tambah staf' }}</h1></div></x-slot>
 
     <div class="mx-auto max-w-4xl">
-        <div class="mb-7"><h2 class="text-2xl font-extrabold text-clinic-950">{{ $editing ? $staff->name : 'Akun staf baru' }}</h2><p class="mt-2 text-sm text-slate-500">{{ $editing ? 'Perbarui profil dan status akses staf.' : 'Staf akan menerima email verifikasi dan tautan untuk membuat kata sandi.' }}</p></div>
+        <div class="mb-7"><h2 class="text-2xl font-extrabold text-clinic-950">{{ $editing ? $staff->name : 'Akun staf baru' }}</h2><p class="mt-2 text-sm text-slate-500">{{ $editing ? 'Perbarui profil, kata sandi, dan status akses staf.' : 'Tentukan kata sandi awal. Staf akan menerima email verifikasi setelah akun dibuat.' }}</p></div>
 
         <form method="POST" action="{{ $editing ? route('admin.staff.update', $staff) : route('admin.staff.store') }}" class="space-y-6" x-data="{ role: '{{ old('role', $editing ? $staff->roles->first()?->name : 'Doctor') }}', submitting: false }" @submit="submitting = true">
             @csrf
@@ -23,6 +23,7 @@
                     @else
                         <div><label class="clinic-label">Peran</label><div class="clinic-input bg-slate-50 text-slate-500">{{ $staff->roles->first()?->name }}</div></div>
                     @endif
+                    <div><label class="clinic-label" for="password">{{ $editing ? 'Kata sandi baru' : 'Kata sandi' }}</label><input class="clinic-input" id="password" type="password" name="password" @required(! $editing) autocomplete="new-password"><p class="mt-1 text-xs text-slate-500">{{ $editing ? 'Kosongkan jika tidak ingin mengubah kata sandi.' : 'Minimal 8 karakter.' }}</p><x-input-error :messages="$errors->get('password')" class="mt-2" /></div>
                 </div>
             </section>
 

@@ -28,7 +28,7 @@ const connectionPresentations = {
     },
     offline: {
         label: 'Realtime tidak tersedia · diperbarui berkala',
-        dotClasses: ['bg-red-400'],
+        dotClasses: ['bg-amber-400'],
     },
 };
 
@@ -61,6 +61,55 @@ function isRealtimeConnected() {
     return window.Echo?.connector?.pusher?.connection?.state === 'connected';
 }
 
+function captureRealtimeFocus(region) {
+    const activeElement = document.activeElement;
+
+    if (! activeElement || ! region.contains(activeElement)) {
+        return null;
+    }
+
+    if (activeElement.id) {
+        return { id: activeElement.id };
+    }
+
+    const container = activeElement.closest('a[href], form[action]');
+
+    if (! container || ! region.contains(container)) {
+        return null;
+    }
+
+    const tag = container.tagName.toLowerCase();
+    const attribute = tag === 'form' ? 'action' : 'href';
+    const value = container.getAttribute(attribute);
+    const matches = [...region.querySelectorAll(`${tag}[${attribute}]`)]
+        .filter((candidate) => candidate.getAttribute(attribute) === value);
+
+    return { tag, attribute, value, index: matches.indexOf(container) };
+}
+
+function restoreRealtimeFocus(region, focusState) {
+    if (! focusState) {
+        return;
+    }
+
+    if (focusState.id) {
+        [...region.querySelectorAll('[id]')]
+            .find((candidate) => candidate.id === focusState.id)
+            ?.focus({ preventScroll: true });
+
+        return;
+    }
+
+    const matches = [...region.querySelectorAll(`${focusState.tag}[${focusState.attribute}]`)]
+        .filter((candidate) => candidate.getAttribute(focusState.attribute) === focusState.value);
+    const container = matches[focusState.index];
+    const target = focusState.tag === 'form'
+        ? container?.querySelector('button, input, select, textarea')
+        : container;
+
+    target?.focus({ preventScroll: true });
+}
+
 async function refreshRealtimeRegion(showRefetching = true) {
     const currentRegion = document.querySelector('[data-realtime-refresh-root]');
 
@@ -89,7 +138,9 @@ async function refreshRealtimeRegion(showRefetching = true) {
             throw new Error('Realtime refresh region tidak ditemukan.');
         }
 
+        const focusState = captureRealtimeFocus(currentRegion);
         currentRegion.replaceWith(freshRegion);
+        restoreRealtimeFocus(freshRegion, focusState);
         setConnectionState(window.Echo
             ? (isRealtimeConnected() ? 'connected' : 'disconnected')
             : 'offline');

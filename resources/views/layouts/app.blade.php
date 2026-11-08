@@ -19,13 +19,13 @@
             <div class="lg:pl-72">
                 @if (isset($header))
                     <header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0">
-                        <div class="mx-auto flex min-h-20 max-w-[1440px] items-center px-4 sm:px-6 lg:px-10">
+                        <div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10">
                             {{ $header }}
                         </div>
                     </header>
                 @endif
 
-                <main class="mx-auto max-w-[1440px] px-4 py-7 sm:px-6 lg:px-10 lg:py-10">
+                <main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10">
                     @php
                         $subscriptionOverview = auth()->check()
                             ? app(\App\Services\SubscriptionService::class)->overviewFor(auth()->user())

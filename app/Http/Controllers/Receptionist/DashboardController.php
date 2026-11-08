@@ -53,18 +53,32 @@ class DashboardController extends Controller
             'in_progress' => (int) ($statusCounts[QueueStatus::InProgress->value] ?? 0),
             'completed' => (int) ($statusCounts[QueueStatus::Completed->value] ?? 0),
         ];
-        $actionableQueueCount = $metrics['not_checked_in'] + $metrics['waiting'] + $metrics['called'];
-        $queues = $queueQuery
-            ->whereIn('status', [QueueStatus::Booked->value, QueueStatus::Waiting->value, QueueStatus::Called->value])
-            ->with(['appointment.patient', 'doctor.user:id,name', 'schedule'])
-            ->orderByRaw('CASE status WHEN ? THEN 0 WHEN ? THEN 1 ELSE 2 END', [
-                QueueStatus::Called->value,
-                QueueStatus::Waiting->value,
-            ])
+        $queueRelations = ['appointment.patient', 'doctor.user:id,name', 'schedule'];
+        $calledQueues = (clone $queueQuery)
+            ->where('status', QueueStatus::Called->value)
+            ->with($queueRelations)
+            ->orderBy('doctor_id')
+            ->orderBy('doctor_schedule_id')
+            ->orderBy('queue_number')
+            ->limit(4)
+            ->get();
+        $queues = (clone $queueQuery)
+            ->whereIn('status', [QueueStatus::Booked->value, QueueStatus::Waiting->value])
+            ->with($queueRelations)
+            ->orderByRaw('CASE status WHEN ? THEN 0 ELSE 1 END', [QueueStatus::Waiting->value])
+            ->orderBy('doctor_id')
+            ->orderBy('doctor_schedule_id')
             ->orderBy('queue_number')
             ->limit(13)
             ->get();
-        $activeQueue = $queues->first(fn (Queue $queue): bool => $queue->status !== QueueStatus::Booked);
+        $activeQueue = $metrics['called'] === 1
+            ? $calledQueues->first()
+            : $queues->first(fn (Queue $queue): bool => $queue->status === QueueStatus::Waiting);
+        $remainingQueues = $activeQueue?->status === QueueStatus::Waiting
+            ? $queues->reject->is($activeQueue)->take(12)
+            : $queues->take(12);
+        $remainingQueueCount = $metrics['not_checked_in'] + $metrics['waiting']
+            - ($activeQueue?->status === QueueStatus::Waiting ? 1 : 0);
         $doctors = Doctor::query()
             ->where('clinic_id', $clinicId)
             ->where('is_active', true)
@@ -77,15 +91,17 @@ class DashboardController extends Controller
 
         return view('receptionist.dashboard', [
             'metrics' => $metrics,
+            'calledQueues' => $calledQueues,
             'activeQueue' => $activeQueue,
-            'queues' => $activeQueue === null ? $queues->take(12) : $queues->reject->is($activeQueue)->take(12),
-            'actionableQueueCount' => $actionableQueueCount,
+            'queues' => $remainingQueues,
+            'remainingQueueCount' => $remainingQueueCount,
             'doctors' => $doctors,
             'doctorId' => $doctorId,
             'isToday' => $isToday,
             'canWrite' => $canWrite,
             'isInteractive' => $isToday && $canWrite,
             'date' => $date->toDateString(),
+            'timezone' => $timezone,
         ]);
     }
 }
