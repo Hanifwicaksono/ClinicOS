@@ -258,6 +258,10 @@ class BookingService
             }
         }
 
+        if ($actor !== null && ! $actor->hasRole('Patient')) {
+            app(PatientDuplicateService::class)->assertReviewed($clinic->id, $data);
+        }
+
         $patient = Patient::query()->create([
             ...Arr::only($data, ['name', 'nik', 'birth_date', 'gender', 'phone', 'email', 'address']),
             'clinic_id' => $clinic->id,

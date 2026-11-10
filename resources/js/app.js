@@ -8,3 +8,6 @@
 
 import './echo';
 import './realtime';
+import './rme-autosave';
+import './booking-form';
+import './patient-duplicates';

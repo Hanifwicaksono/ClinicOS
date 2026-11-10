@@ -21,6 +21,7 @@ class MedicalRecord extends Model
     {
         return [
             'status' => MedicalRecordStatus::class,
+            'lock_version' => 'integer',
             'photos' => 'array',
             'odontogram' => 'array',
             'allergy_acknowledged_at' => 'datetime',

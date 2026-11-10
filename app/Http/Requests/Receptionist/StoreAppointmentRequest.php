@@ -38,6 +38,8 @@ class StoreAppointmentRequest extends FormRequest
             'email' => ['nullable', 'email', 'max:255'],
             'address' => ['nullable', 'string', 'max:1500'],
             'notes' => ['nullable', 'string', 'max:1000'],
+            'duplicate_reviewed' => ['nullable', 'boolean'],
+            'duplicate_review_token' => ['nullable', 'string', 'size:64'],
         ];
     }
 }

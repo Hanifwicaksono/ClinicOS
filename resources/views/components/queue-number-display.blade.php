@@ -15,6 +15,11 @@
         'CALLED' => 'Dipanggil',
         'WAITING' => 'Menunggu',
         'IN_PROGRESS' => 'Diperiksa',
+        'BOOKED' => 'Belum check-in',
+        'COMPLETED' => 'Selesai',
+        'CANCELLED' => 'Dibatalkan',
+        'NO_SHOW' => 'Tidak hadir',
+        'SKIPPED' => 'Dilewati',
         default => 'Antrean',
     };
     $statusClasses = match ($status) {

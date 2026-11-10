@@ -35,6 +35,8 @@
     <div class="grid gap-6 xl:grid-cols-[1fr_320px]">
         <form method="POST" enctype="multipart/form-data" action="{{ $isFinal ? route('doctor.visits.correct', $visit) : route('doctor.visits.save', $visit) }}" class="space-y-6" x-data="{
             medicines: @js($prescriptionRows),
+            diagnoses: @js(old('diagnoses', $record->diagnoses->map->only(['code', 'name', 'notes', 'is_primary'])->all()) ?: [['code' => '', 'name' => '', 'notes' => '', 'is_primary' => true]]),
+            treatments: @js(old('treatments', $record->treatments->map->only(['name', 'description', 'quantity'])->all()) ?: [['name' => '', 'description' => '', 'quantity' => 1]]),
             prescriptionNotes: @js(old('prescription_notes', $record->prescription?->notes)),
             selectedPhotos: [],
             removedPhotos: @js(array_map('intval', old('removed_photos', []))),
@@ -62,13 +64,17 @@
                 const files = new DataTransfer();
                 this.selectedPhotos.forEach(photo => files.items.add(photo.file));
                 this.$refs.photos.files = files.files;
+                this.$dispatch('rme-changed');
             },
-        }" data-rme-form @input="$dispatch('rme-autosave-state', { state: 'draft' })" @paste.window="const images = [...$event.clipboardData.files].filter(file => file.type.startsWith('image/')); if (images.length) { $event.preventDefault(); addPhotos(images); }" @submit="submitting = true; $dispatch('rme-autosave-state', { state: 'saving' })">
+        }" data-rme-form @unless($isFinal) data-rme-autosave @endunless @input="$dispatch('rme-autosave-state', { state: 'draft' })" @paste.window="const images = [...$event.clipboardData.files].filter(file => file.type.startsWith('image/')); if (images.length) { $event.preventDefault(); addPhotos(images); }" @submit="submitting = true; $dispatch('rme-autosave-state', { state: 'saving' })">
             @csrf @method('PUT')
+            <input type="hidden" name="record_version" value="{{ old('record_version', $record->lock_version) }}">
+            <input type="hidden" name="allergy_version" value="{{ old('allergy_version', $visit->patient->allergyVersion()) }}">
             <template x-for="index in removedPhotos" :key="index"><input type="hidden" name="removed_photos[]" :value="index"></template>
             <section class="clinic-card p-6 sm:p-8"><div class="flex flex-wrap items-start justify-between gap-5"><div><p class="text-xs font-bold uppercase tracking-wider text-slate-400">Pasien</p><h2 class="mt-2 text-2xl font-extrabold text-clinic-950">{{ $visit->patient->name }}</h2><p class="mt-1 text-sm text-slate-500">{{ $visit->patient->medical_record_number }} · {{ $visit->patient->birth_date->age }} tahun · {{ $visit->patient->gender === 'MALE' ? 'Laki-laki' : 'Perempuan' }}</p></div><div class="text-left sm:text-right"><p class="text-xs font-bold uppercase tracking-wider text-slate-400">Layanan</p><p class="mt-2 font-bold text-slate-900">{{ $visit->service_name }}</p><p class="mt-1 text-sm text-clinic-600">Rp {{ number_format((float) $visit->service_price, 0, ',', '.') }}</p></div></div></section>
 
             <x-critical-allergy-banner :allergies="$criticalAllergies" />
+            <a href="#patient-allergies-heading" class="inline-flex min-h-11 items-center text-sm font-bold text-clinic-700 underline focus-visible:ring-2 focus-visible:ring-clinic-500">Tinjau / catat alergi pasien</a>
 
             <section class="clinic-card p-6 sm:p-8" aria-labelledby="prescription-workflow-heading">
                 <h2 id="prescription-workflow-heading" class="text-lg font-extrabold text-clinic-950">Alur resep dan rekam medis</h2>
@@ -94,6 +100,8 @@
                 <x-slot:actions>
                     <x-rme.autosave-status :state="$rmeFormState" :message="$errors->first()" />
                 </x-slot:actions>
+
+                @unless($isFinal)<p class="mb-5 text-sm leading-6 text-slate-500">Isian tersimpan otomatis setelah Anda berhenti mengetik. Foto dan penghapusan foto disimpan lewat tombol Simpan draft atau finalisasi.</p>@endunless
 
                 <div class="grid gap-5 md:grid-cols-2">
                     <div class="md:col-span-2">
@@ -211,6 +219,38 @@
                 </div>
             </x-rme.section>
 
+            <x-rme.section heading-id="structured-clinical-heading" title="Diagnosis dan tindakan" description="Catat diagnosis serta tindakan yang benar-benar diberikan. Diagnosis pertama menjadi utama jika tidak dipilih.">
+                <div class="space-y-5">
+                    <template x-for="(diagnosis, index) in diagnoses" :key="index">
+                        <fieldset class="rounded-2xl border border-slate-200 p-4">
+                            <legend class="px-2 text-sm font-bold" x-text="`Diagnosis ${index + 1}`"></legend>
+                            <div class="grid gap-4 sm:grid-cols-[8rem_1fr]">
+                                <div><label class="clinic-label" :for="`diagnosis_code_${index}`">Kode (opsional)</label><input class="clinic-input" :id="`diagnosis_code_${index}`" :name="`diagnoses[${index}][code]`" x-model="diagnosis.code" maxlength="30"></div>
+                                <div><label class="clinic-label" :for="`diagnosis_name_${index}`">Diagnosis</label><input class="clinic-input" :id="`diagnosis_name_${index}`" :name="`diagnoses[${index}][name]`" x-model="diagnosis.name" maxlength="255"></div>
+                                <div class="sm:col-span-2"><label class="clinic-label" :for="`diagnosis_notes_${index}`">Catatan</label><textarea class="clinic-input" :id="`diagnosis_notes_${index}`" :name="`diagnoses[${index}][notes]`" x-model="diagnosis.notes" maxlength="2000" rows="2"></textarea></div>
+                            </div>
+                            <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
+                                <label class="flex min-h-11 items-center gap-2 text-sm"><input type="checkbox" :name="`diagnoses[${index}][is_primary]`" value="1" x-model="diagnosis.is_primary" @change="if (diagnosis.is_primary) diagnoses.forEach((row, i) => { if (i !== index) row.is_primary = false; })" class="rounded text-clinic-600 focus:ring-clinic-500">Diagnosis utama</label>
+                                <button type="button" class="min-h-11 text-sm font-bold text-red-700 focus-visible:ring-2 focus-visible:ring-red-500" @click="diagnoses.splice(index, 1); if (!diagnoses.length) diagnoses.push({code:'',name:'',notes:'',is_primary:true}); $nextTick(() => $dispatch('rme-changed'))">Hapus diagnosis <span x-text="index + 1" class="sr-only"></span></button>
+                            </div>
+                        </fieldset>
+                    </template>
+                    <x-clinic-button type="button" variant="secondary" @click="diagnoses.push({code:'',name:'',notes:'',is_primary:false})" x-bind:disabled="diagnoses.length >= 20">+ Tambah diagnosis</x-clinic-button>
+                    <template x-for="(treatment, index) in treatments" :key="index">
+                        <fieldset class="rounded-2xl border border-slate-200 p-4">
+                            <legend class="px-2 text-sm font-bold" x-text="`Tindakan ${index + 1}`"></legend>
+                            <div class="grid gap-4 sm:grid-cols-[1fr_7rem]">
+                                <div><label class="clinic-label" :for="`treatment_name_${index}`">Tindakan</label><input class="clinic-input" :id="`treatment_name_${index}`" :name="`treatments[${index}][name]`" x-model="treatment.name" maxlength="255"></div>
+                                <div><label class="clinic-label" :for="`treatment_quantity_${index}`">Jumlah</label><input class="clinic-input" :id="`treatment_quantity_${index}`" :name="`treatments[${index}][quantity]`" x-model="treatment.quantity" type="number" min="1" max="9999"></div>
+                                <div class="sm:col-span-2"><label class="clinic-label" :for="`treatment_description_${index}`">Rincian tindakan</label><textarea class="clinic-input" :id="`treatment_description_${index}`" :name="`treatments[${index}][description]`" x-model="treatment.description" maxlength="3000" rows="2"></textarea></div>
+                            </div>
+                            <button type="button" class="mt-2 min-h-11 text-sm font-bold text-red-700 focus-visible:ring-2 focus-visible:ring-red-500" @click="treatments.splice(index,1); if (!treatments.length) treatments.push({name:'',description:'',quantity:1}); $nextTick(() => $dispatch('rme-changed'))">Hapus tindakan <span x-text="index + 1" class="sr-only"></span></button>
+                        </fieldset>
+                    </template>
+                    <x-clinic-button type="button" variant="secondary" @click="treatments.push({name:'',description:'',quantity:1})" x-bind:disabled="treatments.length >= 30">+ Tambah tindakan</x-clinic-button>
+                </div>
+            </x-rme.section>
+
             @if ($canEditOdontogram || $hasOdontogram)
             @if ($canEditOdontogram)
                 <p class="rounded-xl border border-clinic-200 bg-clinic-50 p-4 text-sm font-semibold text-clinic-800" role="status">Odontogram aktif. Perubahan disimpan saat Anda menyimpan RME.</p>
@@ -287,7 +327,7 @@
                                     <input class="clinic-input" :id="`medicine_unit_${index}`" :name="`prescription_items[${index}][unit]`" x-model="item.unit" placeholder="Contoh: tablet">
                                 </div>
                                 <div class="flex items-end">
-                                    <button type="button" @click="medicines.splice(index,1)" class="inline-flex min-h-11 items-center font-bold text-red-600 hover:text-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2">Hapus obat</button>
+                                    <button type="button" @click="medicines.splice(index,1); $nextTick(() => $dispatch('rme-changed'))" class="inline-flex min-h-11 items-center font-bold text-red-600 hover:text-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2">Hapus obat</button>
                                 </div>
                                 <div class="md:col-span-3">
                                     <label class="clinic-label" :for="`medicine_instructions_${index}`">Instruksi penggunaan <span class="font-normal text-slate-400">(opsional)</span></label>
@@ -366,7 +406,9 @@
             @endunless
         </form>
 
-        <aside class="space-y-6"><section class="clinic-card p-6"><h2 class="font-extrabold text-clinic-950">Kunjungan</h2><dl class="mt-5 space-y-4 text-sm"><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Mulai</dt><dd class="mt-1 font-semibold">{{ $visit->started_at->format('d M Y, H:i') }}</dd></div><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Dokter</dt><dd class="mt-1 font-semibold">{{ $visit->doctor->user->name }}</dd></div><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Nilai layanan</dt><dd class="mt-1 font-semibold">Rp {{ number_format((float) $visit->total_amount, 0, ',', '.') }}</dd></div>@if($visit->completed_at)<div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Selesai</dt><dd class="mt-1 font-semibold">{{ $visit->completed_at->format('d M Y, H:i') }}</dd></div>@endif</dl></section>
+        <aside class="space-y-6">
+            <x-rme.allergy-editor :visit="$visit" />
+            <section class="clinic-card p-6"><h2 class="font-extrabold text-clinic-950">Kunjungan</h2><dl class="mt-5 space-y-4 text-sm"><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Mulai</dt><dd class="mt-1 font-semibold">{{ $visit->started_at->format('d M Y, H:i') }}</dd></div><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Dokter</dt><dd class="mt-1 font-semibold">{{ $visit->doctor->user->name }}</dd></div><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Nilai layanan</dt><dd class="mt-1 font-semibold">Rp {{ number_format((float) $visit->total_amount, 0, ',', '.') }}</dd></div>@if($visit->completed_at)<div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Selesai</dt><dd class="mt-1 font-semibold">{{ $visit->completed_at->format('d M Y, H:i') }}</dd></div>@endif</dl></section>
             <section class="clinic-card overflow-hidden"><div class="border-b border-slate-100 p-5"><h2 class="font-extrabold text-clinic-950">Riwayat dengan dokter ini</h2></div><div class="divide-y divide-slate-100">@forelse($history as $item)<a href="{{ route('doctor.visits.show', $item) }}" class="block p-5 hover:bg-slate-50" wire:navigate><p class="text-sm font-bold text-slate-900">{{ $item->started_at->format('d M Y') }}</p><p class="mt-1 text-xs text-slate-500">{{ $item->service_name }} · {{ $item->status->value }}</p><p class="mt-2 text-xs font-semibold text-clinic-700">{{ $item->medicalRecord?->assessment ?: $item->medicalRecord?->diagnoses->pluck('name')->join(', ') ?: 'Belum ada diagnosa' }}</p></a>@empty<div class="p-6 text-sm text-slate-500">Belum ada kunjungan sebelumnya.</div>@endforelse</div></section>
             @if($hasModifications)
                 <section class="clinic-card min-w-0 overflow-hidden p-6 xl:col-span-1" aria-labelledby="modification-history-heading">

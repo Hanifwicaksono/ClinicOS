@@ -8,6 +8,8 @@ use App\Events\VisitCompleted;
 use App\MedicalRecordStatus;
 use App\Models\Clinic;
 use App\Models\MedicalRecord;
+use App\Models\Patient;
+use App\Models\PatientAllergy;
 use App\Models\Queue;
 use App\Models\User;
 use App\Models\Visit;
@@ -210,6 +212,11 @@ class VisitWorkflowService
     /** @param array<string, mixed> $data */
     private function syncRecord(MedicalRecord $record, array $data, User $actor): void
     {
+        abort_if(isset($data['record_version']) && (int) $data['record_version'] !== $record->lock_version, 409,
+            'Rekam medis telah berubah di tab lain. Salin perubahan Anda lalu muat ulang halaman sebelum melanjutkan.');
+        $patient = Patient::query()->where('clinic_id', $record->visit->clinic_id)->lockForUpdate()->findOrFail($record->patient_id);
+        abort_if(isset($data['allergy_version']) && ! hash_equals($patient->allergyVersion(), $data['allergy_version']), 409,
+            'Data alergi pasien telah berubah. Salin perubahan Anda lalu muat ulang untuk meninjau alergi terbaru.');
         $items = array_values(array_filter($data['prescription_items'] ?? [], fn (array $item): bool => filled($item['medicine_name'] ?? null)));
         $hasCriticalAllergy = $record->patient->criticalAllergies()->exists();
 
@@ -238,7 +245,9 @@ class VisitWorkflowService
                 ->all();
         }
 
-        $record->update($recordData);
+        $record->fill($recordData);
+        $record->lock_version++;
+        $record->save();
 
         $storedPhotos = $record->photos ?? [];
         $removedPhotoIndexes = array_map('intval', $data['removed_photos'] ?? []);
@@ -309,6 +318,7 @@ class VisitWorkflowService
             foreach (array_values(array_filter($data['treatments'], fn (array $item): bool => filled($item['name'] ?? null))) as $index => $treatment) {
                 $record->treatments()->create([
                     ...Arr::only($treatment, ['name', 'description']),
+                    'quantity' => $treatment['quantity'] ?? 1,
                     'sort_order' => $index,
                 ]);
             }
@@ -334,6 +344,9 @@ class VisitWorkflowService
             foreach ($items as $index => $item) {
                 $prescription->items()->create([
                     ...Arr::only($item, ['medicine_name', 'dosage', 'frequency', 'quantity', 'unit', 'instructions']),
+                    'dosage' => $item['dosage'] ?? '',
+                    'frequency' => $item['frequency'] ?? '',
+                    'quantity' => $item['quantity'] ?? null,
                     'sort_order' => $index,
                 ]);
             }
@@ -361,7 +374,7 @@ class VisitWorkflowService
 
     private function ensureDoctor(Visit $visit, User $actor): void
     {
-        if ($visit->doctor->user_id !== $actor->id) {
+        if ($visit->doctor->user_id !== $actor->id || $actor->clinic_id !== $visit->clinic_id) {
             throw new AuthorizationException('Dokter hanya dapat mengelola kunjungannya sendiri.');
         }
     }
@@ -371,6 +384,35 @@ class VisitWorkflowService
         if ($visit->status !== VisitStatus::InProgress) {
             throw ValidationException::withMessages(['visit' => 'Kunjungan ini sudah tidak aktif.']);
         }
+    }
+
+    /** @param array{substance: string, reaction?: ?string, severity: string, is_active: bool|string|int} $data */
+    public function saveAllergy(Visit $visit, User $actor, array $data, ?PatientAllergy $allergy = null): PatientAllergy
+    {
+        return DB::transaction(function () use ($visit, $actor, $data, $allergy): PatientAllergy {
+            $lockedVisit = Visit::query()->lockForUpdate()->findOrFail($visit->id);
+            $this->ensureDoctor($lockedVisit, $actor);
+            $this->ensureInProgress($lockedVisit);
+            $patient = Patient::query()->where('clinic_id', $lockedVisit->clinic_id)->lockForUpdate()->findOrFail($lockedVisit->patient_id);
+            $isNew = $allergy === null;
+            $allergy = $isNew ? $patient->allergies()->make() : $patient->allergies()->lockForUpdate()->findOrFail($allergy->id);
+            $previousId = $allergy->id;
+            $allergy->fill($data);
+            if (! $isNew && $allergy->isDirty(['substance', 'reaction', 'severity'])) {
+                $allergy->refresh()->update(['is_active' => false]);
+                $allergy = $patient->allergies()->make($data);
+            }
+            $allergy->recorded_by_user_id = $actor->id;
+            $allergy->save();
+            $this->auditLogger->recordForClinic($lockedVisit->clinic, $isNew ? 'patient_allergy.created' : 'patient_allergy.updated', $allergy, [
+                'patient_id' => $patient->id,
+                'visit_id' => $lockedVisit->id,
+                'is_active' => $allergy->is_active,
+                'previous_allergy_id' => $previousId,
+            ], $actor);
+
+            return $allergy;
+        }, 3);
     }
 
     private function loadVisit(Visit $visit): Visit

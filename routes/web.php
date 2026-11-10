@@ -169,6 +169,7 @@ Route::domain($baseDomain)->group(function (): void {
 
     Route::prefix('receptionist')->name('receptionist.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin|Receptionist', 'subscription.writable'])->group(function () {
         Route::get('patients/search', [ReceptionistPatientController::class, 'search'])->name('patients.search');
+        Route::post('patients/duplicates', [ReceptionistPatientController::class, 'duplicates'])->middleware('throttle:30,1')->name('patients.duplicates');
         Route::resource('patients', ReceptionistPatientController::class)->except(['destroy']);
         Route::resource('appointments', ReceptionistAppointmentController::class)->only(['index', 'create', 'store', 'show']);
         Route::post('appointments/{appointment}/cancel', [ReceptionistAppointmentController::class, 'cancel'])->name('appointments.cancel');
@@ -183,6 +184,8 @@ Route::domain($baseDomain)->group(function (): void {
         Route::get('visits/{visit}/photos/{photo}', [DoctorVisitController::class, 'photo'])
             ->whereNumber('photo')->name('visits.photos.show');
         Route::put('visits/{visit}/draft', [DoctorVisitController::class, 'save'])->name('visits.save');
+        Route::post('visits/{visit}/allergies', [DoctorVisitController::class, 'storeAllergy'])->name('visits.allergies.store');
+        Route::put('visits/{visit}/allergies/{allergy}', [DoctorVisitController::class, 'updateAllergy'])->name('visits.allergies.update');
         Route::put('visits/{visit}/complete', [DoctorVisitController::class, 'complete'])->name('visits.complete');
         Route::put('visits/{visit}/correct', [DoctorVisitController::class, 'correct'])->name('visits.correct');
     });

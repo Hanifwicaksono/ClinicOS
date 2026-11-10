@@ -22,10 +22,13 @@ function notificationClient() {
     const window = {
         Echo: { private() { return { notification(callback) { receive = callback; } }; } },
         setInterval() {},
+        addEventListener() {},
         dispatchEvent(event) { events.push(event); },
     };
-    runInNewContext(readFileSync(new URL('../resources/js/realtime.js', import.meta.url), 'utf8'), {
-        document, window, console,
+    const source = readFileSync(new URL('../resources/js/realtime.js', import.meta.url), 'utf8')
+        .replace("import { QueueRealtimeClient } from './queue-realtime';", '');
+    runInNewContext(source, {
+        document, window, console, QueueRealtimeClient: class {},
         CustomEvent: class { constructor(type, options) { this.type = type; this.detail = options.detail; } },
     });
     initialize();

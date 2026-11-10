@@ -36,6 +36,8 @@ class StorePatientRequest extends FormRequest
             'email' => ['nullable', 'email', 'max:255'],
             'address' => ['nullable', 'string', 'max:1500'],
             'is_active' => ['required', 'boolean'],
+            'duplicate_reviewed' => ['nullable', 'boolean'],
+            'duplicate_review_token' => ['nullable', 'string', 'size:64'],
         ];
     }
 }

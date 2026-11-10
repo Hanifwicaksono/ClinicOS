@@ -1,0 +1,6 @@
+@props(['allergy' => null, 'fieldKey'])
+<div><label class="clinic-label" for="{{ $fieldKey }}-substance">Zat / obat pemicu</label><input class="clinic-input" id="{{ $fieldKey }}-substance" name="substance" maxlength="255" value="{{ $allergy?->substance }}" required></div>
+<div><label class="clinic-label" for="{{ $fieldKey }}-reaction">Reaksi</label><input class="clinic-input" id="{{ $fieldKey }}-reaction" name="reaction" maxlength="255" value="{{ $allergy?->reaction }}"></div>
+<div><label class="clinic-label" for="{{ $fieldKey }}-severity">Keparahan</label><select class="clinic-input" id="{{ $fieldKey }}-severity" name="severity" required><option value="">Pilih keparahan</option>@foreach(\App\AllergySeverity::cases() as $severity)<option value="{{ $severity->value }}" @selected($allergy?->severity === $severity)>{{ $severity->label() }}</option>@endforeach</select></div>
+<input type="hidden" name="is_active" value="0">
+<label class="flex min-h-11 items-center gap-2 text-sm" for="{{ $fieldKey }}-active"><input id="{{ $fieldKey }}-active" name="is_active" value="1" type="checkbox" @checked($allergy?->is_active ?? true) class="rounded text-clinic-600 focus:ring-clinic-500">Alergi masih aktif</label>

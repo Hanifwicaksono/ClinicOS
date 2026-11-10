@@ -63,7 +63,7 @@ class EnsureSubscriptionWritable
 
         return $visit instanceof Visit
             && $visit->status === VisitStatus::InProgress
-            && $request->routeIs('doctor.visits.save', 'doctor.visits.complete');
+            && $request->routeIs('doctor.visits.save', 'doctor.visits.complete', 'doctor.visits.allergies.*');
     }
 
     private function canDeactivateSeat(Request $request): bool

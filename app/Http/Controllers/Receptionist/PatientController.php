@@ -8,9 +8,12 @@ use App\Http\Requests\Receptionist\UpdatePatientRequest;
 use App\Models\Patient;
 use App\Services\AuditLogger;
 use App\Services\MedicalRecordNumberGenerator;
+use App\Services\PatientDuplicateService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class PatientController extends Controller
@@ -71,17 +74,45 @@ class PatientController extends Controller
         return view('receptionist.patients.form');
     }
 
+    public function duplicates(Request $request, PatientDuplicateService $duplicates): JsonResponse
+    {
+        $this->authorize('create', Patient::class);
+        $data = $request->validate([
+            'name' => ['nullable', 'string', 'max:150'],
+            'birth_date' => ['nullable', 'date_format:Y-m-d'],
+            'nik' => ['nullable', 'string', 'max:30'],
+            'phone' => ['nullable', 'string', 'max:30'],
+        ]);
+        $candidates = $duplicates->candidates($request->user()->clinic_id, $data);
+
+        return response()->json([
+            'candidates' => $candidates->map(fn (Patient $patient): array => [
+                'id' => $patient->id,
+                'label' => $patient->medical_record_number.' · '.$patient->name.' · '.$patient->birth_date->format('d/m/Y').' · '.$patient->phone.($patient->is_active ? '' : ' · Nonaktif'),
+                'url' => route('receptionist.patients.show', $patient),
+            ]),
+            'token' => $duplicates->reviewToken($request->user()->clinic_id, $data, $candidates),
+        ])->header('Cache-Control', 'no-store');
+    }
+
     public function store(
         StorePatientRequest $request,
         MedicalRecordNumberGenerator $numberGenerator,
         AuditLogger $auditLogger,
+        PatientDuplicateService $duplicates,
     ): RedirectResponse {
-        $patient = Patient::query()->create($request->validated() + [
-            'clinic_id' => $request->user()->clinic_id,
-            'medical_record_number' => 'TEMP-'.str()->random(32),
-        ]);
-        $patient->update(['medical_record_number' => $numberGenerator->generate($patient)]);
-        $auditLogger->record($request->user(), 'patient.created', $patient);
+        $patient = DB::transaction(function () use ($request, $numberGenerator, $auditLogger, $duplicates): Patient {
+            $request->user()->clinic()->lockForUpdate()->firstOrFail();
+            $duplicates->assertReviewed($request->user()->clinic_id, $request->validated());
+            $patient = Patient::query()->create(Arr::except($request->validated(), ['duplicate_reviewed', 'duplicate_review_token']) + [
+                'clinic_id' => $request->user()->clinic_id,
+                'medical_record_number' => 'TEMP-'.str()->random(32),
+            ]);
+            $patient->update(['medical_record_number' => $numberGenerator->generate($patient)]);
+            $auditLogger->record($request->user(), 'patient.created', $patient);
+
+            return $patient;
+        }, 3);
 
         return redirect()->route('receptionist.patients.show', $patient)
             ->with('status', 'Pasien berhasil didaftarkan.');

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Doctor\CompleteVisitRequest;
 use App\Http\Requests\Doctor\CorrectMedicalRecordRequest;
 use App\Http\Requests\Doctor\SaveMedicalRecordRequest;
+use App\Http\Requests\Doctor\SavePatientAllergyRequest;
+use App\Models\PatientAllergy;
 use App\Models\Queue;
 use App\Models\Visit;
 use App\Services\AddonService;
@@ -41,7 +43,7 @@ class VisitController extends Controller
     {
         $this->authorize('view', $visit);
         $visit->load([
-            'clinic', 'appointment', 'patient.criticalAllergies', 'doctor.user', 'service', 'queue',
+            'clinic', 'appointment', 'patient.criticalAllergies', 'patient.allergies', 'doctor.user', 'service', 'queue',
             'medicalRecord.vitalSign', 'medicalRecord.diagnoses', 'medicalRecord.treatments',
             'medicalRecord.prescription.items', 'medicalRecord.revisions.correctedBy',
         ]);
@@ -110,8 +112,16 @@ class VisitController extends Controller
         SaveMedicalRecordRequest $request,
         Visit $visit,
         VisitWorkflowService $workflow,
-    ): RedirectResponse {
-        $workflow->saveDraft($visit, $request->user(), $request->validated());
+    ): RedirectResponse|JsonResponse {
+        $savedVisit = $workflow->saveDraft($visit, $request->user(), $request->validated());
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Draft rekam medis berhasil disimpan.',
+                'record_version' => $savedVisit->medicalRecord->lock_version,
+                'redirect' => route('doctor.visits.show', $savedVisit),
+            ])->header('Cache-Control', 'no-store');
+        }
 
         return back()->with('status', 'Draft rekam medis berhasil disimpan.');
     }
@@ -134,12 +144,30 @@ class VisitController extends Controller
             ->with('status', 'Kunjungan selesai dan rekam medis telah difinalisasi.');
     }
 
+    public function storeAllergy(SavePatientAllergyRequest $request, Visit $visit, VisitWorkflowService $workflow): JsonResponse
+    {
+        $workflow->saveAllergy($visit, $request->user(), $request->validated());
+
+        return response()->json(['message' => 'Alergi pasien tersimpan.'])->header('Cache-Control', 'no-store');
+    }
+
+    public function updateAllergy(SavePatientAllergyRequest $request, Visit $visit, PatientAllergy $allergy, VisitWorkflowService $workflow): JsonResponse
+    {
+        $workflow->saveAllergy($visit, $request->user(), $request->validated(), $allergy);
+
+        return response()->json(['message' => 'Data alergi diperbarui.'])->header('Cache-Control', 'no-store');
+    }
+
     public function correct(
         CorrectMedicalRecordRequest $request,
         Visit $visit,
         VisitWorkflowService $workflow,
-    ): RedirectResponse {
+    ): RedirectResponse|JsonResponse {
         $workflow->correct($visit, $request->user(), $request->validated());
+
+        if ($request->expectsJson()) {
+            return response()->json(['redirect' => route('doctor.visits.show', $visit)])->header('Cache-Control', 'no-store');
+        }
 
         return back()->with('status', 'Koreksi rekam medis tersimpan dengan riwayat perubahan.');
     }

@@ -40,10 +40,10 @@ class OdontogramAddonTest extends TestCase
             'services.doku.base_url' => 'https://api-sandbox.doku.com',
         ]);
         Http::fake([
-            'https://api-sandbox.doku.com/checkout/v1/payment' => Http::response([
+            'https://api-sandbox.doku.com/checkout/v1/payment' => fn (ClientRequest $request) => Http::response([
                 'response' => ['payment' => [
                     'url' => 'https://sandbox.doku.com/checkout/test',
-                    'expired_date' => '20261103235959',
+                    'expired_date' => now('Asia/Jakarta')->addMinutes($request['payment']['payment_due_date'])->format('YmdHis'),
                 ]],
             ]),
         ]);

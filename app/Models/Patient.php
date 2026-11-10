@@ -63,4 +63,10 @@ class Patient extends Model
             ->where('is_active', true)
             ->where('severity', AllergySeverity::Critical);
     }
+
+    public function allergyVersion(): string
+    {
+        return hash('sha256', $this->allergies()->orderBy('id')
+            ->get(['id', 'substance', 'reaction', 'severity', 'is_active'])->toJson());
+    }
 }

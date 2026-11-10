@@ -28,7 +28,7 @@ class QueueEtaServiceTest extends TestCase
     public function test_it_falls_back_to_service_duration_and_counts_only_active_queues_in_the_same_session(): void
     {
         $context = $this->context(serviceDuration: 25);
-        $otherSchedule = DoctorSchedule::factory()->for($context['doctor'])->create();
+        $otherSchedule = DoctorSchedule::factory()->for($context['doctor'])->create(['start_time' => '13:00', 'end_time' => '16:00']);
         $target = $this->queue($context, 5, QueueStatus::Waiting);
 
         $this->queue($context, 1, QueueStatus::Waiting);

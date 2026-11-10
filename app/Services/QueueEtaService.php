@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Appointment;
 use App\Models\Queue;
 use App\Models\Visit;
 use App\QueueStatus;
@@ -10,6 +11,19 @@ use App\VisitStatus;
 class QueueEtaService
 {
     private const int HistoryLimit = 20;
+
+    /** @return array{eta_minutes: int, eta_min_minutes: int, eta_max_minutes: int, confidence: string}|null */
+    public function forAppointment(Appointment $appointment): ?array
+    {
+        $queue = $appointment->queue;
+        $timezone = $appointment->clinic->settings?->timezone ?? 'Asia/Jakarta';
+        if ($queue === null || ! $queue->queue_date->isSameDay(now($timezone))
+            || ! in_array($queue->status, [QueueStatus::Waiting, QueueStatus::Called, QueueStatus::InProgress], true)) {
+            return null;
+        }
+
+        return $this->estimate($queue);
+    }
 
     /**
      * @return array{

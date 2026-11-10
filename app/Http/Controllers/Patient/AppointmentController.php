@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Patient;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Services\BookingService;
+use App\Services\QueueEtaService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -23,12 +24,13 @@ class AppointmentController extends Controller
         return view('patient.appointments.index', compact('appointments'));
     }
 
-    public function show(Appointment $appointment): View
+    public function show(Appointment $appointment, QueueEtaService $etaService): View
     {
         $this->authorize('viewOwn', $appointment);
 
         return view('patient.appointments.show', [
             'appointment' => $appointment->load(['clinic', 'patient', 'doctor.user', 'schedule', 'queue']),
+            'eta' => $etaService->forAppointment($appointment),
         ]);
     }
 

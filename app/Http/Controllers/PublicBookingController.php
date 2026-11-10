@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use App\Models\Clinic;
 use App\Models\Scopes\ClinicScope;
 use App\Services\BookingService;
+use App\Services\QueueEtaService;
 use App\Services\SubscriptionService;
 use App\UserAccountType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -54,7 +55,7 @@ class PublicBookingController extends Controller
         ]);
     }
 
-    public function status(Request $request, Appointment $appointment, BookingService $bookingService): View
+    public function status(Request $request, Appointment $appointment, BookingService $bookingService, QueueEtaService $etaService): View
     {
         $token = (string) $request->query('token');
         abort_unless($token !== '' && $bookingService->tokenMatches($appointment, $token), 404);
@@ -66,6 +67,7 @@ class PublicBookingController extends Controller
                 'doctor.user', 'schedule', 'queue',
             ]),
             'token' => $token,
+            'eta' => $etaService->forAppointment($appointment),
         ]);
     }
 
