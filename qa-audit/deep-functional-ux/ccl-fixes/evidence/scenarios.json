@@ -1,0 +1,912 @@
+[
+  {
+    "id": "before-CCL-05",
+    "feature": "CCL-05",
+    "role": "Clinic Owner / Patient",
+    "scenario": "Jam berubah: booking baru di luar jam ditolak; histori tetap utuh",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T06:52:51.180Z",
+    "status": "FAIL",
+    "reason": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   [Object: null prototype] {\n+     appointment_date: '2026-11-14 00:00:00',\n+     id: 98,\n+     status: 'BOOKED'\n+   }\n+ ]\n- []\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": []
+  },
+  {
+    "id": "before-CCL-03",
+    "feature": "CCL-03",
+    "role": "Receptionist",
+    "scenario": "Nomor bertitik disimpan dan ditemukan kembali; data lama tetap dikenali",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T06:53:05.281Z",
+    "status": "FAIL",
+    "reason": "Nomor yang diterima tidak ditemukan kembali",
+    "error_type": "AssertionError",
+    "failure_screenshots": []
+  },
+  {
+    "id": "before-CCL-04",
+    "feature": "CCL-04",
+    "role": "Receptionist",
+    "scenario": "URL booking pasien nonaktif mempertahankan konteks dan jalur pemulihan",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T06:53:11.983Z",
+    "status": "FAIL",
+    "reason": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '/receptionist/appointments/create'\n- '/receptionist/patients/32'\n                 ^\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": []
+  },
+  {
+    "id": "before-CCL-06",
+    "feature": "CCL-06",
+    "role": "Platform Admin",
+    "scenario": "List tenant mencerminkan expiry tanpa mengubah periode dan pembayaran",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T06:53:15.257Z",
+    "status": "FAIL",
+    "reason": "The input did not match the regular expression /expired/. Input:\n\n'QA Closure Expiry\\n' +\n  '\\n' +\n  'qa-closure-expiry\\n' +\n  '\\n' +\n  '\\t\\n' +\n  '\\n' +\n  'QA Closure expiry.owner\\n' +\n  '\\n' +\n  'closure.expiry.owner@clinicos.test\\n' +\n  '\\n' +\n  '\\tAktif\\t\\n' +\n  '\\n' +\n  'Team\\n' +\n  '\\n' +\n  'active\\n' +\n  '\\n' +\n  '\\t1\\t3\\tDetail'\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": []
+  },
+  {
+    "id": "before-CCL-07",
+    "feature": "CCL-07",
+    "role": "Receptionist",
+    "scenario": "Socket refetch mempertahankan semua filter dan selection kursor",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T06:53:19.936Z",
+    "status": "FAIL",
+    "reason": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   direction: 'forward',\n+   end: 0,\n-   direction: 'backward',\n-   end: 5,\n    focused: true,\n+   start: 0,\n+   value: ''\n-   start: 2,\n-   value: 'QA Clo'\n  }\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": []
+  },
+  {
+    "id": "before-CCL-02",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "401 dari logout tab lain memberi pemulihan login dan menjaga draft",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T06:53:25.832Z",
+    "status": "FAIL",
+    "reason": "The input did not match the regular expression /Sesi berakhir/. Input:\n\n'Draft\\nAda perubahan yang belum disimpan.'\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": []
+  },
+  {
+    "id": "before-CCL-01-123456",
+    "feature": "CCL-01",
+    "role": "Clinic Admin",
+    "scenario": "Tarif 123456 dapat disimpan lewat form dan dibuka ulang",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T06:53:38.646Z",
+    "status": "FAIL",
+    "reason": "Native stepMismatch memblok nominal yang sah\n\nfalse !== true\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": []
+  },
+  {
+    "id": "before-CCL-01-123_45",
+    "feature": "CCL-01",
+    "role": "Clinic Admin",
+    "scenario": "Tarif 123.45 dapat disimpan lewat form dan dibuka ulang",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T06:53:42.932Z",
+    "status": "FAIL",
+    "reason": "Native stepMismatch memblok nominal yang sah\n\nfalse !== true\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": []
+  },
+  {
+    "id": "before-CCL-08",
+    "feature": "CCL-08",
+    "role": "Clinic Owner / Platform Admin",
+    "scenario": "Paket seluruhnya nonaktif memberi alasan dan pemulihan tanpa checkout",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T06:53:46.720Z",
+    "status": "FAIL",
+    "reason": "The input did not match the regular expression /Belum ada paket tersedia/. Input:\n\n'Perpanjang akses ClinicOS\\n' +\n  '\\n' +\n  'Mulai gratis, coba kapasitas Team selama 14 hari, atau pilih durasi paket berbayar.\\n' +\n  '\\n' +\n  'Riwayat pembayaran\\n' +\n  '\\n' +\n  'Harga adalah total pembayaran. Akses berbayar aktif hanya setelah notification DOKU terverifikasi.'\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": []
+  },
+  {
+    "id": "after-CCL-05",
+    "feature": "CCL-05",
+    "role": "Clinic Owner / Patient",
+    "scenario": "Jam berubah: booking baru di luar jam ditolak; histori tetap utuh",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:01:00.324Z",
+    "observed": {
+      "new_booking_rejected": true,
+      "historical_unchanged": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-CCL-03",
+    "feature": "CCL-03",
+    "role": "Receptionist",
+    "scenario": "Nomor bertitik disimpan dan ditemukan kembali; data lama tetap dikenali",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:01:12.401Z",
+    "status": "FAIL",
+    "reason": "page.waitForNavigation: Timeout 7000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"domcontentloaded\"\n============================================================",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [],
+    "superseded_by": "after-r2-CCL-03",
+    "harness_note": "Runner membaca kandidat sebelum pemeriksaan async terakhir selesai sehingga consent belum tersedia. Retest menunggu request yang memuat nomor tepat dan token review siap."
+  },
+  {
+    "id": "after-CCL-04",
+    "feature": "CCL-04",
+    "role": "Receptionist",
+    "scenario": "URL booking pasien nonaktif mempertahankan konteks dan jalur pemulihan",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:01:21.605Z",
+    "observed": {
+      "inactive_explained": true,
+      "no_new_patient_fallback": true,
+      "recovery_edit_link": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-CCL-06",
+    "feature": "CCL-06",
+    "role": "Platform Admin",
+    "scenario": "List tenant mencerminkan expiry tanpa mengubah periode dan pembayaran",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:01:26.077Z",
+    "observed": {
+      "effective_expired": true,
+      "periods_and_payments_unchanged": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-CCL-07",
+    "feature": "CCL-07",
+    "role": "Receptionist",
+    "scenario": "Socket refetch mempertahankan semua filter dan selection kursor",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:01:30.601Z",
+    "observed": {
+      "all_filter_values_retained": true,
+      "cursor_selection_retained": true,
+      "actual_socket_refetch": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-CCL-02",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "401 dari logout tab lain memberi pemulihan login dan menjaga draft",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:01:37.304Z",
+    "status": "FAIL",
+    "reason": "The input did not match the regular expression /Sesi berakhir/. Input:\n\n'Menyimpan…\\nData sedang dikirim.'\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": [],
+    "superseded_by": "after-r2-CCL-02",
+    "harness_note": "Retest sinkronisasi hasil request; kedua percobaan awal masih menjalankan editor pada tab background."
+  },
+  {
+    "id": "after-CCL-01-123456",
+    "feature": "CCL-01",
+    "role": "Clinic Admin",
+    "scenario": "Tarif 123456 dapat disimpan lewat form dan dibuka ulang",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:01:46.889Z",
+    "observed": {
+      "stored_price": "123456",
+      "reloaded": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-CCL-01-123_45",
+    "feature": "CCL-01",
+    "role": "Clinic Admin",
+    "scenario": "Tarif 123.45 dapat disimpan lewat form dan dibuka ulang",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:01:50.757Z",
+    "observed": {
+      "stored_price": "123.45",
+      "reloaded": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-CCL-08",
+    "feature": "CCL-08",
+    "role": "Clinic Owner / Platform Admin",
+    "scenario": "Paket seluruhnya nonaktif memberi alasan dan pemulihan tanpa checkout",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:01:53.426Z",
+    "observed": {
+      "empty_state_explained": true,
+      "reload_available": true,
+      "no_invalid_checkout": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-r2-CCL-03",
+    "feature": "CCL-03",
+    "role": "Receptionist",
+    "scenario": "Nomor bertitik disimpan dan ditemukan kembali; data lama tetap dikenali",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:03:24.326Z",
+    "observed": {
+      "stored_canonical": true,
+      "duplicate_candidate_found": true,
+      "legacy_recognized": false
+    },
+    "status": "PASS",
+    "evidence_note": "Legacy candidate assertion dieksekusi pada startsWith(after); flag legacy_recognized lama memakai pembandingan phase strict dan salah mencatat false. Bukti eksplisit tanpa flag ambigu: related-CCL-03-LEGACY."
+  },
+  {
+    "id": "after-r2-CCL-02",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "401 dari logout tab lain memberi pemulihan login dan menjaga draft",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:03:28.447Z",
+    "status": "FAIL",
+    "reason": "The input did not match the regular expression /Sesi berakhir/. Input:\n\n'Menyimpan…\\nData sedang dikirim.'\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": [],
+    "superseded_by": "after-r3-CCL-02",
+    "harness_note": "State client dan Alpine sudah expired, tetapi mutasi visual tab background tertunda. Retest mengaktifkan tab editor sebagaimana pengguna nyata sebelum mengetik dan menunggu state terlihat."
+  },
+  {
+    "id": "after-r3-CCL-02",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "401 dari logout tab lain memberi pemulihan login dan menjaga draft",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:05:49.924Z",
+    "observed": {
+      "real_http401": true,
+      "text_retained": true,
+      "login_recovery": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-CCL-05-Clinic-Admin",
+    "feature": "CCL-05",
+    "role": "Clinic Admin",
+    "scenario": "Booking staf di luar jam ditolak tanpa pasien/appointment tambahan",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:02.770Z",
+    "observed": {
+      "role": "Clinic Admin",
+      "new_booking_rejected": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-CCL-05-Receptionist",
+    "feature": "CCL-05",
+    "role": "Receptionist",
+    "scenario": "Booking staf di luar jam ditolak tanpa pasien/appointment tambahan",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:10.422Z",
+    "observed": {
+      "role": "Receptionist",
+      "new_booking_rejected": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-CCL-03-LEGACY",
+    "feature": "CCL-03",
+    "role": "Receptionist",
+    "scenario": "Pencarian kandidat mengenali nomor bertitik lama tanpa rewrite",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:18.928Z",
+    "observed": {
+      "legacy_lookup": true,
+      "old_phone_unchanged": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-CCL-03-PUBLIC-STORAGE",
+    "feature": "CCL-03",
+    "role": "Patient",
+    "scenario": "Booking lintas klinik akun global menyimpan nomor pasien baru secara canonical",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:23.500Z",
+    "observed": {
+      "public_booking_phone_canonical": true,
+      "no_automatic_identity_linking": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-CCL-04-REACTIVATE-STALE",
+    "feature": "CCL-04",
+    "role": "Receptionist",
+    "scenario": "Reaktivasi melalui UI memulihkan booking existing; tab lama ditolak setelah nonaktif ulang",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:25.632Z",
+    "status": "FAIL",
+    "reason": "The input did not match the regular expression /Pasien tidak ditemukan/. Input:\n\n'Pasien nonaktif\\n' +\n  '\\n' +\n  'Booking untuk pasien ini belum dapat dibuat. Aktifkan kembali melalui Edit pasien setelah identitas dikonfirmasi.\\n' +\n  '\\n' +\n  'Identitas pasien\\n' +\n  'NO. REKAM MEDIS\\n' +\n  'TEMP-ZOO8BORPJSFO8JFZOGF3\\n' +\n  'NIK\\n' +\n  '1757130090803862\\n' +\n  'TANGGAL LAHIR\\n' +\n  '06 August 1969\\n' +\n  'JENIS KELAMIN\\n' +\n  'Perempuan\\n' +\n  'TELEPON\\n' +\n  '081288880000\\n' +\n  'EMAIL\\n' +\n  '—\\n' +\n  'ALAMAT\\n' +\n  '417 Simone Port Apt. 924Port Helen, LA 18039\\n' +\n  'Riwayat kunjungan\\n' +\n  '\\n' +\n  'Data booking pasien di klinik ini.\\n' +\n  '\\n' +\n  'Belum ada riwayat kunjungan.'\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": [],
+    "superseded_by": "related-r2-CCL-04-REACTIVATE-STALE",
+    "harness_note": "Validasi POST mengarahkan kembali ke GET prefill; perbaikan baru mempertahankan konteks dengan redirect profil nonaktif. Expected retest memeriksa profil, alasan dan tidak adanya pasien baru."
+  },
+  {
+    "id": "related-CCL-06-EXACT-END-DASHBOARD",
+    "feature": "CCL-06",
+    "role": "Platform Admin",
+    "scenario": "Batas ends_at tepat dan angka dashboard memakai status efektif",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:32.981Z",
+    "observed": {
+      "exact_end_expired": true,
+      "dashboard_active_count": 9,
+      "history_unchanged": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-CCL-07-Clinic-Admin",
+    "feature": "CCL-07",
+    "role": "Clinic Admin",
+    "scenario": "Filter terpilih, input sesi dan kursor tetap utuh setelah socket refetch",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:37.379Z",
+    "observed": {
+      "role": "Clinic Admin",
+      "cursor_retained": true,
+      "selected_filter_retained": true,
+      "real_socket": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-CCL-07-Doctor",
+    "feature": "CCL-07",
+    "role": "Doctor",
+    "scenario": "Filter terpilih, input sesi dan kursor tetap utuh setelah socket refetch",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:43.342Z",
+    "observed": {
+      "role": "Doctor",
+      "cursor_retained": true,
+      "selected_filter_retained": true,
+      "real_socket": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-CCL-02-401-manual",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "manual HTTP401 menjaga teks/foto dan tidak melakukan write",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:48.341Z",
+    "observed": {
+      "http_status": 401,
+      "mode": "manual",
+      "text_retained": true,
+      "no_db_write": true,
+      "response_stubbed": false,
+      "compatibility_header_removed": false
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-CCL-02-419-autosave",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "autosave HTTP419 menjaga teks/foto dan tidak melakukan write",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:50.609Z",
+    "status": "FAIL",
+    "reason": "Expected values to be strictly equal:\n\n200 !== 419\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": [],
+    "superseded_by": "related-r2-CCL-02-419-autosave",
+    "harness_note": "Chrome memasok ulang Fetch Metadata walau header dihapus pada intercept, sehingga same-origin sah menghasilkan200. Retest menggunakan router QA yang meniru proxy tanpa Fetch Metadata untuk menjalankan validasi CSRF Laravel sesungguhnya."
+  },
+  {
+    "id": "related-CCL-02-419-manual",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "manual HTTP419 menjaga teks/foto dan tidak melakukan write",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:55.044Z",
+    "status": "FAIL",
+    "reason": "Expected values to be strictly equal:\n\n200 !== 419\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": [],
+    "superseded_by": "related-r2-CCL-02-419-manual",
+    "harness_note": "Asumsi sama-origin stale CSRF menghasilkan419 tidak berlaku pada Laravel13. Retest memakai compatibility proxy QA; tidak mengubah middleware produksi atau memalsukan response."
+  },
+  {
+    "id": "related-CCL-02-RECOVERY",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "Copy draft, login portal staf di tab baru, reload/paste/simpan berhasil",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:11:59.567Z",
+    "observed": {
+      "staff_login_link": true,
+      "draft_copy_retained": true,
+      "manual_recovery_saved": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-CCL-02-OFFLINE",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "Gangguan jaringan tetap retryable dan berbeda dari sesi berakhir",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:12:08.951Z",
+    "observed": {
+      "network_distinct": true,
+      "retry_succeeded": true,
+      "text_retained": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-r2-CCL-04-REACTIVATE-STALE",
+    "feature": "CCL-04",
+    "role": "Receptionist",
+    "scenario": "Reaktivasi melalui UI memulihkan booking existing; tab lama ditolak setelah nonaktif ulang",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:14:34.401Z",
+    "observed": {
+      "reactivation_ui": true,
+      "existing_patient_preserved": true,
+      "stale_inactive_rejected": true,
+      "no_new_patient": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-r2-CCL-02-419-autosave",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "autosave HTTP419 menjaga teks/foto dan tidak melakukan write",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:14:38.235Z",
+    "observed": {
+      "http_status": 419,
+      "mode": "autosave",
+      "text_retained": true,
+      "no_db_write": true,
+      "response_stubbed": false,
+      "compatibility_header_removed": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "related-r2-CCL-02-419-manual",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "manual HTTP419 menjaga teks/foto dan tidak melakukan write",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:14:44.078Z",
+    "observed": {
+      "http_status": 419,
+      "mode": "manual",
+      "text_retained": true,
+      "no_db_write": true,
+      "response_stubbed": false,
+      "compatibility_header_removed": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "boundary-CCL-01-BOUNDS-RESPONSIVE",
+    "feature": "CCL-01",
+    "role": "Clinic Admin",
+    "scenario": "Native range0..9999999999.99, keyboard focus dan4 viewport",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:17:09.816Z",
+    "observed": {
+      "viewports": [
+        375,
+        768,
+        1024,
+        1440
+      ],
+      "native_boundaries": true,
+      "label_focus": true
+    },
+    "status": "PASS",
+    "superseded_by": "boundary-ready-CCL-01-BOUNDS-RESPONSIVE",
+    "harness_note": "Bukti viewport diperketat: tunggu Alpine/navigation tertutup dan transisi selesai sebelum screenshot; screenshot mobile lama dapat menangkap flash drawer saat resize."
+  },
+  {
+    "id": "boundary-CCL-08-EMPTY-RESPONSIVE",
+    "feature": "CCL-08",
+    "role": "Clinic Owner / Platform Admin",
+    "scenario": "Empty state4 viewport dan keyboard reload; katalog pulih kembali",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:17:11.398Z",
+    "observed": {
+      "viewports": [
+        375,
+        768,
+        1024,
+        1440
+      ],
+      "keyboard_reload": true,
+      "no_invalid_checkout": true
+    },
+    "status": "PASS",
+    "superseded_by": "boundary-ready-CCL-08-EMPTY-RESPONSIVE",
+    "harness_note": "Bukti viewport diperketat: tunggu Alpine/navigation tertutup dan transisi selesai sebelum screenshot; screenshot mobile lama dapat menangkap flash drawer saat resize."
+  },
+  {
+    "id": "boundary-CCL-02-PENDING-PHOTO-401-autosave",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "Foto pending dan teks tetap utuh pada autosave HTTP401",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:17:15.001Z",
+    "observed": {
+      "real_http_status": 401,
+      "pending_photo_retained": true,
+      "text_retained": true,
+      "db_unchanged": true,
+      "mobile375": true,
+      "compatibility_proxy": false
+    },
+    "status": "PASS",
+    "superseded_by": "boundary-ready-CCL-02-PENDING-PHOTO-401-autosave",
+    "harness_note": "Bukti viewport diperketat: tunggu Alpine/navigation tertutup dan transisi selesai sebelum screenshot; screenshot mobile lama dapat menangkap flash drawer saat resize."
+  },
+  {
+    "id": "boundary-CCL-02-PENDING-PHOTO-401-manual",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "Foto pending dan teks tetap utuh pada manual HTTP401",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:17:17.797Z",
+    "observed": {
+      "real_http_status": 401,
+      "pending_photo_retained": true,
+      "text_retained": true,
+      "db_unchanged": true,
+      "mobile375": true,
+      "compatibility_proxy": false
+    },
+    "status": "PASS",
+    "superseded_by": "boundary-ready-CCL-02-PENDING-PHOTO-401-manual",
+    "harness_note": "Bukti viewport diperketat: tunggu Alpine/navigation tertutup dan transisi selesai sebelum screenshot; screenshot mobile lama dapat menangkap flash drawer saat resize."
+  },
+  {
+    "id": "boundary-CCL-02-PENDING-PHOTO-419-autosave",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "Foto pending dan teks tetap utuh pada autosave HTTP419",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:17:20.091Z",
+    "observed": {
+      "real_http_status": 419,
+      "pending_photo_retained": true,
+      "text_retained": true,
+      "db_unchanged": true,
+      "mobile375": true,
+      "compatibility_proxy": true
+    },
+    "status": "PASS",
+    "superseded_by": "boundary-ready-CCL-02-PENDING-PHOTO-419-autosave",
+    "harness_note": "Bukti viewport diperketat: tunggu Alpine/navigation tertutup dan transisi selesai sebelum screenshot; screenshot mobile lama dapat menangkap flash drawer saat resize."
+  },
+  {
+    "id": "boundary-CCL-02-PENDING-PHOTO-419-manual",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "Foto pending dan teks tetap utuh pada manual HTTP419",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:17:23.199Z",
+    "observed": {
+      "real_http_status": 419,
+      "pending_photo_retained": true,
+      "text_retained": true,
+      "db_unchanged": true,
+      "mobile375": true,
+      "compatibility_proxy": true
+    },
+    "status": "PASS",
+    "superseded_by": "boundary-ready-CCL-02-PENDING-PHOTO-419-manual",
+    "harness_note": "Bukti viewport diperketat: tunggu Alpine/navigation tertutup dan transisi selesai sebelum screenshot; screenshot mobile lama dapat menangkap flash drawer saat resize."
+  },
+  {
+    "id": "boundary-ready-CCL-01-BOUNDS-RESPONSIVE",
+    "feature": "CCL-01",
+    "role": "Clinic Admin",
+    "scenario": "Native range0..9999999999.99, keyboard focus dan4 viewport",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:27:02.590Z",
+    "status": "FAIL",
+    "reason": "page.waitForFunction: Timeout 7000ms exceeded.",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [],
+    "superseded_by": "boundary-final-CCL-01-BOUNDS-RESPONSIVE",
+    "harness_note": "Pada desktop Alpine menghilangkan atribut aria-hidden ketika false, bukan menulis string false. Retest menerima atribut absent dan tetap mensyaratkan drawer benar-benar di luar viewport pada mobile."
+  },
+  {
+    "id": "boundary-ready-CCL-08-EMPTY-RESPONSIVE",
+    "feature": "CCL-08",
+    "role": "Clinic Owner / Platform Admin",
+    "scenario": "Empty state4 viewport dan keyboard reload; katalog pulih kembali",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:27:12.028Z",
+    "status": "FAIL",
+    "reason": "page.waitForFunction: Timeout 7000ms exceeded.",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [],
+    "superseded_by": "boundary-final-CCL-08-EMPTY-RESPONSIVE",
+    "harness_note": "Pada desktop Alpine menghilangkan atribut aria-hidden ketika false, bukan menulis string false. Retest menerima atribut absent dan tetap mensyaratkan drawer benar-benar di luar viewport pada mobile."
+  },
+  {
+    "id": "boundary-ready-CCL-02-PENDING-PHOTO-401-autosave",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "Foto pending dan teks tetap utuh pada autosave HTTP401",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:27:27.989Z",
+    "observed": {
+      "real_http_status": 401,
+      "pending_photo_retained": true,
+      "text_retained": true,
+      "db_unchanged": true,
+      "mobile375": true,
+      "compatibility_proxy": false
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "boundary-ready-CCL-02-PENDING-PHOTO-401-manual",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "Foto pending dan teks tetap utuh pada manual HTTP401",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:27:33.516Z",
+    "observed": {
+      "real_http_status": 401,
+      "pending_photo_retained": true,
+      "text_retained": true,
+      "db_unchanged": true,
+      "mobile375": true,
+      "compatibility_proxy": false
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "boundary-ready-CCL-02-PENDING-PHOTO-419-autosave",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "Foto pending dan teks tetap utuh pada autosave HTTP419",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:27:39.576Z",
+    "observed": {
+      "real_http_status": 419,
+      "pending_photo_retained": true,
+      "text_retained": true,
+      "db_unchanged": true,
+      "mobile375": true,
+      "compatibility_proxy": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "boundary-ready-CCL-02-PENDING-PHOTO-419-manual",
+    "feature": "CCL-02",
+    "role": "Doctor",
+    "scenario": "Foto pending dan teks tetap utuh pada manual HTTP419",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:27:44.377Z",
+    "observed": {
+      "real_http_status": 419,
+      "pending_photo_retained": true,
+      "text_retained": true,
+      "db_unchanged": true,
+      "mobile375": true,
+      "compatibility_proxy": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "boundary-final-CCL-01-BOUNDS-RESPONSIVE",
+    "feature": "CCL-01",
+    "role": "Clinic Admin",
+    "scenario": "Native range0..9999999999.99, keyboard focus dan4 viewport",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:28:45.455Z",
+    "observed": {
+      "viewports": [
+        375,
+        768,
+        1024,
+        1440
+      ],
+      "native_boundaries": true,
+      "label_focus": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "boundary-final-CCL-08-EMPTY-RESPONSIVE",
+    "feature": "CCL-08",
+    "role": "Clinic Owner / Platform Admin",
+    "scenario": "Empty state4 viewport dan keyboard reload; katalog pulih kembali",
+    "steps": [
+      "Prasyarat dan aksi UI pada runner; DB hanya verifikasi",
+      "Bandingkan expected behavior dengan respons dan data tersimpan"
+    ],
+    "started": "2026-11-14T07:28:50.144Z",
+    "observed": {
+      "viewports": [
+        375,
+        768,
+        1024,
+        1440
+      ],
+      "keyboard_reload": true,
+      "no_invalid_checkout": true
+    },
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "checks": {
+    "source_and_test_baseline_files_unchanged": 439,
+    "historical_qa_reports_unchanged": 40,
+    "requested_markdown_documents": 11,
+    "local_report_links_checked": 316,
+    "broken_links": 0,
+    "canonical_gaps": 18,
+    "gap_acceptance_criteria_blocks": 18,
+    "capabilities": 72,
+    "active_browser_observations": 28,
+    "historical_harness_record_preserved": 1,
+    "pg18_submit_ui_reproduced": {
+      "intercepted_requests": 1,
+      "submitting": true,
+      "button_disabled": false,
+      "backend_request_blocked": true
+    },
+    "protected_dummy_tables": {
+      "patients": {
+        "rows": 35,
+        "identical_to_source_disposable_fixture": true
+      },
+      "subscription_periods": {
+        "rows": 12,
+        "identical_to_source_disposable_fixture": true
+      },
+      "addon_periods": {
+        "rows": 2,
+        "identical_to_source_disposable_fixture": true
+      },
+      "payments": {
+        "rows": 12,
+        "identical_to_source_disposable_fixture": true
+      },
+      "medical_records": {
+        "rows": 55,
+        "identical_to_source_disposable_fixture": true
+      },
+      "medical_record_revisions": {
+        "rows": 3,
+        "identical_to_source_disposable_fixture": true
+      },
+      "prescriptions": {
+        "rows": 11,
+        "identical_to_source_disposable_fixture": true
+      },
+      "prescription_items": {
+        "rows": 13,
+        "identical_to_source_disposable_fixture": true
+      },
+      "patient_allergies": {
+        "rows": 3,
+        "identical_to_source_disposable_fixture": true
+      },
+      "visits": {
+        "rows": 55,
+        "identical_to_source_disposable_fixture": true
+      },
+      "vital_signs": {
+        "rows": 14,
+        "identical_to_source_disposable_fixture": true
+      },
+      "diagnoses": {
+        "rows": 18,
+        "identical_to_source_disposable_fixture": true
+      },
+      "treatments": {
+        "rows": 19,
+        "identical_to_source_disposable_fixture": true
+      }
+    },
+    "dummy_appointments_added_ui22": 1,
+    "patient_ui22_activation_restored": true,
+    "git_status_outside_audit_unchanged": true
+  },
+  "functional_suite_rerun": false,
+  "user_database_opened": false,
+  "source_mutations": [],
+  "historical_report_mutations": [],
+  "note": "PASS describes audit-document/evidence integrity checks, not a functional suite, product completeness percentage, human validation or production readiness."
+}

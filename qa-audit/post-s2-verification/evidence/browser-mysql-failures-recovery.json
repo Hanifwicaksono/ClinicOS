@@ -1,0 +1,37 @@
+[
+  {
+    "id": "P-01",
+    "title": "Actual MySQL SELECT denial fails private authority closed and recovers without losing valid sockets",
+    "started": "2026-11-15T13:45:30.134Z",
+    "status": "FAIL",
+    "error": "Public positive control during DB privilege denial"
+  },
+  {
+    "id": "P-02",
+    "title": "Actual MySQL ACK UPDATE denial closes old transports but cannot manufacture ACK; restored privilege safely retries",
+    "started": "2026-11-15T13:45:54.715Z",
+    "status": "FAIL",
+    "error": "Control queue delivery missing: mysql-ack-write-failed"
+  },
+  {
+    "id": "P-03",
+    "title": "Worker restart preserves pending revocation and filters delayed notification jobs on MySQL",
+    "started": "2026-11-15T13:46:19.818Z",
+    "status": "FAIL",
+    "error": "Backlogged queue actual publication"
+  },
+  {
+    "id": "P-04",
+    "title": "Abrupt Reverb and worker restart with committed pending revocation closes old physical sockets and safely ACKs after recovery",
+    "started": "2026-11-15T13:46:43.353Z",
+    "status": "FAIL",
+    "error": "Authorized reconnect"
+  },
+  {
+    "id": "P-05",
+    "title": "Actual notification redelivery keeps one database notification and one client action per notification ID",
+    "started": "2026-11-15T13:47:10.308Z",
+    "status": "FAIL",
+    "error": "Queue drained"
+  }
+]

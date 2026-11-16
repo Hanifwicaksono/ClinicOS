@@ -1,0 +1,88 @@
+{
+  "at": "2026-11-13T09:26:28.578Z",
+  "findings": [
+    {
+      "id": "DFU-01",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-01"
+    },
+    {
+      "id": "DFU-12",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-12"
+    },
+    {
+      "id": "DFU-02",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-02"
+    },
+    {
+      "id": "DFU-11",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-11"
+    },
+    {
+      "id": "DFU-05",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-05"
+    },
+    {
+      "id": "DFU-06",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-06"
+    },
+    {
+      "id": "DFU-07",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-07"
+    },
+    {
+      "id": "DFU-08",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-08"
+    },
+    {
+      "id": "DFU-03",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-03"
+    },
+    {
+      "id": "DFU-04",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-04"
+    },
+    {
+      "id": "DFU-09",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-09"
+    },
+    {
+      "id": "DFU-10",
+      "status": "FIXED & VERIFIED",
+      "browser": "final-DFU-10"
+    }
+  ],
+  "backend": {
+    "tests": 378,
+    "passed": 378,
+    "result": "passed",
+    "assertions": 2572
+  },
+  "javascript": {
+    "tests": 10,
+    "passed": 10
+  },
+  "browser": {
+    "passed": 65,
+    "failed": 0,
+    "blocked": 0,
+    "not_tested": [
+      {
+        "id": "RME-DENTAL",
+        "reason": "Dijalankan pada fase add-on/dental, membutuhkan fixture entitlement dummy."
+      }
+    ]
+  },
+  "historical_browser_records": 97,
+  "current_browser_records": 66
+}

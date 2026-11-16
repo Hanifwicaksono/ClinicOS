@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {readFileSync,existsSync} from 'node:fs';
+import {join,resolve} from 'node:path';
+import {tmpdir} from 'node:os';
+import {spawn} from 'node:child_process';
+const repo=resolve(import.meta.dirname,'../../..');
+const runtime=JSON.parse(readFileSync(join(repo,'qa-audit/deep-functional-ux/evidence/runtime.json')));
+const root=resolve(runtime.root);assert.ok(root.toLowerCase().startsWith(resolve(tmpdir(),'clinicos-deep-').toLowerCase()));
+assert.ok(existsSync(runtime.database));
+const saved=JSON.parse(readFileSync(join(root,'env.json')));assert.equal(saved.DB_CONNECTION,'sqlite');assert.equal(resolve(saved.DB_DATABASE),resolve(runtime.database));
+const server=spawn('php',['-d','extension=pdo_sqlite','-d','extension=sqlite3','-d','extension=gd','-S','127.0.0.1:18961',join(root,'router.php')],{cwd:repo,env:{...process.env,...saved},stdio:['ignore','ignore','ignore'],windowsHide:true});
+process.on('SIGINT',()=>{server.kill();process.exit();});process.on('SIGTERM',()=>{server.kill();process.exit();});server.on('exit',code=>process.exit(code||0));
+console.log(JSON.stringify({disposable_runtime_resumed:true,pid:server.pid,database_reset:false}));

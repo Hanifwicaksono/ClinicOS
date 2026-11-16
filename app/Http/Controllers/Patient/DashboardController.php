@@ -27,6 +27,7 @@ class DashboardController extends Controller
                 'prescription.items:id,prescription_id,medicine_name,dosage,frequency,quantity,unit,instructions,sort_order',
                 'visit:id,clinic_id,completed_at',
                 'visit.clinic:id,name',
+                'visit.clinic.settings',
                 'doctor:id,user_id',
                 'doctor.user:id,name',
             ])

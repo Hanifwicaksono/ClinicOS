@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\F1ImplementationTest" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" tests="2" assertions="5" errors="0" failures="2" skipped="0" time="2.005328">
+    <testcase name="test_grant_form_renders_valid_binding_and_process_feedback" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="24" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="2" time="1.890784">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\F1ImplementationTest::test_grant_form_renders_valid_binding_and_process_feedback&#13;
+Failed asserting that '&lt;!DOCTYPE html&gt;\n
+&lt;html lang="en"&gt;\n
+    &lt;head&gt;\n
+        &lt;meta charset="utf-8"&gt;\n
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;\n
+        &lt;meta name="csrf-token" content="[redacted]"&gt;\n
+\n
+        &lt;title&gt;ClinicOS&lt;/title&gt;\n
+\n
+        &lt;link rel="preconnect" href="https://fonts.bunny.net"&gt;\n
+        &lt;link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;family=plus-jakarta-sans:600,700,800&amp;display=swap" rel="stylesheet" /&gt;\n
+\n
+        &lt;link rel="preload" as="style" href="http://localhost/build/assets/app-CD_dLgch.css" /&gt;&lt;link rel="modulepreload" as="script" href="http://localhost/build/assets/app-Cz1giBvO.js" /&gt;&lt;link rel="stylesheet" href="http://localhost/build/assets/app-CD_dLgch.css" data-navigate-track="reload" /&gt;&lt;script type="module" src="http://localhost/build/assets/app-Cz1giBvO.js" data-navigate-track="reload"&gt;&lt;/script&gt;    &lt;!-- Livewire Styles --&gt;&lt;style &gt;[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak="x-cloak"],[x-cloak=""] {display: none !important;}[wire\:cloak="wire:cloak"],[wire\:cloak=""] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}&lt;/style&gt;\n
+&lt;/head&gt;\n
+    &lt;body class="font-sans antialiased"&gt;\n
+                &lt;div class="min-h-screen"&gt;\n
+            &lt;div wire:snapshot="{&amp;quot;data&amp;quot;:[],&amp;quot;memo&amp;quot;:{&amp;quot;id&amp;quot;:&amp;quot;qUSD1FFdadeRrlMvAefC&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;layout.navigation&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;platform\/tenants\/1&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;release&amp;quot;:&amp;quot;a-a-a&amp;quot;,&amp;quot;children&amp;quot;:[],&amp;quot;scripts&amp;quot;:[],&amp;quot;assets&amp;quot;:[],&amp;quot;errors&amp;quot;:[],&amp;quot;locale&amp;quot;:&amp;quot;en&amp;quot;},&amp;quot;checksum&amp;quot;:&amp;quot;133b271091d10cd3d5761170c21f54c2c629773f189c5c7eca72ca87b2016ef5&amp;quot;}" wire:effects="[]" wire:id="qUSD1FFdadeRrlMvAefC" x-data="{\n
+    open: false,\n
+    desktop: window.matchMedia('(min-width: 1024px)').matches,\n
+    close() { this.open = false; this.$nextTick(() =&gt; this.$refs.trigger.focus()); },\n
+}" @keydown.escape.window="if (open) { $event.preventDefault(); close(); }"\n
+    @resize.window="desktop = window.matchMedia('(min-width: 1024px)').matches; if (desktop) open = false"\n
+    data-user-notification-channel="users.1"&gt;\n
+    &lt;div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden"&gt;\n
+        &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+            &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-9 w-9" /&gt;\n
+            &lt;span class="font-display text-lg font-extrabold text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/span&gt;\n
+        &lt;/a&gt;\n
+        &lt;button x-ref="trigger" type="button" @click="open = true" aria-controls="workspace-navigation" :aria-expanded="open.toString()" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi"&gt;\n
+            &lt;svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+        &lt;/button&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;div x-show="open" x-cloak @click="close()" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"&gt;&lt;/div&gt;\n
+\n
+    &lt;aside id="workspace-navigation" x-trap.inert.noscroll.noreturn="open &amp;&amp; !desktop" :inert="!open &amp;&amp; !desktop" :aria-hidden="!open &amp;&amp; !desktop" :role="desktop ? 'complementary' : 'dialog'" :aria-modal="open &amp;&amp; !desktop ? 'true' : null" aria-label="Navigasi utama" :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0"&gt;\n
+        &lt;div class="flex h-20 items-center justify-between border-b border-slate-100 px-6"&gt;\n
+            &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+                &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-11 w-11" /&gt;\n
+                &lt;div&gt;\n
+                    &lt;div class="font-display text-xl font-extrabold tracking-tight text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/div&gt;\n
+                    &lt;div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400"&gt;Clinic workspace&lt;/div&gt;\n
+                &lt;/div&gt;\n
+            &lt;/a&gt;\n
+            &lt;button type="button" @click="close()" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi"&gt;✕&lt;/button&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;div class="border-b border-slate-100 px-6 py-5"&gt;\n
+            &lt;p class="truncate text-sm font-bold text-slate-900"&gt;ClinicOS Platform&lt;/p&gt;\n
+                        &lt;p class="mt-1 text-xs text-slate-500"&gt;Platform Admin&lt;/p&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5"&gt;\n
+            \n
+            &lt;!--[if BLOCK]&gt;&lt;![endif]--&gt;                &lt;a href="http://localhost/platform/dashboard" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z"/&gt;&lt;/svg&gt;\n
+                    Dashboard\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/platform/tenants" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition bg-clinic-50 text-clinic-700"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-5 7v-3h4v3"/&gt;&lt;/svg&gt;\n
+                    Tenant klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/platform/subscription-plans" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 7h16M4 12h16M4 17h10"/&gt;&lt;/svg&gt;\n
+                    Paket &amp;amp; harga\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/platform/payments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 6h18M3 10h18M7 15h4"/&gt;&lt;/svg&gt;\n
+                    Pembayaran\n
+                &lt;/a&gt;\n
+            &lt;!--[if ENDBLOCK]&gt;&lt;![endif]--&gt;\n
+            &lt;a href="http://localhost/notifications" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/&gt;&lt;/svg&gt;\n
+                &lt;span class="flex-1"&gt;Notifikasi&lt;/span&gt;\n
+                &lt;span data-notification-count class="rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white hidden"&gt;0&lt;/span&gt;\n
+            &lt;/a&gt;\n
+        &lt;/nav&gt;\n
+\n
+        &lt;div class="border-t border-slate-100 p-4"&gt;\n
+            &lt;a href="http://localhost/profile" wire:navigate class="mb-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"&gt;\n
+                &lt;span class="flex h-9 w-9 items-center justify-center rounded-full bg-clinic-100 font-bold text-clinic-700"&gt;M&lt;/span&gt;\n
+                &lt;span class="min-w-0 flex-1"&gt;&lt;span class="block truncate text-slate-900"&gt;Maximo Bashirian&lt;/span&gt;&lt;span class="block truncate text-xs font-normal text-slate-500"&gt;malinda.vonrueden@example.net&lt;/span&gt;&lt;/span&gt;\n
+            &lt;/a&gt;\n
+            &lt;button wire:click="logout" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-500 hover:bg-red-50 hover:text-red-600"&gt;\n
+                &lt;svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M10 17l5-5-5-5M15 12H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/&gt;&lt;/svg&gt;\n
+                Keluar\n
+            &lt;/button&gt;\n
+        &lt;/div&gt;\n
+    &lt;/aside&gt;\n
+\n
+    &lt;div class="h-16 lg:hidden"&gt;&lt;/div&gt;\n
+&lt;/div&gt;\n
+            &lt;div class="lg:pl-72"&gt;\n
+                                    &lt;header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0"&gt;\n
+                        &lt;div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10"&gt;\n
+                            &lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600"&gt;Tenant&lt;/p&gt;&lt;h1 class="mt-1 text-xl font-extrabold text-clinic-950"&gt;Watsica Ltd Clinic&lt;/h1&gt;&lt;/div&gt;\n
+                        &lt;/div&gt;\n
+                    &lt;/header&gt;\n
+                \n
+                &lt;main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10"&gt;\n
+                    \n
+                    \n
+                    \n
+                                        &lt;div class="grid gap-6 xl:grid-cols-[1.2fr_1fr]"&gt;\n
+        &lt;section class="clinic-card p-6"&gt;&lt;h2 class="font-bold text-clinic-950"&gt;Profil nonmedis&lt;/h2&gt;&lt;dl class="mt-5 grid gap-4 text-sm sm:grid-cols-2"&gt;&lt;div&gt;&lt;dt class="text-slate-400"&gt;Slug&lt;/dt&gt;&lt;dd class="mt-1 font-semibold text-slate-800"&gt;quia-corrupti-voluptatem-est-deserunt-adipisci&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt class="text-slate-400"&gt;Status&lt;/dt&gt;&lt;dd class="mt-1 font-semibold text-slate-800"&gt;Aktif&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt class="text-slate-400"&gt;Email klinik&lt;/dt&gt;&lt;dd class="mt-1 font-semibold text-slate-800"&gt;anya.marquardt@gusikowski.com&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt class="text-slate-400"&gt;Telepon&lt;/dt&gt;&lt;dd class="mt-1 font-semibold text-slate-800"&gt;+16574696973&lt;/dd&gt;&lt;/div&gt;&lt;div class="sm:col-span-2"&gt;&lt;dt class="text-slate-400"&gt;Alamat&lt;/dt&gt;&lt;dd class="mt-1 font-semibold text-slate-800"&gt;514 Wisoky Ridge\n
+Hoppeport, WY 48603-1761&lt;/dd&gt;&lt;/div&gt;&lt;/dl&gt;&lt;/section&gt;\n
+\n
+        &lt;section class="clinic-card p-6"&gt;&lt;h2 class="font-bold text-clinic-950"&gt;Owner&lt;/h2&gt;&lt;p class="mt-5 font-semibold text-slate-900"&gt;Belum dipetakan&lt;/p&gt;&lt;p class="mt-1 text-sm text-slate-500"&gt;&lt;/p&gt;&lt;/section&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;section class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"&gt;&lt;article class="clinic-card p-5"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Dokter&lt;/p&gt;&lt;p class="mt-4 font-display text-3xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/article&gt;&lt;article class="clinic-card p-5"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Akun tenant&lt;/p&gt;&lt;p class="mt-4 font-display text-3xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/article&gt;&lt;article class="clinic-card p-5"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Pasien&lt;/p&gt;&lt;p class="mt-4 font-display text-3xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/article&gt;&lt;article class="clinic-card p-5"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Booking&lt;/p&gt;&lt;p class="mt-4 font-display text-3xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/article&gt;&lt;/section&gt;\n
+\n
+    &lt;div class="mt-6 grid gap-6 xl:grid-cols-[1fr_1.2fr]"&gt;\n
+        &lt;section class="clinic-card p-6"&gt;&lt;h2 class="font-bold text-clinic-950"&gt;Subscription saat ini&lt;/h2&gt;&lt;p class="mt-4 text-sm text-slate-500"&gt;Belum ada subscription.&lt;/p&gt;&lt;/section&gt;\n
+\n
+        &lt;section class="clinic-card p-6"&gt;\n
+            &lt;h2 class="font-bold text-clinic-950"&gt;Grant manual&lt;/h2&gt;\n
+            &lt;p class="mt-2 text-sm text-slate-500"&gt;Paket setara atau lebih tinggi dijadwalkan setelah periode aktif. Downgrade ke paket lebih rendah berlaku langsung; periode aktif dan terjadwal dihentikan. Invoice tetap tersimpan dan refund tidak otomatis.&lt;/p&gt;\n
+            &lt;form method="POST" action="http://localhost/platform/tenants/1/subscription-grants" class="mt-5 space-y-4" x-data="{ submitting: false }" @submit="submitting = true"&gt;\n
+                &lt;input type="hidden" name="_token" value="[redacted]" autocomplete="off"&gt;                &lt;input type="hidden" name="grant_request_id" value="7da98cf2-6c3d-44f7-9b88-0915ce790dcb"&gt;\n
+                                &lt;div&gt;&lt;label class="clinic-label" for="subscription_price_id"&gt;Paket dan durasi&lt;/label&gt;&lt;select id="subscription_price_id" name="subscription_price_id" class="clinic-input" required&gt;&lt;option value=""&gt;Pilih paket&lt;/option&gt;&lt;option value="1" &gt;Individual · 1 bulan · Rp 149.000&lt;/option&gt;&lt;option value="2" &gt;Individual · 6 bulan · Rp 799.000&lt;/option&gt;&lt;option value="3" &gt;Individual · 12 bulan · Rp 1.399.000&lt;/option&gt;&lt;option value="4" &gt;Team · 1 bulan · Rp 499.000&lt;/option&gt;&lt;option value="5" &gt;Team · 6 bulan · Rp 2.699.000&lt;/option&gt;&lt;option value="6" &gt;Team · 12 bulan · Rp 4.999.000&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;\n
+                &lt;div&gt;&lt;label class="clinic-label" for="reason"&gt;Alasan grant&lt;/label&gt;&lt;textarea id="reason" name="reason" class="clinic-input min-h-24" maxlength="1000" required&gt;&lt;/textarea&gt;&lt;/div&gt;\n
+                &lt;button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 bg-clinic-500 text-white hover:bg-clinic-600" x-bind:disabled="submitting || @js($subscriptionPrices-&gt;isEmpty())"&gt;\n
+        Berikan akses\n
+    &lt;/button&gt;\n
+            &lt;/form&gt;\n
+        &lt;/section&gt;\n
+    &lt;/div&gt;\n
+                &lt;/main&gt;\n
+            &lt;/div&gt;\n
+        &lt;/div&gt;\n
+    &lt;script src="/livewire/livewire.min.js?id=dfa5f5ee"   data-csrf="[redacted]" data-update-uri="/livewire/update" data-navigate-once="true"&gt;&lt;/script&gt;\n
+&lt;/body&gt;\n
+&lt;/html&gt;\n
+' [UTF-8](length: 15445) does not contain "@js(" [ASCII](length: 4).
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:812
+C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php:29</failure>
+    </testcase>
+    <testcase name="test_duplicate_candidates_after_the_first_eight_are_reachable" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="32" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="3" time="0.114544">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\F1ImplementationTest::test_duplicate_candidates_after_the_first_eight_are_reachable&#13;
+Failed asserting that an array has the key 'next_cursor'.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\AssertableJsonString.php:318
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:1046
+C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php:38</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

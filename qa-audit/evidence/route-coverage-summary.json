@@ -1,0 +1,10 @@
+﻿{
+    "routesWithNonErrorResponse":  104,
+    "registry":  117,
+    "applicationRoutes":  107,
+    "applicationExecutionPercent":  100,
+    "routesObserved":  108,
+    "routeExecutionPercent":  92.31,
+    "applicationRoutesObserved":  107,
+    "requestCount":  699
+}

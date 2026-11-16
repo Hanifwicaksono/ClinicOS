@@ -1,0 +1,10 @@
+{
+  "mode": "php",
+  "status": 1,
+  "error": null,
+  "command": "phpunit",
+  "args": [
+    "tests/Feature/F1ImplementationTest.php"
+  ],
+  "finished": "2026-11-15T04:38:52.098Z"
+}

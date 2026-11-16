@@ -1,0 +1,11 @@
+{
+  "phase": "8-cross-feature-human-state",
+  "at": "2026-11-13T07:44:29.345Z",
+  "counts": {
+    "PASS": 81,
+    "FAIL": 39,
+    "BLOCKED": 9,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

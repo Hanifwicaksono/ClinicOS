@@ -1,0 +1,27 @@
+[
+  {
+    "id": "PG-18-before",
+    "status": "FAIL",
+    "root_reproduced": true,
+    "errors": [
+      "Invalid or unexpected token"
+    ],
+    "raw_binding": "submitting || @js($subscriptionPrices->isEmpty())",
+    "observed": {
+      "submitting": true,
+      "disabled": false
+    },
+    "requests": 1,
+    "request_blocked_before_backend": true,
+    "screenshot": "screenshots/F1A-before.png"
+  },
+  {
+    "id": "PG-17-before",
+    "status": "FAIL",
+    "root_reproduced": true,
+    "visible": 8,
+    "fixture_matches": 10,
+    "pagination_controls": 0,
+    "screenshot": "screenshots/F1B-before.png"
+  }
+]

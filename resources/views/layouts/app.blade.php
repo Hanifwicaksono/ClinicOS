@@ -13,6 +13,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+        @php
+            $validationMessages = session('errors')?->all() ?? $errors->all();
+        @endphp
         <div class="min-h-screen">
             <livewire:layout.navigation />
 
@@ -77,6 +80,11 @@
                         </div>
                     @endif
 
+                    <x-validation-errors :messages="$validationMessages" />
+                    <div data-realtime-access-feedback hidden class="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950" role="status" aria-live="polite">
+                        <p data-realtime-access-message></p>
+                        <button type="button" data-realtime-access-retry class="mt-2 font-bold underline">Periksa akses realtime lagi</button>
+                    </div>
                     {{ $slot }}
                 </main>
             </div>

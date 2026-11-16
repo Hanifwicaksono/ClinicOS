@@ -1,0 +1,578 @@
+[
+  [
+    "CAP-01",
+    "Autentikasi email/password, pemisahan pintu staf/pasien",
+    "COMPLETE",
+    "Login/logout, verifikasi dan reset tersedia; lifecycle lokal sudah dibuktikan. Tidak berarti provider email eksternal tersertifikasi.",
+    "[routes/web.php:1](../../routes/web.php#L1); [Lifecycle historis](../STAFF_LIFECYCLE_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-02",
+    "Registrasi Patient dan onboarding owner",
+    "COMPLETE",
+    "Akun publik Patient, owner eksplisit dan satu klinik/owner; bukan role Owner baru.",
+    "[app/Services/ClinicRegistrationService.php:1](../../app/Services/ClinicRegistrationService.php#L1); [database/seeders/RoleAndPermissionSeeder.php:1](../../database/seeders/RoleAndPermissionSeeder.php#L1)",
+    "—"
+  ],
+  [
+    "CAP-03",
+    "Google OAuth eksternal",
+    "NOT VERIFIED",
+    "Source callback tersedia; belum ada bukti end-to-end akun dummy provider yang diotorisasi.",
+    "[routes/web.php:1](../../routes/web.php#L1); [Gap provider](../deep-functional-ux/REMAINING_GAPS.md)",
+    "—"
+  ],
+  [
+    "CAP-04",
+    "Lima role, policy dan tenant-scoped akses HTTP",
+    "COMPLETE",
+    "Policy/resource authorization tersedia, audit akses historis; tidak mengklaim socket lama otomatis dicabut.",
+    "[database/seeders/RoleAndPermissionSeeder.php:1](../../database/seeders/RoleAndPermissionSeeder.php#L1); [Role/permissions aktual](evidence/roles-permissions.json)",
+    "—"
+  ],
+  [
+    "CAP-05",
+    "Revokasi socket aktif",
+    "PARTIAL",
+    "PR-01 OPEN terpisah: HTTP revoked tetapi socket lama menerima event nonmedis; tidak diperbaiki audit ini.",
+    "[routes/channels.php:1](../../routes/channels.php#L1); [PR-01](../production-readiness/NEW_FINDINGS.md)",
+    "PR-01 (risiko, bukan gap baru)"
+  ],
+  [
+    "CAP-06",
+    "Delegasi admin dan invitation staf",
+    "PARTIAL",
+    "Doctor/Receptionist dapat dibuat dengan password awal; reset/verification ada, invitation/delegated admin belum.",
+    "[app/Http/Controllers/Admin/StaffController.php:31](../../app/Http/Controllers/Admin/StaffController.php#L31); [UI-20](evidence/screenshots/UI-20.png)",
+    "PG-15"
+  ],
+  [
+    "CAP-07",
+    "Profil akun dan deaktivasi staf",
+    "COMPLETE",
+    "Edit profil/reset/password, status staf, invalidasi sesi HTTP tersedia. Owner self-delete dibatasi sesuai relasi.",
+    "[app/Services/StaffAccountService.php:1](../../app/Services/StaffAccountService.php#L1); [Lifecycle](../STAFF_LIFECYCLE_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-08",
+    "Custom permission editor",
+    "PRODUCT DECISION REQUIRED",
+    "Spatie dan permission seeder bukan UI manajemen role custom. Belum ada kebutuhan delegasi granular yang divalidasi.",
+    "[database/seeders/RoleAndPermissionSeeder.php:1](../../database/seeders/RoleAndPermissionSeeder.php#L1); [routes/web.php:1](../../routes/web.php#L1)",
+    "D-17"
+  ],
+  [
+    "CAP-09",
+    "Profil, logo dan status aktif klinik",
+    "COMPLETE",
+    "Owner/Admin dapat edit profil dan is_active; logo public, foto medis tetap private.",
+    "[app/Http/Requests/UpdateClinicRequest.php:39](../../app/Http/Requests/UpdateClinicRequest.php#L39); [UI-12](evidence/screenshots/UI-12.png)",
+    "—"
+  ],
+  [
+    "CAP-10",
+    "Timezone klinik dan jam operasional dasar",
+    "COMPLETE",
+    "Setting waktu dan tampilan timezone telah diperbaiki DFU/CCL; booking baru memakai jam yang berlaku.",
+    "[app/Http/Requests/UpdateClinicRequest.php:39](../../app/Http/Requests/UpdateClinicRequest.php#L39); [app/Services/BookingService.php:35](../../app/Services/BookingService.php#L35); [Fix terkini](../deep-functional-ux/CCL_FIX_REGRESSION_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-11",
+    "Libur, cuti, jam khusus berbasis tanggal",
+    "PARTIAL",
+    "Ada jadwal mingguan/aktivasi; tidak ada kalender exception dan impact preview.",
+    "[app/Models/DoctorSchedule.php:6](../../app/Models/DoctorSchedule.php#L6); [UI-13](evidence/screenshots/UI-13.png)",
+    "PG-02"
+  ],
+  [
+    "CAP-12",
+    "Layanan, harga dan asosiasi dokter",
+    "COMPLETE",
+    "CRUD aktif/nonaktif dan validasi nominal FE/BE CCL-01, layanan dokter tersedia.",
+    "[app/Http/Controllers/Admin/ServiceController.php:1](../../app/Http/Controllers/Admin/ServiceController.php#L1); [app/Http/Controllers/Admin/StaffController.php:1](../../app/Http/Controllers/Admin/StaffController.php#L1)",
+    "—"
+  ],
+  [
+    "CAP-13",
+    "Jadwal mingguan, kuota dan benturan sesi",
+    "COMPLETE",
+    "DoctorSchedule, validasi hari dan sesi serta kuota booking tersedia; pengecualian tanggal terpisah.",
+    "[app/Models/DoctorSchedule.php:6](../../app/Models/DoctorSchedule.php#L6); [app/Services/BookingService.php:35](../../app/Services/BookingService.php#L35)",
+    "—"
+  ],
+  [
+    "CAP-14",
+    "Pendaftaran pasien, telepon dan kandidat duplikat",
+    "COMPLETE",
+    "Validasi/normalisasi pencarian-simpan terkini; matching bersifat kandidat bukan account linking otomatis.",
+    "[app/Services/BookingService.php:232](../../app/Services/BookingService.php#L232); [app/Services/PatientDuplicateService.php:42](../../app/Services/PatientDuplicateService.php#L42); [CCL](../deep-functional-ux/CCL_FIX_REGRESSION_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-15",
+    "Daftar kandidat duplikat lengkap",
+    "PARTIAL",
+    "Panel dibatasi delapan hasil tanpa jalur lanjutan yang jelas; UI-18 memakai sepuluh fixture.",
+    "[app/Services/PatientDuplicateService.php:42](../../app/Services/PatientDuplicateService.php#L42); [UI-18](evidence/screenshots/UI-18.png)",
+    "PG-17"
+  ],
+  [
+    "CAP-16",
+    "Kebijakan patient nonaktif lintas kanal",
+    "PRODUCT DECISION REQUIRED",
+    "Staf ditolak, pasien sendiri dapat booking profil nonaktif yang sama. Arti status belum diseragamkan.",
+    "[app/Services/BookingService.php:232](../../app/Services/BookingService.php#L232); [UI-22](evidence/screenshots/UI-22.png)",
+    "PG-06"
+  ],
+  [
+    "CAP-17",
+    "Booking online guest, Patient, staf/walk-in",
+    "COMPLETE",
+    "Workflow transactional sama, clinic/doctor/service/schedule validation dan snapshot; walk-in adalah booking oleh staf lalu check-in.",
+    "[app/Services/BookingService.php:35](../../app/Services/BookingService.php#L35); [UI-07](evidence/screenshots/UI-07.png); [UI-21-R2](evidence/screenshots/UI-21-R2.png)",
+    "—"
+  ],
+  [
+    "CAP-18",
+    "Jalur booking dari portal Patient",
+    "COMPLETE",
+    "CTA booking baru, klinik terkait dan clinic_code tersedia; tidak mensyaratkan hafal URL.",
+    "[app/Http/Controllers/Patient/AppointmentController.php:1](../../app/Http/Controllers/Patient/AppointmentController.php#L1); [UI-11](evidence/screenshots/UI-11.png)",
+    "—"
+  ],
+  [
+    "CAP-19",
+    "Status booking rahasia dan akses milik Patient",
+    "COMPLETE",
+    "Guest token hash dan policy appointment; tidak menampilkan token pada laporan ini.",
+    "[routes/web.php:1](../../routes/web.php#L1); [DFU fix](../deep-functional-ux/FIX_REGRESSION_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-20",
+    "Pencegahan replay/booking ganda dan kuota",
+    "COMPLETE",
+    "UUID/locks/constraint/idempotency backend tersedia dan bukti historis; bukan pengujian concurrency MySQL baru.",
+    "[app/Services/BookingService.php:35](../../app/Services/BookingService.php#L35); [Batas bukti](../deep-functional-ux/CCL_FIX_REGRESSION_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-21",
+    "Cancel/no-show sebelum visit dan histori",
+    "COMPLETE",
+    "Status/alasan diatur domain; cancel after start ditolak untuk integritas.",
+    "[app/Services/QueueWorkflowService.php:85](../../app/Services/QueueWorkflowService.php#L85); [DFU-01](../deep-functional-ux/FIX_REGRESSION_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-22",
+    "Reschedule, salah dokter/layanan dan reassignment",
+    "PARTIAL",
+    "Cancel + booking baru tersedia sebagai tindakan terpisah; tidak ada perubahan terpandu atau hubungan pengganti.",
+    "[UI-07](evidence/screenshots/UI-07.png); [app/Services/BookingService.php:35](../../app/Services/BookingService.php#L35)",
+    "PG-01"
+  ],
+  [
+    "CAP-23",
+    "Check-in, FIFO panggil, skip dan return",
+    "COMPLETE",
+    "Transisi BOOKED/WAITING/CALLED, skip-return dan satu aktif per sesi tersedia.",
+    "[app/Services/QueueWorkflowService.php:1](../../app/Services/QueueWorkflowService.php#L1); [UI-08](evidence/screenshots/UI-08.png)",
+    "—"
+  ],
+  [
+    "CAP-24",
+    "Display publik antrean nonmedis",
+    "COMPLETE",
+    "Public queue-board menampilkan nomor/status tanpa identitas/isi medis.",
+    "[app/Http/Controllers/PublicQueueController.php:1](../../app/Http/Controllers/PublicQueueController.php#L1); [Bukti historis](../deep-functional-ux/FINAL_COVERAGE_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-25",
+    "ETA dan informasi stale/confidence",
+    "COMPLETE",
+    "QueueEtaService terhubung dan historis diuji; bukan janji waktu tunggu pasti.",
+    "[app/Services/QueueEtaService.php:1](../../app/Services/QueueEtaService.php#L1); [Coverage ETA](../deep-functional-ux/COVERAGE_CLOSURE_MATRIX.md)",
+    "—"
+  ],
+  [
+    "CAP-26",
+    "Kiosk/filter khusus display",
+    "PRODUCT DECISION REQUIRED",
+    "Display ada; tidak ada kontrol kiosk khusus. Kebutuhan perangkat/filter belum terbukti wajib.",
+    "[routes/web.php:1](../../routes/web.php#L1); [G29](../deep-functional-ux/REMAINING_GAPS.md)",
+    "D-18"
+  ],
+  [
+    "CAP-27",
+    "Realtime, refetch dan polling recovery",
+    "COMPLETE",
+    "Alur tersedia dan recovery sebelumnya dibuktikan; filter/cursor CCL-07 tetap dipertahankan; PR-01 terpisah.",
+    "[resources/js/realtime.js:1](../../resources/js/realtime.js#L1); [CCL](../deep-functional-ux/CCL_FIX_REGRESSION_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-28",
+    "Start/resume dan finalisasi visit atomik",
+    "COMPLETE",
+    "Visit dibuat saat dokter start dari CALLED; draft/final appointment/queue bersama.",
+    "[app/Services/VisitWorkflowService.php:135](../../app/Services/VisitWorkflowService.php#L135); [UI-09](evidence/screenshots/UI-09.png)",
+    "—"
+  ],
+  [
+    "CAP-29",
+    "Abort/interrupted/handover visit",
+    "PRODUCT DECISION REQUIRED",
+    "Hanya IN_PROGRESS/COMPLETED; tak ada transisi recovery selain resume/complete sah.",
+    "[app/VisitStatus.php:5](../../app/VisitStatus.php#L5); [UI-09](evidence/screenshots/UI-09.png)",
+    "PG-03"
+  ],
+  [
+    "CAP-30",
+    "SOAP, delapan vital, diagnosis/tindakan terstruktur",
+    "COMPLETE",
+    "Editor dan persistence backend tersedia; catatan lama yang menyebut array tidak ada sudah usang.",
+    "[resources/views/doctor/visits/show.blade.php:1](../../resources/views/doctor/visits/show.blade.php#L1); [app/Services/VisitWorkflowService.php:135](../../app/Services/VisitWorkflowService.php#L135)",
+    "—"
+  ],
+  [
+    "CAP-31",
+    "Autosave nyata dan optimistic conflict",
+    "COMPLETE",
+    "Debounce, endpoint, lock_version/allergy_version dan conflict/retry tersedia, bukan hanya status visual.",
+    "[resources/views/doctor/visits/show.blade.php:1](../../resources/views/doctor/visits/show.blade.php#L1); [resources/js/rme-autosave.js:1](../../resources/js/rme-autosave.js#L1); [CCL](../deep-functional-ux/CCL_FIX_REGRESSION_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-32",
+    "Recovery editor offline / 401 / 419",
+    "COMPLETE",
+    "Pesan expired vs koneksi, teks/file pending bertahan sebelum reload; login tab baru + copy/reload/paste manual. Tidak menjanjikan file bertahan melewati reload.",
+    "[resources/js/rme-autosave.js:1](../../resources/js/rme-autosave.js#L1); [Bukti 401/419](../deep-functional-ux/CCL_FIX_REGRESSION_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-33",
+    "Alergi persisten, severity dan banner kritis",
+    "COMPLETE",
+    "PatientAllergy nyata, append-only dan aktor tersedia; bukan array kosong.",
+    "[app/Services/VisitWorkflowService.php:392](../../app/Services/VisitWorkflowService.php#L392); [app/Models/PatientAllergy.php:1](../../app/Models/PatientAllergy.php#L1)",
+    "—"
+  ],
+  [
+    "CAP-34",
+    "Resolusi versi alergi antar-editor",
+    "PRODUCT DECISION REQUIRED",
+    "Append-only mempertahankan kedua input, current lineage belum diputuskan.",
+    "[app/Services/VisitWorkflowService.php:392](../../app/Services/VisitWorkflowService.php#L392); [G38/Gaps](../deep-functional-ux/REMAINING_GAPS.md)",
+    "PG-13"
+  ],
+  [
+    "CAP-35",
+    "Resep terstruktur dan preview final",
+    "COMPLETE",
+    "Item dosis/frekuensi/quantity/instruksi tersimpan; Patient hanya resep final miliknya.",
+    "[resources/views/doctor/visits/show.blade.php:1](../../resources/views/doctor/visits/show.blade.php#L1); [app/Http/Controllers/Patient/DashboardController.php:17](../../app/Http/Controllers/Patient/DashboardController.php#L17); [UI-10](evidence/screenshots/UI-10.png)",
+    "—"
+  ],
+  [
+    "CAP-36",
+    "Foto klinis private dan authorization",
+    "COMPLETE",
+    "Upload, storage private dan endpoint ber-policy tersedia, bukti browser historis.",
+    "[app/Http/Controllers/Doctor/VisitController.php:99](../../app/Http/Controllers/Doctor/VisitController.php#L99); [Integrasi](../production-readiness/INTEGRATION_TEST_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-37",
+    "Odontogram persistent + entitlement",
+    "COMPLETE",
+    "32 gigi/6 kondisi tersimpan; paid dummy sah historis, expired read-only dan akses dokter; 192 cell historis PASS bukan run baru.",
+    "[resources/views/doctor/visits/show.blade.php:1](../../resources/views/doctor/visits/show.blade.php#L1); [app/Services/AddonService.php:1](../../app/Services/AddonService.php#L1); [Coverage dental](../deep-functional-ux/FINAL_COVERAGE_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-38",
+    "Koreksi RME final dan audit revisi",
+    "COMPLETE",
+    "Alasan minimal 10, snapshot before/after, actor/time dan status tetap final.",
+    "[app/Services/VisitWorkflowService.php:135](../../app/Services/VisitWorkflowService.php#L135); [app/Models/MedicalRecordRevision.php:1](../../app/Models/MedicalRecordRevision.php#L1); [UI-10](evidence/screenshots/UI-10.png)",
+    "—"
+  ],
+  [
+    "CAP-39",
+    "Riwayat medis sesuai dokter yang diotorisasi",
+    "COMPLETE",
+    "Panel recent visit terbatas, daftar RME paginated/search tersedia; batas assigned doctor disengaja, bukan admin medical bypass.",
+    "[app/Http/Controllers/Doctor/MedicalRecordController.php:1](../../app/Http/Controllers/Doctor/MedicalRecordController.php#L1); [app/Policies/MedicalRecordPolicy.php:1](../../app/Policies/MedicalRecordPolicy.php#L1)",
+    "—"
+  ],
+  [
+    "CAP-40",
+    "Riwayat appointment dan resep Patient",
+    "COMPLETE",
+    "Patient mempunyai booking/history dan resep final; ini tidak memberi full SOAP otomatis.",
+    "[app/Http/Controllers/Patient/AppointmentController.php:1](../../app/Http/Controllers/Patient/AppointmentController.php#L1); [app/Http/Controllers/Patient/DashboardController.php:17](../../app/Http/Controllers/Patient/DashboardController.php#L17); [UI-05](evidence/screenshots/UI-05.png)",
+    "—"
+  ],
+  [
+    "CAP-41",
+    "Follow-up terstruktur dan booking berikutnya terkait",
+    "PARTIAL",
+    "Plan teks dan booking baru terpisah; tidak ada closed-loop task.",
+    "[resources/views/doctor/visits/show.blade.php:1](../../resources/views/doctor/visits/show.blade.php#L1); [UI-10](evidence/screenshots/UI-10.png); [UI-11](evidence/screenshots/UI-11.png)",
+    "PG-04"
+  ],
+  [
+    "CAP-42",
+    "Dokumen klinis printable/download yang disetujui",
+    "PARTIAL",
+    "Resep preview tersedia; format penerbitan/print/export dan kontrak penerima belum ada.",
+    "[routes/web.php:1](../../routes/web.php#L1); [app/Http/Controllers/Patient/DashboardController.php:17](../../app/Http/Controllers/Patient/DashboardController.php#L17)",
+    "PG-07"
+  ],
+  [
+    "CAP-43",
+    "Billing/receipt pembayaran layanan pasien",
+    "MISSING",
+    "Tidak ada model/tabel/route kasir pasien. Payment adalah SaaS.",
+    "[app/Http/Controllers/Admin/DashboardController.php:81](../../app/Http/Controllers/Admin/DashboardController.php#L81); [Schema](evidence/schema.json)",
+    "PG-05"
+  ],
+  [
+    "CAP-44",
+    "Dashboard Owner dan Clinic Admin",
+    "COMPLETE",
+    "Metrik operasional, filter periode, shortcut dan service value tersedia; tidak mengklaim cash.",
+    "[app/Http/Controllers/Admin/DashboardController.php:81](../../app/Http/Controllers/Admin/DashboardController.php#L81); [UI-01](evidence/screenshots/UI-01.png); [UI-02](evidence/screenshots/UI-02.png)",
+    "—"
+  ],
+  [
+    "CAP-45",
+    "Dashboard Receptionist / Doctor / Patient / Platform",
+    "COMPLETE",
+    "Titik mulai sesuai persona dan tautan pekerjaan tersedia; task review agen bukan validasi manusia.",
+    "[UI-03](evidence/screenshots/UI-03.png); [UI-04](evidence/screenshots/UI-04.png); [UI-05](evidence/screenshots/UI-05.png); [UI-06](evidence/screenshots/UI-06.png)",
+    "—"
+  ],
+  [
+    "CAP-46",
+    "Empty activity dashboard tenant",
+    "PARTIAL",
+    "Owner/Rec/Doctor/Patient teramati dengan aktivitas kosong; fixture Free over-seat bukan onboarding klinik benar-benar kosong; Admin non-owner empty tidak ditinjau tersendiri.",
+    "[UI-24](evidence/screenshots/UI-24.png); [UI-25](evidence/screenshots/UI-25.png); [UI-26](evidence/screenshots/UI-26.png); [UI-27](evidence/screenshots/UI-27.png)",
+    "G47: sebagian bukti baru, batas tetap"
+  ],
+  [
+    "CAP-47",
+    "Dashboard Platform dengan nol tenant dan kontrak loading",
+    "NOT VERIFIED",
+    "Template @empty ada; DB klon punya tenant. Tidak menghapus fixture untuk menciptakan global kosong. Blade SSR tidak otomatis membutuhkan skeleton aplikasi.",
+    "[resources/views/platform/dashboard.blade.php:76](../../resources/views/platform/dashboard.blade.php#L76)",
+    "G47: NOT VERIFIED"
+  ],
+  [
+    "CAP-48",
+    "Audit log metadata dan filter",
+    "COMPLETE",
+    "Activity filter tenant/actor/action/date dan pagination tersedia; bukan viewer full medical contents.",
+    "[app/Http/Controllers/Admin/AuditLogController.php:1](../../app/Http/Controllers/Admin/AuditLogController.php#L1); [UI-16](evidence/screenshots/UI-16.png)",
+    "—"
+  ],
+  [
+    "CAP-49",
+    "Laporan periode dan export operasional",
+    "PARTIAL",
+    "Dashboard/audit dapat dibaca, export belum tersedia.",
+    "[app/Http/Controllers/Admin/DashboardController.php:81](../../app/Http/Controllers/Admin/DashboardController.php#L81); [routes/web.php:1](../../routes/web.php#L1)",
+    "PG-08"
+  ],
+  [
+    "CAP-50",
+    "Notifikasi event booking/queue dan inbox",
+    "COMPLETE",
+    "Database + job broadcast, recipient recheck, read/read-all inbox tersedia; bukan reminder proaktif.",
+    "[app/Services/ClinicNotificationService.php:40](../../app/Services/ClinicNotificationService.php#L40); [UI-19](evidence/screenshots/UI-19.png)",
+    "—"
+  ],
+  [
+    "CAP-51",
+    "Near-turn / scheduled appointment reminder",
+    "PARTIAL",
+    "Notifikasi perubahan status dan ETA tersedia; threshold/reminder terjadwal janji belum.",
+    "[routes/console.php:11](../../routes/console.php#L11); [app/Services/ClinicNotificationService.php:40](../../app/Services/ClinicNotificationService.php#L40); [PRD.md:440](../../PRD.md#L440)",
+    "PG-12"
+  ],
+  [
+    "CAP-52",
+    "Free/Individual/Team, trial once, seats/kuota",
+    "COMPLETE",
+    "Plan dan period domain aktif; Free 1 dokter/1 staf/50 visit, paid seats; trial once, expiry/read-only dan finish IN_PROGRESS exception.",
+    "[database/seeders/SubscriptionPlanSeeder.php:29](../../database/seeders/SubscriptionPlanSeeder.php#L29); [app/Services/SubscriptionService.php:96](../../app/Services/SubscriptionService.php#L96)",
+    "—"
+  ],
+  [
+    "CAP-53",
+    "Katalog harga durasi dan invoice snapshot SaaS",
+    "COMPLETE",
+    "Plan/price aktif, snapshot harga/periode, empty katalog CCL-08 tersedia.",
+    "[database/seeders/SubscriptionPlanSeeder.php:29](../../database/seeders/SubscriptionPlanSeeder.php#L29); [app/Services/DokuPaymentService.php:1](../../app/Services/DokuPaymentService.php#L1)",
+    "—"
+  ],
+  [
+    "CAP-54",
+    "Flags realtime/management_dashboard vs hak akses",
+    "PRODUCT DECISION REQUIRED",
+    "Metadata ada tetapi enforcement key tidak ditemukan pada app/routes; keputusan copy vs entitlement perlu.",
+    "[database/seeders/SubscriptionPlanSeeder.php:29](../../database/seeders/SubscriptionPlanSeeder.php#L29); [app/Services/SubscriptionService.php:96](../../app/Services/SubscriptionService.php#L96)",
+    "PG-16"
+  ],
+  [
+    "CAP-55",
+    "Odontogram add-on prorata dan histori owner",
+    "COMPLETE",
+    "Quote per sisa periode, checkout, revoke add-on dan daftar period/invoice tersedia.",
+    "[app/Services/AddonService.php:1](../../app/Services/AddonService.php#L1); [app/Http/Controllers/SubscriptionAddonController.php:46](../../app/Http/Controllers/SubscriptionAddonController.php#L46); [UI-23](evidence/screenshots/UI-23.png)",
+    "—"
+  ],
+  [
+    "CAP-56",
+    "DOKU checkout dan reconciliation pending sandbox",
+    "COMPLETE",
+    "Bukti HTTPS sandbox nyata 11 Nov; pending tidak mengaktifkan subscription. Tidak dijalankan ulang dengan kredensial pengguna.",
+    "[app/Services/DokuPaymentService.php:1](../../app/Services/DokuPaymentService.php#L1); [Integrasi sandbox](../production-readiness/INTEGRATION_TEST_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-57",
+    "Provider settlement/callback/refund dana E2E",
+    "NOT VERIFIED",
+    "Handler dan test fake ada; callback eksternal/settlement/refund dana belum terbukti end-to-end. Manual recording bukan funds transfer.",
+    "[app/Services/DokuPaymentService.php:333](../../app/Services/DokuPaymentService.php#L333); [Integrasi](../production-readiness/INTEGRATION_TEST_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-58",
+    "Reminder subscription dan worker delivery lokal",
+    "COMPLETE",
+    "Scheduler command dan dedup reminder tersedia, loopback SMTP+worker historis PASS; bukan bukti inbox publik.",
+    "[routes/console.php:11](../../routes/console.php#L11); [Integrasi SMTP](../production-readiness/INTEGRATION_TEST_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-59",
+    "Platform tenant listing/current effective status",
+    "COMPLETE",
+    "Metadata tenant, current subscription, grants dan status efektif CCL-06 tersedia tanpa akses isi medis.",
+    "[app/Http/Controllers/Platform/TenantController.php:45](../../app/Http/Controllers/Platform/TenantController.php#L45); [UI-14](evidence/screenshots/UI-14.png)",
+    "—"
+  ],
+  [
+    "CAP-60",
+    "Grant subscription idempotent dan Free downgrade",
+    "COMPLETE",
+    "Request UUID/replay dan transaction mencegah double-click, Free downgrade mengakhiri period terkait sesuai kontrak.",
+    "[app/Services/SubscriptionService.php:96](../../app/Services/SubscriptionService.php#L96); [DFU-12](../deep-functional-ux/FIX_REGRESSION_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-61",
+    "Commercial history viewer lengkap",
+    "PARTIAL",
+    "Invoice list/detail, audit dan owner addon history ada; Platform full main-period timeline belum.",
+    "[app/Http/Controllers/Platform/TenantController.php:45](../../app/Http/Controllers/Platform/TenantController.php#L45); [app/Http/Controllers/SubscriptionAddonController.php:46](../../app/Http/Controllers/SubscriptionAddonController.php#L46)",
+    "PG-09"
+  ],
+  [
+    "CAP-62",
+    "Single grant revoke / recovery duplikat historis",
+    "PRODUCT DECISION REQUIRED",
+    "Tidak ada UI satu periode; global downgrade bukan undo aman per grant.",
+    "[resources/views/platform/tenants/show.blade.php:13](../../resources/views/platform/tenants/show.blade.php#L13); [app/Services/SubscriptionService.php:96](../../app/Services/SubscriptionService.php#L96)",
+    "PG-10"
+  ],
+  [
+    "CAP-63",
+    "Manual refund pencatatan dan akses",
+    "PARTIAL",
+    "Payment refunded + add-on revoked tersedia; refund provider/kontrak paket utama dan recovery butuh keputusan.",
+    "[app/Services/DokuPaymentService.php:333](../../app/Services/DokuPaymentService.php#L333); [UI-15](evidence/screenshots/UI-15.png)",
+    "PG-10"
+  ],
+  [
+    "CAP-64",
+    "Transfer owner / tenant suspend / closure",
+    "PRODUCT DECISION REQUIRED",
+    "Clinic active switch ada, tetapi tidak sama dengan seluruh lifecycle SaaS.",
+    "[resources/views/platform/tenants/show.blade.php:13](../../resources/views/platform/tenants/show.blade.php#L13); [app/Http/Requests/UpdateClinicRequest.php:39](../../app/Http/Requests/UpdateClinicRequest.php#L39)",
+    "PG-11"
+  ],
+  [
+    "CAP-65",
+    "Deteksi/repair legacy inkonsisten",
+    "PRODUCT DECISION REQUIRED",
+    "Backfill owner/subscription terbatas ada; repair generik tidak ada dan DB pengguna tidak diperiksa.",
+    "[app/Services/LegacyTenantBackfillService.php:21](../../app/Services/LegacyTenantBackfillService.php#L21)",
+    "PG-14"
+  ],
+  [
+    "CAP-66",
+    "Discovery klinik / multi-cabang / offline Edge",
+    "PRODUCT DECISION REQUIRED",
+    "RPP menyebut, source belum menyediakan; bukan wajib MVP terverifikasi. Patient code/related clinic sudah tersedia.",
+    "[app/Http/Controllers/Patient/AppointmentController.php:1](../../app/Http/Controllers/Patient/AppointmentController.php#L1); [RPP](evidence/rpp-reference.txt)",
+    "D-19"
+  ],
+  [
+    "CAP-67",
+    "Aplikasi native / migrasi React / SPA",
+    "NOT REQUIRED",
+    "Bertentangan dengan scope web Blade/Tailwind saat ini; responsive web sudah ada.",
+    "[PROJECT_ANALYSIS.md:13](../../PROJECT_ANALYSIS.md#L13); [RPP](evidence/rpp-reference.txt)",
+    "—"
+  ],
+  [
+    "CAP-68",
+    "Platform impersonation / admin full medical bypass",
+    "NOT REQUIRED",
+    "Tidak diperlukan untuk tugas komersial/metadata; melanggar boundary akses yang disepakati.",
+    "[app/Policies/MedicalRecordPolicy.php:1](../../app/Policies/MedicalRecordPolicy.php#L1); [database/seeders/RoleAndPermissionSeeder.php:1](../../database/seeders/RoleAndPermissionSeeder.php#L1)",
+    "—"
+  ],
+  [
+    "CAP-69",
+    "Hard delete histori klinis / pembayaran",
+    "NOT REQUIRED",
+    "Bukan kemampuan yang perlu ditambah untuk recovery. Gunakan status/revision/compensating adjustment.",
+    "[app/Services/VisitWorkflowService.php:135](../../app/Services/VisitWorkflowService.php#L135); [app/Services/DokuPaymentService.php:333](../../app/Services/DokuPaymentService.php#L333)",
+    "—"
+  ],
+  [
+    "CAP-70",
+    "Katalog/interaksi obat, inventori, asuransi/claim eksternal",
+    "PRODUCT DECISION REQUIRED",
+    "Resep free-text terstruktur ada; belum ada requirement MVP tervalidasi untuk domain tambahan ini.",
+    "[resources/views/doctor/visits/show.blade.php:1](../../resources/views/doctor/visits/show.blade.php#L1); [docs/prescription-workflow/README.md:1](../../docs/prescription-workflow/README.md#L1)",
+    "D-19"
+  ],
+  [
+    "CAP-71",
+    "First-use usability dan aksesibilitas manusia",
+    "NOT VERIFIED",
+    "Task review agen dan bukti DOM historis tersedia; peserta awam, screen reader/perangkat fisik belum diuji.",
+    "[UI-11](evidence/screenshots/UI-11.png); [Batas studi](../production-readiness/HUMAN_UAT_REPORT.md)",
+    "—"
+  ],
+  [
+    "CAP-72",
+    "Feedback pending tombol grant Platform",
+    "PARTIAL",
+    "Ekspresi @js literal memicu Alpine SyntaxError; saat submit tombol tetap enabled. Backend UUID/dedup tetap ada, tidak dibuktikan grant ganda.",
+    "[resources/views/platform/tenants/show.blade.php:24](../../resources/views/platform/tenants/show.blade.php#L24); [UI-28](evidence/screenshots/UI-28.png); [Triage](evidence/page-error-triage.json)",
+    "PG-18"
+  ]
+]

@@ -1,0 +1,51 @@
+{
+  "name": "ClinicOS",
+  "dependencies": {
+    "@laravel/multiplex": {},
+    "@tailwindcss/forms": {
+      "version": "0.5.11",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/forms/-/forms-0.5.11.tgz",
+      "overridden": false
+    },
+    "autoprefixer": {
+      "version": "10.6.1",
+      "resolved": "https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.6.1.tgz",
+      "overridden": false
+    },
+    "concurrently": {
+      "version": "10.0.6",
+      "resolved": "https://registry.npmjs.org/concurrently/-/concurrently-10.0.6.tgz",
+      "overridden": false
+    },
+    "laravel-echo": {
+      "version": "2.6.1",
+      "resolved": "https://registry.npmjs.org/laravel-echo/-/laravel-echo-2.6.1.tgz",
+      "overridden": false
+    },
+    "laravel-vite-plugin": {
+      "version": "3.2.0",
+      "resolved": "https://registry.npmjs.org/laravel-vite-plugin/-/laravel-vite-plugin-3.2.0.tgz",
+      "overridden": false
+    },
+    "postcss": {
+      "version": "8.5.31",
+      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.5.31.tgz",
+      "overridden": false
+    },
+    "pusher-js": {
+      "version": "8.6.0",
+      "resolved": "https://registry.npmjs.org/pusher-js/-/pusher-js-8.6.0.tgz",
+      "overridden": false
+    },
+    "tailwindcss": {
+      "version": "3.4.17",
+      "resolved": "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.4.17.tgz",
+      "overridden": false
+    },
+    "vite": {
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/vite/-/vite-8.3.4.tgz",
+      "overridden": false
+    }
+  }
+}

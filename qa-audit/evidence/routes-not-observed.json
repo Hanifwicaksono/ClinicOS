@@ -1,0 +1,56 @@
+﻿[
+    {
+        "domain":  null,
+        "method":  "POST",
+        "uri":  "_boost/browser-logs",
+        "name":  "boost.browser-logs"
+    },
+    {
+        "domain":  null,
+        "method":  "GET|POST|HEAD",
+        "uri":  "broadcasting/auth",
+        "name":  null
+    },
+    {
+        "domain":  null,
+        "method":  "GET|HEAD",
+        "uri":  "livewire/livewire.js",
+        "name":  null
+    },
+    {
+        "domain":  null,
+        "method":  "GET|HEAD",
+        "uri":  "livewire/livewire.min.js.map",
+        "name":  null
+    },
+    {
+        "domain":  null,
+        "method":  "GET|HEAD",
+        "uri":  "livewire/preview-file/{filename}",
+        "name":  "livewire.preview-file"
+    },
+    {
+        "domain":  null,
+        "method":  "POST",
+        "uri":  "livewire/upload-file",
+        "name":  "livewire.upload-file"
+    },
+    {
+        "domain":  null,
+        "method":  "GET|HEAD",
+        "uri":  "storage/{path}",
+        "name":  "storage.local"
+    },
+    {
+        "domain":  null,
+        "method":  "PUT",
+        "uri":  "storage/{path}",
+        "name":  "storage.local.upload"
+    },
+    {
+        "domain":  null,
+        "method":  "GET|HEAD",
+        "uri":  "up",
+        "name":  null
+    }
+]

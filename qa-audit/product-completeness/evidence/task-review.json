@@ -1,0 +1,4425 @@
+[
+  {
+    "id": "UI-01",
+    "role": "Clinic Owner",
+    "task": "Tentukan titik mulai, informasi dan menu persona Clinic Owner",
+    "started": "2026-11-14T08:09:07.822Z",
+    "observed": {
+      "route": "/admin/dashboard",
+      "status": 200,
+      "headings": [
+        "Dashboard",
+        "QA Closure Dental",
+        "Operasional siap dijalankan",
+        "Tim terbaru",
+        "Kunjungan selesai terbaru"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/admin/dashboard"
+        },
+        {
+          "label": "Subscription",
+          "path": "/subscription/payments"
+        },
+        {
+          "label": "Add-on odontogram",
+          "path": "/subscription/addons"
+        },
+        {
+          "label": "Profil klinik",
+          "path": "/admin/clinic"
+        },
+        {
+          "label": "Tim klinik",
+          "path": "/admin/staff"
+        },
+        {
+          "label": "Layanan",
+          "path": "/admin/services"
+        },
+        {
+          "label": "Jadwal dokter",
+          "path": "/admin/doctor-schedules"
+        },
+        {
+          "label": "Pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Booking & antrean",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "Antrean hari ini",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Audit aktivitas",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "Notifikasi\n22",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.owner\nclosure.dental.owner@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Lihat antrean\n→",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "PASIEN TERJADWAL\n\n→\n\n1\n\nPasien unik pada periode ini",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "ANTREAN AKTIF\n\n→\n\n0\n\nMenunggu, dipanggil, atau diperiksa",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "KUNJUNGAN SELESAI\n\n→\n\n1\n\nPelayanan yang sudah difinalisasi",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "ESTIMASI NILAI LAYANAN\n\n→\n\nRp 75.000\n\nBukan pembayaran yang diterima",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "✓\nProfil dan jam operasional\n→",
+          "path": "/admin/clinic"
+        },
+        {
+          "label": "✓\nDaftar layanan\n→",
+          "path": "/admin/services"
+        },
+        {
+          "label": "✓\nAkun dokter\n→",
+          "path": "/admin/staff"
+        },
+        {
+          "label": "✓\nJadwal praktik\n→",
+          "path": "/admin/doctor-schedules"
+        },
+        {
+          "label": "Lihat semua",
+          "path": "/admin/staff"
+        },
+        {
+          "label": "Lihat audit",
+          "path": "/admin/audit-logs"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Terapkan",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "GET",
+          "action": "/admin/dashboard",
+          "fields": [
+            {
+              "name": "from",
+              "type": "date",
+              "label": "Dari"
+            },
+            {
+              "name": "to",
+              "type": "date",
+              "label": "Sampai"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-01.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-02",
+    "role": "Clinic Admin",
+    "task": "Tentukan titik mulai, informasi dan menu persona Clinic Admin",
+    "started": "2026-11-14T08:09:13.642Z",
+    "observed": {
+      "route": "/admin/dashboard",
+      "status": 200,
+      "headings": [
+        "Dashboard",
+        "Klinik Sehat Sentosa",
+        "Operasional siap dijalankan",
+        "Tim terbaru",
+        "Kunjungan selesai terbaru"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/admin/dashboard"
+        },
+        {
+          "label": "Profil klinik",
+          "path": "/admin/clinic"
+        },
+        {
+          "label": "Tim klinik",
+          "path": "/admin/staff"
+        },
+        {
+          "label": "Layanan",
+          "path": "/admin/services"
+        },
+        {
+          "label": "Jadwal dokter",
+          "path": "/admin/doctor-schedules"
+        },
+        {
+          "label": "Pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Booking & antrean",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "Antrean hari ini",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Audit aktivitas",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "Notifikasi",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Lihat antrean\n→",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "PASIEN TERJADWAL\n\n→\n\n8\n\nPasien unik pada periode ini",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "ANTREAN AKTIF\n\n→\n\n0\n\nMenunggu, dipanggil, atau diperiksa",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "KUNJUNGAN SELESAI\n\n→\n\n1\n\nPelayanan yang sudah difinalisasi",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "ESTIMASI NILAI LAYANAN\n\n→\n\nRp 75.000\n\nBukan pembayaran yang diterima",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "✓\nProfil dan jam operasional\n→",
+          "path": "/admin/clinic"
+        },
+        {
+          "label": "✓\nDaftar layanan\n→",
+          "path": "/admin/services"
+        },
+        {
+          "label": "✓\nAkun dokter\n→",
+          "path": "/admin/staff"
+        },
+        {
+          "label": "✓\nJadwal praktik\n→",
+          "path": "/admin/doctor-schedules"
+        },
+        {
+          "label": "Lihat semua",
+          "path": "/admin/staff"
+        },
+        {
+          "label": "Lihat audit",
+          "path": "/admin/audit-logs"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Terapkan",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "GET",
+          "action": "/admin/dashboard",
+          "fields": [
+            {
+              "name": "from",
+              "type": "date",
+              "label": "Dari"
+            },
+            {
+              "name": "to",
+              "type": "date",
+              "label": "Sampai"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-02.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-03",
+    "role": "Receptionist",
+    "task": "Tentukan titik mulai, informasi dan menu persona Receptionist",
+    "started": "2026-11-14T08:09:16.996Z",
+    "observed": {
+      "route": "/receptionist/dashboard",
+      "status": 200,
+      "headings": [
+        "Dashboard Resepsionis",
+        "Operasional 14 November 2026",
+        "Belum ada pasien check-in",
+        "Antrean yang perlu ditangani"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/receptionist/dashboard"
+        },
+        {
+          "label": "Pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Booking & antrean",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "Antrean hari ini",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Notifikasi",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure prorata.reception\nclosure.prorata.reception@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Cari pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "+ Booking walk-in",
+          "path": "/receptionist/appointments/create"
+        },
+        {
+          "label": "Cari pasien →",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Buat booking",
+          "path": "/receptionist/appointments/create"
+        },
+        {
+          "label": "Lihat antrean",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Kelola semua →",
+          "path": "/receptionist/queues"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Tampilkan",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Check-in",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Check-in",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "GET",
+          "action": "/receptionist/dashboard",
+          "fields": [
+            {
+              "name": "date",
+              "type": "date",
+              "label": "Tanggal"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/queues/98/check-in",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/queues/99/check-in",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-03.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-04",
+    "role": "Doctor",
+    "task": "Tentukan titik mulai, informasi dan menu persona Doctor",
+    "started": "2026-11-14T08:09:20.371Z",
+    "observed": {
+      "route": "/doctor/dashboard",
+      "status": 200,
+      "headings": [
+        "Dashboard Dokter",
+        "Ringkasan 14 November 2026",
+        "QA Closure Pasien dental",
+        "Antrean berikutnya"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/doctor/dashboard"
+        },
+        {
+          "label": "Antrean saya",
+          "path": "/doctor/queues"
+        },
+        {
+          "label": "Rekam medis",
+          "path": "/doctor/medical-records"
+        },
+        {
+          "label": "Notifikasi\n26",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.doctor\nclosure.dental.doctor@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Lanjutkan pemeriksaan",
+          "path": "/doctor/visits/15"
+        },
+        {
+          "label": "Riwayat pasien",
+          "path": "/doctor/medical-records"
+        },
+        {
+          "label": "Lihat antrean",
+          "path": "/doctor/queues"
+        },
+        {
+          "label": "Kelola semua →",
+          "path": "/doctor/queues"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Tampilkan",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "GET",
+          "action": "/doctor/dashboard",
+          "fields": [
+            {
+              "name": "date",
+              "type": "date",
+              "label": "Tanggal ringkasan"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-04.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-05",
+    "role": "Patient",
+    "task": "Tentukan titik mulai, informasi dan menu persona Patient",
+    "started": "2026-11-14T08:09:23.794Z",
+    "observed": {
+      "route": "/patient/dashboard",
+      "status": 200,
+      "headings": [
+        "Dashboard Pasien",
+        "Informasi penting Anda, dalam satu tempat.",
+        "Resep saya"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/patient/dashboard"
+        },
+        {
+          "label": "Booking saya",
+          "path": "/patient/appointments"
+        },
+        {
+          "label": "Notifikasi\n27",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.patient\nclosure.dental.patient@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Booking baru",
+          "path": "/patient/appointments/create"
+        },
+        {
+          "label": "Lihat booking saya",
+          "path": "/patient/appointments"
+        },
+        {
+          "label": "Kelola profil akun",
+          "path": "/profile"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [],
+      "screenshot": "screenshots/UI-05.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-06",
+    "role": "Platform Admin",
+    "task": "Tentukan titik mulai, informasi dan menu persona Platform Admin",
+    "started": "2026-11-14T08:09:28.893Z",
+    "observed": {
+      "route": "/platform/dashboard",
+      "status": 200,
+      "headings": [
+        "Dashboard platform",
+        "40 dari 41 tenant operasional",
+        "Perlu perhatian",
+        "Tenant nonaktif",
+        "Owner belum dipetakan",
+        "Berakhir ≤ 7 hari",
+        "Pembayaran gagal",
+        "Distribusi subscription",
+        "Tenant terbaru"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/platform/dashboard"
+        },
+        {
+          "label": "Tenant klinik",
+          "path": "/platform/tenants"
+        },
+        {
+          "label": "Paket & harga",
+          "path": "/platform/subscription-plans"
+        },
+        {
+          "label": "Pembayaran",
+          "path": "/platform/payments"
+        },
+        {
+          "label": "Notifikasi\n22",
+          "path": "/notifications"
+        },
+        {
+          "label": "P\nPlatform Administrator\nplatform@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Cari tenant",
+          "path": "/platform/tenants"
+        },
+        {
+          "label": "1\n→\nTenant nonaktif\n\nAkun klinik tidak operasional",
+          "path": "/platform/tenants"
+        },
+        {
+          "label": "0\n→\nOwner belum dipetakan\n\nTenant tanpa pemilik eksplisit",
+          "path": "/platform/tenants"
+        },
+        {
+          "label": "1\n→\nBerakhir ≤ 7 hari\n\nSubscription aktif atau trial",
+          "path": "/platform/tenants"
+        },
+        {
+          "label": "1\n→\nPembayaran gagal\n\nPerlu pemeriksaan pembayaran",
+          "path": "/platform/payments"
+        },
+        {
+          "label": "Lihat semua",
+          "path": "/platform/tenants"
+        },
+        {
+          "label": "Klinik Demo Trial\n\nowner.trial@clinicos.test\n\nTeam\n\n4 hours from now",
+          "path": "/platform/tenants/3"
+        },
+        {
+          "label": "Klinik Demo Expired\n\nowner.expired@clinicos.test\n\nIndividual\n\n4 hours from now",
+          "path": "/platform/tenants/4"
+        },
+        {
+          "label": "Klinik Demo Suspended\n\nowner.suspended@clinicos.test\n\nTeam\n\n4 hours from now",
+          "path": "/platform/tenants/5"
+        },
+        {
+          "label": "Klinik Sehat Sentosa\n\nadmin@clinicos.test\n\nTeam\n\n4 hours from now",
+          "path": "/platform/tenants/1"
+        },
+        {
+          "label": "Klinik Demo Free\n\nowner.free@clinicos.test\n\nFree\n\n4 hours from now",
+          "path": "/platform/tenants/2"
+        },
+        {
+          "label": "Kelola tenant klinik",
+          "path": "/platform/tenants"
+        },
+        {
+          "label": "Lihat pembayaran",
+          "path": "/platform/payments"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [],
+      "screenshot": "screenshots/UI-06.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-07",
+    "role": "Receptionist",
+    "task": "Cari jalur koreksi dokter/layanan atau reschedule booking yang sudah dikonfirmasi",
+    "started": "2026-11-14T08:09:31.745Z",
+    "observed": {
+      "route": "/receptionist/appointments/98",
+      "status": 200,
+      "headings": [
+        "Detail booking"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/receptionist/dashboard"
+        },
+        {
+          "label": "Pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Booking & antrean",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "Antrean hari ini",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Notifikasi",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure prorata.reception\nclosure.prorata.reception@clinicos.test",
+          "path": "/profile"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Batalkan booking",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "POST",
+          "action": "/receptionist/appointments/98/cancel",
+          "fields": [
+            {
+              "name": "cancel_reason",
+              "type": "text",
+              "label": "Alasan pembatalan (opsional)"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-07.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-08",
+    "role": "Receptionist",
+    "task": "Cari penanganan dokter tidak hadir dan handoff antrean",
+    "started": "2026-11-14T08:09:37.891Z",
+    "observed": {
+      "route": "/receptionist/queues",
+      "status": 200,
+      "headings": [
+        "Antrean pasien",
+        "Antrean 14 November 2026"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/receptionist/dashboard"
+        },
+        {
+          "label": "Pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Booking & antrean",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "Antrean hari ini",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Notifikasi",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure prorata.reception\nclosure.prorata.reception@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "+ Booking walk-in",
+          "path": "/receptionist/appointments/create"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Terapkan filter",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Check-in",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "No-show",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Batalkan",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Check-in",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "No-show",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Batalkan",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "GET",
+          "action": "/receptionist/queues",
+          "fields": [
+            {
+              "name": "date",
+              "type": "date",
+              "label": "Tanggal"
+            },
+            {
+              "name": "",
+              "type": "search",
+              "label": "Dokter"
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "search",
+              "label": "Sesi"
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "status",
+              "type": "select-one",
+              "label": "Status"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/queues/98/check-in",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/queues/98/no-show",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/queues/98/cancel",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/queues/99/check-in",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/queues/99/no-show",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/queues/99/cancel",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-08.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-09",
+    "role": "Doctor",
+    "task": "Cari penghentian/transfer pemeriksaan yang sudah IN_PROGRESS",
+    "started": "2026-11-14T08:09:42.836Z",
+    "observed": {
+      "route": "/doctor/visits/17",
+      "status": 200,
+      "headings": [
+        "Pemeriksaan pasien",
+        "QA Closure Pasien dental",
+        "Alergi kritis",
+        "Alur resep dan rekam medis",
+        "RME General",
+        "Tanda vital",
+        "Diagnosis dan tindakan",
+        "Odontogram",
+        "Resep",
+        "Preview resep",
+        "Catatan tambahan",
+        "Jadikan rekam medis ini finalized?",
+        "Alergi pasien",
+        "Kunjungan",
+        "Riwayat dengan dokter ini"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/doctor/dashboard"
+        },
+        {
+          "label": "Antrean saya",
+          "path": "/doctor/queues"
+        },
+        {
+          "label": "Rekam medis",
+          "path": "/doctor/medical-records"
+        },
+        {
+          "label": "Notifikasi\n26",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.doctor\nclosure.dental.doctor@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Tinjau / catat alergi pasien",
+          "path": "/doctor/visits/17"
+        },
+        {
+          "label": "Masuk kembali",
+          "path": "/admin"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · COMPLETED\n\nAssessment dummy final",
+          "path": "/doctor/visits/25"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy stale-correction",
+          "path": "/doctor/visits/23"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy socket",
+          "path": "/doctor/visits/22"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy finalize",
+          "path": "/doctor/visits/21"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy photos",
+          "path": "/doctor/visits/20"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy prescription",
+          "path": "/doctor/visits/19"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy allergy",
+          "path": "/doctor/visits/18"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy limits",
+          "path": "/doctor/visits/16"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy chart",
+          "path": "/doctor/visits/15"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Hapus diagnosis\n1",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "+ Tambah diagnosis",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "Hapus tindakan\n1",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "+ Tambah tindakan",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "18\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "17\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "16\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "15\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "14\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "13\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "12\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "11\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "21\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "22\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "23\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "24\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "25\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "26\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "27\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "28\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "48\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "47\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "46\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "45\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "44\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "43\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "42\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "41\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "31\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "32\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "33\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "34\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "35\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "36\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "37\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "38\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "Belum dicatat",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "Sehat",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "Karies",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "Tambalan",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "Hilang",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "Mahkota",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "+ Tambah obat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "Hapus obat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "Simpan draft",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Tinjau & finalisasi",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "POST",
+          "action": "/doctor/visits/17/draft",
+          "fields": [
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "chief_complaint",
+              "type": "textarea",
+              "label": "Keluhan utama"
+            },
+            {
+              "name": "subjective",
+              "type": "textarea",
+              "label": "S · Subjektif *\n(wajib)"
+            },
+            {
+              "name": "objective",
+              "type": "textarea",
+              "label": "O · Objektif"
+            },
+            {
+              "name": "assessment",
+              "type": "textarea",
+              "label": "A · Assessment *\n(wajib)"
+            },
+            {
+              "name": "plan",
+              "type": "textarea",
+              "label": "P · Rencana *\n(wajib)"
+            },
+            {
+              "name": "physical_examination",
+              "type": "textarea",
+              "label": "Pemeriksaan fisik"
+            },
+            {
+              "name": "photos[]",
+              "type": "file",
+              "label": "Foto pendukung (opsional)"
+            },
+            {
+              "name": "vital_signs[weight_kg]",
+              "type": "number",
+              "label": "Berat badan"
+            },
+            {
+              "name": "vital_signs[height_cm]",
+              "type": "number",
+              "label": "Tinggi badan"
+            },
+            {
+              "name": "vital_signs[systolic]",
+              "type": "number",
+              "label": "Sistolik"
+            },
+            {
+              "name": "vital_signs[diastolic]",
+              "type": "number",
+              "label": "Diastolik"
+            },
+            {
+              "name": "vital_signs[pulse]",
+              "type": "number",
+              "label": "Nadi"
+            },
+            {
+              "name": "vital_signs[respiratory_rate]",
+              "type": "number",
+              "label": "Pernapasan"
+            },
+            {
+              "name": "vital_signs[temperature_c]",
+              "type": "number",
+              "label": "Suhu"
+            },
+            {
+              "name": "vital_signs[oxygen_saturation]",
+              "type": "number",
+              "label": "Saturasi oksigen"
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "diagnoses[0][code]",
+              "type": "text",
+              "label": "Kode (opsional)"
+            },
+            {
+              "name": "diagnoses[0][name]",
+              "type": "text",
+              "label": "Diagnosis"
+            },
+            {
+              "name": "diagnoses[0][notes]",
+              "type": "textarea",
+              "label": "Catatan"
+            },
+            {
+              "name": "diagnoses[0][is_primary]",
+              "type": "checkbox",
+              "label": "Diagnosis utama"
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "treatments[0][name]",
+              "type": "text",
+              "label": "Tindakan"
+            },
+            {
+              "name": "treatments[0][quantity]",
+              "type": "number",
+              "label": "Jumlah"
+            },
+            {
+              "name": "treatments[0][description]",
+              "type": "textarea",
+              "label": "Rincian tindakan"
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "critical_allergies_acknowledged",
+              "type": "checkbox",
+              "label": "Saya telah meninjau alergi kritis pasien\nKonfirmasi ini wajib saat resep berisi obat. Sistem mencatat dokter dan waktu peninjauan."
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "prescription_items[0][medicine_name]",
+              "type": "text",
+              "label": "Nama obat"
+            },
+            {
+              "name": "prescription_items[0][dosage]",
+              "type": "text",
+              "label": "Dosis"
+            },
+            {
+              "name": "prescription_items[0][frequency]",
+              "type": "text",
+              "label": "Frekuensi"
+            },
+            {
+              "name": "prescription_items[0][quantity]",
+              "type": "number",
+              "label": "Jumlah"
+            },
+            {
+              "name": "prescription_items[0][unit]",
+              "type": "text",
+              "label": "Satuan"
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "prescription_items[0][instructions]",
+              "type": "textarea",
+              "label": "Instruksi penggunaan (opsional)"
+            },
+            {
+              "name": "prescription_notes",
+              "type": "textarea",
+              "label": "Catatan resep"
+            },
+            {
+              "name": "doctor_notes",
+              "type": "textarea",
+              "label": "Catatan dokter"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/doctor/visits/17/allergies/3",
+          "fields": [
+            {
+              "name": "substance",
+              "type": "text",
+              "label": ""
+            },
+            {
+              "name": "reaction",
+              "type": "text",
+              "label": ""
+            },
+            {
+              "name": "severity",
+              "type": "select-one",
+              "label": ""
+            },
+            {
+              "name": "is_active",
+              "type": "checkbox",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/doctor/visits/17/allergies",
+          "fields": [
+            {
+              "name": "substance",
+              "type": "text",
+              "label": ""
+            },
+            {
+              "name": "reaction",
+              "type": "text",
+              "label": ""
+            },
+            {
+              "name": "severity",
+              "type": "select-one",
+              "label": ""
+            },
+            {
+              "name": "is_active",
+              "type": "checkbox",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-09.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-10",
+    "role": "Doctor",
+    "task": "Cari dokumen pasien, tindak lanjut dan langkah setelah finalisasi",
+    "started": "2026-11-14T08:09:47.436Z",
+    "observed": {
+      "route": "/doctor/visits/25",
+      "status": 200,
+      "headings": [
+        "Pemeriksaan pasien",
+        "QA Closure Pasien dental",
+        "Alergi kritis",
+        "Alur resep dan rekam medis",
+        "RME General",
+        "Tanda vital",
+        "Diagnosis dan tindakan",
+        "Odontogram",
+        "Resep",
+        "Preview resep",
+        "Catatan tambahan",
+        "Alergi pasien",
+        "Kunjungan",
+        "Riwayat dengan dokter ini",
+        "Version history / Modification"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/doctor/dashboard"
+        },
+        {
+          "label": "Antrean saya",
+          "path": "/doctor/queues"
+        },
+        {
+          "label": "Rekam medis",
+          "path": "/doctor/medical-records"
+        },
+        {
+          "label": "Notifikasi\n26",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.doctor\nclosure.dental.doctor@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Tinjau / catat alergi pasien",
+          "path": "/doctor/visits/25"
+        },
+        {
+          "label": "Masuk kembali",
+          "path": "/admin"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy stale-correction",
+          "path": "/doctor/visits/23"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy socket",
+          "path": "/doctor/visits/22"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy finalize",
+          "path": "/doctor/visits/21"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy photos",
+          "path": "/doctor/visits/20"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy prescription",
+          "path": "/doctor/visits/19"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy allergy",
+          "path": "/doctor/visits/18"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy leave",
+          "path": "/doctor/visits/17"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy limits",
+          "path": "/doctor/visits/16"
+        },
+        {
+          "label": "14 Nov 2026\n\nKonsultasi Umum · IN_PROGRESS\n\nAssessment dummy chart",
+          "path": "/doctor/visits/15"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Hapus diagnosis\n1",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "+ Tambah diagnosis",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "Hapus tindakan\n1",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "+ Tambah tindakan",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "18\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "17\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "16\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "15\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "14\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "13\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "12\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "11\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "21\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "22\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "23\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "24\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "25\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "26\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "27\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "28\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "48\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "47\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "46\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "45\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "44\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "43\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "42\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "41\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "31\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "32\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "33\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "34\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "35\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "36\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "37\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "38\nBelum dicatat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "Belum dicatat",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "Sehat",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "Karies",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "Tambalan",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "Hilang",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "Mahkota",
+          "type": "button",
+          "disabled": true
+        },
+        {
+          "label": "+ Tambah obat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "Hapus obat",
+          "type": "button",
+          "disabled": false
+        },
+        {
+          "label": "Simpan Modification",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "POST",
+          "action": "/doctor/visits/25/correct",
+          "fields": [
+            {
+              "name": "correction_reason",
+              "type": "textarea",
+              "label": "Alasan Modification"
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "chief_complaint",
+              "type": "textarea",
+              "label": "Keluhan utama"
+            },
+            {
+              "name": "subjective",
+              "type": "textarea",
+              "label": "S · Subjektif *\n(wajib)"
+            },
+            {
+              "name": "objective",
+              "type": "textarea",
+              "label": "O · Objektif"
+            },
+            {
+              "name": "assessment",
+              "type": "textarea",
+              "label": "A · Assessment *\n(wajib)"
+            },
+            {
+              "name": "plan",
+              "type": "textarea",
+              "label": "P · Rencana *\n(wajib)"
+            },
+            {
+              "name": "physical_examination",
+              "type": "textarea",
+              "label": "Pemeriksaan fisik"
+            },
+            {
+              "name": "photos[]",
+              "type": "file",
+              "label": "Foto pendukung (opsional)"
+            },
+            {
+              "name": "vital_signs[weight_kg]",
+              "type": "number",
+              "label": "Berat badan"
+            },
+            {
+              "name": "vital_signs[height_cm]",
+              "type": "number",
+              "label": "Tinggi badan"
+            },
+            {
+              "name": "vital_signs[systolic]",
+              "type": "number",
+              "label": "Sistolik"
+            },
+            {
+              "name": "vital_signs[diastolic]",
+              "type": "number",
+              "label": "Diastolik"
+            },
+            {
+              "name": "vital_signs[pulse]",
+              "type": "number",
+              "label": "Nadi"
+            },
+            {
+              "name": "vital_signs[respiratory_rate]",
+              "type": "number",
+              "label": "Pernapasan"
+            },
+            {
+              "name": "vital_signs[temperature_c]",
+              "type": "number",
+              "label": "Suhu"
+            },
+            {
+              "name": "vital_signs[oxygen_saturation]",
+              "type": "number",
+              "label": "Saturasi oksigen"
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "diagnoses[0][code]",
+              "type": "text",
+              "label": "Kode (opsional)"
+            },
+            {
+              "name": "diagnoses[0][name]",
+              "type": "text",
+              "label": "Diagnosis"
+            },
+            {
+              "name": "diagnoses[0][notes]",
+              "type": "textarea",
+              "label": "Catatan"
+            },
+            {
+              "name": "diagnoses[0][is_primary]",
+              "type": "checkbox",
+              "label": "Diagnosis utama"
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "treatments[0][name]",
+              "type": "text",
+              "label": "Tindakan"
+            },
+            {
+              "name": "treatments[0][quantity]",
+              "type": "number",
+              "label": "Jumlah"
+            },
+            {
+              "name": "treatments[0][description]",
+              "type": "textarea",
+              "label": "Rincian tindakan"
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "critical_allergies_acknowledged",
+              "type": "checkbox",
+              "label": "Saya telah meninjau alergi kritis pasien\nKonfirmasi ini wajib saat resep berisi obat. Sistem mencatat dokter dan waktu peninjauan."
+            },
+            {
+              "name": "",
+              "type": "fieldset",
+              "label": ""
+            },
+            {
+              "name": "prescription_items[0][medicine_name]",
+              "type": "text",
+              "label": "Nama obat"
+            },
+            {
+              "name": "prescription_items[0][dosage]",
+              "type": "text",
+              "label": "Dosis"
+            },
+            {
+              "name": "prescription_items[0][frequency]",
+              "type": "text",
+              "label": "Frekuensi"
+            },
+            {
+              "name": "prescription_items[0][quantity]",
+              "type": "number",
+              "label": "Jumlah"
+            },
+            {
+              "name": "prescription_items[0][unit]",
+              "type": "text",
+              "label": "Satuan"
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "prescription_items[0][instructions]",
+              "type": "textarea",
+              "label": "Instruksi penggunaan (opsional)"
+            },
+            {
+              "name": "prescription_notes",
+              "type": "textarea",
+              "label": "Catatan resep"
+            },
+            {
+              "name": "doctor_notes",
+              "type": "textarea",
+              "label": "Catatan dokter"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-10.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-11",
+    "role": "Patient",
+    "task": "Mulai kunjungan baru tanpa mengingat URL klinik",
+    "started": "2026-11-14T08:09:52.115Z",
+    "observed": {
+      "route": "/patient/appointments/create",
+      "status": 200,
+      "headings": [
+        "Booking baru",
+        "Pilih klinik Anda"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/patient/dashboard"
+        },
+        {
+          "label": "Booking saya",
+          "path": "/patient/appointments"
+        },
+        {
+          "label": "Notifikasi\n27",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.patient\nclosure.dental.patient@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "QA Closure Dental",
+          "path": "/clinic/qa-closure-dental/booking"
+        },
+        {
+          "label": "QA Closure Prorata",
+          "path": "/clinic/qa-closure-prorata/booking"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Lanjutkan booking",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "GET",
+          "action": "/patient/appointments/create",
+          "fields": [
+            {
+              "name": "clinic_code",
+              "type": "text",
+              "label": "Kode klinik"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-11.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-12",
+    "role": "Clinic Owner",
+    "task": "Atur hari libur/perubahan jam khusus dan akses status aktif klinik",
+    "started": "2026-11-14T08:09:58.847Z",
+    "observed": {
+      "route": "/admin/clinic/6/edit",
+      "status": 200,
+      "headings": [
+        "Profil klinik",
+        "Identitas dan operasional",
+        "Profil dasar",
+        "Jam operasional"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/admin/dashboard"
+        },
+        {
+          "label": "Subscription",
+          "path": "/subscription/payments"
+        },
+        {
+          "label": "Add-on odontogram",
+          "path": "/subscription/addons"
+        },
+        {
+          "label": "Profil klinik",
+          "path": "/admin/clinic"
+        },
+        {
+          "label": "Tim klinik",
+          "path": "/admin/staff"
+        },
+        {
+          "label": "Layanan",
+          "path": "/admin/services"
+        },
+        {
+          "label": "Jadwal dokter",
+          "path": "/admin/doctor-schedules"
+        },
+        {
+          "label": "Pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Booking & antrean",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "Antrean hari ini",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Audit aktivitas",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "Notifikasi\n22",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.owner\nclosure.dental.owner@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Batal",
+          "path": "/admin/dashboard"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Simpan perubahan",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "POST",
+          "action": "/admin/clinic/6",
+          "fields": [
+            {
+              "name": "name",
+              "type": "text",
+              "label": "Nama klinik"
+            },
+            {
+              "name": "slug",
+              "type": "text",
+              "label": "Slug klinik"
+            },
+            {
+              "name": "email",
+              "type": "email",
+              "label": "Email klinik"
+            },
+            {
+              "name": "phone",
+              "type": "text",
+              "label": "Nomor telepon"
+            },
+            {
+              "name": "address",
+              "type": "textarea",
+              "label": "Alamat"
+            },
+            {
+              "name": "description",
+              "type": "textarea",
+              "label": "Deskripsi singkat"
+            },
+            {
+              "name": "",
+              "type": "button",
+              "label": ""
+            },
+            {
+              "name": "logo",
+              "type": "file",
+              "label": "Logo klinik"
+            },
+            {
+              "name": "opening_time",
+              "type": "time",
+              "label": "Jam buka"
+            },
+            {
+              "name": "closing_time",
+              "type": "time",
+              "label": "Jam tutup"
+            },
+            {
+              "name": "timezone",
+              "type": "select-one",
+              "label": "Zona waktu"
+            },
+            {
+              "name": "queue_prefix",
+              "type": "text",
+              "label": "Prefix antrean"
+            },
+            {
+              "name": "is_active",
+              "type": "checkbox",
+              "label": "Klinik aktif dan dapat digunakan"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-12.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-13",
+    "role": "Clinic Owner",
+    "task": "Cari pengecualian jadwal berbasis tanggal dan dampak booking existing",
+    "started": "2026-11-14T08:10:04.268Z",
+    "observed": {
+      "route": "/admin/doctor-schedules/create",
+      "status": 200,
+      "headings": [
+        "Tambah jadwal",
+        "Sesi praktik dokter"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/admin/dashboard"
+        },
+        {
+          "label": "Subscription",
+          "path": "/subscription/payments"
+        },
+        {
+          "label": "Add-on odontogram",
+          "path": "/subscription/addons"
+        },
+        {
+          "label": "Profil klinik",
+          "path": "/admin/clinic"
+        },
+        {
+          "label": "Tim klinik",
+          "path": "/admin/staff"
+        },
+        {
+          "label": "Layanan",
+          "path": "/admin/services"
+        },
+        {
+          "label": "Jadwal dokter",
+          "path": "/admin/doctor-schedules"
+        },
+        {
+          "label": "Pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Booking & antrean",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "Antrean hari ini",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Audit aktivitas",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "Notifikasi\n22",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.owner\nclosure.dental.owner@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Batal",
+          "path": "/admin/doctor-schedules"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Tambah jadwal",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "POST",
+          "action": "/admin/doctor-schedules",
+          "fields": [
+            {
+              "name": "doctor_id",
+              "type": "select-one",
+              "label": "Dokter"
+            },
+            {
+              "name": "day_of_week",
+              "type": "select-one",
+              "label": "Hari"
+            },
+            {
+              "name": "quota",
+              "type": "number",
+              "label": "Kuota pasien"
+            },
+            {
+              "name": "start_time",
+              "type": "time",
+              "label": "Jam mulai"
+            },
+            {
+              "name": "end_time",
+              "type": "time",
+              "label": "Jam selesai"
+            },
+            {
+              "name": "is_active",
+              "type": "checkbox",
+              "label": "Jadwal aktif"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-13.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-14",
+    "role": "Platform Admin",
+    "task": "Lihat commercial history, koreksi grant dan kontrol lifecycle tenant",
+    "started": "2026-11-14T08:10:10.354Z",
+    "observed": {
+      "route": "/platform/tenants/6",
+      "status": 200,
+      "headings": [
+        "QA Closure Dental",
+        "Profil nonmedis",
+        "Owner",
+        "Subscription saat ini",
+        "Grant manual",
+        "Downgrade ke Free"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/platform/dashboard"
+        },
+        {
+          "label": "Tenant klinik",
+          "path": "/platform/tenants"
+        },
+        {
+          "label": "Paket & harga",
+          "path": "/platform/subscription-plans"
+        },
+        {
+          "label": "Pembayaran",
+          "path": "/platform/payments"
+        },
+        {
+          "label": "Notifikasi\n22",
+          "path": "/notifications"
+        },
+        {
+          "label": "P\nPlatform Administrator\nplatform@clinicos.test",
+          "path": "/profile"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Berikan akses",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Terapkan Free sekarang",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "POST",
+          "action": "/platform/tenants/6/subscription-grants",
+          "fields": [
+            {
+              "name": "subscription_price_id",
+              "type": "select-one",
+              "label": "Paket dan durasi"
+            },
+            {
+              "name": "reason",
+              "type": "textarea",
+              "label": "Alasan grant"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/platform/tenants/6/subscription-grants",
+          "fields": [
+            {
+              "name": "reason",
+              "type": "textarea",
+              "label": "Alasan downgrade"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-14.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-15",
+    "role": "Platform Admin",
+    "task": "Bedakan refund manual, invoice dan pengembalian uang provider",
+    "started": "2026-11-14T08:10:13.283Z",
+    "observed": {
+      "route": "/platform/payments/7",
+      "status": 200,
+      "headings": [
+        "QA-CLOSURE-DENTAL",
+        "Odontogram + Team",
+        "Tindakan",
+        "Event pembayaran"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/platform/dashboard"
+        },
+        {
+          "label": "Tenant klinik",
+          "path": "/platform/tenants"
+        },
+        {
+          "label": "Paket & harga",
+          "path": "/platform/subscription-plans"
+        },
+        {
+          "label": "Pembayaran",
+          "path": "/platform/payments"
+        },
+        {
+          "label": "Notifikasi\n22",
+          "path": "/notifications"
+        },
+        {
+          "label": "P\nPlatform Administrator\nplatform@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Kembali",
+          "path": "/platform/payments"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Tandai refunded",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "POST",
+          "action": "/platform/payments/7/refund",
+          "fields": [
+            {
+              "name": "reason",
+              "type": "textarea",
+              "label": "Catat refund manual"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-15.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-16",
+    "role": "Clinic Owner",
+    "task": "Cari bukti perubahan yang dapat direkonsiliasi atau diekspor",
+    "started": "2026-11-14T08:10:18.575Z",
+    "observed": {
+      "route": "/admin/audit-logs",
+      "status": 200,
+      "headings": [
+        "Audit aktivitas"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/admin/dashboard"
+        },
+        {
+          "label": "Subscription",
+          "path": "/subscription/payments"
+        },
+        {
+          "label": "Add-on odontogram",
+          "path": "/subscription/addons"
+        },
+        {
+          "label": "Profil klinik",
+          "path": "/admin/clinic"
+        },
+        {
+          "label": "Tim klinik",
+          "path": "/admin/staff"
+        },
+        {
+          "label": "Layanan",
+          "path": "/admin/services"
+        },
+        {
+          "label": "Jadwal dokter",
+          "path": "/admin/doctor-schedules"
+        },
+        {
+          "label": "Pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Booking & antrean",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "Antrean hari ini",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Audit aktivitas",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "Notifikasi\n22",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.owner\nclosure.dental.owner@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Next »",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "2",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "3",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "4",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "5",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "Next &raquo;",
+          "path": "/admin/audit-logs"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Terapkan filter",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "GET",
+          "action": "/admin/audit-logs",
+          "fields": [
+            {
+              "name": "from",
+              "type": "date",
+              "label": "Dari"
+            },
+            {
+              "name": "to",
+              "type": "date",
+              "label": "Sampai"
+            },
+            {
+              "name": "action",
+              "type": "select-one",
+              "label": "Aksi"
+            },
+            {
+              "name": "actor",
+              "type": "text",
+              "label": "Aktor"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-16.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-17",
+    "role": "Receptionist",
+    "task": "Cari penyelesaian administrasi layanan/kasir pada pekerjaan resepsionis",
+    "started": "2026-11-14T08:10:21.286Z",
+    "observed": {
+      "route": "/receptionist/patients",
+      "status": 200,
+      "headings": [
+        "Pasien",
+        "Data pasien"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/receptionist/dashboard"
+        },
+        {
+          "label": "Pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Booking & antrean",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "Antrean hari ini",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Notifikasi\n22",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.reception\nclosure.dental.reception@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "+ Pasien baru",
+          "path": "/receptionist/patients/create"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/33"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/13"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/32"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/34"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/22"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/23"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/24"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/25"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/26"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/27"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/28"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/29"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/30"
+        },
+        {
+          "label": "Detail",
+          "path": "/receptionist/patients/31"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Cari",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "GET",
+          "action": "/receptionist/patients",
+          "fields": [
+            {
+              "name": "search",
+              "type": "text",
+              "label": "Cari pasien"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-17.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-18",
+    "role": "Receptionist",
+    "task": "Tinjau seluruh kandidat ketika nomor keluarga dimiliki lebih dari8 pasien",
+    "started": "2026-11-14T08:10:25.492Z",
+    "observed": {
+      "visible_candidates": 8,
+      "fixture_candidates": 10,
+      "controls": {
+        "headings": [
+          "Pasien baru",
+          "Daftarkan pasien",
+          "Periksa pasien terdaftar"
+        ],
+        "links": [
+          {
+            "label": "ClinicOS",
+            "path": "/dashboard"
+          },
+          {
+            "label": "ClinicOS\nCLINIC WORKSPACE",
+            "path": "/dashboard"
+          },
+          {
+            "label": "Dashboard",
+            "path": "/receptionist/dashboard"
+          },
+          {
+            "label": "Pasien",
+            "path": "/receptionist/patients"
+          },
+          {
+            "label": "Booking & antrean",
+            "path": "/receptionist/appointments"
+          },
+          {
+            "label": "Antrean hari ini",
+            "path": "/receptionist/queues"
+          },
+          {
+            "label": "Notifikasi\n22",
+            "path": "/notifications"
+          },
+          {
+            "label": "Q\nQA Closure dental.reception\nclosure.dental.reception@clinicos.test",
+            "path": "/profile"
+          },
+          {
+            "label": "TEMP-MTDNMIMMAUUJGXHTTMUP · QA Shared Candidate 0 · 01/01/1990 · 081299990000",
+            "path": "/receptionist/patients/22"
+          },
+          {
+            "label": "TEMP-N55MCOFTL4SJ2MGY4TVZ · QA Shared Candidate 1 · 01/01/1990 · 081299990000",
+            "path": "/receptionist/patients/23"
+          },
+          {
+            "label": "TEMP-UMBUG2CY80DH78XSLWVE · QA Shared Candidate 2 · 01/01/1990 · 081299990000",
+            "path": "/receptionist/patients/24"
+          },
+          {
+            "label": "TEMP-REKTXQITSBJSQMCSZQ6Q · QA Shared Candidate 3 · 01/01/1990 · 081299990000",
+            "path": "/receptionist/patients/25"
+          },
+          {
+            "label": "TEMP-JMWW1CZRBQVIHVDD0GDT · QA Shared Candidate 4 · 01/01/1990 · 081299990000",
+            "path": "/receptionist/patients/26"
+          },
+          {
+            "label": "TEMP-WXVPHCZF9DDXRI75FKEW · QA Shared Candidate 5 · 01/01/1990 · 081299990000",
+            "path": "/receptionist/patients/27"
+          },
+          {
+            "label": "TEMP-TFWRGOR3L2KOUFCDID7Y · QA Shared Candidate 6 · 01/01/1990 · 081299990000",
+            "path": "/receptionist/patients/28"
+          },
+          {
+            "label": "TEMP-AGQCJ7WKNGOG8WY5JV4M · QA Shared Candidate 7 · 01/01/1990 · 081299990000",
+            "path": "/receptionist/patients/29"
+          },
+          {
+            "label": "Batal",
+            "path": "/receptionist/patients"
+          }
+        ],
+        "buttons": [
+          {
+            "label": "Keluar",
+            "type": "submit",
+            "disabled": false
+          },
+          {
+            "label": "Periksa kembali",
+            "type": "button",
+            "disabled": false
+          },
+          {
+            "label": "Simpan pasien",
+            "type": "submit",
+            "disabled": false
+          }
+        ],
+        "forms": [
+          {
+            "method": "POST",
+            "action": "/receptionist/patients",
+            "fields": [
+              {
+                "name": "name",
+                "type": "text",
+                "label": "Nama lengkap"
+              },
+              {
+                "name": "nik",
+                "type": "text",
+                "label": "NIK (opsional)"
+              },
+              {
+                "name": "birth_date",
+                "type": "date",
+                "label": "Tanggal lahir"
+              },
+              {
+                "name": "gender",
+                "type": "select-one",
+                "label": "Jenis kelamin"
+              },
+              {
+                "name": "phone",
+                "type": "tel",
+                "label": "Nomor telepon"
+              },
+              {
+                "name": "email",
+                "type": "email",
+                "label": "Email"
+              },
+              {
+                "name": "address",
+                "type": "text",
+                "label": "Alamat"
+              },
+              {
+                "name": "is_active",
+                "type": "checkbox",
+                "label": "Pasien aktif"
+              },
+              {
+                "name": "duplicate_reviewed",
+                "type": "checkbox",
+                "label": "Saya telah meninjau kandidat dan memastikan ini pasien yang berbeda."
+              },
+              {
+                "name": "",
+                "type": "button",
+                "label": ""
+              },
+              {
+                "name": "",
+                "type": "submit",
+                "label": ""
+              }
+            ]
+          }
+        ]
+      },
+      "screenshot": "screenshots/UI-18.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-19",
+    "role": "Patient",
+    "task": "Cari informasi mendekati giliran, reminder appointment dan instruksi setelah pelayanan",
+    "started": "2026-11-14T08:10:30.555Z",
+    "observed": {
+      "route": "/notifications",
+      "status": 200,
+      "headings": [
+        "Notifikasi"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/patient/dashboard"
+        },
+        {
+          "label": "Booking saya",
+          "path": "/patient/appointments"
+        },
+        {
+          "label": "Notifikasi\n27",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.patient\nclosure.dental.patient@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Next »",
+          "path": "/notifications"
+        },
+        {
+          "label": "2",
+          "path": "/notifications"
+        },
+        {
+          "label": "Next &raquo;",
+          "path": "/notifications"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Tandai semua dibaca",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 0\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 1\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 2\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 3\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 4\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 5\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 6\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 7\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 8\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 9\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 10\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 11\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 12\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 13\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 14\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 15\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 16\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 17\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 18\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "QA Closure notification 19\nSynthetic pagination fixture\n0 seconds ago",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "POST",
+          "action": "/notifications/30bcba4a-ba6d-46fe-8afc-0ff0ea940b38/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/a5378ccd-589f-4d1f-b337-ce6cf1cf1245/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/7b5a2a45-6436-4c5a-aec5-e61ef3b4a54f/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/351902f9-3ef6-4f15-82db-8706ddc4940d/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/20bbda43-b560-4b57-a29b-b2209cd21acd/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/6756a133-f5fc-4d6e-86ea-a443b9096118/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/8b51138f-2788-465d-b3a4-05c14fe54633/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/2d83931b-a8c9-4d34-9ba5-e42321736e3c/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/395cddbe-e0fc-495b-a6b1-06b33551a01e/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/57cad951-c9b1-4284-9db5-9b8a41cda0bd/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/304e3c1c-a611-462f-ba04-db6c85ce4c89/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/f6dd5557-948b-487a-a35e-e970a7eef785/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/4eebf43c-7796-48b9-8155-d4b11c948977/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/c13808ab-d5a8-4082-b913-8440142e42ca/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/0ae792f5-8c29-43ad-9f63-a21662ec375a/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/a647d461-8ffd-46eb-828a-4f17ef90ae5a/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/a2702ac8-44ed-497c-a014-3a8928279273/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/fea2caa6-098b-4b4c-8307-eefa5bc01d87/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/55ef1dcf-9e3d-4738-b4b0-a23c9392bdda/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "action": "/notifications/5e39d395-4f78-44b3-a135-86f7b4cadea3/read",
+          "fields": [
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-19.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-20",
+    "role": "Clinic Owner",
+    "task": "Pahami provisioning akun, peran yang bisa dibuat dan setup akses staf",
+    "started": "2026-11-14T08:10:33.192Z",
+    "observed": {
+      "route": "/admin/staff/create",
+      "status": 200,
+      "headings": [
+        "Tambah staf",
+        "Akun staf baru",
+        "Profil dokter"
+      ],
+      "links": [
+        {
+          "label": "ClinicOS",
+          "path": "/dashboard"
+        },
+        {
+          "label": "ClinicOS\nCLINIC WORKSPACE",
+          "path": "/dashboard"
+        },
+        {
+          "label": "Dashboard",
+          "path": "/admin/dashboard"
+        },
+        {
+          "label": "Subscription",
+          "path": "/subscription/payments"
+        },
+        {
+          "label": "Add-on odontogram",
+          "path": "/subscription/addons"
+        },
+        {
+          "label": "Profil klinik",
+          "path": "/admin/clinic"
+        },
+        {
+          "label": "Tim klinik",
+          "path": "/admin/staff"
+        },
+        {
+          "label": "Layanan",
+          "path": "/admin/services"
+        },
+        {
+          "label": "Jadwal dokter",
+          "path": "/admin/doctor-schedules"
+        },
+        {
+          "label": "Pasien",
+          "path": "/receptionist/patients"
+        },
+        {
+          "label": "Booking & antrean",
+          "path": "/receptionist/appointments"
+        },
+        {
+          "label": "Antrean hari ini",
+          "path": "/receptionist/queues"
+        },
+        {
+          "label": "Audit aktivitas",
+          "path": "/admin/audit-logs"
+        },
+        {
+          "label": "Notifikasi\n22",
+          "path": "/notifications"
+        },
+        {
+          "label": "Q\nQA Closure dental.owner\nclosure.dental.owner@clinicos.test",
+          "path": "/profile"
+        },
+        {
+          "label": "Batal",
+          "path": "/admin/staff"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Keluar",
+          "type": "submit",
+          "disabled": false
+        },
+        {
+          "label": "Buat akun staf",
+          "type": "submit",
+          "disabled": false
+        }
+      ],
+      "forms": [
+        {
+          "method": "POST",
+          "action": "/admin/staff",
+          "fields": [
+            {
+              "name": "name",
+              "type": "text",
+              "label": "Nama lengkap"
+            },
+            {
+              "name": "email",
+              "type": "email",
+              "label": "Email"
+            },
+            {
+              "name": "phone",
+              "type": "text",
+              "label": "Nomor telepon"
+            },
+            {
+              "name": "role",
+              "type": "select-one",
+              "label": "Peran"
+            },
+            {
+              "name": "specialization",
+              "type": "text",
+              "label": "Spesialisasi"
+            },
+            {
+              "name": "license_number",
+              "type": "text",
+              "label": "Nomor SIP/STR"
+            },
+            {
+              "name": "bio",
+              "type": "textarea",
+              "label": "Bio singkat"
+            },
+            {
+              "name": "service_ids[]",
+              "type": "checkbox",
+              "label": "QA CCL after Price 123.45"
+            },
+            {
+              "name": "service_ids[]",
+              "type": "checkbox",
+              "label": "QA CCL after Price 123456"
+            },
+            {
+              "name": "service_ids[]",
+              "type": "checkbox",
+              "label": "QA Closure Layanan dental"
+            },
+            {
+              "name": "",
+              "type": "submit",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/UI-20.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-21",
+    "role": "Guest",
+    "task": "Temukan informasi klinik, booking dan display bagi pengunjung",
+    "started": "2026-11-14T08:10:36.068Z",
+    "status": "NOT VERIFIED",
+    "reason": "page.waitForURL: Timeout 7000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+    "superseded_by": "UI-21-R2",
+    "harness_note": "Guest was passed as uppercase to a lowercase-only helper. Login timeout was a harness error; no product failure inferred."
+  },
+  {
+    "id": "UI-22",
+    "role": "Receptionist / Patient",
+    "task": "Amati arti pasien nonaktif pada booking staf dibanding self-service",
+    "started": "2026-11-14T08:10:43.550Z",
+    "observed": {
+      "staff_redirect": "/receptionist/patients/13",
+      "self_service_route": "/booking/100/status",
+      "profile_still_inactive": true,
+      "profiles_before": 1,
+      "profiles_after": 1,
+      "screenshot": "screenshots/UI-22.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-21-R2",
+    "role": "Guest",
+    "task": "Informasi klinik dan titik mulai pengunjung, setelah koreksi identitas guest pada harness",
+    "started": "2026-11-14T08:14:29.086Z",
+    "observed": {
+      "route": "/clinic/qa-closure-dental",
+      "status": 200,
+      "headings": [
+        "QA Closure Dental",
+        "Perawatan yang Anda butuhkan,semua ada di sini.",
+        "QA CCL after Price 123.45",
+        "QA CCL after Price 123456",
+        "QA Closure Layanan dental",
+        "Kenali dokter danwaktu praktiknya.",
+        "QA Closure dental.doctor",
+        "Sudah tahu mau periksa kapan?"
+      ],
+      "text": "ClinicOS\n/\nProfil klinik\nQ\nPROFIL KLINIK\nQA Closure Dental\n\nAb ipsa magnam optio quia aut.\n\n288 Murray Isle Suite 037 Dachburgh, NV 45984-4674\n0215550123\nMasuk untuk booking\nLihat antrean\nLAYANAN KLINIK\nSiap bantu kunjungan Anda\n✚\n3\nLayanan aktif\n1\nDokter praktik\nALUR KUNJUNGAN\n3 langkah\n01\nPilih layanan\nLihat biaya dan durasi layanan\n02\nAtur jadwal\nSesuaikan dengan sesi dokter\n03\nPantau antrean\nIkuti informasi antrean klinik\nInformasi layanan terhubung ke ClinicOS\n✚\nJelajahi layanan klinik\n↗\n◷\nCek jadwal praktik\n↗\n☷\nInformasi antrean\n↗\nLAYANAN TERSEDIA\nPerawatan yang Anda butuhkan,\nsemua ada di sini.\n\n01 / LAYANAN\nQA CCL after Price 123.45\n\nInformasi lengkap layanan dapat dilihat saat proses booking.\n\nBIAYA LAYANAN\nRp 123\n20 menit\nMasuk untuk booking\n↗\n02 / LAYANAN\nQA CCL after Price 123456\n\nInformasi lengkap layanan dapat dilihat saat proses booking.\n\nBIAYA LAYANAN\nRp 123.456\n20 menit\nMasuk untuk booking\n↗\n03 / LAYANAN\nQA Closure Layanan dental\n\nAut iusto officia error quidem necessitatibus dolor veniam.\n\nBIAYA LAYANAN\nRp 123.456\n20 menit\nMasuk untuk booking\n↗\nDOKTER & JADWAL\nKenali dokter dan\nwaktu praktiknya.\n\nQ\nQA Closure dental.doctor\n\nDokter Gigi\n\nDOKTER\nJADWAL PRAKTIK\nMinggu\n12:00 – 23:59\nSenin\n12:00 – 23:59\nSelasa\n12:00 – 23:59\nRabu\n12:00 – 23:59\nKamis\n12:00 – 23:59\nJumat\n12:00 – 23:59\nSabtu\n12:00 – 23:59\nMasuk untuk booking\n↗\nLANGKAH SELANJUTNYA\nSudah tahu mau periksa kapan?\n\nAtur kunjungan di QA Closure Dental lewat proses booking ClinicOS.\n\nMasuk untuk booking",
+      "screenshot": "screenshots/UI-21-R2.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-23",
+    "role": "Clinic Owner",
+    "task": "Bedakan riwayat add-on owner yang tersedia dari timeline periode utama Platform yang belum tersedia",
+    "started": "2026-11-14T08:14:30.660Z",
+    "observed": {
+      "route": "/subscription/addons",
+      "status": 200,
+      "headings": [
+        "Add-on Odontogram",
+        "Odontogram untuk klinik",
+        "Riwayat add-on"
+      ],
+      "text": "Odontogram untuk klinik\n\nRME General tersedia pada semua paket. Odontogram opsional untuk Individual dan Team berbayar.\n\nAktif\n\nRp 99.000 / klinik / bulan\n\nDibayar sekali untuk sisa periode paket utama. Tidak diperpanjang otomatis.\n\nOdontogram dapat digunakan dokter yang ditugaskan sampai akhir periode paket utama.\n\nRiwayat add-on\nPERIODE\tNOMINAL\tSTATUS\tINVOICE\n01 Nov 2026 – 30 Nov 2026\tRp 99.000\tAktif\tLihat invoice",
+      "screenshot": "screenshots/UI-23.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-24",
+    "role": "Clinic Owner",
+    "task": "Tinjau empty activity dashboard pada tenant fixture kosong; bukan onboarding klinik tanpa konfigurasi",
+    "started": "2026-11-14T08:14:33.473Z",
+    "observed": {
+      "route": "/admin/dashboard",
+      "status": 200,
+      "headings": [
+        "Dashboard",
+        "QA Closure Empty",
+        "Operasional siap dijalankan",
+        "Tim terbaru",
+        "Kunjungan selesai terbaru"
+      ],
+      "text": "Paket Free aktif. Nonaktifkan akun tambahan sebelum melanjutkan operasional.\nLihat paket\n\nSelamat datang, QA Closure empty.owner\n\nQA Closure Empty\n\nAda 0 booking, 0 antrean aktif, dan 0 kunjungan selesai pada periode ini.\n\nLihat antrean\n→\n\nPeriode operasional\n\nMenggunakan zona waktu Asia/Jakarta.\n\nDari\nSampai\nTerapkan\n\nPASIEN TERJADWAL\n\n→\n\n0\n\nPasien unik pada periode ini\n\nANTREAN AKTIF\n\n→\n\n0\n\nMenunggu, dipanggil, atau diperiksa\n\nKUNJUNGAN SELESAI\n\n→\n\n0\n\nPelayanan yang sudah difinalisasi\n\nESTIMASI NILAI LAYANAN\n\n→\n\nRp 0\n\nBukan pembayaran yang diterima\n\nKESIAPAN KLINIK\n\nOperasional siap dijalankan\n\nKelola fondasi klinik dari pintasan berikut.\n\n4/4 selesai\n✓\nProfil dan jam operasional\n→\n✓\nDaftar layanan\n→\n✓\nAkun dokter\n→\n✓\nJadwal praktik\n→\nDokter\n1\nResepsionis\n2\nLayanan\n1\nSesi jadwal\n7\nTim terbaru\n\nAnggota tim yang baru ditambahkan.\n\nLihat semua\nQ\n\nQA Closure empty.reception\n\nclosure.empty.reception@clinicos.test\n\nReceptionist\nQ\n\nQA Closure empty.doctor\n\nclosure.empty.doctor@clinicos.test\n\nDoctor\nQ\n\nQA Closure notifempty.receptionist\n\nclosure.notifempty.receptionist@clinicos.test\n\nReceptionist\nQ\n\nQA Closure notifempty.doctor\n\nclosure.notifempty.doctor@clinicos.test\n\nDoctor\nKunjungan selesai terbaru\n\nNominal menggunakan snapshot layanan saat kunjungan, bukan bukti pembayaran.\n\nLihat audit\n\nBelum ada kunjungan selesai\n\nKunjungan yang difinalisasi pada periode ini akan muncul di sini.",
+      "screenshot": "screenshots/UI-24.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-25",
+    "role": "Receptionist",
+    "task": "Tinjau empty activity dashboard pada tenant fixture kosong; bukan onboarding klinik tanpa konfigurasi",
+    "started": "2026-11-14T08:14:35.471Z",
+    "observed": {
+      "route": "/receptionist/dashboard",
+      "status": 200,
+      "headings": [
+        "Dashboard Resepsionis",
+        "Operasional 14 November 2026",
+        "Belum ada antrean",
+        "Antrean yang perlu ditangani"
+      ],
+      "text": "Paket Free melewati batas akun. Hubungi pemilik klinik.\nOperasional 14 November 2026\nMenghubungkan kembali…\n\nPantau kedatangan dan tangani antrean tanpa berpindah halaman.\n\nCakupan: semua dokter.\n\nTanggal\nTampilkan\nOperasional klinik sedang hanya-baca. Data antrean tetap dapat dipantau.\n✓\nBelum ada antrean\n\nBooking dan pasien yang check-in akan muncul di sini.\n\nLihat antrean\n0 booking aktif dari 0 total pada cakupan ini.\n\nBELUM CHECK-IN\n\nMasih terdaftar\n\n0\n\nMENUNGGU\n\nSiap dipanggil\n\n0\n\nDIPANGGIL\n\nMenunggu pasien masuk\n\n0\n\nDIPERIKSA\n\nBersama dokter\n\n0\n\nTINDAKAN BERIKUTNYA\n\nAntrean yang perlu ditangani\n\nMenampilkan 0 dari 0 antrean lainnya.\n\nKelola semua →\n✓\n\nTidak ada antrean lain\n\nBooking dan pasien yang perlu ditangani akan muncul di sini.",
+      "screenshot": "screenshots/UI-25.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-26",
+    "role": "Doctor",
+    "task": "Tinjau empty activity dashboard pada tenant fixture kosong; bukan onboarding klinik tanpa konfigurasi",
+    "started": "2026-11-14T08:14:37.148Z",
+    "observed": {
+      "route": "/doctor/dashboard",
+      "status": 200,
+      "headings": [
+        "Dashboard Dokter",
+        "Ringkasan 14 November 2026",
+        "Belum ada pasien terjadwal",
+        "Antrean berikutnya"
+      ],
+      "text": "Paket Free melewati batas akun. Hubungi pemilik klinik.\nRingkasan 14 November 2026\n12:00–23:59 · kuota 100\nTanggal ringkasan\nTampilkan\nOperasional sedang hanya-baca. Pemeriksaan yang sudah berjalan tetap dapat dilanjutkan.\n✓\nBelum ada pasien terjadwal\n\nAntrean akan muncul setelah pasien melakukan check-in.\n\nLihat semua antrean\n\nMENUNGGU\n\n0\n\nDIPANGGIL\n\n0\n\nDIPERIKSA\n\n0\n\nSELESAI\n\n0\n\nAntrean berikutnya\n\nMenampilkan 0 dari 0 antrean berikutnya.\n\nKelola semua →\n\nTidak ada antrean berikutnya\n\nPasien baru akan muncul otomatis setelah check-in.",
+      "screenshot": "screenshots/UI-26.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-27",
+    "role": "Patient",
+    "task": "Tinjau empty activity dashboard pada tenant fixture kosong; bukan onboarding klinik tanpa konfigurasi",
+    "started": "2026-11-14T08:14:38.166Z",
+    "observed": {
+      "route": "/patient/dashboard",
+      "status": 200,
+      "headings": [
+        "Dashboard Pasien",
+        "Informasi penting Anda, dalam satu tempat.",
+        "Resep saya"
+      ],
+      "text": "Selamat datang, QA Closure empty.patient\n\nInformasi penting Anda, dalam satu tempat.\n\nLihat booking, jadwal dokter, dan nomor antrean Anda.\n\nBooking baru\nLihat booking saya\nKelola profil akun\n\nRIWAYAT PENGOBATAN\n\nResep saya\n\nResep tampil setelah dokter menyelesaikan visit.\n\nBelum ada resep\n\nResep dari visit yang sudah selesai akan muncul di sini.",
+      "screenshot": "screenshots/UI-27.png"
+    },
+    "status": "OBSERVED"
+  },
+  {
+    "id": "UI-28",
+    "role": "Platform Admin",
+    "task": "Triage ekspresi Alpine dan feedback tombol grant saat submit pending; request dicegat sebelum backend",
+    "status": "OBSERVED",
+    "observed": {
+      "intercepted_requests": 1,
+      "submitting": true,
+      "button_disabled": false,
+      "backend_request_blocked": true,
+      "screenshot": "screenshots/UI-28.png"
+    }
+  }
+]

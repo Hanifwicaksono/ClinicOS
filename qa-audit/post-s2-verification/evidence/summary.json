@@ -1,0 +1,107 @@
+{
+  "at": "2026-11-15T13:59:38.7981775Z",
+  "status": "PR-02 and PR-03 FIXED & VERIFIED; notification reservation race fixed on tested interleaving; PR-01 VERIFIED single-node with actual MySQL WS",
+  "php_sqlite": {
+    "tests": 453,
+    "pass": 453,
+    "fail": 0,
+    "error": 0,
+    "skipped": 0,
+    "assertions": 2971
+  },
+  "php_mysql": {
+    "tests": 453,
+    "pass": 453,
+    "fail": 0,
+    "error": 0,
+    "skipped": 0,
+    "assertions": 2971
+  },
+  "javascript_unit_pass": 25,
+  "chrome_workflow_pass": 2,
+  "js_chrome_exit": 0,
+  "mysql_websocket_pass": 31,
+  "mysql_websocket_fail": 0,
+  "pg17_pg18_pass": 12,
+  "pg17_pg18_exit": 0,
+  "notification_modes": [
+    {
+      "mode": "deferred",
+      "status": "PASS"
+    },
+    {
+      "mode": "immediate",
+      "status": "PASS"
+    },
+    {
+      "mode": "configured",
+      "status": "PASS"
+    },
+    {
+      "mode": "mysql",
+      "status": "PASS"
+    }
+  ],
+  "source_integrity": {
+    "at": "2026-11-15T13:58:38.104Z",
+    "baseline_files": 1923,
+    "changed": [
+      "config/database.php",
+      "database/factories/SubscriptionPlanFactory.php",
+      "tests/Feature/RmeGeneralDentalTest.php"
+    ],
+    "missing": [],
+    "unexpected": [],
+    "new_source": [
+      "tests/Feature/SubscriptionPlanFactoryTest.php"
+    ],
+    "protected_s2_unchanged": true,
+    "original_tests_preserved": true,
+    "pass": true
+  },
+  "runtime": {
+    "at": "2026-11-15T13:58:38.108Z",
+    "database": "clinicos_post_s2_runtime_1794749647385",
+    "pending_jobs": 0,
+    "failed_jobs": 0,
+    "revocations": 94,
+    "unacknowledged": 0,
+    "transport_failures_pending": 0,
+    "notification_count": 225,
+    "failed_history": [],
+    "pending_history": []
+  },
+  "cleanup": {
+    "at": "2026-11-15T13:59:06.7189024Z",
+    "stopped": [
+      {
+        "kind": "worker",
+        "pid": 26140
+      },
+      {
+        "kind": "reverb",
+        "pid": 23740
+      },
+      {
+        "kind": "http",
+        "pid": 14112
+      },
+      {
+        "kind": "master",
+        "pid": 29256
+      }
+    ],
+    "mysql_shutdown_exit": 0,
+    "remaining_test_listeners": []
+  },
+  "pint_exit": 0,
+  "diff_check_exit": 0,
+  "remaining_failures": [],
+  "not_tested": [
+    "multi-node",
+    "all crash permutations",
+    "total MySQL server or storage failure",
+    "production deployment",
+    "load/stress"
+  ]
+}

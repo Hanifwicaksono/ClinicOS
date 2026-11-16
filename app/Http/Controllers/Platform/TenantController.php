@@ -7,12 +7,14 @@ use App\Models\Clinic;
 use App\Models\SubscriptionPrice;
 use App\Services\AuditLogger;
 use App\Services\SubscriptionService;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class TenantController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request, SubscriptionService $subscriptionService): View
     {
         $validated = $request->validate([
             'search' => ['nullable', 'string', 'max:100'],
@@ -31,6 +33,11 @@ class TenantController extends Controller
             ->latest()
             ->paginate(15)
             ->withQueryString();
+
+        $at = CarbonImmutable::now();
+        foreach ($tenants as $tenant) {
+            $tenant->setRelation('subscription', $subscriptionService->refreshStatus($tenant, $at));
+        }
 
         return view('platform.tenants.index', compact('tenants', 'search'));
     }
@@ -53,6 +60,6 @@ class TenantController extends Controller
             ->orderBy('duration_months')
             ->get();
 
-        return view('platform.tenants.show', compact('clinic', 'subscription', 'subscriptionPrices'));
+        return view('platform.tenants.show', compact('clinic', 'subscription', 'subscriptionPrices') + ['grantRequestId' => (string) Str::uuid()]);
     }
 }

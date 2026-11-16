@@ -1,0 +1,10 @@
+{
+  "sandbox_only": true,
+  "real_payment_performed": false,
+  "public_webhook_receiver": "BLOCKED",
+  "checkout_http": "success",
+  "payment_status": "pending",
+  "https_checkout_url_received": true,
+  "status_reconciliation": "success",
+  "subscription_unchanged": true
+}

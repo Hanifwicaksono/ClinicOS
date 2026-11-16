@@ -1,0 +1,8 @@
+{
+  "clock": "2026-11-13T02:31:00Z",
+  "subscription": {
+    "status": "active",
+    "ends_at": "2026-11-13 02:30:00"
+  },
+  "ui": "QA Closure Expiry\n\nqa-closure-expiry\n\n\t\n\nQA Closure expiry.owner\n\nclosure.expiry.owner@clinicos.test\n\n\tAktif\t\n\nTeam\n\nactive\n\n\t1\t3\tDetail"
+}

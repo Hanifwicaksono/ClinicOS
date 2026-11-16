@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\CoverageClosureRegressionTest" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" tests="23" assertions="139" errors="0" failures="6" skipped="0" time="5.090602">
+    <testcase name="test_new_booking_obeys_changed_hours_without_rewriting_history_or_replay" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="27" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="4" time="0.642157">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_new_booking_obeys_changed_hours_without_rewriting_history_or_replay&#13;
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+ Array &amp;0 [
++    'id' =&gt; 1,
+     'clinic_id' =&gt; 1,
+     'patient_id' =&gt; 1,
+     'doctor_id' =&gt; 1,
+@@ @@
+     'status' =&gt; 'BOOKED',
+     'source' =&gt; 'WALK_IN',
+     'service_name' =&gt; 'Layanan 3536',
+-    'service_price' =&gt; '150000.00',
++    'service_price' =&gt; 150000,
+     'notes' =&gt; null,
++    'cancelled_at' =&gt; null,
++    'cancel_reason' =&gt; null,
++    'created_at' =&gt; '2026-11-14 02:00:00',
+     'updated_at' =&gt; '2026-11-14 02:00:00',
+-    'created_at' =&gt; '2026-11-14 02:00:00',
+-    'id' =&gt; 1,
+ ]
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:35</failure>
+    </testcase>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_booking_boundaries_match_current_hours" tests="3" assertions="10" errors="0" failures="0" skipped="0" time="0.263346">
+      <testcase name="test_booking_boundaries_match_current_hours with data set &quot;inclusive&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="49" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.092262"/>
+      <testcase name="test_booking_boundaries_match_current_hours with data set &quot;opening&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="49" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="4" time="0.084032"/>
+      <testcase name="test_booking_boundaries_match_current_hours with data set &quot;closing&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="49" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="4" time="0.087052"/>
+    </testsuite>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_phone_validation_storage_and_legacy_candidates_share_normalization" tests="4" assertions="28" errors="0" failures="0" skipped="0" time="0.351405">
+      <testcase name="test_phone_validation_storage_and_legacy_candidates_share_normalization with data set &quot;dots&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="64" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="7" time="0.087662"/>
+      <testcase name="test_phone_validation_storage_and_legacy_candidates_share_normalization with data set &quot;ID&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="64" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="7" time="0.084519"/>
+      <testcase name="test_phone_validation_storage_and_legacy_candidates_share_normalization with data set &quot;US&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="64" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="7" time="0.086594"/>
+      <testcase name="test_phone_validation_storage_and_legacy_candidates_share_normalization with data set &quot;whitespace&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="64" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="7" time="0.092630"/>
+    </testsuite>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_inactive_patient_keeps_context_and_has_recovery" tests="2" assertions="24" errors="0" failures="0" skipped="0" time="1.053114">
+      <testcase name="test_inactive_patient_keeps_context_and_has_recovery with data set &quot;admin&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="81" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="12" time="0.940674"/>
+      <testcase name="test_inactive_patient_keeps_context_and_has_recovery with data set &quot;receptionist&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="81" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="12" time="0.112440"/>
+    </testsuite>
+    <testcase name="test_foreign_or_missing_patient_never_falls_back_to_new_patient" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="93" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.152111"/>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history" tests="5" assertions="31" errors="0" failures="5" skipped="0" time="0.760573">
+      <testcase name="test_platform_reads_effective_subscription_without_changing_history with data set &quot;expired&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="103" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="6" time="0.349925">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set "expired"&#13;
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+ Array &amp;0 [
++    'id' =&gt; 1,
+     'clinic_id' =&gt; 1,
+     'subscription_price_id' =&gt; 7,
+     'invoice_number' =&gt; 'INV-5395505198',
+@@ @@
+     'expires_at' =&gt; '2026-11-14 03:00:00',
+     'paid_at' =&gt; null,
+     'provider_reference' =&gt; null,
++    'created_at' =&gt; '2026-11-14 02:00:00',
+     'updated_at' =&gt; '2026-11-14 02:00:00',
+-    'created_at' =&gt; '2026-11-14 02:00:00',
+-    'id' =&gt; 1,
+ ]
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:118</failure>
+      </testcase>
+      <testcase name="test_platform_reads_effective_subscription_without_changing_history with data set &quot;trial&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="103" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="6" time="0.103860">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set "trial"&#13;
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+ Array &amp;0 [
++    'id' =&gt; 1,
+     'clinic_id' =&gt; 1,
+     'subscription_price_id' =&gt; 7,
+     'invoice_number' =&gt; 'INV-7042593039',
+@@ @@
+     'expires_at' =&gt; '2026-11-14 03:00:00',
+     'paid_at' =&gt; null,
+     'provider_reference' =&gt; null,
++    'created_at' =&gt; '2026-11-14 02:00:00',
+     'updated_at' =&gt; '2026-11-14 02:00:00',
+-    'created_at' =&gt; '2026-11-14 02:00:00',
+-    'id' =&gt; 1,
+ ]
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:118</failure>
+      </testcase>
+      <testcase name="test_platform_reads_effective_subscription_without_changing_history with data set &quot;scheduled&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="103" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="7" time="0.103929">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set "scheduled"&#13;
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+ Array &amp;0 [
++    'id' =&gt; 1,
+     'clinic_id' =&gt; 1,
+     'subscription_price_id' =&gt; 7,
+     'invoice_number' =&gt; 'INV-9523498261',
+@@ @@
+     'expires_at' =&gt; '2026-11-14 03:00:00',
+     'paid_at' =&gt; null,
+     'provider_reference' =&gt; null,
++    'created_at' =&gt; '2026-11-14 02:00:00',
+     'updated_at' =&gt; '2026-11-14 02:00:00',
+-    'created_at' =&gt; '2026-11-14 02:00:00',
+-    'id' =&gt; 1,
+ ]
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:118</failure>
+      </testcase>
+      <testcase name="test_platform_reads_effective_subscription_without_changing_history with data set &quot;future&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="103" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="6" time="0.105462">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set "future"&#13;
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+ Array &amp;0 [
++    'id' =&gt; 1,
+     'clinic_id' =&gt; 1,
+     'subscription_price_id' =&gt; 7,
+     'invoice_number' =&gt; 'INV-4668064871',
+@@ @@
+     'expires_at' =&gt; '2026-11-14 03:00:00',
+     'paid_at' =&gt; null,
+     'provider_reference' =&gt; null,
++    'created_at' =&gt; '2026-11-14 02:00:00',
+     'updated_at' =&gt; '2026-11-14 02:00:00',
+-    'created_at' =&gt; '2026-11-14 02:00:00',
+-    'id' =&gt; 1,
+ ]
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:118</failure>
+      </testcase>
+      <testcase name="test_platform_reads_effective_subscription_without_changing_history with data set &quot;suspended&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="103" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="6" time="0.097397">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set "suspended"&#13;
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+ Array &amp;0 [
++    'id' =&gt; 1,
+     'clinic_id' =&gt; 1,
+     'subscription_price_id' =&gt; 7,
+     'invoice_number' =&gt; 'INV-4153995096',
+@@ @@
+     'expires_at' =&gt; '2026-11-14 03:00:00',
+     'paid_at' =&gt; null,
+     'provider_reference' =&gt; null,
++    'created_at' =&gt; '2026-11-14 02:00:00',
+     'updated_at' =&gt; '2026-11-14 02:00:00',
+-    'created_at' =&gt; '2026-11-14 02:00:00',
+-    'id' =&gt; 1,
+ ]
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:118</failure>
+      </testcase>
+    </testsuite>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_service_ui_and_server_share_numeric_price_contract" tests="3" assertions="24" errors="0" failures="0" skipped="0" time="0.647353">
+      <testcase name="test_service_ui_and_server_share_numeric_price_contract with data set &quot;nonmultiple&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="125" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="8" time="0.450750"/>
+      <testcase name="test_service_ui_and_server_share_numeric_price_contract with data set &quot;fraction&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="125" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="8" time="0.101116"/>
+      <testcase name="test_service_ui_and_server_share_numeric_price_contract with data set &quot;maximum&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="125" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="8" time="0.095488"/>
+    </testsuite>
+    <testcase name="test_empty_catalog_has_explanation_and_recovery_without_checkout" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="134" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="4" time="0.465523"/>
+    <testcase name="test_expired_editor_exposes_login_recovery_without_losing_data" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="140" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="6" time="0.240316"/>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_queue_filters_are_preserved_separately_from_refreshed_rows" tests="2" assertions="6" errors="0" failures="0" skipped="0" time="0.514703">
+      <testcase name="test_queue_filters_are_preserved_separately_from_refreshed_rows with data set &quot;admin&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="149" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="3" time="0.423142"/>
+      <testcase name="test_queue_filters_are_preserved_separately_from_refreshed_rows with data set &quot;receptionist&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="149" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="3" time="0.091561"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

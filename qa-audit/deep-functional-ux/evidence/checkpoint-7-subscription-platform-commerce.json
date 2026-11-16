@@ -1,0 +1,11 @@
+{
+  "phase": "7-subscription-platform-commerce",
+  "at": "2026-11-13T07:40:17.549Z",
+  "counts": {
+    "PASS": 76,
+    "FAIL": 32,
+    "BLOCKED": 8,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

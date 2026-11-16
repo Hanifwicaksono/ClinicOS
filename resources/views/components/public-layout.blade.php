@@ -9,6 +9,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&family=plus-jakarta-sans:600,700,800&display=swap" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
     </head>
     <body class="min-h-screen bg-[#f7f8f5] font-sans antialiased">
         <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-sm">
@@ -19,5 +20,6 @@
         </header>
         <main>{{ $slot }}</main>
         <footer class="bg-white/80"><div class="mx-auto max-w-7xl px-5 py-8 text-sm text-slate-500 sm:px-8">© {{ date('Y') }} ClinicOS</div></footer>
+        @livewireScripts
     </body>
 </html>

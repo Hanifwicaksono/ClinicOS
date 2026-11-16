@@ -1,0 +1,45 @@
+{
+  "tests": 9,
+  "passed": 0,
+  "failed": 9,
+  "result": "failed",
+  "assertions": 13,
+  "failures": [
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set \"patient\"",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set \"receptionist\"",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set \"admin\"",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set \"token\"",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_used_session_keeps_its_day_and_times with data set \"day\"",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_used_session_keeps_its_day_and_times with data set \"start\"",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_used_session_keeps_its_day_and_times with data set \"end\"",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_replayed_grant_creates_one_period_and_one_audit_event",
+      "message": "Failed asserting that table [subscription_periods] matches expected entries count of 1. Entries found: 2."
+    },
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_http_grant_requires_a_request_identifier",
+      "message": "Expected response status code [422] but received 302."
+    }
+  ]
+}

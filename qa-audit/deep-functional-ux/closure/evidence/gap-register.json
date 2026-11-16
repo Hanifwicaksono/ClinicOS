@@ -1,0 +1,550 @@
+{
+  "additional": [
+    {
+      "id": "G01",
+      "feature": "F00",
+      "scenario": "Navigasi Back/Forward landing pada seluruh anchor",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G02",
+      "feature": "F00",
+      "scenario": "Katalog harga kosong/nonaktif seluruhnya dan pemulihan",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G03",
+      "feature": "F01",
+      "scenario": "Remember-only session dan revokasi password pada browser baru",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G04",
+      "feature": "F01",
+      "scenario": "Reset/verification link kedaluwarsa dan pemakaian ulang lewat UI",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G05",
+      "feature": "F02",
+      "scenario": "Email registrasi duplikat/case variant melalui UI pasien dan owner",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G06",
+      "feature": "F02",
+      "scenario": "Terms tidak disetujui serta refresh di setiap tahap registrasi",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G07",
+      "feature": "F03",
+      "scenario": "Email duplikat dan batas panjang nama pada seluruh role",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G08",
+      "feature": "F03",
+      "scenario": "Dua sesi profil aktif saat password/email berubah",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G09",
+      "feature": "F04",
+      "scenario": "Lanjut onboarding yang ditinggalkan setelah logout/login",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G10",
+      "feature": "F04",
+      "scenario": "Preferred plan dari setiap CTA landing sampai aktivasi",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G11",
+      "feature": "F05",
+      "scenario": "Timezone WITA/WIT dan perubahan jam operasional terhadap sesi existing",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G12",
+      "feature": "F05",
+      "scenario": "Logo tipe salah, ukuran lebih dari2MB, dan penggantian gagal",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G13",
+      "feature": "F06",
+      "scenario": "Admin mengganti email/password staf dengan sesi remember aktif",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G14",
+      "feature": "F06",
+      "scenario": "Batas doctor seat dari UI dan semua variasi entitlement paket",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G15",
+      "feature": "F07",
+      "scenario": "Tarif pecahan/nonkelipatan1000 dan batas nominal server",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G16",
+      "feature": "F07",
+      "scenario": "Layanan dinonaktifkan ketika tab booking lama masih terbuka",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G17",
+      "feature": "F08",
+      "scenario": "Perubahan jam sesi terpakai serta quota diturunkan di bawah reservasi",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G18",
+      "feature": "F08",
+      "scenario": "Batas quota0/501, akhir sebelum mulai, dan jam di luar operasional melalui UI",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G19",
+      "feature": "F09",
+      "scenario": "Tanggal lahir masa depan dan seluruh field kosong melalui submit UI",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G20",
+      "feature": "F09",
+      "scenario": "Pasien dengan histori sangat panjang dan setiap filter pencarian identitas",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G21",
+      "feature": "F10",
+      "scenario": "Semua CTA dokter/layanan website klinik dalam kondisi tanpa dokter/sesi",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G22",
+      "feature": "F10",
+      "scenario": "Alur pengguna pertama tanpa URL klinik dalam studi awam langsung",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G23",
+      "feature": "F11",
+      "scenario": "Tanggal tepat+30/+31 dan sesi baru saja berakhir",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G24",
+      "feature": "F11",
+      "scenario": "Dua form/tab dengan UUID berbeda untuk pasien/sesi sama",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G25",
+      "feature": "F12",
+      "scenario": "Replay cancel dari tab stale untuk seluruh status terminal",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G26",
+      "feature": "F12",
+      "scenario": "Tautan status tanpa/salah token dan cancellation error pada template resepsionis lewat browser",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G27",
+      "feature": "F13",
+      "scenario": "Aksi stale dari dua tab resepsionis dan dokter terhadap queue sama",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G28",
+      "feature": "F13",
+      "scenario": "Filter dokter/sesi dikombinasikan dengan pagination dan status terminal",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G29",
+      "feature": "F14",
+      "scenario": "Display klinik kosong dan seluruh kontrol filter/kiosk",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G30",
+      "feature": "F14",
+      "scenario": "Public display putus/pulih dari socket nyata",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G31",
+      "feature": "F15",
+      "scenario": "Ulang Mulai periksa dari tab lama sesudah visit selesai",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G32",
+      "feature": "F15",
+      "scenario": "Semua kombinasi pencarian/filter index rekam medis",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G33",
+      "feature": "F16",
+      "scenario": "HTTP419/sesi berakhir saat autosave dan pemulihan isi editor",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G34",
+      "feature": "F16",
+      "scenario": "Batas20 diagnosis/30 tindakan serta seluruh nilai vital ekstrem",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G35",
+      "feature": "F16",
+      "scenario": "Refresh/Back/leave sebelum debounce autosave selesai dan ketika foto belum disimpan",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G36",
+      "feature": "F17",
+      "scenario": "Edit severity lain dan dua editor alergi bersamaan melalui UI",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G37",
+      "feature": "F17",
+      "scenario": "Semua variasi acknowledgement alergi pada resep baru/koreksi",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G38",
+      "feature": "F18",
+      "scenario": "Hapus/tambah30 obat, jumlah9999/10000, serta resep kosong final",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G39",
+      "feature": "F18",
+      "scenario": "Seluruh variasi preview, instruksi panjang dan koreksi yang mengubah resep pasien",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G40",
+      "feature": "F19",
+      "scenario": "Paste clipboard, batas10 foto/5MB, tipe salah dan abort upload",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G41",
+      "feature": "F19",
+      "scenario": "Akses foto revisi oleh setiap role/tenant asing melalui browser",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G42",
+      "feature": "F20",
+      "scenario": "Dua submit finalisasi bersamaan dan tab koreksi stale melalui UI",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G43",
+      "feature": "F20",
+      "scenario": "Semua perbedaan array panjang pada histori koreksi di mobile",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G44",
+      "feature": "F21",
+      "scenario": "Seluruh32 gigi×6 kondisi dan correction-final dental melalui UI",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G45",
+      "feature": "F21",
+      "scenario": "Expiry berdasarkan ends_at; pencabutan revoked_at sudah diuji, keduanya tidak disamakan",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G46",
+      "feature": "F22",
+      "scenario": "Rekonsiliasi angka seluruh dashboard terhadap fixture setiap periode/timezone",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G47",
+      "feature": "F22",
+      "scenario": "Semua shortcut, empty/loading dan variasi data panjang per role",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G48",
+      "feature": "F23",
+      "scenario": "Pagination/empty notification center untuk setiap role",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G49",
+      "feature": "F23",
+      "scenario": "Notifikasi masuk socket dan badge realtime lintas browser",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G50",
+      "feature": "F24",
+      "scenario": "Kombinasi filter aktor/tanggal, pagination, serta tidak ada hasil",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G51",
+      "feature": "F24",
+      "scenario": "Validasi semua metadata audit yang ditampilkan di browser",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G52",
+      "feature": "F25",
+      "scenario": "Transisi expiry oleh waktu serta reminder subscription yang dipicu command",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G53",
+      "feature": "F25",
+      "scenario": "Seluruh kombinasi paket, renewal terjadwal dan seat overage pada UI",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G54",
+      "feature": "F26",
+      "scenario": "Successful checkout/notification/reconcile provider nyata",
+      "previous_status": "BLOCKED",
+      "previous_reason": "Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna."
+    },
+    {
+      "id": "G55",
+      "feature": "F26",
+      "scenario": "Repeat/delay callback dan browser-return nyata bersama provider",
+      "previous_status": "BLOCKED",
+      "previous_reason": "Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna."
+    },
+    {
+      "id": "G56",
+      "feature": "F27",
+      "scenario": "Prorata akhir hari/bulan dan renewal gabungan lewat UI",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G57",
+      "feature": "F27",
+      "scenario": "Refund yang mencabut add-on melalui flow provider; fixture revoke saja sudah diuji",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G58",
+      "feature": "F28",
+      "scenario": "Pencarian owner-email, pagination banyak tenant, dan tenant inactive",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G59",
+      "feature": "F28",
+      "scenario": "Semua metadata commercial history di setiap state tenant",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G60",
+      "feature": "F29",
+      "scenario": "Harga invalid, price toggle inactive dan addon toggle inactive lewat UI",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G61",
+      "feature": "F29",
+      "scenario": "Katalog diubah ketika owner masih memegang tab checkout lama",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G62",
+      "feature": "F30",
+      "scenario": "Grant lebih tinggi/setara terjadwal dan downgrade paid dengan overlap",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G63",
+      "feature": "F30",
+      "scenario": "Pemulihan grant ganda dan kebijakan revoke grant yang belum tersedia di UI",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G64",
+      "feature": "F31",
+      "scenario": "Refund ulang pada tab stale dan seluruh status yang tidak refundable",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G65",
+      "feature": "F31",
+      "scenario": "Reconcile+refund lintas role/tenant pada UI, tanpa transaksi provider nyata",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G66",
+      "feature": "F32",
+      "scenario": "Confidence medium/high dengan data historis terkontrol di browser",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G67",
+      "feature": "F32",
+      "scenario": "ETA untuk CALLED/IN_PROGRESS/terminal dan seluruh kombinasi antrian depan",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G68",
+      "feature": "F33",
+      "scenario": "Socket aktif putus/pulih, missed-event dan permission revoked pada koneksi aktif",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G69",
+      "feature": "F33",
+      "scenario": "Fokus input saat refetch/pagination dan semua offline queue actions",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G70",
+      "feature": "F34",
+      "scenario": "Google OAuth success/callback/error/relink dengan akun dummy provider",
+      "previous_status": "BLOCKED",
+      "previous_reason": "Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna."
+    },
+    {
+      "id": "G71",
+      "feature": "F35",
+      "scenario": "NIK format/normalisasi telepon berbagai negara dan lebih dari8 kandidat",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    },
+    {
+      "id": "G72",
+      "feature": "F35",
+      "scenario": "Review token stale setelah kandidat berubah dan navigasi ulang ke profil inactive",
+      "previous_status": "NOT TESTED",
+      "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+    }
+  ],
+  "blocked": [
+    {
+      "id": "AUTH-GOOGLE",
+      "feature": "F01",
+      "role": "Patient",
+      "scenario": "OAuth Google end-to-end",
+      "status": "BLOCKED",
+      "reason": "BLOCKED: kredensial eksternal sengaja dikosongkan; tidak memakai akun pengguna."
+    },
+    {
+      "id": "DOKU-SUCCESS",
+      "feature": "F26",
+      "role": "Clinic Owner",
+      "scenario": "Checkout dan pembayaran DOKU sukses end-to-end",
+      "status": "BLOCKED",
+      "reason": "BLOCKED: tidak ada kredensial provider dummy untuk audit ini; tidak melakukan pembayaran nyata."
+    },
+    {
+      "id": "DOKU-RECONCILE",
+      "feature": "F26",
+      "role": "Clinic Owner / Platform Admin",
+      "scenario": "Reconciliation dari provider lewat UI",
+      "status": "BLOCKED",
+      "reason": "BLOCKED: provider sengaja dinonaktifkan; regression fake-provider berjalan terpisah."
+    },
+    {
+      "id": "DOKU-WEBHOOK",
+      "feature": "F26",
+      "role": "System",
+      "scenario": "Notification valid provider mengaktifkan paket",
+      "status": "BLOCKED",
+      "reason": "BLOCKED: tidak ada provider callback nyata pada audit fungsional browser ini; tests/backend saja."
+    },
+    {
+      "id": "WS-RECOVERY",
+      "feature": "F14",
+      "role": "All queue roles",
+      "scenario": "Socket Reverb putus/pulih nyata",
+      "status": "BLOCKED",
+      "reason": "BLOCKED: realtime dinonaktifkan di lingkungan audit; polling dan offline editor diuji, socket tidak."
+    }
+  ]
+}

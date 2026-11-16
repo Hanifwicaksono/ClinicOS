@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {join} from 'node:path';
+import {spawn} from 'node:child_process';
+import assert from 'node:assert/strict';
+const evidence=join(import.meta.dirname,'evidence'),r=JSON.parse(readFileSync(join(evidence,'runtime.json'))),env=JSON.parse(readFileSync(join(r.root,'env.json')));
+assert.equal(env.DB_CONNECTION,'sqlite');assert.equal(env.DB_DATABASE,r.database);
+const worker=spawn('php',['-d','extension=pdo_sqlite','-d','extension=sqlite3','-d','extension=gd',join(r.root,'artisan.php'),'queue:work','database','--sleep=1','--tries=3','--timeout=20','--no-interaction'],{cwd:r.repo,env,windowsHide:true,stdio:'ignore'});
+writeFileSync(join(evidence,'worker.json'),JSON.stringify({pid:worker.pid,master_pid:process.pid,isolated:true},null,2));
+for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{worker.kill();process.exit();});worker.on('exit',()=>process.exit());
+console.log(JSON.stringify({isolated_worker:worker.pid}));

@@ -1,0 +1,30 @@
+{
+  "at": "2026-11-13T17:32:48.654Z",
+  "owned_http_reverb_worker_stopped": true,
+  "ports": [
+    18961,
+    18962
+  ],
+  "source_and_user_database_unchanged": true,
+  "retained_artifacts_are_dummy_only": true,
+  "runtimes": [
+    {
+      "runtime": "C:/Users/User/AppData/Local/Temp/clinicos-deep-HEtV7n",
+      "disposable_sqlite_retained": true,
+      "env_inherited_keys_removed": 76,
+      "private_files_deleted": [
+        "mail.jsonl",
+        "setup-output.private"
+      ]
+    },
+    {
+      "runtime": "C:/Users/User/AppData/Local/Temp/clinicos-deep-F1yefg",
+      "disposable_sqlite_retained": true,
+      "env_inherited_keys_removed": 76,
+      "private_files_deleted": [
+        "setup-diagnostic.private"
+      ]
+    }
+  ],
+  "warning": "Disposable SQLite retained only as dummy evidence, contains test password hashes and application-generated dummy state. No external provider transaction or user database copied. Private mail tokens deleted; runtime env is private, contains only isolated QA configuration and ephemeral keys, must not be published."
+}

@@ -1,0 +1,65 @@
+{
+  "syntax_checks": [
+    {
+      "file": "application.php",
+      "exit": 0
+    },
+    {
+      "file": "audit.php",
+      "exit": 0
+    },
+    {
+      "file": "browser.mjs",
+      "exit": 0
+    },
+    {
+      "file": "concurrency.py",
+      "exit": 0
+    },
+    {
+      "file": "day.mjs",
+      "exit": 0
+    },
+    {
+      "file": "doku_probe.py",
+      "exit": 0
+    },
+    {
+      "file": "infra.mjs",
+      "exit": 0
+    },
+    {
+      "file": "integration.py",
+      "exit": 0
+    },
+    {
+      "file": "load.mjs",
+      "exit": 0
+    },
+    {
+      "file": "monitor.py",
+      "exit": 0
+    },
+    {
+      "file": "recovery.py",
+      "exit": 0
+    },
+    {
+      "file": "router.php",
+      "exit": 0
+    },
+    {
+      "file": "runtime.py",
+      "exit": 0
+    },
+    {
+      "file": "suites.py",
+      "exit": 0
+    }
+  ],
+  "audit_php_format_exit": 0,
+  "tracked_diff_unchanged_by_final_checks": true,
+  "git_diff_check_exit": 0,
+  "final_foreign_key_orphans": 0,
+  "final_tenant_mismatches": 0
+}

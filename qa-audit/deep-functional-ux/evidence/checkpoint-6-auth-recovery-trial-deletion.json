@@ -1,0 +1,11 @@
+{
+  "phase": "6-auth-recovery-trial-deletion",
+  "at": "2026-11-13T07:38:26.933Z",
+  "counts": {
+    "PASS": 65,
+    "FAIL": 32,
+    "BLOCKED": 5,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

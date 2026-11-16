@@ -1,0 +1,13 @@
+{
+  "clinic_hours": {
+    "opening_time": "08:00",
+    "closing_time": "10:00"
+  },
+  "booking": 103,
+  "session": {
+    "start_time": "12:00",
+    "end_time": "23:59",
+    "appointment_date": "2026-11-13 00:00:00"
+  },
+  "accepted_outside_updated_hours": true
+}

@@ -1,0 +1,11 @@
+{
+  "phase": "closure-final-shortcut-and-two-session-verification",
+  "at": "2026-11-13T17:15:16.898Z",
+  "counts": {
+    "PASS": 228,
+    "FAIL": 75,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

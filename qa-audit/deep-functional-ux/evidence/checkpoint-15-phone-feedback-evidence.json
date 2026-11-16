@@ -1,0 +1,11 @@
+{
+  "phase": "15-phone-feedback-evidence",
+  "at": "2026-11-13T08:22:43.442Z",
+  "counts": {
+    "PASS": 103,
+    "FAIL": 52,
+    "BLOCKED": 9,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

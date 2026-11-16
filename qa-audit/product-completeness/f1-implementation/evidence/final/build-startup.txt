@@ -1,0 +1,10 @@
+[36mvite v8.3.4 [32mbuilding client environment for production...[36m[39m
+transforming...
+✓ 11 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/public/build/manifest.json              0.33 kB │ gzip:  0.16 kB
+../../../Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/public/build/assets/app-CD_dLgch.css   77.04 kB │ gzip: 13.18 kB
+../../../Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/public/build/assets/app-CeIX8J0_.js   114.44 kB │ gzip: 31.91 kB
+
+[32m✓ built in 753ms[39m

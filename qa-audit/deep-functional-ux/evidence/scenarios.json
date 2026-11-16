@@ -1,0 +1,3129 @@
+[
+  {
+    "id": "DISC-LOGIN-admin",
+    "feature": "F01",
+    "role": "admin",
+    "scenario": "Login valid lalu dashboard sesuai persona",
+    "steps": [
+      "Buka login dari UI",
+      "Isi kredensial dummy",
+      "Klik masuk",
+      "Periksa tujuan dashboard"
+    ],
+    "started": "2026-11-13T07:20:06.924Z",
+    "observed": {
+      "destination": "http://127.0.0.1:18961/admin/dashboard"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGOUT-admin",
+    "feature": "F01",
+    "role": "admin",
+    "scenario": "Logout melalui navigasi dan login ulang",
+    "steps": [
+      "Klik Keluar pada navigasi",
+      "Periksa landing",
+      "Buka dashboard kembali"
+    ],
+    "started": "2026-11-13T07:20:58.850Z",
+    "observed": {
+      "protected_after_logout": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGIN-operational-admin",
+    "feature": "F01",
+    "role": "operational-admin",
+    "scenario": "Login valid lalu dashboard sesuai persona",
+    "steps": [
+      "Buka login dari UI",
+      "Isi kredensial dummy",
+      "Klik masuk",
+      "Periksa tujuan dashboard"
+    ],
+    "started": "2026-11-13T07:20:59.189Z",
+    "status": "FAIL",
+    "reason": "page.waitForURL: Timeout 7000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+    "error_type": "TimeoutError",
+    "superseded_by": "RETEST-01",
+    "harness_note": "Invalid account_type in audit fixture; domain only patient/clinic_owner/null."
+  },
+  {
+    "id": "DISC-LOGIN-receptionist",
+    "feature": "F01",
+    "role": "receptionist",
+    "scenario": "Login valid lalu dashboard sesuai persona",
+    "steps": [
+      "Buka login dari UI",
+      "Isi kredensial dummy",
+      "Klik masuk",
+      "Periksa tujuan dashboard"
+    ],
+    "started": "2026-11-13T07:21:07.021Z",
+    "observed": {
+      "destination": "http://127.0.0.1:18961/receptionist/dashboard"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGOUT-receptionist",
+    "feature": "F01",
+    "role": "receptionist",
+    "scenario": "Logout melalui navigasi dan login ulang",
+    "steps": [
+      "Klik Keluar pada navigasi",
+      "Periksa landing",
+      "Buka dashboard kembali"
+    ],
+    "started": "2026-11-13T07:21:29.056Z",
+    "observed": {
+      "protected_after_logout": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGIN-doctor",
+    "feature": "F01",
+    "role": "doctor",
+    "scenario": "Login valid lalu dashboard sesuai persona",
+    "steps": [
+      "Buka login dari UI",
+      "Isi kredensial dummy",
+      "Klik masuk",
+      "Periksa tujuan dashboard"
+    ],
+    "started": "2026-11-13T07:21:29.250Z",
+    "observed": {
+      "destination": "http://127.0.0.1:18961/doctor/dashboard"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGOUT-doctor",
+    "feature": "F01",
+    "role": "doctor",
+    "scenario": "Logout melalui navigasi dan login ulang",
+    "steps": [
+      "Klik Keluar pada navigasi",
+      "Periksa landing",
+      "Buka dashboard kembali"
+    ],
+    "started": "2026-11-13T07:21:42.743Z",
+    "observed": {
+      "protected_after_logout": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGIN-dentist",
+    "feature": "F01",
+    "role": "dentist",
+    "scenario": "Login valid lalu dashboard sesuai persona",
+    "steps": [
+      "Buka login dari UI",
+      "Isi kredensial dummy",
+      "Klik masuk",
+      "Periksa tujuan dashboard"
+    ],
+    "started": "2026-11-13T07:21:42.993Z",
+    "observed": {
+      "destination": "http://127.0.0.1:18961/doctor/dashboard"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGOUT-dentist",
+    "feature": "F01",
+    "role": "dentist",
+    "scenario": "Logout melalui navigasi dan login ulang",
+    "steps": [
+      "Klik Keluar pada navigasi",
+      "Periksa landing",
+      "Buka dashboard kembali"
+    ],
+    "started": "2026-11-13T07:21:50.170Z",
+    "observed": {
+      "protected_after_logout": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGIN-patient",
+    "feature": "F01",
+    "role": "patient",
+    "scenario": "Login valid lalu dashboard sesuai persona",
+    "steps": [
+      "Buka login dari UI",
+      "Isi kredensial dummy",
+      "Klik masuk",
+      "Periksa tujuan dashboard"
+    ],
+    "started": "2026-11-13T07:21:50.425Z",
+    "observed": {
+      "destination": "http://127.0.0.1:18961/patient/dashboard"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGOUT-patient",
+    "feature": "F01",
+    "role": "patient",
+    "scenario": "Logout melalui navigasi dan login ulang",
+    "steps": [
+      "Klik Keluar pada navigasi",
+      "Periksa landing",
+      "Buka dashboard kembali"
+    ],
+    "started": "2026-11-13T07:21:57.882Z",
+    "observed": {
+      "protected_after_logout": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGIN-platform",
+    "feature": "F01",
+    "role": "platform",
+    "scenario": "Login valid lalu dashboard sesuai persona",
+    "steps": [
+      "Buka login dari UI",
+      "Isi kredensial dummy",
+      "Klik masuk",
+      "Periksa tujuan dashboard"
+    ],
+    "started": "2026-11-13T07:21:58.087Z",
+    "observed": {
+      "destination": "http://127.0.0.1:18961/platform/dashboard"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGOUT-platform",
+    "feature": "F01",
+    "role": "platform",
+    "scenario": "Logout melalui navigasi dan login ulang",
+    "steps": [
+      "Klik Keluar pada navigasi",
+      "Periksa landing",
+      "Buka dashboard kembali"
+    ],
+    "started": "2026-11-13T07:22:11.100Z",
+    "observed": {
+      "protected_after_logout": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGIN-free-owner",
+    "feature": "F01",
+    "role": "free-owner",
+    "scenario": "Login valid lalu dashboard sesuai persona",
+    "steps": [
+      "Buka login dari UI",
+      "Isi kredensial dummy",
+      "Klik masuk",
+      "Periksa tujuan dashboard"
+    ],
+    "started": "2026-11-13T07:22:11.295Z",
+    "observed": {
+      "destination": "http://127.0.0.1:18961/admin/dashboard"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGOUT-free-owner",
+    "feature": "F01",
+    "role": "free-owner",
+    "scenario": "Logout melalui navigasi dan login ulang",
+    "steps": [
+      "Klik Keluar pada navigasi",
+      "Periksa landing",
+      "Buka dashboard kembali"
+    ],
+    "started": "2026-11-13T07:22:28.433Z",
+    "observed": {
+      "protected_after_logout": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGIN-expired-owner",
+    "feature": "F01",
+    "role": "expired-owner",
+    "scenario": "Login valid lalu dashboard sesuai persona",
+    "steps": [
+      "Buka login dari UI",
+      "Isi kredensial dummy",
+      "Klik masuk",
+      "Periksa tujuan dashboard"
+    ],
+    "started": "2026-11-13T07:22:28.660Z",
+    "observed": {
+      "destination": "http://127.0.0.1:18961/admin/dashboard"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGOUT-expired-owner",
+    "feature": "F01",
+    "role": "expired-owner",
+    "scenario": "Logout melalui navigasi dan login ulang",
+    "steps": [
+      "Klik Keluar pada navigasi",
+      "Periksa landing",
+      "Buka dashboard kembali"
+    ],
+    "started": "2026-11-13T07:22:45.577Z",
+    "observed": {
+      "protected_after_logout": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGIN-suspended-owner",
+    "feature": "F01",
+    "role": "suspended-owner",
+    "scenario": "Login valid lalu dashboard sesuai persona",
+    "steps": [
+      "Buka login dari UI",
+      "Isi kredensial dummy",
+      "Klik masuk",
+      "Periksa tujuan dashboard"
+    ],
+    "started": "2026-11-13T07:22:45.808Z",
+    "observed": {
+      "destination": "http://127.0.0.1:18961/admin/dashboard"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISC-LOGOUT-suspended-owner",
+    "feature": "F01",
+    "role": "suspended-owner",
+    "scenario": "Logout melalui navigasi dan login ulang",
+    "steps": [
+      "Klik Keluar pada navigasi",
+      "Periksa landing",
+      "Buka dashboard kembali"
+    ],
+    "started": "2026-11-13T07:23:03.621Z",
+    "observed": {
+      "protected_after_logout": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-01",
+    "feature": "F07",
+    "role": "Clinic Admin",
+    "scenario": "Layanan: create melalui menu lalu buka ulang",
+    "steps": [
+      "Menu Layanan",
+      "Tambah layanan",
+      "Isi nama/tarif/durasi",
+      "Simpan",
+      "Edit kembali"
+    ],
+    "started": "2026-11-13T07:23:57.658Z",
+    "observed": {
+      "service_id": 5,
+      "persisted": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-02",
+    "feature": "F07",
+    "role": "Clinic Admin",
+    "scenario": "Layanan: duplicate ditolak dan data form dipertahankan",
+    "steps": [
+      "Tambah layanan dengan nama yang sama",
+      "Klik simpan",
+      "Periksa pesan serta nilai form"
+    ],
+    "started": "2026-11-13T07:23:58.196Z",
+    "observed": {
+      "duplicate_rejected": true,
+      "screenshot": "screenshots/ADM-02-duplicate-service.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-03",
+    "feature": "F07",
+    "role": "Clinic Admin",
+    "scenario": "Layanan: empty, batas durasi dan harga negatif diblok browser",
+    "steps": [
+      "Kosongkan nama",
+      "Isi harga negatif",
+      "Isi durasi 481",
+      "Periksa validitas kontrol"
+    ],
+    "started": "2026-11-13T07:23:58.813Z",
+    "observed": {
+      "native_boundary_validation": true,
+      "server_validation": "covered separately by existing regression"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-04",
+    "feature": "F06",
+    "role": "Clinic Admin",
+    "scenario": "Staf: tambah resepsionis lalu edit dan buka ulang",
+    "steps": [
+      "Tim klinik",
+      "Tambah staf",
+      "Pilih Resepsionis",
+      "Isi akun dummy",
+      "Simpan",
+      "Edit telepon"
+    ],
+    "started": "2026-11-13T07:23:58.939Z",
+    "observed": {
+      "user_id": 12,
+      "verification_required": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-05",
+    "feature": "F06",
+    "role": "Receptionist",
+    "scenario": "Staf baru diarahkan ke verifikasi, tidak terjebak login",
+    "steps": [
+      "Login akun staf baru",
+      "Periksa verifikasi dan tombol kirim ulang",
+      "Logout"
+    ],
+    "started": "2026-11-13T07:24:01.229Z",
+    "observed": {
+      "awaiting_verification": true,
+      "mail_delivery": "BLOCKED: array mail sink, external delivery excluded"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-06",
+    "feature": "F06",
+    "role": "Clinic Admin",
+    "scenario": "Staf: email duplikat dan password pendek ditolak",
+    "steps": [
+      "Form tambah staf",
+      "Email yang sudah ada",
+      "Password pendek",
+      "Simpan"
+    ],
+    "started": "2026-11-13T07:24:03.004Z",
+    "observed": {
+      "errors_visible": true,
+      "screenshot": "screenshots/ADM-06-staff-invalid.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-07",
+    "feature": "F06",
+    "role": "Clinic Admin",
+    "scenario": "Staf: deaktivasi dan aktivasi ulang dapat dikelola dari UI",
+    "steps": [
+      "Edit staf baru",
+      "Nonaktifkan",
+      "Simpan",
+      "Login staf ditolak",
+      "Aktifkan ulang"
+    ],
+    "started": "2026-11-13T07:24:03.603Z",
+    "observed": {
+      "deactivate_reactivate": true,
+      "history_retained": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-08",
+    "feature": "F06",
+    "role": "Clinic Admin",
+    "scenario": "Dokter: create dengan profil profesi dan relasi layanan",
+    "steps": [
+      "Tambah staf Dokter",
+      "Isi spesialisasi/SIP",
+      "Pilih layanan",
+      "Simpan",
+      "Buka ulang"
+    ],
+    "started": "2026-11-13T07:24:05.570Z",
+    "observed": {
+      "doctor_id": 3,
+      "service_link": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-09",
+    "feature": "F08",
+    "role": "Clinic Admin",
+    "scenario": "Jadwal: create/edit/nonaktif dan validasi bentrok",
+    "steps": [
+      "Jadwal dokter",
+      "Tambah jadwal",
+      "Pilih dokter baru",
+      "Isi sesi",
+      "Simpan",
+      "Ulangi sesi bentrok"
+    ],
+    "started": "2026-11-13T07:24:06.046Z",
+    "status": "FAIL",
+    "reason": "The expression evaluated to a falsy value:\n\n  assert.ok((await page.locator('body').innerText()).match(/bentrok|overlap|bertumpang/i))\n",
+    "error_type": "AssertionError",
+    "superseded_by": "RETEST-02",
+    "harness_note": "Assertion missed actual Indonesian word bertabrakan; create and rejection already worked."
+  },
+  {
+    "id": "ADM-10",
+    "feature": "F09",
+    "role": "Receptionist",
+    "scenario": "Pasien: create melalui menu dan buka ulang identitas",
+    "steps": [
+      "Menu Pasien",
+      "Pasien baru",
+      "Isi identitas dummy",
+      "Simpan",
+      "Edit alamat"
+    ],
+    "started": "2026-11-13T07:24:06.975Z",
+    "observed": {
+      "patient_id": 13,
+      "number_created": true,
+      "edit_persisted": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-11",
+    "feature": "F09",
+    "role": "Receptionist",
+    "scenario": "Pasien: telepon berformat salah ditolak dan error membantu",
+    "steps": [
+      "Pasien baru",
+      "Isi nama/lahir/gender valid",
+      "Telepon abc",
+      "Simpan"
+    ],
+    "started": "2026-11-13T07:24:07.653Z",
+    "status": "FAIL",
+    "reason": "Telepon abc diterima dan pasien tersimpan; bukti screenshots/ADM-11-invalid-phone.png\n\ntrue !== false\n",
+    "error_type": "AssertionError"
+  },
+  {
+    "id": "ADM-12",
+    "feature": "F10",
+    "role": "Receptionist",
+    "scenario": "Duplikat: kandidat tampil, tanpa persetujuan tidak menyimpan",
+    "steps": [
+      "Buat pasien dengan telepon pasien QA yang ada",
+      "Periksa kandidat",
+      "Simpan tanpa review",
+      "Centang review dan simpan"
+    ],
+    "started": "2026-11-13T07:24:08.230Z",
+    "observed": {
+      "review_required": true,
+      "shared_phone_supported": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-13",
+    "feature": "F09",
+    "role": "Receptionist",
+    "scenario": "Pencarian pasien: hasil dan empty state dari filter UI",
+    "steps": [
+      "Menu Pasien",
+      "Cari nama QA",
+      "Cari teks tanpa kecocokan",
+      "Periksa empty state"
+    ],
+    "started": "2026-11-13T07:24:08.975Z",
+    "observed": {
+      "search": true,
+      "empty_state": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-14",
+    "feature": "F05",
+    "role": "Clinic Admin",
+    "scenario": "Profil klinik: edit kontak lalu verifikasi halaman publik",
+    "steps": [
+      "Profil klinik",
+      "Ubah deskripsi",
+      "Simpan",
+      "Buka website publik"
+    ],
+    "started": "2026-11-13T07:24:09.650Z",
+    "observed": {
+      "cross_page_updated": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADM-15",
+    "feature": "F24",
+    "role": "Clinic Admin",
+    "scenario": "Audit aktivitas: tindakan admin muncul dan filter dapat digunakan",
+    "steps": [
+      "Menu Audit aktivitas",
+      "Cari event layanan/staf",
+      "Gunakan filter"
+    ],
+    "started": "2026-11-13T07:24:11.131Z",
+    "status": "FAIL",
+    "reason": "The expression evaluated to a falsy value:\n\n  assert.ok(/service.created|staff.created|patient.created/.test(text))\n",
+    "error_type": "AssertionError",
+    "superseded_by": "RETEST-03",
+    "harness_note": "First page contained other recent audit actions; action filter is the correct UI verification."
+  },
+  {
+    "id": "RETEST-01",
+    "feature": "F01",
+    "role": "Clinic Admin (non-owner)",
+    "scenario": "Login admin operasional dengan fixture tipe akun sah",
+    "steps": [
+      "Perbaiki tipe akun fixture menjadi null sesuai domain",
+      "Login",
+      "Periksa menu dan pembatasan subscription"
+    ],
+    "started": "2026-11-13T07:25:02.033Z",
+    "observed": {
+      "login": true,
+      "owner_actions_hidden": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RETEST-02",
+    "feature": "F08",
+    "role": "Clinic Admin",
+    "scenario": "Jadwal: pesan bertabrakan dan edit/nonaktif tersimpan",
+    "steps": [
+      "Buka tambah jadwal dokter QA",
+      "Buat sesi bertabrakan",
+      "Periksa pesan bertabrakan",
+      "Edit sesi yang ada dan nonaktifkan"
+    ],
+    "started": "2026-11-13T07:25:13.000Z",
+    "observed": {
+      "overlap_rejected": true,
+      "edit_deactivate": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RETEST-03",
+    "feature": "F24",
+    "role": "Clinic Admin",
+    "scenario": "Audit: filter action menemukan event yang dibuat melalui UI",
+    "steps": [
+      "Menu Audit aktivitas",
+      "Pilih service.created",
+      "Terapkan filter",
+      "Periksa baris"
+    ],
+    "started": "2026-11-13T07:25:13.855Z",
+    "observed": {
+      "action_filter": true,
+      "screenshot": "screenshots/RETEST-03-audit-filter.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-01",
+    "feature": "F01",
+    "role": "Guest",
+    "scenario": "Login password salah memberikan feedback dan tetap dapat dikoreksi",
+    "steps": [
+      "Buka masuk pasien",
+      "Isi email valid/password salah",
+      "Klik masuk",
+      "Periksa error",
+      "Koreksi password"
+    ],
+    "started": "2026-11-13T07:27:27.098Z",
+    "status": "FAIL",
+    "reason": "The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('body').innerText()).match(/match|cocok|kredensial/i))\n",
+    "error_type": "AssertionError",
+    "superseded_by": "AUTH-01-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "AUTH-02",
+    "feature": "F02",
+    "role": "Guest → Clinic Owner",
+    "scenario": "Registrasi owner, terms, verifikasi email dan onboarding melalui UI",
+    "steps": [
+      "Landing",
+      "Daftarkan klinik",
+      "Isi akun dummy",
+      "Setujui terms",
+      "Submit",
+      "Kirim ulang verifikasi",
+      "Buka tautan mail dummy"
+    ],
+    "started": "2026-11-13T07:27:28.261Z",
+    "observed": {
+      "registered": true,
+      "verification_link_followed": true,
+      "delivery": "private array mail capture"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-03",
+    "feature": "F04",
+    "role": "Clinic Owner",
+    "scenario": "Buat klinik dan aktivasi Free dari onboarding",
+    "steps": [
+      "Isi identitas klinik",
+      "Buat klinik",
+      "Pilih Free",
+      "Periksa dashboard dan kunjungi ulang onboarding"
+    ],
+    "started": "2026-11-13T07:27:30.744Z",
+    "observed": {
+      "created": true,
+      "free_active": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-04",
+    "feature": "F04",
+    "role": "Clinic Owner",
+    "scenario": "Trial dapat dimulai sekali dan paket trial terlihat",
+    "steps": [
+      "Buka subscription",
+      "Pilih Team trial",
+      "Periksa state trial dan ketidaktersediaan pemakaian ulang"
+    ],
+    "started": "2026-11-13T07:27:31.812Z",
+    "status": "FAIL",
+    "reason": "locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action$=\"/onboarding/plans/trial\"]').getByRole('button')\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "AUTH-04-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "AUTH-05",
+    "feature": "F02",
+    "role": "Guest → Patient",
+    "scenario": "Registrasi pasien termasuk password mismatch dan pemulihan",
+    "steps": [
+      "Buka daftar pasien",
+      "Isi konfirmasi password salah",
+      "Submit dan periksa error",
+      "Koreksi",
+      "Verifikasi melalui tautan dummy"
+    ],
+    "started": "2026-11-13T07:27:38.986Z",
+    "observed": {
+      "mismatch_rejected": true,
+      "registered_verified": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-06",
+    "feature": "F03",
+    "role": "Patient",
+    "scenario": "Profil: ubah nama dan password, password lama salah lalu koreksi",
+    "steps": [
+      "Kelola profil",
+      "Ubah nama",
+      "Simpan",
+      "Isi password lama salah",
+      "Periksa error",
+      "Isi password benar"
+    ],
+    "started": "2026-11-13T07:27:40.631Z",
+    "status": "FAIL",
+    "reason": "locator.fill: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#current_password')\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "AUTH-06-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "AUTH-07",
+    "feature": "F01",
+    "role": "Patient",
+    "scenario": "Lupa/reset password: tautan dummy, validasi, login password baru",
+    "steps": [
+      "Login",
+      "Lupa kata sandi",
+      "Kirim email",
+      "Buka tautan lokal",
+      "Isi password baru",
+      "Masuk ulang"
+    ],
+    "started": "2026-11-13T07:27:48.253Z",
+    "status": "FAIL",
+    "reason": "Private reset mail unavailable",
+    "error_type": "AssertionError",
+    "superseded_by": "AUTH-07-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "AUTH-08",
+    "feature": "F06",
+    "role": "Doctor",
+    "scenario": "Staf dokter baru dapat memverifikasi dan bekerja",
+    "steps": [
+      "Login dokter baru",
+      "Kirim ulang verifikasi",
+      "Buka tautan dummy",
+      "Periksa dashboard"
+    ],
+    "started": "2026-11-13T07:27:49.741Z",
+    "observed": {
+      "staff_verification": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-GOOGLE",
+    "feature": "F01",
+    "role": "Patient",
+    "scenario": "OAuth Google end-to-end",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: kredensial eksternal sengaja dikosongkan; tidak memakai akun pengguna."
+  },
+  {
+    "id": "BOOK-01",
+    "feature": "F08",
+    "role": "Clinic Admin",
+    "scenario": "Sesi dokter baru hari ini dapat dibuat dari UI",
+    "steps": [
+      "Jadwal dokter",
+      "Tambah jadwal dokter QA terverifikasi",
+      "Sesi hari ini mulai dua jam ke depan",
+      "Simpan"
+    ],
+    "started": "2026-11-13T07:29:35.413Z",
+    "observed": {
+      "schedule_id": 16,
+      "date": "2026-11-13",
+      "start": "16:00"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "BOOK-02",
+    "feature": "F11",
+    "role": "Receptionist",
+    "scenario": "Walk-in: buat booking dan periksa patient/appointment/queue tersimpan",
+    "steps": [
+      "Menu Booking & antrean",
+      "Booking baru",
+      "Isi pasien baru",
+      "Pilih dokter, tanggal, layanan, sesi memakai keyboard",
+      "Buat booking"
+    ],
+    "started": "2026-11-13T07:29:35.700Z",
+    "status": "FAIL",
+    "reason": "page.waitForFunction: Timeout 7000ms exceeded.",
+    "error_type": "TimeoutError",
+    "superseded_by": "BOOK-02-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "BOOK-03",
+    "feature": "F11",
+    "role": "Patient",
+    "scenario": "Booking publik terautentikasi dari halaman klinik sampai konfirmasi",
+    "steps": [
+      "Buka website klinik",
+      "Klik booking",
+      "Pilih dokter dan sesi",
+      "Lengkapi identitas",
+      "Konfirmasi",
+      "Lihat Booking saya"
+    ],
+    "started": "2026-11-13T07:29:43.002Z",
+    "status": "FAIL",
+    "reason": "page.waitForFunction: Timeout 7000ms exceeded.",
+    "error_type": "TimeoutError",
+    "superseded_by": "BOOK-03-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "QUEUE-01",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "Check-in mengubah BOOKED ke WAITING tanpa membuat visit",
+    "steps": [
+      "Antrean hari ini",
+      "Cari booking QA",
+      "Klik Check-in",
+      "Periksa status dan DB"
+    ],
+    "started": "2026-11-13T07:29:50.964Z",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: booking gagal",
+    "error_type": "AssertionError",
+    "superseded_by": "QUEUE-01-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "QUEUE-02",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "FIFO: panggil urutan kedua ditolak tanpa merusak state",
+    "steps": [
+      "Check-in pasien kedua",
+      "Klik Panggil pada urutan kedua",
+      "Periksa pesan urutan paling awal"
+    ],
+    "started": "2026-11-13T07:29:50.965Z",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: booking pasien gagal",
+    "error_type": "AssertionError",
+    "superseded_by": "QUEUE-02-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "QUEUE-03",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "Call, skip, return, call lagi mengikuti lifecycle",
+    "steps": [
+      "Panggil pertama",
+      "Lewati",
+      "Kembalikan",
+      "Panggil ulang"
+    ],
+    "started": "2026-11-13T07:29:50.966Z",
+    "status": "FAIL",
+    "reason": "locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action$=\"/queues/undefined/call\"]').getByRole('button', { name: 'Panggil', exact: true })\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "QUEUE-03-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "QUEUE-04",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "Satu panggilan aktif: panggilan kedua ditolak dengan feedback",
+    "steps": [
+      "Sementara panggilan pertama aktif",
+      "Klik panggil pasien kedua",
+      "Periksa state dan pesan"
+    ],
+    "started": "2026-11-13T07:29:58.153Z",
+    "status": "FAIL",
+    "reason": "locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action$=\"/queues/undefined/call\"]').getByRole('button', { name: 'Panggil', exact: true })\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "QUEUE-04-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "QUEUE-05",
+    "feature": "F15",
+    "role": "Doctor",
+    "scenario": "Handoff resepsionis → dokter membuat visit ketika mulai periksa",
+    "steps": [
+      "Login dokter QA",
+      "Antrean saya",
+      "Mulai periksa pasien yang dipanggil",
+      "Periksa visit dan editor"
+    ],
+    "started": "2026-11-13T07:30:05.285Z",
+    "status": "FAIL",
+    "reason": "locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action$=\"/queues/undefined/start\"]').getByRole('button', { name: 'Mulai periksa' })\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "QUEUE-05-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "QUEUE-06",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "Cancel antrean kedua memperbarui appointment dan portal pasien",
+    "steps": [
+      "Antrean hari ini",
+      "Klik Batalkan pada pasien kedua",
+      "Setujui dialog",
+      "Buka ulang portal pasien"
+    ],
+    "started": "2026-11-13T07:30:12.381Z",
+    "status": "FAIL",
+    "reason": "locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action$=\"/queues/undefined/cancel\"]').getByRole('button', { name: 'Batalkan', exact: true })\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "QUEUE-06-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "BOOK-04",
+    "feature": "F11",
+    "role": "Receptionist",
+    "scenario": "Pasien terdaftar dapat dipilih untuk booking berulang",
+    "steps": [
+      "Detail pasien QA",
+      "Buat booking",
+      "Pilih dokter/sesi",
+      "Simpan"
+    ],
+    "started": "2026-11-13T07:30:19.512Z",
+    "status": "FAIL",
+    "reason": "page.waitForFunction: Timeout 7000ms exceeded.",
+    "error_type": "TimeoutError",
+    "superseded_by": "BOOK-04-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "QUEUE-07",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "No-show sebelum sesi dimulai: batal dialog aman dan konfirmasi memberi alasan penolakan",
+    "steps": [
+      "Klik No-show",
+      "Dismiss dialog",
+      "Periksa tidak berubah",
+      "Klik ulang dan accept",
+      "Periksa error waktu"
+    ],
+    "started": "2026-11-13T07:30:26.798Z",
+    "status": "FAIL",
+    "reason": "locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action$=\"/queues/undefined/no-show\"] button')\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "QUEUE-07-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "BOOK-05",
+    "feature": "F12",
+    "role": "Receptionist",
+    "scenario": "Pembatalan booking sebelum sesi dimulai tersimpan setelah reload",
+    "steps": [
+      "Detail booking pasien terdaftar",
+      "Isi alasan",
+      "Klik batalkan",
+      "Accept",
+      "Reload"
+    ],
+    "started": "2026-11-13T07:30:33.903Z",
+    "status": "FAIL",
+    "reason": "locator.fill: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[name=cancel_reason]')\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "BOOK-05-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "BOOK-06",
+    "feature": "F12",
+    "role": "Patient",
+    "scenario": "Pembatalan setelah sesi dimulai menampilkan alasan penolakan",
+    "steps": [
+      "Buka booking demo hari ini yang sesinya sudah dimulai",
+      "Klik batalkan dan accept",
+      "Periksa feedback"
+    ],
+    "started": "2026-11-13T07:30:40.996Z",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: tidak ada fixture booking dimulai",
+    "error_type": "AssertionError",
+    "superseded_by": "BOOK-06-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "BOOK-07",
+    "feature": "F14",
+    "role": "Guest",
+    "scenario": "Display publik tidak menampilkan identitas pasien dan tersedia di mobile",
+    "steps": [
+      "Buka display publik",
+      "Periksa nomor antrean",
+      "Periksa tidak ada nama pasien QA/NIK/RM",
+      "Resize 375"
+    ],
+    "started": "2026-11-13T07:30:40.997Z",
+    "observed": {
+      "no_patient_name": true,
+      "responsive": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "BOOK-02-R1",
+    "feature": "F11",
+    "role": "Receptionist",
+    "scenario": "Walk-in: buat booking dan periksa patient/appointment/queue tersimpan",
+    "steps": [
+      "Menu Booking & antrean",
+      "Booking baru",
+      "Isi pasien baru",
+      "Pilih dokter, tanggal, layanan, sesi memakai keyboard",
+      "Buat booking"
+    ],
+    "started": "2026-11-13T07:30:56.987Z",
+    "observed": {
+      "appointment_id": 22,
+      "queue_id": 22,
+      "visit_not_created_yet": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "BOOK-03-R1",
+    "feature": "F11",
+    "role": "Patient",
+    "scenario": "Booking publik terautentikasi dari halaman klinik sampai konfirmasi",
+    "steps": [
+      "Buka website klinik",
+      "Klik booking",
+      "Pilih dokter dan sesi",
+      "Lengkapi identitas",
+      "Konfirmasi",
+      "Lihat Booking saya"
+    ],
+    "started": "2026-11-13T07:30:57.591Z",
+    "observed": {
+      "appointment_id": 23,
+      "listed_in_patient_portal": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "QUEUE-01-R1",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "Check-in mengubah BOOKED ke WAITING tanpa membuat visit",
+    "steps": [
+      "Antrean hari ini",
+      "Cari booking QA",
+      "Klik Check-in",
+      "Periksa status dan DB"
+    ],
+    "started": "2026-11-13T07:30:58.962Z",
+    "observed": {
+      "queue": "WAITING",
+      "visit_count": 0
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "QUEUE-02-R1",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "FIFO: panggil urutan kedua ditolak tanpa merusak state",
+    "steps": [
+      "Check-in pasien kedua",
+      "Klik Panggil pada urutan kedua",
+      "Periksa pesan urutan paling awal"
+    ],
+    "started": "2026-11-13T07:30:59.655Z",
+    "status": "FAIL",
+    "reason": "The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('[data-queue-action-feedback]').innerText()).match(/paling awal/))\n",
+    "error_type": "AssertionError"
+  },
+  {
+    "id": "QUEUE-03-R1",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "Call, skip, return, call lagi mengikuti lifecycle",
+    "steps": [
+      "Panggil pertama",
+      "Lewati",
+      "Kembalikan",
+      "Panggil ulang"
+    ],
+    "started": "2026-11-13T07:31:01.008Z",
+    "observed": {
+      "transitions": [
+        "CALLED",
+        "SKIPPED",
+        "WAITING",
+        "CALLED"
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "QUEUE-04-R1",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "Satu panggilan aktif: panggilan kedua ditolak dengan feedback",
+    "steps": [
+      "Sementara panggilan pertama aktif",
+      "Klik panggil pasien kedua",
+      "Periksa state dan pesan"
+    ],
+    "started": "2026-11-13T07:31:03.579Z",
+    "status": "FAIL",
+    "reason": "The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('[data-queue-action-feedback]').innerText()).includes('panggilan aktif'))\n",
+    "error_type": "AssertionError"
+  },
+  {
+    "id": "QUEUE-05-R1",
+    "feature": "F15",
+    "role": "Doctor",
+    "scenario": "Handoff resepsionis → dokter membuat visit ketika mulai periksa",
+    "steps": [
+      "Login dokter QA",
+      "Antrean saya",
+      "Mulai periksa pasien yang dipanggil",
+      "Periksa visit dan editor"
+    ],
+    "started": "2026-11-13T07:31:04.250Z",
+    "observed": {
+      "visit_id": 15,
+      "queue": "IN_PROGRESS"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "QUEUE-06-R1",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "Cancel antrean kedua memperbarui appointment dan portal pasien",
+    "steps": [
+      "Antrean hari ini",
+      "Klik Batalkan pada pasien kedua",
+      "Setujui dialog",
+      "Buka ulang portal pasien"
+    ],
+    "started": "2026-11-13T07:31:05.252Z",
+    "observed": {
+      "appointment": "CANCELLED",
+      "queue": "CANCELLED",
+      "cancel_action_removed": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "BOOK-04-R1",
+    "feature": "F11",
+    "role": "Receptionist",
+    "scenario": "Pasien terdaftar dapat dipilih untuk booking berulang",
+    "steps": [
+      "Detail pasien QA",
+      "Buat booking",
+      "Pilih dokter/sesi",
+      "Simpan"
+    ],
+    "started": "2026-11-13T07:31:05.986Z",
+    "observed": {
+      "existing_patient_reused": true,
+      "appointment_id": 24
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "QUEUE-07-R1",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "No-show sebelum sesi dimulai: batal dialog aman dan konfirmasi memberi alasan penolakan",
+    "steps": [
+      "Klik No-show",
+      "Dismiss dialog",
+      "Periksa tidak berubah",
+      "Klik ulang dan accept",
+      "Periksa error waktu"
+    ],
+    "started": "2026-11-13T07:31:06.436Z",
+    "status": "FAIL",
+    "reason": "The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('[data-queue-action-feedback]').innerText()).includes('setelah sesi dimulai'))\n",
+    "error_type": "AssertionError"
+  },
+  {
+    "id": "BOOK-05-R1",
+    "feature": "F12",
+    "role": "Receptionist",
+    "scenario": "Pembatalan booking sebelum sesi dimulai tersimpan setelah reload",
+    "steps": [
+      "Detail booking pasien terdaftar",
+      "Isi alasan",
+      "Klik batalkan",
+      "Accept",
+      "Reload"
+    ],
+    "started": "2026-11-13T07:31:07.211Z",
+    "observed": {
+      "cancelled": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "BOOK-06-R1",
+    "feature": "F12",
+    "role": "Patient",
+    "scenario": "Pembatalan setelah sesi dimulai menampilkan alasan penolakan",
+    "steps": [
+      "Buka booking demo hari ini yang sesinya sudah dimulai",
+      "Klik batalkan dan accept",
+      "Periksa feedback"
+    ],
+    "started": "2026-11-13T07:31:07.921Z",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: tidak ada fixture booking dimulai",
+    "error_type": "AssertionError",
+    "superseded_by": "CROSS-05",
+    "harness_note": "Missing initial fixture was replaced by a real UI booking in a started session."
+  },
+  {
+    "id": "RME-01",
+    "feature": "F16",
+    "role": "Doctor",
+    "scenario": "Autosave SOAP, vital, diagnosis dan tindakan tersimpan tanpa submit",
+    "steps": [
+      "Isi SOAP sintetis",
+      "Isi berat/tekanan darah",
+      "Isi diagnosis/tindakan",
+      "Berhenti mengetik",
+      "Reload"
+    ],
+    "started": "2026-11-13T07:33:04.785Z",
+    "observed": {
+      "autosave_persisted": true,
+      "structured_rows_persisted": true,
+      "record_version": 1
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-02",
+    "feature": "F16",
+    "role": "Doctor",
+    "scenario": "Nilai vital tidak masuk akal ditandai dan dapat dikoreksi",
+    "steps": [
+      "Isi sistolik 999",
+      "Tunggu autosave",
+      "Periksa aria-invalid",
+      "Koreksi 120",
+      "Tunggu tersimpan"
+    ],
+    "started": "2026-11-13T07:33:06.251Z",
+    "observed": {
+      "invalid_rejected": true,
+      "recovered": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-03",
+    "feature": "F17",
+    "role": "Doctor",
+    "scenario": "Alergi kritis: catat melalui editor dan tampil setelah reload",
+    "steps": [
+      "Tinjau/catat alergi pasien",
+      "Buka Catat alergi",
+      "Isi zat/reaction/severity",
+      "Simpan alergi",
+      "Periksa banner"
+    ],
+    "started": "2026-11-13T07:33:08.943Z",
+    "observed": {
+      "allergy_id": 3,
+      "critical_banner": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-04",
+    "feature": "F18",
+    "role": "Doctor",
+    "scenario": "Resep: warning kelengkapan dan acknowledgement alergi sebelum tersimpan",
+    "steps": [
+      "Isi hanya nama obat",
+      "Periksa finalisasi disabled",
+      "Lengkapi dosis/frekuensi/jumlah",
+      "Centang review alergi",
+      "Tunggu autosave"
+    ],
+    "started": "2026-11-13T07:33:09.271Z",
+    "observed": {
+      "incomplete_warning": true,
+      "acknowledgement": true,
+      "prescription_persisted": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-05",
+    "feature": "F16",
+    "role": "Doctor",
+    "scenario": "Dua tab: stale autosave ditolak tanpa menimpa perubahan terbaru",
+    "steps": [
+      "Buka record di tab kedua",
+      "Edit tab pertama dan tunggu tersimpan",
+      "Edit tab kedua",
+      "Periksa konflik dan nilai DB"
+    ],
+    "started": "2026-11-13T07:33:11.915Z",
+    "observed": {
+      "stale_rejected": true,
+      "newer_preserved": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-06",
+    "feature": "F16",
+    "role": "Doctor",
+    "scenario": "Koneksi putus: perubahan tetap di editor dan tersimpan setelah pulih",
+    "steps": [
+      "Offline browser",
+      "Ubah objective",
+      "Tunggu error autosave",
+      "Online kembali",
+      "Periksa DB"
+    ],
+    "started": "2026-11-13T07:33:15.837Z",
+    "observed": {
+      "editor_retained": true,
+      "reconnect_saved": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-07",
+    "feature": "F19",
+    "role": "Doctor",
+    "scenario": "Foto dummy: pilih, simpan manual, buka ulang dan endpoint privat",
+    "steps": [
+      "Unggah PNG dummy",
+      "Klik Simpan draft",
+      "Reload",
+      "Buka foto dari UI"
+    ],
+    "started": "2026-11-13T07:33:17.143Z",
+    "observed": {
+      "photo_persisted": true,
+      "private_endpoint": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-08",
+    "feature": "F20",
+    "role": "Doctor",
+    "scenario": "Finalisasi: keyboard dialog, batal lalu konfirmasi dan status atomik",
+    "steps": [
+      "Tinjau & finalisasi",
+      "Tekan Escape",
+      "Buka lagi",
+      "Finalisasi kunjungan",
+      "Periksa RME/visit/appointment/queue"
+    ],
+    "started": "2026-11-13T07:33:17.597Z",
+    "status": "FAIL",
+    "reason": "locator.waitFor: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#correction_reason') to be visible\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "RME-08-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "RME-09",
+    "feature": "F20",
+    "role": "Doctor",
+    "scenario": "Modification: alasan pendek diblok, koreksi sah membuat histori",
+    "steps": [
+      "Isi alasan pendek",
+      "Periksa minlength",
+      "Isi alasan sah",
+      "Ubah assessment",
+      "Simpan Modification",
+      "Buka Version history"
+    ],
+    "started": "2026-11-13T07:33:25.800Z",
+    "status": "FAIL",
+    "reason": "locator.fill: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#correction_reason')\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "RME-09-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "RME-10",
+    "feature": "F17",
+    "role": "Doctor",
+    "scenario": "Alergi: nonaktifkan dengan histori tetap ada",
+    "steps": [
+      "Buka detail alergi",
+      "Uncheck aktif",
+      "Perbarui alergi",
+      "Periksa DB dan banner"
+    ],
+    "started": "2026-11-13T07:33:32.807Z",
+    "observed": {
+      "inactive": true,
+      "row_retained": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-11",
+    "feature": "F15",
+    "role": "Clinic Admin / Receptionist / Platform Admin / unrelated Doctor",
+    "scenario": "Role lain tidak dapat membuka isi visit dokter QA",
+    "steps": [
+      "Login per role",
+      "Buka URL visit langsung",
+      "Periksa 403"
+    ],
+    "started": "2026-11-13T07:33:33.132Z",
+    "observed": {
+      "admin": 403,
+      "receptionist": 403,
+      "platform": 403,
+      "doctor": 403
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-12",
+    "feature": "F15",
+    "role": "Doctor",
+    "scenario": "Record final dapat ditemukan kembali melalui menu Rekam medis",
+    "steps": [
+      "Menu Rekam medis",
+      "Cari pasien QA",
+      "Buka record yang sudah final"
+    ],
+    "started": "2026-11-13T07:33:37.525Z",
+    "status": "FAIL",
+    "reason": "locator.waitFor: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#correction_reason') to be visible\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "superseded_by": "RME-12-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "RME-DENTAL",
+    "feature": "F21",
+    "role": "Doctor",
+    "scenario": "Odontogram dengan entitlement aktif: edit dan persist",
+    "status": "NOT TESTED",
+    "reason": "Dijalankan pada fase add-on/dental, membutuhkan fixture entitlement dummy.",
+    "superseded_by": "DENT-01",
+    "harness_note": "Entitlement fixture and browser persistence were subsequently executed."
+  },
+  {
+    "id": "RME-08-R1",
+    "feature": "F20",
+    "role": "Doctor",
+    "scenario": "Finalisasi: keyboard dialog, batal lalu konfirmasi dan status atomik",
+    "steps": [
+      "Tinjau & finalisasi",
+      "Tekan Escape",
+      "Buka lagi",
+      "Finalisasi kunjungan",
+      "Periksa RME/visit/appointment/queue"
+    ],
+    "started": "2026-11-13T07:34:06.854Z",
+    "status": "FAIL",
+    "reason": "no such column: v.queue_id",
+    "error_type": "Error",
+    "failure_screenshots": [
+      "screenshots/RME-08-R1-failure-0.png"
+    ],
+    "superseded_by": "RME-08-R2",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "RME-09-R1",
+    "feature": "F20",
+    "role": "Doctor",
+    "scenario": "Modification: alasan pendek diblok, koreksi sah membuat histori",
+    "steps": [
+      "Isi alasan pendek",
+      "Periksa minlength",
+      "Isi alasan sah",
+      "Ubah assessment",
+      "Simpan Modification",
+      "Buka Version history"
+    ],
+    "started": "2026-11-13T07:34:07.659Z",
+    "status": "FAIL",
+    "reason": "locator.check: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#critical_allergies_acknowledged')\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/RME-09-R1-failure-0.png"
+    ],
+    "superseded_by": "RME-09-R2",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "RME-12-R1",
+    "feature": "F15",
+    "role": "Doctor",
+    "scenario": "Record final dapat ditemukan kembali melalui menu Rekam medis",
+    "steps": [
+      "Menu Rekam medis",
+      "Cari pasien QA",
+      "Buka record yang sudah final"
+    ],
+    "started": "2026-11-13T07:34:15.154Z",
+    "status": "FAIL",
+    "reason": "page.goto: net::ERR_ABORTED at [url]\nCall log:\n\u001b[2m  - navigating to \"[url] waiting until \"load\"\u001b[22m\n",
+    "error_type": "Error",
+    "failure_screenshots": [
+      "screenshots/RME-12-R1-failure-0.png"
+    ],
+    "superseded_by": "RME-12-R2",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "RME-08-R2",
+    "feature": "F20",
+    "role": "Doctor",
+    "scenario": "Finalisasi: keyboard dialog, batal lalu konfirmasi dan status atomik",
+    "steps": [
+      "Tinjau & finalisasi",
+      "Tekan Escape",
+      "Buka lagi",
+      "Finalisasi kunjungan",
+      "Periksa RME/visit/appointment/queue"
+    ],
+    "started": "2026-11-13T07:34:50.582Z",
+    "observed": {
+      "visit": "COMPLETED",
+      "appointment": "COMPLETED",
+      "queue": "COMPLETED",
+      "medical_record": "FINAL",
+      "note": "UI finalize ran in preceding attempt; corrected assertion joins queue by appointment_id."
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-09-R2",
+    "feature": "F20",
+    "role": "Doctor",
+    "scenario": "Modification: alasan pendek diblok, koreksi sah membuat histori",
+    "steps": [
+      "Isi alasan pendek",
+      "Periksa minlength",
+      "Isi alasan sah",
+      "Ubah assessment",
+      "Simpan Modification",
+      "Buka Version history"
+    ],
+    "started": "2026-11-13T07:34:50.585Z",
+    "status": "FAIL",
+    "reason": "locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('summary').filter({ hasText: /histori|Version|Modification/i }).first()\u001b[22m\n\u001b[2m    - locator resolved to <summary tabindex=\"0\" x-bind:tabindex=\"clipped ? 0 : -1\" x-on:click=\"if (! clipped) $event.preventDefault()\" x-bind:class=\"clipped ? 'cursor-pointer' : 'cursor-default'\" class=\"list-none focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 focus-visible:ring-offset-2 cursor-pointer\">…</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    14 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/RME-09-R2-failure-0.png"
+    ],
+    "superseded_by": "RME-09-R3",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "RME-12-R2",
+    "feature": "F15",
+    "role": "Doctor",
+    "scenario": "Record final dapat ditemukan kembali melalui menu Rekam medis",
+    "steps": [
+      "Menu Rekam medis",
+      "Cari pasien QA",
+      "Buka record yang sudah final"
+    ],
+    "started": "2026-11-13T07:35:00.119Z",
+    "observed": {
+      "reopened_from_index": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "RME-09-R3",
+    "feature": "F20",
+    "role": "Doctor",
+    "scenario": "Modification: alasan pendek diblok, koreksi sah membuat histori",
+    "steps": [
+      "Isi alasan pendek",
+      "Periksa minlength",
+      "Isi alasan sah",
+      "Ubah assessment",
+      "Simpan Modification",
+      "Buka Version history"
+    ],
+    "started": "2026-11-13T07:36:02.856Z",
+    "observed": {
+      "revision_count": 1,
+      "status": "FINAL",
+      "screenshot": "screenshots/RME-09-history-open.png",
+      "note": "Correction was saved in earlier attempt; retest uses outer visible history summary."
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-01-R1",
+    "feature": "F01",
+    "role": "Guest",
+    "scenario": "Login password salah memberikan feedback dan dapat dikoreksi",
+    "steps": [
+      "Isi password salah",
+      "Tunggu respons Livewire",
+      "Periksa feedback",
+      "Koreksi dan login"
+    ],
+    "started": "2026-11-13T07:37:07.447Z",
+    "status": "FAIL",
+    "reason": "The expression evaluated to a falsy value:\n\n  assert.ok((await p.locator('body').innerText()).match(/match|cocok|kredensial/i))\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/AUTH-01-R1-failure-0.png"
+    ],
+    "superseded_by": "AUTH-01-R2",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "AUTH-04-R1",
+    "feature": "F04",
+    "role": "Clinic Owner",
+    "scenario": "Trial Team pada aktivasi awal, satu kali per klinik",
+    "steps": [
+      "Daftar owner kedua",
+      "Verifikasi dummy",
+      "Buat klinik baru",
+      "Pilih trial sebelum paket apa pun",
+      "Buka ulang paket"
+    ],
+    "started": "2026-11-13T07:37:08.436Z",
+    "observed": {
+      "trial_activated": true,
+      "repeat_unavailable": true,
+      "note": "UI offers trial only before initial subscription; preceding attempt incorrectly expected it after Free."
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-06-R1",
+    "feature": "F03",
+    "role": "Patient",
+    "scenario": "Profil: ubah password, password lama salah ditolak lalu dikoreksi",
+    "steps": [
+      "Profil",
+      "Isi password saat ini salah",
+      "Periksa error",
+      "Isi benar",
+      "Login password baru"
+    ],
+    "started": "2026-11-13T07:37:10.151Z",
+    "observed": {
+      "wrong_old_password_rejected": true,
+      "new_password_login": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-07-R1",
+    "feature": "F01",
+    "role": "Patient",
+    "scenario": "Lupa/reset password melalui email dummy lalu login",
+    "steps": [
+      "Lupa password",
+      "Kirim tautan",
+      "Tunggu respons Livewire",
+      "Buka tautan private dummy",
+      "Reset",
+      "Login"
+    ],
+    "started": "2026-11-13T07:37:12.655Z",
+    "status": "FAIL",
+    "reason": "page.waitForResponse: Timeout 7000ms exceeded while waiting for event \"response\"",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/AUTH-07-R1-failure-0.png",
+      "screenshots/AUTH-07-R1-failure-1.png"
+    ],
+    "superseded_by": "AUTH-07-R2",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "AUTH-09",
+    "feature": "F03",
+    "role": "Patient",
+    "scenario": "Hapus akun tanpa histori: batal dialog, password salah, lalu hapus sah",
+    "steps": [
+      "Profil",
+      "Hapus akun",
+      "Escape",
+      "Buka ulang",
+      "Password salah",
+      "Password benar",
+      "Periksa logout dan akun hilang"
+    ],
+    "started": "2026-11-13T07:37:20.242Z",
+    "status": "FAIL",
+    "reason": "page.waitForURL: Timeout 7000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/AUTH-09-failure-0.png",
+      "screenshots/AUTH-09-failure-1.png",
+      "screenshots/AUTH-09-failure-2.png"
+    ],
+    "superseded_by": "AUTH-09-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "AUTH-10",
+    "feature": "F03",
+    "role": "Clinic Owner",
+    "scenario": "Owner yang memiliki klinik ditolak hapus akun dengan alasan jelas",
+    "steps": [
+      "Owner QA",
+      "Profil",
+      "Hapus akun",
+      "Password benar",
+      "Periksa penolakan dan akun tetap ada"
+    ],
+    "started": "2026-11-13T07:37:27.786Z",
+    "observed": {
+      "owner_retained": true,
+      "message": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-01-R2",
+    "feature": "F01",
+    "role": "Guest",
+    "scenario": "Login password salah memberikan feedback dan dapat dikoreksi",
+    "steps": [
+      "Isi password salah",
+      "Tunggu respons Livewire",
+      "Periksa feedback",
+      "Koreksi dan login"
+    ],
+    "started": "2026-11-13T07:37:35.371Z",
+    "observed": {
+      "invalid_rejected": true,
+      "recovered": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-07-R2",
+    "feature": "F01",
+    "role": "Patient",
+    "scenario": "Lupa/reset password melalui email dummy lalu login",
+    "steps": [
+      "Lupa password",
+      "Kirim tautan",
+      "Tunggu respons Livewire",
+      "Buka tautan private dummy",
+      "Reset",
+      "Login"
+    ],
+    "started": "2026-11-13T07:37:36.710Z",
+    "status": "FAIL",
+    "reason": "page.waitForResponse: Timeout 7000ms exceeded while waiting for event \"response\"",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/AUTH-07-R2-failure-0.png"
+    ],
+    "superseded_by": "AUTH-07-R3",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "AUTH-09-R1",
+    "feature": "F03",
+    "role": "Patient",
+    "scenario": "Hapus akun tanpa histori: batal dialog, password salah, lalu hapus sah",
+    "steps": [
+      "Profil",
+      "Hapus akun",
+      "Escape",
+      "Buka ulang",
+      "Password salah",
+      "Password benar",
+      "Periksa logout dan akun hilang"
+    ],
+    "started": "2026-11-13T07:37:44.213Z",
+    "status": "FAIL",
+    "reason": "page.waitForURL: Timeout 7000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/AUTH-09-R1-failure-0.png",
+      "screenshots/AUTH-09-R1-failure-1.png"
+    ],
+    "superseded_by": "AUTH-09-R2",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "AUTH-07-R3",
+    "feature": "F01",
+    "role": "Patient",
+    "scenario": "Lupa/reset password melalui email dummy lalu login",
+    "steps": [
+      "Lupa password",
+      "Kirim tautan",
+      "Tunggu respons Livewire",
+      "Buka tautan private dummy",
+      "Reset",
+      "Login"
+    ],
+    "started": "2026-11-13T07:38:20.180Z",
+    "observed": {
+      "reset": true,
+      "new_login": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "AUTH-09-R2",
+    "feature": "F03",
+    "role": "Patient",
+    "scenario": "Hapus akun tanpa histori: batal dialog, password salah, lalu hapus sah",
+    "steps": [
+      "Profil",
+      "Hapus akun",
+      "Escape",
+      "Buka ulang",
+      "Password salah",
+      "Password benar",
+      "Periksa logout dan akun hilang"
+    ],
+    "started": "2026-11-13T07:38:24.328Z",
+    "observed": {
+      "dismiss_safe": true,
+      "wrong_password_rejected": true,
+      "deleted": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "SUB-01",
+    "feature": "F25",
+    "role": "Clinic Owner",
+    "scenario": "Invoice subscription: list, semua status aktual, detail dan kembali",
+    "steps": [
+      "Menu Subscription",
+      "Buka tiap status invoice demo",
+      "Periksa nominal/status/pesan",
+      "Kembali"
+    ],
+    "started": "2026-11-13T07:39:59.546Z",
+    "observed": {
+      "statuses": [
+        "expired",
+        "failed",
+        "paid",
+        "pending",
+        "refunded",
+        "review"
+      ],
+      "detail_reopened": true,
+      "fixture": "DemoSeeder; provider not contacted"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "SUB-02",
+    "feature": "F26",
+    "role": "Clinic Owner",
+    "scenario": "Checkout provider tidak tersedia: error terbaca dan subscription tetap",
+    "steps": [
+      "Lihat paket",
+      "Pilih bayar Individual",
+      "Periksa error checkout",
+      "Periksa status subscription"
+    ],
+    "started": "2026-11-13T07:40:04.517Z",
+    "observed": {
+      "error_visible": true,
+      "subscription_not_activated": true,
+      "screenshot": "screenshots/SUB-02-checkout-failure.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "SUB-03",
+    "feature": "F27",
+    "role": "Clinic Owner",
+    "scenario": "Add-on Free/trial menjelaskan prasyarat tanpa tombol bayar",
+    "steps": [
+      "Login owner Free dan trial",
+      "Menu Add-on odontogram",
+      "Periksa alasan/prasyarat"
+    ],
+    "started": "2026-11-13T07:40:04.825Z",
+    "observed": {
+      "restricted_states": [
+        "free",
+        "trial"
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "SUB-04",
+    "feature": "F25",
+    "role": "Clinic Admin / Patient / Receptionist",
+    "scenario": "Halaman pembayaran owner menolak role lain dan tenant lain",
+    "steps": [
+      "Login tiap role",
+      "Buka halaman invoice main clinic",
+      "Periksa 403/404"
+    ],
+    "started": "2026-11-13T07:40:06.637Z",
+    "observed": {
+      "operational-admin": 403,
+      "receptionist": 403,
+      "patient": 403,
+      "other-owner": 404
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "PLAT-01",
+    "feature": "F28",
+    "role": "Platform Admin",
+    "scenario": "Cari tenant melalui nama/slug dan empty state",
+    "steps": [
+      "Tenant klinik",
+      "Cari qa-klinik-baru",
+      "Buka detail",
+      "Kembali",
+      "Cari tidak ada"
+    ],
+    "started": "2026-11-13T07:40:10.955Z",
+    "observed": {
+      "search": true,
+      "detail": true,
+      "empty": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "PLAT-02",
+    "feature": "F29",
+    "role": "Platform Admin",
+    "scenario": "Harga paket: edit dan landing berubah, invoice lama tetap snapshot",
+    "steps": [
+      "Paket & harga",
+      "Ubah harga Individual bulanan",
+      "Simpan",
+      "Buka landing",
+      "Periksa invoice lama",
+      "Pulihkan harga"
+    ],
+    "started": "2026-11-13T07:40:12.176Z",
+    "observed": {
+      "price_updated": true,
+      "landing_updated": true,
+      "snapshots_unchanged": true,
+      "restored": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "PLAT-03",
+    "feature": "F29",
+    "role": "Platform Admin",
+    "scenario": "Paket: nonaktif/aktif memengaruhi katalog checkout",
+    "steps": [
+      "Nonaktifkan Individual",
+      "Buka katalog owner",
+      "Periksa paket hilang",
+      "Aktifkan ulang"
+    ],
+    "started": "2026-11-13T07:40:13.012Z",
+    "observed": {
+      "toggle": true,
+      "checkout_catalog_filtered": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "PLAT-04",
+    "feature": "F29",
+    "role": "Platform Admin",
+    "scenario": "Katalog add-on: edit nominal dan pulihkan",
+    "steps": [
+      "Edit harga add-on",
+      "Simpan",
+      "Periksa tersimpan",
+      "Pulihkan"
+    ],
+    "started": "2026-11-13T07:40:13.472Z",
+    "observed": {
+      "addon_catalog_edit": true,
+      "restored": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "PLAT-05",
+    "feature": "F30",
+    "role": "Platform Admin",
+    "scenario": "Grant manual dan downgrade Free mempertahankan histori",
+    "steps": [
+      "Buka tenant QA baru",
+      "Pilih Individual satu bulan",
+      "Isi alasan dan Berikan akses",
+      "Downgrade Free dengan alasan",
+      "Periksa periode lama tetap ada"
+    ],
+    "started": "2026-11-13T07:40:13.821Z",
+    "observed": {
+      "grant": true,
+      "downgrade": true,
+      "history_retained": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "PLAT-06",
+    "feature": "F31",
+    "role": "Platform Admin",
+    "scenario": "Pembayaran review: catat refund manual dummy dan event tetap ada",
+    "steps": [
+      "Pembayaran",
+      "Cari invoice review demo",
+      "Buka detail",
+      "Isi alasan refund sintetis",
+      "Tandai refunded",
+      "Reload"
+    ],
+    "started": "2026-11-13T07:40:14.490Z",
+    "observed": {
+      "dummy_refund_recorded": true,
+      "provider_transaction": false,
+      "history_retained": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "SUB-05",
+    "feature": "F25",
+    "role": "Expired / Suspended Owner",
+    "scenario": "Subscription membatasi tulis sambil mempertahankan baca",
+    "steps": [
+      "Login owner expired/suspended",
+      "Buka daftar layanan",
+      "Buka tambah dan simpan dummy",
+      "Periksa penolakan tanpa insert"
+    ],
+    "started": "2026-11-13T07:40:14.865Z",
+    "observed": {
+      "statuses": {
+        "expired": 403,
+        "suspended": 403
+      },
+      "read": true,
+      "write_rejected": true,
+      "note": "Create action remains enabled despite read-only banner; UX limitation."
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DOKU-SUCCESS",
+    "feature": "F26",
+    "role": "Clinic Owner",
+    "scenario": "Checkout dan pembayaran DOKU sukses end-to-end",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: tidak ada kredensial provider dummy untuk audit ini; tidak melakukan pembayaran nyata."
+  },
+  {
+    "id": "DOKU-RECONCILE",
+    "feature": "F26",
+    "role": "Clinic Owner / Platform Admin",
+    "scenario": "Reconciliation dari provider lewat UI",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: provider sengaja dinonaktifkan; regression fake-provider berjalan terpisah."
+  },
+  {
+    "id": "DOKU-WEBHOOK",
+    "feature": "F26",
+    "role": "System",
+    "scenario": "Notification valid provider mengaktifkan paket",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: tidak ada provider callback nyata pada audit fungsional browser ini; tests/backend saja."
+  },
+  {
+    "id": "CROSS-01",
+    "feature": "F11",
+    "role": "Patient",
+    "scenario": "Mobile 375: double-click konfirmasi hanya membuat satu booking",
+    "steps": [
+      "Viewport 375",
+      "Buka booking dari URL klinik yang sudah diketahui",
+      "Isi pasien dan jadwal",
+      "Double-click konfirmasi",
+      "Periksa DB"
+    ],
+    "started": "2026-11-13T07:43:01.828Z",
+    "status": "FAIL",
+    "reason": "page.waitForURL: Timeout 7000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/CROSS-01-failure-0.png",
+      "screenshots/CROSS-01-failure-1.png",
+      "screenshots/CROSS-01-failure-2.png"
+    ],
+    "superseded_by": "CROSS-01-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "CROSS-01-R1",
+    "feature": "F11",
+    "role": "Patient",
+    "scenario": "Mobile 375: double-click konfirmasi hanya membuat satu booking",
+    "steps": [
+      "Viewport 375",
+      "Buka booking dari URL klinik yang sudah diketahui",
+      "Isi pasien dan jadwal",
+      "Double-click konfirmasi",
+      "Periksa DB"
+    ],
+    "started": "2026-11-13T07:44:16.503Z",
+    "observed": {
+      "appointment_id": 25,
+      "created": 1,
+      "screenshot": "screenshots/CROSS-01-mobile-booking.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "CROSS-02",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "Pesan penolakan no-show bertahan setelah refresh otomatis",
+    "steps": [
+      "Viewport 768",
+      "Klik No-show sebelum sesi mulai",
+      "Accept",
+      "Tunggu respons dan refresh UI",
+      "Periksa pesan tetap terbaca"
+    ],
+    "started": "2026-11-13T07:44:18.558Z",
+    "status": "FAIL",
+    "reason": "Server menolak 422 tetapi kotak feedback kosong setelah refresh otomatis",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/CROSS-02-failure-0.png",
+      "screenshots/CROSS-02-failure-1.png",
+      "screenshots/CROSS-02-failure-2.png"
+    ]
+  },
+  {
+    "id": "CROSS-03",
+    "feature": "F15",
+    "role": "Receptionist → Doctor",
+    "scenario": "Tablet/desktop kecil: mulai pemeriksaan sebelum sesi terjadwal",
+    "steps": [
+      "Check-in",
+      "Panggil",
+      "Dokter viewport1024",
+      "Mulai periksa"
+    ],
+    "started": "2026-11-13T07:44:19.740Z",
+    "observed": {
+      "visit_id": 16,
+      "early_start_allowed": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "CROSS-04",
+    "feature": "F12",
+    "role": "Patient / Doctor",
+    "scenario": "Pasien tidak dapat membatalkan pemeriksaan yang sudah IN_PROGRESS",
+    "steps": [
+      "Pasien buka Booking saya",
+      "Buka detail booking yang sedang diperiksa",
+      "Klik Batalkan dan accept",
+      "Periksa state lintas domain"
+    ],
+    "started": "2026-11-13T07:44:21.629Z",
+    "status": "FAIL",
+    "reason": "Pasien membatalkan appointment/queue saat visit tetap IN_PROGRESS",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/CROSS-04-failure-0.png",
+      "screenshots/CROSS-04-failure-1.png",
+      "screenshots/CROSS-04-failure-2.png"
+    ]
+  },
+  {
+    "id": "CROSS-05",
+    "feature": "F12",
+    "role": "Patient",
+    "scenario": "Pembatalan terlambat pada portal pasien menampilkan error",
+    "steps": [
+      "Buat booking sesi umum hari ini yang sudah dimulai",
+      "Buka detail portal",
+      "Batalkan dan accept",
+      "Periksa alasan penolakan"
+    ],
+    "started": "2026-11-13T07:44:23.011Z",
+    "status": "FAIL",
+    "reason": "Status tetap BOOKED tetapi alasan penolakan tidak dirender",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/CROSS-05-failure-0.png",
+      "screenshots/CROSS-05-failure-1.png",
+      "screenshots/CROSS-05-failure-2.png"
+    ]
+  },
+  {
+    "id": "CROSS-06",
+    "feature": "F12",
+    "role": "Patient",
+    "scenario": "Konfirmasi booking bertoken juga menampilkan error pembatalan",
+    "steps": [
+      "Buka tautan konfirmasi private milik booking sendiri",
+      "Klik Batalkan",
+      "Accept",
+      "Periksa feedback"
+    ],
+    "started": "2026-11-13T07:44:24.584Z",
+    "status": "FAIL",
+    "reason": "Form status bertoken tidak menampilkan errors dari redirect validasi",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/CROSS-06-failure-0.png",
+      "screenshots/CROSS-06-failure-1.png",
+      "screenshots/CROSS-06-failure-2.png"
+    ]
+  },
+  {
+    "id": "CROSS-07",
+    "feature": "F13",
+    "role": "Receptionist / Patient",
+    "scenario": "No-show setelah sesi mulai memperbarui booking dan portal",
+    "steps": [
+      "Antrean hari ini",
+      "No-show booking umum",
+      "Accept",
+      "Periksa appointment,queue dan portal"
+    ],
+    "started": "2026-11-13T07:44:25.592Z",
+    "observed": {
+      "queue": "NO_SHOW",
+      "appointment": "NO_SHOW",
+      "patient_updated": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "CROSS-08",
+    "feature": "F08",
+    "role": "Clinic Admin",
+    "scenario": "Perubahan hari sesi terpakai tidak membiarkan appointment salah hari",
+    "steps": [
+      "Edit jadwal QA yang memiliki booking dan visit",
+      "Ubah hari praktik",
+      "Simpan",
+      "Buka booking lama",
+      "Periksa tanggal vs hari sesi",
+      "Pulihkan jadwal fixture"
+    ],
+    "started": "2026-11-13T07:44:26.493Z",
+    "status": "FAIL",
+    "reason": "Hari sesi berubah tetapi tanggal appointment lama tetap; tidak ada reschedule/snapshot\n\n5 !== 6\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/CROSS-08-failure-0.png",
+      "screenshots/CROSS-08-failure-1.png",
+      "screenshots/CROSS-08-failure-2.png"
+    ]
+  },
+  {
+    "id": "CROSS-09",
+    "feature": "F15",
+    "role": "Doctor",
+    "scenario": "Waktu mulai visit memakai timezone klinik yang ditampilkan pada pengaturan",
+    "steps": [
+      "Buka visit final journey",
+      "Bandingkan waktu Mulai pada UI dengan instant DB dalam Asia/Jakarta"
+    ],
+    "started": "2026-11-13T07:44:27.340Z",
+    "status": "FAIL",
+    "reason": "Waktu visit dirender sebagai UTC, berbeda 7 jam dari zona klinik",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/CROSS-09-failure-0.png",
+      "screenshots/CROSS-09-failure-1.png",
+      "screenshots/CROSS-09-failure-2.png"
+    ]
+  },
+  {
+    "id": "CROSS-10",
+    "feature": "F23",
+    "role": "Patient / Doctor",
+    "scenario": "Notifikasi hasil lintas role dapat dibaca dan badge diperbarui",
+    "steps": [
+      "Menu Notifikasi pasien",
+      "Buka satu notifikasi",
+      "Kembali",
+      "Tandai semua dibaca",
+      "Periksa DB dan badge"
+    ],
+    "started": "2026-11-13T07:44:27.859Z",
+    "observed": {
+      "individual_open": true,
+      "read_all": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "CROSS-11",
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "scenario": "Dashboard range tidak valid memberikan pesan pemulihan",
+    "steps": [
+      "Dashboard",
+      "Isi Dari besok dan Sampai hari ini",
+      "Terapkan",
+      "Periksa error"
+    ],
+    "started": "2026-11-13T07:44:28.523Z",
+    "observed": {
+      "feedback": true
+    },
+    "status": "PASS",
+    "superseded_by": "UX-04",
+    "harness_note": "Earlier regex matched unrelated word diperiksa; replaced with date-error-specific assertion."
+  },
+  {
+    "id": "WS-RECOVERY",
+    "feature": "F14",
+    "role": "All queue roles",
+    "scenario": "Socket Reverb putus/pulih nyata",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: realtime dinonaktifkan di lingkungan audit; polling dan offline editor diuji, socket tidak."
+  },
+  {
+    "id": "DENT-01",
+    "feature": "F21",
+    "role": "Doctor",
+    "scenario": "Odontogram entitlement aktif: pilih kondisi, autosave, reload",
+    "steps": [
+      "Buka visit draft dokter",
+      "Pilih Gigi11",
+      "Klik Karies",
+      "Tunggu autosave",
+      "Reload"
+    ],
+    "started": "2026-11-13T07:45:49.533Z",
+    "observed": {
+      "tooth": 11,
+      "persisted_condition": "caries",
+      "screenshot": "screenshots/DENT-01-persisted.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DENT-02",
+    "feature": "F21",
+    "role": "Doctor",
+    "scenario": "Pencabutan add-on ketika editor terbuka: simpan ditolak, reload mempertahankan chart read-only",
+    "steps": [
+      "Cabut entitlement dummy",
+      "Edit kondisi dari tab lama",
+      "Tunggu error",
+      "Reload",
+      "Periksa kondisi tersimpan dan disabled"
+    ],
+    "started": "2026-11-13T07:45:52.151Z",
+    "observed": {
+      "stale_edit_rejected": true,
+      "history_preserved": true,
+      "readonly": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DENT-03",
+    "feature": "F16",
+    "role": "Doctor",
+    "scenario": "RME General tetap dapat disimpan setelah add-on berakhir",
+    "steps": [
+      "Odontogram read-only",
+      "Edit SOAP umum",
+      "Tunggu autosave",
+      "Periksa tersimpan"
+    ],
+    "started": "2026-11-13T07:45:53.838Z",
+    "observed": {
+      "general_saved": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "CROSS-12",
+    "feature": "F20",
+    "role": "Doctor",
+    "scenario": "Visit yang dibatalkan pasien tidak membuat dokter terjebak finalisasi",
+    "steps": [
+      "Buka draft visit yang queue-nya dibatalkan",
+      "Lengkapi SOAP",
+      "Tinjau dan finalisasi",
+      "Periksa hasil dan pesan"
+    ],
+    "started": "2026-11-13T07:45:55.119Z",
+    "status": "FAIL",
+    "reason": "Visit tetap IN_PROGRESS; finalisasi ditolak karena antrean sudah CANCELLED\n+ actual - expected\n\n+ 'IN_PROGRESS'\n- 'COMPLETED'\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/CROSS-12-failure-0.png",
+      "screenshots/CROSS-12-failure-1.png"
+    ]
+  },
+  {
+    "id": "UX-01",
+    "feature": "F00",
+    "role": "Guest",
+    "scenario": "Landing 375px: tidak memerlukan scroll horizontal",
+    "steps": [
+      "Buka landing",
+      "Resize375",
+      "Geser horizontal",
+      "Periksa batas dokumen"
+    ],
+    "started": "2026-11-13T07:48:44.930Z",
+    "status": "FAIL",
+    "reason": "Lebar dokumen landing melebihi viewport375",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/UX-01-failure-0.png",
+      "screenshots/UX-01-failure-1.png",
+      "screenshots/UX-01-failure-2.png"
+    ]
+  },
+  {
+    "id": "UX-02",
+    "feature": "F10",
+    "role": "Patient",
+    "scenario": "Pasien menemukan aksi membuat booking baru dari portal",
+    "steps": [
+      "Login pasien",
+      "Periksa dashboard dan menu",
+      "Buka Booking saya",
+      "Cari aksi booking baru atau kembali ke website klinik"
+    ],
+    "started": "2026-11-13T07:48:46.115Z",
+    "status": "FAIL",
+    "reason": "Tidak ada aksi booking baru atau tautan website klinik dari dashboard dan Booking saya",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/UX-02-failure-0.png",
+      "screenshots/UX-02-failure-1.png",
+      "screenshots/UX-02-failure-2.png"
+    ]
+  },
+  {
+    "id": "UX-03",
+    "feature": "F24",
+    "role": "Clinic Admin",
+    "scenario": "Filter audit: seluruh kontrol mempunyai accessible name",
+    "steps": [
+      "Buka Audit aktivitas",
+      "Tab ke setiap filter",
+      "Periksa label programatis"
+    ],
+    "started": "2026-11-13T07:48:47.495Z",
+    "status": "FAIL",
+    "reason": "Empat filter audit tidak terhubung dengan label programatis\n\n4 !== 0\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/UX-03-failure-0.png",
+      "screenshots/UX-03-failure-1.png",
+      "screenshots/UX-03-failure-2.png"
+    ]
+  },
+  {
+    "id": "UX-04",
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "scenario": "Rentang dashboard terbalik memberi pesan spesifik",
+    "steps": [
+      "Isi Dari14Nov dan Sampai13Nov",
+      "Klik Terapkan",
+      "Periksa error tanggal"
+    ],
+    "started": "2026-11-13T07:48:47.994Z",
+    "status": "FAIL",
+    "reason": "Tidak ada pesan validasi spesifik setelah filter tanggal ditolak",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/UX-04-failure-0.png",
+      "screenshots/UX-04-failure-1.png",
+      "screenshots/UX-04-failure-2.png"
+    ]
+  },
+  {
+    "id": "UX-05",
+    "feature": "F09",
+    "role": "Receptionist",
+    "scenario": "Pasien: telepon terlalu panjang tidak gagal diam-diam",
+    "steps": [
+      "Pasien baru",
+      "Isi identitas valid",
+      "Telepon31 karakter",
+      "Simpan",
+      "Periksa error field"
+    ],
+    "started": "2026-11-13T07:48:48.513Z",
+    "status": "FAIL",
+    "reason": "page.waitForNavigation: Timeout 7000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"domcontentloaded\"\n============================================================",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/UX-05-failure-0.png",
+      "screenshots/UX-05-failure-1.png",
+      "screenshots/UX-05-failure-2.png"
+    ],
+    "superseded_by": "UX-05-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "KEY-01",
+    "feature": "F01",
+    "role": "Five actual roles",
+    "scenario": "Mobile drawer: Tab/ShiftTab trap, Escape dan fokus kembali",
+    "steps": [
+      "Login lima role",
+      "Viewport375",
+      "Buka navigasi",
+      "Tab dan ShiftTab",
+      "Escape",
+      "Periksa fokus pemicu"
+    ],
+    "started": "2026-11-13T07:48:55.843Z",
+    "observed": {
+      "native_keyboard_roles": [
+        "admin",
+        "receptionist",
+        "doctor",
+        "patient",
+        "platform"
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "QUEUE-08",
+    "feature": "F13",
+    "role": "Receptionist",
+    "scenario": "Semua status domain dapat difilter dan empty state tetap jelas",
+    "steps": [
+      "Antrean",
+      "Pilih tiap delapan status",
+      "Terapkan filter",
+      "Periksa label kartu",
+      "Tanggal kosong90hari lalu"
+    ],
+    "started": "2026-11-13T07:49:02.337Z",
+    "observed": {
+      "counts": {
+        "BOOKED": 1,
+        "WAITING": 1,
+        "CALLED": 1,
+        "IN_PROGRESS": 1,
+        "COMPLETED": 2,
+        "SKIPPED": 1,
+        "CANCELLED": 4,
+        "NO_SHOW": 2
+      },
+      "empty": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "LIST-01",
+    "feature": "F09",
+    "role": "Receptionist",
+    "scenario": "Pagination pasien mempertahankan query dan dapat kembali",
+    "steps": [
+      "Daftar pasien",
+      "Next",
+      "Periksa page2",
+      "Previous"
+    ],
+    "started": "2026-11-13T07:49:03.567Z",
+    "status": "FAIL",
+    "reason": "locator.click: Error: strict mode violation: locator('a[rel=next]') resolved to 2 elements:\n    1) <a rel=\"next\" href=\"[url] class=\"inline-flex items-center px-4 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-700 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-800 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300 hov…>↵                    Next »↵                </a> aka getByText('Next »')\n    2) <a rel=\"next\" aria-label=\"Next &raquo;\" href=\"[url] class=\"inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md leading-5 hover:text-gray-400 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:active:bg-gray-700 dark:focus:border-blue-800 dark:text-gra…>…</a> aka getByRole('link', { name: 'Next &raquo;' })\n\nCall log:\n\u001b[2m  - waiting for locator('a[rel=next]')\u001b[22m\n",
+    "error_type": "Error",
+    "failure_screenshots": [
+      "screenshots/LIST-01-failure-0.png",
+      "screenshots/LIST-01-failure-1.png",
+      "screenshots/LIST-01-failure-2.png"
+    ],
+    "superseded_by": "LIST-01-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "SERVICE-05",
+    "feature": "F07",
+    "role": "Clinic Admin / Patient",
+    "scenario": "Nonaktif layanan memengaruhi pilihan baru dan mempertahankan snapshot lama",
+    "steps": [
+      "Edit layanan QA",
+      "Nonaktifkan",
+      "Periksa booking publik",
+      "Buka booking lama",
+      "Aktifkan ulang"
+    ],
+    "started": "2026-11-13T07:49:03.924Z",
+    "observed": {
+      "new_booking_excludes_inactive": true,
+      "snapshot_preserved": true,
+      "reactivated": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "PAT-05",
+    "feature": "F09",
+    "role": "Receptionist",
+    "scenario": "Pasien nonaktif dapat dikelola kembali dan tidak masuk pencarian booking",
+    "steps": [
+      "Edit pasien QA",
+      "Nonaktifkan",
+      "Buka booking pasien terdaftar",
+      "Cari nama",
+      "Periksa tidak ada hasil",
+      "Aktifkan ulang"
+    ],
+    "started": "2026-11-13T07:49:05.296Z",
+    "observed": {
+      "inactive_excluded": true,
+      "reactivated": true,
+      "note": "Detail still offers Buat booking for inactive patient; UI prerequisite is unclear."
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "BROWSER-01",
+    "feature": "F07",
+    "role": "Clinic Admin",
+    "scenario": "Back/Forward dan Batal form tidak menyimpan perubahan",
+    "steps": [
+      "Tambah layanan",
+      "Isi nama belum disimpan",
+      "Batal",
+      "Browser Back",
+      "Forward",
+      "Periksa DB"
+    ],
+    "started": "2026-11-13T07:49:06.527Z",
+    "observed": {
+      "cancelled_unsaved": true,
+      "back_forward": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DISCOVERY-NEGATIVE",
+    "feature": "F10",
+    "role": "Guest / Patient",
+    "scenario": "Guest booking diarahkan login dan resource asing ditolak",
+    "steps": [
+      "Guest buka booking",
+      "Periksa login",
+      "Pasien buka appointment milik pasien lain",
+      "Periksa403"
+    ],
+    "started": "2026-11-13T07:49:06.707Z",
+    "observed": {
+      "guest_login_required": true,
+      "foreign_patient_forbidden": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "BOOK-QUOTA",
+    "feature": "F11",
+    "role": "Patient",
+    "scenario": "Kuota penuh ditolak dari UI tanpa appointment/patient baru",
+    "steps": [
+      "Turunkan kuota sesi dummy menjadi1 melalui admin",
+      "Isi booking pasien",
+      "Submit",
+      "Periksa error kuota dan jumlah row",
+      "Pulihkan kuota"
+    ],
+    "started": "2026-11-13T07:51:17.327Z",
+    "observed": {
+      "full_rejected": true,
+      "no_insert": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "JOURNEY-02",
+    "feature": "F11",
+    "role": "Patient → Receptionist → Doctor → Patient",
+    "scenario": "Journey pasien sampai resep final muncul pada dashboard pasien",
+    "steps": [
+      "Pasien buat booking",
+      "Resepsionis check-in dan panggil",
+      "Dokter mulai dan isi SOAP/resep",
+      "Finalisasi",
+      "Pasien buka Resep saya"
+    ],
+    "started": "2026-11-13T07:51:18.442Z",
+    "status": "FAIL",
+    "reason": "page.waitForFunction: Timeout 7000ms exceeded.",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/JOURNEY-02-failure-0.png",
+      "screenshots/JOURNEY-02-failure-1.png",
+      "screenshots/JOURNEY-02-failure-2.png"
+    ],
+    "superseded_by": "JOURNEY-02-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "LIST-01-R1",
+    "feature": "F09",
+    "role": "Receptionist",
+    "scenario": "Pagination pasien Next/Previous melalui kontrol yang terlihat",
+    "steps": [
+      "Daftar pasien",
+      "Klik Next visible",
+      "Periksa page2",
+      "Klik Previous visible"
+    ],
+    "started": "2026-11-13T07:51:27.663Z",
+    "observed": {
+      "next_previous": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "SUB-SEATS",
+    "feature": "F06",
+    "role": "Free Owner",
+    "scenario": "Batas seat resepsionis, deaktivasi, dan pemakaian kembali kapasitas",
+    "steps": [
+      "Owner klinik Free QA",
+      "Tambah resepsionis pertama",
+      "Tambah kedua ditolak",
+      "Nonaktifkan pertama",
+      "Tambah kedua berhasil"
+    ],
+    "started": "2026-11-13T07:51:27.985Z",
+    "observed": {
+      "over_limit_rejected": true,
+      "seat_reused": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ROLE-CHANGE",
+    "feature": "F01",
+    "role": "Receptionist",
+    "scenario": "Role dicabut: sesi aktif kehilangan akses dan navigasi menyesuaikan",
+    "steps": [
+      "Resepsionis sudah login",
+      "Cabut role pada fixture dummy",
+      "Reload route operasional",
+      "Periksa403",
+      "Buka dashboard",
+      "Pulihkan role"
+    ],
+    "started": "2026-11-13T07:51:30.198Z",
+    "observed": {
+      "revoked_next_request": true,
+      "menu_updated": true,
+      "restored": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ADDON-OWNER",
+    "feature": "F27",
+    "role": "Clinic Owner",
+    "scenario": "Owner melihat add-on aktif beserta riwayat dan invoice",
+    "steps": [
+      "Menu Add-on",
+      "Periksa status aktif",
+      "Lihat invoice riwayat dummy"
+    ],
+    "started": "2026-11-13T07:51:30.327Z",
+    "observed": {
+      "active_state": true,
+      "history_link": true,
+      "fixture_only": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "JOURNEY-02-R1",
+    "feature": "F11",
+    "role": "Patient → Receptionist → Doctor → Patient",
+    "scenario": "Journey pasien sampai resep final muncul pada dashboard pasien",
+    "steps": [
+      "Pasien buat booking",
+      "Resepsionis check-in dan panggil",
+      "Dokter mulai dan isi SOAP/resep",
+      "Finalisasi",
+      "Pasien buka Resep saya"
+    ],
+    "started": "2026-11-13T07:53:18.226Z",
+    "observed": {
+      "appointment_id": 27,
+      "visit_id": 17,
+      "patient_prescription": true,
+      "read_only_finish_exception": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "CLINIC-LOGO",
+    "feature": "F05",
+    "role": "Clinic Owner",
+    "scenario": "Upload logo, preview, public render dan hapus kembali",
+    "steps": [
+      "Profil klinik",
+      "Pilih PNG dummy",
+      "Periksa preview",
+      "Simpan",
+      "Buka website publik",
+      "Hapus logo",
+      "Simpan"
+    ],
+    "started": "2026-11-13T07:54:15.685Z",
+    "observed": {
+      "preview": true,
+      "persisted": true,
+      "public_image": true,
+      "removed": true,
+      "storage": "temporary isolated public disk"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "CLINIC-STATE",
+    "feature": "F05",
+    "role": "Clinic Owner / Guest",
+    "scenario": "Deaktivasi klinik menutup halaman publik dan dapat diaktifkan ulang",
+    "steps": [
+      "Profil klinik",
+      "Uncheck aktif",
+      "Simpan",
+      "Guest buka klinik",
+      "Aktifkan ulang",
+      "Guest buka ulang"
+    ],
+    "started": "2026-11-13T07:54:16.734Z",
+    "observed": {
+      "inactive_404": true,
+      "reactivated_200": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "CLINIC-SLUG",
+    "feature": "F05",
+    "role": "Clinic Owner",
+    "scenario": "Slug reserved ditolak dengan data lama tetap ada",
+    "steps": [
+      "Edit slug menjadi www",
+      "Simpan",
+      "Periksa pesan field",
+      "Periksa slug DB tetap"
+    ],
+    "started": "2026-11-13T07:54:17.776Z",
+    "observed": {
+      "reserved_slug_rejected": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "PROFILE-EMAIL",
+    "feature": "F03",
+    "role": "Clinic Owner",
+    "scenario": "Perubahan email profil mereset verifikasi dan dapat dipulihkan",
+    "steps": [
+      "Profil akun",
+      "Ubah email dummy",
+      "Simpan",
+      "Buka dashboard",
+      "Kirim ulang verifikasi",
+      "Buka signed link dummy"
+    ],
+    "started": "2026-11-13T07:54:18.027Z",
+    "status": "FAIL",
+    "reason": "page.waitForResponse: Timeout 7000ms exceeded while waiting for event \"response\"",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/PROFILE-EMAIL-failure-0.png"
+    ],
+    "superseded_by": "PROFILE-EMAIL-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "PROFILE-EMAIL-R1",
+    "feature": "F03",
+    "role": "Clinic Owner",
+    "scenario": "Perubahan email profil mereset verifikasi dan dapat dipulihkan",
+    "steps": [
+      "Profil akun",
+      "Ubah email dummy",
+      "Simpan",
+      "Buka dashboard",
+      "Kirim ulang verifikasi",
+      "Buka signed link dummy"
+    ],
+    "started": "2026-11-13T07:55:35.606Z",
+    "observed": {
+      "verification_reset": true,
+      "signed_link_verified": true,
+      "email": "dummy changed account"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "PHOTO-HISTORY",
+    "feature": "F19",
+    "role": "Doctor",
+    "scenario": "Hapus foto melalui Modification mempertahankan foto historis yang dapat dibuka",
+    "steps": [
+      "Buka record final dengan foto",
+      "Hapus foto",
+      "Isi alasan dan simpan Modification",
+      "Buka histori",
+      "Buka foto versi sebelum"
+    ],
+    "started": "2026-11-13T07:56:11.816Z",
+    "observed": {
+      "current_removed": true,
+      "historical_file_retained": true,
+      "history_opened_200": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "DOCTOR-DELETE-GUARD",
+    "feature": "F03",
+    "role": "Doctor",
+    "scenario": "Self-delete dokter berhistori ditolak tanpa logout atau hilang data",
+    "steps": [
+      "Profil dokter QA",
+      "Hapus akun",
+      "Password benar",
+      "Periksa pesan dan sesi",
+      "Buka pemeriksaan lagi"
+    ],
+    "started": "2026-11-13T07:56:12.514Z",
+    "observed": {
+      "history_account_retained": true,
+      "session_intact": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ETA-01",
+    "feature": "F32",
+    "role": "Patient / Receptionist",
+    "scenario": "Tracker ETA berubah setelah check-in dan polling memperbarui lintas browser",
+    "steps": [
+      "Pasien booking QA",
+      "Buka detail tracker BOOKED",
+      "Resepsionis Check-in",
+      "Tunggu polling pada tab pasien",
+      "Periksa WAITING/ETA/confidence"
+    ],
+    "started": "2026-11-13T07:56:13.505Z",
+    "status": "FAIL",
+    "reason": "page.waitForFunction: Timeout 16000ms exceeded.",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/ETA-01-failure-0.png",
+      "screenshots/ETA-01-failure-1.png",
+      "screenshots/ETA-01-failure-2.png"
+    ],
+    "superseded_by": "ETA-01-R1",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "ETA-01-R1",
+    "feature": "F32",
+    "role": "Patient / Receptionist",
+    "scenario": "Tracker ETA berubah setelah check-in dan polling memperbarui lintas browser",
+    "steps": [
+      "Pasien booking QA",
+      "Buka detail tracker BOOKED",
+      "Resepsionis Check-in",
+      "Tunggu polling pada tab pasien",
+      "Periksa WAITING/ETA/confidence"
+    ],
+    "started": "2026-11-13T07:57:42.434Z",
+    "status": "FAIL",
+    "reason": "page.waitForFunction: Timeout 16000ms exceeded.",
+    "error_type": "TimeoutError",
+    "failure_screenshots": [
+      "screenshots/ETA-01-R1-failure-0.png",
+      "screenshots/ETA-01-R1-failure-1.png",
+      "screenshots/ETA-01-R1-failure-2.png"
+    ],
+    "superseded_by": "ETA-01-R2",
+    "harness_note": "Retest after correction of browser synchronization or scenario setup; see replacement evidence."
+  },
+  {
+    "id": "ETA-01-R2",
+    "feature": "F32",
+    "role": "Patient / Receptionist",
+    "scenario": "Tracker ETA berubah setelah check-in dan polling memperbarui lintas browser",
+    "steps": [
+      "Pasien booking QA",
+      "Buka detail tracker BOOKED",
+      "Resepsionis Check-in",
+      "Tunggu polling pada tab pasien",
+      "Periksa WAITING/ETA/confidence"
+    ],
+    "started": "2026-11-13T07:58:52.682Z",
+    "observed": {
+      "polling_cross_browser": true,
+      "waiting_eta": true,
+      "confidence": "low",
+      "socket": "not enabled",
+      "timeout_budget_ms": 45000
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "GRANT-DOUBLE",
+    "feature": "F30",
+    "role": "Platform Admin",
+    "scenario": "Double-click grant tidak membuat dua periode dari satu maksud pengguna",
+    "steps": [
+      "Buka tenant QA Free",
+      "Pilih Individual satu bulan",
+      "Isi satu alasan",
+      "Double-click Berikan akses",
+      "Periksa jumlah periode baru"
+    ],
+    "started": "2026-11-13T08:07:33.582Z",
+    "status": "FAIL",
+    "reason": "Double-click memberi lebih dari satu periode subscription\n\n2 !== 1\n",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/GRANT-DOUBLE-failure-0.png"
+    ]
+  },
+  {
+    "id": "UX-05-R1",
+    "feature": "F09",
+    "role": "Receptionist",
+    "scenario": "Telepon terlalu panjang memberi petunjuk field, bukan error pemeriksaan kandidat generik",
+    "steps": [
+      "Pasien baru",
+      "Isi identitas valid dan telepon31 digit",
+      "Klik Simpan",
+      "Periksa respons duplicate review dan pesan UI"
+    ],
+    "started": "2026-11-13T08:22:43.088Z",
+    "status": "FAIL",
+    "reason": "Detail error phone max30 disembunyikan oleh pesan gagal pemeriksaan kandidat generik",
+    "error_type": "AssertionError",
+    "failure_screenshots": [
+      "screenshots/UX-05-R1-failure-0.png"
+    ]
+  }
+]

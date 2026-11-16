@@ -1,0 +1,97 @@
+{
+  "tests": 23,
+  "passed": 1,
+  "failed": 22,
+  "result": "failed",
+  "assertions": 48,
+  "failures": [
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_new_booking_obeys_changed_hours_without_rewriting_history_or_replay",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_booking_boundaries_match_current_hours with data set \"opening\"",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_booking_boundaries_match_current_hours with data set \"closing\"",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_phone_validation_storage_and_legacy_candidates_share_normalization with data set \"dots\"",
+      "message": "Failed asserting that two strings are identical."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_phone_validation_storage_and_legacy_candidates_share_normalization with data set \"ID\"",
+      "message": "Failed asserting that two strings are identical."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_phone_validation_storage_and_legacy_candidates_share_normalization with data set \"US\"",
+      "message": "Failed asserting that two strings are identical."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_phone_validation_storage_and_legacy_candidates_share_normalization with data set \"whitespace\"",
+      "message": "Failed asserting that two strings are identical."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_inactive_patient_keeps_context_and_has_recovery with data set \"admin\"",
+      "message": "Expected response status code [201, 301, 302, 303, 307, 308] but received 200."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_inactive_patient_keeps_context_and_has_recovery with data set \"receptionist\"",
+      "message": "Expected response status code [201, 301, 302, 303, 307, 308] but received 200."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_foreign_or_missing_patient_never_falls_back_to_new_patient",
+      "message": "Expected response status code [404] but received 200."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set \"expired\"",
+      "message": "Failed asserting that the value at [tenants] fulfills the expectations defined by the closure."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set \"trial\"",
+      "message": "Failed asserting that the value at [tenants] fulfills the expectations defined by the closure."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set \"scheduled\"",
+      "message": "Failed asserting that '<!DOCTYPE html>\\n"
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set \"future\"",
+      "message": "Failed asserting that the value at [tenants] fulfills the expectations defined by the closure."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set \"suspended\"",
+      "message": "Failed asserting that two arrays are identical."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_service_ui_and_server_share_numeric_price_contract with data set \"nonmultiple\"",
+      "message": "Failed asserting that '<!DOCTYPE html>\\n"
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_service_ui_and_server_share_numeric_price_contract with data set \"fraction\"",
+      "message": "Failed asserting that '<!DOCTYPE html>\\n"
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_service_ui_and_server_share_numeric_price_contract with data set \"maximum\"",
+      "message": "Failed asserting that '<!DOCTYPE html>\\n"
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_empty_catalog_has_explanation_and_recovery_without_checkout",
+      "message": "Failed asserting that '<!DOCTYPE html>\\n"
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_expired_editor_exposes_login_recovery_without_losing_data",
+      "message": "Failed asserting that '<div\\n"
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_queue_filters_are_preserved_separately_from_refreshed_rows with data set \"admin\"",
+      "message": "Failed asserting that '<!DOCTYPE html>\\n"
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_queue_filters_are_preserved_separately_from_refreshed_rows with data set \"receptionist\"",
+      "message": "Failed asserting that '<!DOCTYPE html>\\n"
+    }
+  ]
+}

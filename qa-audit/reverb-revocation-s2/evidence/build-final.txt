@@ -1,0 +1,14 @@
+[36mvite v8.3.4 [32mbuilding client environment for production...[36m[39m
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv/public/build/manifest.json              0.33 kB │ gzip:  0.16 kB
+../../../Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv/public/build/assets/app-BIkIVf3F.css   75.35 kB │ gzip: 12.85 kB
+../../../Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv/public/build/assets/app-CaspfGYn.js   116.80 kB │ gzip: 32.58 kB
+
+[32m✓ built in 1.02s[39m
+[33m
+[1m(!)[22m outDir [37m[2mC:\Users\User\AppData\Local\Temp\clinicos-deep-s2-NkDBSv\public\build[22m[33m is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+[39m

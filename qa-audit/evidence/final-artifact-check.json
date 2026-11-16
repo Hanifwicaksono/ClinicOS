@@ -1,0 +1,10 @@
+﻿{
+    "productionTrackedDiff":  "PASS: git diff empty",
+    "localLinks":  "PASS",
+    "phpunitAssertions":  2098,
+    "reports":  10,
+    "automatedPassed":  326,
+    "automatedTests":  335,
+    "status":  "PASS",
+    "automatedFailed":  9
+}

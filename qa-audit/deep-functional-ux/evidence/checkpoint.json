@@ -1,0 +1,14 @@
+{
+  "phase": "reports-verified-exhaustive-coverage-still-open",
+  "at": "2026-11-13T08:28:25.511Z",
+  "counts": {
+    "PASS": 102,
+    "FAIL": 17,
+    "BLOCKED": 5,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36",
+  "features": 36,
+  "findings": 12,
+  "artefact_check": "PASS"
+}

@@ -1,0 +1,8 @@
+{
+  "at": "2026-11-13T08:27:32.048Z",
+  "inherited_process_environment_removed": true,
+  "private_dummy_mail_removed": true,
+  "isolated_database_retained_for_checkpoint": true,
+  "private_env_retained": "Only explicit disposable application values, with external credentials empty",
+  "resume": "node qa-audit/deep-functional-ux/scripts/resume-runtime.mjs"
+}

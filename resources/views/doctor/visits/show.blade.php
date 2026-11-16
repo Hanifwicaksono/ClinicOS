@@ -1,4 +1,5 @@
 @php
+    $timezone = $visit->clinic->settings?->timezone ?? 'Asia/Jakarta';
     $record = $visit->medicalRecord;
     $isFinal = $record->status === \App\MedicalRecordStatus::Final;
     $ignoredRevisionKeys = ['id', 'medical_record_id', 'prescription_id', 'created_at', 'updated_at', 'sort_order'];
@@ -408,8 +409,8 @@
 
         <aside class="space-y-6">
             <x-rme.allergy-editor :visit="$visit" />
-            <section class="clinic-card p-6"><h2 class="font-extrabold text-clinic-950">Kunjungan</h2><dl class="mt-5 space-y-4 text-sm"><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Mulai</dt><dd class="mt-1 font-semibold">{{ $visit->started_at->format('d M Y, H:i') }}</dd></div><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Dokter</dt><dd class="mt-1 font-semibold">{{ $visit->doctor->user->name }}</dd></div><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Nilai layanan</dt><dd class="mt-1 font-semibold">Rp {{ number_format((float) $visit->total_amount, 0, ',', '.') }}</dd></div>@if($visit->completed_at)<div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Selesai</dt><dd class="mt-1 font-semibold">{{ $visit->completed_at->format('d M Y, H:i') }}</dd></div>@endif</dl></section>
-            <section class="clinic-card overflow-hidden"><div class="border-b border-slate-100 p-5"><h2 class="font-extrabold text-clinic-950">Riwayat dengan dokter ini</h2></div><div class="divide-y divide-slate-100">@forelse($history as $item)<a href="{{ route('doctor.visits.show', $item) }}" class="block p-5 hover:bg-slate-50" wire:navigate><p class="text-sm font-bold text-slate-900">{{ $item->started_at->format('d M Y') }}</p><p class="mt-1 text-xs text-slate-500">{{ $item->service_name }} · {{ $item->status->value }}</p><p class="mt-2 text-xs font-semibold text-clinic-700">{{ $item->medicalRecord?->assessment ?: $item->medicalRecord?->diagnoses->pluck('name')->join(', ') ?: 'Belum ada diagnosa' }}</p></a>@empty<div class="p-6 text-sm text-slate-500">Belum ada kunjungan sebelumnya.</div>@endforelse</div></section>
+            <section class="clinic-card p-6"><h2 class="font-extrabold text-clinic-950">Kunjungan</h2><dl class="mt-5 space-y-4 text-sm"><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Mulai</dt><dd class="mt-1 font-semibold">{{ $visit->started_at->timezone($timezone)->format('d M Y, H:i') }}</dd></div><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Dokter</dt><dd class="mt-1 font-semibold">{{ $visit->doctor->user->name }}</dd></div><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Nilai layanan</dt><dd class="mt-1 font-semibold">Rp {{ number_format((float) $visit->total_amount, 0, ',', '.') }}</dd></div>@if($visit->completed_at)<div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Selesai</dt><dd class="mt-1 font-semibold">{{ $visit->completed_at->timezone($timezone)->format('d M Y, H:i') }}</dd></div>@endif</dl></section>
+            <section class="clinic-card overflow-hidden"><div class="border-b border-slate-100 p-5"><h2 class="font-extrabold text-clinic-950">Riwayat dengan dokter ini</h2></div><div class="divide-y divide-slate-100">@forelse($history as $item)<a href="{{ route('doctor.visits.show', $item) }}" class="block p-5 hover:bg-slate-50" wire:navigate><p class="text-sm font-bold text-slate-900">{{ $item->started_at->timezone($timezone)->format('d M Y') }}</p><p class="mt-1 text-xs text-slate-500">{{ $item->service_name }} · {{ $item->status->value }}</p><p class="mt-2 text-xs font-semibold text-clinic-700">{{ $item->medicalRecord?->assessment ?: $item->medicalRecord?->diagnoses->pluck('name')->join(', ') ?: 'Belum ada diagnosa' }}</p></a>@empty<div class="p-6 text-sm text-slate-500">Belum ada kunjungan sebelumnya.</div>@endforelse</div></section>
             @if($hasModifications)
                 <section class="clinic-card min-w-0 overflow-hidden p-6 xl:col-span-1" aria-labelledby="modification-history-heading">
                     <h2 id="modification-history-heading" class="font-extrabold text-clinic-950">Version history / Modification</h2>
@@ -419,11 +420,23 @@
                             <article class="min-w-0 overflow-hidden rounded-2xl border border-amber-200 bg-amber-50 p-4">
                                 <p class="truncate text-xs font-extrabold uppercase tracking-wider text-amber-800">Modification {{ $modifications->count() - $loop->index }}</p>
                                 <p class="mt-2 text-sm font-semibold text-slate-900 [overflow-wrap:anywhere]">{{ $revision->reason }}</p>
-                                <p class="mt-1 truncate text-xs text-slate-600" title="{{ $revision->correctedBy->name }} · {{ $revision->created_at->format('d M Y, H:i') }}">{{ $revision->correctedBy->name }} · {{ $revision->created_at->format('d M Y, H:i') }}</p>
+                                <p class="mt-1 truncate text-xs text-slate-600" title="{{ $revision->correctedBy->name }} · {{ $revision->created_at->timezone($timezone)->format('d M Y, H:i') }}">{{ $revision->correctedBy->name }} · {{ $revision->created_at->timezone($timezone)->format('d M Y, H:i') }}</p>
                                 <details class="mt-4">
                                     <summary class="cursor-pointer text-sm font-bold text-clinic-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 focus-visible:ring-offset-2">Lihat semua perubahan</summary>
                                     <div class="mt-3 grid gap-3">
                                         <x-medical-record-modification :before="$revision->before_data" :after="$revision->after_data" />
+                                        @foreach(['before' => 'Sebelum', 'after' => 'Sesudah'] as $snapshot => $label)
+                                            @if($revision->{$snapshot.'_data'}['record']['photos'] ?? [])
+                                                <section class="min-w-0 rounded-2xl border border-slate-200 bg-white p-4">
+                                                    <h4 class="text-xs font-bold text-slate-500">Foto {{ strtolower($label) }} koreksi</h4>
+                                                    <ul class="mt-3 space-y-2">
+                                                        @foreach($revision->{$snapshot.'_data'}['record']['photos'] as $index => $photo)
+                                                            <li><a data-revision-photo href="{{ route('doctor.visits.photos.show', ['visit' => $visit, 'photo' => $index, 'revision' => $revision->id, 'snapshot' => $snapshot]) }}" target="_blank" rel="noopener" class="text-sm font-semibold text-clinic-700 underline [overflow-wrap:anywhere]">{{ $photo['name'] ?? 'Foto rekam medis' }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </section>
+                                            @endif
+                                        @endforeach
                                     </div>
                                 </details>
                             </article>

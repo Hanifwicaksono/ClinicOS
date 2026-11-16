@@ -1,0 +1,2542 @@
+[
+  {
+    "feature": "F21",
+    "role": "Doctor (dentist)",
+    "action": "Pilih kondisi Belum dicatat pada seluruh 32 gigi lalu reload",
+    "state": "paid parent + paid addon active / DRAFT",
+    "status": "PASS",
+    "cases": [
+      "DENT-32-unknown"
+    ]
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor (dentist)",
+    "action": "Pilih kondisi Sehat pada seluruh 32 gigi lalu reload",
+    "state": "paid parent + paid addon active / DRAFT",
+    "status": "PASS",
+    "cases": [
+      "DENT-32-healthy"
+    ]
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor (dentist)",
+    "action": "Pilih kondisi Karies pada seluruh 32 gigi lalu reload",
+    "state": "paid parent + paid addon active / DRAFT",
+    "status": "PASS",
+    "cases": [
+      "DENT-32-caries"
+    ]
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor (dentist)",
+    "action": "Pilih kondisi Tambalan pada seluruh 32 gigi lalu reload",
+    "state": "paid parent + paid addon active / DRAFT",
+    "status": "PASS",
+    "cases": [
+      "DENT-32-filled"
+    ]
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor (dentist)",
+    "action": "Pilih kondisi Hilang pada seluruh 32 gigi lalu reload",
+    "state": "paid parent + paid addon active / DRAFT",
+    "status": "PASS",
+    "cases": [
+      "DENT-32-missing"
+    ]
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor (dentist)",
+    "action": "Pilih kondisi Mahkota pada seluruh 32 gigi lalu reload",
+    "state": "paid parent + paid addon active / DRAFT",
+    "status": "PASS",
+    "cases": [
+      "DENT-32-crown"
+    ]
+  },
+  {
+    "feature": "F20",
+    "role": "Doctor (dentist)",
+    "action": "Buka dan baca perbedaan array 32 gigi pada mobile",
+    "state": "FINAL + correction history32 / viewport375",
+    "status": "PASS",
+    "cases": [
+      "DENT-HISTORY-MOBILE"
+    ]
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "Edit stale dental setelah ends_at lewat, reload read-only, simpan RME General",
+    "state": "active09:00 → expired09:31; revoked_at NULL",
+    "status": "PASS",
+    "cases": [
+      "DENT-EXPIRES-ENDS-AT"
+    ]
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor (dentist)",
+    "action": "Buka ulang dental final dan verifikasi snapshot koreksi32",
+    "state": "FINAL after earlier successful UI final/correction; assertion key corrected",
+    "status": "PASS",
+    "cases": [
+      "DENT-FINAL-CORRECTION-R2"
+    ]
+  },
+  {
+    "feature": "F07",
+    "role": "Clinic Admin",
+    "action": "Simpan tarif 123.45",
+    "state": "numeric within server range; fractional/nonmultiple1000",
+    "status": "FAIL",
+    "cases": [
+      "SERVICE-PRICE-123_45"
+    ]
+  },
+  {
+    "feature": "F07",
+    "role": "Clinic Admin",
+    "action": "Simpan tarif 123456",
+    "state": "numeric within server range; fractional/nonmultiple1000",
+    "status": "FAIL",
+    "cases": [
+      "SERVICE-PRICE-123456"
+    ]
+  },
+  {
+    "feature": "F07",
+    "role": "Clinic Admin",
+    "action": "Tolak nominal melebihi 9999999999.99",
+    "state": "numeric overflow boundary",
+    "status": "PASS",
+    "cases": [
+      "SERVICE-MAX"
+    ]
+  },
+  {
+    "feature": "F08",
+    "role": "Clinic Admin",
+    "action": "Tolak jadwal quota=0",
+    "state": "new session; min/max/order/outside clinic hours",
+    "status": "PASS",
+    "cases": [
+      "SCHEDULE-BOUND-quota-0"
+    ]
+  },
+  {
+    "feature": "F08",
+    "role": "Clinic Admin",
+    "action": "Tolak jadwal quota=501",
+    "state": "new session; min/max/order/outside clinic hours",
+    "status": "PASS",
+    "cases": [
+      "SCHEDULE-BOUND-quota-501"
+    ]
+  },
+  {
+    "feature": "F08",
+    "role": "Clinic Admin",
+    "action": "Tolak jadwal end_time=11:00",
+    "state": "new session; min/max/order/outside clinic hours",
+    "status": "PASS",
+    "cases": [
+      "SCHEDULE-BOUND-end_time-1100"
+    ]
+  },
+  {
+    "feature": "F08",
+    "role": "Clinic Admin",
+    "action": "Tolak jadwal start_time=07:00",
+    "state": "new session; min/max/order/outside clinic hours",
+    "status": "PASS",
+    "cases": [
+      "SCHEDULE-BOUND-start_time-0700"
+    ]
+  },
+  {
+    "feature": "F08",
+    "role": "Clinic Admin",
+    "action": "Ubah start_time sesi terpakai",
+    "state": "appointments and queues reference schedule",
+    "status": "PASS",
+    "cases": [
+      "USED-SESSION-start_time"
+    ]
+  },
+  {
+    "feature": "F08",
+    "role": "Clinic Admin",
+    "action": "Ubah end_time sesi terpakai",
+    "state": "appointments and queues reference schedule",
+    "status": "PASS",
+    "cases": [
+      "USED-SESSION-end_time"
+    ]
+  },
+  {
+    "feature": "F09",
+    "role": "Receptionist",
+    "action": "Submit pasien baru dengan field wajib kosong",
+    "state": "new patient required fields empty",
+    "status": "PASS",
+    "cases": [
+      "PATIENT-EMPTY"
+    ]
+  },
+  {
+    "feature": "F09",
+    "role": "Receptionist",
+    "action": "Tolak tanggal lahir masa depan",
+    "state": "new patient; future DOB",
+    "status": "PASS",
+    "cases": [
+      "PATIENT-FUTURE-DOB"
+    ]
+  },
+  {
+    "feature": "F09",
+    "role": "Receptionist",
+    "action": "Cari pasien berdasarkan name",
+    "state": "patient with >30 appointment history",
+    "status": "PASS",
+    "cases": [
+      "PATIENT-SEARCH-name"
+    ]
+  },
+  {
+    "feature": "F09",
+    "role": "Receptionist",
+    "action": "Cari pasien berdasarkan nik",
+    "state": "patient with >30 appointment history",
+    "status": "PASS",
+    "cases": [
+      "PATIENT-SEARCH-nik"
+    ]
+  },
+  {
+    "feature": "F09",
+    "role": "Receptionist",
+    "action": "Cari pasien berdasarkan phone",
+    "state": "patient with >30 appointment history",
+    "status": "PASS",
+    "cases": [
+      "PATIENT-SEARCH-phone"
+    ]
+  },
+  {
+    "feature": "F09",
+    "role": "Receptionist",
+    "action": "Cari pasien berdasarkan medical_record_number",
+    "state": "patient with >30 appointment history",
+    "status": "PASS",
+    "cases": [
+      "PATIENT-SEARCH-medical_record_number"
+    ]
+  },
+  {
+    "feature": "F09",
+    "role": "Receptionist",
+    "action": "Buka histori pasien dan booking lama",
+    "state": ">30 appointments for same patient",
+    "status": "PASS",
+    "cases": [
+      "PATIENT-LONG-HISTORY"
+    ]
+  },
+  {
+    "feature": "F24",
+    "role": "Clinic Admin",
+    "action": "Filter aktor/tanggal/aksi, next/previous dan empty",
+    "state": "35 fixture events; matching and no-result filters",
+    "status": "PASS",
+    "cases": [
+      "AUDIT-COMBINATION"
+    ]
+  },
+  {
+    "feature": "F24",
+    "role": "Clinic Admin",
+    "action": "Periksa metadata whitelist dan referensi aman",
+    "state": "safe fixture source+appointment_id and unlisted extra metadata",
+    "status": "PASS",
+    "cases": [
+      "AUDIT-METADATA"
+    ]
+  },
+  {
+    "feature": "F05",
+    "role": "Clinic Admin",
+    "action": "Simpan timezone Asia/Makassar dan buka dashboard",
+    "state": "clinic with existing sessions",
+    "status": "PASS",
+    "cases": [
+      "CLINIC-TZ-8"
+    ]
+  },
+  {
+    "feature": "F05",
+    "role": "Clinic Admin",
+    "action": "Simpan timezone Asia/Jayapura dan buka dashboard",
+    "state": "clinic with existing sessions",
+    "status": "PASS",
+    "cases": [
+      "CLINIC-TZ-9"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Clinic Admin",
+    "action": "Tolak perubahan profil duplicate-email",
+    "state": "verified active; duplicate email / max255 name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-Clinic-Admin-duplicate-email-R2"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Clinic Admin",
+    "action": "Tolak perubahan profil name256",
+    "state": "verified active; duplicate email / max255 name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-Clinic-Admin-name256-R2"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Receptionist",
+    "action": "Tolak perubahan profil duplicate-email",
+    "state": "verified active; duplicate email / max255 name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-Receptionist-duplicate-email-R2"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Receptionist",
+    "action": "Tolak perubahan profil name256",
+    "state": "verified active; duplicate email / max255 name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-Receptionist-name256-R2"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Doctor",
+    "action": "Tolak perubahan profil duplicate-email",
+    "state": "verified active; duplicate email / max255 name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-Doctor-duplicate-email-R2"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Doctor",
+    "action": "Tolak perubahan profil name256",
+    "state": "verified active; duplicate email / max255 name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-Doctor-name256-R2"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Patient",
+    "action": "Tolak perubahan profil duplicate-email",
+    "state": "verified active; duplicate email / max255 name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-Patient-duplicate-email-R2"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Patient",
+    "action": "Tolak perubahan profil name256",
+    "state": "verified active; duplicate email / max255 name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-Patient-name256-R2"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Platform Admin",
+    "action": "Tolak perubahan profil duplicate-email",
+    "state": "verified active; duplicate email / max255 name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-Platform-Admin-duplicate-email-R2"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Platform Admin",
+    "action": "Tolak perubahan profil name256",
+    "state": "verified active; duplicate email / max255 name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-Platform-Admin-name256-R2"
+    ]
+  },
+  {
+    "feature": "F02",
+    "role": "Guest → patient",
+    "action": "Tolak email duplicate",
+    "state": "existing lower-case account email",
+    "status": "PASS",
+    "cases": [
+      "REGISTER-patient-duplicate"
+    ]
+  },
+  {
+    "feature": "F02",
+    "role": "Guest → patient",
+    "action": "Tolak email uppercase",
+    "state": "existing lower-case account email",
+    "status": "PASS",
+    "cases": [
+      "REGISTER-patient-uppercase"
+    ]
+  },
+  {
+    "feature": "F02",
+    "role": "Guest → patient",
+    "action": "Terms unchecked mencegah submit; refresh form tidak membuat akun",
+    "state": "new registration / terms false / form refresh",
+    "status": "PASS",
+    "cases": [
+      "REGISTER-patient-terms-refresh"
+    ]
+  },
+  {
+    "feature": "F02",
+    "role": "Guest → owner",
+    "action": "Tolak email duplicate",
+    "state": "existing lower-case account email",
+    "status": "PASS",
+    "cases": [
+      "REGISTER-owner-duplicate"
+    ]
+  },
+  {
+    "feature": "F02",
+    "role": "Guest → owner",
+    "action": "Tolak email uppercase",
+    "state": "existing lower-case account email",
+    "status": "PASS",
+    "cases": [
+      "REGISTER-owner-uppercase"
+    ]
+  },
+  {
+    "feature": "F02",
+    "role": "Guest → owner",
+    "action": "Terms unchecked mencegah submit; refresh form tidak membuat akun",
+    "state": "new registration / terms false / form refresh",
+    "status": "PASS",
+    "cases": [
+      "REGISTER-owner-terms-refresh"
+    ]
+  },
+  {
+    "feature": "F01",
+    "role": "Guest → Patient",
+    "action": "Verifikasi kedaluwarsa ditolak, link baru sah, reuse aman",
+    "state": "new unverified patient / signed link expired then verified",
+    "status": "PASS",
+    "cases": [
+      "VERIFY-EXPIRED-REUSED"
+    ]
+  },
+  {
+    "feature": "F01",
+    "role": "Patient",
+    "action": "Masuk browser baru hanya dengan remember cookie",
+    "state": "session cookie absent; persistent remember cookie valid",
+    "status": "PASS",
+    "cases": [
+      "REMEMBER-NEW-CONTEXT"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Patient",
+    "action": "Ubah password pada sesiA, amati sesiB dan login baru",
+    "state": "two active sessions; password change through profile UI",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-TWO-PASSWORD-SESSIONS"
+    ]
+  },
+  {
+    "feature": "F01",
+    "role": "Patient",
+    "action": "Cookie remember lama tidak dapat dipakai setelah password berubah",
+    "state": "new browser with previous recaller only",
+    "status": "PASS",
+    "cases": [
+      "REMEMBER-REVOKED"
+    ]
+  },
+  {
+    "feature": "F01",
+    "role": "Patient",
+    "action": "Reset kedaluwarsa ditolak dan token reset tidak dapat dipakai ulang",
+    "state": "reset request via UI; expired then new valid token",
+    "status": "PASS",
+    "cases": [
+      "RESET-EXPIRED-REUSED"
+    ]
+  },
+  {
+    "feature": "F04",
+    "role": "Clinic Owner",
+    "action": "Logout/login melanjutkan onboarding yang ditinggalkan",
+    "state": "verified owner; clinic not created",
+    "status": "PASS",
+    "cases": [
+      "ONBOARDING-RESUME"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Simpan batas min/max dan tolak luar rentang weight_kg",
+    "state": "DRAFT / numeric bounds",
+    "status": "PASS",
+    "cases": [
+      "VITAL-BOUND-weight_kg"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Simpan batas min/max dan tolak luar rentang height_cm",
+    "state": "DRAFT / numeric bounds",
+    "status": "PASS",
+    "cases": [
+      "VITAL-BOUND-height_cm"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Simpan batas min/max dan tolak luar rentang systolic",
+    "state": "DRAFT / numeric bounds",
+    "status": "PASS",
+    "cases": [
+      "VITAL-BOUND-systolic"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Simpan batas min/max dan tolak luar rentang diastolic",
+    "state": "DRAFT / numeric bounds",
+    "status": "PASS",
+    "cases": [
+      "VITAL-BOUND-diastolic"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Simpan batas min/max dan tolak luar rentang pulse",
+    "state": "DRAFT / numeric bounds",
+    "status": "PASS",
+    "cases": [
+      "VITAL-BOUND-pulse"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Simpan batas min/max dan tolak luar rentang respiratory_rate",
+    "state": "DRAFT / numeric bounds",
+    "status": "PASS",
+    "cases": [
+      "VITAL-BOUND-respiratory_rate"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Simpan batas min/max dan tolak luar rentang temperature_c",
+    "state": "DRAFT / numeric bounds",
+    "status": "PASS",
+    "cases": [
+      "VITAL-BOUND-temperature_c"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Simpan batas min/max dan tolak luar rentang oxygen_saturation",
+    "state": "DRAFT / numeric bounds",
+    "status": "PASS",
+    "cases": [
+      "VITAL-BOUND-oxygen_saturation"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Tambah20 diagnosis, batas tombol dan persistence",
+    "state": "DRAFT / 20 structured diagnoses",
+    "status": "PASS",
+    "cases": [
+      "DIAGNOSIS-20"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Tambah30 tindakan, batas tombol dan persistence",
+    "state": "DRAFT / 30 structured treatments",
+    "status": "PASS",
+    "cases": [
+      "TREATMENT-30"
+    ]
+  },
+  {
+    "feature": "F17",
+    "role": "Doctor",
+    "action": "Resep baru memerlukan acknowledgement alergi kritis",
+    "state": "active CRITICAL allergy; new prescription / unchecked then checked",
+    "status": "PASS",
+    "cases": [
+      "PRESCRIPTION-ACK-DRAFT"
+    ]
+  },
+  {
+    "feature": "F18",
+    "role": "Doctor",
+    "action": "Lanjut PRESCRIPTION-30-31",
+    "state": "UI dependency corrected; existing persisted Rx30",
+    "status": "PASS",
+    "cases": [
+      "PRESCRIPTION-30-31-R2"
+    ]
+  },
+  {
+    "feature": "F18",
+    "role": "Doctor",
+    "action": "Lanjut PRESCRIPTION-QUANTITY",
+    "state": "UI dependency corrected; existing persisted Rx30",
+    "status": "PASS",
+    "cases": [
+      "PRESCRIPTION-QUANTITY-R2"
+    ]
+  },
+  {
+    "feature": "F18",
+    "role": "Doctor",
+    "action": "Lanjut PRESCRIPTION-EMPTY-FINAL",
+    "state": "UI dependency corrected; existing persisted Rx30",
+    "status": "PASS",
+    "cases": [
+      "PRESCRIPTION-EMPTY-FINAL-R2"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Sesi logout dikenali sebagai kebutuhan login kembali",
+    "state": "same-context logout; editor has old session",
+    "status": "FAIL",
+    "cases": [
+      "SESSION-401-FEEDBACK"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Doctor",
+    "action": "Pilih tipe bukan gambar",
+    "state": "DRAFT / invalid text upload",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-TYPE"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Doctor",
+    "action": "Pilih11 gambar; UI membatasi pilihan10",
+    "state": "DRAFT / 11 selected files, <=10 accepted selection",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-COUNT"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Tolak navigasi Back/refresh saat foto dan draft belum disimpan",
+    "state": "pending photo + dirty SOAP before debounce",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-LEAVE-BEFORE-SAVE"
+    ]
+  },
+  {
+    "feature": "F17",
+    "role": "Doctor",
+    "action": "Native acknowledgement wajib sebelum koreksi resep final",
+    "state": "FINAL / critical allergy / native checkbox required",
+    "status": "PASS",
+    "cases": [
+      "PRESCRIPTION-ACK-CORRECTION-R3"
+    ]
+  },
+  {
+    "feature": "F18",
+    "role": "Patient",
+    "action": "Buka resep hasil koreksi melalui portal",
+    "state": "FINAL + corrected prescription",
+    "status": "PASS",
+    "cases": [
+      "PATIENT-CORRECTED-PRESCRIPTION-R3"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Login ulang tablain lalu simpan dari editor lama; observasi proteksi origin Laravel13",
+    "state": "fresh authenticated session + stale CSRF but same-origin request",
+    "status": "PASS",
+    "cases": [
+      "SESSION-RELOGIN-SAME-ORIGIN"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Doctor",
+    "action": "Tolak gambar lebih5MB tanpa menyimpan",
+    "state": "DRAFT / 5MB+ PNG upload",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-SIZE-R2"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Doctor",
+    "action": "Paste gambar dari clipboard lalu simpan manual",
+    "state": "DRAFT / browser clipboard image",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-CLIPBOARD-R2"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Doctor",
+    "action": "Upload terputus mempertahankan foto terpilih dan dapat diulang",
+    "state": "DRAFT / offline manual upload → online manual retry",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-OFFLINE-RETRY-R2"
+    ]
+  },
+  {
+    "feature": "F17",
+    "role": "Doctor",
+    "action": "Ubah severity aktif menjadi MODERATE; pertahankan versi sebelumnya",
+    "state": "append-only allergy history / active row",
+    "status": "PASS",
+    "cases": [
+      "ALLERGY-SEVERITY-MODERATE-R2"
+    ]
+  },
+  {
+    "feature": "F17",
+    "role": "Doctor",
+    "action": "Ubah severity aktif menjadi SEVERE; pertahankan versi sebelumnya",
+    "state": "append-only allergy history / active row",
+    "status": "PASS",
+    "cases": [
+      "ALLERGY-SEVERITY-SEVERE-R2"
+    ]
+  },
+  {
+    "feature": "F17",
+    "role": "Doctor",
+    "action": "Ubah severity aktif menjadi CRITICAL; pertahankan versi sebelumnya",
+    "state": "append-only allergy history / active row",
+    "status": "PASS",
+    "cases": [
+      "ALLERGY-SEVERITY-CRITICAL-R2"
+    ]
+  },
+  {
+    "feature": "F17",
+    "role": "Doctor",
+    "action": "Ubah severity aktif menjadi MILD; pertahankan versi sebelumnya",
+    "state": "append-only allergy history / active row",
+    "status": "PASS",
+    "cases": [
+      "ALLERGY-SEVERITY-MILD-R2"
+    ]
+  },
+  {
+    "feature": "F17",
+    "role": "Doctor",
+    "action": "Dua editor stale mempertahankan kedua versi; tidak menimpa histori",
+    "state": "same original active allergy opened twice",
+    "status": "PASS",
+    "cases": [
+      "ALLERGY-TWO-EDITORS-VERSIONS"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Doctor",
+    "action": "Hapus foto clipboard pada Modification dan buka snapshot lama",
+    "state": "FINAL with valid clipboard image.png and retry-photo.png",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-REVISION-SETUP-R3"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Clinic Owner",
+    "action": "Tolak akses foto snapshot revisi",
+    "state": "unassigned role / foreign tenant; real historical photo URL",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-REVISION-DENY-Clinic-Owner-R3"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Clinic Admin",
+    "action": "Tolak akses foto snapshot revisi",
+    "state": "unassigned role / foreign tenant; real historical photo URL",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-REVISION-DENY-Clinic-Admin-R3"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Receptionist",
+    "action": "Tolak akses foto snapshot revisi",
+    "state": "unassigned role / foreign tenant; real historical photo URL",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-REVISION-DENY-Receptionist-R3"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Doctor other tenant",
+    "action": "Tolak akses foto snapshot revisi",
+    "state": "unassigned role / foreign tenant; real historical photo URL",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-REVISION-DENY-Doctor-other-tenant-R3"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Patient",
+    "action": "Tolak akses foto snapshot revisi",
+    "state": "unassigned role / foreign tenant; real historical photo URL",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-REVISION-DENY-Patient-R3"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Platform Admin",
+    "action": "Tolak akses foto snapshot revisi",
+    "state": "unassigned role / foreign tenant; real historical photo URL",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-REVISION-DENY-Platform-Admin-R3"
+    ]
+  },
+  {
+    "feature": "F11",
+    "role": "Patient",
+    "action": "Booking tepat30 hari ke depan",
+    "state": "date today+30 / valid session",
+    "status": "PASS",
+    "cases": [
+      "BOOK-DAY30"
+    ]
+  },
+  {
+    "feature": "F11",
+    "role": "Patient",
+    "action": "Tanggal31 hari ditolak",
+    "state": "date today+31 / form native max",
+    "status": "PASS",
+    "cases": [
+      "BOOK-DAY31"
+    ]
+  },
+  {
+    "feature": "F13",
+    "role": "Receptionist",
+    "action": "Gabungkan dokter/sesi/status, next/previous dan empty",
+    "state": "COMPLETED >20 same doctor/session/date",
+    "status": "PASS",
+    "cases": [
+      "QUEUE-FILTER-PAGINATION"
+    ]
+  },
+  {
+    "feature": "F11",
+    "role": "Clinic Admin → Patient",
+    "action": "Sesi sudah berakhir ditolak saat booking",
+    "state": "new today08:00-08:30 session; controlled current09:00",
+    "status": "PASS",
+    "cases": [
+      "BOOK-ENDED-SESSION-R2"
+    ]
+  },
+  {
+    "feature": "F07",
+    "role": "Clinic Admin → Patient",
+    "action": "Layanan dinonaktifkan saat tab booking masih terbuka",
+    "state": "stale selected service; inactive server resource",
+    "status": "PASS",
+    "cases": [
+      "BOOK-SERVICE-STALE-R2"
+    ]
+  },
+  {
+    "feature": "F12",
+    "role": "Token holder",
+    "action": "Tolak status dengan token missing",
+    "state": "known appointment id; no matching secret",
+    "status": "PASS",
+    "cases": [
+      "TOKEN-missing-R2"
+    ]
+  },
+  {
+    "feature": "F12",
+    "role": "Token holder",
+    "action": "Tolak status dengan token wrong",
+    "state": "known appointment id; no matching secret",
+    "status": "PASS",
+    "cases": [
+      "TOKEN-wrong-R2"
+    ]
+  },
+  {
+    "feature": "F13",
+    "role": "Receptionist → Doctor",
+    "action": "Aksi stale check-in/call dari dua tab ditolak tanpa merusak state",
+    "state": "BOOKED→WAITING→CALLED; refresh GET intentionally disconnected",
+    "status": "PASS",
+    "cases": [
+      "QUEUE-TWO-TABS-R2"
+    ]
+  },
+  {
+    "feature": "F11",
+    "role": "Patient",
+    "action": "Dua UUID berbeda membuat dua booking dengan nomor antrean unik",
+    "state": "quota100 restored through UI after incomplete earlier harness",
+    "status": "PASS",
+    "cases": [
+      "BOOK-TWO-UUIDS-R3"
+    ]
+  },
+  {
+    "feature": "F08",
+    "role": "Clinic Admin → Patient",
+    "action": "Kuota di bawah reservasi tidak merusak booking lama dan menolak tambahan",
+    "state": "quota100→1 while existing reservations>1",
+    "status": "PASS",
+    "cases": [
+      "SCHEDULE-LOWER-QUOTA-R3"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Ulang Mulai periksa sesudah final:403, tanpa visit baru",
+    "state": "CALLED old tab held while first tab finalizes",
+    "status": "PASS",
+    "cases": [
+      "START-STALE-AFTER-FINAL-R3"
+    ]
+  },
+  {
+    "feature": "F12",
+    "role": "Patient",
+    "action": "Tolak pembatalan stale sesudah dokter menyelesaikan visit",
+    "state": "BOOKED cancellation form held → COMPLETED",
+    "status": "PASS",
+    "cases": [
+      "CANCEL-STALE-COMPLETED"
+    ]
+  },
+  {
+    "feature": "F12",
+    "role": "Patient",
+    "action": "Tolak cancel ulang dari tab stale; audit tidak diduplikasi",
+    "state": "BOOKED open twice → CANCELLED",
+    "status": "PASS",
+    "cases": [
+      "CANCEL-STALE-CANCELLED-R3"
+    ]
+  },
+  {
+    "feature": "F12",
+    "role": "Patient / Receptionist",
+    "action": "No-show dari sesi08:00, lalu replay cancellation stale ditolak",
+    "state": "BOOKED07:59 → NO_SHOW09:00; within same session lifetime",
+    "status": "PASS",
+    "cases": [
+      "CANCEL-STALE-NOSHOW"
+    ]
+  },
+  {
+    "feature": "F00",
+    "role": "Guest",
+    "action": "Klik seluruh anchor navbar lalu Back/Forward",
+    "state": "landing section history navigation",
+    "status": "PASS",
+    "cases": [
+      "LANDING-HISTORY"
+    ]
+  },
+  {
+    "feature": "F14",
+    "role": "Guest",
+    "action": "Display tanpa antrean dan navigasi yang tersedia",
+    "state": "empty clinic queue display",
+    "status": "PASS",
+    "cases": [
+      "DISPLAY-EMPTY-CONTROLS"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Clinic Admin (owner)",
+    "action": "Next/Previous dan mark-read dari notification center",
+    "state": ">20 own notifications",
+    "status": "PASS",
+    "cases": [
+      "NOTIFICATION-PAGINATION-Clinic-Admin-(owner)"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Receptionist",
+    "action": "Next/Previous dan mark-read dari notification center",
+    "state": ">20 own notifications",
+    "status": "PASS",
+    "cases": [
+      "NOTIFICATION-PAGINATION-Receptionist"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Doctor",
+    "action": "Next/Previous dan mark-read dari notification center",
+    "state": ">20 own notifications",
+    "status": "PASS",
+    "cases": [
+      "NOTIFICATION-PAGINATION-Doctor"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Patient",
+    "action": "Next/Previous dan mark-read dari notification center",
+    "state": ">20 own notifications",
+    "status": "PASS",
+    "cases": [
+      "NOTIFICATION-PAGINATION-Patient"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Platform Admin",
+    "action": "Next/Previous dan mark-read dari notification center",
+    "state": ">20 own notifications",
+    "status": "PASS",
+    "cases": [
+      "NOTIFICATION-PAGINATION-Platform-Admin"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Clinic Admin",
+    "action": "Notification center kosong",
+    "state": "no own notifications",
+    "status": "PASS",
+    "cases": [
+      "NOTIFICATION-EMPTY-Clinic-Admin"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Clinic Admin",
+    "action": "Simpan nama255 karakter lalu periksa mobile",
+    "state": "valid max255 profile name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-MAX255-Clinic-Admin"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Receptionist",
+    "action": "Notification center kosong",
+    "state": "no own notifications",
+    "status": "PASS",
+    "cases": [
+      "NOTIFICATION-EMPTY-Receptionist"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Receptionist",
+    "action": "Simpan nama255 karakter lalu periksa mobile",
+    "state": "valid max255 profile name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-MAX255-Receptionist"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Doctor",
+    "action": "Notification center kosong",
+    "state": "no own notifications",
+    "status": "PASS",
+    "cases": [
+      "NOTIFICATION-EMPTY-Doctor"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Doctor",
+    "action": "Simpan nama255 karakter lalu periksa mobile",
+    "state": "valid max255 profile name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-MAX255-Doctor"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Patient",
+    "action": "Notification center kosong",
+    "state": "no own notifications",
+    "status": "PASS",
+    "cases": [
+      "NOTIFICATION-EMPTY-Patient"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Patient",
+    "action": "Simpan nama255 karakter lalu periksa mobile",
+    "state": "valid max255 profile name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-MAX255-Patient"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Platform Admin",
+    "action": "Notification center kosong",
+    "state": "no own notifications",
+    "status": "PASS",
+    "cases": [
+      "NOTIFICATION-EMPTY-Platform-Admin"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Platform Admin",
+    "action": "Simpan nama255 karakter lalu periksa mobile",
+    "state": "valid max255 profile name",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-MAX255-Platform-Admin"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis name × ALL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-name-ALL"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis name × DRAFT",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-name-DRAFT"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis name × FINAL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-name-FINAL"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis RM × ALL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-RM-ALL"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis RM × DRAFT",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-RM-DRAFT"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis RM × FINAL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-RM-FINAL"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis diagnosis × ALL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-diagnosis-ALL"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis diagnosis × DRAFT",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-diagnosis-DRAFT"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis diagnosis × FINAL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-diagnosis-FINAL"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis code × ALL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-code-ALL"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis code × DRAFT",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-code-DRAFT"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis code × FINAL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-code-FINAL"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis assessment × ALL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-assessment-ALL"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis assessment × DRAFT",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-assessment-DRAFT"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis assessment × FINAL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-assessment-FINAL"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Filter rekam medis service × FINAL",
+    "state": "search representative family + status + today date range",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-service-FINAL"
+    ]
+  },
+  {
+    "feature": "F14",
+    "role": "Guest / Receptionist",
+    "action": "Check-in UI memperbarui display melalui socket nyata",
+    "state": "Reverb local + database worker / BOOKED→WAITING",
+    "status": "PASS",
+    "cases": [
+      "WS-PUBLIC-DELIVERY"
+    ]
+  },
+  {
+    "feature": "F23",
+    "role": "Patient / Doctor",
+    "action": "Badge bertambah sesudah notification socket lintas browser",
+    "state": "same check-in delivery; before badge captured prior action",
+    "status": "PASS",
+    "cases": [
+      "WS-NOTIFICATION-BADGES"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Patient",
+    "action": "ETA confidence sedang dari histori terkontrol",
+    "state": "10 completed visits",
+    "status": "PASS",
+    "cases": [
+      "ETA-CONFIDENCE-sedang"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Patient",
+    "action": "ETA confidence tinggi dari histori terkontrol",
+    "state": "20 completed visits",
+    "status": "PASS",
+    "cases": [
+      "ETA-CONFIDENCE-tinggi"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Receptionist / Doctor / Patient",
+    "action": "ETA target ketika depan CALLED",
+    "state": "WAITING target / one preceding queue",
+    "status": "PASS",
+    "cases": [
+      "ETA-FRONT-CALLED"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Receptionist / Doctor / Patient",
+    "action": "ETA target ketika depan IN_PROGRESS",
+    "state": "WAITING target / one preceding queue",
+    "status": "PASS",
+    "cases": [
+      "ETA-FRONT-IN_PROGRESS"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Receptionist / Doctor / Patient",
+    "action": "ETA target ketika depan COMPLETED",
+    "state": "WAITING target / one preceding queue",
+    "status": "PASS",
+    "cases": [
+      "ETA-FRONT-COMPLETED"
+    ]
+  },
+  {
+    "feature": "F28",
+    "role": "Platform Admin",
+    "action": "Cari tenant berdasarkan email owner dan buka detail",
+    "state": "exact owner-email / >15 tenant pages",
+    "status": "PASS",
+    "cases": [
+      "TENANT-OWNER-SEARCH"
+    ]
+  },
+  {
+    "feature": "F28",
+    "role": "Platform Admin",
+    "action": "Periksa metadata komersial tenant free",
+    "state": "Free / paid Individual / paid Team / trial / near-expiry",
+    "status": "PASS",
+    "cases": [
+      "TENANT-COMMERCIAL-free"
+    ]
+  },
+  {
+    "feature": "F28",
+    "role": "Platform Admin",
+    "action": "Periksa metadata komersial tenant individual",
+    "state": "Free / paid Individual / paid Team / trial / near-expiry",
+    "status": "PASS",
+    "cases": [
+      "TENANT-COMMERCIAL-individual"
+    ]
+  },
+  {
+    "feature": "F28",
+    "role": "Platform Admin",
+    "action": "Periksa metadata komersial tenant dental",
+    "state": "Free / paid Individual / paid Team / trial / near-expiry",
+    "status": "PASS",
+    "cases": [
+      "TENANT-COMMERCIAL-dental"
+    ]
+  },
+  {
+    "feature": "F28",
+    "role": "Platform Admin",
+    "action": "Periksa metadata komersial tenant trial",
+    "state": "Free / paid Individual / paid Team / trial / near-expiry",
+    "status": "PASS",
+    "cases": [
+      "TENANT-COMMERCIAL-trial"
+    ]
+  },
+  {
+    "feature": "F28",
+    "role": "Platform Admin",
+    "action": "Periksa metadata komersial tenant expiry",
+    "state": "Free / paid Individual / paid Team / trial / near-expiry",
+    "status": "PASS",
+    "cases": [
+      "TENANT-COMMERCIAL-expiry"
+    ]
+  },
+  {
+    "feature": "F29",
+    "role": "Platform Admin",
+    "action": "Tolak harga katalog 0",
+    "state": "integer1..999999999",
+    "status": "PASS",
+    "cases": [
+      "CATALOG-INVALID-0"
+    ]
+  },
+  {
+    "feature": "F29",
+    "role": "Platform Admin",
+    "action": "Tolak harga katalog 1000000000",
+    "state": "integer1..999999999",
+    "status": "PASS",
+    "cases": [
+      "CATALOG-INVALID-1000000000"
+    ]
+  },
+  {
+    "feature": "F29",
+    "role": "Platform Admin",
+    "action": "Tolak harga katalog 1.5",
+    "state": "integer1..999999999",
+    "status": "PASS",
+    "cases": [
+      "CATALOG-INVALID-1.5"
+    ]
+  },
+  {
+    "feature": "F29",
+    "role": "Clinic Owner / Platform Admin",
+    "action": "Tab checkout lama ditolak setelah harga dinonaktifkan",
+    "state": "old paid price form selected; active price→inactive",
+    "status": "PASS",
+    "cases": [
+      "CATALOG-STALE-CHECKOUT"
+    ]
+  },
+  {
+    "feature": "F29",
+    "role": "Platform Admin",
+    "action": "Perubahan harga katalog tidak mengubah invoice lama",
+    "state": "paid invoice exists at original price",
+    "status": "PASS",
+    "cases": [
+      "CATALOG-PRICE-SNAPSHOT"
+    ]
+  },
+  {
+    "feature": "F29",
+    "role": "Platform Admin / Clinic Owner",
+    "action": "Nonaktifkan add-on katalog; entitlement lama tetap berlaku",
+    "state": "active addon period; catalog price inactive",
+    "status": "PASS",
+    "cases": [
+      "CATALOG-ADDON-INACTIVE"
+    ]
+  },
+  {
+    "feature": "F00",
+    "role": "Guest / Clinic Owner / Platform Admin",
+    "action": "Katalog seluruh paket nonaktif lalu pulihkan",
+    "state": "all3 plans inactive; landing and owner plans",
+    "status": "PASS",
+    "cases": [
+      "CATALOG-ALL-INACTIVE"
+    ]
+  },
+  {
+    "feature": "F30",
+    "role": "Platform Admin",
+    "action": "Grant lebih tinggi dan setara dijadwalkan setelah periode aktif",
+    "state": "Individual active → Team scheduled → Individual scheduled",
+    "status": "PASS",
+    "cases": [
+      "GRANT-HIGHER-EQUAL"
+    ]
+  },
+  {
+    "feature": "F30",
+    "role": "Platform Admin",
+    "action": "Downgrade berbayar menghentikan overlap dan menjaga invoice",
+    "state": "Team active + future Team grant → Individual now",
+    "status": "PASS",
+    "cases": [
+      "GRANT-PAID-DOWNGRADE"
+    ]
+  },
+  {
+    "feature": "F31",
+    "role": "Platform Admin",
+    "action": "Refund manual dummy dan ulang dari tab stale",
+    "state": "paid with addon → refunded; replay manual form",
+    "status": "PASS",
+    "cases": [
+      "REFUND-STALE"
+    ]
+  },
+  {
+    "feature": "F31",
+    "role": "Platform Admin",
+    "action": "Refund tidak ditawarkan pada pending",
+    "state": "nonrefundable payment state",
+    "status": "PASS",
+    "cases": [
+      "REFUND-UNAVAILABLE-pending"
+    ]
+  },
+  {
+    "feature": "F31",
+    "role": "Platform Admin",
+    "action": "Refund tidak ditawarkan pada expired",
+    "state": "nonrefundable payment state",
+    "status": "PASS",
+    "cases": [
+      "REFUND-UNAVAILABLE-expired"
+    ]
+  },
+  {
+    "feature": "F31",
+    "role": "Platform Admin",
+    "action": "Refund tidak ditawarkan pada failed",
+    "state": "nonrefundable payment state",
+    "status": "PASS",
+    "cases": [
+      "REFUND-UNAVAILABLE-failed"
+    ]
+  },
+  {
+    "feature": "F31",
+    "role": "Platform Admin",
+    "action": "Refund tidak ditawarkan pada refunded",
+    "state": "nonrefundable payment state",
+    "status": "PASS",
+    "cases": [
+      "REFUND-UNAVAILABLE-refunded"
+    ]
+  },
+  {
+    "feature": "F31",
+    "role": "Foreign Owner",
+    "action": "Akses invoice tenant asing tidak membuka reconcile/refund",
+    "state": "foreign clinic invoice / unauthorized role",
+    "status": "PASS",
+    "cases": [
+      "PAYMENT-ROLE-Foreign-Owner"
+    ]
+  },
+  {
+    "feature": "F31",
+    "role": "Clinic Admin",
+    "action": "Akses invoice tenant asing tidak membuka reconcile/refund",
+    "state": "foreign clinic invoice / unauthorized role",
+    "status": "PASS",
+    "cases": [
+      "PAYMENT-ROLE-Clinic-Admin"
+    ]
+  },
+  {
+    "feature": "F31",
+    "role": "Doctor",
+    "action": "Akses invoice tenant asing tidak membuka reconcile/refund",
+    "state": "foreign clinic invoice / unauthorized role",
+    "status": "PASS",
+    "cases": [
+      "PAYMENT-ROLE-Doctor"
+    ]
+  },
+  {
+    "feature": "F31",
+    "role": "Receptionist",
+    "action": "Akses invoice tenant asing tidak membuka reconcile/refund",
+    "state": "foreign clinic invoice / unauthorized role",
+    "status": "PASS",
+    "cases": [
+      "PAYMENT-ROLE-Receptionist"
+    ]
+  },
+  {
+    "feature": "F31",
+    "role": "Patient",
+    "action": "Akses invoice tenant asing tidak membuka reconcile/refund",
+    "state": "foreign clinic invoice / unauthorized role",
+    "status": "PASS",
+    "cases": [
+      "PAYMENT-ROLE-Patient"
+    ]
+  },
+  {
+    "feature": "F06",
+    "role": "Clinic Owner",
+    "action": "Tambah dokter kedua pada paket free",
+    "state": "Free/Individual limit1; Team/trial unlimited",
+    "status": "PASS",
+    "cases": [
+      "DOCTOR-SEAT-free"
+    ]
+  },
+  {
+    "feature": "F06",
+    "role": "Clinic Owner",
+    "action": "Tambah dokter kedua pada paket individual",
+    "state": "Free/Individual limit1; Team/trial unlimited",
+    "status": "PASS",
+    "cases": [
+      "DOCTOR-SEAT-individual"
+    ]
+  },
+  {
+    "feature": "F06",
+    "role": "Clinic Owner",
+    "action": "Tambah dokter kedua pada paket dental",
+    "state": "Free/Individual limit1; Team/trial unlimited",
+    "status": "PASS",
+    "cases": [
+      "DOCTOR-SEAT-dental"
+    ]
+  },
+  {
+    "feature": "F06",
+    "role": "Clinic Owner",
+    "action": "Tambah dokter kedua pada paket trial",
+    "state": "Free/Individual limit1; Team/trial unlimited",
+    "status": "PASS",
+    "cases": [
+      "DOCTOR-SEAT-trial"
+    ]
+  },
+  {
+    "feature": "F06",
+    "role": "Clinic Owner",
+    "action": "Seat Free dipakai pengganti; reaktivasi dokter lama ditolak",
+    "state": "one doctor inactive → replacement active → reactivation overage",
+    "status": "PASS",
+    "cases": [
+      "DOCTOR-SEAT-REACTIVATION"
+    ]
+  },
+  {
+    "feature": "F06",
+    "role": "Clinic Owner / Receptionist",
+    "action": "Ubah email/password staf; remember lama ditolak dan email baru wajib diverifikasi",
+    "state": "remember-only session + credentials changed through owner UI",
+    "status": "PASS",
+    "cases": [
+      "STAFF-REMEMBER-CHANGE"
+    ]
+  },
+  {
+    "feature": "F35",
+    "role": "Receptionist",
+    "action": "Cari kandidat US setelah normalisasi format",
+    "state": "accepted phone plus/spaces/parentheses/dashes",
+    "status": "PASS",
+    "cases": [
+      "PHONE-NORMALIZE-US"
+    ]
+  },
+  {
+    "feature": "F35",
+    "role": "Receptionist",
+    "action": "Cari kandidat UK setelah normalisasi format",
+    "state": "accepted phone plus/spaces/parentheses/dashes",
+    "status": "PASS",
+    "cases": [
+      "PHONE-NORMALIZE-UK"
+    ]
+  },
+  {
+    "feature": "F35",
+    "role": "Receptionist",
+    "action": "Cari kandidat ID setelah normalisasi format",
+    "state": "accepted phone plus/spaces/parentheses/dashes",
+    "status": "PASS",
+    "cases": [
+      "PHONE-NORMALIZE-ID"
+    ]
+  },
+  {
+    "feature": "F35",
+    "role": "Receptionist",
+    "action": "Telepon bertitik yang sah ditemukan kembali dengan digit normal",
+    "state": "stored0812.8888.9999; lookup081288889999",
+    "status": "FAIL",
+    "cases": [
+      "PHONE-DOT-NORMALIZATION"
+    ]
+  },
+  {
+    "feature": "F35",
+    "role": "Receptionist",
+    "action": "Review dengan10 kandidat menunjukkan batas8 tanpa account linking",
+    "state": "10 shared-phone fixture candidates",
+    "status": "PASS",
+    "cases": [
+      "DUPLICATES-MORE-THAN8"
+    ]
+  },
+  {
+    "feature": "F35",
+    "role": "Receptionist",
+    "action": "NIK opsional diproses sebagai string max30, bukan verifikasi nasional",
+    "state": "non-numeric dummy identifier and whitespace trimming",
+    "status": "PASS",
+    "cases": [
+      "DUPLICATE-NIK-CONTRACT"
+    ]
+  },
+  {
+    "feature": "F35",
+    "role": "Receptionist",
+    "action": "Kandidat baru dari tablain membatalkan persetujuan review lama",
+    "state": "review token for1 candidate becomes2 candidates before submit",
+    "status": "PASS",
+    "cases": [
+      "DUPLICATE-STALE-REVIEW"
+    ]
+  },
+  {
+    "feature": "F35",
+    "role": "Receptionist",
+    "action": "Dari kandidat nonaktif, booking menjelaskan mengapa pasien tidak bisa dipilih",
+    "state": "inactive profile → Buat booking",
+    "status": "FAIL",
+    "cases": [
+      "INACTIVE-CANDIDATE-BOOKING"
+    ]
+  },
+  {
+    "feature": "F05",
+    "role": "Clinic Admin",
+    "action": "Penggantian logo invalid-type ditolak dan logo lama tetap ada",
+    "state": "existing valid logo; invalid replacement",
+    "status": "PASS",
+    "cases": [
+      "LOGO-REPLACE-invalid-type"
+    ]
+  },
+  {
+    "feature": "F05",
+    "role": "Clinic Admin",
+    "action": "Penggantian logo over2mb ditolak dan logo lama tetap ada",
+    "state": "existing valid logo; invalid replacement",
+    "status": "PASS",
+    "cases": [
+      "LOGO-REPLACE-over2mb"
+    ]
+  },
+  {
+    "feature": "F05",
+    "role": "Clinic Admin → Patient",
+    "action": "Perubahan jam tutup menjaga sesi dan booking baru tetap konsisten",
+    "state": "active12:00-23:59 session; closing23:59→10:00",
+    "status": "FAIL",
+    "cases": [
+      "CLINIC-HOURS-EXISTING"
+    ]
+  },
+  {
+    "feature": "F04",
+    "role": "Guest → Clinic Owner",
+    "action": "CTA free dipertahankan sampai pilihan aktivasi",
+    "state": "landing CTA → register → verify → clinic → plan selector",
+    "status": "PASS",
+    "cases": [
+      "CTA-PREFERRED-free"
+    ]
+  },
+  {
+    "feature": "F04",
+    "role": "Guest → Clinic Owner",
+    "action": "CTA individual dipertahankan sampai pilihan aktivasi",
+    "state": "landing CTA → register → verify → clinic → plan selector",
+    "status": "PASS",
+    "cases": [
+      "CTA-PREFERRED-individual"
+    ]
+  },
+  {
+    "feature": "F04",
+    "role": "Guest → Clinic Owner",
+    "action": "CTA team dipertahankan sampai pilihan aktivasi",
+    "state": "landing CTA → register → verify → clinic → plan selector",
+    "status": "PASS",
+    "cases": [
+      "CTA-PREFERRED-team"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Cari snapshot nama layanan historis × ALL",
+    "state": "service snapshot differs from current catalog name",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-service-ALL-R2"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Cari snapshot nama layanan historis × DRAFT",
+    "state": "service snapshot differs from current catalog name",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-service-DRAFT-R2"
+    ]
+  },
+  {
+    "feature": "F15",
+    "role": "Doctor",
+    "action": "Pencarian tanpa hasil menampilkan empty state",
+    "state": "unmatched search",
+    "status": "PASS",
+    "cases": [
+      "RME-SEARCH-EMPTY-R2"
+    ]
+  },
+  {
+    "feature": "F20",
+    "role": "Doctor",
+    "action": "Dua tab submit finalisasi menghasilkan satu finalisasi/audit",
+    "state": "same DRAFT version; two real UI requests in flight",
+    "status": "PASS",
+    "cases": [
+      "FINALIZE-TWO-SUBMITS"
+    ]
+  },
+  {
+    "feature": "F20",
+    "role": "Doctor",
+    "action": "Koreksi tab stale409 tanpa menimpa versi terbaru",
+    "state": "FINAL same version in two tabs",
+    "status": "PASS",
+    "cases": [
+      "CORRECTION-TWO-TABS"
+    ]
+  },
+  {
+    "feature": "F20",
+    "role": "Doctor",
+    "action": "Histori20 diagnosis/30 tindakan/30 obat dibaca pada mobile",
+    "state": "FINAL correction; long array values; viewport375",
+    "status": "PASS",
+    "cases": [
+      "LONG-ARRAY-HISTORY-MOBILE"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Owner / Patient / Receptionist / Doctor",
+    "action": "Siapkan visit UI pada UTC13Nov16:30 yang jatuh14Nov di WIT",
+    "state": "real workflow precondition for timezone reconciliation",
+    "status": "PASS",
+    "cases": [
+      "DASHBOARD-DATE-EDGE"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "action": "Rekonsiliasi dashboard Asia/Jakarta day-before",
+    "state": "3 timezone Ã— 3 periods with actual midnight-edge visit",
+    "status": "PASS",
+    "cases": [
+      "DASH-ADMIN-7-day-before"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "action": "Rekonsiliasi dashboard Asia/Jakarta day-after",
+    "state": "3 timezone Ã— 3 periods with actual midnight-edge visit",
+    "status": "PASS",
+    "cases": [
+      "DASH-ADMIN-7-day-after"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "action": "Rekonsiliasi dashboard Asia/Jakarta month",
+    "state": "3 timezone Ã— 3 periods with actual midnight-edge visit",
+    "status": "PASS",
+    "cases": [
+      "DASH-ADMIN-7-month"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "action": "Rekonsiliasi dashboard Asia/Makassar day-before",
+    "state": "3 timezone Ã— 3 periods with actual midnight-edge visit",
+    "status": "PASS",
+    "cases": [
+      "DASH-ADMIN-8-day-before"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "action": "Rekonsiliasi dashboard Asia/Makassar day-after",
+    "state": "3 timezone Ã— 3 periods with actual midnight-edge visit",
+    "status": "PASS",
+    "cases": [
+      "DASH-ADMIN-8-day-after"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "action": "Rekonsiliasi dashboard Asia/Makassar month",
+    "state": "3 timezone Ã— 3 periods with actual midnight-edge visit",
+    "status": "PASS",
+    "cases": [
+      "DASH-ADMIN-8-month"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "action": "Rekonsiliasi dashboard Asia/Jayapura day-before",
+    "state": "3 timezone Ã— 3 periods with actual midnight-edge visit",
+    "status": "PASS",
+    "cases": [
+      "DASH-ADMIN-9-day-before"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "action": "Rekonsiliasi dashboard Asia/Jayapura day-after",
+    "state": "3 timezone Ã— 3 periods with actual midnight-edge visit",
+    "status": "PASS",
+    "cases": [
+      "DASH-ADMIN-9-day-after"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "action": "Rekonsiliasi dashboard Asia/Jayapura month",
+    "state": "3 timezone Ã— 3 periods with actual midnight-edge visit",
+    "status": "PASS",
+    "cases": [
+      "DASH-ADMIN-9-month"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Doctor",
+    "action": "Rekonsiliasi status antrean pada 2026-11-13",
+    "state": "role-scoped clinic/day metrics",
+    "status": "PASS",
+    "cases": [
+      "DASH-OPS-Doctor-2026-11-13"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Doctor",
+    "action": "Rekonsiliasi status antrean pada 2026-11-14",
+    "state": "role-scoped clinic/day metrics",
+    "status": "PASS",
+    "cases": [
+      "DASH-OPS-Doctor-2026-11-14"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Receptionist",
+    "action": "Rekonsiliasi status antrean pada 2026-11-13",
+    "state": "role-scoped clinic/day metrics",
+    "status": "PASS",
+    "cases": [
+      "DASH-OPS-Receptionist-2026-11-13"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Receptionist",
+    "action": "Rekonsiliasi status antrean pada 2026-11-14",
+    "state": "role-scoped clinic/day metrics",
+    "status": "PASS",
+    "cases": [
+      "DASH-OPS-Receptionist-2026-11-14"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Platform Admin",
+    "action": "Rekonsiliasi total/aktif tenant platform dengan data dummy",
+    "state": "all tenant metadata, no clinical access",
+    "status": "PASS",
+    "cases": [
+      "DASH-PLATFORM-COUNTS"
+    ]
+  },
+  {
+    "feature": "F25",
+    "role": "Clinic Owner",
+    "action": "Owner melihat expired dan penulisan baru ditolak oleh waktu",
+    "state": "ends_at passed; no direct status mutation",
+    "status": "PASS",
+    "cases": [
+      "EXPIRY-OWNER-RESTRICTED"
+    ]
+  },
+  {
+    "feature": "F25",
+    "role": "System â†’ Clinic Owner",
+    "action": "Command reminder membuat notifikasi sekali dan terlihat di UI",
+    "state": "expiry milestone0; real command in disposable environment",
+    "status": "PASS",
+    "cases": [
+      "SUBSCRIPTION-REMINDER-COMMAND"
+    ]
+  },
+  {
+    "feature": "F28",
+    "role": "Platform Admin",
+    "action": "Next/Previous daftar tenant dan Detail tenant nonaktif",
+    "state": ">15 tenants; inactive metadata remains readable to platform",
+    "status": "PASS",
+    "cases": [
+      "TENANT-PAGINATION-INACTIVE-R2"
+    ]
+  },
+  {
+    "feature": "F25",
+    "role": "Platform Admin",
+    "action": "List subscription menampilkan expired setelah ends_at lewat",
+    "state": "cached active09:00; clock09:31; owner/detail not accessed after expiry",
+    "status": "FAIL",
+    "cases": [
+      "EXPIRY-PLATFORM-LIST-R2"
+    ]
+  },
+  {
+    "feature": "F25",
+    "role": "Clinic Owner",
+    "action": "Lihat paket/add-on sesuai state free",
+    "state": "Free / paid Individual / paid Team+addon / trial Team",
+    "status": "PASS",
+    "cases": [
+      "PLAN-UI-STATE-free"
+    ]
+  },
+  {
+    "feature": "F25",
+    "role": "Clinic Owner",
+    "action": "Lihat paket/add-on sesuai state individual",
+    "state": "Free / paid Individual / paid Team+addon / trial Team",
+    "status": "PASS",
+    "cases": [
+      "PLAN-UI-STATE-individual"
+    ]
+  },
+  {
+    "feature": "F25",
+    "role": "Clinic Owner",
+    "action": "Lihat paket/add-on sesuai state dental",
+    "state": "Free / paid Individual / paid Team+addon / trial Team",
+    "status": "PASS",
+    "cases": [
+      "PLAN-UI-STATE-dental"
+    ]
+  },
+  {
+    "feature": "F25",
+    "role": "Clinic Owner",
+    "action": "Lihat paket/add-on sesuai state trial",
+    "state": "Free / paid Individual / paid Team+addon / trial Team",
+    "status": "PASS",
+    "cases": [
+      "PLAN-UI-STATE-trial"
+    ]
+  },
+  {
+    "feature": "F25",
+    "role": "Platform Admin → Clinic Owner",
+    "action": "Downgrade trial dengan2 dokter keFree, lalu owner mengurangi seat",
+    "state": "overage Free readonly; owner seat-deactivation exception",
+    "status": "PASS",
+    "cases": [
+      "PLAN-SEAT-OVERAGE-DOWNGRADE"
+    ]
+  },
+  {
+    "feature": "F27",
+    "role": "Clinic Owner",
+    "action": "Pilih add-on pada setiap durasi renewal dan periksa total UI",
+    "state": "paid renewal; 8 plan-price options; provider not submitted",
+    "status": "PASS",
+    "cases": [
+      "RENEWAL-COMBINED-SELECTION"
+    ]
+  },
+  {
+    "feature": "F27",
+    "role": "Clinic Owner",
+    "action": "Prorata pada23:59 hari kalender terakhir sebelum akhirbulan",
+    "state": "controlled month-end; no addon yet",
+    "status": "PASS",
+    "cases": [
+      "ADDON-PRORATA-MONTH-END"
+    ]
+  },
+  {
+    "feature": "F14",
+    "role": "Guest / Receptionist",
+    "action": "Pemulihan socket nyata setelah event terlewat",
+    "state": "Reverb stopped/restarted; allow actual Pusher retry backoff",
+    "status": "PASS",
+    "cases": [
+      "WS-REAL-RECOVERY-R2"
+    ]
+  },
+  {
+    "feature": "F33",
+    "role": "Receptionist",
+    "action": "Refetch mempertahankan fokus dan filter yang sedang diketik",
+    "state": "input unsubmitted; real queue event from second browser",
+    "status": "FAIL",
+    "cases": [
+      "QUEUE-FOCUS-REFETCH"
+    ]
+  },
+  {
+    "feature": "F33",
+    "role": "Receptionist",
+    "action": "Offline check-in tidak menulis state dan memberi feedback",
+    "state": "network offline; eligible action visible",
+    "status": "PASS",
+    "cases": [
+      "OFFLINE-QUEUE-check-in"
+    ]
+  },
+  {
+    "feature": "F33",
+    "role": "Receptionist",
+    "action": "Offline call tidak menulis state dan memberi feedback",
+    "state": "network offline; eligible action visible",
+    "status": "PASS",
+    "cases": [
+      "OFFLINE-QUEUE-call"
+    ]
+  },
+  {
+    "feature": "F33",
+    "role": "Receptionist",
+    "action": "Offline cancel tidak menulis state dan memberi feedback",
+    "state": "network offline; eligible action visible",
+    "status": "PASS",
+    "cases": [
+      "OFFLINE-QUEUE-cancel"
+    ]
+  },
+  {
+    "feature": "F33",
+    "role": "Receptionist",
+    "action": "Offline no-show tidak menulis state dan memberi feedback",
+    "state": "network offline; eligible action visible",
+    "status": "PASS",
+    "cases": [
+      "OFFLINE-QUEUE-no-show"
+    ]
+  },
+  {
+    "feature": "F33",
+    "role": "Receptionist",
+    "action": "Offline skip mempertahankan CALLED",
+    "state": "network offline; CALLED front",
+    "status": "PASS",
+    "cases": [
+      "OFFLINE-QUEUE-skip"
+    ]
+  },
+  {
+    "feature": "F33",
+    "role": "Doctor",
+    "action": "Offline Mulai periksa tidak membuat visit",
+    "state": "network offline; assigned CALLED",
+    "status": "PASS",
+    "cases": [
+      "OFFLINE-QUEUE-start"
+    ]
+  },
+  {
+    "feature": "F33",
+    "role": "Receptionist",
+    "action": "Offline Kembalikan mempertahankan SKIPPED",
+    "state": "network offline; SKIPPED",
+    "status": "PASS",
+    "cases": [
+      "OFFLINE-QUEUE-return"
+    ]
+  },
+  {
+    "feature": "F10",
+    "role": "Clinic Admin / Guest / Patient",
+    "action": "Seluruh CTA booking pada klinik tanpa dokter aktif",
+    "state": "paid Team fixture avoids unrelated Free seat overage",
+    "status": "PASS",
+    "cases": [
+      "CLINIC-NO-ACTIVE-DOCTOR-R2"
+    ]
+  },
+  {
+    "feature": "F10",
+    "role": "Clinic Admin / Patient",
+    "action": "Seluruh CTA booking saat dokter tidak memiliki sesi aktif",
+    "state": "7 schedules inactive through owner UI",
+    "status": "PASS",
+    "cases": [
+      "CLINIC-NO-ACTIVE-SESSIONS"
+    ]
+  },
+  {
+    "feature": "F00",
+    "role": "Clinic Owner",
+    "action": "Halaman paket kosong menjelaskan tidak ada paket yang tersedia",
+    "state": "all plans inactive; no checkout forms",
+    "status": "FAIL",
+    "cases": [
+      "CATALOG-EMPTY-EXPLANATION"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Receptionist",
+    "action": "Klik semua tujuan shortcut dashboard berbeda",
+    "state": "role dashboard; wait for actual navigation commit",
+    "status": "PASS",
+    "cases": [
+      "DASHBOARD-SHORTCUTS-Receptionist-R2"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Doctor",
+    "action": "Klik semua tujuan shortcut dashboard berbeda",
+    "state": "role dashboard; wait for actual navigation commit",
+    "status": "PASS",
+    "cases": [
+      "DASHBOARD-SHORTCUTS-Doctor-R2"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Patient",
+    "action": "Klik semua tujuan shortcut dashboard berbeda",
+    "state": "role dashboard; wait for actual navigation commit",
+    "status": "PASS",
+    "cases": [
+      "DASHBOARD-SHORTCUTS-Patient-R2"
+    ]
+  },
+  {
+    "feature": "F03",
+    "role": "Patient",
+    "action": "Ubah email sesi A; sesi B memerlukan verifikasi lalu pulih",
+    "state": "two authenticated browser contexts / same user ID / email changes",
+    "status": "PASS",
+    "cases": [
+      "PROFILE-TWO-EMAIL-SESSIONS"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Platform Admin",
+    "action": "Klik semua href shortcut dashboard berbeda",
+    "state": "exact href avoids identical captions; navigation commit awaited",
+    "status": "PASS",
+    "cases": [
+      "DASHBOARD-SHORTCUTS-Platform-Admin-R3"
+    ]
+  },
+  {
+    "feature": "F22",
+    "role": "Clinic Admin",
+    "action": "Klik semua href shortcut dashboard berbeda",
+    "state": "exact href; documented clinic index redirect; DOMContentLoaded awaited",
+    "status": "PASS",
+    "cases": [
+      "DASHBOARD-SHORTCUTS-Clinic-Admin-R4"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Receptionist / Doctor / Patient",
+    "action": "Tracker target CALLED",
+    "state": "no active queue in front; real UI workflow",
+    "status": "PASS",
+    "cases": [
+      "ETA-TARGET-CALLED"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Receptionist / Doctor / Patient",
+    "action": "Tracker target IN_PROGRESS",
+    "state": "no active queue in front; real UI workflow",
+    "status": "PASS",
+    "cases": [
+      "ETA-TARGET-IN_PROGRESS"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Receptionist / Doctor / Patient",
+    "action": "Tracker target COMPLETED",
+    "state": "no active queue in front; real UI workflow",
+    "status": "PASS",
+    "cases": [
+      "ETA-TARGET-COMPLETED"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Batalkan navigasi browser refresh",
+    "state": "new context per case / draft before debounce / browser navigation API",
+    "status": "PASS",
+    "cases": [
+      "LEAVE-draft-refresh-R3"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Batalkan navigasi browser back",
+    "state": "new context per case / draft before debounce / browser navigation API",
+    "status": "PASS",
+    "cases": [
+      "LEAVE-draft-back-R3"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Batalkan navigasi browser refresh",
+    "state": "new context per case / pending-photo before debounce / browser navigation API",
+    "status": "PASS",
+    "cases": [
+      "LEAVE-pending-photo-refresh-R3"
+    ]
+  },
+  {
+    "feature": "F16",
+    "role": "Doctor",
+    "action": "Batalkan navigasi browser back",
+    "state": "new context per case / pending-photo before debounce / browser navigation API",
+    "status": "PASS",
+    "cases": [
+      "LEAVE-pending-photo-back-R3"
+    ]
+  },
+  {
+    "feature": "F24",
+    "role": "Clinic Admin",
+    "action": "Periksa semua key metadata whitelist dari event UI nyata",
+    "state": "each event viewed by its own clinic owner; read-only database selection",
+    "status": "PASS",
+    "cases": [
+      "AUDIT-ALL-SAFE-METADATA-R3"
+    ]
+  },
+  {
+    "feature": "F19",
+    "role": "Doctor",
+    "action": "Putus upload yang sedang berjalan; retry tepat5MB",
+    "state": "real Chrome throttled upload / offline mid-transfer / retry online; wait actual30s timeout",
+    "status": "PASS",
+    "cases": [
+      "PHOTO-EXACT5MB-MIDTRANSFER-ABORT-R2"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Patient",
+    "action": "Tracker pada state BOOKED",
+    "state": "existing UI/initial isolated state; no direct business mutation",
+    "status": "PASS",
+    "cases": [
+      "ETA-STATE-BOOKED"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Patient",
+    "action": "Tracker pada state WAITING",
+    "state": "existing UI/initial isolated state; no direct business mutation",
+    "status": "PASS",
+    "cases": [
+      "ETA-STATE-WAITING"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Patient",
+    "action": "Tracker pada state IN_PROGRESS",
+    "state": "existing UI/initial isolated state; no direct business mutation",
+    "status": "PASS",
+    "cases": [
+      "ETA-STATE-IN_PROGRESS"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Patient",
+    "action": "Tracker pada state COMPLETED",
+    "state": "existing UI/initial isolated state; no direct business mutation",
+    "status": "PASS",
+    "cases": [
+      "ETA-STATE-COMPLETED"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Patient",
+    "action": "Tracker pada state SKIPPED",
+    "state": "existing UI/initial isolated state; no direct business mutation",
+    "status": "PASS",
+    "cases": [
+      "ETA-STATE-SKIPPED"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Patient",
+    "action": "Tracker pada state CANCELLED",
+    "state": "existing UI/initial isolated state; no direct business mutation",
+    "status": "PASS",
+    "cases": [
+      "ETA-STATE-CANCELLED"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Patient",
+    "action": "Tracker pada state NO_SHOW",
+    "state": "existing UI/initial isolated state; no direct business mutation",
+    "status": "PASS",
+    "cases": [
+      "ETA-STATE-NO_SHOW"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Receptionist / Patient",
+    "action": "Return antrean SKIPPED; target memiliki dua WAITING di depan",
+    "state": "prior socket recovery left front SKIPPED; restore via UI",
+    "status": "PASS",
+    "cases": [
+      "ETA-TWO-WAITING-FRONT-R2"
+    ]
+  },
+  {
+    "feature": "F32",
+    "role": "Receptionist / Patient",
+    "action": "Tracker target CALLED dan target lain dengan depan CALLED+WAITING",
+    "state": "real call UI; 0 for called front and40 for waiting target",
+    "status": "PASS",
+    "cases": [
+      "ETA-STATE-CALLED-R2"
+    ]
+  }
+]

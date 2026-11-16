@@ -1,0 +1,323 @@
+[
+  {
+    "role": "admin",
+    "links": [
+      {
+        "label": "Dashboard",
+        "url": "http://127.0.0.1:18961/admin/dashboard"
+      },
+      {
+        "label": "Subscription",
+        "url": "http://127.0.0.1:18961/subscription/payments"
+      },
+      {
+        "label": "Add-on odontogram",
+        "url": "http://127.0.0.1:18961/subscription/addons"
+      },
+      {
+        "label": "Profil klinik",
+        "url": "http://127.0.0.1:18961/admin/clinic"
+      },
+      {
+        "label": "Tim klinik",
+        "url": "http://127.0.0.1:18961/admin/staff"
+      },
+      {
+        "label": "Layanan",
+        "url": "http://127.0.0.1:18961/admin/services"
+      },
+      {
+        "label": "Jadwal dokter",
+        "url": "http://127.0.0.1:18961/admin/doctor-schedules"
+      },
+      {
+        "label": "Pasien",
+        "url": "http://127.0.0.1:18961/receptionist/patients"
+      },
+      {
+        "label": "Booking & antrean",
+        "url": "http://127.0.0.1:18961/receptionist/appointments"
+      },
+      {
+        "label": "Antrean hari ini",
+        "url": "http://127.0.0.1:18961/receptionist/queues"
+      },
+      {
+        "label": "Audit aktivitas",
+        "url": "http://127.0.0.1:18961/admin/audit-logs"
+      },
+      {
+        "label": "Notifikasi\n                2",
+        "url": "http://127.0.0.1:18961/notifications"
+      }
+    ]
+  },
+  {
+    "role": "receptionist",
+    "links": [
+      {
+        "label": "Dashboard",
+        "url": "http://127.0.0.1:18961/receptionist/dashboard"
+      },
+      {
+        "label": "Pasien",
+        "url": "http://127.0.0.1:18961/receptionist/patients"
+      },
+      {
+        "label": "Booking & antrean",
+        "url": "http://127.0.0.1:18961/receptionist/appointments"
+      },
+      {
+        "label": "Antrean hari ini",
+        "url": "http://127.0.0.1:18961/receptionist/queues"
+      },
+      {
+        "label": "Notifikasi\n                1",
+        "url": "http://127.0.0.1:18961/notifications"
+      }
+    ]
+  },
+  {
+    "role": "doctor",
+    "links": [
+      {
+        "label": "Dashboard",
+        "url": "http://127.0.0.1:18961/doctor/dashboard"
+      },
+      {
+        "label": "Antrean saya",
+        "url": "http://127.0.0.1:18961/doctor/queues"
+      },
+      {
+        "label": "Rekam medis",
+        "url": "http://127.0.0.1:18961/doctor/medical-records"
+      },
+      {
+        "label": "Notifikasi\n                2",
+        "url": "http://127.0.0.1:18961/notifications"
+      }
+    ]
+  },
+  {
+    "role": "dentist",
+    "links": [
+      {
+        "label": "Dashboard",
+        "url": "http://127.0.0.1:18961/doctor/dashboard"
+      },
+      {
+        "label": "Antrean saya",
+        "url": "http://127.0.0.1:18961/doctor/queues"
+      },
+      {
+        "label": "Rekam medis",
+        "url": "http://127.0.0.1:18961/doctor/medical-records"
+      },
+      {
+        "label": "Notifikasi\n                0",
+        "url": "http://127.0.0.1:18961/notifications"
+      }
+    ]
+  },
+  {
+    "role": "patient",
+    "links": [
+      {
+        "label": "Dashboard",
+        "url": "http://127.0.0.1:18961/patient/dashboard"
+      },
+      {
+        "label": "Booking saya",
+        "url": "http://127.0.0.1:18961/patient/appointments"
+      },
+      {
+        "label": "Notifikasi\n                1",
+        "url": "http://127.0.0.1:18961/notifications"
+      }
+    ]
+  },
+  {
+    "role": "platform",
+    "links": [
+      {
+        "label": "Dashboard",
+        "url": "http://127.0.0.1:18961/platform/dashboard"
+      },
+      {
+        "label": "Tenant klinik",
+        "url": "http://127.0.0.1:18961/platform/tenants"
+      },
+      {
+        "label": "Paket & harga",
+        "url": "http://127.0.0.1:18961/platform/subscription-plans"
+      },
+      {
+        "label": "Pembayaran",
+        "url": "http://127.0.0.1:18961/platform/payments"
+      },
+      {
+        "label": "Notifikasi\n                0",
+        "url": "http://127.0.0.1:18961/notifications"
+      }
+    ]
+  },
+  {
+    "role": "free-owner",
+    "links": [
+      {
+        "label": "Dashboard",
+        "url": "http://127.0.0.1:18961/admin/dashboard"
+      },
+      {
+        "label": "Subscription",
+        "url": "http://127.0.0.1:18961/subscription/payments"
+      },
+      {
+        "label": "Add-on odontogram",
+        "url": "http://127.0.0.1:18961/subscription/addons"
+      },
+      {
+        "label": "Profil klinik",
+        "url": "http://127.0.0.1:18961/admin/clinic"
+      },
+      {
+        "label": "Tim klinik",
+        "url": "http://127.0.0.1:18961/admin/staff"
+      },
+      {
+        "label": "Layanan",
+        "url": "http://127.0.0.1:18961/admin/services"
+      },
+      {
+        "label": "Jadwal dokter",
+        "url": "http://127.0.0.1:18961/admin/doctor-schedules"
+      },
+      {
+        "label": "Pasien",
+        "url": "http://127.0.0.1:18961/receptionist/patients"
+      },
+      {
+        "label": "Booking & antrean",
+        "url": "http://127.0.0.1:18961/receptionist/appointments"
+      },
+      {
+        "label": "Antrean hari ini",
+        "url": "http://127.0.0.1:18961/receptionist/queues"
+      },
+      {
+        "label": "Audit aktivitas",
+        "url": "http://127.0.0.1:18961/admin/audit-logs"
+      },
+      {
+        "label": "Notifikasi\n                0",
+        "url": "http://127.0.0.1:18961/notifications"
+      }
+    ]
+  },
+  {
+    "role": "expired-owner",
+    "links": [
+      {
+        "label": "Dashboard",
+        "url": "http://127.0.0.1:18961/admin/dashboard"
+      },
+      {
+        "label": "Subscription",
+        "url": "http://127.0.0.1:18961/subscription/payments"
+      },
+      {
+        "label": "Add-on odontogram",
+        "url": "http://127.0.0.1:18961/subscription/addons"
+      },
+      {
+        "label": "Profil klinik",
+        "url": "http://127.0.0.1:18961/admin/clinic"
+      },
+      {
+        "label": "Tim klinik",
+        "url": "http://127.0.0.1:18961/admin/staff"
+      },
+      {
+        "label": "Layanan",
+        "url": "http://127.0.0.1:18961/admin/services"
+      },
+      {
+        "label": "Jadwal dokter",
+        "url": "http://127.0.0.1:18961/admin/doctor-schedules"
+      },
+      {
+        "label": "Pasien",
+        "url": "http://127.0.0.1:18961/receptionist/patients"
+      },
+      {
+        "label": "Booking & antrean",
+        "url": "http://127.0.0.1:18961/receptionist/appointments"
+      },
+      {
+        "label": "Antrean hari ini",
+        "url": "http://127.0.0.1:18961/receptionist/queues"
+      },
+      {
+        "label": "Audit aktivitas",
+        "url": "http://127.0.0.1:18961/admin/audit-logs"
+      },
+      {
+        "label": "Notifikasi\n                0",
+        "url": "http://127.0.0.1:18961/notifications"
+      }
+    ]
+  },
+  {
+    "role": "suspended-owner",
+    "links": [
+      {
+        "label": "Dashboard",
+        "url": "http://127.0.0.1:18961/admin/dashboard"
+      },
+      {
+        "label": "Subscription",
+        "url": "http://127.0.0.1:18961/subscription/payments"
+      },
+      {
+        "label": "Add-on odontogram",
+        "url": "http://127.0.0.1:18961/subscription/addons"
+      },
+      {
+        "label": "Profil klinik",
+        "url": "http://127.0.0.1:18961/admin/clinic"
+      },
+      {
+        "label": "Tim klinik",
+        "url": "http://127.0.0.1:18961/admin/staff"
+      },
+      {
+        "label": "Layanan",
+        "url": "http://127.0.0.1:18961/admin/services"
+      },
+      {
+        "label": "Jadwal dokter",
+        "url": "http://127.0.0.1:18961/admin/doctor-schedules"
+      },
+      {
+        "label": "Pasien",
+        "url": "http://127.0.0.1:18961/receptionist/patients"
+      },
+      {
+        "label": "Booking & antrean",
+        "url": "http://127.0.0.1:18961/receptionist/appointments"
+      },
+      {
+        "label": "Antrean hari ini",
+        "url": "http://127.0.0.1:18961/receptionist/queues"
+      },
+      {
+        "label": "Audit aktivitas",
+        "url": "http://127.0.0.1:18961/admin/audit-logs"
+      },
+      {
+        "label": "Notifikasi\n                0",
+        "url": "http://127.0.0.1:18961/notifications"
+      }
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "phase": "closure-clinical-native-validation-and-origin",
+  "at": "2026-11-13T16:18:43.153Z",
+  "counts": {
+    "PASS": 71,
+    "FAIL": 36,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

@@ -35,6 +35,12 @@
             'class' => 'border-amber-300 bg-amber-50 text-amber-950',
             'dot' => 'bg-amber-500',
         ],
+        'expired' => [
+            'label' => 'Sesi berakhir',
+            'message' => 'Salin perubahan Anda lalu masuk kembali di tab baru. Setelah itu muat ulang editor.',
+            'class' => 'border-amber-300 bg-amber-50 text-amber-950',
+            'dot' => 'bg-amber-500',
+        ],
         'finalized' => [
             'label' => 'Finalized',
             'message' => 'Perubahan berikutnya menjadi Modification.',
@@ -78,10 +84,13 @@
                 <span class="block font-extrabold">{{ $configuration['label'] }}</span>
                 <span
                     class="mt-0.5 block leading-5"
-                    @if (in_array($stateName, ['error', 'conflict'])) x-text="message || @js($configuration['message'])" @endif
+                    @if (in_array($stateName, ['error', 'conflict', 'expired'])) x-text="message || @js($configuration['message'])" @endif
                 >{{ $configuration['message'] }}</span>
                 @if ($stateName === 'error')
                     <button type="button" class="mt-1 min-h-11 font-bold underline focus-visible:ring-2 focus-visible:ring-clinic-500" @click="$dispatch('rme-retry')">Coba simpan lagi</button>
+                @endif
+                @if ($stateName === 'expired')
+                    <a href="{{ route('admin.login') }}" target="_blank" rel="noopener" class="mt-1 inline-flex min-h-11 items-center font-bold underline focus-visible:ring-2 focus-visible:ring-clinic-500">Masuk kembali</a>
                 @endif
             </span>
         </div>

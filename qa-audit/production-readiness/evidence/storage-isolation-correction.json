@@ -1,0 +1,6 @@
+{
+  "initial_audit_uploads_relocated_to_private_temporary_storage": 3,
+  "source_paths_derived_only_from_isolated_database": true,
+  "user_files_not_enumerated_or_deleted": true,
+  "explicit_http_storage_binding_added": true
+}

@@ -1,0 +1,11 @@
+{
+  "phase": "closure-remaining-cta-and-shortcut-states",
+  "at": "2026-11-13T17:10:18.692Z",
+  "counts": {
+    "PASS": 224,
+    "FAIL": 73,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

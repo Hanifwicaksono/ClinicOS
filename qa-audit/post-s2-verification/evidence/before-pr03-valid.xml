@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\SubscriptionPlanFactoryTest" file="C:\laragon\www\ClinicOS\tests\Feature\SubscriptionPlanFactoryTest.php" tests="2" assertions="3" errors="0" failures="1" skipped="0" time="1.018831">
+    <testcase name="test_generated_code_fits_schema_for_the_previous_overflow_seed" file="C:\laragon\www\ClinicOS\tests\Feature\SubscriptionPlanFactoryTest.php" line="13" class="Tests\Feature\SubscriptionPlanFactoryTest" classname="Tests.Feature.SubscriptionPlanFactoryTest" assertions="2" time="0.989115">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SubscriptionPlanFactoryTest::test_generated_code_fits_schema_for_the_previous_overflow_seed&#13;
+Failed asserting that 31 is equal to 30 or is less than 30.
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\SubscriptionPlanFactoryTest.php:19</failure>
+    </testcase>
+    <testcase name="test_a_deterministic_code_at_the_schema_boundary_is_preserved" file="C:\laragon\www\ClinicOS\tests\Feature\SubscriptionPlanFactoryTest.php" line="28" class="Tests\Feature\SubscriptionPlanFactoryTest" classname="Tests.Feature.SubscriptionPlanFactoryTest" assertions="1" time="0.029716"/>
+  </testsuite>
+</testsuites>

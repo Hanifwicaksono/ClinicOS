@@ -1,0 +1,25 @@
+{
+    "at":  "2026-11-15T13:59:06.7189024Z",
+    "stopped":  [
+                    {
+                        "kind":  "worker",
+                        "pid":  26140
+                    },
+                    {
+                        "kind":  "reverb",
+                        "pid":  23740
+                    },
+                    {
+                        "kind":  "http",
+                        "pid":  14112
+                    },
+                    {
+                        "kind":  "master",
+                        "pid":  29256
+                    }
+                ],
+    "mysql_shutdown_exit":  0,
+    "remaining_test_listeners":  [
+
+                                 ]
+}

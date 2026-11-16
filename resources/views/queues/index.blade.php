@@ -16,8 +16,8 @@
 <x-app-layout>
     <x-slot name="header"><div class="flex w-full items-center justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Operasional hari ini</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Antrean pasien</h1></div>@unless($isDoctor)<x-clinic-button href="{{ route('receptionist.appointments.create') }}" variant="primary" wire:navigate>+ Booking walk-in</x-clinic-button>@endunless</div></x-slot>
 
-    <div data-realtime-queue-channel="clinic.{{ auth()->user()->clinic_id }}.queues" data-realtime-refresh-root>
     <div class="mb-6 hidden rounded-2xl border px-5 py-4 text-sm font-semibold" data-queue-action-feedback role="status" aria-live="polite"></div>
+    <div data-realtime-queue-channel="clinic.{{ auth()->user()->clinic_id }}.queues" data-realtime-refresh-root>
     @if($errors->any())<div class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm font-semibold text-red-700">{{ $errors->first() }}</div>@endif
 
     <div class="mb-7"><h2 class="text-2xl font-extrabold text-clinic-950">Antrean {{ \Carbon\CarbonImmutable::parse($date)->translatedFormat('d F Y') }}</h2><p class="mt-2 text-sm text-slate-500">Check-in pasien sesuai kedatangan, lalu panggil satu per satu dalam setiap sesi dokter.</p></div>
@@ -28,7 +28,7 @@
         @endforeach
     </div>
 
-    <form method="GET" class="clinic-card mb-6 grid gap-4 p-5 md:grid-cols-4">
+    <form method="GET" data-realtime-preserve="queue-filters" class="clinic-card mb-6 grid gap-4 p-5 md:grid-cols-4">
         <div><label class="clinic-label" for="date">Tanggal</label><input class="clinic-input" id="date" name="date" type="date" value="{{ $date }}"></div>
         @unless($isDoctor)<x-receptionist.search-select name="doctor_id" label="Dokter" placeholder="Cari dokter" :options="$doctorOptions" :selected="request('doctor_id')" :required="false" empty-label="Semua dokter" />@endunless
         <x-receptionist.search-select name="doctor_schedule_id" label="Sesi" placeholder="Cari sesi" :options="$scheduleOptions" :selected="request('doctor_schedule_id')" :required="false" empty-label="Semua sesi" />
@@ -38,7 +38,7 @@
 
     <div class="space-y-4">
         @forelse($queues as $queue)
-            <x-queue-card :queue="$queue" />
+            <x-queue-card :queue="$queue" :timezone="$timezone" />
         @empty
             <div class="clinic-card p-14 text-center"><div class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-clinic-50 text-xl text-clinic-600">✓</div><p class="mt-4 font-bold text-slate-800">Tidak ada antrean</p><p class="mt-1 text-sm text-slate-500">Belum ada antrean yang sesuai dengan filter ini.</p></div>
         @endforelse

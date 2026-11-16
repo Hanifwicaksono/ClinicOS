@@ -1,0 +1,13 @@
+{
+  "tests": 378,
+  "passed": 377,
+  "failed": 1,
+  "result": "failed",
+  "assertions": 2567,
+  "failures": [
+    {
+      "test": "Tests\\Feature\\Admin\\ClinicManagementTest::test_clinic_admin_can_remove_the_current_logo",
+      "message": "Session has unexpected errors: \r"
+    }
+  ]
+}

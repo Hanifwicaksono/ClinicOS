@@ -25,11 +25,20 @@ class DashboardController extends Controller
     {
         $clinic = $request->user()->clinic;
         $clinicId = $clinic?->id;
+        $timezone = $clinic?->settings?->timezone ?? 'Asia/Jakarta';
+        $today = now($timezone)->toDateString();
+        $request->merge([
+            'from' => $request->input('from') ?? $today,
+            'to' => $request->input('to') ?? $today,
+        ]);
         $validated = $request->validate([
             'from' => ['nullable', 'date_format:Y-m-d'],
             'to' => ['nullable', 'date_format:Y-m-d', 'after_or_equal:from'],
+        ], [
+            'from.date_format' => 'Tanggal awal harus menggunakan format tanggal yang valid.',
+            'to.date_format' => 'Tanggal akhir harus menggunakan format tanggal yang valid.',
+            'to.after_or_equal' => 'Tanggal akhir harus sama dengan atau setelah tanggal awal.',
         ]);
-        $timezone = $clinic?->settings?->timezone ?? 'Asia/Jakarta';
         $from = CarbonImmutable::parse($validated['from'] ?? now($timezone)->toDateString(), $timezone)->startOfDay();
         $to = CarbonImmutable::parse($validated['to'] ?? now($timezone)->toDateString(), $timezone)->endOfDay();
 

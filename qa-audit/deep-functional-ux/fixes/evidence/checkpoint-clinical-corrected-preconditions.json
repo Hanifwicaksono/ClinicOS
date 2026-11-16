@@ -1,0 +1,11 @@
+{
+  "phase": "clinical-corrected-preconditions",
+  "at": "2026-11-13T09:17:03.984Z",
+  "counts": {
+    "PASS": 66,
+    "FAIL": 18,
+    "BLOCKED": 1,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

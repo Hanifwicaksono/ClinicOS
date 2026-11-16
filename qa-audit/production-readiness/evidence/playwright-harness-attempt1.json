@@ -1,0 +1,84 @@
+{
+  "playwright": "1.65.0",
+  "browser": "157.0.8103.50",
+  "results": [
+    {
+      "name": "UAT: all five roles and owner can open their dashboard",
+      "status": "PASS",
+      "duration_ms": 38584,
+      "detail": {
+        "simultaneous_browser_contexts": 9,
+        "roles": 5,
+        "owner_persona": true
+      }
+    },
+    {
+      "name": "UAT: desktop/tablet/mobile and native keyboard drawer",
+      "status": "FAIL",
+      "duration_ms": 30091,
+      "error_class": "TimeoutError",
+      "checkpoint": "login-other"
+    },
+    {
+      "name": "UAT: admin creates staff, real SMTP inbox receives verification, staff verifies",
+      "status": "FAIL",
+      "duration_ms": 30290,
+      "error_class": "TimeoutError",
+      "checkpoint": "create-staff-ui"
+    },
+    {
+      "name": "UAT: receptionist books through keyboard-operated form",
+      "status": "FAIL",
+      "duration_ms": 12498,
+      "error_class": "Error",
+      "checkpoint": "booking-form-selection"
+    },
+    {
+      "name": "Realtime: real sockets, two staff browsers, cross-tenant denial",
+      "status": "BLOCKED",
+      "duration_ms": 1,
+      "error_class": "Error",
+      "checkpoint": "booking-form-selection",
+      "reason": "Dependency: booking failed"
+    },
+    {
+      "name": "Realtime: connection loss and real reconnection",
+      "status": "FAIL",
+      "duration_ms": 30021,
+      "error_class": "TimeoutError",
+      "checkpoint": "websocket-reconnect"
+    },
+    {
+      "name": "UAT: doctor starts, saves photo draft, finalizes, and corrects with history",
+      "status": "BLOCKED",
+      "duration_ms": 0,
+      "error_class": "Error",
+      "checkpoint": "websocket-reconnect",
+      "reason": "Dependency: booking failed"
+    },
+    {
+      "name": "Security: clinical page and private photo role matrix",
+      "status": "BLOCKED",
+      "duration_ms": 1,
+      "error_class": "Error",
+      "checkpoint": "websocket-reconnect",
+      "reason": "Dependency: visit unavailable"
+    },
+    {
+      "name": "SMTP: reset link delivery, reset password, old session revoked, new login works",
+      "status": "BLOCKED",
+      "duration_ms": 0,
+      "error_class": "Error",
+      "checkpoint": "websocket-reconnect",
+      "reason": "Dependency: staff verification unavailable"
+    },
+    {
+      "name": "Realtime security: permission revocation invalidates an already subscribed socket",
+      "status": "FAIL",
+      "duration_ms": 11,
+      "error_class": "Error",
+      "checkpoint": "permission-revocation-open-socket"
+    }
+  ],
+  "page_errors": []
+}

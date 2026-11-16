@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-13T17:36:57.629Z",
+  "qa_modules_syntax_checked": 39,
+  "reports_checked": 4,
+  "existing_local_links_checked": 415,
+  "registered_parent_results": 77,
+  "unique_executed_tuples": 254,
+  "counts_consistent": true,
+  "clock_restored": true,
+  "private_mail_deleted": true,
+  "isolated_database_confirmed": true,
+  "production_integrity_file": "production-integrity.json"
+}

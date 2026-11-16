@@ -1,0 +1,8 @@
+{
+  "http": 422,
+  "error_fields": [
+    "phone"
+  ],
+  "ui_message": "Kandidat pasien belum dapat diperiksa. Periksa data dan coba lagi.",
+  "patient_created": false
+}

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Receptionist;
 
 use App\Models\Patient;
+use App\Rules\PhoneNumber;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -32,7 +33,7 @@ class StorePatientRequest extends FormRequest
             ],
             'birth_date' => ['required', 'date', 'before_or_equal:today'],
             'gender' => ['required', 'in:MALE,FEMALE'],
-            'phone' => ['required', 'string', 'max:30'],
+            'phone' => [new PhoneNumber, 'required', 'string', 'max:30'],
             'email' => ['nullable', 'email', 'max:255'],
             'address' => ['nullable', 'string', 'max:1500'],
             'is_active' => ['required', 'boolean'],

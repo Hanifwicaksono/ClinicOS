@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-11-13T17:35:35.652Z",
+  "text_evidence_files_scanned": 64,
+  "secret_query_values_found": 0,
+  "sensitive_value_fields_found": 0,
+  "private_mail_removed": true,
+  "inherited_process_env_removed": true,
+  "scope": "Structured credential fields and secret query parameters. Generic prose/field names about password are not credentials. Screenshots show only dummy actors and dummy clinical content."
+}

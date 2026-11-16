@@ -1,0 +1,269 @@
+{
+  "clock": "2026-11-14T02:00:00+00:00",
+  "today": "2026-11-14",
+  "tenants": {
+    "dental": {
+      "clinic": 6,
+      "slug": "qa-closure-dental",
+      "owner": "closure.dental.owner@clinicos.test",
+      "reception": "closure.dental.reception@clinicos.test",
+      "doctor": "closure.dental.doctor@clinicos.test",
+      "patient": "closure.dental.patient@clinicos.test",
+      "patient_id": 13,
+      "doctor_id": 3,
+      "service_id": 5,
+      "today_schedule": 21,
+      "period": 6,
+      "payment": 7,
+      "addon": 1
+    },
+    "expiry": {
+      "clinic": 7,
+      "slug": "qa-closure-expiry",
+      "owner": "closure.expiry.owner@clinicos.test",
+      "reception": "closure.expiry.reception@clinicos.test",
+      "doctor": "closure.expiry.doctor@clinicos.test",
+      "patient": "closure.expiry.patient@clinicos.test",
+      "patient_id": 14,
+      "doctor_id": 4,
+      "service_id": 6,
+      "today_schedule": 28,
+      "period": 7,
+      "payment": 8,
+      "addon": 2
+    },
+    "free": {
+      "clinic": 8,
+      "slug": "qa-closure-free",
+      "owner": "closure.free.owner@clinicos.test",
+      "reception": "closure.free.reception@clinicos.test",
+      "doctor": "closure.free.doctor@clinicos.test",
+      "patient": "closure.free.patient@clinicos.test",
+      "patient_id": 15,
+      "doctor_id": 5,
+      "service_id": 7,
+      "today_schedule": 35,
+      "period": null,
+      "payment": null,
+      "addon": null
+    },
+    "individual": {
+      "clinic": 9,
+      "slug": "qa-closure-individual",
+      "owner": "closure.individual.owner@clinicos.test",
+      "reception": "closure.individual.reception@clinicos.test",
+      "doctor": "closure.individual.doctor@clinicos.test",
+      "patient": "closure.individual.patient@clinicos.test",
+      "patient_id": 16,
+      "doctor_id": 6,
+      "service_id": 8,
+      "today_schedule": 42,
+      "period": 8,
+      "payment": 9,
+      "addon": null
+    },
+    "trial": {
+      "clinic": 10,
+      "slug": "qa-closure-trial",
+      "owner": "closure.trial.owner@clinicos.test",
+      "reception": "closure.trial.reception@clinicos.test",
+      "doctor": "closure.trial.doctor@clinicos.test",
+      "patient": "closure.trial.patient@clinicos.test",
+      "patient_id": 17,
+      "doctor_id": 7,
+      "service_id": 9,
+      "today_schedule": 49,
+      "period": null,
+      "payment": null,
+      "addon": null
+    },
+    "empty": {
+      "clinic": 11,
+      "slug": "qa-closure-empty",
+      "owner": "closure.empty.owner@clinicos.test",
+      "reception": "closure.empty.reception@clinicos.test",
+      "doctor": "closure.empty.doctor@clinicos.test",
+      "patient": "closure.empty.patient@clinicos.test",
+      "patient_id": 18,
+      "doctor_id": 8,
+      "service_id": 10,
+      "today_schedule": 56,
+      "period": null,
+      "payment": null,
+      "addon": null
+    },
+    "eta10": {
+      "clinic": 12,
+      "slug": "qa-closure-eta10",
+      "owner": "closure.eta10.owner@clinicos.test",
+      "reception": "closure.eta10.reception@clinicos.test",
+      "doctor": "closure.eta10.doctor@clinicos.test",
+      "patient": "closure.eta10.patient@clinicos.test",
+      "patient_id": 19,
+      "doctor_id": 9,
+      "service_id": 11,
+      "today_schedule": 63,
+      "period": 10,
+      "payment": 10,
+      "addon": null
+    },
+    "eta20": {
+      "clinic": 13,
+      "slug": "qa-closure-eta20",
+      "owner": "closure.eta20.owner@clinicos.test",
+      "reception": "closure.eta20.reception@clinicos.test",
+      "doctor": "closure.eta20.doctor@clinicos.test",
+      "patient": "closure.eta20.patient@clinicos.test",
+      "patient_id": 20,
+      "doctor_id": 10,
+      "service_id": 12,
+      "today_schedule": 70,
+      "period": 11,
+      "payment": 11,
+      "addon": null
+    },
+    "prorata": {
+      "clinic": 14,
+      "slug": "qa-closure-prorata",
+      "owner": "closure.prorata.owner@clinicos.test",
+      "reception": "closure.prorata.reception@clinicos.test",
+      "doctor": "closure.prorata.doctor@clinicos.test",
+      "patient": "closure.prorata.patient@clinicos.test",
+      "patient_id": 21,
+      "doctor_id": 11,
+      "service_id": 13,
+      "today_schedule": 77,
+      "period": 12,
+      "payment": 12,
+      "addon": null
+    }
+  },
+  "exams": {
+    "chart": {
+      "appointment": 22,
+      "queue": 22,
+      "visit": 15,
+      "record": 15
+    },
+    "limits": {
+      "appointment": 23,
+      "queue": 23,
+      "visit": 16,
+      "record": 16
+    },
+    "leave": {
+      "appointment": 24,
+      "queue": 24,
+      "visit": 17,
+      "record": 17
+    },
+    "allergy": {
+      "appointment": 25,
+      "queue": 25,
+      "visit": 18,
+      "record": 18
+    },
+    "prescription": {
+      "appointment": 26,
+      "queue": 26,
+      "visit": 19,
+      "record": 19
+    },
+    "photos": {
+      "appointment": 27,
+      "queue": 27,
+      "visit": 20,
+      "record": 20
+    },
+    "finalize": {
+      "appointment": 28,
+      "queue": 28,
+      "visit": 21,
+      "record": 21
+    },
+    "socket": {
+      "appointment": 29,
+      "queue": 29,
+      "visit": 22,
+      "record": 22
+    },
+    "stale-correction": {
+      "appointment": 30,
+      "queue": 30,
+      "visit": 23,
+      "record": 23
+    }
+  },
+  "dental": {
+    "addon_id": 1,
+    "appointment": 22,
+    "queue": 22,
+    "visit": 15,
+    "record": 15
+  },
+  "expiry": {
+    "appointment": 31,
+    "queue": 31,
+    "visit": 24,
+    "record": 24
+  },
+  "final": {
+    "appointment": 32,
+    "queue": 32,
+    "visit": 25,
+    "record": 25
+  },
+  "queues": {
+    "BOOKED": {
+      "appointment": 33,
+      "queue": 33
+    },
+    "WAITING": {
+      "appointment": 34,
+      "queue": 34
+    },
+    "CALLED": {
+      "appointment": 35,
+      "queue": 35
+    },
+    "SKIPPED": {
+      "appointment": 36,
+      "queue": 36
+    },
+    "COMPLETED": {
+      "appointment": 37,
+      "queue": 37
+    },
+    "CANCELLED": {
+      "appointment": 38,
+      "queue": 38
+    },
+    "NO_SHOW": {
+      "appointment": 39,
+      "queue": 39
+    }
+  },
+  "eta10": {
+    "front": 74,
+    "appointment": 75,
+    "queue": 75
+  },
+  "eta20": {
+    "front": 96,
+    "appointment": 97,
+    "queue": 97
+  },
+  "inactive_patient": 32,
+  "empty_notification_accounts": {
+    "Clinic Admin": "closure.notifempty.clinic-admin@clinicos.test",
+    "Receptionist": "closure.notifempty.receptionist@clinicos.test",
+    "Doctor": "closure.notifempty.doctor@clinicos.test",
+    "Patient": "closure.notifempty.patient@clinicos.test",
+    "Platform Admin": "closure.notifempty.platform-admin@clinicos.test"
+  },
+  "empty_owner": "closure.empty.owner@clinicos.test",
+  "unonboarded": "closure.onboarding@clinicos.test",
+  "fixture_only": true,
+  "provider_checkout_executed": false,
+  "entitlement_domain_verified": true
+}

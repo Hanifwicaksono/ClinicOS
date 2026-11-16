@@ -20,6 +20,10 @@ class CheckUserIsActive
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
+            if ($request->expectsJson() || $request->is('broadcasting/auth')) {
+                return response()->json(['message' => 'Akun telah dinonaktifkan. Silakan hubungi administrator.'], 401);
+            }
+
             return redirect()->route($loginRoute)
                 ->withErrors(['email' => 'Akun Anda telah dinonaktifkan. Silakan hubungi administrator.']);
         }

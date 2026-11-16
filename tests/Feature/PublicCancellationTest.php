@@ -202,14 +202,14 @@ class PublicCancellationTest extends TestCase
             'doctor_id' => $appointment->doctor_id,
             'created_by_user_id' => $doctorUser->id,
         ]);
-        $data = ['subjective' => 'Keluhan masih sama.', 'assessment' => 'Observasi.', 'plan' => 'Lanjutkan perawatan.'];
+        $data = [...$this->recordVersions($visit), 'subjective' => 'Keluhan masih sama.', 'assessment' => 'Observasi.', 'plan' => 'Lanjutkan perawatan.'];
 
         $this->actingAs($doctorUser)->post(route('public.booking.cancel', $appointment), ['token' => $token])->assertForbidden();
         $this->assertSame(VisitStatus::InProgress, $visit->refresh()->status);
         $this->put(route('doctor.visits.save', $visit), $data)->assertSessionHasNoErrors()->assertRedirect();
         $this->assertSame(VisitStatus::InProgress, $visit->refresh()->status);
         $this->assertSame($data['subjective'], $visit->medicalRecord->subjective);
-        $this->put(route('doctor.visits.complete', $visit), $data)->assertSessionHasNoErrors()->assertRedirect();
+        $this->put(route('doctor.visits.complete', $visit), [...$data, ...$this->recordVersions($visit)])->assertSessionHasNoErrors()->assertRedirect();
         $this->assertSame(VisitStatus::Completed, $visit->refresh()->status);
         $this->assertSame(MedicalRecordStatus::Final, $visit->medicalRecord->refresh()->status);
         $this->assertSame(AppointmentStatus::Completed, $appointment->refresh()->status);

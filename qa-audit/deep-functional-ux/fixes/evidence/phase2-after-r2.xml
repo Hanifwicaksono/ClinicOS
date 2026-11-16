@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\DeepFunctionalRegressionTest" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" tests="12" assertions="101" errors="1" failures="1" skipped="0" time="2.238974">
+    <testsuite name="Tests\Feature\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized" tests="4" assertions="32" errors="0" failures="0" skipped="0" time="1.027897">
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;patient&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.696186"/>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;receptionist&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.114351"/>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;admin&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.107220"/>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;token&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.110140"/>
+    </testsuite>
+    <testsuite name="Tests\Feature\DeepFunctionalRegressionTest::test_used_session_keeps_its_day_and_times" tests="3" assertions="18" errors="0" failures="0" skipped="0" time="0.283530">
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;day&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="81" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="6" time="0.090452"/>
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;start&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="81" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="6" time="0.097957"/>
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;end&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="81" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="6" time="0.095121"/>
+    </testsuite>
+    <testcase name="test_replayed_grant_creates_one_period_and_one_audit_event" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="98" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="12" time="0.106656"/>
+    <testcase name="test_http_grant_requires_a_request_identifier" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="117" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="4" time="0.080462"/>
+    <testcase name="test_patient_phone_validation_is_shared_by_all_entry_points" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="128" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="22" time="0.137609"/>
+    <testcase name="test_rejected_forms_render_errors_and_retain_input" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="146" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="5" time="0.494723">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\DeepFunctionalRegressionTest::test_rejected_forms_render_errors_and_retain_input&#13;
+Failed asserting that '&lt;!DOCTYPE html&gt;\n
+&lt;html lang="en"&gt;\n
+    &lt;head&gt;\n
+        &lt;meta charset="utf-8"&gt;\n
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;\n
+        &lt;meta name="csrf-token" content="[redacted opaque value]"&gt;\n
+\n
+        &lt;title&gt;ClinicOS&lt;/title&gt;\n
+\n
+        &lt;link rel="preconnect" href="https://fonts.bunny.net"&gt;\n
+        &lt;link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;family=plus-jakarta-sans:600,700,800&amp;display=swap" rel="stylesheet" /&gt;\n
+\n
+        &lt;link rel="preload" as="style" href="http://localhost/build/assets/app-60tHKeNr.css" /&gt;&lt;link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BMtnh1Cm.js" /&gt;&lt;link rel="stylesheet" href="http://localhost/build/assets/app-60tHKeNr.css" data-navigate-track="reload" /&gt;&lt;script type="module" src="http://localhost/build/assets/app-BMtnh1Cm.js" data-navigate-track="reload"&gt;&lt;/script&gt;    &lt;!-- Livewire Styles --&gt;&lt;style &gt;[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak="x-cloak"],[x-cloak=""] {display: none !important;}[wire\:cloak="wire:cloak"],[wire\:cloak=""] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}&lt;/style&gt;\n
+&lt;/head&gt;\n
+    &lt;body class="font-sans antialiased"&gt;\n
+        &lt;div class="min-h-screen"&gt;\n
+            &lt;div wire:snapshot="{&amp;quot;data&amp;quot;:[],&amp;quot;memo&amp;quot;:{&amp;quot;id&amp;quot;:&amp;quot;3i2RYX7wwwxSB6TFcjXa&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;layout.navigation&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;patient\/appointments\/1&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;release&amp;quot;:&amp;quot;a-a-a&amp;quot;,&amp;quot;children&amp;quot;:[],&amp;quot;scripts&amp;quot;:[],&amp;quot;assets&amp;quot;:[],&amp;quot;errors&amp;quot;:[],&amp;quot;locale&amp;quot;:&amp;quot;en&amp;quot;},&amp;quot;checksum&amp;quot;:&amp;quot;[redacted opaque value]&amp;quot;}" wire:effects="[]" wire:id="3i2RYX7wwwxSB6TFcjXa" x-data="{\n
+    open: false,\n
+    desktop: window.matchMedia('(min-width: 1024px)').matches,\n
+    close() { this.open = false; this.$nextTick(() =&gt; this.$refs.trigger.focus()); },\n
+}" @keydown.escape.window="if (open) { $event.preventDefault(); close(); }"\n
+    @resize.window="desktop = window.matchMedia('(min-width: 1024px)').matches; if (desktop) open = false"\n
+    data-user-notification-channel="users.2"&gt;\n
+    &lt;div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden"&gt;\n
+        &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+            &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-9 w-9" /&gt;\n
+            &lt;span class="font-display text-lg font-extrabold text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/span&gt;\n
+        &lt;/a&gt;\n
+        &lt;button x-ref="trigger" type="button" @click="open = true" aria-controls="workspace-navigation" :aria-expanded="open.toString()" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi"&gt;\n
+            &lt;svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+        &lt;/button&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;div x-show="open" x-cloak @click="close()" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"&gt;&lt;/div&gt;\n
+\n
+    &lt;aside id="workspace-navigation" x-trap.inert.noscroll.noreturn="open &amp;&amp; !desktop" :inert="!open &amp;&amp; !desktop" :aria-hidden="!open &amp;&amp; !desktop" :role="desktop ? 'complementary' : 'dialog'" :aria-modal="open &amp;&amp; !desktop ? 'true' : null" aria-label="Navigasi utama" :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0"&gt;\n
+        &lt;div class="flex h-20 items-center justify-between border-b border-slate-100 px-6"&gt;\n
+            &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+                &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-11 w-11" /&gt;\n
+                &lt;div&gt;\n
+                    &lt;div class="font-display text-xl font-extrabold tracking-tight text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/div&gt;\n
+                    &lt;div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400"&gt;Clinic workspace&lt;/div&gt;\n
+                &lt;/div&gt;\n
+            &lt;/a&gt;\n
+            &lt;button type="button" @click="close()" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi"&gt;✕&lt;/button&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;div class="border-b border-slate-100 px-6 py-5"&gt;\n
+            &lt;p class="truncate text-sm font-bold text-slate-900"&gt;Runolfsdottir-Boehm Clinic&lt;/p&gt;\n
+                        &lt;p class="mt-1 text-xs text-slate-500"&gt;Pasien&lt;/p&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5"&gt;\n
+            \n
+            &lt;!--[if BLOCK]&gt;&lt;![endif]--&gt;                &lt;a href="http://localhost/patient/dashboard" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z"/&gt;&lt;/svg&gt;\n
+                    Dashboard\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/patient/appointments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition bg-clinic-50 text-clinic-700"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/&gt;&lt;/svg&gt;\n
+                    Booking saya\n
+                &lt;/a&gt;\n
+            &lt;!--[if ENDBLOCK]&gt;&lt;![endif]--&gt;\n
+            &lt;a href="http://localhost/notifications" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/&gt;&lt;/svg&gt;\n
+                &lt;span class="flex-1"&gt;Notifikasi&lt;/span&gt;\n
+                &lt;span data-notification-count class="rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white hidden"&gt;0&lt;/span&gt;\n
+            &lt;/a&gt;\n
+        &lt;/nav&gt;\n
+\n
+        &lt;div class="border-t border-slate-100 p-4"&gt;\n
+            &lt;a href="http://localhost/profile" wire:navigate class="mb-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"&gt;\n
+                &lt;span class="flex h-9 w-9 items-center justify-center rounded-full bg-clinic-100 font-bold text-clinic-700"&gt;G&lt;/span&gt;\n
+                &lt;span class="min-w-0 flex-1"&gt;&lt;span class="block truncate text-slate-900"&gt;Grant Becker&lt;/span&gt;&lt;span class="block truncate text-xs font-normal text-slate-500"&gt;leland48@example.com&lt;/span&gt;&lt;/span&gt;\n
+            &lt;/a&gt;\n
+            &lt;button wire:click="logout" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-500 hover:bg-red-50 hover:text-red-600"&gt;\n
+                &lt;svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M10 17l5-5-5-5M15 12H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/&gt;&lt;/svg&gt;\n
+                Keluar\n
+            &lt;/button&gt;\n
+        &lt;/div&gt;\n
+    &lt;/aside&gt;\n
+\n
+    &lt;div class="h-16 lg:hidden"&gt;&lt;/div&gt;\n
+&lt;/div&gt;\n
+            &lt;div class="lg:pl-72"&gt;\n
+                                    &lt;header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0"&gt;\n
+                        &lt;div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10"&gt;\n
+                            &lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600"&gt;BK-MNEE5XHPAL&lt;/p&gt;&lt;h1 class="mt-1 text-xl font-extrabold text-clinic-950"&gt;Status booking&lt;/h1&gt;&lt;/div&gt;\n
+                        &lt;/div&gt;\n
+                    &lt;/header&gt;\n
+                \n
+                &lt;main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10"&gt;\n
+                    \n
+                    \n
+                    \n
+                                        &lt;div class="mx-auto max-w-4xl"&gt;&lt;div class="clinic-card overflow-hidden"&gt;&lt;div class="flex flex-wrap items-end justify-between gap-5 bg-clinic-950 p-7 text-white"&gt;&lt;div&gt;&lt;p class="text-sm text-clinic-200"&gt;Nomor antrean&lt;/p&gt;&lt;p class="mt-2 text-4xl font-extrabold"&gt;A-993&lt;/p&gt;&lt;/div&gt;&lt;span class="rounded-full bg-white/10 px-4 py-2 text-sm font-bold"&gt;BOOKED&lt;/span&gt;&lt;/div&gt;&lt;div class="grid gap-7 p-7 sm:grid-cols-2"&gt;&lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Klinik&lt;/p&gt;&lt;p class="mt-2 font-bold text-slate-900"&gt;Runolfsdottir-Boehm Clinic&lt;/p&gt;&lt;/div&gt;&lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Pasien&lt;/p&gt;&lt;p class="mt-2 font-bold text-slate-900"&gt;Miss Lora Haley Jr.&lt;/p&gt;&lt;/div&gt;&lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Dokter&lt;/p&gt;&lt;p class="mt-2 font-bold text-slate-900"&gt;Mollie Cassin&lt;/p&gt;&lt;/div&gt;&lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Layanan&lt;/p&gt;&lt;p class="mt-2 font-bold text-slate-900"&gt;Konsultasi Umum&lt;/p&gt;&lt;/div&gt;&lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Tanggal&lt;/p&gt;&lt;p class="mt-2 font-bold text-slate-900"&gt;13 November 2026&lt;/p&gt;&lt;/div&gt;&lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Sesi&lt;/p&gt;&lt;p class="mt-2 font-bold text-slate-900"&gt;12:00–18:00&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="border-t border-slate-100 p-7"&gt;&lt;form method="POST" action="http://localhost/patient/appointments/1/cancel" class="flex flex-col gap-3 sm:flex-row" onsubmit="return confirm('Batalkan booking ini?')"&gt;&lt;input type="hidden" name="_token" value="[redacted opaque value]" autocomplete="off"&gt;&lt;label class="sr-only" for="cancel_reason"&gt;Alasan pembatalan (opsional)&lt;/label&gt;&lt;input id="cancel_reason" class="clinic-input" name="cancel_reason" value="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" maxlength="500" placeholder="Alasan pembatalan (opsional)"&gt;&lt;button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 border border-slate-300 bg-white text-slate-700 hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-700 shrink-0 text-red-600"&gt;\n
+        Batalkan booking\n
+    &lt;/button&gt;\n
+&lt;/form&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;\r\n
+    &lt;div class="mx-auto max-w-4xl"&gt;&lt;section class="mt-6 space-y-4" data-realtime-queue-channel="clinic.1.queue-board" data-realtime-public data-realtime-refresh-root aria-label="Perkembangan antrean Anda"&gt;\n
+    &lt;div class="flex items-center gap-2 text-sm font-semibold text-slate-600" data-realtime-connection-state="reconnecting" role="status" aria-live="polite"&gt;&lt;span data-realtime-connection-dot class="h-2 w-2 rounded-full bg-amber-400" aria-hidden="true"&gt;&lt;/span&gt;&lt;span data-realtime-connection-label&gt;Menghubungkan pembaruan antrean…&lt;/span&gt;&lt;/div&gt;\n
+    &lt;article class="clinic-card min-w-0 overflow-hidden p-5 sm:p-6 2xl:p-8"&gt;\n
+    &lt;div class="flex min-w-0 items-start justify-between gap-3 sm:gap-5"&gt;\n
+        &lt;div class="min-w-0"&gt;\n
+            &lt;p class="text-xs font-bold uppercase tracking-[0.14em] text-slate-400"&gt;Nomor antrean&lt;/p&gt;\n
+            &lt;p class="mt-2 max-w-full break-words font-display text-4xl font-extrabold leading-none text-clinic-700 sm:text-5xl 2xl:text-6xl"&gt;\n
+                A-993\n
+            &lt;/p&gt;\n
+        &lt;/div&gt;\n
+        &lt;span class="shrink-0 rounded-full px-3 py-1.5 text-xs font-bold sm:text-sm bg-slate-100 text-slate-600"&gt;\n
+            Belum check-in\n
+        &lt;/span&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;dl class="mt-6 grid min-w-0 gap-4 border-t border-slate-100 pt-4 sm:grid-cols-2"&gt;\n
+        &lt;div class="min-w-0"&gt;\n
+            &lt;dt class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Poli&lt;/dt&gt;\n
+            &lt;dd class="mt-1 break-words text-lg font-extrabold text-slate-900"&gt;\n
+                Dokter Anak\n
+            &lt;/dd&gt;\n
+        &lt;/div&gt;\n
+                    &lt;div class="min-w-0 sm:text-right"&gt;\n
+                                    &lt;dt class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Dokter&lt;/dt&gt;\n
+                    &lt;dd class="mt-1 break-words font-bold text-slate-800"&gt;Mollie Cassin&lt;/dd&gt;\n
+                                            &lt;/div&gt;\n
+            &lt;/dl&gt;\n
+\n
+    &lt;div class="mt-5 rounded-2xl bg-slate-50 p-4"&gt;\n
+        &lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Perkiraan waktu tunggu&lt;/p&gt;\n
+                    &lt;p class="mt-2 text-sm font-semibold text-slate-600"&gt;Estimasi belum tersedia.&lt;/p&gt;\n
+        \n
+            &lt;/div&gt;\n
+&lt;/article&gt;\n
+    &lt;p class="text-sm leading-6 text-slate-500"&gt;Estimasi tersedia setelah check-in pada hari kunjungan dan selama antrean masih aktif.&lt;/p&gt;&lt;/section&gt;\n
+&lt;/div&gt;\n
+                &lt;/main&gt;\n
+            &lt;/div&gt;\n
+        &lt;/div&gt;\n
+    &lt;!-- Livewire Scripts --&gt;\n
+&lt;script src="/livewire/livewire.js?id=dfa5f5ee"   data-csrf="[redacted opaque value]" data-update-uri="/livewire/update" data-navigate-once="true"&gt;&lt;/script&gt;\n
+&lt;/body&gt;\n
+&lt;/html&gt;\n
+' [UTF-8](length: 15304) contains "role="alert"" [ASCII](length: 12).
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:720
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:153</failure>
+    </testcase>
+    <testcase name="test_patient_can_choose_a_known_clinic_or_use_an_explicit_clinic_code" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="161" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.108097">
+      <error type="BadMethodCallException">Tests\Feature\DeepFunctionalRegressionTest::test_patient_can_choose_a_known_clinic_or_use_an_explicit_clinic_code&#13;
+BadMethodCallException: Call to undefined method Database\Factories\UserFactory::patient()
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:67
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:1151
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:170</error>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,6 @@
+{
+  "at": "2026-11-15T08:42:37.717Z",
+  "checked": 1094,
+  "changed": [],
+  "scope": "Existing application, tests, config, migrations, resources, public build, .env hash only, dependency manifests, installed Reverb/broadcasting/Spatie/Echo/Pusher sources, historical QA Markdown"
+}

@@ -1,0 +1,1 @@
+{"scope":"Disposable loopback QA router only; production middleware unchanged","behavior":"Strip Sec-Fetch-Site only when X-CCL-Legacy-CSRF=1 to model a legacy client/proxy. Laravel validates the naturally stale form token; no response stubbing.","normal_chrome_behavior":"same-origin Fetch Metadata may bypass stale-token fallback"}

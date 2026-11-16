@@ -1,0 +1,79 @@
+{
+  "width": 375,
+  "scroll_width": 385,
+  "scroll_x": 5,
+  "offenders": [
+    {
+      "tag": "LI",
+      "classes": "",
+      "text": "02Resepsionis melakukan check-inKunjungan terjadwal masuk ke antrean pelayanan p",
+      "right": 379.42320251464844
+    },
+    {
+      "tag": "DIV",
+      "classes": "",
+      "text": "Resepsionis melakukan check-inKunjungan terjadwal masuk ke antrean pelayanan pad",
+      "right": 379.42320251464844
+    },
+    {
+      "tag": "H3",
+      "classes": "",
+      "text": "Resepsionis melakukan check-in",
+      "right": 379.42320251464844
+    },
+    {
+      "tag": "P",
+      "classes": "",
+      "text": "Kunjungan terjadwal masuk ke antrean pelayanan pada dokter dan sesi yang dipilih",
+      "right": 379.42320251464844
+    },
+    {
+      "tag": "LI",
+      "classes": "",
+      "text": "03Antrean mengarahkan pelayananStatus antrean membantu staf mengetahui pasien ya",
+      "right": 378.38285636901855
+    },
+    {
+      "tag": "DIV",
+      "classes": "",
+      "text": "Antrean mengarahkan pelayananStatus antrean membantu staf mengetahui pasien yang",
+      "right": 378.3828582763672
+    },
+    {
+      "tag": "H3",
+      "classes": "",
+      "text": "Antrean mengarahkan pelayanan",
+      "right": 378.3828582763672
+    },
+    {
+      "tag": "P",
+      "classes": "",
+      "text": "Status antrean membantu staf mengetahui pasien yang menunggu, dipanggil, dan sed",
+      "right": 378.3828582763672
+    },
+    {
+      "tag": "DETAILS",
+      "classes": "",
+      "text": "Apakah ada paket gratis?+Ada. Paket Free mencakup 1 dokter, 1 staf, dan hingga 5",
+      "right": 379.8569030761719
+    },
+    {
+      "tag": "DETAILS",
+      "classes": "",
+      "text": "Apakah paket dapat diubah ketika klinik berkembang?+ClinicOS menyediakan paket I",
+      "right": 379.42320251464844
+    },
+    {
+      "tag": "DETAILS",
+      "classes": "",
+      "text": "Apakah akses staf dan dokter dibedakan?+Ya. Akses dibatasi berdasarkan peran dan",
+      "right": 378.38285636901855
+    },
+    {
+      "tag": "DIV",
+      "classes": "co-final-orbit",
+      "text": "",
+      "right": 449.0914421081543
+    }
+  ]
+}

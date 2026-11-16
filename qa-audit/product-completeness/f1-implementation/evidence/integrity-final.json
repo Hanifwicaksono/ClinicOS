@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "baseline_files": 439,
+  "changed_existing_files": [
+    "app/Http/Controllers/Receptionist/PatientController.php",
+    "app/Services/PatientDuplicateService.php",
+    "resources/js/patient-duplicates.js",
+    "resources/views/components/patient-duplicate-review.blade.php",
+    "resources/views/platform/tenants/show.blade.php",
+    "tests/patient-duplicates.test.mjs"
+  ],
+  "new_test_file": "tests/Feature/F1ImplementationTest.php",
+  "historical_qa_reports_unchanged": 40,
+  "subscription_service_unchanged": true,
+  "env_unchanged": true,
+  "dependencies_and_migrations_unchanged": true,
+  "main_fixture_protected_tables": {
+    "visits": true,
+    "medical_records": true,
+    "medical_record_revisions": true,
+    "vital_signs": true,
+    "diagnoses": true,
+    "treatments": true,
+    "patient_allergies": true,
+    "prescriptions": true,
+    "prescription_items": true,
+    "payments": true,
+    "payment_items": true,
+    "payment_events": true,
+    "addon_periods": true
+  },
+  "dummy_record_deltas": {
+    "patients": 1,
+    "appointments": 1,
+    "queues": 1,
+    "subscription_periods": 1
+  },
+  "original_patient_identity_and_activation_restored": true,
+  "dummy_edit_normalization_note": "Existing single-line address input removed one newline from one synthetic multiline address when that profile was edited for the stale/inactive tests. Address characters otherwise equal; all original patient fields except updated_at and that linebreak are equal. No direct SQL repair/cleanup performed.",
+  "source_user_database_accessed": false
+}

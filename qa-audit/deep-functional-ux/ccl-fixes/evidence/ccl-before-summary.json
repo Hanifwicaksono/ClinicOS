@@ -1,0 +1,8 @@
+{
+  "tests": 23,
+  "passed": 1,
+  "failed": 22,
+  "errors": 0,
+  "assertions": 48,
+  "result": "failed"
+}

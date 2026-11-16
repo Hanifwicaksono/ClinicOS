@@ -1,0 +1,11 @@
+{
+  "phase": "4-booking-queue-handoff",
+  "at": "2026-11-13T09:12:53.595Z",
+  "counts": {
+    "PASS": 37,
+    "FAIL": 15,
+    "BLOCKED": 1,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

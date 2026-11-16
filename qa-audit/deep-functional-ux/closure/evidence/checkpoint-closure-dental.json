@@ -1,0 +1,11 @@
+{
+  "phase": "closure-dental",
+  "at": "2026-11-13T10:59:35.718Z",
+  "counts": {
+    "PASS": 8,
+    "FAIL": 1,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

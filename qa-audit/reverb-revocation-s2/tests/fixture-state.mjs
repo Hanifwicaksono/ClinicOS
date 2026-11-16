@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {join} from 'node:path';
+import {execFileSync} from 'node:child_process';
+const evidence=join(import.meta.dirname,'../evidence');
+const r=JSON.parse(readFileSync(join(evidence,'runtime.json')));
+if(!r.database.startsWith(r.root+'/')||!r.root.includes('/clinicos-deep-s2-final-'))throw Error('Fixture isolation guard');
+const code=`$db = new PDO("sqlite:".$argv[1]); $result = []; foreach (["pending_jobs" => "SELECT COUNT(*) FROM jobs", "failed_jobs" => "SELECT COUNT(*) FROM failed_jobs", "revocations" => "SELECT COUNT(*) FROM realtime_revocations", "unacknowledged" => "SELECT COUNT(*) FROM realtime_revocations WHERE acknowledged_at IS NULL", "transport_failures_pending" => "SELECT COUNT(*) FROM realtime_revocations WHERE acknowledged_at IS NULL AND failed_at IS NOT NULL", "scopes" => "SELECT COUNT(*) FROM realtime_session_grants", "logout_tombstones" => "SELECT COUNT(*) FROM realtime_session_grants WHERE revoked_at IS NOT NULL"] as $key => $query) { $result[$key] = (int) $db->query($query)->fetchColumn(); } echo json_encode($result);`;
+const details=`$result["failed_job_history"] = []; foreach ($db->query("SELECT payload FROM failed_jobs") as $row) { $payload = json_decode($row["payload"], true); preg_match('/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/', $payload["data"]["command"] ?? "", $match); $q = $db->prepare("SELECT acknowledged_at IS NOT NULL FROM realtime_revocations WHERE id = ?"); $q->execute([$match[0] ?? ""]); $result["failed_job_history"][] = ["job" => $payload["data"]["commandName"] ?? null, "revocation_now_acknowledged" => str_ends_with($payload["data"]["commandName"] ?? "", "RevokeRealtimeAccess") ? (bool) $q->fetchColumn() : null]; } echo json_encode($result);`;
+const result=JSON.parse(execFileSync('php',['-d','extension=pdo_sqlite','-d','extension=sqlite3','-r',code.replace('echo json_encode($result);',details),r.database],{encoding:'utf8'}));
+writeFileSync(join(evidence,'fixture-final-state.json'),JSON.stringify({at:new Date().toISOString(),isolated:true,...result},null,2));console.log(JSON.stringify(result));

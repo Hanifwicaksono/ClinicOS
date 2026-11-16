@@ -1,0 +1,67 @@
+{
+  "kind": "actual isolated backend checks, not PHPUnit full suite",
+  "results": [
+    {
+      "name": "Current queue and own notification context allowed",
+      "status": "PASS"
+    },
+    {
+      "name": "Foreign tenant denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Foreign user notification denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Unknown private family denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Unsigned legacy binding denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Empty authorization version denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Old authorization version denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing durable authority row denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Inactive update bumps epoch in same transaction",
+      "status": "PASS"
+    },
+    {
+      "name": "Password update bumps epoch and invalidates old socket context",
+      "status": "PASS"
+    },
+    {
+      "name": "Clinic reassignment bumps epoch and denies original clinic",
+      "status": "PASS"
+    },
+    {
+      "name": "Role permission change fans out to all role members, not receptionist",
+      "status": "PASS"
+    },
+    {
+      "name": "Direct permission removal does not erase inherited role permission",
+      "status": "PASS"
+    },
+    {
+      "name": "syncRoles invalidates old authority",
+      "status": "PASS"
+    },
+    {
+      "name": "Rollback preserves durable user state and epoch",
+      "status": "PASS"
+    }
+  ],
+  "PASS": 15,
+  "FAIL": 0
+}

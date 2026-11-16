@@ -212,10 +212,10 @@ class VisitWorkflowService
     /** @param array<string, mixed> $data */
     private function syncRecord(MedicalRecord $record, array $data, User $actor): void
     {
-        abort_if(isset($data['record_version']) && (int) $data['record_version'] !== $record->lock_version, 409,
+        abort_if(! isset($data['record_version']) || (int) $data['record_version'] !== $record->lock_version, 409,
             'Rekam medis telah berubah di tab lain. Salin perubahan Anda lalu muat ulang halaman sebelum melanjutkan.');
         $patient = Patient::query()->where('clinic_id', $record->visit->clinic_id)->lockForUpdate()->findOrFail($record->patient_id);
-        abort_if(isset($data['allergy_version']) && ! hash_equals($patient->allergyVersion(), $data['allergy_version']), 409,
+        abort_if(! isset($data['allergy_version']) || ! hash_equals($patient->allergyVersion(), $data['allergy_version']), 409,
             'Data alergi pasien telah berubah. Salin perubahan Anda lalu muat ulang untuk meninjau alergi terbaru.');
         $items = array_values(array_filter($data['prescription_items'] ?? [], fn (array $item): bool => filled($item['medicine_name'] ?? null)));
         $hasCriticalAllergy = $record->patient->criticalAllergies()->exists();
@@ -271,6 +271,8 @@ class VisitWorkflowService
                 throw new RuntimeException('Foto rekam medis gagal disimpan.');
             }
 
+            DB::afterRollBack(fn () => Storage::disk('local')->delete($path));
+
             $photos[] = ['path' => $path, 'name' => $photo->getClientOriginalName()];
         }
 
@@ -278,7 +280,7 @@ class VisitWorkflowService
             $record->update(['photos' => $photos]);
         }
 
-        if ($removedPhotoPaths !== []) {
+        if ($removedPhotoPaths !== [] && $record->status !== MedicalRecordStatus::Final) {
             DB::afterCommit(fn () => Storage::disk('local')->delete($removedPhotoPaths));
         }
 
@@ -296,7 +298,7 @@ class VisitWorkflowService
         if (array_key_exists('diagnoses', $data)) {
             $record->diagnoses()->delete();
             $diagnoses = array_values(array_filter(
-                $data['diagnoses'],
+                $data['diagnoses'] ?? [],
                 fn (array $item): bool => filled($item['name'] ?? null),
             ));
             $primaryDiagnosisIndex = collect($diagnoses)->search(
@@ -315,7 +317,7 @@ class VisitWorkflowService
 
         if (array_key_exists('treatments', $data)) {
             $record->treatments()->delete();
-            foreach (array_values(array_filter($data['treatments'], fn (array $item): bool => filled($item['name'] ?? null))) as $index => $treatment) {
+            foreach (array_values(array_filter($data['treatments'] ?? [], fn (array $item): bool => filled($item['name'] ?? null))) as $index => $treatment) {
                 $record->treatments()->create([
                     ...Arr::only($treatment, ['name', 'description']),
                     'quantity' => $treatment['quantity'] ?? 1,

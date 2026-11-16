@@ -1,0 +1,27 @@
+TAP version 13
+# (node:19300) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: P1 regressions and staff security lifecycle in Chrome
+ok 1 - P1 regressions and staff security lifecycle in Chrome
+  ---
+  duration_ms: 28691.8979
+  type: 'test'
+  ...
+# (node:40580) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Browser screenshots: C:\\Users\\User\\AppData\\Local\\Temp\\clinicos-browser-009Sfz
+# Subtest: clinical and booking workflows in Chrome with an isolated demo database
+ok 2 - clinical and booking workflows in Chrome with an isolated demo database
+  ---
+  duration_ms: 18612.4728
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 28802.6997

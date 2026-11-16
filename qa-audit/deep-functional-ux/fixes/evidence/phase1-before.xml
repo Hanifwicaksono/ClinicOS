@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\DeepFunctionalRegressionTest" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" tests="9" assertions="13" errors="0" failures="9" skipped="0" time="1.496768">
+    <testsuite name="Tests\Feature\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized" tests="4" assertions="4" errors="0" failures="4" skipped="0" time="1.016061">
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;patient&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="44" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="1" time="0.719460">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set "patient"&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:63</failure>
+      </testcase>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;receptionist&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="44" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="1" time="0.102611">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set "receptionist"&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:63</failure>
+      </testcase>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;admin&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="44" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="1" time="0.097716">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set "admin"&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:63</failure>
+      </testcase>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;token&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="44" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="1" time="0.096274">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set "token"&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:63</failure>
+      </testcase>
+    </testsuite>
+    <testsuite name="Tests\Feature\DeepFunctionalRegressionTest::test_used_session_keeps_its_day_and_times" tests="3" assertions="3" errors="0" failures="3" skipped="0" time="0.274384">
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;day&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="80" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="1" time="0.091847">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\DeepFunctionalRegressionTest::test_used_session_keeps_its_day_and_times with data set "day"&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:91</failure>
+      </testcase>
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;start&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="80" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="1" time="0.091256">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\DeepFunctionalRegressionTest::test_used_session_keeps_its_day_and_times with data set "start"&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:91</failure>
+      </testcase>
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;end&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="80" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="1" time="0.091281">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\DeepFunctionalRegressionTest::test_used_session_keeps_its_day_and_times with data set "end"&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:91</failure>
+      </testcase>
+    </testsuite>
+    <testcase name="test_replayed_grant_creates_one_period_and_one_audit_event" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="97" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="5" time="0.106135">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\DeepFunctionalRegressionTest::test_replayed_grant_creates_one_period_and_one_audit_event&#13;
+Failed asserting that table [subscription_periods] matches expected entries count of 1. Entries found: 2.
+.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase.php:118
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:105</failure>
+    </testcase>
+    <testcase name="test_http_grant_requires_a_request_identifier" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="116" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="1" time="0.100188">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\DeepFunctionalRegressionTest::test_http_grant_requires_a_request_identifier&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:123</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

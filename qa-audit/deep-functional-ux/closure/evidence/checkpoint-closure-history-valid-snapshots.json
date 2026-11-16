@@ -1,0 +1,11 @@
+{
+  "phase": "closure-history-valid-snapshots",
+  "at": "2026-11-13T16:21:21.425Z",
+  "counts": {
+    "PASS": 86,
+    "FAIL": 43,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

@@ -1,0 +1,168 @@
+TAP version 13
+# (node:40008) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: P1 regressions and staff security lifecycle in Chrome
+not ok 1 - P1 regressions and staff security lifecycle in Chrome
+  ---
+  duration_ms: 15425.8927
+  type: 'test'
+  location: 'C:\\Users\\User\\AppData\\Local\\Temp\\clinicos-deep-f1-5UGb4q\\browser-workspace-Pd5lUx\\tests\\browser-p1-regressions.test.mjs:9:1'
+  failureType: 'testCodeFailure'
+  error: 'Browser condition timed out'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    waitFor (file:///C:/Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/browser-workspace-Pd5lUx/tests/browser-p1-regressions.test.mjs:78:19)
+    async go (file:///C:/Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/browser-workspace-Pd5lUx/tests/browser-p1-regressions.test.mjs:83:13)
+    async login (file:///C:/Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/browser-workspace-Pd5lUx/tests/browser-p1-regressions.test.mjs:98:13)
+    async TestContext.<anonymous> (file:///C:/Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/browser-workspace-Pd5lUx/tests/browser-p1-regressions.test.mjs:116:9)
+    async Test.run (node:internal/test_runner/test:1125:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3)
+  ...
+# (node:30952) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: clinical and booking workflows in Chrome with an isolated demo database
+not ok 2 - clinical and booking workflows in Chrome with an isolated demo database
+  ---
+  duration_ms: 15499.5597
+  type: 'test'
+  location: 'C:\\Users\\User\\AppData\\Local\\Temp\\clinicos-deep-f1-5UGb4q\\browser-workspace-Pd5lUx\\tests\\browser-partial-workflows.test.mjs:10:1'
+  failureType: 'testCodeFailure'
+  error: 'Browser condition timed out: Boolean(window.Livewire && document.querySelector("#email")) '
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    waitFor (file:///C:/Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/browser-workspace-Pd5lUx/tests/browser-partial-workflows.test.mjs:79:19)
+    async go (file:///C:/Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/browser-workspace-Pd5lUx/tests/browser-partial-workflows.test.mjs:83:13)
+    async login (file:///C:/Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/browser-workspace-Pd5lUx/tests/browser-partial-workflows.test.mjs:92:13)
+    async TestContext.<anonymous> (file:///C:/Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/browser-workspace-Pd5lUx/tests/browser-partial-workflows.test.mjs:103:9)
+    async Test.run (node:internal/test_runner/test:1125:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3)
+  ...
+# Subtest: redelivery of the same notification increments the counter and emits the event once
+ok 3 - redelivery of the same notification increments the counter and emits the event once
+  ---
+  duration_ms: 2.3022
+  type: 'test'
+  ...
+# Subtest: distinct notifications remain visible and messages without IDs preserve compatibility
+ok 4 - distinct notifications remain visible and messages without IDs preserve compatibility
+  ---
+  duration_ms: 1.4161
+  type: 'test'
+  ...
+# Subtest: autosave HTTP401 retains editor data and offers session recovery
+ok 5 - autosave HTTP401 retains editor data and offers session recovery
+  ---
+  duration_ms: 1.8965
+  type: 'test'
+  ...
+# Subtest: manual HTTP401 retains editor data and offers session recovery
+ok 6 - manual HTTP401 retains editor data and offers session recovery
+  ---
+  duration_ms: 0.3672
+  type: 'test'
+  ...
+# Subtest: autosave HTTP419 retains editor data and offers session recovery
+ok 7 - autosave HTTP419 retains editor data and offers session recovery
+  ---
+  duration_ms: 0.1907
+  type: 'test'
+  ...
+# Subtest: manual HTTP419 retains editor data and offers session recovery
+ok 8 - manual HTTP419 retains editor data and offers session recovery
+  ---
+  duration_ms: 0.1376
+  type: 'test'
+  ...
+# Subtest: a network failure remains retryable and is distinct from session expiry
+ok 9 - a network failure remains retryable and is distinct from session expiry
+  ---
+  duration_ms: 0.3205
+  type: 'test'
+  ...
+# Subtest: autosave updates the version and keeps photos for the explicit save
+ok 10 - autosave updates the version and keeps photos for the explicit save
+  ---
+  duration_ms: 0.163
+  type: 'test'
+  ...
+# Subtest: network failures retain changes and can be retried; conflict stops automatic writes
+ok 11 - network failures retain changes and can be retried; conflict stops automatic writes
+  ---
+  duration_ms: 0.2283
+  type: 'test'
+  ...
+# Subtest: typing during an autosave is saved in a following request with the new version
+ok 12 - typing during an autosave is saved in a following request with the new version
+  ---
+  duration_ms: 0.2529
+  type: 'test'
+  ...
+# Subtest: finalize waits for an active autosave and retains the form on a stale conflict
+ok 13 - finalize waits for an active autosave and retains the form on a stale conflict
+  ---
+  duration_ms: 0.2819
+  type: 'test'
+  ...
+# Subtest: booking filters services by doctor and sessions by the selected date
+ok 14 - booking filters services by doctor and sessions by the selected date
+  ---
+  duration_ms: 0.7048
+  type: 'test'
+  ...
+# Subtest: duplicate review preserves phone validation details and blocks submit
+ok 15 - duplicate review preserves phone validation details and blocks submit
+  ---
+  duration_ms: 0.9694
+  type: 'test'
+  ...
+# Subtest: non-JSON server failure has actionable feedback
+ok 16 - non-JSON server failure has actionable feedback
+  ---
+  duration_ms: 0.7368
+  type: 'test'
+  ...
+# Subtest: a later review wins over a stale failed request
+ok 17 - a later review wins over a stale failed request
+  ---
+  duration_ms: 0.2492
+  type: 'test'
+  ...
+# Subtest: pagination appends candidates, sends the cursor and requires review again
+ok 18 - pagination appends candidates, sends the cursor and requires review again
+  ---
+  duration_ms: 0.5782
+  type: 'test'
+  ...
+# Subtest: a stale cursor clears its authority and offers a fresh first-page check
+ok 19 - a stale cursor clears its authority and offers a fresh first-page check
+  ---
+  duration_ms: 0.336
+  type: 'test'
+  ...
+# Subtest: an input change invalidates an in-flight page before the debounce runs
+ok 20 - an input change invalidates an in-flight page before the debounce runs
+  ---
+  duration_ms: 3.751
+  type: 'test'
+  ...
+# Subtest: malformed cursor metadata is not installed in state
+ok 21 - malformed cursor metadata is not installed in state
+  ---
+  duration_ms: 0.2547
+  type: 'test'
+  ...
+# Subtest: out-of-order pagination cannot append stale candidates
+ok 22 - out-of-order pagination cannot append stale candidates
+  ---
+  duration_ms: 0.1974
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 20
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 32556.7343

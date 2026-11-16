@@ -1,0 +1,90 @@
+ M README.md
+ M app/Http/Controllers/Admin/DashboardController.php
+ M app/Http/Controllers/Admin/DoctorScheduleController.php
+ M app/Http/Controllers/Admin/StaffController.php
+ M app/Http/Controllers/Doctor/VisitController.php
+ M app/Http/Controllers/Patient/AppointmentController.php
+ M app/Http/Controllers/Patient/DashboardController.php
+ M app/Http/Controllers/Platform/DashboardController.php
+ M app/Http/Controllers/Platform/PaymentController.php
+ M app/Http/Controllers/Platform/SubscriptionGrantController.php
+ M app/Http/Controllers/Platform/TenantController.php
+ M app/Http/Controllers/PublicBookingController.php
+ M app/Http/Controllers/QueueController.php
+ M app/Http/Controllers/Receptionist/AppointmentController.php
+ M app/Http/Controllers/Receptionist/PatientController.php
+ M app/Http/Controllers/SubscriptionPaymentController.php
+ M app/Http/Requests/Admin/StoreStaffRequest.php
+ M app/Http/Requests/Doctor/SaveMedicalRecordRequest.php
+ M app/Http/Requests/GrantSubscriptionRequest.php
+ M app/Http/Requests/Receptionist/StoreAppointmentRequest.php
+ M app/Http/Requests/Receptionist/StorePatientRequest.php
+ M app/Http/Requests/Receptionist/UpdatePatientRequest.php
+ M app/Http/Requests/StorePublicBookingRequest.php
+ M app/Models/Patient.php
+ M app/Models/SubscriptionPeriod.php
+ M app/Policies/UserPolicy.php
+ M app/Services/BookingService.php
+ M app/Services/PatientDuplicateService.php
+ M app/Services/StaffAccountService.php
+ M app/Services/SubscriptionService.php
+ M app/Services/VisitWorkflowService.php
+ M bootstrap/app.php
+ M composer.lock
+ M public/css/clinicos-landing.css
+ M resources/js/patient-duplicates.js
+ M resources/js/realtime.js
+ M resources/js/rme-autosave.js
+ M resources/views/admin/audit-logs/index.blade.php
+ M resources/views/admin/dashboard.blade.php
+ M resources/views/admin/services/form.blade.php
+ M resources/views/components/public-layout.blade.php
+ M resources/views/components/queue-card.blade.php
+ M resources/views/components/rme/autosave-status.blade.php
+ M resources/views/dashboard.blade.php
+ M resources/views/doctor/medical-records/index.blade.php
+ M resources/views/doctor/visits/show.blade.php
+ M resources/views/layouts/app.blade.php
+ M resources/views/livewire/layout/navigation.blade.php
+ M resources/views/livewire/profile/delete-user-form.blade.php
+ M resources/views/onboarding/plans/index.blade.php
+ M resources/views/patient/appointments/index.blade.php
+ M resources/views/patient/appointments/show.blade.php
+ M resources/views/platform/tenants/show.blade.php
+ M resources/views/public/booking-status.blade.php
+ M resources/views/public/booking.blade.php
+ M resources/views/queues/index.blade.php
+ M resources/views/receptionist/appointments/form.blade.php
+ M resources/views/receptionist/appointments/index.blade.php
+ M resources/views/receptionist/appointments/show.blade.php
+ M resources/views/receptionist/patients/form.blade.php
+ M resources/views/receptionist/patients/index.blade.php
+ M resources/views/receptionist/patients/show.blade.php
+ M resources/views/subscription/payments/index.blade.php
+ M resources/views/subscription/payments/show.blade.php
+ M routes/web.php
+ M tests/Feature/Admin/ClinicManagementTest.php
+ M tests/Feature/Admin/DoctorScheduleManagementTest.php
+ M tests/Feature/Admin/StaffManagementTest.php
+ M tests/Feature/BookingTest.php
+ M tests/Feature/DashboardAccessTest.php
+ M tests/Feature/MedicalRecordCorrectionTest.php
+ M tests/Feature/OdontogramAddonTest.php
+ M tests/Feature/PlatformSubscriptionManagementTest.php
+ M tests/Feature/ProfileTest.php
+ M tests/Feature/PublicCancellationTest.php
+ M tests/Feature/RmeGeneralDentalTest.php
+ M tests/Feature/SubscriptionEnforcementTest.php
+ M tests/Feature/VisitWorkflowTest.php
+ M tests/TestCase.php
+ M tests/browser-partial-workflows.test.mjs
+ M tests/partial-workflows.test.mjs
+?? app/Rules/
+?? database/migrations/2026_11_13_084924_add_grant_request_id_to_subscription_periods_table.php
+?? qa-audit/
+?? resources/views/components/validation-errors.blade.php
+?? resources/views/patient/appointments/create.blade.php
+?? tests/Feature/CoverageClosureRegressionTest.php
+?? tests/Feature/DeepFunctionalRegressionTest.php
+?? tests/browser-p1-regressions.test.mjs
+?? tests/patient-duplicates.test.mjs

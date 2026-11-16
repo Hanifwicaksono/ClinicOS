@@ -7,6 +7,7 @@ class Form extends EventTarget {
     action = 'http://localhost/draft';
     elements = { record_version: { value: 0 } };
     isConnected = true;
+    inert = false;
     fields = { subjective: 'Draft', 'photos[]': 'pending-photo', 'removed_photos[]': '0' };
     hasAttribute() { return true; }
     querySelector() { return null; }
@@ -20,6 +21,54 @@ globalThis.FormData = class extends Map {
 function response(status, payload) {
     return { ok: status >= 200 && status < 300, status, json: async () => payload };
 }
+
+for (const status of [401, 419]) {
+    for (const mode of ['autosave', 'manual']) {
+        test(`${mode} HTTP${status} retains editor data and offers session recovery`, async () => {
+            const form = new Form();
+            const events = [];
+            let navigated = false;
+            form.addEventListener('rme-autosave-state', event => events.push(event.detail));
+            const client = new RmeAutosave(form, {
+                request: async () => response(status, {}),
+                navigate: () => { navigated = true; },
+            });
+            client.markDirty();
+            if (mode === 'autosave') await client.flush();
+            else await client.submit({ preventDefault() {}, stopImmediatePropagation() {}, submitter: null });
+            assert.equal(events.at(-1).state, 'expired');
+            assert.match(events.at(-1).message, /Sesi berakhir.*Salin perubahan.*masuk kembali/);
+            assert.equal(client.blocked, true);
+            assert.equal(client.unsaved, true);
+            assert.equal(form.inert, false);
+            assert.equal(form.fields.subjective, 'Draft');
+            assert.equal(form.fields['photos[]'], 'pending-photo');
+            assert.equal(navigated, false);
+            client.destroy();
+        });
+    }
+}
+
+test('a network failure remains retryable and is distinct from session expiry', async () => {
+    const form = new Form();
+    const events = [];
+    form.addEventListener('rme-autosave-state', event => events.push(event.detail));
+    let online = false;
+    const client = new RmeAutosave(form, { request: async () => {
+        if (!online) throw new TypeError('Failed to fetch');
+        return response(200, {record_version: 1});
+    } });
+    client.markDirty();
+    assert.equal(await client.flush(), false);
+    assert.equal(events.at(-1).state, 'error');
+    assert.equal(client.blocked, false);
+    assert.equal(client.sessionExpired, false);
+    assert.equal(client.unsaved, true);
+    online = true;
+    assert.equal(await client.flush(), true);
+    assert.equal(client.unsaved, false);
+    client.destroy();
+});
 
 test('autosave updates the version and keeps photos for the explicit save', async () => {
     const form = new Form();

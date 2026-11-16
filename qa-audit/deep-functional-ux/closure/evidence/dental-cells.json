@@ -1,0 +1,1346 @@
+[
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 18",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 17",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 16",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 15",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 14",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 13",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 12",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 11",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 21",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 22",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 23",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 24",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 25",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 26",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 27",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 28",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 48",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 47",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 46",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 45",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 44",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 43",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 42",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 41",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 31",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 32",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 33",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 34",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 35",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 36",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 37",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 38",
+    "state": "DRAFT + entitlement active + unknown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 18",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 17",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 16",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 15",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 14",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 13",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 12",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 11",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 21",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 22",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 23",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 24",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 25",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 26",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 27",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 28",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 48",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 47",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 46",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 45",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 44",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 43",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 42",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 41",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 31",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 32",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 33",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 34",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 35",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 36",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 37",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 38",
+    "state": "DRAFT + entitlement active + healthy",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 18",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 17",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 16",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 15",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 14",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 13",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 12",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 11",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 21",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 22",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 23",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 24",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 25",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 26",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 27",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 28",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 48",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 47",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 46",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 45",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 44",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 43",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 42",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 41",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 31",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 32",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 33",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 34",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 35",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 36",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 37",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 38",
+    "state": "DRAFT + entitlement active + caries",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 18",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 17",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 16",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 15",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 14",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 13",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 12",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 11",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 21",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 22",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 23",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 24",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 25",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 26",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 27",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 28",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 48",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 47",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 46",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 45",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 44",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 43",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 42",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 41",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 31",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 32",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 33",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 34",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 35",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 36",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 37",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 38",
+    "state": "DRAFT + entitlement active + filled",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 18",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 17",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 16",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 15",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 14",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 13",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 12",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 11",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 21",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 22",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 23",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 24",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 25",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 26",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 27",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 28",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 48",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 47",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 46",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 45",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 44",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 43",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 42",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 41",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 31",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 32",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 33",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 34",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 35",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 36",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 37",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 38",
+    "state": "DRAFT + entitlement active + missing",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 18",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 17",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 16",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 15",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 14",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 13",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 12",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 11",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 21",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 22",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 23",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 24",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 25",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 26",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 27",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 28",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 48",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 47",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 46",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 45",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 44",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 43",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 42",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 41",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 31",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 32",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 33",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 34",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 35",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 36",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 37",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  },
+  {
+    "feature": "F21",
+    "role": "Doctor",
+    "action": "select/save/reload tooth 38",
+    "state": "DRAFT + entitlement active + crown",
+    "status": "PASS"
+  }
+]

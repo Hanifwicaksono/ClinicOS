@@ -1,0 +1,11 @@
+{
+  "phase": "closure-socket-recovery-focus-and-offline-actions",
+  "at": "2026-11-13T17:06:57.385Z",
+  "counts": {
+    "PASS": 222,
+    "FAIL": 67,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

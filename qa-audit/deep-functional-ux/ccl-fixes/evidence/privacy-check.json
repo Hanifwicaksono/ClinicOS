@@ -1,0 +1,8 @@
+{
+  "at": "2026-11-14T07:40:43.499Z",
+  "source_env_never_printed": true,
+  "qa_configuration_private": true,
+  "php_failure_tokens_redacted": true,
+  "hashes_redacted_in_failure_text_only": true,
+  "artifacts_contain_dummy_actors_only": true
+}

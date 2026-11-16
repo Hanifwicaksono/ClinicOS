@@ -1,0 +1,101 @@
+[
+  {
+    "width": 375,
+    "scrollWidth": 385,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "",
+        "right": 384.2253952026367
+      },
+      {
+        "tag": "H3",
+        "class": "",
+        "right": 384.2253952026367
+      },
+      {
+        "tag": "P",
+        "class": "",
+        "right": 384.2253952026367
+      },
+      {
+        "tag": "LI",
+        "class": "",
+        "right": 382.9168395996094
+      },
+      {
+        "tag": "DIV",
+        "class": "",
+        "right": 382.9168395996094
+      },
+      {
+        "tag": "H3",
+        "class": "",
+        "right": 382.9168395996094
+      },
+      {
+        "tag": "P",
+        "class": "",
+        "right": 382.9168395996094
+      },
+      {
+        "tag": "DETAILS",
+        "class": "",
+        "right": 385
+      },
+      {
+        "tag": "DETAILS",
+        "class": "",
+        "right": 384.97731018066406
+      },
+      {
+        "tag": "DETAILS",
+        "class": "",
+        "right": 384.7783432006836
+      },
+      {
+        "tag": "DETAILS",
+        "class": "",
+        "right": 384.2253952026367
+      },
+      {
+        "tag": "DIV",
+        "class": "co-final-orbit",
+        "right": 453.99000549316406
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "scrollWidth": 768,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "co-final-orbit",
+        "right": 825.8325805664062
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "scrollWidth": 1024,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "co-final-orbit",
+        "right": 1074.161376953125
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "scrollWidth": 1440,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "co-final-orbit",
+        "right": 1477.695556640625
+      }
+    ]
+  }
+]

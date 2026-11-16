@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "database": "dedicated MySQL 8.0.30 on loopback 13318",
+  "setup": {
+    "user_id": 19,
+    "version": 2
+  },
+  "writers": [
+    {
+      "writer": "a",
+      "loaded_epoch": 2,
+      "saved_epoch": 3
+    },
+    {
+      "writer": "b",
+      "loaded_epoch": 2,
+      "saved_epoch": 4
+    }
+  ],
+  "verified": {
+    "version": 4,
+    "versions": [
+      3,
+      4
+    ],
+    "active": false,
+    "password_changed": true,
+    "rollback_valid": true
+  },
+  "tests": {
+    "concurrent_stale_writers": "PASS",
+    "atomic_rollback": "PASS"
+  },
+  "transport_ack_on_mysql": "NOT TESTED by this backend-only concurrency probe"
+}

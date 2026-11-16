@@ -1,0 +1,11 @@
+{
+  "phase": "closure-photo-transfer-size-boundary",
+  "at": "2026-11-13T17:22:02.929Z",
+  "counts": {
+    "PASS": 239,
+    "FAIL": 87,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

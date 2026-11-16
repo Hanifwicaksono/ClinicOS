@@ -1,0 +1,3 @@
+
+   INFO  Test [C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php] created successfully.  
+

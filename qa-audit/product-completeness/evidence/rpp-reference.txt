@@ -1,0 +1,503 @@
+Nomor ID
+: 
+PBLTRPL-504
+Pengusul Proyek
+:
+TIM PBL 504
+Manajer proyek
+:
+Siskha Handayani, M.Si
+Judul Proyek
+:
+ClinicOS
+ — 
+Antre Tanpa Menunggu, Melayani Tanpa Terputus
+Luaran
+:
+Laporan Akhir, Aplikasi Web ClinicOS (Staff Web dan Patient Web), Manual Book, Video Demo, HKI, Poster, Berita Acara Serah Terima PBL
+Sponsor
+:
+[penyandang dana]
+Biaya
+:
+Rp240.000 – Rp1.760.000 (estimasi sesuai rincian biaya)
+Klien/Pelanggan
+:
+Klinik pratama dengan poli umum dan/atau poli gigi
+Waktu 
+:
+1 Semester
+Ruang lingkup
+Digitalisasi layanan klinik di Indonesia terus berkembang, namun masih banyak klinik yang menghadapi kendala dalam pelayanan sehari-hari. Proses pendaftaran, pengelolaan antrean, dan pencatatan rekam medis sering kali masih dilakukan secara manual atau menggunakan sistem yang terpisah-pisah, sehingga memakan waktu dan rawan kesalahan. Di sisi pasien, sistem antrean umumnya hanya menampilkan nomor yang sedang dipanggil. Pasien tidak memiliki gambaran kapan gilirannya tiba, sehingga memilih menunggu lama di klinik dan membuat ruang tunggu menjadi padat.
+ClinicOS adalah platform Software as a Service (SaaS) multi-tenant berbasis web yang mengintegrasikan registrasi pasien, appointment, visit, antrean realtime, rekam medis elektronik, resep, billing, laporan, serta audit log. Produk terdiri atas Staff Web untuk owner/admin, resepsionis, dokter, dan kasir, serta Patient Web untuk pencarian klinik, booking, reminder, dan pemantauan antrean. Kedua antarmuka diakses melalui browser responsif pada PC, laptop, tablet, atau smartphone tanpa aplikasi mobile native dan tanpa aplikasi desktop terpisah. Tenant dan cabang memiliki pembatasan data dan permission yang divalidasi di backend.
+Predictive Queue menampilkan rentang estimasi waktu antrean beserta tingkat keyakinan, bukan janji jam pelayanan yang pasti. Dukungan layanan mencakup poli umum dan poli gigi, termasuk odontogram, peringatan alergi kritis, serta RME dengan alur Draft, Autosave, Finalize, dan Amendment. Cloud Mode menjadi mode utama. Resilient Edge Mode menggunakan satu Edge Node lokal di LAN klinik agar workflow yang ditetapkan dapat berjalan saat koneksi WAN terganggu dan disinkronkan secara aman setelah pulih. Edge Node adalah komponen server lokal, bukan aplikasi desktop untuk pengguna.
+Desain
+ Umum
+ClinicOS menggunakan arsitektur SaaS berbasis web dengan dua frontend React (Staff Web dan Patient Web), backend/API Laravel modular monolith, database MySQL, serta Redis dan Laravel Reverb/WebSocket untuk cache, antrean pekerjaan, dan realtime. Cloud merupakan pusat layanan. Cabang yang mengaktifkan Resilient Edge Mode memakai Local API/DB dan Sync Agent pada Edge Node melalui LAN. Semua pengguna tetap mengakses UI menggunakan browser.
+Antarmuka web: Staff Web menyediakan workspace berdasarkan role/capability bagi owner/admin, resepsionis, dokter, dan kasir. Patient Web menyediakan discovery klinik, appointment, booking, dan live queue. Keduanya responsif di browser desktop maupun smartphone. Public queue display juga dibuka melalui browser.
+Backend Laravel menjalankan autentikasi, tenant/branch isolation, otorisasi berbasis capability, modul patient/doctor/service, appointment dan visit, queue state, Predictive Queue, RME General/Dental, resep, billing/payment, laporan, notifikasi, serta audit log. Realtime bertugas mengirim pembaruan, sedangkan API/database menjadi sumber kebenaran.
+Database MySQL menyimpan data operasional yang dipisahkan sesuai scope tenant dan branch. Operasi kritis seperti pembayaran dan pembuatan visit menerapkan idempotency, sedangkan perubahan RME yang sudah difinalisasi dicatat melalui amendment dan audit log.
+Edge Node (opsional sesuai penerapan) menyediakan Local API/DB, sinkronisasi, dan realtime LAN untuk workflow cabang yang ditentukan ketika WAN terganggu. Pengguna tetap mengakses layanan melalui browser, bukan perangkat lunak desktop khusus.
+Gambaran umum sistem ditunjukkan pada gambar berikut
+:
+Alur pelayanan utama pada ClinicOS adalah sebagai berikut:
+Pasien mencari klinik, memilih layanan/jadwal, dan booking melalui Patient Web; resepsionis juga dapat mendaftarkan pasien walk-in lewat Staff Web.
+Sistem memvalidasi slot, membuat atau menautkan Visit saat check-in, dan memperbarui state antrean realtime tanpa duplikasi.
+Pasien memantau status antrean dan rentang estimasi waktu melalui Patient Web, serta menerima notifikasi sesuai konfigurasi.
+Resepsionis mengelola Call, Skip, Start, dan Complete; layar antrean publik hanya menampilkan data non-sensitif.
+Dokter mencatat RME General/Dental, alergi kritis, odontogram bila relevan, dan resep; finalisasi serta koreksi dicatat berversi.
+Kasir memproses tagihan dan pembayaran secara idempotent, menerbitkan receipt, dan data layanan masuk ke laporan serta audit log. Saat WAN bermasalah, workflow Edge yang didukung disinkronkan kembali setelah koneksi pulih.
+Konstruksi 
+Produk
+Pengembangan ClinicOS dilakukan menggunakan metode Scrum dengan sprint mingguan. Setiap sprint diawali dengan Sprint Planning untuk menentukan pekerjaan yang akan diselesaikan, dilanjutkan koordinasi rutin selama sprint, lalu ditutup dengan Sprint Review untuk mendemonstrasikan hasil dan Sprint Retrospective untuk mengevaluasi cara kerja tim. Manajer proyek berperan sebagai Product Owner yang menentukan prioritas kebutuhan, salah satu mahasiswa berperan sebagai Scrum Master yang menjaga kelancaran proses, dan mahasiswa lainnya berperan sebagai tim pengembang. Seluruh pekerjaan dicatat dan dipantau melalui Product Backlog dan Sprint Backlog di 
+Notion
+.
+Teknologi yang digunakan
+Bagian
+Teknologi
+Kegunaan
+Backend/API
+PHP Laravel (modular monolith)
+Business rules, autentikasi, tenant/branch isolation, capability, REST API, audit
+Frontend Web
+React, HTML, CSS, JavaScript
+Staff Web dan Patient Web responsif di browser
+Database
+MySQL
+Penyimpanan relasional terisolasi per tenant/branch
+Realtime & queue
+Redis + Laravel Reverb/WebSocket
+Cache, job queue, update antrean, fallback dan notifikasi
+Cloud & Edge
+Cloud server + Edge Node (Local API/DB, Sync Agent)
+SaaS cloud dan kontinuitas workflow lokal saat WAN putus
+Desain
+Figma
+Merancang tampilan antarmuka sebelum dibangun
+Kolaborasi
+Git dan GitHub
+Menyimpan kode dan menggabungkan pekerjaan antaranggota tim
+Manajemen proyek
+Notion
+Mengelola backlog dan memantau progres sprint
+Tahapan pembangunan
+Analisis kebutuhan SRS, desain tenant/branch dan permission, alur appointment-versus-visit, arsitektur SaaS/Edge, serta wireframe Staff Web dan Patient Web di Figma.
+Menyiapkan Laravel modular monolith, React web, MySQL, autentikasi, tenant isolation, role/capability dan audit log.
+Membangun modul pasien, dokter, jadwal, layanan, booking/registrasi, visit, realtime queue, dan Predictive Queue.
+Membangun RME General/Dental, odontogram, critical alert, resep, billing/payment, laporan/receipt, Patient Web dan notifikasi.
+Menyiapkan Edge Node Local API/DB, Sync Agent, realtime LAN dan skenario recovery untuk workflow yang didukung; tidak membangun aplikasi desktop.
+Melaksanakan unit/integration/UAT untuk seluruh fitur web, tenant isolation, izin akses, idempotency, RME amendment, realtime fallback, serta sync/recovery.
+Komponen yang dibangun
+Komponen deliverable: (1) Staff Web responsif, (2) Patient Web responsif, (3) Laravel backend/API, (4) MySQL serta Redis/Reverb realtime, (5) tenant/branch/role/capability, (6) patient, doctor, service, appointment, registration dan visit, (7) realtime queue, Predictive Queue dan public display, (8) RME General/Dental, odontogram, critical alert dan prescription, (9) billing/payment, receipt, report, audit log, serta (10) Resilient Edge Mode dan sinkronisasi. Tidak termasuk aplikasi Android/iOS native atau program desktop mandiri.
+Standar Pengembangan
+Setiap anggota tim mengerjakan fitur pada branch terpisah di GitHub. Sebelum digabungkan ke kode utama, fitur diperiksa oleh anggota tim lain dan diuji terlebih dahulu, sehingga kualitas kode tetap terjaga dan kesalahan dapat ditemukan lebih awal.
+Kebutuhan Peralatan
+/Perangkat
+ dan Bahan
+/Komponen
+Fase/Proses
+Peralatan/Perangkat (SW/HW)
+Bahan/Komponen
+Nama
+Jumlah
+Catatan
+Nama
+Jumlah
+Catatan
+Perancangan
+Laptop, Figma, Draw.io
+4
+Merancang tampilan antarmuka, alur pengguna, struktur database, dan diagram sistem
+-
+-
+-
+Pengembangan backend
+Laptop, Visual Studio Code, PHP, Laravel, Composer
+2
+Membangun logika aplikasi, hak akses, antrean, rekam medis, dan perkiraan giliran
+-
+-
+-
+Pengembangan frontend
+Laptop, Visual Studio Code, browser
+2
+Membangun tampilan dashboard dan website klinik dengan HTML, CSS, dan JavaScript
+-
+-
+-
+Database
+MySQL, phpMyAdmin/HeidiSQL
+1 set
+Menyimpan dan mengelola data klinik, pasien, antrean, dan rekam medis
+-
+-
+-
+Kolaborasi & manajemen proyek
+Git, GitHub, Notion
+1 set
+Menyimpan kode, menggabungkan pekerjaan tim, dan memantau progres sprint
+-
+-
+-
+Server
+Cloud server / Edge Node
+1
+Menjalankan aplikasi dan database pusat
+Domain
+1
+Alamat website dan aplikasi ClinicOS
+Uji penggunaan di komputer klinik
+Laptop sebagai Edge Node lokal (server via LAN), router Wi-Fi
+1 set
+Menguji perangkat lain terhubung melalui Wi-Fi saat internet terganggu, serta sinkronisasi data
+-
+-
+-
+Uji multi-perangkat
+Smartphone, tablet
+2–4
+Menguji tampilan dan fungsi di berbagai ukuran layar
+-
+-
+-
+Layar antrean
+Monitor atau TV
+1
+Menampilkan nomor antrean saat pengujian dan demo
+Kabel HDMI
+1
+Menghubungkan laptop ke monitor/TV
+Demo & uji coba di klinik
+Laptop, smartphone
+2
+Mendemokan aplikasi dan mengumpulkan masukan klinik
+QR code cetak
+Sesuai kebutuhan
+Untuk uji pendaftaran mandiri di lokasi
+Dokumentasi & luaran
+OBS Studio, Canva
+1 set
+Merekam video demo serta membuat poster dan materi presentasi
+Cetak poster
+1
+Untuk pameran atau presentasi akhir
+Tantangan dan Isu
+[Identifikasi potensi tantangan/isu yang mungkin muncul terkait dengan proses/fase atau terkait dengan peralatan/perangkat/bahan/lainnya
+ menggunakan 
+No.FO.17.
+1
+.
+1
+-V0 
+format identifikasi bahaya, dan penilaian risiko
+ dilampirkan pada dokumen RPP
+]
+No
+Tantangan/Isu
+Dampak
+Langkah Antisipasi
+1
+Keamanan data pasien
+Data rekam medis bersifat sensitif, kebocoran data dapat merugikan pasien dan klinik
+Menerapkan login dan hak akses sesuai peran, enkripsi data penting, pemisahan data antarklinik, serta pencatatan setiap perubahan rekam medis
+2
+Sinkronisasi data dari komputer klinik ke server pusat
+Data dapat tercatat ganda atau tidak terkirim saat koneksi kembali
+Setiap data diberi ID unik, pengiriman ulang tidak membuat data ganda, dan skenario koneksi terputus diuji secara berkala
+3
+Antrean harus diperbarui secara langsung di banyak perangkat
+Layar antrean dan tampilan pasien tidak sesuai dengan kondisi sebenarnya
+Menggunakan Laravel Reverb untuk pembaruan real-time dan menguji dengan beberapa perangkat sekaligus
+4
+Data lama pelayanan pada awal penggunaan masih sedikit
+Perkiraan waktu giliran kurang akurat
+Menggunakan perkiraan awal berdasarkan rata-rata umum, lalu disesuaikan seiring bertambahnya data
+5
+Kebiasaan klinik yang sudah terbiasa mencatat secara manual
+Aplikasi tidak digunakan secara maksimal
+Tampilan dibuat sederhana dan mudah dipahami, disertai manual book dan pendampingan saat uji coba
+6
+Perbedaan perangkat dan spesifikasi komputer di klinik
+Aplikasi berjalan lambat atau tampilan tidak sesuai
+Aplikasi dibuat ringan dan responsif, serta diuji di berbagai perangkat dan ukuran layar
+7
+Kesediaan klinik menjadi tempat uji coba
+Pengujian tidak dapat dilakukan di kondisi nyata
+Menghubungi beberapa klinik sejak awal dan menyiapkan simulasi dengan data uji sebagai alternatif
+8
+Pembagian tugas dan koordinasi tim
+Pekerjaan tumpang tindih atau terlambat
+Pembagian tugas jelas di Notion, koordinasi rutin setiap sprint, dan penggunaan GitHub untuk menggabungkan pekerjaan
+9
+Risiko kerja selama pengembangan dan pengujian
+Kelelahan, gangguan kesehatan akibat posisi kerja, atau kerusakan perangkat
+Mengatur waktu kerja dan istirahat, menjaga posisi duduk yang baik, serta menggunakan kabel dan stop kontak yang aman
+Estimasi
+ Waktu
+ Pekerjaan
+Fase/Proses
+Uraian Pekerjaan
+Estimasi 
+W
+aktu
+Catatan
+1. Analisis dan desain
+Validasi SRS, desain arsitektur SaaS dan Edge, ERD, user journey, UI Staff Web/Patient Web
+Sprint 1
+Baseline MF-1 sampai MF-7
+2. Identity dan tenant
+Laravel + React, login, role/capability, tenant/branch isolation, audit
+Sprint 2
+MF-1
+3. Pasien dan kunjungan
+Patient, doctor, service, slot, appointment, walk-in, registration, visit
+Sprint 3
+MF-2
+4. Antrean realtime
+Queue states, public display, Reverb, fallback disconnect dan Predictive Queue
+Sprint 4
+MF-3
+5. RME umum dan gigi
+Draft/autosave/finalize/amendment, critical alert, odontogram dan resep
+Sprint 5
+MF-4
+6. Demo dan validasi
+Demo alur Staff Web, kumpulkan masukan klinik dan revisi backlog
+Sprint 6
+UAT antara
+7. Patient Web
+Discovery klinik, booking, appointment, reminder, live queue
+Sprint 7
+MF-6
+8. Resilient Edge Mode
+Local API/DB, Sync Agent, idempotency, conflict handling dan recovery
+Sprint 8
+MF-7, bukan desktop app
+9. Billing dan pelaporan
+Tagihan, payment, receipt, laporan, audit dan onboarding SaaS
+Sprint 9
+MF-5 / MF-7
+10. Integrasi dan UAT
+Tes role/tenant, retry, antrean, RME, pembayaran, Edge, responsive web
+Sprint 10
+Verifikasi terhadap SRS
+11. Luaran dan serah terima
+Laporan akhir, manual book web, video demo, poster, HKI dan BA serah terima
+Sprint 11
+Web-only deliverable
+Biaya Proyek
+ (
+Biaya Bahan dan Peralatan
+)
+Fase/Proses
+Uraian Pekerjaan
+Perkiraan Biaya
+Catatan 
+Cloud server
+Sewa cloud server/VPS untuk backend web, database, dan pengujian
+Rp0 – Rp600.000
+Rp0 jika menggunakan server kampus atau komputer milik tim
+Domain
+Alamat website dan aplikasi ClinicOS
+Rp15.000 – Rp200.000
+Domain .my.id lebih murah dibanding .com
+Jaringan uji
+Router Wi-Fi untuk pengujian penggunaan di komputer klinik
+Rp0 – Rp300.000
+Rp0 jika menggunakan router yang sudah dimiliki
+Layar antrean
+Kabel HDMI untuk menghubungkan laptop ke monitor/TV
+Rp25.000 – Rp60.000
+Monitor/TV menggunakan perangkat yang sudah tersedia
+Notifikasi
+Layanan pemberitahuan kepada pasien
+Rp0 – Rp100.000
+Notifikasi melalui email dan browser gratis, WhatsApp bersifat opsional
+Demo & uji coba
+Transportasi ke klinik dan cetak QR code
+Rp100.000 – Rp200.000
+Luaran
+Cetak poster
+Rp50.000 – Rp150.000
+Untuk pameran atau presentasi akhir
+Cadangan
+Kebutuhan tidak terduga
+Rp50.000 – Rp150.000
+Total
+Rp240.000 – Rp1.760.000
+Cloud server
+Sewa cloud server/VPS untuk backend web, database, dan pengujian
+Rp0 – Rp600.000
+Rp0 jika menggunakan server kampus atau komputer milik tim
+Total
+Rp240.000 – Rp1.760.000
+Tim proyek 
+(Dosen, Laboran
+ dan/atau M
+ahasiswa)
+No
+Nama
+NIK/NIM
+Program Studi
+1
+Sukma Evadini, S.T., M.Kom
+125360
+Teknologi Rekayasa Perangkat Lunak
+2
+Supardianto, M.Eng.
+113105
+Teknologi Rekayasa Perangkat Lunak
+3
+Alena Uperiati, S.T., M.Cs
+122279
+Teknologi Rekayasa Perangkat Lunak
+4
+Recy Harviani Zurwanty
+125355
+Teknologi Rekayasa Perangkat Lunak
+5
+Agus Fatulloh S.T.,M.T
+107015
+Rekayasa Keamanan Siber
+6
+Seto Sulaksono Adi Wibowo, S.E, M.Sc.
+111076
+Akutansi Manajerial
+7
+Siskha Handayani, M.Si.
+121246
+Teknik Informatika
+8
+Muhammad Syifa Abdurrasyid
+4342401015
+Teknologi Rekayasa Perangkat Lunak
+9
+Vioni Azzahra
+4342401012
+Teknologi Rekayasa Perangkat Lunak
+10
+Dhominica 
+Riskana 
+Laurensa
+4342401003
+Teknologi Rekayasa Perangkat Lunak
+11
+Hanif Wicaksono Suryohusodo
+4342401025
+Teknologi Rekayasa Perangkat Lunak
+Ruang Kerja (Workspace)/Laboratorium/Workshop
+Tower A 
+Lantai 12 
+Ruang 12.3B
+Towe A Lantai 12 Ruang 11.4B
+Mata Kuliah, Capaian Pembelajaran dan
+ Capaian Pembelajaran Mata K
+uliah yang terlibat
+No.
+Nama Mata K
+uliah
+Capaian Pembelajaran
+Capaian Pembelajaran 
+M
+ata
+ K
+uliah
+1.
+Kecerdasan Bisnis
+CPL-7 
+Mampu mengolah, menganalisis, dan menyajikan data bisnis menggunakan teknik statistik dan tools Business Intelligence untuk menghasilkan dashboard interaktif, laporan analitik, dan insight yang mendukung pengambilan keputusan organisasi.
+Mampu mengidentifikasi peran BI dalam organisasi, menganalisis arsitektur dan teknologi BI termasuk data warehouse, ETL, dan DBMS/NoSQL, serta mengevaluasi proses pengolahan data untuk mendukung kebutuhan bisnis.
+Mampu menerapkan teknik analisis data dan visualisasi untuk mengidentifikasi pola dan tren bisnis, menggunakan tools BI modern untuk pembuatan dashboard, serta menganalisis peran integrasi BI dengan ML dan AI.
+Mampu merancang dan mengimplementasikan data mart untuk analisis multidimensi dan OLAP, serta membangun dashboard interaktif menggunakan Power BI dengan optimasi DAX
+2.
+Pengembangan Startup Digital
+CPL-9
+Mampu mengevaluasi dampak sosial, ekonomi, hukum, dan lingkungan dari solusi teknologi yang dikembangkan, menerapkan prinsip etika profesi rekayasa perangkat lunak, serta berkomitmen pada pembelajaran sepanjang hayat untuk beradaptasi dengan perkembangan teknologi.
+CPL-10
+Mampu menganalisis peluang bisnis teknologi, menyusun model dan rencana bisnis berbasis kebutuhan pasar, merancang strategi pengembangan usaha digital yang layak secara ekonomi dan patuh terhadap regulasi, serta mengomunikasikan nilai produk teknologi kepada pemangku kepentingan.
+Mampu menganalisis landscape bisnis digital dan ekosistem startup serta menerapkan etika bisnis dan menganalisis peran founder dalam konteks pengembangan startup teknologi.
+Mampu mengidentifikasi permasalahan nyata pengguna, merumuskan solusi inovatif, menyusun lean canvas, serta merancang dan menguji prototipe produk dan MVP.
+Mampu menyusun strategi go-to-market yang komprehensif dan mengidentifikasi aspek hukum, keuangan, serta perlindungan HAKI yang relevan dalam operasional startup digital.
+Mampu menyusun pitch deck yang persuasif dan menyampaikan presentasi startup secara efektif di depan calon investor melalui simulasi pitching
+3.
+Manajemen Proyek Perangkat Lunak
+CPL-8
+Mampu bekerja secara efektif dalam tim multidisiplin, berkomunikasi secara profesional dalam konteks teknis dan bisnis, serta merencanakan dan mengelola proyek perangkat lunak menggunakan metodologi agile dan prinsip manajemen proyek yang relevan.
+Mampu membandingkan dan menganalisis pendekatan manajemen proyek tradisional dan agile serta menerapkan metodologi Scrum, Kanban, dan XP dalam simulasi proyek menggunakan tools digital seperti Trello atau Jira.
+Mampu mengidentifikasi karakteristik tim berkinerja tinggi dan 
+menerapkan praktik Agile untuk membangun kepercayaan, kolaborasi, dan komunikasi efektif dalam tim proyek.
+Mampu menyusun Product Backlog yang valid, melakukan grooming, dan merencanakan sprint secara terstruktur menggunakan tools digital dalam konteks simulasi proyek Agile.
+Mampu mendemonstrasikan penerapan seluruh aspek metodologi Agile — meliputi user stories, sprint review, retrospektif, dan dokumentasi terpadu — dalam proyek aplikasi/website hingga presentasi akhir semester.
+4.
+Proyek Inovasi Agile
+CPL-3
+Mampu mengimplementasikan, mengintegrasikan, dan melakukan deployment aplikasi perangkat lunak menggunakan paradigma pemrograman yang sesuai serta menerapkan praktik rekayasa yang baik meliputi version control, CI/CD, dan pengelolaan dependensi dalam lingkungan pengembangan kolaboratif.
+CPL-8
+Mampu bekerja secara efektif dalam tim multidisiplin, berkomunikasi secara profesional dalam konteks teknis dan bisnis, serta merencanakan dan mengelola proyek perangkat lunak menggunakan metodologi agile dan prinsip manajemen proyek yang relevan.
+CPL-10
+Mampu menganalisis peluang bisnis teknologi, menyusun model dan rencana bisnis berbasis kebutuhan pasar, merancang strategi pengembangan usaha digital yang layak secara ekonomi dan patuh terhadap regulasi, serta mengomunikasikan nilai produk teknologi kepada pemangku kepentingan.
+Mampu menerapkan kerangka kerja Scrum secara langsung dalam proyek inovasi nyata — termasuk perencanaan sprint, pelaksanaan sprint, pengelolaan Product Backlog, dan Sprint Backlog — dalam lingkungan proyek yang dinamis.
+Mampu memfasilitasi seluruh acara Scrum dan menggunakan tools manajemen proyek digital (Kanban, Trello, Jira) untuk merencanakan, melacak, dan memvisualisasikan alur kerja serta kemajuan sprint secara efektif.
+Mampu melakukan adaptasi dan penyempurnaan proses Scrum berdasarkan feedback retrospektif sprint untuk meningkatkan efisiensi tim dan kualitas produk secara berkelanjutan.
+Komunikasi antara 
+Manajer P
+royek
+ dan Klien
+Fase/Proses
+Pertanyaan/Komentar
+Jawaban
+Catatan
+Planning
+Pertemuan awal untuk memahami alur pelayanan di klinik mulai dari pendaftaran, antrean, hingga pemeriksaan, poli yang dimiliki, sistem pencatatan yang digunakan saat ini, serta masalah utama yang dihadapi klinik dan pasien.
+Sprint 1
+Analysis
+Validasi kebutuhan data pasien, format rekam medis poli umum dan poli gigi, rata-rata jumlah pasien dan lama pelayanan, perangkat yang dimiliki klinik, kondisi koneksi internet, serta laporan yang dibutuhkan pemilik klinik.
+Sprint 1
+Design
+Pembahasan rancangan tampilan dashboard resepsionis, halaman pemeriksaan dokter, odontogram, website klinik untuk pasien, tampilan perkiraan waktu giliran, dan layar antrean.
+Sprint 1–2
+Implementasi
+Demo perkembangan aplikasi secara berkala, mulai dari pendaftaran, antrean, dan rekam medis, dilanjutkan website klinik, perkiraan giliran, penggunaan di komputer klinik, serta dashboard. Klien memberikan masukan untuk perbaikan dan penyesuaian fitur.
+Demo utama pada Sprint 6
+Operate
+Uji coba penggunaan di klinik, evaluasi kemudahan penggunaan, ketepatan perkiraan waktu giliran, kelancaran antrean, kebutuhan pelatihan pengguna, serta proses serah terima aplikasi.
+…
+Sprint 10–11
+Monitoring dan Evaluasi
+ 
+Monitoring dilakukan setiap sprint melalui Product Backlog, Sprint Backlog, daily/weekly coordination, Sprint Review, dan Retrospective. Evaluasi akhir mencakup aspek teknis, penggunaan, dan bisnis. Indikator ketercapaian yang digunakan:
+• Minimal 90% kebutuhan prioritas tinggi pada backlog berbasis MF-1 sampai MF-7 dapat didemonstrasikan melalui Staff Web dan Patient Web responsif sesuai permission tiap role.
+• Tenant isolation dan backend authorization diuji lintas dua tenant/cabang, termasuk penolakan akses yang tidak sah dan pencatatan audit aksi sensitif.
+• Pengujian retry booking/check-in/payment membuktikan tidak terjadi Visit atau pembayaran ganda, dan perubahan RME Finalized memakai amendment/version.
+• Realtime queue diuji pada beberapa browser, termasuk state Waiting/Called/Skipped/In service/Done, fallback stale/refetch, dan rentang ETA Predictive Queue.
+• Resilient Edge Mode diuji saat WAN putus/pulih pada LAN yang sehat, dengan sinkronisasi idempotent dan indikator stale/conflict; target SRS: 95% backlog normal tersinkron dalam 2 menit setelah reconnect.
+Riwayat 
+Perubahan Proyek yang akan ditangani
+No
+. Re
+visi/tanggal
+Deskripsi Perubahan
+Originator
+01 / 13-10-2026
+Penyelarasan ClinicOS SRS v1.0: luaran web-only, React Staff/Patient Web, Laravel + MySQL + Redis/Reverb, Edge Node bukan aplikasi desktop, penyelarasan MF-1–MF-7 dan KPI; menghapus KPI ClinicOS/mobile.
+Tim PBL 504
+…
+…
+…
+Tanda Tangan Persetujuan
+Batam, 13 Oktober 2026
+Klien
+P3M
+SHILAU
+Manajer P
+royek
+   Ahmad Hamim T
+     Supardianto
+Kajur 
+IF
+Kajur ____
+KPS
+ 
+TRPL
+KPS
+ ______

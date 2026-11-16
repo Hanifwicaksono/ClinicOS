@@ -1,0 +1,417 @@
+[
+  {
+    "id": "P-01",
+    "title": "Actual MySQL SELECT denial fails private authority closed and recovers without losing valid sockets",
+    "started": "2026-11-15T13:50:56.003Z",
+    "observed": {
+      "queue_id": 140,
+      "mysql_error": "SELECT permission denied on users for Reverb connection",
+      "private_frames_during_failure": 0,
+      "public_delivered": true,
+      "recovered_without_reload": true,
+      "recovery": {
+        "queue_id": 141,
+        "action_started": 1794750665.222,
+        "views": {
+          "a": [
+            {
+              "at": 1794750665.887,
+              "socket": "8c2830e773097f52",
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 141,
+              "appointment_id": null,
+              "type": null,
+              "notification_id": null,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794750665.978,
+              "socket": "8c2830e773097f52",
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 141,
+              "appointment_id": 141,
+              "type": "queue.status",
+              "notification_id": "037461f5-0806-42ad-ad87-107f6e749edb",
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "b": [
+            {
+              "at": 1794750665.887,
+              "socket": "c93efacb3cadb791",
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 141,
+              "appointment_id": null,
+              "type": null,
+              "notification_id": null,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794750665.978,
+              "socket": "c93efacb3cadb791",
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 141,
+              "appointment_id": 141,
+              "type": "queue.status",
+              "notification_id": "037461f5-0806-42ad-ad87-107f6e749edb",
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "rec": [
+            {
+              "at": 1794750665.887,
+              "socket": "f29175e5a86b6863",
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 141,
+              "appointment_id": null,
+              "type": null,
+              "notification_id": null,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794750665.893,
+              "socket": "f29175e5a86b6863",
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 141,
+              "appointment_id": null,
+              "type": null,
+              "notification_id": null,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794750665.932,
+              "socket": "e1ddf930d13cc190",
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 141,
+              "appointment_id": 141,
+              "type": "queue.status",
+              "notification_id": "d22f4d95-8c5c-4171-bdbf-5c6208d4e38b",
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "P-02",
+    "title": "Actual MySQL ACK UPDATE denial closes old transports but cannot manufacture ACK; restored privilege safely retries",
+    "started": "2026-11-15T13:51:06.218Z",
+    "observed": {
+      "mutation": {
+        "command": "role",
+        "committed_at": 1794750678.417612,
+        "epoch": "46",
+        "active": true,
+        "role": false,
+        "queue_permission": false,
+        "request_id": "ecf67834-67a9-465c-930d-a583e732023c",
+        "acknowledged": false,
+        "failed": false
+      },
+      "pending": {
+        "epoch": 46,
+        "acknowledged": null,
+        "failed": true
+      },
+      "old_transports_closed_before_ack": true,
+      "mysql_ack_write_denied": true,
+      "restored_at": 1794750680.716,
+      "server_ack_at": 1794750681.19267,
+      "confirmation": {
+        "version": 46,
+        "node": "f43bf9ea-1027-4e4e-baef-ad0a7cb09977",
+        "observed_at": 1794750681.414
+      },
+      "after": {
+        "queue_id": 142,
+        "action_started": 1794750679.484,
+        "views": {
+          "a": [],
+          "b": [],
+          "rec": [
+            {
+              "at": 1794750680.215,
+              "socket": "f29175e5a86b6863",
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 142,
+              "appointment_id": null,
+              "type": null,
+              "notification_id": null,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794750680.215,
+              "socket": "f29175e5a86b6863",
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 142,
+              "appointment_id": null,
+              "type": null,
+              "notification_id": null,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794750680.26,
+              "socket": "e1ddf930d13cc190",
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 142,
+              "appointment_id": 142,
+              "type": "queue.status",
+              "notification_id": "d4b005db-dfa9-4fb4-a5d7-0cb089ac0906",
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "P-03",
+    "title": "Worker restart preserves pending revocation and filters delayed notification jobs on MySQL",
+    "started": "2026-11-15T13:51:21.415Z",
+    "observed": {
+      "queue_id": 143,
+      "pending_jobs_before_restart": 5,
+      "mutation": {
+        "command": "role",
+        "committed_at": 1794750691.863772,
+        "epoch": "48",
+        "active": true,
+        "role": false,
+        "queue_permission": false,
+        "request_id": "d8742a5d-fa1c-4f58-85b0-2b6dcc4b7961",
+        "acknowledged": false,
+        "failed": false
+      },
+      "confirmation": {
+        "version": 48,
+        "node": "f43bf9ea-1027-4e4e-baef-ad0a7cb09977",
+        "observed_at": 1794750693.973
+      },
+      "delayed_revoked_notification_frames": 0,
+      "authorized_patient_delivered": true
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "P-04",
+    "title": "Abrupt Reverb and worker restart with committed pending revocation closes old physical sockets and safely ACKs after recovery",
+    "started": "2026-11-15T13:51:33.974Z",
+    "observed": {
+      "mutation": {
+        "command": "role",
+        "committed_at": 1794750702.67044,
+        "epoch": "50",
+        "active": true,
+        "role": false,
+        "queue_permission": false,
+        "request_id": "7eb7d1ac-2379-49c9-897e-29a1cb99b466",
+        "acknowledged": false,
+        "failed": false
+      },
+      "pending_before_restart": true,
+      "old_physical_close": [
+        {
+          "at": 1794750702.767,
+          "socket": "3626057f487fbb4c"
+        },
+        {
+          "at": 1794750702.768,
+          "socket": "e1841c16bf892740"
+        }
+      ],
+      "server_ack_at": 1794750706.823029,
+      "confirmation": {
+        "version": 50,
+        "node": "cbef447a-8bc7-4193-a246-e1568f53c618",
+        "observed_at": 1794750707.066
+      },
+      "replayed_signature": 4009,
+      "revoked_new_auth": 403,
+      "after": {
+        "queue_id": 144,
+        "action_started": 1794750721.471,
+        "views": {
+          "a": [],
+          "b": [],
+          "rec": [
+            {
+              "at": 1794750721.979,
+              "socket": "e8c3c2e3b08e9908",
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 144,
+              "appointment_id": null,
+              "type": null,
+              "notification_id": null,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794750721.979,
+              "socket": "e8c3c2e3b08e9908",
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 144,
+              "appointment_id": null,
+              "type": null,
+              "notification_id": null,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794750722.025,
+              "socket": "c2dd60ed597d5d18",
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 144,
+              "appointment_id": 144,
+              "type": "queue.status",
+              "notification_id": "f8b8e5e0-4cae-4514-a4d1-5bb610bf34dc",
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "P-05",
+    "title": "Actual notification redelivery keeps one database notification and one client action per notification ID",
+    "started": "2026-11-15T13:52:02.338Z",
+    "observed": {
+      "queue_id": 145,
+      "raw_frames": 2,
+      "distinct_notification_ids": 1,
+      "client_actions": 1,
+      "stored_notifications_unchanged": true
+    },
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "at": "2026-11-14T07:36:07.865Z",
+  "runtime": "C:/Users/User/AppData/Local/Temp/clinicos-deep-i5R5Lc",
+  "isolated_db_retained": true,
+  "owned_http_reverb_worker_stopped": true,
+  "process_env_keys_removed": 69,
+  "private_files_removed": [],
+  "clock_restored": true,
+  "user_database_accessed": false,
+  "configuration_retained_privately": "QA-only values and ephemeral keys; not copied into application .env"
+}

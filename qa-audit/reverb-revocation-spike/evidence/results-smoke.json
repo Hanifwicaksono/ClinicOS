@@ -1,0 +1,1208 @@
+[
+  {
+    "id": "S1-01",
+    "title": "Foreign tenant and foreign user channel authorization",
+    "started": "2026-11-15T08:17:51.854Z",
+    "observed": {
+      "clinic_auth": 403,
+      "user_auth": 403
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-B-role",
+    "title": "Baseline old sockets after role",
+    "started": "2026-11-15T08:17:51.914Z",
+    "observed": {
+      "security_result": "FAIL",
+      "mutation": {
+        "command": "role",
+        "barrier": 1794730678.007754,
+        "target_active": true,
+        "target_has_role": false,
+        "target_queue_permission": false,
+        "epoch": "10"
+      },
+      "new_clinic_auth": 403,
+      "before": {
+        "queue_id": 101,
+        "published_after": 1794730677.639,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794730677.242,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 101,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730677.273,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 101,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794730677.242,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 101,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730677.273,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 101,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794730677.242,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 101,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730677.242,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 101,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794730677.266,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 101,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      },
+      "after": {
+        "queue_id": 102,
+        "published_after": 1794730678.667,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794730678.285,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 102,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730678.298,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 102,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794730678.285,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 102,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730678.298,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 102,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794730678.285,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 102,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730678.285,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 102,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794730678.291,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 102,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-B-permission",
+    "title": "Baseline old sockets after permission",
+    "started": "2026-11-15T08:17:58.668Z",
+    "observed": {
+      "security_result": "FAIL",
+      "mutation": {
+        "command": "permission",
+        "barrier": 1794730684.202492,
+        "target_active": true,
+        "target_has_role": true,
+        "target_queue_permission": false,
+        "epoch": "13"
+      },
+      "new_clinic_auth": 403,
+      "before": {
+        "queue_id": 103,
+        "published_after": 1794730683.826,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794730683.362,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 103,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730683.374,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 103,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794730683.362,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 103,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730683.374,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 103,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794730683.362,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 103,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730683.362,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 103,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794730683.368,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 103,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      },
+      "after": {
+        "queue_id": 104,
+        "published_after": 1794730684.853,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794730684.393,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 104,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730684.405,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 104,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794730684.393,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 104,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730684.405,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 104,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794730684.393,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 104,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730684.393,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 104,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794730684.399,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 104,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-B-inactive",
+    "title": "Baseline old sockets after inactive",
+    "started": "2026-11-15T08:18:04.854Z",
+    "observed": {
+      "security_result": "FAIL",
+      "mutation": {
+        "command": "inactive",
+        "barrier": 1794730690.34132,
+        "target_active": false,
+        "target_has_role": true,
+        "target_queue_permission": true,
+        "epoch": "17"
+      },
+      "new_clinic_auth": 200,
+      "before": {
+        "queue_id": 105,
+        "published_after": 1794730689.918,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794730689.457,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 105,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730689.47,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 105,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794730689.457,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 105,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730689.47,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 105,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794730689.457,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 105,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730689.457,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 105,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794730689.463,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 105,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      },
+      "after": {
+        "queue_id": 106,
+        "published_after": 1794730690.913,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794730690.484,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 106,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730690.495,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 106,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794730690.484,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 106,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730690.495,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 106,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794730690.484,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 106,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730690.484,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 106,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794730690.489,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 106,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-B-password",
+    "title": "Baseline old sockets after password",
+    "started": "2026-11-15T08:18:10.914Z",
+    "observed": {
+      "security_result": "FAIL",
+      "mutation": {
+        "command": "password",
+        "barrier": 1794730695.559342,
+        "target_active": true,
+        "target_has_role": true,
+        "target_queue_permission": true,
+        "epoch": "21"
+      },
+      "new_clinic_auth": 401,
+      "before": {
+        "queue_id": 107,
+        "published_after": 1794730695.003,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794730694.527,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 107,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730694.539,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 107,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794730694.527,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 107,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730694.539,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 107,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794730694.527,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 107,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730694.527,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 107,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794730694.533,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 107,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      },
+      "after": {
+        "queue_id": 108,
+        "published_after": 1794730696.97,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794730696.56,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 108,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730696.573,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 108,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794730696.56,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 108,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730696.573,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 108,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794730696.56,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 108,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730696.56,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 108,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794730696.567,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 108,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-02",
+    "title": "Native termination endpoint without signed user identity",
+    "started": "2026-11-15T08:18:16.971Z",
+    "observed": {
+      "security_result": "FAIL",
+      "termination": {
+        "accepted": true,
+        "response_type": "stdClass",
+        "command": "terminate",
+        "barrier": 1794730701.46582,
+        "target_active": true,
+        "target_has_role": false,
+        "target_queue_permission": false,
+        "epoch": "26"
+      },
+      "after": {
+        "queue_id": 109,
+        "published_after": 1794730702.007,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794730701.628,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 109,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730701.641,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 109,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794730701.628,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 109,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730701.641,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 109,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794730701.628,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 109,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794730701.628,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 109,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794730701.635,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 109,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-03",
+    "title": "Signed identity makes SDK terminate close both account sockets",
+    "started": "2026-11-15T08:18:22.008Z",
+    "status": "FAIL",
+    "error": "Expected values to be strictly equal:\n\n1 !== 0\n"
+  }
+]

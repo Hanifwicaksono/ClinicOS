@@ -4,9 +4,11 @@ namespace App\Models;
 
 use App\AllergySeverity;
 use App\Models\Scopes\ClinicScope;
+use App\Rules\PhoneNumber;
 use Database\Factories\PatientFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,6 +20,11 @@ class Patient extends Model
 {
     /** @use HasFactory<PatientFactory> */
     use HasFactory;
+
+    protected function phone(): Attribute
+    {
+        return Attribute::make(set: fn (?string $value): ?string => $value === null ? null : PhoneNumber::normalize($value));
+    }
 
     protected function casts(): array
     {

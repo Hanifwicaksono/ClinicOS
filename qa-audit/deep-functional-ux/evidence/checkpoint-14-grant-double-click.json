@@ -1,0 +1,11 @@
+{
+  "phase": "14-grant-double-click",
+  "at": "2026-11-13T08:07:36.244Z",
+  "counts": {
+    "PASS": 103,
+    "FAIL": 51,
+    "BLOCKED": 9,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

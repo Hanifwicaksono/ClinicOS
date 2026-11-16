@@ -1,0 +1,112 @@
+PHPUnit 12.5.37 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.5
+Configuration: C:\laragon\www\ClinicOS\phpunit.xml
+
+Time: 02:44.061, Memory: 102.00 MB
+
+There was 1 error:
+
+1) Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history@expired with data ('expired')
+Illuminate\Database\QueryException: SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'code' at row 1 (Connection: mysql, Host: 127.0.0.1, Port: 13318, Database: clinicos_s2_1794735325920, SQL: insert into `subscription_plans` (`code`, `name`, `doctor_limit`, `staff_limit`, `monthly_visit_limit`, `features`, `is_active`, `updated_at`, `created_at`) values (voluptatum-accusantium-deserunt, vel ratione, 6, 14, ?, [], 1, 2026-11-14 02:00:00, 2026-11-14 02:00:00))
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Connection.php:857
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Connection.php:813
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:42
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\MySqlProcessor.php:35
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:4320
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2346
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1713
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1625
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1427
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:383
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:277
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:378
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:334
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:600
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Arr.php:858
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Collection.php:834
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:592
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:546
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:530
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\GuardsAttributes.php:182
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:529
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:442
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:331
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:600
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Arr.php:858
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Collection.php:834
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:592
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:546
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:530
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\GuardsAttributes.php:188
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:529
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:442
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:331
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:144
+
+Caused by
+PDOException: SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'code' at row 1
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:53
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Connection.php:846
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Connection.php:813
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:42
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\MySqlProcessor.php:35
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:4320
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2346
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1713
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1625
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1427
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:383
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:277
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:378
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:334
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:600
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Arr.php:858
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Collection.php:834
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:592
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:546
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:530
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\GuardsAttributes.php:182
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:529
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:442
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:331
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:600
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Arr.php:858
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Collection.php:834
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:592
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:546
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:530
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\GuardsAttributes.php:188
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:529
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:442
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:331
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:144
+
+--
+
+There was 1 failure:
+
+1) Tests\Feature\RmeGeneralDentalTest::test_assigned_doctor_can_persist_general_rme_and_odontogram_in_draft
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+ Array &0 [
+     0 => Array &1 [
++        'condition' => 'caries',
+         'tooth_number' => 11,
+-        'condition' => 'caries',
+     ],
+     1 => Array &2 [
++        'condition' => 'filled',
+         'tooth_number' => 26,
+-        'condition' => 'filled',
+     ],
+ ]
+
+C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php:56
+
+[37;41mERRORS![0m
+[37;41mTests: 451[0m[37;41m, Assertions: 2958[0m[37;41m, Errors: 1[0m[37;41m, Failures: 1[0m[37;41m.[0m

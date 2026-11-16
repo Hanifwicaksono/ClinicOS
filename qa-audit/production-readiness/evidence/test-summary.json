@@ -1,0 +1,42 @@
+{
+  "php-main": {
+    "tests": 341,
+    "pass": 339,
+    "fail": 1,
+    "error": 1,
+    "skip": 0
+  },
+  "php-audit": {
+    "tests": 22,
+    "pass": 22,
+    "fail": 0,
+    "error": 0,
+    "skip": 0
+  },
+  "playwright": {
+    "PASS": 12,
+    "FAIL": 2,
+    "BLOCKED": 0
+  },
+  "clinic_day": "PASS",
+  "javascript": {
+    "tests": 7,
+    "pass": 7,
+    "fail": 0,
+    "evidence": "javascript.txt"
+  },
+  "mysql_concurrency": {
+    "PASS": 9,
+    "FAIL": 0
+  },
+  "recovery": {
+    "PASS": 7,
+    "FAIL": 0
+  },
+  "open_findings": {
+    "P2": 1,
+    "P3": 2,
+    "total": 3
+  },
+  "decision": "NO-GO"
+}

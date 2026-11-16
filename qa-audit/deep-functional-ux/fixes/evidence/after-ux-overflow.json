@@ -1,0 +1,46 @@
+[
+  {
+    "width": 375,
+    "scrollWidth": 375,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "co-final-orbit",
+        "right": 453.99000549316406
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "scrollWidth": 768,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "co-final-orbit",
+        "right": 825.83251953125
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "scrollWidth": 1024,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "co-final-orbit",
+        "right": 1074.1614990234375
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "scrollWidth": 1440,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "co-final-orbit",
+        "right": 1477.7388916015625
+      }
+    ]
+  }
+]

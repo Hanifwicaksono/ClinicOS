@@ -1,0 +1,44 @@
+{
+  "before": {
+    "tests": 9,
+    "passed": 0,
+    "failed": 9
+  },
+  "after": {
+    "tests": 28,
+    "passed": 28,
+    "failed": 0
+  },
+  "superseded_attempts": 14,
+  "raw_attempts": 51,
+  "active_case_ids": [
+    "after-CCL-05",
+    "after-CCL-04",
+    "after-CCL-06",
+    "after-CCL-07",
+    "after-CCL-01-123456",
+    "after-CCL-01-123_45",
+    "after-CCL-08",
+    "after-r2-CCL-03",
+    "after-r3-CCL-02",
+    "related-CCL-05-Clinic-Admin",
+    "related-CCL-05-Receptionist",
+    "related-CCL-03-LEGACY",
+    "related-CCL-03-PUBLIC-STORAGE",
+    "related-CCL-06-EXACT-END-DASHBOARD",
+    "related-CCL-07-Clinic-Admin",
+    "related-CCL-07-Doctor",
+    "related-CCL-02-401-manual",
+    "related-CCL-02-RECOVERY",
+    "related-CCL-02-OFFLINE",
+    "related-r2-CCL-04-REACTIVATE-STALE",
+    "related-r2-CCL-02-419-autosave",
+    "related-r2-CCL-02-419-manual",
+    "boundary-ready-CCL-02-PENDING-PHOTO-401-autosave",
+    "boundary-ready-CCL-02-PENDING-PHOTO-401-manual",
+    "boundary-ready-CCL-02-PENDING-PHOTO-419-autosave",
+    "boundary-ready-CCL-02-PENDING-PHOTO-419-manual",
+    "boundary-final-CCL-01-BOUNDS-RESPONSIVE",
+    "boundary-final-CCL-08-EMPTY-RESPONSIVE"
+  ]
+}

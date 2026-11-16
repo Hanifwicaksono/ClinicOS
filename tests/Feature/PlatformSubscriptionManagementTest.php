@@ -17,6 +17,7 @@ use Carbon\CarbonImmutable;
 use Database\Seeders\RoleAndPermissionSeeder;
 use Database\Seeders\SubscriptionPlanSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class PlatformSubscriptionManagementTest extends TestCase
@@ -63,6 +64,7 @@ class PlatformSubscriptionManagementTest extends TestCase
         $this->patch(route('platform.subscription-prices.update', $price), ['amount' => 5_100_000, 'is_active' => true])->assertRedirect();
         $this->post(route('platform.subscription-grants.store', $clinic), [
             'subscription_price_id' => $price->id,
+            'grant_request_id' => (string) Str::uuid(),
             'reason' => 'Kompensasi migrasi pelanggan lama',
         ])->assertRedirect();
 
@@ -94,12 +96,14 @@ class PlatformSubscriptionManagementTest extends TestCase
 
         $this->actingAs($platformAdmin)->post(route('platform.subscription-grants.store', $clinic), [
             'subscription_price_id' => $price->id,
+            'grant_request_id' => (string) Str::uuid(),
             'reason' => '',
         ])->assertSessionHasErrors('reason');
 
         $price->update(['is_active' => false]);
         $this->post(route('platform.subscription-grants.store', $clinic), [
             'subscription_price_id' => $price->id,
+            'grant_request_id' => (string) Str::uuid(),
             'reason' => 'Tidak boleh dipakai',
         ])->assertSessionHasErrors('subscription_price_id');
 
@@ -152,6 +156,7 @@ class PlatformSubscriptionManagementTest extends TestCase
 
         $this->actingAs($admin)->post(route('platform.subscription-grants.store', $clinic), [
             'subscription_price_id' => $individualPrice->id,
+            'grant_request_id' => (string) Str::uuid(),
             'reason' => 'Klinik meminta paket Individual sekarang.',
         ])->assertRedirect()->assertSessionHas('status', 'Grant subscription berlaku sekarang.');
 

@@ -1,0 +1,33 @@
+ M README.md
+ M app/Http/Controllers/Admin/DoctorScheduleController.php
+ M app/Http/Controllers/Admin/StaffController.php
+ M app/Http/Controllers/Doctor/VisitController.php
+ M app/Http/Controllers/PublicBookingController.php
+ M app/Http/Requests/Admin/StoreStaffRequest.php
+ M app/Http/Requests/Doctor/SaveMedicalRecordRequest.php
+ M app/Policies/UserPolicy.php
+ M app/Services/StaffAccountService.php
+ M app/Services/VisitWorkflowService.php
+ M bootstrap/app.php
+ M composer.lock
+ M resources/views/components/public-layout.blade.php
+ M resources/views/doctor/visits/show.blade.php
+ M resources/views/livewire/layout/navigation.blade.php
+ M resources/views/livewire/profile/delete-user-form.blade.php
+ M resources/views/receptionist/appointments/form.blade.php
+ M routes/web.php
+ M tests/Feature/Admin/DoctorScheduleManagementTest.php
+ M tests/Feature/Admin/StaffManagementTest.php
+ M tests/Feature/BookingTest.php
+ M tests/Feature/DashboardAccessTest.php
+ M tests/Feature/MedicalRecordCorrectionTest.php
+ M tests/Feature/OdontogramAddonTest.php
+ M tests/Feature/ProfileTest.php
+ M tests/Feature/PublicCancellationTest.php
+ M tests/Feature/RmeGeneralDentalTest.php
+ M tests/Feature/SubscriptionEnforcementTest.php
+ M tests/Feature/VisitWorkflowTest.php
+ M tests/TestCase.php
+ M tests/browser-partial-workflows.test.mjs
+?? qa-audit/
+?? tests/browser-p1-regressions.test.mjs

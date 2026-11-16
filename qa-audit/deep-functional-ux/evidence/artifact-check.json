@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-11-13T08:28:25.510Z",
+  "reports": 10,
+  "local_links_checked": 165,
+  "feature_groups": 36,
+  "active_scenarios": 124,
+  "classified_active_failures": 17,
+  "findings": 12,
+  "gaps": 72,
+  "responsive_snapshots": 213,
+  "secret_url_scan": "PASS (pattern check, not OCR)",
+  "git_status_paths_preserved": true,
+  "source_write_scope": "Only qa-audit/deep-functional-ux artefacts/scripts were written; no byte-level initial hash snapshot was captured.",
+  "versions": {
+    "node": "v24.14.1",
+    "php": "8.5.5",
+    "playwright": "1.65.0",
+    "chrome": "158.0.8127.36",
+    "laravel": "v13.34.0",
+    "livewire": "v3.8.10",
+    "volt": "v1.11.2",
+    "vite": "8.3.4"
+  }
+}

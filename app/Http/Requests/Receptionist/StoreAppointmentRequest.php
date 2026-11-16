@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Receptionist;
 
 use App\Models\Appointment;
+use App\Rules\PhoneNumber;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -34,7 +35,7 @@ class StoreAppointmentRequest extends FormRequest
             'nik' => ['nullable', 'string', 'max:30'],
             'birth_date' => ['required_without:patient_id', 'nullable', 'date', 'before_or_equal:today'],
             'gender' => ['required_without:patient_id', 'nullable', 'in:MALE,FEMALE'],
-            'phone' => ['required_without:patient_id', 'nullable', 'string', 'max:30'],
+            'phone' => [new PhoneNumber, 'required_without:patient_id', 'nullable', 'string', 'max:30'],
             'email' => ['nullable', 'email', 'max:255'],
             'address' => ['nullable', 'string', 'max:1500'],
             'notes' => ['nullable', 'string', 'max:1000'],

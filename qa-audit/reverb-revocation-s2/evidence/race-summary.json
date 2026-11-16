@@ -1,0 +1,102 @@
+[
+  {
+    "id": "S2-15",
+    "status": "PASS",
+    "commit": 1794740324.927037,
+    "ack": 1794740325.245483,
+    "old_version": 25,
+    "transport_closed": [
+      {
+        "type": "transport_closed",
+        "at": 1794740325.243688,
+        "pid": 21052,
+        "run": "verified-final",
+        "socket": "fa43669bb7646ac4"
+      },
+      {
+        "type": "transport_closed",
+        "at": 1794740325.244132,
+        "pid": 21052,
+        "run": "verified-final",
+        "socket": "6cfa40c3cb4d65f3"
+      }
+    ],
+    "deferred_releases": [
+      {
+        "type": "held_released",
+        "at": 1794740325.361148,
+        "pid": 21052,
+        "run": "verified-final",
+        "user": 14,
+        "version": 25,
+        "accepted": false,
+        "write_calls": 0
+      },
+      {
+        "type": "held_released",
+        "at": 1794740325.362044,
+        "pid": 21052,
+        "run": "verified-final",
+        "user": 14,
+        "version": 25,
+        "accepted": false,
+        "write_calls": 0
+      },
+      {
+        "type": "held_released",
+        "at": 1794740325.362362,
+        "pid": 21052,
+        "run": "verified-final",
+        "user": 14,
+        "version": 25,
+        "accepted": false,
+        "write_calls": 0
+      },
+      {
+        "type": "held_released",
+        "at": 1794740325.362546,
+        "pid": 21052,
+        "run": "verified-final",
+        "user": 14,
+        "version": 25,
+        "accepted": false,
+        "write_calls": 0
+      }
+    ],
+    "post_ack_old_private_sends": 0,
+    "new_event_started": 1794740325.403,
+    "new_queue_id": 123
+  },
+  {
+    "id": "S2-16",
+    "status": "PASS",
+    "commit": 1794740334.08438,
+    "ack": 1794740335.059196,
+    "old_version": 27,
+    "transport_closed": [
+      {
+        "type": "transport_closed",
+        "at": 1794740335.056539,
+        "pid": 21052,
+        "run": "verified-final",
+        "socket": "a6393cea06a4bb66"
+      },
+      {
+        "type": "transport_closed",
+        "at": 1794740335.057376,
+        "pid": 21052,
+        "run": "verified-final",
+        "socket": "52fa69edd4a69ab8"
+      }
+    ],
+    "admitted_sends": [
+      1794740334.588039,
+      1794740334.588748,
+      1794740334.589501,
+      1794740334.589917
+    ],
+    "pending_while_active": true,
+    "new_event_started": 1794740335.077,
+    "new_queue_id": 125
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "capabilities": 72,
+  "capability_statuses": {
+    "COMPLETE": 40,
+    "NOT VERIFIED": 4,
+    "PARTIAL": 13,
+    "PRODUCT DECISION REQUIRED": 11,
+    "MISSING": 1,
+    "NOT REQUIRED": 3
+  },
+  "gaps": 18,
+  "priorities": {
+    "P1": 9,
+    "P2": 9
+  },
+  "browser_current_tasks": 28,
+  "browser_records": 29,
+  "qa_reports": 40,
+  "product_documents": 11,
+  "baseline_files": 439,
+  "routes": 120,
+  "tables": 44,
+  "stored_roles": 5,
+  "personas": 6,
+  "decisions": 20
+}

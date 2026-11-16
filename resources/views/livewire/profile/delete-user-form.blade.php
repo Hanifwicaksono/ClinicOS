@@ -1,7 +1,14 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use App\Models\MedicalRecord;
+use App\Models\MedicalRecordRevision;
+use App\Models\Queue;
+use App\Models\User;
+use App\Models\Visit;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Livewire\Volt\Component;
 
 new class extends Component
@@ -17,7 +24,29 @@ new class extends Component
             'password' => ['required', 'string', 'current_password'],
         ]);
 
-        tap(Auth::user(), $logout(...))->delete();
+        DB::transaction(function () use ($logout): void {
+            $user = User::query()->lockForUpdate()->findOrFail(Auth::id());
+            if ($user->ownedClinic()->exists()) {
+                throw ValidationException::withMessages([
+                    'password' => 'Akun pemilik tidak dapat dihapus selama masih memiliki klinik. Hubungi pengelola platform untuk penanganan kepemilikan.',
+                ]);
+            }
+            $doctor = $user->doctor()->lockForUpdate()->first();
+            $hasDoctorHistory = $doctor !== null && ($doctor->appointments()->exists()
+                || $doctor->visits()->exists()
+                || Queue::query()->where('doctor_id', $doctor->id)->exists()
+                || MedicalRecord::query()->where('doctor_id', $doctor->id)->exists());
+            if ($hasDoctorHistory
+                || Visit::query()->where('started_by_user_id', $user->id)->exists()
+                || MedicalRecord::query()->where('created_by_user_id', $user->id)->exists()
+                || MedicalRecordRevision::query()->where('corrected_by_user_id', $user->id)->exists()) {
+                throw ValidationException::withMessages([
+                    'password' => 'Akun terhubung dengan riwayat pelayanan dan tidak dapat dihapus. Hubungi admin klinik untuk menonaktifkan akses.',
+                ]);
+            }
+            $logout();
+            $user->delete();
+        }, 3);
 
         $this->redirect('/', navigate: true);
     }
@@ -32,6 +61,9 @@ new class extends Component
         <p class="mt-2 text-sm leading-6 text-slate-500">
             Penghapusan akun bersifat permanen. Pastikan data yang masih diperlukan sudah disimpan sebelum melanjutkan.
         </p>
+        @if (auth()->user()->ownedClinic()->exists())
+            <p class="mt-2 text-sm font-semibold text-amber-800">Akun pemilik tidak dapat dihapus selama masih memiliki klinik.</p>
+        @endif
     </header>
 
     <x-clinic-button

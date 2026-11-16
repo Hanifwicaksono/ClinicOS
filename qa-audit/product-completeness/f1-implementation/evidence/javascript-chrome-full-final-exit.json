@@ -1,0 +1,14 @@
+{
+  "exit": 1,
+  "files": [
+    "browser-p1-regressions.test.mjs",
+    "browser-partial-workflows.test.mjs",
+    "notification-realtime.test.mjs",
+    "partial-workflows.test.mjs",
+    "patient-duplicates.test.mjs"
+  ],
+  "workspace_isolated": true,
+  "source": "Current first-party source copied without .env or public storage; vendor/node_modules junctions read-only in this run; generated build copied from isolated F1 build",
+  "bootstrap_instrumentation": "Drive-letter absolute cache paths only",
+  "finished": "2026-11-15T04:58:50.418Z"
+}

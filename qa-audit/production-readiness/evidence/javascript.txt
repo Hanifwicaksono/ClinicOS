@@ -1,0 +1,15 @@
+✔ redelivery of the same notification increments the counter and emits the event once (26.4153ms)
+✔ distinct notifications remain visible and messages without IDs preserve compatibility (4.618ms)
+✔ autosave updates the version and keeps photos for the explicit save (1.2808ms)
+✔ network failures retain changes and can be retried; conflict stops automatic writes (1.0644ms)
+✔ typing during an autosave is saved in a following request with the new version (0.3526ms)
+✔ finalize waits for an active autosave and retains the form on a stale conflict (0.4074ms)
+✔ booking filters services by doctor and sessions by the selected date (11.4383ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1448.4924

@@ -1,0 +1,93 @@
+<?php
+
+$app = require getenv('AUDIT_ROOT').'/application.php';
+$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+if (config('database.default') !== 'sqlite' || config('database.connections.sqlite.database') !== getenv('AUDIT_ROOT').'/audit.sqlite') { throw new RuntimeException('Disposable fixture guard'); }
+
+use App\Models\{Clinic,User,Doctor,DoctorSchedule,Service,Patient,Appointment,Queue,Visit,MedicalRecord,Payment,PaymentItem,Subscription,SubscriptionPlan,SubscriptionPrice,SubscriptionPeriod,PatientAllergy,AuditLog};
+use App\Services\{AddonService,SubscriptionService};
+use App\{UserAccountType,PaymentStatus,QueueStatus,AppointmentStatus,VisitStatus,MedicalRecordStatus};
+use Carbon\CarbonImmutable as C;
+use Illuminate\Support\Str;
+
+Illuminate\Support\Facades\DB::beginTransaction();
+$password = User::where('email','admin@clinicos.test')->value('password');
+function account(string $key, string $role, ?Clinic $clinic=null): User {
+    global $password;
+    $user=User::factory()->create(['name'=>'QA Closure '.$key,'email'=>'closure.'.$key.'@clinicos.test','password'=>$password,'clinic_id'=>$clinic?->id,'account_type'=>$role==='Patient'?UserAccountType::Patient:null]);
+    $user->assignRole($role);return $user;
+}
+function tenant(string $key,string $plan='team',bool $dental=false,?C $end=null): array {
+    $clinic=Clinic::factory()->create(['name'=>'QA Closure '.ucfirst($key),'slug'=>'qa-closure-'.$key,'phone'=>'0215550123']);
+    $clinic->settings()->create(['timezone'=>'Asia/Jakarta','opening_time'=>'08:00','closing_time'=>'23:59','queue_prefix'=>'C']);
+    $owner=account($key.'.owner','Clinic Admin',$clinic);$owner->update(['account_type'=>UserAccountType::ClinicOwner]);$clinic->update(['owner_user_id'=>$owner->id]);
+    $subscription=null;$period=null;$addon=null;
+    if ($plan==='free') { $subscription=app(SubscriptionService::class)->activateFree($clinic); }
+    elseif ($plan==='trial') {$subscription=app(SubscriptionService::class)->startTrial($clinic);}
+    else {
+        $catalog=SubscriptionPlan::where('code',$plan)->firstOrFail();$price=$catalog->prices()->where('duration_months',1)->firstOrFail();
+        $starts=C::now()->startOfMonth();$ends=$end??C::now()->startOfMonth()->addMonth();
+        $payment=Payment::factory()->for($clinic)->create(['subscription_price_id'=>$price->id,'invoice_number'=>'QA-CLOSURE-'.strtoupper($key),'plan_code'=>$plan,'plan_name'=>$catalog->name,'amount'=>$price->amount,'status'=>PaymentStatus::Paid,'paid_at'=>$starts]);
+        $subscription=Subscription::create(['clinic_id'=>$clinic->id,'subscription_plan_id'=>$catalog->id,'status'=>'active','source'=>'payment','starts_at'=>$starts,'ends_at'=>$ends]);
+        $period=SubscriptionPeriod::create(['clinic_id'=>$clinic->id,'subscription_id'=>$subscription->id,'subscription_plan_id'=>$catalog->id,'payment_id'=>$payment->id,'plan_code'=>$plan,'plan_name'=>$catalog->name,'duration_months'=>1,'amount'=>$price->amount,'source'=>'payment','starts_at'=>$starts,'ends_at'=>$ends]);
+        $payment->items()->create(['kind'=>'subscription','code'=>$plan,'name'=>$catalog->name,'amount'=>$price->amount,'duration_months'=>1,'subscription_price_id'=>$price->id]);
+        if ($dental) {
+            $item=$payment->items()->create(['kind'=>'addon','code'=>'odontogram','name'=>'Odontogram','amount'=>99000,'monthly_amount'=>99000,'addon_price_id'=>App\Models\AddonPrice::where('code','odontogram')->value('id'),'target_subscription_period_id'=>$period->id]);
+            $addon=app(AddonService::class)->activate($payment,$item,$period,$starts);
+            if (! app(AddonService::class)->canEdit($clinic)) {throw new RuntimeException('Entitlement fixture must pass production domain guard');}
+        }
+    }
+    $reception=account($key.'.reception','Receptionist',$clinic);$doctorUser=account($key.'.doctor','Doctor',$clinic);
+    $doctor=Doctor::factory()->for($clinic)->for($doctorUser,'user')->create(['specialization'=>$dental?'Dokter Gigi':'Dokter Umum']);
+    $service=Service::factory()->for($clinic)->create(['name'=>'QA Closure Layanan '.$key,'price'=>123456,'duration_minutes'=>20]);$doctor->services()->attach($service);
+    $schedules=[];foreach(range(0,6) as $day){$schedules[]=DoctorSchedule::factory()->for($doctor)->create(['day_of_week'=>$day,'start_time'=>'12:00','end_time'=>'23:59','quota'=>100]);}
+    $patientUser=account($key.'.patient','Patient');$patient=Patient::factory()->for($clinic)->for($patientUser,'user')->create(['name'=>'QA Closure Pasien '.$key,'phone'=>'081234560001','nik'=>str_pad((string)$clinic->id,16,'1'),'email'=>$patientUser->email,'birth_date'=>'1990-01-01','address'=>'Alamat dummy']);
+    return compact('clinic','owner','subscription','period','addon','reception','doctorUser','doctor','service','schedules','patientUser','patient');
+}
+function booking(array $t,string $state='BOOKED',?Patient $patient=null,?C $date=null): array {
+    $date??=C::now('Asia/Jakarta');$patient??=$t['patient'];$schedule=$t['schedules'][$date->dayOfWeek];
+    $number=(int)Queue::where('doctor_schedule_id',$schedule->id)->whereDate('queue_date',$date->toDateString())->max('queue_number')+1;
+    $appointment=Appointment::factory()->for($t['clinic'])->for($t['doctor'])->for($patient)->for($t['service'])->for($schedule,'schedule')->create(['appointment_date'=>$date->toDateString(),'status'=>in_array($state,['COMPLETED','CANCELLED','NO_SHOW'])?$state:'BOOKED']);
+    $queue=Queue::factory()->for($t['clinic'])->for($t['doctor'])->for($appointment)->for($schedule,'schedule')->create(['queue_date'=>$date->toDateString(),'status'=>$state,'queue_number'=>$number,'display_number'=>'C-'.str_pad((string)$number,3,'0',STR_PAD_LEFT),'checked_in_at'=>in_array($state,['WAITING','CALLED','IN_PROGRESS','COMPLETED'])?C::now()->subMinutes(10):null,'called_at'=>in_array($state,['CALLED','IN_PROGRESS','COMPLETED'])?C::now()->subMinutes(5):null]);
+    return compact('appointment','queue');
+}
+function exam(array $t,string $key,bool $final=false,?C $at=null): array {
+    $b=booking($t,$final?'COMPLETED':'IN_PROGRESS',date:$at);$at??=C::now();
+    $visit=Visit::factory()->for($b['appointment'])->create(['status'=>$final?'COMPLETED':'IN_PROGRESS','started_at'=>$at->subMinutes(20),'completed_at'=>$final?$at:null,'completed_by_user_id'=>$final?$t['doctorUser']->id:null]);
+    $record=MedicalRecord::factory()->for($visit)->create(['status'=>$final?'FINAL':'DRAFT','chief_complaint'=>'Dummy '.$key,'subjective'=>'Subjektif dummy '.$key,'objective'=>'Objektif dummy','assessment'=>'Assessment dummy '.$key,'plan'=>'Rencana dummy','finalized_at'=>$final?$at:null]);
+    return ['appointment'=>$b['appointment']->id,'queue'=>$b['queue']->id,'visit'=>$visit->id,'record'=>$record->id];
+}
+$main=tenant('dental',dental:true);
+$expire=tenant('expiry',dental:true,end:C::now()->addMinutes(30));
+$free=tenant('free','free');$individual=tenant('individual','individual');$trial=tenant('trial','trial');$empty=tenant('empty','free');
+$eta10=tenant('eta10');$eta20=tenant('eta20');$prorata=tenant('prorata');
+$output=['clock'=>C::now()->toIso8601String(),'today'=>C::now('Asia/Jakarta')->toDateString(),'tenants'=>[]];
+foreach(['dental'=>$main,'expiry'=>$expire,'free'=>$free,'individual'=>$individual,'trial'=>$trial,'empty'=>$empty,'eta10'=>$eta10,'eta20'=>$eta20,'prorata'=>$prorata] as $key=>$t){
+    $output['tenants'][$key]=['clinic'=>$t['clinic']->id,'slug'=>$t['clinic']->slug,'owner'=>$t['owner']->email,'reception'=>$t['reception']->email,'doctor'=>$t['doctorUser']->email,'patient'=>$t['patientUser']->email,'patient_id'=>$t['patient']->id,'doctor_id'=>$t['doctor']->id,'service_id'=>$t['service']->id,'today_schedule'=>$t['schedules'][C::now('Asia/Jakarta')->dayOfWeek]->id,'period'=>$t['period']?->id,'payment'=>$t['period']?->payment_id,'addon'=>$t['addon']?->id];
+}
+foreach(['chart','limits','leave','allergy','prescription','photos','finalize','socket','stale-correction'] as $key){$output['exams'][$key]=exam($main,$key);}
+$output['dental']=['addon_id'=>$main['addon']->id,...$output['exams']['chart']];
+$output['expiry']=exam($expire,'expiry');
+$output['final']=exam($main,'final',true);
+PatientAllergy::create(['patient_id'=>$main['patient']->id,'substance'=>'Closure dummy allergy','reaction'=>'Reaksi dummy','severity'=>'CRITICAL','is_active'=>true,'recorded_by_user_id'=>$main['doctorUser']->id]);
+foreach(['BOOKED','WAITING','CALLED','SKIPPED','COMPLETED','CANCELLED','NO_SHOW'] as $state){$b=booking($main,$state);$output['queues'][$state]=['appointment'=>$b['appointment']->id,'queue'=>$b['queue']->id];}
+for($i=0;$i<24;$i++){booking($main,'COMPLETED');}
+foreach([[$eta10,10],[$eta20,20]] as [$t,$count]){
+    for($i=0;$i<$count;$i++){exam($t,'ETA fixture',true,C::now()->subDays($i+1));}
+    $front=booking($t,'WAITING');$target=booking($t,'WAITING');$output[$count===10?'eta10':'eta20']=['front'=>$front['queue']->id,'appointment'=>$target['appointment']->id,'queue'=>$target['queue']->id];
+}
+for($i=0;$i<10;$i++){Patient::factory()->for($main['clinic'])->create(['name'=>'QA Shared Candidate '.$i,'phone'=>'081299990000','nik'=>null,'birth_date'=>'1990-01-01']);}
+$inactive=Patient::factory()->for($main['clinic'])->create(['name'=>'QA Inactive Candidate','phone'=>'081288880000','is_active'=>false]);$output['inactive_patient']=$inactive->id;
+for($i=0;$i<27;$i++){
+    $owner=account('page'.$i.'.owner','Clinic Admin');$owner->update(['account_type'=>UserAccountType::ClinicOwner]);$clinic=Clinic::factory()->ownedBy($owner)->create(['name'=>'QA Closure Page '.str_pad((string)$i,2,'0',STR_PAD_LEFT),'slug'=>'qa-closure-page-'.$i,'is_active'=>$i!==26]);app(SubscriptionService::class)->activateFree($clinic);
+}
+foreach([$main['owner'],$main['reception'],$main['doctorUser'],$main['patientUser'],User::where('email','platform@clinicos.test')->first()] as $user){
+    for($i=0;$i<22;$i++){$user->notifications()->create(['id'=>(string)Str::uuid(),'type'=>'QAClosureNotification','data'=>['title'=>'QA Closure notification '.$i,'message'=>'Synthetic pagination fixture','url'=>'/notifications']]);}
+}
+foreach(['Clinic Admin','Receptionist','Doctor','Patient','Platform Admin'] as $role){$key=strtolower(str_replace(' ','-',$role));$u=account('notifempty.'.$key,$role,in_array($role,['Clinic Admin','Receptionist','Doctor'])?$empty['clinic']:null);$output['empty_notification_accounts'][$role]=$u->email;}
+$output['empty_owner']=$empty['owner']->email;
+$output['unonboarded']=account('onboarding','Clinic Admin')->email;User::where('email',$output['unonboarded'])->update(['account_type'=>UserAccountType::ClinicOwner]);
+for($i=0;$i<35;$i++){AuditLog::create(['clinic_id'=>$main['clinic']->id,'user_id'=>$main['owner']->id,'actor_name'=>$main['owner']->name,'action'=>'qa.closure.fixture','entity_type'=>Clinic::class,'entity_id'=>$main['clinic']->id,'metadata'=>['source'=>'fixture','appointment_id'=>$output['exams']['chart']['appointment'],'discarded_extra'=>'must not render'],'created_at'=>C::now()->subMinutes($i)]);}
+$output['fixture_only']=true;$output['provider_checkout_executed']=false;$output['entitlement_domain_verified']=app(AddonService::class)->canEdit($main['clinic']);
+Illuminate\Support\Facades\DB::commit();
+echo json_encode($output);

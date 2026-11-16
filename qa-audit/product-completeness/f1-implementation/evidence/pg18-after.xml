@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\F1ImplementationTest" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" tests="1" assertions="3" errors="0" failures="0" skipped="0" time="1.206701">
+    <testcase name="test_grant_form_renders_valid_binding_and_process_feedback" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="24" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="3" time="1.206701"/>
+  </testsuite>
+</testsuites>

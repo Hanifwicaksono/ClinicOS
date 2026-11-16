@@ -59,6 +59,10 @@ class DeliverClinicNotification implements ShouldQueue
             throw new LogicException('Clinic notification recipient no longer belongs to the target resource.');
         }
 
+        if (! $recipient->is_active || ! $recipient->hasVerifiedEmail() || (! ($isPatient && $recipient->hasRole('Patient')) && ! ($isDoctor && $recipient->hasRole('Doctor')))) {
+            return;
+        }
+
         (new BroadcastEvent(new BroadcastNotificationCreated($recipient, $this->notification, $stored->data)))
             ->handle($broadcasting);
     }

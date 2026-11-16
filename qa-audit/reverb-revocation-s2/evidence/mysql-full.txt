@@ -1,0 +1,40 @@
+PHPUnit 12.5.37 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.5
+Configuration: C:\laragon\www\ClinicOS\phpunit.xml
+
+Time: 02:53.176, Memory: 104.00 MB
+
+There were 2 failures:
+
+1) Tests\Feature\PublicClinicTest::test_public_urls_resolve_only_the_clinic_named_by_the_subdomain
+Expected response status code [404] but received 302.
+Failed asserting that 302 is identical to 404.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:151
+C:\laragon\www\ClinicOS\tests\Feature\PublicClinicTest.php:67
+
+2) Tests\Feature\RmeGeneralDentalTest::test_assigned_doctor_can_persist_general_rme_and_odontogram_in_draft
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+ Array &0 [
+     0 => Array &1 [
++        'condition' => 'caries',
+         'tooth_number' => 11,
+-        'condition' => 'caries',
+     ],
+     1 => Array &2 [
++        'condition' => 'filled',
+         'tooth_number' => 26,
+-        'condition' => 'filled',
+     ],
+ ]
+
+C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php:56
+
+[37;41mFAILURES![0m
+[37;41mTests: 447[0m[37;41m, Assertions: 2954[0m[37;41m, Failures: 2[0m[37;41m.[0m

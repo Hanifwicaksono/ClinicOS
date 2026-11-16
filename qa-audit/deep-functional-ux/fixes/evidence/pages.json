@@ -1,0 +1,3020 @@
+[
+  {
+    "role": "new-staff",
+    "label": "Verifikasi staf baru",
+    "url": "http://127.0.0.1:18961/verify-email",
+    "title": "ClinicOS",
+    "headings": [
+      "Operasional klinik lebih mudah dalam satu platform",
+      "Verifikasi email Anda"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/",
+        "visible": true
+      },
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/",
+        "visible": false
+      }
+    ],
+    "actions": [
+      {
+        "text": "Kirim ulang email verifikasi",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [],
+    "forms": [],
+    "dialogs": [],
+    "text": "ClinicOS\nOperasional klinik lebih mudah dalam satu platform\n\nMelalui ClinicOS kelola berbagai kebutuhan klinik mulai dari pendaftaran pasien, jadwal dokter, antrean, hingga pengelolaan rekam medis dan administrasi. Terintegrasi dalam satu platform untuk operasional klinik lebih efisien.\n\n© 2026 ClinicOS · Sistem operasional klinik\n\nSATU LANGKAH LAGI\n\nVerifikasi email Anda\n\nBuka tautan verifikasi yang kami kirimkan agar akun Anda dapat mengakses ClinicOS.\n\nKirim ulang email verifikasi\nKeluar\n\nDengan melanjutkan, Anda menyetujui kebijakan penggunaan dan privasi ClinicOS.",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:11:52.883Z"
+  },
+  {
+    "role": "guest",
+    "label": "Display publik dengan journey berjalan",
+    "url": "http://127.0.0.1:18961/display/klinik-sehat-sentosa",
+    "title": "Antrean Klinik Sehat Sentosa",
+    "headings": [
+      "Status antrean klinik"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/",
+        "visible": true
+      },
+      {
+        "label": "Masuk",
+        "target": "http://127.0.0.1:18961/login",
+        "visible": true
+      },
+      {
+        "label": "←\nKlinik Sehat Sentosa",
+        "target": "http://klinik-sehat-sentosa.localhost:18961/",
+        "visible": true
+      },
+      {
+        "label": "Buat booking",
+        "target": "http://127.0.0.1:18961/clinic/klinik-sehat-sentosa/booking",
+        "visible": true
+      }
+    ],
+    "actions": [],
+    "fields": [],
+    "forms": [],
+    "dialogs": [],
+    "text": "ClinicOS\nMasuk\n←\nKlinik Sehat Sentosa\n\nANTREAN HARI INI\n\nStatus antrean klinik\n\n13 November 2026\n\nMenghubungkan kembali…\nBuat booking\n\nNOMOR ANTREAN\n\nKS-102\n\nMenunggu\nPOLI\nDokter Umum\nDOKTER\ndr. Budi Santoso\nSesi 00:00–23:59\n\nPERKIRAAN WAKTU TUNGGU\n\nPerkiraan 0–0 menit\n\nKeyakinan sedang\n\nNOMOR ANTREAN\n\nKS-104\n\nDiperiksa\nPOLI\nDokter Umum\nDOKTER\ndr. Budi Santoso\nSesi 00:00–23:59\n\nPERKIRAAN WAKTU TUNGGU\n\nPerkiraan 25–30 menit\n\nKeyakinan sedang\n\nNOMOR ANTREAN\n\nKS-103\n\nDipanggil\nPOLI\nDokter Gigi\nDOKTER\ndrg. Raka Adinata\nSesi 08:00–17:00\n\nPERKIRAAN WAKTU TUNGGU\n\nPerkiraan 0–0 menit\n\nKeyakinan rendah\n\nPerkiraan dapat berubah.\n\nNOMOR ANTREAN\n\nKS-001\n\nDipanggil\nPOLI\nDokter Umum\nDOKTER\nQA Deep Dokter\nSesi 18:00–23:59\n\nPERKIRAAN WAKTU TUNGGU\n\nPerkiraan 0–0 menit\n\nKeyakinan rendah\n\nPerkiraan dapat berubah.\n\nStatus mengikuti pembaruan sistem antrean.\n\n© 2026 ClinicOS",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:12:53.579Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Dashboard admin operasional",
+    "url": "http://127.0.0.1:18961/admin/dashboard",
+    "title": "ClinicOS",
+    "headings": [
+      "Dashboard",
+      "Klinik Sehat Sentosa",
+      "Operasional siap dijalankan",
+      "Tim terbaru",
+      "Kunjungan selesai terbaru"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "Lihat antrean\n→",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "PASIEN TERJADWAL\n\n→\n\n11\n\nPasien unik pada periode ini",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "ANTREAN AKTIF\n\n→\n\n0\n\nMenunggu, dipanggil, atau diperiksa",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "KUNJUNGAN SELESAI\n\n→\n\n2\n\nPelayanan yang sudah difinalisasi",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "ESTIMASI NILAI LAYANAN\n\n→\n\nRp 150.000\n\nBukan pembayaran yang diterima",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "✓\nProfil dan jam operasional\n→",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "✓\nDaftar layanan\n→",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "✓\nAkun dokter\n→",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "✓\nJadwal praktik\n→",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Lihat semua",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Lihat audit",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Terapkan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [
+      {
+        "name": "from",
+        "id": "from",
+        "type": "date",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Dari"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "to",
+        "id": "to",
+        "type": "date",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Sampai"
+        ],
+        "aria_label": null
+      }
+    ],
+    "forms": [
+      {
+        "method": "get",
+        "action": "http://127.0.0.1:18961/admin/dashboard",
+        "fields": [
+          "from",
+          "to"
+        ]
+      }
+    ],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nWORKSPACE ADMIN\n\nDashboard\nKlinik aktif\n\nSelamat datang, QA Operational Admin\n\nKlinik Sehat Sentosa\n\nAda 15 booking, 0 antrean aktif, dan 2 kunjungan selesai pada periode ini.\n\nLihat antrean\n→\n\nPeriode operasional\n\nMenggunakan zona waktu Asia/Jakarta.\n\nDari\nSampai\nTerapkan\n\nPASIEN TERJADWAL\n\n→\n\n11\n\nPasien unik pada periode ini\n\nANTREAN AKTIF\n\n→\n\n0\n\nMenunggu, dipanggil, atau diperiksa\n\nKUNJUNGAN SELESAI\n\n→\n\n2\n\nPelayanan yang sudah difinalisasi\n\nESTIMASI NILAI LAYANAN\n\n→\n\nRp 150.000\n\nBukan pembayaran yang diterima\n\nKESIAPAN KLINIK\n\nOperasional siap dijalankan\n\nKelola fondasi klinik dari pintasan berikut.\n\n4/4 selesai\n✓\nProfil dan jam operasional\n→\n✓\nDaftar layanan\n→\n✓\nAkun dokter\n→\n✓\nJadwal praktik\n→\nDokter\n4\nResepsionis\n2\nLayanan\n5\nSesi jadwal\n17\nTim terbaru\n\nAnggota tim yang baru ditambahkan.\n\nLihat semua\nQ\n\nQA Deep Dokter\n\ndeep.doctor@clinicos.test\n\nDoctor\nQ\n\nQA Deep Resepsionis\n\ndeep.receptionist@clinicos.test\n\nReceptionist\nQ\n\nQA Fix Doctor\n\nfix.doctor@clinicos.test\n\nDoctor\nD\n\ndr. Budi Santoso\n\ndoctor@clinicos.test\n\nDoctor\nS\n\nSiti Rahma\n\nreceptionist@clinicos.test\n\nReceptionist\nKunjungan selesai terbaru\n\nNominal menggunakan snapshot layanan saat kunjungan, bukan bukti pembayaran.\n\nLihat audit\n\nDewi Lestari\n\nKonsultasi Umum\n\ndr. Budi Santoso\n\nRp 75.000\n\n13 Nov 17:45\n\nQA Fix Patient\n\nKonsultasi Umum\n\nQA Fix Doctor\n\nRp 75.000\n\n13 Nov 15:55",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:29.560Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Dashboard",
+    "url": "http://127.0.0.1:18961/admin/dashboard",
+    "title": "ClinicOS",
+    "headings": [
+      "Dashboard",
+      "Klinik Sehat Sentosa",
+      "Operasional siap dijalankan",
+      "Tim terbaru",
+      "Kunjungan selesai terbaru"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "Lihat antrean\n→",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "PASIEN TERJADWAL\n\n→\n\n11\n\nPasien unik pada periode ini",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "ANTREAN AKTIF\n\n→\n\n0\n\nMenunggu, dipanggil, atau diperiksa",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "KUNJUNGAN SELESAI\n\n→\n\n2\n\nPelayanan yang sudah difinalisasi",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "ESTIMASI NILAI LAYANAN\n\n→\n\nRp 150.000\n\nBukan pembayaran yang diterima",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "✓\nProfil dan jam operasional\n→",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "✓\nDaftar layanan\n→",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "✓\nAkun dokter\n→",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "✓\nJadwal praktik\n→",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Lihat semua",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Lihat audit",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Terapkan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [
+      {
+        "name": "from",
+        "id": "from",
+        "type": "date",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Dari"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "to",
+        "id": "to",
+        "type": "date",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Sampai"
+        ],
+        "aria_label": null
+      }
+    ],
+    "forms": [
+      {
+        "method": "get",
+        "action": "http://127.0.0.1:18961/admin/dashboard",
+        "fields": [
+          "from",
+          "to"
+        ]
+      }
+    ],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nWORKSPACE ADMIN\n\nDashboard\nKlinik aktif\n\nSelamat datang, QA Operational Admin\n\nKlinik Sehat Sentosa\n\nAda 15 booking, 0 antrean aktif, dan 2 kunjungan selesai pada periode ini.\n\nLihat antrean\n→\n\nPeriode operasional\n\nMenggunakan zona waktu Asia/Jakarta.\n\nDari\nSampai\nTerapkan\n\nPASIEN TERJADWAL\n\n→\n\n11\n\nPasien unik pada periode ini\n\nANTREAN AKTIF\n\n→\n\n0\n\nMenunggu, dipanggil, atau diperiksa\n\nKUNJUNGAN SELESAI\n\n→\n\n2\n\nPelayanan yang sudah difinalisasi\n\nESTIMASI NILAI LAYANAN\n\n→\n\nRp 150.000\n\nBukan pembayaran yang diterima\n\nKESIAPAN KLINIK\n\nOperasional siap dijalankan\n\nKelola fondasi klinik dari pintasan berikut.\n\n4/4 selesai\n✓\nProfil dan jam operasional\n→\n✓\nDaftar layanan\n→\n✓\nAkun dokter\n→\n✓\nJadwal praktik\n→\nDokter\n4\nResepsionis\n2\nLayanan\n5\nSesi jadwal\n17\nTim terbaru\n\nAnggota tim yang baru ditambahkan.\n\nLihat semua\nQ\n\nQA Deep Dokter\n\ndeep.doctor@clinicos.test\n\nDoctor\nQ\n\nQA Deep Resepsionis\n\ndeep.receptionist@clinicos.test\n\nReceptionist\nQ\n\nQA Fix Doctor\n\nfix.doctor@clinicos.test\n\nDoctor\nD\n\ndr. Budi Santoso\n\ndoctor@clinicos.test\n\nDoctor\nS\n\nSiti Rahma\n\nreceptionist@clinicos.test\n\nReceptionist\nKunjungan selesai terbaru\n\nNominal menggunakan snapshot layanan saat kunjungan, bukan bukti pembayaran.\n\nLihat audit\n\nDewi Lestari\n\nKonsultasi Umum\n\ndr. Budi Santoso\n\nRp 75.000\n\n13 Nov 17:45\n\nQA Fix Patient\n\nKonsultasi Umum\n\nQA Fix Doctor\n\nRp 75.000\n\n13 Nov 15:55",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:30.325Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Profil klinik",
+    "url": "http://127.0.0.1:18961/admin/clinic/1/edit",
+    "title": "ClinicOS",
+    "headings": [
+      "Profil klinik",
+      "Identitas dan operasional",
+      "Profil dasar",
+      "Jam operasional"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "Batal",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "×",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Simpan perubahan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [
+      {
+        "name": "name",
+        "id": "name",
+        "type": "text",
+        "required": true,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Nama klinik"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "slug",
+        "id": "slug",
+        "type": "text",
+        "required": true,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Slug klinik"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "email",
+        "id": "email",
+        "type": "email",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Email klinik"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "phone",
+        "id": "phone",
+        "type": "text",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Nomor telepon"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "address",
+        "id": "address",
+        "type": "textarea",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Alamat"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "description",
+        "id": "description",
+        "type": "textarea",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Deskripsi singkat"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "logo",
+        "id": "logo",
+        "type": "file",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Logo klinik"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "opening_time",
+        "id": "opening_time",
+        "type": "time",
+        "required": true,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Jam buka"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "closing_time",
+        "id": "closing_time",
+        "type": "time",
+        "required": true,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Jam tutup"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "timezone",
+        "id": "timezone",
+        "type": "select-one",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Zona waktu"
+        ],
+        "aria_label": null,
+        "options": [
+          "WIB",
+          "WITA",
+          "WIT"
+        ]
+      },
+      {
+        "name": "queue_prefix",
+        "id": "queue_prefix",
+        "type": "text",
+        "required": true,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Prefix antrean"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "is_active",
+        "id": "",
+        "type": "checkbox",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Klinik aktif dan dapat digunakan"
+        ],
+        "aria_label": null
+      }
+    ],
+    "forms": [
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/admin/clinic/1",
+        "fields": [
+          "_method",
+          "name",
+          "slug",
+          "email",
+          "phone",
+          "address",
+          "description",
+          "remove_logo",
+          "logo",
+          "opening_time",
+          "closing_time",
+          "timezone",
+          "queue_prefix",
+          "is_active",
+          "is_active"
+        ]
+      }
+    ],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      },
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      },
+      {
+        "tag": "P",
+        "label": null,
+        "visible": false
+      },
+      {
+        "tag": "SPAN",
+        "label": null,
+        "visible": true
+      },
+      {
+        "tag": "SPAN",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nPENGATURAN\n\nProfil klinik\nIdentitas dan operasional\n\nInformasi ini menjadi sumber utama untuk layanan, jadwal, dan komunikasi pasien.\n\nProfil dasar\n\nNama, alamat, dan kontak resmi klinik.\n\nNama klinik\nSlug klinik\nEmail klinik\nNomor telepon\nAlamat\nDeskripsi singkat\nLogo klinik\n\nJPG, PNG, atau WebP. Maksimal 2 MB.\n\nJam operasional\n\nJadwal dokter harus berada di dalam rentang waktu ini.\n\nJam buka\nJam tutup\nZona waktu\nWIB\nWITA\nWIT\nPrefix antrean\nKlinik aktif dan dapat digunakan\nBatal\nSimpan perubahan",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:31.095Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Tim klinik",
+    "url": "http://127.0.0.1:18961/admin/staff",
+    "title": "ClinicOS",
+    "headings": [
+      "Dokter & resepsionis",
+      "Tim klinik"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "+ Tambah staf",
+        "target": "http://127.0.0.1:18961/admin/staff/create",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/staff/15/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/staff/14/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/staff/12/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/staff/3/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/staff/4/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/staff/6/edit",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [],
+    "forms": [],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nMANAJEMEN TIM\n\nDokter & resepsionis\n+ Tambah staf\nTim klinik\n\nKelola akses operasional dan profil dokter tanpa membuka data medis kepada admin.\n\nSTAF\tPERAN\tSPESIALISASI\tSTATUS\tAKSI\n\nQ\n\nQA Deep Dokter\n\ndeep.doctor@clinicos.test\n\n\tDoctor\tDokter Umum\t\nAktif\tEdit\n\nQ\n\nQA Deep Resepsionis\n\ndeep.receptionist@clinicos.test\n\n\tReceptionist\t—\t\nAktif\tEdit\n\nQ\n\nQA Fix Doctor\n\nfix.doctor@clinicos.test\n\n\tDoctor\tDokter Umum\t\nAktif\tEdit\n\nD\n\ndr. Budi Santoso\n\ndoctor@clinicos.test\n\n\tDoctor\tDokter Umum\t\nAktif\tEdit\n\nS\n\nSiti Rahma\n\nreceptionist@clinicos.test\n\n\tReceptionist\t—\t\nAktif\tEdit\n\nD\n\ndrg. Raka Adinata\n\ndentist@clinicos.test\n\n\tDoctor\tDokter Gigi\t\nAktif\tEdit",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:31.870Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Layanan",
+    "url": "http://127.0.0.1:18961/admin/services",
+    "title": "ClinicOS",
+    "headings": [
+      "Layanan",
+      "Daftar layanan"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "+ Tambah layanan",
+        "target": "http://127.0.0.1:18961/admin/services/create",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/services/3/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/services/1/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/services/4/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/services/2/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/services/5/edit",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [],
+    "forms": [],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nKATALOG KLINIK\n\nLayanan\n+ Tambah layanan\nDaftar layanan\n\nAtur biaya dan durasi standar sebagai dasar pendaftaran pasien.\n\nLAYANAN\tBIAYA\tDURASI\tDOKTER\tSTATUS\tAKSI\n\n\nKonsultasi Anak\n\nLayanan Konsultasi Anak di Klinik Sehat Sentosa.\n\n\tRp 100.000\t30 menit\t1\tAktif\tEdit\n\n\nKonsultasi Umum\n\nLayanan Konsultasi Umum di Klinik Sehat Sentosa.\n\n\tRp 75.000\t30 menit\t2\tAktif\tEdit\n\n\nPemeriksaan Gigi Umum\n\nPemeriksaan, konsultasi, dan perawatan dasar kesehatan gigi.\n\n\tRp 150.000\t45 menit\t1\tAktif\tEdit\n\n\nPemeriksaan Kesehatan\n\nLayanan Pemeriksaan Kesehatan di Klinik Sehat Sentosa.\n\n\tRp 125.000\t45 menit\t1\tAktif\tEdit\n\n\nQA Deep Konsultasi\n\nLayanan sintetis untuk audit interaksi.\n\n\tRp 85.000\t25 menit\t1\tAktif\tEdit",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:32.600Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Jadwal dokter",
+    "url": "http://127.0.0.1:18961/admin/doctor-schedules",
+    "title": "ClinicOS",
+    "headings": [
+      "Jadwal dokter",
+      "Jadwal praktik"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "+ Tambah jadwal",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/create",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/1/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/8/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/2/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/9/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/16/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/3/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/10/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/4/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/11/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/5/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/12/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/6/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/13/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/17/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/15/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/7/edit",
+        "visible": true
+      },
+      {
+        "label": "Edit",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules/14/edit",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [],
+    "forms": [],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nOPERASIONAL\n\nJadwal dokter\n+ Tambah jadwal\nJadwal praktik\n\nAtur sesi dan kuota dokter dalam jam operasional klinik.\n\nDOKTER\tHARI\tJAM PRAKTIK\tKUOTA\tSTATUS\tAKSI\n\n\ndr. Budi Santoso\n\nDokter Umum\n\n\tMinggu\t00:00–23:59\t16 pasien\tAktif\tEdit\n\n\ndrg. Raka Adinata\n\nDokter Gigi\n\n\tMinggu\t08:00–17:00\t12 pasien\tAktif\tEdit\n\n\ndr. Budi Santoso\n\nDokter Umum\n\n\tSenin\t00:00–23:59\t16 pasien\tAktif\tEdit\n\n\ndrg. Raka Adinata\n\nDokter Gigi\n\n\tSenin\t08:00–17:00\t12 pasien\tAktif\tEdit\n\n\nQA Deep Dokter\n\nDokter Umum\n\n\tSenin\t08:00–12:00\t12 pasien\tAktif\tEdit\n\n\ndr. Budi Santoso\n\nDokter Umum\n\n\tSelasa\t00:00–23:59\t16 pasien\tAktif\tEdit\n\n\ndrg. Raka Adinata\n\nDokter Gigi\n\n\tSelasa\t08:00–17:00\t12 pasien\tAktif\tEdit\n\n\ndr. Budi Santoso\n\nDokter Umum\n\n\tRabu\t00:00–23:59\t16 pasien\tAktif\tEdit\n\n\ndrg. Raka Adinata\n\nDokter Gigi\n\n\tRabu\t08:00–17:00\t12 pasien\tAktif\tEdit\n\n\ndr. Budi Santoso\n\nDokter Umum\n\n\tKamis\t00:00–23:59\t16 pasien\tAktif\tEdit\n\n\ndrg. Raka Adinata\n\nDokter Gigi\n\n\tKamis\t08:00–17:00\t12 pasien\tAktif\tEdit\n\n\ndr. Budi Santoso\n\nDokter Umum\n\n\tJumat\t00:00–23:59\t16 pasien\tAktif\tEdit\n\n\ndrg. Raka Adinata\n\nDokter Gigi\n\n\tJumat\t08:00–17:00\t12 pasien\tAktif\tEdit\n\n\nQA Deep Dokter\n\nDokter Umum\n\n\tJumat\t18:00–23:59\t20 pasien\tAktif\tEdit\n\n\nQA Fix Doctor\n\nDokter Umum\n\n\tJumat\t22:00–23:59\t100 pasien\tAktif\tEdit\n\n\ndr. Budi Santoso\n\nDokter Umum\n\n\tSabtu\t00:00–23:59\t16 pasien\tAktif\tEdit\n\n\ndrg. Raka Adinata\n\nDokter Gigi\n\n\tSabtu\t08:00–17:00\t12 pasien\tAktif\tEdit",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:33.366Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Pasien",
+    "url": "http://127.0.0.1:18961/receptionist/patients",
+    "title": "ClinicOS",
+    "headings": [
+      "Pasien",
+      "Data pasien"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "+ Pasien baru",
+        "target": "http://127.0.0.1:18961/receptionist/patients/create",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/17",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/16",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/15",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/14",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/13",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/8",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/1",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/2",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/5",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/11",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/6",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/3",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/10",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/9",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/patients/4",
+        "visible": true
+      },
+      {
+        "label": "Next »",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": false
+      },
+      {
+        "label": "2",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Cari",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [
+      {
+        "name": "search",
+        "id": "filter_search",
+        "type": "text",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Cari pasien"
+        ],
+        "aria_label": null
+      }
+    ],
+    "forms": [
+      {
+        "method": "get",
+        "action": "http://127.0.0.1:18961/receptionist/patients",
+        "fields": [
+          "search"
+        ]
+      }
+    ],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nREGISTRASI\n\nPasien\n+ Pasien baru\nData pasien\n\nCari berdasarkan nama, nomor rekam medis, NIK, atau telepon.\n\nCari pasien\nCari\nNO. RM\tPASIEN\tKONTAK\tSTATUS\tAKSI\nRM-0001-000017\t\n\nQA Deep Journey Utama\n\n05/07/1991 · Laki-laki\n\n\t\n\n0812777154735\n\n—\n\n\tAktif\tDetail\nRM-0001-000016\t\n\nQA Deep Anggota Keluarga\n\n01/01/2001 · Laki-laki\n\n\t\n\n081299990001\n\n—\n\n\tAktif\tDetail\nRM-0001-000015\t\n\nQA Deep Pasien\n\n12/04/1992 · Perempuan\n\n\t\n\n081299990001\n\ndeep.patient@clinicos.test\n\n\tAktif\tDetail\nRM-0001-000014\t\n\nQA Fix Letters before-ux\n\n01/01/1990 · Laki-laki\n\n\t\n\nabc\n\n—\n\n\tAktif\tDetail\nQA-FIX-001\t\n\nQA Fix Patient\n\n01/01/1990 · Laki-laki\n\n\t\n\n081277778888\n\nfix.patient@clinicos.test\n\n\tAktif\tDetail\nRM-0001-000008\t\n\nMaria Christina\n\n29/12/1988 · Perempuan\n\n\t\n\n081223450008\n\nmaria.christina@example.test\n\n\tAktif\tDetail\nRM-0001-000001\t\n\nAhmad Fauzi\n\n10/05/1990 · Laki-laki\n\n\t\n\n081266665555\n\npatient@clinicos.test\n\n\tAktif\tDetail\nRM-0001-000002\t\n\nSiti Aminah\n\n15/02/1985 · Perempuan\n\n\t\n\n081298765401\n\nsiti.aminah@example.test\n\n\tAktif\tDetail\nRM-0001-000005\t\n\nHendra Gunawan\n\n19/05/1960 · Laki-laki\n\n\t\n\n081320450005\n\n—\n\n\tAktif\tDetail\nRM-0001-000011\t\n\nSoedarto\n\n05/10/1945 · Laki-laki\n\n\t\n\n081377770011\n\n—\n\n\tAktif\tDetail\nRM-0001-000006\t\n\nNadia Putri\n\n03/03/2015 · Perempuan\n\n\t\n\n081911220006\n\n—\n\n\tAktif\tDetail\nRM-0001-000003\t\n\nBambang Sutrisno\n\n22/11/1972 · Laki-laki\n\n\t\n\n082112340003\n\n—\n\n\tAktif\tDetail\nRM-0001-000010\t\n\nLina Marlina\n\n24/04/2002 · Perempuan\n\n\t\n\n083812340010\n\nlina.marlina@example.test\n\n\tAktif\tDetail\nRM-0001-000009\t\n\nYusuf Maulana\n\n11/06/1979 · Laki-laki\n\n\t\n\n085155660009\n\n—\n\n\tAktif\tDetail\nRM-0001-000004\t\n\nDewi Lestari\n\n08/09/1998 · Perempuan\n\n\t\n\n085721340004\n\ndewi.lestari@example.test\n\n\tAktif\tDetail\n\nShowing 1 to 15 of 17 results\n\n1\n2",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:34.134Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Booking & antrean",
+    "url": "http://127.0.0.1:18961/receptionist/appointments",
+    "title": "ClinicOS",
+    "headings": [
+      "Booking & antrean",
+      "Daftar booking"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "+ Booking baru",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/create",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/1",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/28",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/27",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/26",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/25",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/24",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/23",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/22",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/20",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/19",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/18",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/17",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/16",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/15",
+        "visible": true
+      },
+      {
+        "label": "Detail",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/14",
+        "visible": true
+      },
+      {
+        "label": "Next »",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": false
+      },
+      {
+        "label": "2",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Tampilkan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [
+      {
+        "name": "date",
+        "id": "filter_date",
+        "type": "date",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Tanggal booking"
+        ],
+        "aria_label": null
+      }
+    ],
+    "forms": [
+      {
+        "method": "get",
+        "action": "http://127.0.0.1:18961/receptionist/appointments",
+        "fields": [
+          "date"
+        ]
+      }
+    ],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nPENDAFTARAN\n\nBooking & antrean\n+ Booking baru\nDaftar booking\n\nNomor antrean dibuat otomatis sesuai sesi dokter.\n\nTanggal booking\nTampilkan\nTANGGAL\tANTREAN\tPASIEN\tDOKTER & LAYANAN\tSTATUS\tAKSI\n15 Nov 2026\tKS-001\t\n\nMaria Christina\n\nKLI-YCZ6KLSW\n\n\t\n\ndr. Budi Santoso\n\nKonsultasi Umum\n\n\tBOOKED\tDetail\n13 Nov 2026\tKS-003\t\n\nQA Deep Pasien\n\nKLI-GXZVLYO0\n\n\t\n\nQA Deep Dokter\n\nQA Deep Konsultasi\n\n\tCANCELLED\tDetail\n13 Nov 2026\tKS-002\t\n\nAhmad Fauzi\n\nKLI-SCTCPLIQ\n\n\t\n\nQA Deep Dokter\n\nQA Deep Konsultasi\n\n\tCANCELLED\tDetail\n13 Nov 2026\tKS-001\t\n\nQA Deep Journey Utama\n\nKLI-YIX2ZJTT\n\n\t\n\nQA Deep Dokter\n\nQA Deep Konsultasi\n\n\tBOOKED\tDetail\n13 Nov 2026\tKS-004\t\n\nQA Fix Patient\n\nKLI-F3PZZWCE\n\n\t\n\nQA Fix Doctor\n\nKonsultasi Umum\n\n\tBOOKED\tDetail\n13 Nov 2026\tKS-003\t\n\nQA Fix Patient\n\nKLI-BOSGKMBA\n\n\t\n\nQA Fix Doctor\n\nKonsultasi Umum\n\n\tBOOKED\tDetail\n13 Nov 2026\tKS-002\t\n\nQA Fix Patient\n\nKLI-BBSIQQXK\n\n\t\n\nQA Fix Doctor\n\nKonsultasi Umum\n\n\tCOMPLETED\tDetail\n13 Nov 2026\tKS-001\t\n\nQA Fix Patient\n\nKLI-EL468VOD\n\n\t\n\nQA Fix Doctor\n\nKonsultasi Umum\n\n\tCANCELLED\tDetail\n13 Nov 2026\tKS-108\t\n\nLina Marlina\n\nDEMO-Q-008\n\n\t\n\ndr. Budi Santoso\n\nKonsultasi Umum\n\n\tCANCELLED\tDetail\n13 Nov 2026\tKS-107\t\n\nYusuf Maulana\n\nDEMO-Q-007\n\n\t\n\ndr. Budi Santoso\n\nKonsultasi Umum\n\n\tNO_SHOW\tDetail\n13 Nov 2026\tKS-106\t\n\nMaria Christina\n\nDEMO-Q-006\n\n\t\n\ndr. Budi Santoso\n\nKonsultasi Umum\n\n\tBOOKED\tDetail\n13 Nov 2026\tKS-105\t\n\nDewi Lestari\n\nDEMO-Q-005\n\n\t\n\ndr. Budi Santoso\n\nKonsultasi Umum\n\n\tCOMPLETED\tDetail\n13 Nov 2026\tKS-104\t\n\nRizky Pratama\n\nDEMO-Q-004\n\n\t\n\ndr. Budi Santoso\n\nKonsultasi Umum\n\n\tBOOKED\tDetail\n13 Nov 2026\tKS-103\t\n\nBambang Sutrisno\n\nDEMO-Q-003\n\n\t\n\ndrg. Raka Adinata\n\nPemeriksaan Gigi Umum\n\n\tBOOKED\tDetail\n13 Nov 2026\tKS-102\t\n\nSiti Aminah\n\nDEMO-Q-002\n\n\t\n\ndr. Budi Santoso\n\nKonsultasi Umum\n\n\tBOOKED\tDetail\n\nShowing 1 to 15 of 28 results\n\n1\n2",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:34.927Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Antrean hari ini",
+    "url": "http://127.0.0.1:18961/receptionist/queues",
+    "title": "ClinicOS",
+    "headings": [
+      "Antrean pasien",
+      "Antrean 13 November 2026"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "+ Booking walk-in",
+        "target": "http://127.0.0.1:18961/receptionist/appointments/create",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "×",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "dr. Budi Santoso",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "drg. Raka Adinata",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "QA Fix Doctor",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "QA Deep Dokter",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "×",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "dr. Budi Santoso · Minggu 00:00",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "dr. Budi Santoso · Senin 00:00",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "dr. Budi Santoso · Selasa 00:00",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "dr. Budi Santoso · Rabu 00:00",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "dr. Budi Santoso · Kamis 00:00",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "dr. Budi Santoso · Jumat 00:00",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "dr. Budi Santoso · Sabtu 00:00",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "drg. Raka Adinata · Minggu 08:00",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Terapkan filter",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Check-in",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "No-show",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Batalkan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Panggil",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "No-show",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Batalkan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Kembalikan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "No-show",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Batalkan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Lewati",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "No-show",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Batalkan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Check-in",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "No-show",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Batalkan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Check-in",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "No-show",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Batalkan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Lewati",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "No-show",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Batalkan",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [
+      {
+        "name": "date",
+        "id": "date",
+        "type": "date",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Tanggal"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "",
+        "id": "doctor_id_search",
+        "type": "search",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Dokter"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "",
+        "id": "doctor_schedule_id_search",
+        "type": "search",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Sesi"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "status",
+        "id": "status",
+        "type": "select-one",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Status"
+        ],
+        "aria_label": null,
+        "options": [
+          "Semua status",
+          "Terdaftar",
+          "Menunggu",
+          "Dipanggil",
+          "Diperiksa",
+          "Selesai",
+          "Dibatalkan",
+          "Dilewati",
+          "Tidak hadir"
+        ]
+      }
+    ],
+    "forms": [
+      {
+        "method": "get",
+        "action": "http://127.0.0.1:18961/receptionist/queues",
+        "fields": [
+          "date",
+          "doctor_id",
+          "doctor_schedule_id",
+          "status"
+        ]
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/13/check-in",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/13/no-show",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/13/cancel",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/14/call",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/14/no-show",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/14/cancel",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/18/return",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/18/no-show",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/18/cancel",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/15/skip",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/15/no-show",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/15/cancel",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/24/check-in",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/24/no-show",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/24/cancel",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/25/check-in",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/25/no-show",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/25/cancel",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/26/skip",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/26/no-show",
+        "fields": []
+      },
+      {
+        "method": "post",
+        "action": "http://127.0.0.1:18961/queues/26/cancel",
+        "fields": []
+      }
+    ],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Hapus pilihan dokter",
+        "visible": false
+      },
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      },
+      {
+        "tag": "P",
+        "label": null,
+        "visible": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Hapus pilihan sesi",
+        "visible": false
+      },
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      },
+      {
+        "tag": "P",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nOPERASIONAL HARI INI\n\nAntrean pasien\n+ Booking walk-in\nAntrean 13 November 2026\n\nCheck-in pasien sesuai kedatangan, lalu panggil satu per satu dalam setiap sesi dokter.\n\nTERDAFTAR\n\n3\n\nMENUNGGU\n\n1\n\nDIPANGGIL\n\n2\n\nDIPERIKSA\n\n1\n\nSELESAI\n\n2\n\nDILEWATI\n\n1\n\nTanggal\nDokter\nSesi\nStatus\nSemua status\nTerdaftar\nMenunggu\nDipanggil\nDiperiksa\nSelesai\nDibatalkan\nDilewati\nTidak hadir\nTerapkan filter\n\nKS-101\n\nTerdaftar\n\nPASIEN\n\nAhmad Fauzi\n\nRM-0001-000001 · DEMO-Q-001\n\nDOKTER & SESI\n\ndr. Budi Santoso\n\n00:00–23:59 · Konsultasi Umum\n\nCheck-in\nNo-show\nBatalkan\n\nKS-102\n\nMenunggu\n\nPASIEN\n\nSiti Aminah\n\nRM-0001-000002 · DEMO-Q-002\n\nDOKTER & SESI\n\ndr. Budi Santoso\n\n00:00–23:59 · Konsultasi Umum\n\nPanggil\nNo-show\nBatalkan\n\nKS-104\n\nDiperiksa\n\nPASIEN\n\nRizky Pratama\n\nRM-0001-000007 · DEMO-Q-004\n\nDOKTER & SESI\n\ndr. Budi Santoso\n\n00:00–23:59 · Konsultasi Umum\n\nKS-105\n\nSelesai\n\nPASIEN\n\nDewi Lestari\n\nRM-0001-000004 · DEMO-Q-005\n\nDOKTER & SESI\n\ndr. Budi Santoso\n\n00:00–23:59 · Konsultasi Umum\n\nKS-106\n\nDilewati\n\nPASIEN\n\nMaria Christina\n\nRM-0001-000008 · DEMO-Q-006\n\nDOKTER & SESI\n\ndr. Budi Santoso\n\n00:00–23:59 · Konsultasi Umum\n\nKembalikan\nNo-show\nBatalkan\n\nKS-107\n\nTidak hadir\n\nPASIEN\n\nYusuf Maulana\n\nRM-0001-000009 · DEMO-Q-007\n\nDOKTER & SESI\n\ndr. Budi Santoso\n\n00:00–23:59 · Konsultasi Umum\n\nKS-108\n\nDibatalkan\n\nPASIEN\n\nLina Marlina\n\nRM-0001-000010 · DEMO-Q-008\n\nDOKTER & SESI\n\ndr. Budi Santoso\n\n00:00–23:59 · Konsultasi Umum\n\nKS-103\n\nDipanggil\n\nPASIEN\n\nBambang Sutrisno\n\nRM-0001-000003 · DEMO-Q-003\n\nDOKTER & SESI\n\ndrg. Raka Adinata\n\n08:00–17:00 · Pemeriksaan Gigi Umum\n\nLewati\nNo-show\nBatalkan\nSedang dipanggil sejak 16:05\n\nKS-001\n\nDibatalkan\n\nPASIEN\n\nQA Fix Patient\n\nQA-FIX-001 · KLI-EL468VOD\n\nDOKTER & SESI\n\nQA Fix Doctor\n\n22:00–23:59 · Konsultasi Umum\n\nKS-002\n\nSelesai\n\nPASIEN\n\nQA Fix Patient\n\nQA-FIX-001 · KLI-BBSIQQXK\n\nDOKTER & SESI\n\nQA Fix Doctor\n\n22:00–23:59 · Konsultasi Umum\n\nKS-003\n\nTerdaftar\n\nPASIEN\n\nQA Fix Patient\n\nQA-FIX-001 · KLI-BOSGKMBA\n\nDOKTER & SESI\n\nQA Fix Doctor\n\n22:00–23:59 · Konsultasi Umum\n\nCheck-in\nNo-show\nBatalkan\n\nKS-004\n\nTerdaftar\n\nPASIEN\n\nQA Fix Patient\n\nQA-FIX-001 · KLI-F3PZZWCE\n\nDOKTER & SESI\n\nQA Fix Doctor\n\n22:00–23:59 · Konsultasi Umum\n\nCheck-in\nNo-show\nBatalkan\n\nKS-001\n\nDipanggil\n\nPASIEN\n\nQA Deep Journey Utama\n\nRM-0001-000017 · KLI-YIX2ZJTT\n\nDOKTER & SESI\n\nQA Deep Dokter\n\n18:00–23:59 · QA Deep Konsultasi\n\nLewati\nNo-show\nBatalkan\nSedang dipanggil sejak 16:12\n\nKS-002\n\nDibatalkan\n\nPASIEN\n\nAhmad Fauzi\n\nRM-0001-000001 · KLI-SCTCPLIQ\n\nDOKTER & SESI\n\nQA Deep Dokter\n\n18:00–23:59 · QA Deep Konsultasi\n\nKS-003\n\nDibatalkan\n\nPASIEN\n\nQA Deep Pasien\n\nRM-0001-000015 · KLI-GXZVLYO0\n\nDOKTER & SESI\n\nQA Deep Dokter\n\n18:00–23:59 · QA Deep Konsultasi",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:35.724Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Audit aktivitas",
+    "url": "http://127.0.0.1:18961/admin/audit-logs",
+    "title": "ClinicOS",
+    "headings": [
+      "Audit aktivitas"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "Next »",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": false
+      },
+      {
+        "label": "2",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "3",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Terapkan filter",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [
+      {
+        "name": "from",
+        "id": "audit_from",
+        "type": "date",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Dari"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "to",
+        "id": "audit_to",
+        "type": "date",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Sampai"
+        ],
+        "aria_label": null
+      },
+      {
+        "name": "action",
+        "id": "audit_action",
+        "type": "select-one",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Aksi"
+        ],
+        "aria_label": null,
+        "options": [
+          "Semua aksi",
+          "appointment.cancelled",
+          "appointment.created",
+          "auth.login",
+          "clinic.updated",
+          "doctor_schedule.created",
+          "doctor_schedule.updated",
+          "medical_record.draft_saved",
+          "medical_record.finalized",
+          "patient.created",
+          "patient.updated",
+          "payment.notification.processed",
+          "platform.tenant.viewed",
+          "queue.status_changed",
+          "service.created",
+          "staff.created",
+          "staff.updated",
+          "subscription.granted",
+          "visit.completed",
+          "visit.started"
+        ]
+      },
+      {
+        "name": "actor",
+        "id": "audit_actor",
+        "type": "text",
+        "required": false,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Aktor"
+        ],
+        "aria_label": null
+      }
+    ],
+    "forms": [
+      {
+        "method": "get",
+        "action": "http://127.0.0.1:18961/admin/[object%20HTMLSelectElement]",
+        "fields": [
+          "from",
+          "to",
+          "action",
+          "actor"
+        ]
+      }
+    ],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nPENGAWASAN\n\nAudit aktivitas\nDari\nSampai\nAksi\nSemua aksi\nappointment.cancelled\nappointment.created\nauth.login\nclinic.updated\ndoctor_schedule.created\ndoctor_schedule.updated\nmedical_record.draft_saved\nmedical_record.finalized\npatient.created\npatient.updated\npayment.notification.processed\nplatform.tenant.viewed\nqueue.status_changed\nservice.created\nstaff.created\nstaff.updated\nsubscription.granted\nvisit.completed\nvisit.started\nAktor\nTerapkan filter\nWAKTU\tAKTOR\tAKSI\tRESOURCE\tREFERENSI AMAN\n13 Nov 2026 16:13\t\n\nQA Operational Admin\n\n127.0.0.1\n\n\tauth.login\tUser #11\t\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tappointment.cancelled\tAppointment #28\t\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tappointment.created\tAppointment #28\tsource: RECEPTIONIST\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tqueue.status_changed\tQueue #27\tfrom: WAITINGto: CANCELLED\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tqueue.status_changed\tQueue #26\tfrom: WAITINGto: CALLED\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tqueue.status_changed\tQueue #26\tfrom: SKIPPEDto: WAITING\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tqueue.status_changed\tQueue #26\tfrom: WAITINGto: CALLED\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tqueue.status_changed\tQueue #26\tfrom: CALLEDto: SKIPPED\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tqueue.status_changed\tQueue #26\tfrom: BOOKEDto: WAITING\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tqueue.status_changed\tQueue #27\tfrom: BOOKEDto: WAITING\n13 Nov 2026 16:12\t\n\nAhmad Fauzi\n\n127.0.0.1\n\n\tpatient.updated\tPatient #1\tsource: PATIENT_BOOKING\n13 Nov 2026 16:12\t\n\nAhmad Fauzi\n\n127.0.0.1\n\n\tappointment.created\tAppointment #27\tsource: ONLINE\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tpatient.created\tPatient #17\tsource: STAFF_OR_ACCOUNT\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tappointment.created\tAppointment #26\tsource: RECEPTIONIST\n13 Nov 2026 16:12\t\n\nQA Deep Dokter\n\n127.0.0.1\n\n\tauth.login\tUser #15\t\n13 Nov 2026 16:12\t\n\nClinic Administrator\n\n127.0.0.1\n\n\tdoctor_schedule.created\tDoctorSchedule #17\t\n13 Nov 2026 16:12\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tauth.login\tUser #4\t\n13 Nov 2026 16:12\t\n\nClinic Administrator\n\n127.0.0.1\n\n\tauth.login\tUser #2\t\n13 Nov 2026 16:12\t\n\nClinic Administrator\n\n127.0.0.1\n\n\tclinic.updated\tClinic #1\t\n13 Nov 2026 16:11\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tpatient.created\tPatient #16\t\n13 Nov 2026 16:11\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tpatient.updated\tPatient #15\t\n13 Nov 2026 16:11\t\n\nSiti Rahma\n\n127.0.0.1\n\n\tpatient.created\tPatient #15\t\n13 Nov 2026 16:11\t\n\nClinic Administrator\n\n127.0.0.1\n\n\tstaff.created\tUser #15\t\n13 Nov 2026 16:11\t\n\nClinic Administrator\n\n127.0.0.1\n\n\tdoctor_schedule.created\tDoctorSchedule #16\t\n13 Nov 2026 16:11\t\n\nClinic Administrator\n\n127.0.0.1\n\n\tstaff.updated\tUser #14\t\n13 Nov 2026 16:11\t\n\nClinic Administrator\n\n127.0.0.1\n\n\tstaff.updated\tUser #14\t\n13 Nov 2026 16:11\t\n\nQA Deep Resepsionis\n\n127.0.0.1\n\n\tauth.login\tUser #14\t\n13 Nov 2026 16:11\t\n\nClinic Administrator\n\n127.0.0.1\n\n\tstaff.updated\tUser #14\t\n13 Nov 2026 16:11\t\n\nClinic Administrator\n\n127.0.0.1\n\n\tstaff.created\tUser #14\t\n13 Nov 2026 16:11\t\n\nClinic Administrator\n\n127.0.0.1\n\n\tservice.created\tService #5\t\n\nShowing 1 to 30 of 75 results\n\n1\n2\n3",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:36.481Z"
+  },
+  {
+    "role": "operational-admin",
+    "label": "Notifikasi\n                0",
+    "url": "http://127.0.0.1:18961/notifications",
+    "title": "ClinicOS",
+    "headings": [
+      "Notifikasi"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/admin/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Profil klinik",
+        "target": "http://127.0.0.1:18961/admin/clinic",
+        "visible": true
+      },
+      {
+        "label": "Tim klinik",
+        "target": "http://127.0.0.1:18961/admin/staff",
+        "visible": true
+      },
+      {
+        "label": "Layanan",
+        "target": "http://127.0.0.1:18961/admin/services",
+        "visible": true
+      },
+      {
+        "label": "Jadwal dokter",
+        "target": "http://127.0.0.1:18961/admin/doctor-schedules",
+        "visible": true
+      },
+      {
+        "label": "Pasien",
+        "target": "http://127.0.0.1:18961/receptionist/patients",
+        "visible": true
+      },
+      {
+        "label": "Booking & antrean",
+        "target": "http://127.0.0.1:18961/receptionist/appointments",
+        "visible": true
+      },
+      {
+        "label": "Antrean hari ini",
+        "target": "http://127.0.0.1:18961/receptionist/queues",
+        "visible": true
+      },
+      {
+        "label": "Audit aktivitas",
+        "target": "http://127.0.0.1:18961/admin/audit-logs",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Operational Admin\noperational.admin@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [],
+    "forms": [],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nClinic Admin\n\nDashboard\nProfil klinik\nTim klinik\nLayanan\nJadwal dokter\nPasien\nBooking & antrean\nAntrean hari ini\nAudit aktivitas\nNotifikasi\nQ\nQA Operational Admin\noperational.admin@clinicos.test\nKeluar\n\nAKTIVITAS AKUN\n\nNotifikasi\n\nBelum ada notifikasi\n\nPembaruan booking dan antrean akan muncul di sini.",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:13:37.371Z"
+  },
+  {
+    "role": "Patient",
+    "label": "Booking baru setelah perbaikan",
+    "url": "http://127.0.0.1:18961/patient/appointments/create",
+    "title": "ClinicOS",
+    "headings": [
+      "Booking baru",
+      "Pilih klinik Anda"
+    ],
+    "links": [
+      {
+        "label": "ClinicOS",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": false
+      },
+      {
+        "label": "ClinicOS\nCLINIC WORKSPACE",
+        "target": "http://127.0.0.1:18961/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Dashboard",
+        "target": "http://127.0.0.1:18961/patient/dashboard",
+        "visible": true
+      },
+      {
+        "label": "Booking saya",
+        "target": "http://127.0.0.1:18961/patient/appointments",
+        "visible": true
+      },
+      {
+        "label": "Notifikasi\n14",
+        "target": "http://127.0.0.1:18961/notifications",
+        "visible": true
+      },
+      {
+        "label": "Q\nQA Fix Patient\nfix.patient@clinicos.test",
+        "target": "http://127.0.0.1:18961/profile",
+        "visible": true
+      },
+      {
+        "label": "Klinik Sehat Sentosa",
+        "target": "http://127.0.0.1:18961/clinic/klinik-sehat-sentosa/booking",
+        "visible": true
+      }
+    ],
+    "actions": [
+      {
+        "text": "Buka navigasi",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "✕",
+        "type": "button",
+        "visible": false,
+        "disabled": false
+      },
+      {
+        "text": "Keluar",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "text": "Lanjutkan booking",
+        "type": "submit",
+        "visible": true,
+        "disabled": false
+      }
+    ],
+    "fields": [
+      {
+        "name": "clinic_code",
+        "id": "clinic_code",
+        "type": "text",
+        "required": true,
+        "disabled": false,
+        "visible": true,
+        "labels": [
+          "Kode klinik"
+        ],
+        "aria_label": null
+      }
+    ],
+    "forms": [
+      {
+        "method": "get",
+        "action": "http://127.0.0.1:18961/patient/appointments/create",
+        "fields": [
+          "clinic_code"
+        ]
+      }
+    ],
+    "dialogs": [
+      {
+        "tag": "DIV",
+        "label": null,
+        "visible": false
+      }
+    ],
+    "text": "ClinicOS\nCLINIC WORKSPACE\n\nKlinik Sehat Sentosa\n\nPasien\n\nDashboard\nBooking saya\nNotifikasi\n14\nQ\nQA Fix Patient\nfix.patient@clinicos.test\nKeluar\nBooking baru\nPilih klinik Anda\n\nKlinik yang terhubung dengan akun Anda.\n\nKlinik Sehat Sentosa\nKode klinik\n\nMasukkan kode pada tautan booking dari klinik, misalnya klinik-sehat-sentosa. Anda juga dapat membuka tautan booking langsung.\n\nLanjutkan booking",
+    "responsive": [
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": false
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": false
+      }
+    ],
+    "observed": "2026-11-13T09:14:40.372Z"
+  }
+]

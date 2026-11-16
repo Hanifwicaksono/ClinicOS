@@ -1,0 +1,10 @@
+{
+  "root": "C:/Users/User/AppData/Local/Temp/clinicos-deep-product-ttd05o",
+  "repo": "C:\\laragon\\www\\ClinicOS",
+  "base": "http://127.0.0.1:18961",
+  "database": "C:/Users/User/AppData/Local/Temp/clinicos-deep-product-ttd05o/audit.sqlite",
+  "started": "2026-11-14T08:04:03.125Z",
+  "playwright": "C:/Users/User/AppData/Local/Temp/clinicos-readiness-0_thp4gu/tools/node_modules/playwright/index.mjs",
+  "provenance": "Clone of retained disposable CCL fixture, never user DB",
+  "source_fixture": "C:/Users/User/AppData/Local/Temp/clinicos-deep-i5R5Lc"
+}

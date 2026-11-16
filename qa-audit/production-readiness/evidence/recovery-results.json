@@ -1,0 +1,1072 @@
+{
+  "storage_failure": {
+    "gate": "PASS",
+    "filesystem_failure_observed": true,
+    "version_unchanged": true,
+    "photo_count": 0,
+    "existing_private_files_unchanged": true
+  },
+  "transaction_recovery": {
+    "gate": "PASS",
+    "before": {
+      "patients": 4124,
+      "appointments": 81,
+      "queues": 81,
+      "notifications": 315,
+      "jobs": 0,
+      "audit_logs": 422
+    },
+    "after": {
+      "patients": 4124,
+      "appointments": 81,
+      "queues": 81,
+      "notifications": 315,
+      "jobs": 0,
+      "audit_logs": 422
+    },
+    "rolled_back": true,
+    "connection_usable": true
+  },
+  "worker_restart": {
+    "gate": "PASS",
+    "old_pid": 194416,
+    "new_pid": 226520,
+    "durable_pending_jobs": 2,
+    "remaining": 0,
+    "failed_jobs": 0,
+    "recovery_seconds_including_test_pause": 4.296000000089407,
+    "mid_job_crash_tested": false,
+    "retry_after_seconds": 90,
+    "worker_timeout_seconds": 30
+  },
+  "database_restore": {
+    "gate": "PASS",
+    "tables": 44,
+    "all_table_checksums_equal": true,
+    "backup_bytes": 1410920,
+    "backup_seconds": 1.0,
+    "restore_seconds": 4.937999999849126,
+    "source_database": "clinicos_pr_0thp4gu",
+    "restored_database": "clinicos_pr_0thp4gu_restore_03a1d9a6"
+  },
+  "private_file_restore": {
+    "gate": "PASS",
+    "files": 4,
+    "all_sha256_equal": true,
+    "restore_outside_webroot": true
+  },
+  "app_restart": {
+    "gate": "PASS",
+    "old_pids": [
+      182028,
+      173260,
+      229096,
+      203284
+    ],
+    "new_pids": [
+      173092,
+      81820,
+      233004,
+      235352
+    ],
+    "health_status": 200
+  },
+  "schema_after_recovery": {
+    "database": "clinicos_pr_0thp4gu",
+    "engines": [
+      {
+        "ENGINE": "InnoDB",
+        "tables_count": 44
+      }
+    ],
+    "foreign_key_constraints": 69,
+    "orphan_counts": {
+      "addon_periods.addon_periods_clinic_id_foreign": 0,
+      "addon_periods.addon_periods_payment_id_foreign": 0,
+      "addon_periods.addon_periods_subscription_period_id_foreign": 0,
+      "appointments.appointments_clinic_id_foreign": 0,
+      "appointments.appointments_created_by_user_id_foreign": 0,
+      "appointments.appointments_doctor_id_foreign": 0,
+      "appointments.appointments_doctor_schedule_id_foreign": 0,
+      "appointments.appointments_patient_id_foreign": 0,
+      "appointments.appointments_service_id_foreign": 0,
+      "audit_logs.audit_logs_clinic_id_foreign": 0,
+      "audit_logs.audit_logs_user_id_foreign": 0,
+      "clinic_settings.clinic_settings_clinic_id_foreign": 0,
+      "clinics.clinics_owner_user_id_foreign": 0,
+      "diagnoses.diagnoses_medical_record_id_foreign": 0,
+      "doctor_schedules.doctor_schedules_doctor_id_foreign": 0,
+      "doctor_service.doctor_service_doctor_id_foreign": 0,
+      "doctor_service.doctor_service_service_id_foreign": 0,
+      "doctors.doctors_clinic_id_foreign": 0,
+      "doctors.doctors_user_id_foreign": 0,
+      "medical_record_revisions.medical_record_revisions_corrected_by_user_id_foreign": 0,
+      "medical_record_revisions.medical_record_revisions_medical_record_id_foreign": 0,
+      "medical_records.medical_records_allergy_acknowledged_by_user_id_foreign": 0,
+      "medical_records.medical_records_created_by_user_id_foreign": 0,
+      "medical_records.medical_records_doctor_id_foreign": 0,
+      "medical_records.medical_records_patient_id_foreign": 0,
+      "medical_records.medical_records_visit_id_foreign": 0,
+      "model_has_permissions.model_has_permissions_permission_id_foreign": 0,
+      "model_has_roles.model_has_roles_role_id_foreign": 0,
+      "patient_allergies.patient_allergies_patient_id_foreign": 0,
+      "patient_allergies.patient_allergies_recorded_by_user_id_foreign": 0,
+      "patients.patients_clinic_id_foreign": 0,
+      "patients.patients_user_id_foreign": 0,
+      "payment_events.payment_events_payment_id_foreign": 0,
+      "payment_items.payment_items_addon_price_id_foreign": 0,
+      "payment_items.payment_items_payment_id_foreign": 0,
+      "payment_items.payment_items_subscription_price_id_foreign": 0,
+      "payment_items.payment_items_target_subscription_period_id_foreign": 0,
+      "payments.payments_clinic_id_foreign": 0,
+      "payments.payments_subscription_price_id_foreign": 0,
+      "prescription_items.prescription_items_prescription_id_foreign": 0,
+      "prescriptions.prescriptions_medical_record_id_foreign": 0,
+      "queues.queues_appointment_id_foreign": 0,
+      "queues.queues_clinic_id_foreign": 0,
+      "queues.queues_doctor_id_foreign": 0,
+      "queues.queues_doctor_schedule_id_foreign": 0,
+      "role_has_permissions.role_has_permissions_permission_id_foreign": 0,
+      "role_has_permissions.role_has_permissions_role_id_foreign": 0,
+      "services.services_clinic_id_foreign": 0,
+      "subscription_periods.subscription_periods_clinic_id_foreign": 0,
+      "subscription_periods.subscription_periods_granted_by_user_id_foreign": 0,
+      "subscription_periods.subscription_periods_payment_id_foreign": 0,
+      "subscription_periods.subscription_periods_subscription_id_foreign": 0,
+      "subscription_periods.subscription_periods_subscription_plan_id_foreign": 0,
+      "subscription_prices.subscription_prices_subscription_plan_id_foreign": 0,
+      "subscription_reminders.subscription_reminders_clinic_id_foreign": 0,
+      "subscription_reminders.subscription_reminders_owner_user_id_foreign": 0,
+      "subscription_reminders.subscription_reminders_subscription_period_id_foreign": 0,
+      "subscriptions.subscriptions_clinic_id_foreign": 0,
+      "subscriptions.subscriptions_subscription_plan_id_foreign": 0,
+      "treatments.treatments_medical_record_id_foreign": 0,
+      "users.users_clinic_id_foreign": 0,
+      "visits.visits_appointment_id_foreign": 0,
+      "visits.visits_clinic_id_foreign": 0,
+      "visits.visits_completed_by_user_id_foreign": 0,
+      "visits.visits_doctor_id_foreign": 0,
+      "visits.visits_patient_id_foreign": 0,
+      "visits.visits_service_id_foreign": 0,
+      "visits.visits_started_by_user_id_foreign": 0,
+      "vital_signs.vital_signs_medical_record_id_foreign": 0
+    },
+    "indexes": [
+      {
+        "TABLE_NAME": "addon_periods",
+        "INDEX_NAME": "addon_periods_clinic_id_code_starts_at_ends_at_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,code,starts_at,ends_at"
+      },
+      {
+        "TABLE_NAME": "addon_periods",
+        "INDEX_NAME": "addon_periods_payment_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "payment_id"
+      },
+      {
+        "TABLE_NAME": "addon_periods",
+        "INDEX_NAME": "addon_periods_subscription_period_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "subscription_period_id"
+      },
+      {
+        "TABLE_NAME": "addon_periods",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "addon_prices",
+        "INDEX_NAME": "addon_prices_code_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "code"
+      },
+      {
+        "TABLE_NAME": "addon_prices",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "appointments",
+        "INDEX_NAME": "appointments_access_token_hash_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "access_token_hash"
+      },
+      {
+        "TABLE_NAME": "appointments",
+        "INDEX_NAME": "appointments_booking_code_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "booking_code"
+      },
+      {
+        "TABLE_NAME": "appointments",
+        "INDEX_NAME": "appointments_clinic_id_appointment_date_status_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,appointment_date,status"
+      },
+      {
+        "TABLE_NAME": "appointments",
+        "INDEX_NAME": "appointments_created_by_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "created_by_user_id"
+      },
+      {
+        "TABLE_NAME": "appointments",
+        "INDEX_NAME": "appointments_doctor_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "doctor_id"
+      },
+      {
+        "TABLE_NAME": "appointments",
+        "INDEX_NAME": "appointments_doctor_schedule_id_appointment_date_status_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "doctor_schedule_id,appointment_date,status"
+      },
+      {
+        "TABLE_NAME": "appointments",
+        "INDEX_NAME": "appointments_idempotency_key_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "idempotency_key"
+      },
+      {
+        "TABLE_NAME": "appointments",
+        "INDEX_NAME": "appointments_patient_id_appointment_date_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "patient_id,appointment_date"
+      },
+      {
+        "TABLE_NAME": "appointments",
+        "INDEX_NAME": "appointments_service_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "service_id"
+      },
+      {
+        "TABLE_NAME": "appointments",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "audit_logs",
+        "INDEX_NAME": "audit_logs_action_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "action"
+      },
+      {
+        "TABLE_NAME": "audit_logs",
+        "INDEX_NAME": "audit_logs_clinic_id_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id"
+      },
+      {
+        "TABLE_NAME": "audit_logs",
+        "INDEX_NAME": "audit_logs_created_at_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "created_at"
+      },
+      {
+        "TABLE_NAME": "audit_logs",
+        "INDEX_NAME": "audit_logs_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "user_id"
+      },
+      {
+        "TABLE_NAME": "audit_logs",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "cache",
+        "INDEX_NAME": "cache_expiration_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "expiration"
+      },
+      {
+        "TABLE_NAME": "cache",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "key"
+      },
+      {
+        "TABLE_NAME": "cache_locks",
+        "INDEX_NAME": "cache_locks_expiration_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "expiration"
+      },
+      {
+        "TABLE_NAME": "cache_locks",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "key"
+      },
+      {
+        "TABLE_NAME": "clinic_settings",
+        "INDEX_NAME": "clinic_settings_clinic_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "clinic_id"
+      },
+      {
+        "TABLE_NAME": "clinic_settings",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "clinics",
+        "INDEX_NAME": "clinics_is_active_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "is_active"
+      },
+      {
+        "TABLE_NAME": "clinics",
+        "INDEX_NAME": "clinics_owner_user_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "owner_user_id"
+      },
+      {
+        "TABLE_NAME": "clinics",
+        "INDEX_NAME": "clinics_slug_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "slug"
+      },
+      {
+        "TABLE_NAME": "clinics",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "diagnoses",
+        "INDEX_NAME": "diagnoses_medical_record_id_is_primary_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "medical_record_id,is_primary"
+      },
+      {
+        "TABLE_NAME": "diagnoses",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "doctor_schedules",
+        "INDEX_NAME": "doctor_schedule_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "doctor_id,day_of_week,start_time,end_time"
+      },
+      {
+        "TABLE_NAME": "doctor_schedules",
+        "INDEX_NAME": "doctor_schedules_day_of_week_is_active_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "day_of_week,is_active"
+      },
+      {
+        "TABLE_NAME": "doctor_schedules",
+        "INDEX_NAME": "doctor_schedules_is_active_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "is_active"
+      },
+      {
+        "TABLE_NAME": "doctor_schedules",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "doctor_service",
+        "INDEX_NAME": "doctor_service_service_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "service_id"
+      },
+      {
+        "TABLE_NAME": "doctor_service",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "doctor_id,service_id"
+      },
+      {
+        "TABLE_NAME": "doctors",
+        "INDEX_NAME": "doctors_clinic_id_is_active_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,is_active"
+      },
+      {
+        "TABLE_NAME": "doctors",
+        "INDEX_NAME": "doctors_is_active_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "is_active"
+      },
+      {
+        "TABLE_NAME": "doctors",
+        "INDEX_NAME": "doctors_user_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "user_id"
+      },
+      {
+        "TABLE_NAME": "doctors",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "failed_jobs",
+        "INDEX_NAME": "failed_jobs_connection_queue_failed_at_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "connection,queue,failed_at"
+      },
+      {
+        "TABLE_NAME": "failed_jobs",
+        "INDEX_NAME": "failed_jobs_uuid_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "uuid"
+      },
+      {
+        "TABLE_NAME": "failed_jobs",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "job_batches",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "jobs",
+        "INDEX_NAME": "jobs_queue_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "queue"
+      },
+      {
+        "TABLE_NAME": "jobs",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "medical_record_revisions",
+        "INDEX_NAME": "medical_record_revisions_corrected_by_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "corrected_by_user_id"
+      },
+      {
+        "TABLE_NAME": "medical_record_revisions",
+        "INDEX_NAME": "medical_record_revisions_medical_record_id_created_at_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "medical_record_id,created_at"
+      },
+      {
+        "TABLE_NAME": "medical_record_revisions",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "medical_records",
+        "INDEX_NAME": "medical_records_allergy_acknowledged_by_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "allergy_acknowledged_by_user_id"
+      },
+      {
+        "TABLE_NAME": "medical_records",
+        "INDEX_NAME": "medical_records_created_by_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "created_by_user_id"
+      },
+      {
+        "TABLE_NAME": "medical_records",
+        "INDEX_NAME": "medical_records_doctor_id_status_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "doctor_id,status"
+      },
+      {
+        "TABLE_NAME": "medical_records",
+        "INDEX_NAME": "medical_records_patient_id_created_at_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "patient_id,created_at"
+      },
+      {
+        "TABLE_NAME": "medical_records",
+        "INDEX_NAME": "medical_records_visit_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "visit_id"
+      },
+      {
+        "TABLE_NAME": "medical_records",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "migrations",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "model_has_permissions",
+        "INDEX_NAME": "model_has_permissions_model_id_model_type_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "model_id,model_type"
+      },
+      {
+        "TABLE_NAME": "model_has_permissions",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "permission_id,model_id,model_type"
+      },
+      {
+        "TABLE_NAME": "model_has_roles",
+        "INDEX_NAME": "model_has_roles_model_id_model_type_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "model_id,model_type"
+      },
+      {
+        "TABLE_NAME": "model_has_roles",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "role_id,model_id,model_type"
+      },
+      {
+        "TABLE_NAME": "notifications",
+        "INDEX_NAME": "notifications_notifiable_type_notifiable_id_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "notifiable_type,notifiable_id"
+      },
+      {
+        "TABLE_NAME": "notifications",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "password_reset_tokens",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "email"
+      },
+      {
+        "TABLE_NAME": "patient_allergies",
+        "INDEX_NAME": "patient_allergies_patient_id_is_active_severity_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "patient_id,is_active,severity"
+      },
+      {
+        "TABLE_NAME": "patient_allergies",
+        "INDEX_NAME": "patient_allergies_recorded_by_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "recorded_by_user_id"
+      },
+      {
+        "TABLE_NAME": "patient_allergies",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "patients",
+        "INDEX_NAME": "patients_clinic_id_medical_record_number_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "clinic_id,medical_record_number"
+      },
+      {
+        "TABLE_NAME": "patients",
+        "INDEX_NAME": "patients_clinic_id_name_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,name"
+      },
+      {
+        "TABLE_NAME": "patients",
+        "INDEX_NAME": "patients_clinic_id_nik_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,nik"
+      },
+      {
+        "TABLE_NAME": "patients",
+        "INDEX_NAME": "patients_clinic_id_phone_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,phone"
+      },
+      {
+        "TABLE_NAME": "patients",
+        "INDEX_NAME": "patients_clinic_id_user_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "clinic_id,user_id"
+      },
+      {
+        "TABLE_NAME": "patients",
+        "INDEX_NAME": "patients_is_active_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "is_active"
+      },
+      {
+        "TABLE_NAME": "patients",
+        "INDEX_NAME": "patients_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "user_id"
+      },
+      {
+        "TABLE_NAME": "patients",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "payment_events",
+        "INDEX_NAME": "payment_events_invoice_number_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "invoice_number"
+      },
+      {
+        "TABLE_NAME": "payment_events",
+        "INDEX_NAME": "payment_events_payment_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "payment_id"
+      },
+      {
+        "TABLE_NAME": "payment_events",
+        "INDEX_NAME": "payment_events_provider_request_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "provider_request_id"
+      },
+      {
+        "TABLE_NAME": "payment_events",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "payment_items",
+        "INDEX_NAME": "payment_items_addon_price_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "addon_price_id"
+      },
+      {
+        "TABLE_NAME": "payment_items",
+        "INDEX_NAME": "payment_items_payment_id_kind_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "payment_id,kind"
+      },
+      {
+        "TABLE_NAME": "payment_items",
+        "INDEX_NAME": "payment_items_subscription_price_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "subscription_price_id"
+      },
+      {
+        "TABLE_NAME": "payment_items",
+        "INDEX_NAME": "payment_items_target_subscription_period_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "target_subscription_period_id"
+      },
+      {
+        "TABLE_NAME": "payment_items",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "payments",
+        "INDEX_NAME": "payments_clinic_id_status_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,status"
+      },
+      {
+        "TABLE_NAME": "payments",
+        "INDEX_NAME": "payments_invoice_number_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "invoice_number"
+      },
+      {
+        "TABLE_NAME": "payments",
+        "INDEX_NAME": "payments_provider_reference_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "provider_reference"
+      },
+      {
+        "TABLE_NAME": "payments",
+        "INDEX_NAME": "payments_request_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "request_id"
+      },
+      {
+        "TABLE_NAME": "payments",
+        "INDEX_NAME": "payments_subscription_price_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "subscription_price_id"
+      },
+      {
+        "TABLE_NAME": "payments",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "permissions",
+        "INDEX_NAME": "permissions_name_guard_name_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "name,guard_name"
+      },
+      {
+        "TABLE_NAME": "permissions",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "prescription_items",
+        "INDEX_NAME": "prescription_items_prescription_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "prescription_id"
+      },
+      {
+        "TABLE_NAME": "prescription_items",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "prescriptions",
+        "INDEX_NAME": "prescriptions_medical_record_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "medical_record_id"
+      },
+      {
+        "TABLE_NAME": "prescriptions",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "queues",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "queues",
+        "INDEX_NAME": "queue_scope_number_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "clinic_id,doctor_id,doctor_schedule_id,queue_date,queue_number"
+      },
+      {
+        "TABLE_NAME": "queues",
+        "INDEX_NAME": "queues_appointment_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "appointment_id"
+      },
+      {
+        "TABLE_NAME": "queues",
+        "INDEX_NAME": "queues_clinic_id_queue_date_status_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,queue_date,status"
+      },
+      {
+        "TABLE_NAME": "queues",
+        "INDEX_NAME": "queues_doctor_id_queue_date_status_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "doctor_id,queue_date,status"
+      },
+      {
+        "TABLE_NAME": "queues",
+        "INDEX_NAME": "queues_doctor_schedule_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "doctor_schedule_id"
+      },
+      {
+        "TABLE_NAME": "role_has_permissions",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "permission_id,role_id"
+      },
+      {
+        "TABLE_NAME": "role_has_permissions",
+        "INDEX_NAME": "role_has_permissions_role_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "role_id"
+      },
+      {
+        "TABLE_NAME": "roles",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "roles",
+        "INDEX_NAME": "roles_name_guard_name_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "name,guard_name"
+      },
+      {
+        "TABLE_NAME": "services",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "services",
+        "INDEX_NAME": "services_clinic_id_is_active_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,is_active"
+      },
+      {
+        "TABLE_NAME": "services",
+        "INDEX_NAME": "services_clinic_id_name_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "clinic_id,name"
+      },
+      {
+        "TABLE_NAME": "services",
+        "INDEX_NAME": "services_is_active_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "is_active"
+      },
+      {
+        "TABLE_NAME": "sessions",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "sessions",
+        "INDEX_NAME": "sessions_last_activity_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "last_activity"
+      },
+      {
+        "TABLE_NAME": "sessions",
+        "INDEX_NAME": "sessions_user_id_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "user_id"
+      },
+      {
+        "TABLE_NAME": "subscription_periods",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "subscription_periods",
+        "INDEX_NAME": "subscription_periods_clinic_id_starts_at_ends_at_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,starts_at,ends_at"
+      },
+      {
+        "TABLE_NAME": "subscription_periods",
+        "INDEX_NAME": "subscription_periods_granted_by_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "granted_by_user_id"
+      },
+      {
+        "TABLE_NAME": "subscription_periods",
+        "INDEX_NAME": "subscription_periods_payment_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "payment_id"
+      },
+      {
+        "TABLE_NAME": "subscription_periods",
+        "INDEX_NAME": "subscription_periods_revoked_at_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "revoked_at"
+      },
+      {
+        "TABLE_NAME": "subscription_periods",
+        "INDEX_NAME": "subscription_periods_subscription_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "subscription_id"
+      },
+      {
+        "TABLE_NAME": "subscription_periods",
+        "INDEX_NAME": "subscription_periods_subscription_plan_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "subscription_plan_id"
+      },
+      {
+        "TABLE_NAME": "subscription_plans",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "subscription_plans",
+        "INDEX_NAME": "subscription_plans_code_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "code"
+      },
+      {
+        "TABLE_NAME": "subscription_prices",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "subscription_prices",
+        "INDEX_NAME": "subscription_prices_subscription_plan_id_duration_months_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "subscription_plan_id,duration_months"
+      },
+      {
+        "TABLE_NAME": "subscription_reminders",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "subscription_reminders",
+        "INDEX_NAME": "reminders_period_milestone_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "subscription_period_id,milestone_days"
+      },
+      {
+        "TABLE_NAME": "subscription_reminders",
+        "INDEX_NAME": "subscription_reminders_clinic_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id"
+      },
+      {
+        "TABLE_NAME": "subscription_reminders",
+        "INDEX_NAME": "subscription_reminders_notification_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "notification_id"
+      },
+      {
+        "TABLE_NAME": "subscription_reminders",
+        "INDEX_NAME": "subscription_reminders_owner_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "owner_user_id"
+      },
+      {
+        "TABLE_NAME": "subscriptions",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "subscriptions",
+        "INDEX_NAME": "subscriptions_clinic_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "clinic_id"
+      },
+      {
+        "TABLE_NAME": "subscriptions",
+        "INDEX_NAME": "subscriptions_subscription_plan_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "subscription_plan_id"
+      },
+      {
+        "TABLE_NAME": "treatments",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "treatments",
+        "INDEX_NAME": "treatments_medical_record_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "medical_record_id"
+      },
+      {
+        "TABLE_NAME": "users",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "users",
+        "INDEX_NAME": "users_account_type_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "account_type"
+      },
+      {
+        "TABLE_NAME": "users",
+        "INDEX_NAME": "users_clinic_id_is_active_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,is_active"
+      },
+      {
+        "TABLE_NAME": "users",
+        "INDEX_NAME": "users_email_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "email"
+      },
+      {
+        "TABLE_NAME": "users",
+        "INDEX_NAME": "users_google_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "google_id"
+      },
+      {
+        "TABLE_NAME": "visits",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "visits",
+        "INDEX_NAME": "visits_appointment_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "appointment_id"
+      },
+      {
+        "TABLE_NAME": "visits",
+        "INDEX_NAME": "visits_clinic_id_status_started_at_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "clinic_id,status,started_at"
+      },
+      {
+        "TABLE_NAME": "visits",
+        "INDEX_NAME": "visits_completed_by_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "completed_by_user_id"
+      },
+      {
+        "TABLE_NAME": "visits",
+        "INDEX_NAME": "visits_doctor_id_status_started_at_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "doctor_id,status,started_at"
+      },
+      {
+        "TABLE_NAME": "visits",
+        "INDEX_NAME": "visits_patient_id_started_at_index",
+        "NON_UNIQUE": 1,
+        "columns_list": "patient_id,started_at"
+      },
+      {
+        "TABLE_NAME": "visits",
+        "INDEX_NAME": "visits_service_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "service_id"
+      },
+      {
+        "TABLE_NAME": "visits",
+        "INDEX_NAME": "visits_started_by_user_id_foreign",
+        "NON_UNIQUE": 1,
+        "columns_list": "started_by_user_id"
+      },
+      {
+        "TABLE_NAME": "vital_signs",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "columns_list": "id"
+      },
+      {
+        "TABLE_NAME": "vital_signs",
+        "INDEX_NAME": "vital_signs_medical_record_id_unique",
+        "NON_UNIQUE": 0,
+        "columns_list": "medical_record_id"
+      }
+    ],
+    "tenant_mismatches": 0
+  },
+  "restored_application_photo": {
+    "gate": "PASS",
+    "status": 200,
+    "validation_fields": [],
+    "redirect_path": "",
+    "database": "clinicos_pr_0thp4gu_restore_03a1d9a6",
+    "disk_root_is_restored": true
+  }
+}

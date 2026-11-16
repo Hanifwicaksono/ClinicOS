@@ -7,6 +7,7 @@ export class RmeAutosave {
         this.enabled = form.hasAttribute('data-rme-autosave');
         this.dirty = false;
         this.blocked = false;
+        this.sessionExpired = false;
         this.submitting = false;
         this.inFlight = null;
         this.timer = null;
@@ -82,9 +83,10 @@ export class RmeAutosave {
                 const payload = await response.json().catch(() => ({}));
                 this.showErrors(payload.errors);
                 if (! response.ok) {
-                    this.blocked = [403, 409, 419].includes(response.status);
+                    this.sessionExpired = [401, 419].includes(response.status);
+                    this.blocked = [401, 403, 409, 419].includes(response.status);
                     throw new Error(response.status === 409 ? payload.message
-                        : response.status === 419 ? 'Sesi berakhir. Salin perubahan Anda lalu masuk kembali.'
+                        : this.sessionExpired ? 'Sesi berakhir. Salin perubahan Anda lalu masuk kembali di tab baru. Setelah itu muat ulang editor.'
                         : Object.values(payload.errors ?? {}).flat()[0] ?? 'Penyimpanan gagal. Periksa koneksi lalu coba lagi.');
                 }
                 if (! Number.isInteger(payload.record_version)) throw new Error('Konfirmasi penyimpanan tidak valid. Coba lagi.');
@@ -93,7 +95,7 @@ export class RmeAutosave {
                 return true;
             } catch (error) {
                 this.dirty = true;
-                this.state(this.blocked ? 'conflict' : 'error', error.message);
+                this.state(this.sessionExpired ? 'expired' : this.blocked ? 'conflict' : 'error', error.message);
                 return false;
             }
         })();
@@ -125,15 +127,17 @@ export class RmeAutosave {
             const payload = await response.json().catch(() => ({}));
             this.showErrors(payload.errors);
             if (! response.ok) {
-                this.blocked = [403, 409, 419].includes(response.status);
+                this.sessionExpired = [401, 419].includes(response.status);
+                this.blocked = [401, 403, 409, 419].includes(response.status);
                 throw new Error(response.status === 409 ? payload.message
+                    : this.sessionExpired ? 'Sesi berakhir. Salin perubahan Anda lalu masuk kembali di tab baru. Setelah itu muat ulang editor.'
                     : response.status === 422 ? Object.values(payload.errors ?? {}).flat()[0]
-                    : 'Data belum tersimpan. Periksa koneksi atau sesi Anda lalu coba lagi.');
+                    : 'Data belum tersimpan. Periksa koneksi lalu coba lagi.');
             }
             this.dirty = false;
             this.navigate(payload.redirect || window.location.href);
         } catch (error) {
-            this.state(this.blocked ? 'conflict' : 'error', error.message);
+            this.state(this.sessionExpired ? 'expired' : this.blocked ? 'conflict' : 'error', error.message);
             this.form.inert = false;
             this.submitting = false;
         }

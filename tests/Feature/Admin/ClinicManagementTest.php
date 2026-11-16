@@ -68,7 +68,7 @@ class ClinicManagementTest extends TestCase
     public function test_clinic_admin_can_remove_the_current_logo(): void
     {
         Storage::fake('public');
-        $clinic = Clinic::factory()->create(['logo_path' => 'clinic-logos/old-logo.png']);
+        $clinic = Clinic::factory()->create(['slug' => 'qa-logo-removal', 'logo_path' => 'clinic-logos/old-logo.png']);
         ClinicSetting::factory()->for($clinic)->create();
         Storage::disk('public')->put($clinic->logo_path, 'logo');
         $admin = User::factory()->for($clinic)->create();

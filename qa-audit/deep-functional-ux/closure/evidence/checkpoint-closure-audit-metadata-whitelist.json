@@ -1,0 +1,11 @@
+{
+  "phase": "closure-audit-metadata-whitelist",
+  "at": "2026-11-13T17:20:41.507Z",
+  "counts": {
+    "PASS": 238,
+    "FAIL": 86,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="C:\laragon\www\ClinicOS\phpunit.xml" tests="1" assertions="11" errors="0" failures="0" skipped="0" time="6.717147">
+    <testsuite name="Feature" tests="1" assertions="11" errors="0" failures="0" skipped="0" time="6.717147">
+      <testsuite name="Tests\Feature\PublicClinicTest" file="C:\laragon\www\ClinicOS\tests\Feature\PublicClinicTest.php" tests="1" assertions="11" errors="0" failures="0" skipped="0" time="6.717147">
+        <testcase name="test_public_urls_resolve_only_the_clinic_named_by_the_subdomain" file="C:\laragon\www\ClinicOS\tests\Feature\PublicClinicTest.php" line="48" class="Tests\Feature\PublicClinicTest" classname="Tests.Feature.PublicClinicTest" assertions="11" time="6.717147"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

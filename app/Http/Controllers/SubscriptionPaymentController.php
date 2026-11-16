@@ -16,7 +16,7 @@ class SubscriptionPaymentController extends Controller
     {
         $payments = Payment::query()
             ->where('clinic_id', $request->user()->clinic_id)
-            ->with('items')
+            ->with(['items', 'clinic.settings'])
             ->latest()
             ->paginate(15);
 
@@ -26,7 +26,7 @@ class SubscriptionPaymentController extends Controller
     public function show(Request $request, Payment $payment): View
     {
         $this->authorizeOwnerPayment($request, $payment);
-        $payment->load(['clinic', 'items', 'events' => fn ($query) => $query->latest('received_at')]);
+        $payment->load(['clinic.settings', 'items', 'events' => fn ($query) => $query->latest('received_at')]);
 
         return view('subscription.payments.show', ['payment' => $payment, 'platform' => false]);
     }

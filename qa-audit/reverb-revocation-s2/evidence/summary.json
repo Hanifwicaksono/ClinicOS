@@ -1,0 +1,109 @@
+{
+    "at":  "2026-11-15T11:19:17.3508742Z",
+    "status":  "FIXED \u0026 VERIFIED — single-node Reverb 1.12.0, supported application mutation APIs",
+    "php_sqlite":  {
+                       "tests":  451,
+                       "pass":  451,
+                       "fail":  0,
+                       "error":  0,
+                       "skipped":  0,
+                       "new_revocation_tests":  27,
+                       "new_revocation_failures":  0,
+                       "assertions":  2967
+                   },
+    "php_mysql":  {
+                      "tests":  451,
+                      "pass":  449,
+                      "fail":  1,
+                      "error":  1,
+                      "skipped":  0,
+                      "new_revocation_tests":  27,
+                      "new_revocation_failures":  0,
+                      "assertions":  2958
+                  },
+    "javascript_unit":  25,
+    "legacy_chrome":  2,
+    "js_chrome_pass":  27,
+    "js_chrome_fail":  0,
+    "browser_s2_pass":  26,
+    "browser_s2_fail":  0,
+    "pg17_pg18_browser_pass":  12,
+    "pg17_pg18_browser_fail":  0,
+    "mysql_concurrency":  {
+                              "status":  "PASS",
+                              "database":  "dedicated MySQL 8.0.30 on loopback 13318",
+                              "setup":  {
+                                            "user_id":  562,
+                                            "version":  2
+                                        },
+                              "writers":  [
+                                              {
+                                                  "writer":  "a",
+                                                  "loaded_epoch":  2,
+                                                  "saved_epoch":  3
+                                              },
+                                              {
+                                                  "writer":  "b",
+                                                  "loaded_epoch":  2,
+                                                  "saved_epoch":  4
+                                              }
+                                          ],
+                              "verified":  {
+                                               "version":  4,
+                                               "versions":  [
+                                                                3,
+                                                                4
+                                                            ],
+                                               "active":  false,
+                                               "password_changed":  true,
+                                               "rollback_valid":  true
+                                           },
+                              "tests":  {
+                                            "concurrent_stale_writers":  "PASS",
+                                            "atomic_rollback":  "PASS"
+                                        },
+                              "transport_ack_on_mysql":  "NOT TESTED by this backend-only concurrency probe"
+                          },
+    "fixture_final":  {
+                          "at":  "2026-11-15T11:18:35.284Z",
+                          "isolated":  true,
+                          "pending_jobs":  0,
+                          "failed_jobs":  1,
+                          "revocations":  82,
+                          "unacknowledged":  0,
+                          "transport_failures_pending":  0,
+                          "scopes":  57,
+                          "logout_tombstones":  3,
+                          "failed_job_history":  [
+                                                     {
+                                                         "job":  "App\\Jobs\\DeliverClinicNotification",
+                                                         "revocation_now_acknowledged":  null
+                                                     }
+                                                 ]
+                      },
+    "source_integrity_pass":  true,
+    "build_exit":  0,
+    "pint_exit":  0,
+    "remaining":  [
+                      "PR-02 MySQL JSON key ordering assertion",
+                      "PR-03 subscription_plans.code fixture overflow",
+                      "One SQLite notification job exhausted retries due to database is locked"
+                  ],
+    "not_tested":  [
+                       "Multi-node",
+                       "WebSocket transport on MySQL",
+                       "Process crash during fence ACK",
+                       "End-to-end ACK database-write failure"
+                   ],
+    "cleanup":  {
+                    "at":  "2026-11-15T11:18:49.8967808Z",
+                    "mysql_shutdown_exit":  0,
+                    "owned_mysql_pids":  [
+                                             51072,
+                                             15432
+                                         ],
+                    "remaining_test_listeners":  [
+
+                                                 ]
+                }
+}

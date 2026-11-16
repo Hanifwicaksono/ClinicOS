@@ -1,0 +1,49 @@
+PHPUnit 12.5.37 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.5
+Configuration: C:\laragon\www\ClinicOS\phpunit.xml
+
+Time: 00:02.615, Memory: 70.00 MB
+
+There were 2 failures:
+
+1) Tests\Feature\F1ImplementationTest::test_review_is_still_required_and_token_from_later_page_can_only_confirm_explicit_creation
+Failed to find a validation error in the response for key: 'duplicate_reviewed'
+
+Response has the following JSON validation errors:
+
+{
+    "duplicate_review_token": [
+        "The duplicate review token field must be 64 characters."
+    ]
+}
+
+Failed asserting that an array has the key 'duplicate_reviewed'.
+
+The following errors occurred during the last request:
+
+{
+    "message": "The duplicate review token field must be 64 characters.",
+    "errors": {
+        "duplicate_review_token": [
+            "The duplicate review token field must be 64 characters."
+        ]
+    }
+}
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:1173
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:1101
+C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php:157
+
+2) Tests\Feature\F1ImplementationTest::test_candidate_endpoint_preserves_role_boundaries@receptionist with data ('Receptionist', true)
+Expected response status code [200] but received 403.
+Failed asserting that 403 is identical to 200.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:16
+C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php:180
+
+[37;41mFAILURES![0m
+[37;41mTests: 22[0m[37;41m, Assertions: 151[0m[37;41m, Failures: 2[0m[37;41m.[0m

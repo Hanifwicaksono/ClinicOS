@@ -1,0 +1,155 @@
+{
+  "playwright": "1.65.0",
+  "browser": "157.0.8103.50",
+  "results": [
+    {
+      "name": "UAT: all five roles and owner can open their dashboard",
+      "status": "PASS",
+      "duration_ms": 36090,
+      "detail": {
+        "simultaneous_browser_contexts": 9,
+        "roles": 5,
+        "owner_persona": true
+      }
+    },
+    {
+      "name": "UAT: desktop/tablet/mobile and native keyboard drawer",
+      "status": "PASS",
+      "duration_ms": 142,
+      "detail": {
+        "viewports": [
+          375,
+          768,
+          1024,
+          1440
+        ],
+        "native_keyboard_escape": true
+      }
+    },
+    {
+      "name": "UAT: admin creates staff, real SMTP inbox receives verification, staff verifies",
+      "status": "PASS",
+      "duration_ms": 5010,
+      "detail": {
+        "smtp_received": true,
+        "verified_through_signed_link": true
+      }
+    },
+    {
+      "name": "UAT: receptionist books through keyboard-operated form",
+      "status": "PASS",
+      "duration_ms": 2799,
+      "detail": {
+        "booked": 1,
+        "queued": 1,
+        "native_keyboard_selection": true
+      }
+    },
+    {
+      "name": "Realtime: real sockets, two staff browsers, cross-tenant denial",
+      "status": "PASS",
+      "duration_ms": 442,
+      "detail": {
+        "receptionist": {
+          "latency_ms": 255,
+          "payload_keys": [
+            "display_number",
+            "doctor_id",
+            "queue_date",
+            "queue_id",
+            "status",
+            "updated_at"
+          ]
+        },
+        "receptionist2": {
+          "latency_ms": 255,
+          "payload_keys": [
+            "display_number",
+            "doctor_id",
+            "queue_date",
+            "queue_id",
+            "status",
+            "updated_at"
+          ]
+        },
+        "foreign_tenant_auth": 403,
+        "foreign_tenant_events": 0
+      }
+    },
+    {
+      "name": "Realtime: connection loss and real reconnection",
+      "status": "PASS",
+      "duration_ms": 987,
+      "detail": {
+        "disconnected": true,
+        "reconnected": true,
+        "event_after_reconnect": true
+      }
+    },
+    {
+      "name": "UAT: doctor starts, saves photo draft, finalizes, and corrects with history",
+      "status": "PASS",
+      "duration_ms": 5398,
+      "detail": {
+        "draft_uploaded": true,
+        "finalized_atomically": true,
+        "correction_revision": 1
+      }
+    },
+    {
+      "name": "Security: clinical page and private photo role matrix",
+      "status": "PASS",
+      "duration_ms": 762,
+      "detail": {
+        "owner": {
+          "page": 403,
+          "photo": 403
+        },
+        "admin": {
+          "page": 403,
+          "photo": 403
+        },
+        "receptionist": {
+          "page": 403,
+          "photo": 403
+        },
+        "doctor2": {
+          "page": 403,
+          "photo": 403
+        },
+        "patient": {
+          "page": 403,
+          "photo": 403
+        },
+        "platform": {
+          "page": 403,
+          "photo": 403
+        },
+        "other": {
+          "page": 403,
+          "photo": 403
+        }
+      }
+    },
+    {
+      "name": "SMTP: reset link delivery, reset password, old session revoked, new login works",
+      "status": "PASS",
+      "duration_ms": 7768,
+      "detail": {
+        "reset_email_received": true,
+        "old_session_status": 401,
+        "new_login": true
+      }
+    },
+    {
+      "name": "Realtime security: permission revocation invalidates an already subscribed socket",
+      "status": "PASS",
+      "duration_ms": 3119,
+      "detail": {
+        "new_auth_status": 403,
+        "events_after_revocation": 0
+      }
+    }
+  ],
+  "page_errors": []
+}

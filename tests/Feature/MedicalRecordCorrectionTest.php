@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\Appointment;
 use App\Models\Clinic;
 use App\Models\Doctor;
 use App\Models\DoctorSchedule;
+use App\Models\MedicalRecord;
 use App\Models\MedicalRecordRevision;
 use App\Models\Patient;
 use App\Models\Service;
@@ -14,7 +16,10 @@ use App\Services\BookingService;
 use App\Services\QueueWorkflowService;
 use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Livewire\Volt\Volt;
 use Tests\TestCase;
 
 class MedicalRecordCorrectionTest extends TestCase
@@ -33,10 +38,10 @@ class MedicalRecordCorrectionTest extends TestCase
         $visit = $context['visit'];
 
         $this->actingAs($context['doctor_user'])
-            ->put(route('doctor.visits.save', $visit), $this->medicalPayload('Perubahan tanpa koreksi'))
+            ->put(route('doctor.visits.save', $visit), $this->medicalPayload($visit, 'Perubahan tanpa koreksi'))
             ->assertForbidden();
         $this->actingAs($context['doctor_user'])
-            ->put(route('doctor.visits.correct', $visit), $this->medicalPayload('Perubahan tanpa alasan'))
+            ->put(route('doctor.visits.correct', $visit), $this->medicalPayload($visit, 'Perubahan tanpa alasan'))
             ->assertSessionHasErrors('correction_reason');
 
         $this->assertSame('Diagnosis awal', $visit->medicalRecord->refresh()->assessment);
@@ -47,7 +52,7 @@ class MedicalRecordCorrectionTest extends TestCase
     {
         $context = $this->completedVisitContext();
         $visit = $context['visit'];
-        $payload = $this->medicalPayload('Diagnosis terkoreksi');
+        $payload = $this->medicalPayload($visit, 'Diagnosis terkoreksi');
         $payload['correction_reason'] = 'Memperbaiki diagnosis berdasarkan hasil evaluasi lanjutan.';
         $payload['prescription_items'][0]['medicine_name'] = 'Ibuprofen 400 mg';
         $payload['doctor_notes'] = 'Pasien diminta kembali bila gejala memburuk.';
@@ -96,7 +101,8 @@ class MedicalRecordCorrectionTest extends TestCase
     public function test_history_hides_revision_without_medical_record_changes(): void
     {
         $context = $this->completedVisitContext();
-        $payload = $this->medicalPayload('Diagnosis awal');
+        $visit = $context['visit'];
+        $payload = $this->medicalPayload($visit, 'Diagnosis awal');
         $payload['correction_reason'] = 'Konfirmasi data tanpa perubahan isi rekam medis.';
 
         $this->actingAs($context['doctor_user'])
@@ -111,6 +117,76 @@ class MedicalRecordCorrectionTest extends TestCase
             ->assertDontSeeText('Version history / Modification')
             ->assertDontSeeText('Modification 1')
             ->assertDontSeeText($payload['correction_reason']);
+    }
+
+    public function test_removed_final_photos_remain_readable_only_through_their_own_authorized_history(): void
+    {
+        Storage::fake('local');
+        $context = $this->completedVisitContext();
+        $visit = $context['visit'];
+        $payload = [...$this->medicalPayload($visit, 'Synthetic photo correction'),
+            'correction_reason' => 'Synthetic attachment history regression',
+        ];
+        $this->putJson(route('doctor.visits.correct', $visit), [...$payload,
+            'photos' => [UploadedFile::fake()->image('history.png', 1, 1)],
+        ])->assertOk();
+        $addedRevision = $visit->medicalRecord->revisions()->sole();
+        $path = $visit->medicalRecord->refresh()->photos[0]['path'];
+        $this->putJson(route('doctor.visits.correct', $visit), [...$payload, ...$this->recordVersions($visit), 'removed_photos' => [0]])->assertOk();
+        $removedRevision = $visit->medicalRecord->revisions()->latest('id')->firstOrFail();
+        Storage::disk('local')->assertExists($path);
+        $this->assertSame([], $visit->medicalRecord->refresh()->photos);
+        $this->get(route('doctor.visits.photos.show', [$visit, 0]))->assertNotFound();
+        $beforeUrl = route('doctor.visits.photos.show', ['visit' => $visit, 'photo' => 0,
+            'revision' => $removedRevision->id, 'snapshot' => 'before',
+        ]);
+        $this->get($beforeUrl)->assertOk()->assertHeader('Cache-Control', 'no-store, private');
+        $this->get(route('doctor.visits.photos.show', ['visit' => $visit, 'photo' => 0,
+            'revision' => $addedRevision->id, 'snapshot' => 'after',
+        ]))->assertOk();
+        $this->get(route('doctor.visits.show', $visit))->assertOk()->assertSee('data-revision-photo', false);
+        $this->getJson($beforeUrl.'&snapshot=invalid')->assertUnprocessable();
+        $this->get($beforeUrl.'&revision=999999')->assertNotFound();
+        $otherAppointment = Appointment::factory()->for($visit->clinic)->for($visit->doctor)->for($visit->patient)
+            ->for($visit->service)->for($visit->appointment->schedule, 'schedule')->create();
+        $otherRecord = MedicalRecord::factory()->for(Visit::factory()->for($otherAppointment))->create();
+        $foreignRevision = $otherRecord->revisions()->create([
+            'corrected_by_user_id' => $context['doctor_user']->id, 'reason' => 'Synthetic foreign record',
+            'before_data' => ['record' => ['photos' => [['path' => $path]]]], 'after_data' => [],
+        ]);
+        $this->get($beforeUrl.'&revision='.$foreignRevision->id)->assertNotFound();
+
+        foreach (['Clinic Admin', 'Receptionist', 'Patient', 'Platform Admin', 'Doctor'] as $role) {
+            $actor = User::factory()->forClinic($visit->clinic)->create();
+            $actor->assignRole($role);
+            if ($role === 'Doctor') {
+                Doctor::factory()->for($visit->clinic)->for($actor, 'user')->create();
+            }
+            $this->actingAs($actor)->get($beforeUrl)->assertForbidden();
+        }
+        $otherClinic = Clinic::factory()->create();
+        $otherClinicDoctor = User::factory()->forClinic($otherClinic)->create();
+        $otherClinicDoctor->assignRole('Doctor');
+        Doctor::factory()->for($otherClinic)->for($otherClinicDoctor, 'user')->create();
+        $this->actingAs($otherClinicDoctor)->get($beforeUrl)->assertForbidden();
+        $this->get($beforeUrl.'&revision=invalid')->assertForbidden();
+    }
+
+    public function test_self_delete_preserves_clinical_history_and_session_even_after_doctor_role_is_removed(): void
+    {
+        $context = $this->completedVisitContext();
+        $doctor = $context['doctor_user'];
+        $doctor->removeRole('Doctor');
+        $this->actingAs($doctor);
+
+        Volt::test('profile.delete-user-form')->set('password', 'password')->call('deleteUser')
+            ->assertHasErrors('password')->assertSee('menonaktifkan akses')->assertNoRedirect();
+
+        $this->assertAuthenticatedAs($doctor);
+        $this->assertModelExists($doctor);
+        $this->assertModelExists($context['visit']);
+        $this->assertModelExists($context['visit']->medicalRecord);
+        $this->assertDatabaseMissing('audit_logs', ['action' => 'auth.logout']);
     }
 
     /** @return array{doctor_user: User, visit: Visit} */
@@ -146,16 +222,17 @@ class MedicalRecordCorrectionTest extends TestCase
         $visit = Visit::query()->sole();
         $this->actingAs($doctorUser)->put(
             route('doctor.visits.complete', $visit),
-            $this->medicalPayload('Diagnosis awal'),
+            $this->medicalPayload($visit, 'Diagnosis awal'),
         );
 
         return ['doctor_user' => $doctorUser, 'visit' => $visit->refresh()];
     }
 
     /** @return array<string, mixed> */
-    private function medicalPayload(string $assessment): array
+    private function medicalPayload(Visit $visit, string $assessment): array
     {
         return [
+            ...$this->recordVersions($visit),
             'chief_complaint' => 'Nyeri tenggorokan sejak kemarin.',
             'subjective' => 'Nyeri saat menelan tanpa sesak napas.',
             'objective' => 'Keadaan umum baik dan faring hiperemis.',

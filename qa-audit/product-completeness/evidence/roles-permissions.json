@@ -1,0 +1,319 @@
+{
+  "roles": [
+    {
+      "id": 2,
+      "name": "Clinic Admin",
+      "guard_name": "web"
+    },
+    {
+      "id": 3,
+      "name": "Doctor",
+      "guard_name": "web"
+    },
+    {
+      "id": 5,
+      "name": "Patient",
+      "guard_name": "web"
+    },
+    {
+      "id": 1,
+      "name": "Platform Admin",
+      "guard_name": "web"
+    },
+    {
+      "id": 4,
+      "name": "Receptionist",
+      "guard_name": "web"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Clinic Admin",
+      "permission": "appointment.cancel"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "appointment.create"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "appointment.update"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "appointment.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "audit_log.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "clinic.update"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "clinic.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "dashboard.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "doctor.create"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "doctor.delete"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "doctor.update"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "doctor.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "patient.create"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "patient.update"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "patient.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "queue.call"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "queue.manage"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "queue.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "receptionist.create"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "receptionist.update"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "receptionist.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "revenue.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "schedule.manage"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "schedule.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "service.create"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "service.delete"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "service.update"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "service.view"
+    },
+    {
+      "role": "Clinic Admin",
+      "permission": "visit.view"
+    },
+    {
+      "role": "Doctor",
+      "permission": "appointment.view"
+    },
+    {
+      "role": "Doctor",
+      "permission": "dashboard.view"
+    },
+    {
+      "role": "Doctor",
+      "permission": "doctor.view"
+    },
+    {
+      "role": "Doctor",
+      "permission": "medical_record.create"
+    },
+    {
+      "role": "Doctor",
+      "permission": "medical_record.update"
+    },
+    {
+      "role": "Doctor",
+      "permission": "medical_record.view"
+    },
+    {
+      "role": "Doctor",
+      "permission": "patient.view"
+    },
+    {
+      "role": "Doctor",
+      "permission": "queue.call"
+    },
+    {
+      "role": "Doctor",
+      "permission": "queue.view"
+    },
+    {
+      "role": "Doctor",
+      "permission": "schedule.view"
+    },
+    {
+      "role": "Doctor",
+      "permission": "service.view"
+    },
+    {
+      "role": "Doctor",
+      "permission": "visit.complete"
+    },
+    {
+      "role": "Doctor",
+      "permission": "visit.start"
+    },
+    {
+      "role": "Doctor",
+      "permission": "visit.view"
+    },
+    {
+      "role": "Patient",
+      "permission": "appointment.cancel"
+    },
+    {
+      "role": "Patient",
+      "permission": "appointment.create"
+    },
+    {
+      "role": "Patient",
+      "permission": "appointment.view"
+    },
+    {
+      "role": "Patient",
+      "permission": "dashboard.view"
+    },
+    {
+      "role": "Patient",
+      "permission": "doctor.view"
+    },
+    {
+      "role": "Patient",
+      "permission": "queue.view"
+    },
+    {
+      "role": "Patient",
+      "permission": "schedule.view"
+    },
+    {
+      "role": "Patient",
+      "permission": "service.view"
+    },
+    {
+      "role": "Platform Admin",
+      "permission": "platform.dashboard.view"
+    },
+    {
+      "role": "Platform Admin",
+      "permission": "platform.payment.manage"
+    },
+    {
+      "role": "Platform Admin",
+      "permission": "platform.payment.view"
+    },
+    {
+      "role": "Platform Admin",
+      "permission": "platform.plan.manage"
+    },
+    {
+      "role": "Platform Admin",
+      "permission": "platform.subscription.grant"
+    },
+    {
+      "role": "Platform Admin",
+      "permission": "platform.tenant.view"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "appointment.cancel"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "appointment.create"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "appointment.update"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "appointment.view"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "dashboard.view"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "doctor.view"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "patient.create"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "patient.update"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "patient.view"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "queue.call"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "queue.manage"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "queue.view"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "schedule.view"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "service.view"
+    },
+    {
+      "role": "Receptionist",
+      "permission": "visit.view"
+    }
+  ]
+}

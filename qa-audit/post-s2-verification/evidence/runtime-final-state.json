@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-15T13:58:38.108Z",
+  "database": "clinicos_post_s2_runtime_1794749647385",
+  "pending_jobs": 0,
+  "failed_jobs": 0,
+  "revocations": 94,
+  "unacknowledged": 0,
+  "transport_failures_pending": 0,
+  "notification_count": 225,
+  "failed_history": [],
+  "pending_history": []
+}

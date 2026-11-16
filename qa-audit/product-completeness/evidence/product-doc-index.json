@@ -1,0 +1,923 @@
+[
+  {
+    "file": "PROJECT_ANALYSIS.md",
+    "sha256": "b29f550ddc396b063039df6146352afdc22c5d112816661671d40bf05b7787c0",
+    "lines": 245,
+    "headings": [
+      "# Analisis Arsitektur dan Kesenjangan ClinicOS",
+      "## 1. Kesimpulan utama",
+      "## 2. Cakupan dan sumber yang diperiksa",
+      "## 3. Arsitektur dan struktur repository",
+      "### 3.1 Stack yang benar-benar ditemukan",
+      "### 3.2 Bentuk aplikasi",
+      "### 3.3 Model data dan tenancy",
+      "### 3.4 Workflow dan batas akses yang terimplementasi",
+      "## 4. Pemetaan requirement dan implementasi",
+      "## 5. Konflik spesifikasi dan dokumentasi",
+      "## 6. Temuan teknis yang perlu ditindaklanjuti",
+      "## 7. Verifikasi yang benar-benar dijalankan",
+      "### 7.1 Pemeriksaan tanpa mutasi database aplikasi",
+      "### 7.2 Baseline final",
+      "### 7.3 Batas verifikasi",
+      "## 8. Urutan tindak lanjut yang disarankan"
+    ],
+    "scope_claims": [
+      {
+        "line": 9,
+        "text": "Namun, implementasi **belum memenuhi keseluruhan cakupan RPP web-only**. Kekurangan utama adalah persistence odontogram dan alergi, autosave nyata, Predictive Queue, billing/receipt pasien, pelaporan, discovery klinik, multi-cabang, dan Resilient Edge Mode. Beberapa bagian sudah memiliki UI presentasional sehingga tidak tepat dikategorikan sebagai fitur end-to-end yang selesai."
+      },
+      {
+        "line": 13,
+        "text": "Permintaan pengguna menetapkan **full Laravel + Blade + Tailwind CSS**. Penyebutan React pada RPP dicatat sebagai konflik acuan, bukan rekomendasi mengganti stack."
+      },
+      {
+        "line": 24,
+        "text": "| `C:/Users/User/Downloads/RPP_ClinicOS_Revisi_Web_Only.docx` | Revisi 13 Oktober 2026, referensi SRS v1.0/MF-1–MF-7; web-only, React, tenant/cabang, kasir, Predictive Queue, RME General/Dental, Edge |"
+      },
+      {
+        "line": 26,
+        "text": "| [PRD.md](PRD.md) | Draft 4 Oktober; requirement AUTH/CLINIC/DOC/SERVICE/PAT/PUBLIC/QUEUE/MR/VISIT/DASH/NOTIF/AUDIT; SaaS masih post-MVP |"
+      },
+      {
+        "line": 30,
+        "text": "| [docs/odontogram-allergy/README.md](docs/odontogram-allergy/README.md) | Bukti UI 22 Oktober; secara eksplisit belum menyimpan odontogram dan belum mempunyai sumber data alergi |"
+      },
+      {
+        "line": 31,
+        "text": "| [docs/rme-general-autosave/README.md](docs/rme-general-autosave/README.md) | Bukti field/status/hook autosave 22 Oktober; endpoint dan debounce autosave belum dibuat |"
+      },
+      {
+        "line": 72,
+        "text": "Ini merupakan **monolith MVC dengan service layer**, bukan dua frontend React atau backend REST API terpisah. Terdapat endpoint web yang mengembalikan JSON untuk pencarian pasien dan aksi antrean, tetapi belum ada `routes/api.php`, API Resources, token API, atau kontrak API terversi. Pemisahan area dilakukan melalui folder dan prefix route, belum berupa paket modul mandiri."
+      },
+      {
+        "line": 121,
+        "text": "| Role/capability tenant — MF-1 | Ada/parsial | Lima role dan policy; owner eksplisit, area platform terpisah. Tidak ada role kasir atau editor permission matrix di UI. |"
+      },
+      {
+        "line": 135,
+        "text": "| Autosave RME — MF-4 | Parsial UI | Status dan custom event tersedia; belum ada pengiriman otomatis, debounce, retry autosave, atau version-conflict handling. Draft tersimpan lewat submit manual. |"
+      },
+      {
+        "line": 136,
+        "text": "| Odontogram/RME Dental — MF-4 | Parsial UI | 32 gigi FDI, kondisi, legend, read-only; `data-persists=\"false\"`, tanpa field form maupun tabel persistence. Kondisi awal selalu `unknown`. |"
+      },
+      {
+        "line": 142,
+        "text": "| Kasir, tagihan pasien, payment/receipt — MF-5 | Belum ada | Payment/invoice yang ditemukan hanya untuk subscription; Visit.total_amount bukan ledger pembayaran pasien. |"
+      },
+      {
+        "line": 143,
+        "text": "| Laporan/export — MF-5 | Parsial ringkasan | Ada ringkasan dashboard/audit filter; belum ada modul laporan, CSV/Excel/PDF, receipt, atau template cetak. |"
+      },
+      {
+        "line": 146,
+        "text": "| NOTIF-3: mendekati giliran/reminder pasien | Belum ada | Tidak ada trigger near-turn atau scheduled reminder appointment. Reminder terjadwal yang ada adalah subscription owner. |"
+      },
+      {
+        "line": 159,
+        "text": "| RPP dua frontend React vs permintaan Blade/Tailwind | Permintaan langsung pengguna dan implementasi sekarang menjadi dasar stack; requirement fungsional RPP tetap dibandingkan. |"
+      },
+      {
+        "line": 166,
+        "text": "| Klaim UI “autosave/odontogram selesai” vs batas dokumen | Dokumen docs justru menjelaskan bahwa yang selesai adalah UI/hook; persistence dan integrasinya belum selesai. |"
+      },
+      {
+        "line": 176,
+        "text": "| GAP-01 | P1 | Autosave, odontogram, dan allergy alert belum memiliki jalur penyimpanan/data penuh. Bukti: docs terkait, VisitController, dental-chart, autosave-status. Pengguna berisiko mengira perubahan UI tersimpan. |"
+      },
+      {
+        "line": 177,
+        "text": "| GAP-02 | P1 | Billing pasien/receipt, Predictive Queue, multi-cabang dan Edge belum memenuhi RPP. Keputusan scope diperlukan karena sebagian berbeda dari roadmap SaaS yang sudah dibangun. |"
+      },
+      {
+        "line": 178,
+        "text": "| GAP-03 | P1 | Belum ada optimistic locking/version check pada draft/amendment. Row lock menyerialkan transaksi tetapi tidak mendeteksi dua editor dengan data awal yang sama. Perlu test stale write sebelum autosave diperluas. |"
+      },
+      {
+        "line": 239,
+        "text": "3. **Tutup integrasi klinis yang masih presentasional:** persistence odontogram/alergi, diagnosis/tindakan UI, autosave dengan version conflict, retensi lampiran, serta regresi tenant/permission."
+      },
+      {
+        "line": 241,
+        "text": "5. **Lengkapi operasional dan komersial:** billing/receipt pasien serta laporan bila masuk scope, entitlement premium, aksi suspend/revoke dan reconciliation sesuai keputusan produk."
+      }
+    ]
+  },
+  {
+    "file": "PRD.md",
+    "sha256": "6078090551b9c5a4fc926e63d240beaa4396035249c2e97918e0eb6884cd3bb1",
+    "lines": 1055,
+    "headings": [
+      "# PRODUCT REQUIREMENTS DOCUMENT (PRD)",
+      "## ClinicOS — Platform Manajemen Klinik Berbasis SaaS",
+      "# 1. Ringkasan Produk (Overview)",
+      "# 2. Tujuan & Sasaran (Goals)",
+      "# 3. Pengguna & Peran (Users & Roles)",
+      "## 3.1 Clinic Admin",
+      "## 3.2 Dokter",
+      "## 3.3 Resepsionis",
+      "## 3.4 Pasien",
+      "## 3.5 Super Admin SaaS — Fase Lanjutan",
+      "# 4. Ruang Lingkup (Scope)",
+      "## 4.1 Termasuk — MVP",
+      "### Teknologi MVP",
+      "## 4.2 Di Luar Lingkup Awal / Post-MVP",
+      "# 5. Asumsi & Batasan (Assumptions & Constraints)",
+      "# 6. Kebutuhan Fungsional (Functional Requirements)",
+      "## 6.1 Bersama — Autentikasi dan Manajemen Profil",
+      "## 6.2 Clinic Admin — Manajemen Klinik",
+      "## 6.3 Clinic Admin — Manajemen Dokter",
+      "## 6.4 Clinic Admin — Manajemen Layanan",
+      "## 6.5 Resepsionis — Manajemen Pasien",
+      "## 6.6 Pasien — Website Publik Klinik",
+      "## 6.7 Booking dan Sistem Antrean",
+      "### Status antrean",
+      "## 6.8 Dokter — Rekam Medis",
+      "### Struktur dasar rekam medis",
+      "## 6.9 Dokter — Penyelesaian Kunjungan",
+      "## 6.10 Dashboard Klinik",
+      "## 6.11 Notifikasi",
+      "## 6.12 Audit Log dan Keamanan",
+      "# 7. Alur Pengguna Utama (Key User Flows)",
+      "## 7.1 Alur Pendaftaran Pasien Melalui Website",
+      "## 7.2 Alur Kedatangan Pasien",
+      "## 7.3 Alur Pemanggilan Pasien oleh Dokter",
+      "## 7.4 Alur Pembuatan Rekam Medis",
+      "## 7.5 Alur Dashboard Pendapatan",
+      "## 7.6 Alur Antrean Realtime",
+      "# 8. Model Data (High-Level)",
+      "### Entitas Post-MVP",
+      "# 9. Kebutuhan Non-Fungsional (Non-Functional Requirements)",
+      "### Responsivitas & Kompatibilitas Perangkat",
+      "### Performa",
+      "### Keamanan & Kontrol Akses",
+      "### Integritas Data",
+      "### Skalabilitas",
+      "### Maintainability",
+      "# 10. Integrasi Pihak Ketiga",
+      "# 11. Fitur Usulan / Fase Lanjutan",
+      "## 11.1 SaaS Multi-Tenant",
+      "## 11.2 Subscription",
+      "## 11.3 Multi-Branch",
+      "## 11.4 Offline-First",
+      "## 11.5 Mobile Application",
+      "### Patient App",
+      "### Doctor App",
+      "## 11.6 Advanced Analytics",
+      "## 11.7 Notifikasi Multi-Channel",
+      "## 11.8 AI-Assisted Medical Documentation",
+      "# 12. Pertanyaan Terbuka / TBD",
+      "# 13. Glosarium",
+      "# Product Roadmap",
+      "## Phase 1 — MVP",
+      "## Phase 2 — Clinic Enhancement",
+      "## Phase 3 — SaaS",
+      "## Phase 4 — Advanced Platform",
+      "# MVP Success Criteria",
+      "# Batasan Produk MVP"
+    ],
+    "scope_claims": [
+      {
+        "line": 44,
+        "text": "* Menyediakan arsitektur yang memungkinkan pengembangan fitur realtime, mobile application, offline-first, subscription, dan integrasi pihak ketiga pada fase berikutnya."
+      },
+      {
+        "line": 203,
+        "text": "## 4.2 Di Luar Lingkup Awal / Post-MVP"
+      },
+      {
+        "line": 213,
+        "text": "* Offline-first medical record."
+      },
+      {
+        "line": 223,
+        "text": "* Export laporan lanjutan."
+      },
+      {
+        "line": 237,
+        "text": "* **Asumsi Pengembang:** Antarmuka web menggunakan Blade dan Livewire sehingga tidak membutuhkan frontend SPA terpisah seperti Vue atau React."
+      },
+      {
+        "line": 240,
+        "text": "* **Asumsi Pengembang:** Offline-first bukan bagian dari MVP dan akan dikembangkan pada fase lanjutan."
+      },
+      {
+        "line": 246,
+        "text": "* **Batasan Offline:** Data rekam medis tidak dirancang untuk disimpan pada komputer pribadi dokter sebagai database utama."
+      },
+      {
+        "line": 247,
+        "text": "* **Asumsi Pengembangan Lanjutan:** Apabila fitur offline diperlukan, penyimpanan lokal akan menggunakan perangkat atau server lokal yang dikontrol oleh klinik, bukan laptop pribadi dokter."
+      },
+      {
+        "line": 440,
+        "text": "| **NOTIF-3** | Sistem memberikan informasi ketika antrean pasien mendekati giliran. | **Penting** |"
+      },
+      {
+        "line": 573,
+        "text": "### Entitas Post-MVP"
+      },
+      {
+        "line": 583,
+        "text": "| **sync_conflicts**     | Konflik data pada sistem offline-first. |"
+      },
+      {
+        "line": 688,
+        "text": "| **WhatsApp API**             | Pengiriman notifikasi antrean dan booking melalui WhatsApp. | Post-MVP.                                  |"
+      },
+      {
+        "line": 689,
+        "text": "| **Payment Gateway**          | Pembayaran subscription ClinicOS.                           | Post-MVP.                                  |"
+      },
+      {
+        "line": 690,
+        "text": "| **Cloud Storage**            | Penyimpanan file atau dokumen medis tertentu.               | Post-MVP.                                  |"
+      },
+      {
+        "line": 691,
+        "text": "| **Firebase Cloud Messaging** | Push notification untuk mobile application.                 | Post-MVP.                                  |"
+      },
+      {
+        "line": 692,
+        "text": "| **AI API**                   | Bantuan dokumentasi dan ringkasan data medis.               | Post-MVP dan memerlukan evaluasi keamanan. |"
+      },
+      {
+        "line": 757,
+        "text": "## 11.3 Multi-Branch"
+      },
+      {
+        "line": 772,
+        "text": "## 11.4 Offline-First"
+      },
+      {
+        "line": 878,
+        "text": "* Apakah fitur offline wajib untuk versi pertama atau cukup menjadi Post-MVP?"
+      },
+      {
+        "line": 907,
+        "text": "* **Offline-First:** Pendekatan pengembangan sistem yang memungkinkan aplikasi tetap berfungsi ketika tidak terdapat koneksi internet dan melakukan sinkronisasi ketika koneksi tersedia."
+      },
+      {
+        "line": 909,
+        "text": "* **Post-MVP:** Fitur atau pengembangan yang dilakukan setelah fitur inti MVP berhasil dibuat dan diuji."
+      },
+      {
+        "line": 957,
+        "text": "* Report export."
+      },
+      {
+        "line": 962,
+        "text": "* Prescription printing."
+      },
+      {
+        "line": 983,
+        "text": "* Multi-branch."
+      },
+      {
+        "line": 989,
+        "text": "* Offline-first."
+      },
+      {
+        "line": 1051,
+        "text": "Fitur seperti **multi-tenant, subscription, offline-first, mobile application, WhatsApp, payment gateway, AI, dan multi-cabang** sengaja ditempatkan pada fase Post-MVP agar pengembangan versi pertama tetap terkontrol dan dapat diselesaikan secara realistis."
+      }
+    ]
+  },
+  {
+    "file": "Plan.md",
+    "sha256": "94c116ef49d356ddb7a5897ed0e0723b9ed64ec5b3ae24d4046b57dbb3eff504",
+    "lines": 551,
+    "headings": [
+      "# ClinicOS — Status Proyek dan Development Plan",
+      "## 1. Ringkasan Eksekutif",
+      "## 2. Baseline Teknis Saat Ini",
+      "## 3. Status Milestone MVP",
+      "## 4. Cakupan MVP yang Sudah Selesai",
+      "### 4.1 Foundation, Authentication, dan Authorization",
+      "### 4.2 Clinic Core",
+      "### 4.3 Patient dan Booking",
+      "### 4.4 Queue",
+      "### 4.5 Visit dan Rekam Medis",
+      "### 4.6 Dashboard, Notification, Realtime, dan Audit",
+      "### 4.7 Security dan Regression yang Sudah Selesai",
+      "## 5. Release Gate MVP — Pekerjaan yang Masih Tersisa",
+      "### M7.2 — UI dan Accessibility Final",
+      "#### Rencana Implementasi Frontend Berdasarkan `design (1).md`",
+      "### M7.4 — Staging dan UAT End-to-End",
+      "### M7.5 — Infrastruktur Production",
+      "### M7.6 — Backup, Recovery, dan Observability",
+      "### M7.7 — Release MVP",
+      "## 6. Keputusan Produk/Operasional yang Belum Final",
+      "## 7. Prinsip Pengembangan Post-MVP",
+      "## 8. Roadmap Post-MVP",
+      "### PM1 — Production Stabilization dan Operational Excellence",
+      "### PM2 — Reporting, Documents, dan Clinic Operations",
+      "### PM3 — Communication dan Patient Experience",
+      "### PM4 — Billing dan Payment",
+      "### PM5 — API dan Integration Platform",
+      "### PM6 — SaaS Multi-Tenant dan Subscription",
+      "### PM7 — Multi-Branch",
+      "### PM8 — Mobile/PWA dan Offline Capability",
+      "#### Patient App",
+      "#### Doctor App",
+      "#### Offline, jika tervalidasi",
+      "### PM9 — Advanced Security dan Compliance Readiness",
+      "### PM10 — AI Assistance",
+      "## 9. Urutan dan Dependensi yang Direkomendasikan",
+      "## 10. Backlog Awal untuk Siklus Berikutnya",
+      "## 11. Definition of Done untuk Semua Fitur Baru",
+      "## 12. Target Akhir"
+    ],
+    "scope_claims": [
+      {
+        "line": 160,
+        "text": "Bagian ini adalah prioritas tertinggi. Pekerjaan post-MVP tidak dimulai sebelum release gate yang relevan selesai atau risikonya diterima secara eksplisit."
+      },
+      {
+        "line": 286,
+        "text": "Keputusan ini harus ditutup pada UAT atau sebelum fitur post-MVP yang bergantung padanya:"
+      },
+      {
+        "line": 296,
+        "text": "| Istilah “revenue” | Saat ini nilai layanan selesai, bukan pembayaran kas yang sudah diterima | Sebelum modul billing/reporting |"
+      },
+      {
+        "line": 300,
+        "text": "## 7. Prinsip Pengembangan Post-MVP"
+      },
+      {
+        "line": 305,
+        "text": "4. Multi-tenant dan multi-branch tidak dipaksakan menjadi satu perubahan besar; isolasi, billing, dan migrasi diuji bertahap."
+      },
+      {
+        "line": 308,
+        "text": "7. Offline-first hanya dikerjakan jika kebutuhan konektivitas klinik terbukti melalui riset."
+      },
+      {
+        "line": 313,
+        "text": "## 8. Roadmap Post-MVP"
+      },
+      {
+        "line": 336,
+        "text": "- [ ] Export CSV/Excel dengan authorization, filter, audit, dan batas ukuran."
+      },
+      {
+        "line": 337,
+        "text": "- [ ] Export PDF/print untuk ringkasan kunjungan dan dokumen yang disetujui."
+      },
+      {
+        "line": 344,
+        "text": "**Exit criteria:** angka laporan direkonsiliasi dengan data transaksi sumber dan export besar tidak mengganggu request web."
+      },
+      {
+        "line": 360,
+        "text": "### PM4 — Billing dan Payment"
+      },
+      {
+        "line": 366,
+        "text": "- [ ] Kasir, metode pembayaran, rekonsiliasi, dan laporan penerimaan."
+      },
+      {
+        "line": 382,
+        "text": "- [ ] Data export/import terkontrol dan mapping identifier eksternal."
+      },
+      {
+        "line": 393,
+        "text": "- [ ] Tenant provisioning, suspension, export, dan deletion workflow."
+      },
+      {
+        "line": 397,
+        "text": "- [ ] Automated isolation test untuk HTTP, job, event, broadcast, cache, file, dan export."
+      },
+      {
+        "line": 401,
+        "text": "### PM7 — Multi-Branch"
+      },
+      {
+        "line": 414,
+        "text": "### PM8 — Mobile/PWA dan Offline Capability"
+      },
+      {
+        "line": 416,
+        "text": "**Tujuan:** menyediakan pengalaman mobile setelah API stabil; offline hanya berdasarkan kebutuhan nyata."
+      },
+      {
+        "line": 430,
+        "text": "#### Offline, jika tervalidasi"
+      },
+      {
+        "line": 438,
+        "text": "**Exit criteria:** mobile security review lulus; untuk offline, konflik dapat diprediksi dan tidak merusak rekam medis final."
+      },
+      {
+        "line": 451,
+        "text": "- [ ] Data classification, retention, consent, export, dan deletion policy sesuai yurisdiksi target."
+      },
+      {
+        "line": 479,
+        "text": "    └──→ PM4 Billing"
+      },
+      {
+        "line": 485,
+        "text": "        PM7 Multi-Branch"
+      },
+      {
+        "line": 487,
+        "text": "        PM8 Mobile / Offline"
+      },
+      {
+        "line": 497,
+        "text": "3. **Then:** billing serta API platform."
+      },
+      {
+        "line": 498,
+        "text": "4. **Later:** SaaS multi-tenant, multi-branch, mobile/offline."
+      },
+      {
+        "line": 551,
+        "text": "Setelah target tersebut terbukti stabil di production, ClinicOS dapat berkembang secara bertahap menjadi platform SaaS multi-tenant dan multi-branch dengan API, aplikasi mobile, integrasi komunikasi/pembayaran, serta AI assistance yang terkontrol."
+      }
+    ]
+  },
+  {
+    "file": "Development-Plan.md",
+    "sha256": "00a054c6127aef73282d5b09e1a4d99f1e3489e0e4671155ef930a3aa1d69136",
+    "lines": 102,
+    "headings": [
+      "# ClinicOS — Rencana RME General dan Add-on Odontogram",
+      "## 1. Keputusan produk",
+      "## 2. Keadaan aplikasi saat rencana dibuat",
+      "## 3. Kontrak harga dan periode",
+      "## 4. Data dan pembayaran",
+      "## 5. Entitlement dan alur klinis",
+      "## 6. Pengalaman owner dan dokter",
+      "## 7. Tahap pengerjaan",
+      "## 8. Matriks verifikasi wajib",
+      "## 9. Batas rencana",
+      "## 10. Hasil implementasi dan verifikasi"
+    ],
+    "scope_claims": [
+      {
+        "line": 1,
+        "text": "# ClinicOS — Rencana RME General dan Add-on Odontogram"
+      },
+      {
+        "line": 6,
+        "text": "- Sasaran: RME General tersedia pada setiap paket ClinicOS; odontogram menjadi add-on berbayar opsional per klinik."
+      },
+      {
+        "line": 13,
+        "text": "| Add-on Odontogram | Opsional untuk klinik dengan paket Individual atau Team berbayar yang aktif. Berlaku untuk seluruh dokter yang berwenang di klinik, tanpa harga per dokter. |"
+      },
+      {
+        "line": 14,
+        "text": "| Trial Team | Tidak menyertakan odontogram dan belum dapat membeli add-on. |"
+      },
+      {
+        "line": 19,
+        "text": "| Data lama setelah berakhir | Dokter yang berwenang tetap dapat membaca odontogram tersimpan; perubahan odontogram baru ditolak. RME General tetap mengikuti hak akses dan status paket utama. |"
+      },
+      {
+        "line": 20,
+        "text": "| Refund add-on | Setelah refund tervalidasi, hak mengubah odontogram berhenti. Data klinis, periode, invoice, event, dan audit tetap tersimpan; dokter yang berwenang tetap dapat membaca histori. |"
+      },
+      {
+        "line": 22,
+        "text": "Perubahan paket utama ke Free, expired, atau suspended tidak boleh memberi hak edit odontogram. Add-on bukan pengganti otorisasi medis: hanya dokter yang ditugaskan pada visit/rekam medis yang dapat melihat atau mengubah isi odontogram."
+      },
+      {
+        "line": 27,
+        "text": "- RME General dan odontogram saat ini berada pada form pemeriksaan yang sama. Odontogram 32 gigi FDI sudah divalidasi dan disimpan di medical_records.odontogram melalui VisitWorkflowService; komponen selalu ditampilkan, tanpa pemeriksaan entitlement."
+      },
+      {
+        "line": 29,
+        "text": "- Dokumen PROJECT_ANALYSIS.md dan docs/odontogram-allergy/README.md menggambarkan keadaan lama ketika odontogram belum persisten. Kode dan test RmeGeneralDentalTest saat ini menjadi acuan implementasi terbaru; pembaruan dokumen lama bukan bagian pekerjaan rencana ini."
+      },
+      {
+        "line": 34,
+        "text": "1. Pada checkout paket baru atau perpanjangan yang menyertakan odontogram, tampilkan dua baris harga: paket utama dan add-on. Harga add-on untuk periode penuh adalah Rp99.000 × jumlah bulan paket utama; contoh 12 bulan penuh Rp1.188.000. Satu pembayaran DOKU mengaktifkan kedua hak secara atomik setelah sukses tervalidasi."
+      },
+      {
+        "line": 40,
+        "text": "7. Tidak boleh ada dua add-on odontogram aktif atau dua checkout pending untuk klinik dan periode paket yang sama. Perpanjangan paket tidak otomatis memperpanjang add-on; owner dapat mencentangnya lagi pada checkout perpanjangan."
+      },
+      {
+        "line": 44,
+        "text": "- Tambahkan katalog add-on yang dapat diberi kode stabil odontogram, harga bulanan Rp99.000, status aktif, dan histori harga/snapshot sehingga perubahan katalog hanya berlaku untuk pembelian baru."
+      },
+      {
+        "line": 54,
+        "text": "- Satu pemeriksaan server-side menentukan hak edit odontogram dari klinik milik visit, periode paket Individual/Team berbayar yang aktif, periode add-on yang aktif pada waktu sekarang, serta tidak adanya pencabutan refund. Jangan mempercayai clinic_id, plan, harga, atau status dari form."
+      },
+      {
+        "line": 55,
+        "text": "- Pada halaman visit, dokter yang ditugaskan melihat editor odontogram hanya saat hak edit aktif. Tanpa hak itu, odontogram historis yang sudah ada tampil hanya-baca; jika belum ada data, tampilkan keterangan singkat bahwa add-on belum aktif. Jangan menampilkan CTA pembelian di dalam isi medis."
+      },
+      {
+        "line": 56,
+        "text": "- Form yang menyembunyikan odontogram bukan batas keamanan. SaveMedicalRecordRequest, CompleteVisitRequest, CorrectMedicalRecordRequest, dan VisitWorkflowService harus menolak payload odontogram yang dibuat atau diubah saat hak edit tidak aktif, termasuk request manual. Field odontogram yang tidak dikirim tidak boleh mengosongkan data lama."
+      },
+      {
+        "line": 57,
+        "text": "- Saat add-on berakhir di tengah visit aktif, dokter tetap bisa menyimpan dan memfinalisasi RME General sesuai pengecualian pelayanan yang sudah ada. Odontogram draft tetap tersimpan dan dapat dibaca, tetapi perubahan berikutnya ditolak. Finalisasi/koreksi General tidak boleh menimpa odontogram tersebut."
+      },
+      {
+        "line": 58,
+        "text": "- Koreksi odontogram pada RME final hanya diperbolehkan selama hak edit aktif dan tetap memerlukan alasan serta MedicalRecordRevision sebelum/sesudah. Otorisasi dokter atas pasien/visit tetap wajib pada semua jalur baca dan tulis."
+      },
+      {
+        "line": 59,
+        "text": "- Tidak ada data odontogram, identitas pasien, atau isi medis pada halaman owner/platform, invoice, log pembayaran, notifikasi komersial, maupun broadcast publik."
+      },
+      {
+        "line": 63,
+        "text": "- Landing page dan pemilihan paket menyebut “RME General termasuk” pada semua paket; Individual/Team menampilkan “Odontogram opsional +Rp99.000/klinik/bulan”. Free dan trial Team menjelaskan bahwa add-on belum tersedia."
+      },
+      {
+        "line": 67,
+        "text": "- Dokter melihat status “Odontogram aktif” atau “Histori odontogram hanya-baca” pada halaman pemeriksaan. Pesan tidak menyiratkan bahwa draft tersimpan otomatis; simpan RME tetap mengikuti mekanisme submit yang ada."
+      },
+      {
+        "line": 68,
+        "text": "- Platform Admin dapat melihat status komersial add-on dan mengubah harga/aktif katalog untuk invoice baru. Halaman platform tidak menampilkan isi odontogram."
+      },
+      {
+        "line": 75,
+        "text": "| 1. Domain dan migrasi | Katalog, periode add-on, item invoice, relasi, factory, seeder idempotent, serta kompatibilitas pembayaran lama. | Migrasi additive/rollback aman; histori paket dan odontogram lama utuh; harga penuh dan prorata teruji. |"
+      },
+      {
+        "line": 77,
+        "text": "| 3. Gerbang klinis | Entitlement dari klinik visit, UI editor/histori, validasi request, pengamanan di VisitWorkflowService, finalisasi dan koreksi. | Free/trial/tanpa add-on tidak dapat menulis odontogram lewat UI atau request manual; General tetap berjalan; data lama terbaca sesuai policy. |"
+      },
+      {
+        "line": 79,
+        "text": "| 5. Verifikasi rilis | Test unit/feature, build frontend, formatter, browser responsif, simulasi DOKU sandbox, dan review migrasi pada data berisi odontogram lama. | Semua test terkait lulus; skenario tenant, waktu, gagal bayar, refund, renewal, dan data lama terbukti; tidak memakai pembayaran nyata untuk test rutin. |"
+      },
+      {
+        "line": 84,
+        "text": "- Free, trial Team, paket expired/suspended, Individual/Team tanpa add-on, serta add-on berakhir/refunded tidak dapat membuat atau mengubah odontogram melalui draft, finalisasi, koreksi, atau request buatan."
+      },
+      {
+        "line": 85,
+        "text": "- Dokter yang ditugaskan dapat membaca odontogram historis setelah add-on berakhir/refunded; dokter klinik lain, owner, resepsionis, pasien, dan Platform Admin tidak memperoleh akses medis."
+      },
+      {
+        "line": 90,
+        "text": "- Jika add-on kedaluwarsa saat visit berlangsung, RME General tetap dapat diselesaikan, odontogram lama tidak tertimpa, dan audit koreksi final tetap lengkap."
+      },
+      {
+        "line": 95,
+        "text": "Rencana ini tidak mencakup auto-renewal, harga per dokter, paket dental baru, perubahan domain diagnosis/resep, billing pasien, aplikasi SPA, atau penghapusan data odontogram."
+      },
+      {
+        "line": 100,
+        "text": "- Migrasi additive telah dijalankan pada MySQL lokal. Lima invoice lama tetap ada dan seluruhnya memiliki item paket hasil backfill. Seeder idempotent menghasilkan harga odontogram Rp99.000/bulan."
+      }
+    ]
+  },
+  {
+    "file": "design (1).md",
+    "sha256": "c496eb103b39ea2ec487bbab64e54774703e115cb12882b7ec3e62872ee492fc",
+    "lines": 129,
+    "headings": [
+      "# Panduan Desain ClinicOS",
+      "## 1. Acuan dan prinsip",
+      "## 2. Design tokens",
+      "## 3. State dan API komponen",
+      "## 4. Error, permission, dan data sensitif",
+      "## 5. Screen-to-component map",
+      "## 6. Responsive dan aksesibilitas",
+      "## 7. Frontend Definition of Done",
+      "## 8. Inventory dan aturan konsistensi"
+    ],
+    "scope_claims": [
+      {
+        "line": 57,
+        "text": "connectivity: online | degraded | offline"
+      },
+      {
+        "line": 90,
+        "text": "| Billing | `LineItemTable`, `MoneySummary`, `PaymentMethodSelect`, `PaymentButton`, `ReceiptAction` |"
+      },
+      {
+        "line": 91,
+        "text": "| Reports | `ReportFilter`, `MetricCard`, `ChartCard`, `RankingTable`, `ExportButton` |"
+      },
+      {
+        "line": 115,
+        "text": "- Conflict, autosave, dan sync state ditampilkan bila screen mendukungnya."
+      },
+      {
+        "line": 125,
+        "text": "Domain: `PatientIdentityHeader`, `DuplicatePatientReview`, `AppointmentCard`, `CalendarBlock`, `QueueItem`, `CurrentCall`, `AllergyAlert`, `MedicalEditor`, `SaveStatus`, `PrescriptionEntry`, `BillingSummary`, `PaymentCTA`, `PermissionMatrix`, dan `AuditEventRow`."
+      }
+    ]
+  },
+  {
+    "file": "README.md",
+    "sha256": "4f2f9e906bc925faffc8b30dbfb84b9b708f1e739fd59d030719185ad11cab63",
+    "lines": 65,
+    "headings": [
+      "# ClinicOS",
+      "## Cakupan implementasi",
+      "## Menjalankan instalasi lokal baru",
+      "## Pengujian terisolasi",
+      "## Lisensi"
+    ],
+    "scope_claims": [
+      {
+        "line": 11,
+        "text": "Belum tersedia billing/kasir layanan pasien, discovery klinik, multi-cabang, atau Resilient Edge Mode. Konfigurasi mail, worker, scheduler dan Reverb bukan bukti layanan tersebut sudah berjalan."
+      }
+    ]
+  },
+  {
+    "file": "docs/audit/AUD_01_02_Fix_Report.md",
+    "sha256": "36e74c1c8448a63d53f65db6914f16bea4d93f6078ff5b323ad074ccd419c8ae",
+    "lines": 248,
+    "headings": [
+      "# AUD-01 / AUD-02 — Fix Report",
+      "## 1. Ringkasan sebelum dan sesudah",
+      "## 2. Baseline, sumber acuan, dan integritas pekerjaan pengguna",
+      "## 3. Root cause dan perbaikan AUD-01",
+      "## 4. Root cause dan perbaikan AUD-02",
+      "### Konteks resource",
+      "### Transaksi dan delivery",
+      "## 5. Dependency, file yang berubah, dan perubahan kontrak",
+      "## 6. Regression dan bukti sebelum/sesudah",
+      "### Kegagalan existing yang tetap ada",
+      "## 7. Matriks hasil regresi dan fitur existing",
+      "## 8. Reproduksi pemeriksaan dan pemulihan delivery",
+      "## 9. Risiko residual dan rekomendasi staging",
+      "## 10. Masalah yang sengaja tidak diperbaiki dan kesiapan review"
+    ],
+    "scope_claims": [
+      {
+        "line": 232,
+        "text": "AUD-03 sampai AUD-18 tidak diperbaiki: termasuk draft resep, lifecycle foto, concurrent editing RME, penghapusan owner, file orphan, premium entitlement, autosave, odontogram/alergi, input diagnosis/tindakan, ETA, tanggal dashboard, test baseline, suspend UI, landing asset, polling, dan drift dokumentasi/HMR. Bug migration rollback SQLite yang ditemukan saat menyiapkan harness juga tidak mengubah scope menjadi pekerjaan migration."
+      }
+    ]
+  },
+  {
+    "file": "docs/audit/ClinicOS_Audit.md",
+    "sha256": "4ef9450b8339b7fe99c627e2a320bd82f16ef35cdff8f03bb8fb0844ffb816f0",
+    "lines": 412,
+    "headings": [
+      "# Audit ClinicOS",
+      "## 1. Ringkasan kondisi proyek",
+      "## 2. Acuan dan metode",
+      "### 2.1 Dokumen yang digunakan",
+      "### 2.2 Arti status dan tingkat bukti",
+      "## 3. Audit arsitektur",
+      "### 3.1 Stack, MVC, routing dan struktur",
+      "### 3.2 Database dan multi-tenancy",
+      "### 3.3 Authentication dan authorization",
+      "### 3.4 Kualitas dan konsistensi kode",
+      "## 4. Tabel status implementasi fitur",
+      "## 5. Audit keamanan: kontrol yang bekerja dan batasnya",
+      "## 6. Bug dan ketidaksesuaian yang terbukti",
+      "### AUD-01 — P1 — IDOR appointment antarpasien dengan `clinic_id`",
+      "### AUD-02 — P1 — Tenant subscription salah pada cancel publik; 500 setelah commit",
+      "### AUD-03 — P1 — Draft resep tidak lengkap menghasilkan HTTP 500",
+      "### AUD-04 — P1 — Amendment foto menghapus isi versi historis",
+      "### AUD-05 — P1 — Stale editor dapat menimpa draft tanpa conflict",
+      "### AUD-06 — P1 — Penghapusan akun dapat meninggalkan klinik tanpa owner",
+      "### AUD-07 — P2 — Upload file tidak dibersihkan ketika transaksi database rollback",
+      "### AUD-08 — P2 — Feature premium belum digate berdasarkan paket",
+      "### AUD-09 — P2 — Autosave baru presentasi, belum penyimpanan otomatis",
+      "### AUD-10 — P2 — Odontogram/alergi belum terhubung data klinis",
+      "### AUD-11 — P2 — Backend diagnosis/tindakan tidak mempunyai editor terstruktur saat ini",
+      "### AUD-12 — P2 — Predictive Queue/near-turn/personal tracker belum lengkap",
+      "### AUD-13 — P2 — Agregasi tanggal hari yang sama gagal pada SQLite",
+      "### AUD-14 — P2 — Baseline QA belum hijau; beberapa pemeriksaan tidak mencapai assertion keamanan",
+      "### AUD-15 — P2 — Aksi platform suspend/revoke belum tersedia",
+      "### AUD-16 — P2 — Background landing menunjuk aset yang tidak ada",
+      "### AUD-17 — P2 — Polling HTML berjalan terus meski WebSocket terhubung",
+      "### AUD-18 — P3 — Dokumentasi dan konfigurasi development belum konsisten",
+      "## 7. Risiko dan hal yang belum dapat dibuktikan",
+      "## 8. Hasil pengujian dan reproduksi",
+      "### 8.1 Perintah dan isolasi",
+      "### 8.2 Tujuh kasus PHPUnit yang tidak lulus",
+      "### 8.3 Hasil probe tambahan",
+      "## 9. Kesesuaian spesifikasi dan konflik acuan",
+      "## 10. Rekomendasi backlog sprint berikutnya",
+      "## 11. Integritas workspace dan hasil akhir"
+    ],
+    "scope_claims": [
+      {
+        "line": 44,
+        "text": "| [docs/odontogram-allergy/README.md:6](../odontogram-allergy/README.md#L6) | Kontrak UI dental/alergi dan batas persistence/data |"
+      },
+      {
+        "line": 45,
+        "text": "| [docs/rme-general-autosave/README.md:27](../rme-general-autosave/README.md#L27) | Kontrak autosave presentasional dan integrasi yang belum dibuat |"
+      },
+      {
+        "line": 71,
+        "text": "- Aplikasi berupa MVC monolith dengan service layer; tidak ada frontend React terpisah atau API publik terversi. Prefix route memisahkan area publik, onboarding, subscription, platform, admin, resepsionis, dokter dan pasien. Beberapa aksi web mengembalikan JSON untuk kebutuhan UI. Lihat [routes/web.php:74](../../routes/web.php#L74), [routes/web.php:102](../../routes/web.php#L102), [routes/web.php:143](../../routes/web.php#L143), dan [routes/auth.php:7](../../routes/auth.php#L7)."
+      },
+      {
+        "line": 134,
+        "text": "| Autosave RME | Parsial | Hook/status saja, submit draft masih manual; [rme-general-autosave/README.md:99](../rme-general-autosave/README.md#L99); AUD-09. |"
+      },
+      {
+        "line": 135,
+        "text": "| Odontogram / RME Dental | Parsial | Interaktif di Alpine, tidak dipersist; [dental-chart.blade.php:33](../../resources/views/components/dental-chart.blade.php#L33); AUD-10. |"
+      },
+      {
+        "line": 149,
+        "text": "| Near-turn/appointment reminder pasien — NOTIF-3 | Belum dibuat | Scheduler hanya subscription owner; [routes/console.php:11](../../routes/console.php#L11), requirement [PRD.md:440](../../PRD.md#L440). |"
+      },
+      {
+        "line": 150,
+        "text": "| Billing/kasir/payment/receipt layanan pasien | Belum dibuat | Domain Payment menyimpan plan/durasi subscription, bukan invoice layanan; [Models/Payment.php:14](../../app/Models/Payment.php#L14), [Plan.md:360](../../Plan.md#L360). Nilai layanan visit bukan kas diterima. |"
+      },
+      {
+        "line": 151,
+        "text": "| Laporan lengkap / export / cetak resep | Belum dibuat | Dashboard dan audit filter sudah ada; route report/export/print belum ditemukan. Acuan roadmap [Plan.md:331](../../Plan.md#L331), inventory [design (1).md:80](../../design%20%281%29.md#L80). |"
+      },
+      {
+        "line": 217,
+        "text": "**Rekomendasi:** tambahkan strategi optimistic version/conflict sebelum autosave; test stale draft, finalize saat tab lain terbuka, dan amendment dengan versi awal lama."
+      },
+      {
+        "line": 241,
+        "text": "### AUD-09 — P2 — Autosave baru presentasi, belum penyimpanan otomatis"
+      },
+      {
+        "line": 243,
+        "text": "**Bukti:** source dan pengakuan eksplisit dokumen. Input hanya menandai state draft dan submit menandai saving; belum ada debounce/network autosave. Lihat [resources/views/doctor/visits/show.blade.php:66](../../resources/views/doctor/visits/show.blade.php#L66), [docs/rme-general-autosave/README.md:99](../rme-general-autosave/README.md#L99)."
+      },
+      {
+        "line": 245,
+        "text": "**Rekomendasi:** bedakan label/status simpan manual dari autosave; implementasikan autosave setelah AUD-03/AUD-05 dan kontrak konflik diselesaikan. Ini gap fitur, bukan bukti bahwa tombol simpan manual selalu gagal."
+      },
+      {
+        "line": 247,
+        "text": "### AUD-10 — P2 — Odontogram/alergi belum terhubung data klinis"
+      },
+      {
+        "line": 249,
+        "text": "**Bukti:** source. Dental memakai state lokal dan `data-persists=\"false\"`; controller selalu mengirim kondisi `unknown` dan array alergi kosong. Lihat [resources/views/components/dental-chart.blade.php:33](../../resources/views/components/dental-chart.blade.php#L33), [app/Http/Controllers/Doctor/VisitController.php:67](../../app/Http/Controllers/Doctor/VisitController.php#L67), [app/Http/Controllers/Doctor/VisitController.php:81](../../app/Http/Controllers/Doctor/VisitController.php#L81), [docs/"
+      },
+      {
+        "line": 375,
+        "text": "| Full Laravel/Blade vs React pada konteks RPP lama | Stack repository dan permintaan langsung tetap Blade/Livewire/Tailwind; tidak ada dasar melakukan rewrite React dalam tugas audit. [AGENTS.md:8](../../AGENTS.md#L8). |"
+      },
+      {
+        "line": 376,
+        "text": "| PRD/Plan satu klinik/post-MVP vs kode SaaS | Source sudah melampaui status lama; gunakan Development-Plan untuk keputusan komersial, sambil merapikan baseline spesifikasi. [Plan.md:9](../../Plan.md#L9), [Development-Plan.md:21](../../Development-Plan.md#L21). |"
+      },
+      {
+        "line": 381,
+        "text": "| Autosave/dental/allergy berstatus pekerjaan UI selesai | Dokumen docs secara eksplisit menyatakan batasnya; status selesai UI tidak boleh diterjemahkan menjadi persistence end-to-end selesai. AUD-09/AUD-10. |"
+      },
+      {
+        "line": 382,
+        "text": "| Dashboard layanan populer, near-turn, laporan | DASH-7 dan NOTIF-3 belum terpenuhi; report/export masih roadmap. [PRD.md:430](../../PRD.md#L430), [PRD.md:440](../../PRD.md#L440), [Plan.md:331](../../Plan.md#L331). |"
+      },
+      {
+        "line": 388,
+        "text": "## 10. Rekomendasi backlog sprint berikutnya"
+      },
+      {
+        "line": 390,
+        "text": "Rekomendasi ini tidak merupakan implementasi atau janji kapasitas satu sprint. Prioritas awal adalah memulihkan batas akses, integritas data, dan baseline QA; kapasitas ditentukan tim."
+      },
+      {
+        "line": 402,
+        "text": "| 9 | Kontrak UI klinis — AUD-09/AUD-10/AUD-11 | P2 | Diagnosis/tindakan dapat dikelola bila diwajibkan; persistence dental/alergi dan autosave mempunyai kontrak jelas, tanpa klaim UI palsu. |"
+      },
+      {
+        "line": 406,
+        "text": "**Usulan paket sprint terdekat:** ambil item 1–3 dan baseline QA yang mendukungnya terlebih dahulu; masukkan retensi lampiran/lifecycle owner sesuai kapasitas karena keduanya tetap gate P1. Fitur baru seperti billing pasien, laporan, Predictive Queue, cabang dan Edge diprioritaskan setelah scope produk diputuskan dan gate integritas terpenuhi."
+      }
+    ]
+  },
+  {
+    "file": "docs/odontogram-allergy/README.md",
+    "sha256": "30ccf5a0570296f5235d900119dd1fd902edde70df12259cbab103244c8c4bc1",
+    "lines": 128,
+    "headings": [
+      "# Bukti Implementasi Odontogram dan Allergy Alert",
+      "## Hasil kerja",
+      "### Komponen",
+      "## Kontrak data odontogram",
+      "## Callback integrasi",
+      "## Kontrak allergy alert",
+      "## Accessibility dan responsive",
+      "## Bukti testing",
+      "## Batas implementasi"
+    ],
+    "scope_claims": [
+      {
+        "line": 1,
+        "text": "# Bukti Implementasi Odontogram dan Allergy Alert"
+      },
+      {
+        "line": 8,
+        "text": "Halaman pemeriksaan menerima kontrak odontogram dari `VisitController`, lalu merendernya melalui komponen Blade presentasional. Interaksi hanya mengubah state Alpine lokal dan mengirim custom event. Komponen tidak membuat request, field form, atau penyimpanan server."
+      },
+      {
+        "line": 10,
+        "text": "Editor odontogram tetap interaktif pada Draft maupun Modification. Prop `read_only` tetap tersedia untuk pemakaian komponen di konteks histori atau tampilan non-editor."
+      },
+      {
+        "line": 16,
+        "text": "| `resources/views/components/dental-chart.blade.php` | Odontogram 32 gigi FDI, selection, kondisi, legend, read-only, disabled state, dan callback event. |"
+      },
+      {
+        "line": 20,
+        "text": "## Kontrak data odontogram"
+      },
+      {
+        "line": 74,
+        "text": "Tidak ada `name` pada kontrol dental, sehingga submit RME saat ini tidak mengirim payload odontogram."
+      },
+      {
+        "line": 82,
+        "text": "        'reaction' => 'Anafilaksis',"
+      }
+    ]
+  },
+  {
+    "file": "docs/prescription-workflow/README.md",
+    "sha256": "6f824faba8a8a70c85719f446cca7642dd6864a828207eda9bf4a79ad0c67453",
+    "lines": 111,
+    "headings": [
+      "# Bukti Implementasi Alur Resep, Finalize, dan Modification",
+      "## Hasil kerja",
+      "### Draft",
+      "### Finalize",
+      "### Modification",
+      "## Pemetaan implementasi",
+      "## Bukti testing",
+      "## Bukti acceptance criteria",
+      "## Pemeriksaan accessibility",
+      "## Batas implementasi"
+    ],
+    "scope_claims": [
+      {
+        "line": 4,
+        "text": "Status: selesai untuk Sprint List 1"
+      }
+    ]
+  },
+  {
+    "file": "docs/rme-general-autosave/README.md",
+    "sha256": "c62579c8094d7aa8e8e4d99873bf03b342e6a23523b01a6af1223097837d168c",
+    "lines": 100,
+    "headings": [
+      "# Bukti Implementasi RME General dan Status Autosave",
+      "## Hasil kerja",
+      "### Komponen",
+      "## Kontrak integrasi autosave",
+      "## Accessibility",
+      "## Bukti testing",
+      "## Batas implementasi"
+    ],
+    "scope_claims": [
+      {
+        "line": 1,
+        "text": "# Bukti Implementasi RME General dan Status Autosave"
+      },
+      {
+        "line": 17,
+        "text": "| `resources/views/components/rme/autosave-status.blade.php` | State `draft`, `saving`, `saved`, `error`, dan `finalized`. |"
+      },
+      {
+        "line": 27,
+        "text": "## Kontrak integrasi autosave"
+      },
+      {
+        "line": 33,
+        "text": "<div data-rme-autosave-status data-initial-state=\"draft\">"
+      },
+      {
+        "line": 40,
+        "text": "window.dispatchEvent(new CustomEvent('rme-autosave-state', {"
+      },
+      {
+        "line": 44,
+        "text": "window.dispatchEvent(new CustomEvent('rme-autosave-state', {"
+      },
+      {
+        "line": 48,
+        "text": "window.dispatchEvent(new CustomEvent('rme-autosave-state', {"
+      },
+      {
+        "line": 49,
+        "text": "    detail: { state: 'error', message: 'Autosave gagal. Coba kembali.' },"
+      },
+      {
+        "line": 95,
+        "text": "Test membuktikan render field SOAP, kontrak hook autosave, old input, state draft/saved/error/finalized, hubungan error ke field, alur finalisasi, dan histori Modification."
+      },
+      {
+        "line": 99,
+        "text": "- Endpoint dan debounce autosave belum dibuat karena kontrak API Vioni belum tersedia. Komponen hanya menyediakan presentasi dan hook integrasi."
+      }
+    ]
+  }
+]

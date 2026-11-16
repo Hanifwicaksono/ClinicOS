@@ -1,0 +1,15 @@
+{"id":"after-PG18-validation","status":"PASS","scenario":"Native/server validation permits retry and retains UUID"}
+{"id":"after-PG18-pending","status":"PASS","scenario":"Real double-click shows pending, creates one audited scheduled grant and preserves history"}
+{"id":"after-PG18-empty","status":"PASS","scenario":"Empty catalog remains disabled after Alpine initialization"}
+{"id":"after-PG18-back","status":"PASS","scenario":"Back navigation after simulated HTTP failure resets pending and permits retry"}
+{"id":"after-PG17-more-booking","status":"PASS","scenario":"Page 2 preserves draft and cursor, reaches candidates9/10 and books an existing profile"}
+{"id":"after-PG17-inactive","status":"PASS","scenario":"An inactive later candidate opens its profile without activation, linking or data loss"}
+{"id":"after-PG17-forged","status":"PASS","scenario":"A forged cursor receives real422, clears review authority and permits fresh retry"}
+{"id":"after-PG17-stale","status":"PASS","scenario":"Editing a later candidate in another browser invalidates the old cursor"}
+{"id":"after-PG17-foreign","status":"PASS","scenario":"A valid cursor cannot be replayed by another tenant or overridden by clinic_id"}
+{"id":"after-PG17-roles","status":"PASS","scenario":"Admin can review; Doctor, Patient and Platform cannot use receptionist candidate UI"}
+{"id":"after-PG17-walk-in","status":"PASS","scenario":"Paging in the shared walk-in form preserves patient, doctor, service and schedule inputs without creating records"}
+{"id":"after-PG17-review-token","status":"PASS","scenario":"Unreviewed and forged review tokens cannot silently create a patient; explicit review can create a distinct person"}
+{"pass":12,"fail":0}
+(node:10816) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

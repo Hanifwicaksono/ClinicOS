@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\F1ImplementationTest" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" tests="22" assertions="151" errors="0" failures="2" skipped="0" time="2.613207">
+    <testcase name="test_grant_form_renders_valid_binding_and_process_feedback" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="29" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="3" time="0.627225"/>
+    <testcase name="test_duplicate_candidates_after_the_first_eight_are_reachable" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="38" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="12" time="0.121320"/>
+    <testsuite name="Tests\Feature\F1ImplementationTest::test_page_boundaries_and_existing_review_tokens_stay_compatible" tests="5" assertions="30" errors="0" failures="0" skipped="0" time="0.438250">
+      <testcase name="test_page_boundaries_and_existing_review_tokens_stay_compatible with data set &quot;none&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="61" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="6" time="0.084544"/>
+      <testcase name="test_page_boundaries_and_existing_review_tokens_stay_compatible with data set &quot;one&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="61" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="6" time="0.083919"/>
+      <testcase name="test_page_boundaries_and_existing_review_tokens_stay_compatible with data set &quot;eight&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="61" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="6" time="0.090559"/>
+      <testcase name="test_page_boundaries_and_existing_review_tokens_stay_compatible with data set &quot;nine&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="61" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="6" time="0.089512"/>
+      <testcase name="test_page_boundaries_and_existing_review_tokens_stay_compatible with data set &quot;ten&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="61" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="6" time="0.089717"/>
+    </testsuite>
+    <testcase name="test_cursor_tampering_invalid_shapes_and_oversized_input_are_rejected" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="73" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="21" time="0.107746"/>
+    <testcase name="test_cursor_cannot_cross_tenant_criteria_or_expiry" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="85" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="11" time="0.117732"/>
+    <testsuite name="Tests\Feature\F1ImplementationTest::test_changes_beyond_the_first_page_invalidate_the_cursor" tests="4" assertions="24" errors="0" failures="0" skipped="0" time="0.396129">
+      <testcase name="test_changes_beyond_the_first_page_invalidate_the_cursor with data set &quot;insert&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="110" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="6" time="0.097730"/>
+      <testcase name="test_changes_beyond_the_first_page_invalidate_the_cursor with data set &quot;delete&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="110" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="6" time="0.105093"/>
+      <testcase name="test_changes_beyond_the_first_page_invalidate_the_cursor with data set &quot;later page edit&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="110" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="6" time="0.096180"/>
+      <testcase name="test_changes_beyond_the_first_page_invalidate_the_cursor with data set &quot;inactive&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="110" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="6" time="0.097127"/>
+    </testsuite>
+    <testcase name="test_paging_reuses_all_matchers_and_keeps_inactive_and_foreign_profiles_unchanged" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="128" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="20" time="0.107176"/>
+    <testcase name="test_review_is_still_required_and_token_from_later_page_can_only_confirm_explicit_creation" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="148" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="8" time="0.111117">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\F1ImplementationTest::test_review_is_still_required_and_token_from_later_page_can_only_confirm_explicit_creation&#13;
+Failed to find a validation error in the response for key: 'duplicate_reviewed'&#13;
+&#13;
+Response has the following JSON validation errors:&#13;
+&#13;
+{
+    "duplicate_review_token": [
+        "The duplicate review token field must be 64 characters."
+    ]
+}&#13;
+
+Failed asserting that an array has the key 'duplicate_reviewed'.&#13;
+&#13;
+The following errors occurred during the last request:
+
+{
+    "message": "The duplicate review token field must be 64 characters.",
+    "errors": {
+        "duplicate_review_token": [
+            "The duplicate review token field must be 64 characters."
+        ]
+    }
+}
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:1173
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:1101
+C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php:157</failure>
+    </testcase>
+    <testsuite name="Tests\Feature\F1ImplementationTest::test_candidate_endpoint_preserves_role_boundaries" tests="5" assertions="5" errors="0" failures="1" skipped="0" time="0.396134">
+      <testcase name="test_candidate_endpoint_preserves_role_boundaries with data set &quot;admin&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="174" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="1" time="0.082718"/>
+      <testcase name="test_candidate_endpoint_preserves_role_boundaries with data set &quot;receptionist&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="174" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="1" time="0.083550">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\F1ImplementationTest::test_candidate_endpoint_preserves_role_boundaries with data set "receptionist"&#13;
+Expected response status code [200] but received 403.
+Failed asserting that 403 is identical to 200.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:16
+C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php:180</failure>
+      </testcase>
+      <testcase name="test_candidate_endpoint_preserves_role_boundaries with data set &quot;doctor&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="174" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="1" time="0.076689"/>
+      <testcase name="test_candidate_endpoint_preserves_role_boundaries with data set &quot;patient&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="174" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="1" time="0.078226"/>
+      <testcase name="test_candidate_endpoint_preserves_role_boundaries with data set &quot;platform&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="174" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="1" time="0.074951"/>
+    </testsuite>
+    <testcase name="test_grant_validation_retry_preserves_idempotency_audit_and_history" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="183" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="13" time="0.100147"/>
+    <testcase name="test_empty_catalog_keeps_the_grant_button_disabled_on_the_server" file="C:\laragon\www\ClinicOS\tests\Feature\F1ImplementationTest.php" line="204" class="Tests\Feature\F1ImplementationTest" classname="Tests.Feature.F1ImplementationTest" assertions="4" time="0.090230"/>
+  </testsuite>
+</testsuites>

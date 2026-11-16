@@ -1,0 +1,2906 @@
+[
+  {
+    "file": "qa-audit/UX_AUDIT.md",
+    "sha256": "70392391d527ee5aa45b86da4d3b5bc3cdfbc6f12f81061a1b875ac655a98426",
+    "lines": 56,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "> **Status terbaru setelah P2, 11 November 2026:** QA-09 dan QA-10 FIXED: drawer/fokus/inert/Tab/Escape pada lima role melalui DOM Chrome, tujuh label form pada dua role pendaftaran. Pesan self-delete/verification menjelaskan langkah berikut tanpa error FK atau klaim delivery palsu. Native keyboard dan screen reader NOT TESTED. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md)."
+      },
+      {
+        "line": 9,
+        "text": "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka."
+      },
+      {
+        "line": 27,
+        "text": "| Owner membuat klinik dan mengaktifkan Free | PASS pada fixture verified | Browser onboarding selesai; email delivery tetap BLOCKED |"
+      },
+      {
+        "line": 38,
+        "text": "| Data kosong/loading/error pada semua halaman | NOT TESTED secara penuh | Existing tests mencakup state tertentu; menu smoke tidak membuktikan semua state |"
+      },
+      {
+        "line": 39,
+        "text": "| Semua filter, fixed sort, page awal/akhir | NOT TESTED secara penuh | Beberapa list memiliki fixed sort dan pagination, bukan kontrol sort yang bisa diubah |"
+      },
+      {
+        "line": 40,
+        "text": "| Fokus drawer tertutup/terbuka, trap, return secara menyeluruh | NOT TESTED | Hanya Escape direproduksi; tidak mengklaim semua urutan fokus salah |"
+      },
+      {
+        "line": 41,
+        "text": "| Kontras terukur, zoom 200/400%, reduced motion, screen reader | NOT TESTED | Tidak ada pengukuran WCAG lengkap atau pengguna screen reader |"
+      },
+      {
+        "line": 42,
+        "text": "| Perangkat mobile fisik, keyboard virtual, orientasi | NOT TESTED | Emulasi viewport saja |"
+      },
+      {
+        "line": 54,
+        "text": "Seluruh 88 file view dipetakan pada lampiran view di SYSTEM_INVENTORY. Kolom browser menunjukkan jalur yang benar-benar dibuka, fixture/render test, atau NOT TESTED. Komponen bersama dan layout bukan halaman independen; pemakaian komponen tidak otomatis menguji semua state/prop-nya."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/SYSTEM_INVENTORY.md",
+    "sha256": "91fca573bf71f50649ca9eaca4833a85620ddd0841f5c50fec279186978785a9",
+    "lines": 398,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 9,
+        "text": "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka."
+      },
+      {
+        "line": 19,
+        "text": "Sumber: AGENTS.md, PROJECT_ANALYSIS.md, Development-Plan.md (versi add-on 3 November), PRD.md, Plan.md, design (1).md, README, tiga README fitur dalam docs/, serta dokumen audit/fix historis dalam docs/audit/. Instruksi audit yang dilampirkan menjadi scope tugas. Laporan lama tidak dipakai sebagai hasil test saat ini. SRS/PDF desain/RPP lengkap tidak tersedia dalam workspace audit ini, sehingga compliance penuh terhadap dokumen tersebut NOT TESTED."
+      },
+      {
+        "line": 34,
+        "text": "| F02 | Registrasi Patient | Daftar, persetujuan syarat; Google opsional | Email unik, password valid | Daftar → verifikasi → dashboard/booking | PASS backend; Google nyata BLOCKED |"
+      },
+      {
+        "line": 35,
+        "text": "| F03 | Registrasi owner | Daftar terpisah, pilihan paket dari landing | Email unik, syarat disetujui | Akun owner → verifikasi → buat klinik → paket | PASS browser dengan verifikasi fixture; delivery email BLOCKED |"
+      },
+      {
+        "line": 36,
+        "text": "| F04 | Keamanan akun | Verifikasi/resend, forgot/reset, konfirmasi/update password | Auth/session/signed link, mail | Token sah mengubah status/password; token salah ditolak | PASS fake/backend; transport mail BLOCKED |"
+      },
+      {
+        "line": 40,
+        "text": "| F08 | Profil klinik; admin/owner | Identitas, slug, jam, zona waktu, logo, aktif | Clinic policy dan tenant | Simpan → profil publik memakai data tersimpan | PASS terkait; rollback logo NOT TESTED |"
+      },
+      {
+        "line": 43,
+        "text": "| F11 | Layanan; admin/owner | List/page, create/edit harga/durasi/deskripsi/aktif | Tenant/service policy | Layanan dokter tersedia; snapshot booking mempertahankan harga lama | PASS cakupan existing; update UI tambahan NOT TESTED |"
+      },
+      {
+        "line": 44,
+        "text": "| F12 | Pasien administratif; admin/resepsionis | Create/list/search/detail/edit/nonaktif, duplicate review | Klinik aktor, identitas valid | Nomor RM → profil administratif → booking | PASS create/search/duplicate; update backend tambahan PASS; semua variasi NOT TESTED |"
+      },
+      {
+        "line": 48,
+        "text": "| F16 | Status/token booking; pemegang token | Baca dan cancel token | Hash cocok, subscription target, waktu sesi | Status benar; token salah 404; cancel melepas slot | PASS backend; replay token race MySQL BLOCKED |"
+      },
+      {
+        "line": 55,
+        "text": "| F23 | Odontogram; Doctor | 32 gigi, kondisi, histori read-only; edit dengan add-on | Paid Individual/Team + add-on aktif + policy visit | Data persisten, edit ditolak tanpa hak; General tetap dapat selesai | PASS test entitlement; operational DOKU BLOCKED |"
+      },
+      {
+        "line": 58,
+        "text": "| F26 | ETA/display; publik/pasien | Perkiraan/rentang/confidence, current call | Riwayat 20 visit dokter atau durasi layanan | Perkiraan per sesi/tanggal; tanpa identitas pasien di board | PASS estimator/backend; akurasi lapangan NOT TESTED |"
+      },
+      {
+        "line": 59,
+        "text": "| F27 | Notifikasi; akun terkait | List/page, read/read-all, database+broadcast | Patient/doctor penerima; worker untuk broadcast | Transisi tercatat transaksional, delivery retry | PASS job/database/fake; read-all ownership tambahan PASS; WebSocket BLOCKED |"
+      },
+      {
+        "line": 60,
+        "text": "| F28 | Audit; admin/platform sesuai area | List/page/filter, catat auth/domain/platform | Tenant/permission, metadata aman | Jejak pelaku/aksi tanpa token atau isi medis | PASS; storage tamper/retensi produksi NOT TESTED |"
+      },
+      {
+        "line": 62,
+        "text": "| F30 | Pembayaran SaaS; owner/platform/provider | Invoice/list/detail/checkout/reconcile, callback, dedupe, refund manual | DOKU valid; owner/permission platform; snapshot | Redirect tidak aktifkan akses; event sah aktivasi tepat sekali | PASS fake/provider contract; DOKU nyata BLOCKED |"
+      },
+      {
+        "line": 65,
+        "text": "| F33 | Operasional | Health, scheduler reminder, database queue, Reverb config, deploy workflow | Service eksternal dan proses operasional | Job terkirim; health dan rilis tervalidasi | PASS worker null/scheduler registry/build; production BLOCKED |"
+      },
+      {
+        "line": 106,
+        "text": "| POST |  | _boost/browser-logs | boost.browser-logs | F33 |  | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 134,
+        "text": "| GET\\|POST\\|HEAD |  | broadcasting/auth | (unnamed) | F33 | web | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 152,
+        "text": "| GET\\|HEAD |  | livewire/livewire.js | (unnamed) | F33 |  | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 153,
+        "text": "| GET\\|HEAD |  | livewire/livewire.min.js.map | (unnamed) | F33 |  | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 154,
+        "text": "| GET\\|HEAD |  | livewire/preview-file/{filename} | livewire.preview-file | F33 | web | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 156,
+        "text": "| POST |  | livewire/upload-file | livewire.upload-file | F33 | web; ThrottleRequests:60,1 | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 211,
+        "text": "| GET\\|HEAD |  | storage/{path} | storage.local | F33 |  | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 212,
+        "text": "| PUT |  | storage/{path} | storage.local.upload | F33 |  | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 218,
+        "text": "| GET\\|HEAD |  | up | (unnamed) | F33 |  | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 228,
+        "text": "| [resources/views/admin/audit-logs/index.blade.php](../resources/views/admin/audit-logs/index.blade.php) | Page/fragment | admin.audit-logs.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 229,
+        "text": "| [resources/views/admin/clinic/form.blade.php](../resources/views/admin/clinic/form.blade.php) | Page/fragment | admin.clinic.create, admin.clinic.edit, onboarding.clinic.create | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 230,
+        "text": "| [resources/views/admin/dashboard.blade.php](../resources/views/admin/dashboard.blade.php) | Page/fragment | admin.dashboard | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 231,
+        "text": "| [resources/views/admin/schedules/form.blade.php](../resources/views/admin/schedules/form.blade.php) | Page/fragment | admin.doctor-schedules.create, admin.doctor-schedules.edit | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 232,
+        "text": "| [resources/views/admin/schedules/index.blade.php](../resources/views/admin/schedules/index.blade.php) | Page/fragment | admin.doctor-schedules.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 233,
+        "text": "| [resources/views/admin/services/form.blade.php](../resources/views/admin/services/form.blade.php) | Page/fragment | admin.services.create, admin.services.edit | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 234,
+        "text": "| [resources/views/admin/services/index.blade.php](../resources/views/admin/services/index.blade.php) | Page/fragment | admin.services.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 235,
+        "text": "| [resources/views/admin/staff/form.blade.php](../resources/views/admin/staff/form.blade.php) | Page/fragment | admin.staff.create, admin.staff.edit | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 236,
+        "text": "| [resources/views/admin/staff/index.blade.php](../resources/views/admin/staff/index.blade.php) | Page/fragment | admin.staff.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 237,
+        "text": "| [resources/views/components/action-message.blade.php](../resources/views/components/action-message.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 238,
+        "text": "| [resources/views/components/application-logo.blade.php](../resources/views/components/application-logo.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 239,
+        "text": "| [resources/views/components/appointment-queue-status.blade.php](../resources/views/components/appointment-queue-status.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 240,
+        "text": "| [resources/views/components/auth-session-status.blade.php](../resources/views/components/auth-session-status.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 241,
+        "text": "| [resources/views/components/booking-fields.blade.php](../resources/views/components/booking-fields.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 242,
+        "text": "| [resources/views/components/clinic-button.blade.php](../resources/views/components/clinic-button.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 243,
+        "text": "| [resources/views/components/critical-allergy-banner.blade.php](../resources/views/components/critical-allergy-banner.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 244,
+        "text": "| [resources/views/components/danger-button.blade.php](../resources/views/components/danger-button.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 245,
+        "text": "| [resources/views/components/dental-chart.blade.php](../resources/views/components/dental-chart.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 246,
+        "text": "| [resources/views/components/dropdown.blade.php](../resources/views/components/dropdown.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 247,
+        "text": "| [resources/views/components/dropdown-link.blade.php](../resources/views/components/dropdown-link.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 248,
+        "text": "| [resources/views/components/input-error.blade.php](../resources/views/components/input-error.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 249,
+        "text": "| [resources/views/components/input-label.blade.php](../resources/views/components/input-label.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 250,
+        "text": "| [resources/views/components/medical-record-modification.blade.php](../resources/views/components/medical-record-modification.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 251,
+        "text": "| [resources/views/components/modal.blade.php](../resources/views/components/modal.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 252,
+        "text": "| [resources/views/components/nav-link.blade.php](../resources/views/components/nav-link.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 253,
+        "text": "| [resources/views/components/patient-duplicate-review.blade.php](../resources/views/components/patient-duplicate-review.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 254,
+        "text": "| [resources/views/components/primary-button.blade.php](../resources/views/components/primary-button.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 255,
+        "text": "| [resources/views/components/public-layout.blade.php](../resources/views/components/public-layout.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 256,
+        "text": "| [resources/views/components/public-queue-screen.blade.php](../resources/views/components/public-queue-screen.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 257,
+        "text": "| [resources/views/components/queue-card.blade.php](../resources/views/components/queue-card.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 258,
+        "text": "| [resources/views/components/queue-number-display.blade.php](../resources/views/components/queue-number-display.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 259,
+        "text": "| [resources/views/components/receptionist/search-select.blade.php](../resources/views/components/receptionist/search-select.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 260,
+        "text": "| [resources/views/components/responsive-nav-link.blade.php](../resources/views/components/responsive-nav-link.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 261,
+        "text": "| [resources/views/components/rme/allergy-editor.blade.php](../resources/views/components/rme/allergy-editor.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 262,
+        "text": "| [resources/views/components/rme/allergy-fields.blade.php](../resources/views/components/rme/allergy-fields.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 263,
+        "text": "| [resources/views/components/rme/autosave-status.blade.php](../resources/views/components/rme/autosave-status.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 264,
+        "text": "| [resources/views/components/rme/input-field.blade.php](../resources/views/components/rme/input-field.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 265,
+        "text": "| [resources/views/components/rme/section.blade.php](../resources/views/components/rme/section.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 266,
+        "text": "| [resources/views/components/rme/textarea-field.blade.php](../resources/views/components/rme/textarea-field.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 267,
+        "text": "| [resources/views/components/secondary-button.blade.php](../resources/views/components/secondary-button.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 268,
+        "text": "| [resources/views/components/status-badge.blade.php](../resources/views/components/status-badge.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 269,
+        "text": "| [resources/views/components/text-input.blade.php](../resources/views/components/text-input.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 270,
+        "text": "| [resources/views/components/visit-summary.blade.php](../resources/views/components/visit-summary.blade.php) | Shared component | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 271,
+        "text": "| [resources/views/dashboard.blade.php](../resources/views/dashboard.blade.php) | Page/fragment | dashboard, patient.dashboard | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 272,
+        "text": "| [resources/views/doctor/dashboard.blade.php](../resources/views/doctor/dashboard.blade.php) | Page/fragment | doctor.dashboard | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 273,
+        "text": "| [resources/views/doctor/medical-records/index.blade.php](../resources/views/doctor/medical-records/index.blade.php) | Page/fragment | doctor.medical-records.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 274,
+        "text": "| [resources/views/doctor/visits/show.blade.php](../resources/views/doctor/visits/show.blade.php) | Page/fragment | doctor.visits.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 275,
+        "text": "| [resources/views/errors/404.blade.php](../resources/views/errors/404.blade.php) | Error view | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 276,
+        "text": "| [resources/views/layouts/app.blade.php](../resources/views/layouts/app.blade.php) | Layout/navigation | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 277,
+        "text": "| [resources/views/layouts/guest.blade.php](../resources/views/layouts/guest.blade.php) | Layout/navigation | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 279,
+        "text": "| [resources/views/livewire/pages/auth/confirm-password.blade.php](../resources/views/livewire/pages/auth/confirm-password.blade.php) | Page/fragment | password.confirm | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 280,
+        "text": "| [resources/views/livewire/pages/auth/forgot-password.blade.php](../resources/views/livewire/pages/auth/forgot-password.blade.php) | Page/fragment | password.request | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 281,
+        "text": "| [resources/views/livewire/pages/auth/login.blade.php](../resources/views/livewire/pages/auth/login.blade.php) | Page/fragment | login, admin.login | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 282,
+        "text": "| [resources/views/livewire/pages/auth/register.blade.php](../resources/views/livewire/pages/auth/register.blade.php) | Page/fragment | register | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 283,
+        "text": "| [resources/views/livewire/pages/auth/register-clinic.blade.php](../resources/views/livewire/pages/auth/register-clinic.blade.php) | Page/fragment | register.clinic | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 284,
+        "text": "| [resources/views/livewire/pages/auth/reset-password.blade.php](../resources/views/livewire/pages/auth/reset-password.blade.php) | Page/fragment | password.reset | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 285,
+        "text": "| [resources/views/livewire/pages/auth/verify-email.blade.php](../resources/views/livewire/pages/auth/verify-email.blade.php) | Page/fragment | verification.notice | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 286,
+        "text": "| [resources/views/livewire/profile/delete-user-form.blade.php](../resources/views/livewire/profile/delete-user-form.blade.php) | Volt profile fragment | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 287,
+        "text": "| [resources/views/livewire/profile/update-password-form.blade.php](../resources/views/livewire/profile/update-password-form.blade.php) | Volt profile fragment | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 288,
+        "text": "| [resources/views/livewire/profile/update-profile-information-form.blade.php](../resources/views/livewire/profile/update-profile-information-form.blade.php) | Volt profile fragment | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 289,
+        "text": "| [resources/views/livewire/welcome/navigation.blade.php](../resources/views/livewire/welcome/navigation.blade.php) | Page/fragment | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 290,
+        "text": "| [resources/views/notifications/index.blade.php](../resources/views/notifications/index.blade.php) | Page/fragment | notifications.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 291,
+        "text": "| [resources/views/onboarding/plans/index.blade.php](../resources/views/onboarding/plans/index.blade.php) | Page/fragment | onboarding.plans.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 292,
+        "text": "| [resources/views/patient/appointments/index.blade.php](../resources/views/patient/appointments/index.blade.php) | Page/fragment | patient.appointments.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 293,
+        "text": "| [resources/views/patient/appointments/show.blade.php](../resources/views/patient/appointments/show.blade.php) | Page/fragment | patient.appointments.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 294,
+        "text": "| [resources/views/platform/dashboard.blade.php](../resources/views/platform/dashboard.blade.php) | Page/fragment | platform.dashboard | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 295,
+        "text": "| [resources/views/platform/subscription-plans/index.blade.php](../resources/views/platform/subscription-plans/index.blade.php) | Page/fragment | platform.subscription-plans.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 296,
+        "text": "| [resources/views/platform/tenants/index.blade.php](../resources/views/platform/tenants/index.blade.php) | Page/fragment | platform.tenants.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 297,
+        "text": "| [resources/views/platform/tenants/show.blade.php](../resources/views/platform/tenants/show.blade.php) | Page/fragment | platform.tenants.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 298,
+        "text": "| [resources/views/previews/visit-summary.blade.php](../resources/views/previews/visit-summary.blade.php) | Page/fragment | previews.visit-summary | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 299,
+        "text": "| [resources/views/profile.blade.php](../resources/views/profile.blade.php) | Page/fragment | profile | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 301,
+        "text": "| [resources/views/public/booking-status.blade.php](../resources/views/public/booking-status.blade.php) | Page/fragment | public.booking.status | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 302,
+        "text": "| [resources/views/public/clinic.blade.php](../resources/views/public/clinic.blade.php) | Page/fragment | public.clinic.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 303,
+        "text": "| [resources/views/public/queue.blade.php](../resources/views/public/queue.blade.php) | Page/fragment | public.queue.index, public.queue.display | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 304,
+        "text": "| [resources/views/queues/index.blade.php](../resources/views/queues/index.blade.php) | Page/fragment | doctor.queues.index, receptionist.queues.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 306,
+        "text": "| [resources/views/receptionist/appointments/index.blade.php](../resources/views/receptionist/appointments/index.blade.php) | Page/fragment | receptionist.appointments.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 307,
+        "text": "| [resources/views/receptionist/appointments/show.blade.php](../resources/views/receptionist/appointments/show.blade.php) | Page/fragment | receptionist.appointments.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 308,
+        "text": "| [resources/views/receptionist/dashboard.blade.php](../resources/views/receptionist/dashboard.blade.php) | Page/fragment | receptionist.dashboard | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 309,
+        "text": "| [resources/views/receptionist/patients/form.blade.php](../resources/views/receptionist/patients/form.blade.php) | Page/fragment | receptionist.patients.create, receptionist.patients.edit | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 310,
+        "text": "| [resources/views/receptionist/patients/index.blade.php](../resources/views/receptionist/patients/index.blade.php) | Page/fragment | receptionist.patients.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 311,
+        "text": "| [resources/views/receptionist/patients/show.blade.php](../resources/views/receptionist/patients/show.blade.php) | Page/fragment | receptionist.patients.show | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 312,
+        "text": "| [resources/views/subscription/addons/index.blade.php](../resources/views/subscription/addons/index.blade.php) | Page/fragment | subscription.addons.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 313,
+        "text": "| [resources/views/subscription/payments/index.blade.php](../resources/views/subscription/payments/index.blade.php) | Page/fragment | subscription.payments.index, platform.payments.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 314,
+        "text": "| [resources/views/subscription/payments/show.blade.php](../resources/views/subscription/payments/show.blade.php) | Page/fragment | subscription.payments.show, platform.payments.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 315,
+        "text": "| [resources/views/welcome.blade.php](../resources/views/welcome.blade.php) | Page/fragment | welcome | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 355,
+        "text": "Migration digunakan pada SQLite fixture baru. Upgrade/rollback MySQL pada data lama tetap BLOCKED."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/STAFF_LIFECYCLE_REPORT.md",
+    "sha256": "6b88b90314e6411b528287b3d13163e2d9095080657890d69176b1b51eabf635",
+    "lines": 37,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 8,
+        "text": "| Permission create sesuai target | FIXED QA-13 | FIXED QA-13 | Matrix Doctor-only/Receptionist-only dan tenant-null; browser 403 tanpa akun baru. Role/tenant/permission asing dari payload update tetap diabaikan. |"
+      },
+      {
+        "line": 10,
+        "text": "| Verifikasi awal/resend | PASS lokal | PASS lokal | Notification fake dan signed endpoint di Chrome, bukan update verified langsung. Inbox nyata BLOCKED. |"
+      },
+      {
+        "line": 12,
+        "text": "| Password diganti admin | FIXED kebijakan sesi | FIXED kebijakan sesi | Cookie lama dialihkan ke login; remember-only lama tidak mengembalikan akses; login password baru berhasil. Driver array diuji di PHPUnit dan database di Chrome; driver lain NOT TESTED. |"
+      },
+      {
+        "line": 13,
+        "text": "| Password update rollback | NOT TESTED fault khusus Doctor | PASS | Fault injection: data/hash lama utuh, tidak ada verifikasi terkirim dan sesi lama tetap bekerja. Kasus fault spesifik memakai Receptionist. |"
+      },
+      {
+        "line": 15,
+        "text": "| Gangguan notifikasi | FIXED QA-15 pada create dan perbaikan update | Sama | Failure dilaporkan; akun/alamat yang telah commit tetap unverified dan UI menjelaskan resend. Fault injection bukan bukti SMTP nyata pernah gagal. |"
+      },
+      {
+        "line": 21,
+        "text": "| Self-delete dengan histori | FIXED QA-14 | Guard referensi aktual berlaku | PHP/Chrome menjaga user, visit, record dan session; Doctor role dicabut pun tidak menghilangkan retensi. |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/SECURITY_AUDIT.md",
+    "sha256": "c9a02c94625d7dd0cd73198a5474bea5b8efe8c84c6c99c48d70eb4ef8845fc8",
+    "lines": 75,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "> **Status terbaru setelah P2, 11 November 2026:** QA-13/QA-14 FIXED, sesi/remember lama ditolak setelah reset, email baru wajib verifikasi dan tautan lama ditolak. Composer/npm audit 0 setelah lima patch 7.4; seluruh PHP/Node/Chrome dan HEAD boundary PASS. Provider nyata, concurrency, socket aktif dan pentest menyeluruh belum dibuktikan. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md)."
+      },
+      {
+        "line": 9,
+        "text": "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka."
+      },
+      {
+        "line": 16,
+        "text": "- QA-13 masih OPEN: permission create tidak dibedakan menurut role target. QA-14 masih OPEN: self-delete dokter berhistori menimbulkan error FK. Kedua regression tetap merah."
+      },
+      {
+        "line": 33,
+        "text": "| Login rate limit, inactive/remember me | PASS feature dan inactive browser | AccountSecurityTest; rate limit lintas worker/storage nyata NOT TESTED |"
+      },
+      {
+        "line": 34,
+        "text": "| Role berubah saat sesi berjalan | PASS pada request berikutnya | Browser Doctor→Receptionist menghasilkan 403; socket aktif BLOCKED |"
+      },
+      {
+        "line": 40,
+        "text": "| Password reset/verification/Google account linking | PASS fake/backend | Test valid/invalid token dan verified Google email; provider/inbox nyata BLOCKED |"
+      },
+      {
+        "line": 73,
+        "text": "BLOCKED: concurrency/lock MySQL, Reverb nyata dan pencabutan koneksi, DOKU sandbox nyata, Google nyata, delivery SMTP, staging/production dan backup restore. NOT TESTED: semua permission dicabut satu per satu pada seluruh resource/status, upload polyglot/fuzz, seluruh vector XSS/CSRF/host/proxy, traffic/load/rate limit multi-worker, file retention dan log redaction pada deployment, serta audit storage append-only/retensi."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/ROLE_PERMISSION_MATRIX.md",
+    "sha256": "b23f4ebb20177e067bb720bf9cf1a0511e0f97d5aea91b26a28a27e165a29e46",
+    "lines": 107,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 9,
+        "text": "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka."
+      },
+      {
+        "line": 54,
+        "text": "- NOT TESTED: seluruh Cartesian role × ID resource × status × HTTP method; pencabutan subscription/role pada koneksi WebSocket yang sudah tersambung; semua kombinasi multi-role; seluruh permission individual yang dicabut satu per satu."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/EXPLORATORY_TEST_REPORT.md",
+    "sha256": "2ecc5ed36472be09301fb39e9d837d4ab3af6ab338604cb3a0fa6d548e61b8d2",
+    "lines": 44,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 9,
+        "text": "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka."
+      },
+      {
+        "line": 21,
+        "text": "| Baru, belum memahami aplikasi | Menu setelah login; onboarding owner; Patient membuka booking publik | PASS navigasi; FAIL pilihan dokter publik QA-01; delivery verifikasi BLOCKED | Lima role menu; owner onboarding; Patient booking |"
+      },
+      {
+        "line": 23,
+        "text": "| Terburu-buru | Simpan draft, finalize, reload, kendali submit/idempotency; public booking tanpa pengetahuan implementasi | PASS autosave/UUID backend; FAIL booking publik tidak menyediakan pilihan bekerja | Doctor/Patient/Receptionist; double click setiap form NOT TESTED |"
+      },
+      {
+        "line": 26,
+        "text": "| Menggunakan aplikasi lama | Ubah role/active flag di tengah sesi; RME offline lalu online; reload draft | PASS HTTP session invalidation, role check dan recovery RME | Lima role inactive, satu live role change; soak jam/hari NOT TESTED |"
+      },
+      {
+        "line": 44,
+        "text": "Eksperimen focus-order lengkap diberi NOT TESTED ketika urutan fokus tidak dibuktikan; hanya kegagalan Escape yang dilaporkan. Setiap bug mempunyai reproduksi dan bukti terpisah di BUG_REPORT, sehingga kesalahan harness tidak dicampur dengan temuan aplikasi."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/BUG_REPORT.md",
+    "sha256": "3561b1bc261da528a521d450066bc1ef7a683874a594ec7082ce1a80931e4c45",
+    "lines": 193,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "**Audit terbaru setelah P2 — production readiness:** **NO-GO untuk produksi multi-user**. QA-01–QA-15 tetap FIXED pada cakupan semula. Ada tiga temuan baru OPEN: PR-01 (P2, revokasi socket aktif), PR-02 (P3, assertion JSON MySQL), dan PR-03 (P3, factory melampaui panjang kolom). [Reproduksi/akar masalah](production-readiness/NEW_FINDINGS.md), [scorecard dan bukti run](production-readiness/PRODUCTION_READINESS_SCORECARD.md). Angka 0 OPEN pada paragraf P2 di bawah adalah status historis sebelum audit operasional ini."
+      },
+      {
+        "line": 5,
+        "text": "**Status setelah perbaikan P2, 11 November 2026:** QA-01 sampai QA-15 FIXED pada skenario yang diuji; 0 temuan terkonfirmasi OPEN. QA-15 adalah temuan baru kegagalan notifikasi setelah akun staf commit. Kebijakan revokasi sesi dan verifikasi ulang email juga selesai. Bukti terbaru: [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Expected/actual audit awal di bawah adalah histori, bukan status source terbaru."
+      },
+      {
+        "line": 13,
+        "text": "- **Status/severity:** FIXED / P1 (pengujian ulang 11 November 2026)."
+      },
+      {
+        "line": 26,
+        "text": "- **Status/severity:** FIXED / P1 (pengujian ulang 11 November 2026)."
+      },
+      {
+        "line": 38,
+        "text": "- **Status/severity:** FIXED / P1 (pengujian ulang 11 November 2026)."
+      },
+      {
+        "line": 50,
+        "text": "- **Status/severity:** FIXED / P1 (pengujian ulang 11 November 2026)."
+      },
+      {
+        "line": 62,
+        "text": "- **Status/severity:** FIXED / P2 (pengujian ulang setelah P2)."
+      },
+      {
+        "line": 75,
+        "text": "- **Status/severity:** FIXED / P2 (pengujian ulang setelah P2)."
+      },
+      {
+        "line": 87,
+        "text": "- **Status/severity:** FIXED / P2 (pengujian ulang setelah P2)."
+      },
+      {
+        "line": 98,
+        "text": "- **Status/severity:** FIXED / P2 (pengujian ulang setelah P2)."
+      },
+      {
+        "line": 111,
+        "text": "- **Status/severity:** FIXED / P2 (pengujian ulang setelah P2)."
+      },
+      {
+        "line": 123,
+        "text": "- **Status/severity:** FIXED / P2 (pengujian ulang setelah P2)."
+      },
+      {
+        "line": 135,
+        "text": "- **Status/severity:** FIXED / P2 (pengujian ulang setelah P2)."
+      },
+      {
+        "line": 147,
+        "text": "- **Status/severity:** FIXED / P3 (pengujian ulang setelah P2)."
+      },
+      {
+        "line": 158,
+        "text": "- **Status/severity:** FIXED / P2 (pengujian ulang setelah P2)."
+      },
+      {
+        "line": 170,
+        "text": "- **Status/severity:** FIXED / P2 (pengujian ulang setelah P2)."
+      },
+      {
+        "line": 182,
+        "text": "- **Status/severity:** FIXED / P2, temuan baru pada penelusuran jalur gagal notifikasi."
+      },
+      {
+        "line": 191,
+        "text": "**15 temuan terkonfirmasi FIXED: 4 P1, 10 P2, 1 P3. Tidak ada temuan terkonfirmasi OPEN.** Tambahan kebijakan sesi dan email staf diuji pada PHP dan Chrome. Suite gabungan 363 PHP PASS (2.438 assertion), 7 JavaScript PASS, 3 browser PASS; 0 FAIL/ERROR/SKIP. Semua regression lama dipertahankan, termasuk 22 test audit yang dahulu merah."
+      },
+      {
+        "line": 193,
+        "text": "BLOCKED/NOT TESTED tidak diubah menjadi FIXED: MySQL concurrency, SMTP/inbox, Reverb/socket aktif, DOKU nyata, staging/cron, backup restore/load, native keyboard dan screen reader. Lihat [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md) untuk keputusan production-readiness dan batas bukti."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/ENVIRONMENT_REPORT.md",
+    "sha256": "db56dca1cc79669ee6bd52a8eb70d247b8f2613d6df646553e7805250e0453eb",
+    "lines": 60,
+    "disposition": "Batas operasional historis; PR-01 tetap risiko terpisah. Tidak mengulang readiness/load/security atau menganggap SQLite membuktikan MySQL.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "Run: 11 November 2026, Windows lokal. Status lingkungan audit: **PASS setelah koreksi isolasi storage**. Kesetaraan dengan deployment produksi: **BLOCKED**."
+      },
+      {
+        "line": 39,
+        "text": "**BLOCKED:** VPS, HTTPS, DNS wildcard tenant, firewall, process manager, cron, backup offsite, observability, dan secret management produksi tidak diakses. Workflow `.github/workflows/deploy.yml` melakukan update direktori langsung, migration dan optimize; tidak memiliki rollback otomatis, health gate, atau langkah restart queue worker/Reverb. Ini analisis source, bukan bukti bahwa service VPS tidak berjalan."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/E2E_WORKFLOW_REPORT.md",
+    "sha256": "ad5e475060dff11ef177a2de9618c71925484beadc32233735567b5ef942ca76",
+    "lines": 65,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 9,
+        "text": "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka."
+      },
+      {
+        "line": 19,
+        "text": "| E02/E23 siklus staf Doctor dan Receptionist | PASS lokal: create, unverified gate, resend/signed verify, password setup/login, permission/role revoke, nonaktif memutus sesi, reaktif, self-delete tanpa referensi klinis. Inbox nyata tetap BLOCKED. |"
+      },
+      {
+        "line": 20,
+        "text": "| Sesi setelah password diganti admin | OPEN: sesi lama kedua role masih 200; kebijakan revokasi belum diubah. |"
+      },
+      {
+        "line": 33,
+        "text": "| E01 | Owner baru → persetujuan → verifikasi email → klinik → paket | Browser register; email verification required; pengiriman inbox tidak dijalankan | BLOCKED untuk email end-to-end |"
+      },
+      {
+        "line": 35,
+        "text": "| E02 | Admin → buat akun Doctor → verifikasi → login Doctor | Browser staff create berhasil, status awal unverified; verification diatur hanya di fixture | BLOCKED untuk delivery verifikasi nyata; create PASS |"
+      },
+      {
+        "line": 38,
+        "text": "| E05 | Patient → klinik publik → pilih dokter/layanan/sesi → booking → token status | Browser baru menemukan pilihan dokter tidak bekerja | FAIL QA-01; langkah setelah pilihan dokter BLOCKED oleh QA-01 |"
+      },
+      {
+        "line": 42,
+        "text": "| E08 | BOOKED→WAITING→CALLED→skip→return, FIFO dan satu active call | QueueManagementTest; E03 browser untuk jalur utama | PASS; SQL concurrency MySQL BLOCKED |"
+      },
+      {
+        "line": 45,
+        "text": "| E11 | Alergi kritis → acknowledgement → perubahan alergi → stale editor ditolak | Browser existing, RmeGeneralDentalTest, PartialWorkflowCompletionTest | PASS dengan versi dikirim; seluruh race/allergy version omission NOT TESTED |"
+      },
+      {
+        "line": 47,
+        "text": "| E13 | Dua editor → stale version → simpan/finalisasi/koreksi | Existing stale draft/finalize 409; regression omission | FAIL QA-05 ketika version dihilangkan; MySQL parallelism BLOCKED |"
+      },
+      {
+        "line": 51,
+        "text": "| E17 | Owner pilih paid/combined addon → invoice pending → redirect → notification valid → period/addon → refund | DokuPaymentTest/OdontogramAddonTest memakai Http fake | PASS kontrak backend; DOKU sandbox/real BLOCKED |"
+      },
+      {
+        "line": 54,
+        "text": "| E20 | Booking/queue commit → notifikasi DB/job → worker → retry saat transport gagal | ClinicNotificationDeliveryTest; worker lokal menghabiskan 15 job, 0 gagal, broadcaster null | PASS database/job/fake; Reverb delivery BLOCKED |"
+      },
+      {
+        "line": 55,
+        "text": "| E21 | Scheduler reminder → milestone → DB notification/mail idempotent | SubscriptionReminderTest; schedule:list terisolasi | PASS fake/registry; actual cron dan inbox BLOCKED |"
+      },
+      {
+        "line": 57,
+        "text": "| E23 | Login → perubahan role/inactive pada sesi aktif → URL langsung → logout | Browser lima role; live role change Doctor→Receptionist; AccountSecurityTest | PASS pada request HTTP berikutnya; socket existing BLOCKED |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/MYSQL_CONCURRENCY_REPORT.md",
+    "sha256": "4d37ff2a8efdee86b430c6674170dcd8f20fada4ab4e8e9ddf8030596eb78448",
+    "lines": 43,
+    "disposition": "Batas operasional historis; PR-01 tetap risiko terpisah. Tidak mengulang readiness/load/security atau menganggap SQLite membuktikan MySQL.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "Status skenario yang dijalankan: **PASS, 9/9**. Aktivasi subscription dari callback provider saat operasional: **BLOCKED**."
+      },
+      {
+        "line": 35,
+        "text": "**BLOCKED:** pergantian paket yang benar-benar diaktifkan oleh callback DOKU bersamaan dengan operasi klinik, karena receiver sandbox publik belum tersedia. **NOT TESTED:** soak beberapa jam, failover MySQL, jaringan database terputus saat commit, dan proof semua pola deadlock yang mungkin. Hasil sembilan race tidak menjamin tidak ada race lain."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/HUMAN_UAT_REPORT.md",
+    "sha256": "625c3af23f23f5e9a0678210cf6880eb84d580f96fdf1844fe177b707558ba8f",
+    "lines": 54,
+    "disposition": "Batas operasional historis; PR-01 tetap risiko terpisah. Tidak mengulang readiness/load/security atau menganggap SQLite membuktikan MySQL.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "Alur hari klinik terkompresi melalui UI: **PASS**. Gate penerimaan menyeluruh: **FAIL karena PR-01**. Acceptance oleh manusia klinisi dan shift delapan jam nyata: **NOT TESTED**."
+      },
+      {
+        "line": 26,
+        "text": "Suite [browser.mjs](tests/browser.mjs) menjalankan **14 kasus: 12 PASS, 2 FAIL**. Tambahan clinic-day di atas **1 PASS**; total Playwright **13 PASS, 2 FAIL, 0 BLOCKED**."
+      },
+      {
+        "line": 45,
+        "text": "**BLOCKED:** perubahan paket yang benar-benar diaktifkan oleh callback DOKU saat operasional; checkout owner dan reconciliation pending sudah diuji, tetapi provider callback belum dapat menjangkau receiver audit."
+      },
+      {
+        "line": 47,
+        "text": "**NOT TESTED:** sign-off dokter/resepsionis manusia, shift nyata, screen reader, semua kombinasi browser/mobile OS, proses klinik ketika banyak pasien datang berjam-jam, cetak dokumen, billing pasien, serta semua keadaan error eksternal. Load singkat dan race MySQL melengkapi busy-condition evidence, tidak menggantikan penerimaan manusia."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/DISASTER_RECOVERY_REPORT.md",
+    "sha256": "aea19a65962ab447abe14df9b1e79f82cb6b23c340fc98169ff05c56bd5cbfa8",
+    "lines": 40,
+    "disposition": "Batas operasional historis; PR-01 tetap risiko terpisah. Tidak mengulang readiness/load/security atau menganggap SQLite membuktikan MySQL.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "Gate pemulihan lokal terisolasi: **PASS, 7/7 pemeriksaan**. RPO/RTO produksi dan runbook operasional: **NOT TESTED**."
+      },
+      {
+        "line": 36,
+        "text": "**NOT TESTED:** kill worker di tengah pengiriman SMTP/provider sesudah side effect tetapi sebelum ack, exactly-once delivery eksternal, crash mysqld saat commit, corrupt backup, incremental/binlog point-in-time restore, offsite restore di mesin lain, backup encryption/retention/key escrow, kehilangan satu disk/server, dan pemulihan VPS dengan process manager sesungguhnya."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/LOAD_TEST_REPORT.md",
+    "sha256": "d3bc3f4fbc1156725af8935cb246c3c38b0733ac8708b22c3a660daa6495ca64",
+    "lines": 55,
+    "disposition": "Batas operasional historis; PR-01 tetap risiko terpisah. Tidak mengulang readiness/load/security atau menganggap SQLite membuktikan MySQL.",
+    "status_claims": [
+      {
+        "line": 49,
+        "text": "**NOT TESTED:** spike ratusan pengguna unik, soak harian/mingguan, cold-start deployment, disk penuh pada server sesungguhnya, network partition, horizontal scaling, error budget bulanan, serta latency p95 khusus respons 200 terpisah dari semua respons. Run awal yang mengakses route owner tidak ada disimpan sebagai `load-harness-attempt1.json`; tidak dipakai sebagai hasil final."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/INTEGRATION_TEST_REPORT.md",
+    "sha256": "cd9e6c5ccebd39058803f0dcb52ad727bf45ce4e9b05a43214aa33a317255df9",
+    "lines": 40,
+    "disposition": "Batas operasional historis; PR-01 tetap risiko terpisah. Tidak mengulang readiness/load/security atau menganggap SQLite membuktikan MySQL.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "Gate keseluruhan: **BLOCKED** untuk integrasi provider end-to-end. SMTP lokal, workflow autentikasi, scheduler/worker, checkout dan reconciliation sandbox telah diuji nyata."
+      },
+      {
+        "line": 17,
+        "text": "| Callback DOKU dari provider | BLOCKED | Tidak ada endpoint notifikasi audit yang dapat dijangkau publik |"
+      },
+      {
+        "line": 18,
+        "text": "| Payment failed/timeout/duplicate webhook dari sandbox nyata | BLOCKED | Belum ada siklus pembayaran/callback sandbox lengkap; tidak diganti klaim fake test |"
+      },
+      {
+        "line": 31,
+        "text": "Pada SMTP, staf Doctor memakai notification path yang sama tetapi siklus inbox nyata lengkap dijalankan pada Receptionist; Doctor mempunyai regression coverage PHP. **NOT TESTED:** inbox eksternal, TLS SMTP eksternal, SPF/DKIM/DMARC, reputation/deliverability, dan cron daemon VPS. Scheduler diuji dengan `schedule:test` pada due-date fixture, bukan menunggu pergantian jam atau membuktikan cron terpasang."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/CLINICOS_PRODUCTION_READINESS_FULL_REPORT.md",
+    "sha256": "d5cf5316eed007e32418442e0f91d9b1389d1a0345ed45065e44045ab7df7edf",
+    "lines": 607,
+    "disposition": "Batas operasional historis; PR-01 tetap risiko terpisah. Tidak mengulang readiness/load/security atau menganggap SQLite membuktikan MySQL.",
+    "status_claims": [
+      {
+        "line": 5,
+        "text": "Dokumen ini menggabungkan delapan laporan production-readiness, seluruh temuan baru, dan rekap hasil pengujian. Keputusan **NO-GO**, angka test, bukti, langkah reproduksi, rekomendasi, serta batas PASS/FAIL/BLOCKED/NOT TESTED dipertahankan dari laporan asal. Penggabungan ini tidak menjalankan ulang test atau mengubah status temuan."
+      },
+      {
+        "line": 39,
+        "text": "| Kesetaraan deployment dan versi server produksi | BLOCKED | VPS, TLS/proxy, supervisor/cron, supported MySQL dan release rollback belum diuji |"
+      },
+      {
+        "line": 45,
+        "text": "| Callback, kegagalan/timeout/replay provider end-to-end | BLOCKED | Receiver notifikasi audit tidak dapat dijangkau provider secara publik |"
+      },
+      {
+        "line": 50,
+        "text": "| RPO/RTO, offsite, crash pada side effect eksternal | NOT TESTED | Restore lokal bukan penerimaan recovery produksi |"
+      },
+      {
+        "line": 53,
+        "text": "| Human acceptance oleh staf klinik | NOT TESTED | Sign-off manusia dan shift nyata belum diuji |"
+      },
+      {
+        "line": 57,
+        "text": "Status memakai PASS, FAIL, BLOCKED, dan NOT TESTED pada subgate yang terukur. Tidak membuat persentase kesiapan karena bobot dan acceptance bisnis belum disepakati."
+      },
+      {
+        "line": 61,
+        "text": "| Suite / pengujian | PASS | FAIL | ERROR | BLOCKED / SKIP | Bukti |"
+      },
+      {
+        "line": 73,
+        "text": "| DOKU checkout + reconciliation sandbox | 1 skenario | 0 | 0 | Callback BLOCKED | [probe](evidence/doku-sandbox-probe.json) |"
+      },
+      {
+        "line": 83,
+        "text": "| PR-01 | P2 / Medium | OPEN | Pencabutan role/deactivation tidak mengakhiri private socket yang sudah aktif; tidak ditemukan payload medis pada event yang diuji |"
+      },
+      {
+        "line": 84,
+        "text": "| PR-02 | P3 / Low | OPEN | Assertion urutan key JSON tidak portabel pada MySQL; isi/value yang dibandingkan sama |"
+      },
+      {
+        "line": 85,
+        "text": "| PR-03 | P3 / Low | OPEN | Factory kode plan tidak dibatasi varchar(30); reproduksi seed 0 menghasilkan 31 karakter dan error MySQL |"
+      },
+      {
+        "line": 119,
+        "text": "Run: 11 November 2026, Windows lokal. Status lingkungan audit: **PASS setelah koreksi isolasi storage**. Kesetaraan dengan deployment produksi: **BLOCKED**."
+      },
+      {
+        "line": 155,
+        "text": "**BLOCKED:** VPS, HTTPS, DNS wildcard tenant, firewall, process manager, cron, backup offsite, observability, dan secret management produksi tidak diakses. Workflow `.github/workflows/deploy.yml` melakukan update direktori langsung, migration dan optimize; tidak memiliki rollback otomatis, health gate, atau langkah restart queue worker/Reverb. Ini analisis source, bukan bukti bahwa service VPS tidak berjalan."
+      },
+      {
+        "line": 186,
+        "text": "Status skenario yang dijalankan: **PASS, 9/9**. Aktivasi subscription dari callback provider saat operasional: **BLOCKED**."
+      },
+      {
+        "line": 218,
+        "text": "**BLOCKED:** pergantian paket yang benar-benar diaktifkan oleh callback DOKU bersamaan dengan operasi klinik, karena receiver sandbox publik belum tersedia. **NOT TESTED:** soak beberapa jam, failover MySQL, jaringan database terputus saat commit, dan proof semua pola deadlock yang mungkin. Hasil sembilan race tidak menjamin tidak ada race lain."
+      },
+      {
+        "line": 265,
+        "text": "**NOT TESTED:** revokasi channel user notification yang sudah aktif, perpindahan tenant ketika socket hidup, TLS/wss deployment, proxy idle timeout, horizontal Reverb/Redis, restart node Reverb saat event sedang dipublikasikan, dan koneksi ribuan socket. Tidak menyamakan authorization private clinic channel dengan audit semua channel."
+      },
+      {
+        "line": 283,
+        "text": "Gate keseluruhan: **BLOCKED** untuk integrasi provider end-to-end. SMTP lokal, workflow autentikasi, scheduler/worker, checkout dan reconciliation sandbox telah diuji nyata."
+      },
+      {
+        "line": 297,
+        "text": "| Callback DOKU dari provider | BLOCKED | Tidak ada endpoint notifikasi audit yang dapat dijangkau publik |"
+      },
+      {
+        "line": 298,
+        "text": "| Payment failed/timeout/duplicate webhook dari sandbox nyata | BLOCKED | Belum ada siklus pembayaran/callback sandbox lengkap; tidak diganti klaim fake test |"
+      },
+      {
+        "line": 311,
+        "text": "Pada SMTP, staf Doctor memakai notification path yang sama tetapi siklus inbox nyata lengkap dijalankan pada Receptionist; Doctor mempunyai regression coverage PHP. **NOT TESTED:** inbox eksternal, TLS SMTP eksternal, SPF/DKIM/DMARC, reputation/deliverability, dan cron daemon VPS. Scheduler diuji dengan `schedule:test` pada due-date fixture, bukan menunggu pergantian jam atau membuktikan cron terpasang."
+      },
+      {
+        "line": 376,
+        "text": "**NOT TESTED:** spike ratusan pengguna unik, soak harian/mingguan, cold-start deployment, disk penuh pada server sesungguhnya, network partition, horizontal scaling, error budget bulanan, serta latency p95 khusus respons 200 terpisah dari semua respons. Run awal yang mengakses route owner tidak ada disimpan sebagai `load-harness-attempt1.json`; tidak dipakai sebagai hasil final."
+      },
+      {
+        "line": 392,
+        "text": "Gate pemulihan lokal terisolasi: **PASS, 7/7 pemeriksaan**. RPO/RTO produksi dan runbook operasional: **NOT TESTED**."
+      },
+      {
+        "line": 425,
+        "text": "**NOT TESTED:** kill worker di tengah pengiriman SMTP/provider sesudah side effect tetapi sebelum ack, exactly-once delivery eksternal, crash mysqld saat commit, corrupt backup, incremental/binlog point-in-time restore, offsite restore di mesin lain, backup encryption/retention/key escrow, kehilangan satu disk/server, dan pemulihan VPS dengan process manager sesungguhnya."
+      },
+      {
+        "line": 439,
+        "text": "Alur hari klinik terkompresi melalui UI: **PASS**. Gate penerimaan menyeluruh: **FAIL karena PR-01**. Acceptance oleh manusia klinisi dan shift delapan jam nyata: **NOT TESTED**."
+      },
+      {
+        "line": 462,
+        "text": "Suite [browser.mjs](tests/browser.mjs) menjalankan **14 kasus: 12 PASS, 2 FAIL**. Tambahan clinic-day di atas **1 PASS**; total Playwright **13 PASS, 2 FAIL, 0 BLOCKED**."
+      },
+      {
+        "line": 481,
+        "text": "**BLOCKED:** perubahan paket yang benar-benar diaktifkan oleh callback DOKU saat operasional; checkout owner dan reconciliation pending sudah diuji, tetapi provider callback belum dapat menjangkau receiver audit."
+      },
+      {
+        "line": 483,
+        "text": "**NOT TESTED:** sign-off dokter/resepsionis manusia, shift nyata, screen reader, semua kombinasi browser/mobile OS, proses klinik ketika banyak pasien datang berjam-jam, cetak dokumen, billing pasien, serta semua keadaan error eksternal. Load singkat dan race MySQL melengkapi busy-condition evidence, tidak menggantikan penerimaan manusia."
+      },
+      {
+        "line": 504,
+        "text": "**OPEN — P2 / Medium — gate realtime FAIL.**"
+      },
+      {
+        "line": 524,
+        "text": "**OPEN — P3 / Low — regression suite FAIL, bukan bukti RME kehilangan data.**"
+      },
+      {
+        "line": 548,
+        "text": "**OPEN — P3 / Low — error fixture membuat suite MySQL tidak stabil.**"
+      },
+      {
+        "line": 583,
+        "text": "    \"BLOCKED\": 0"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/PRODUCTION_READINESS_SCORECARD.md",
+    "sha256": "c95690c43dfae4f9ad4bc3f39f6c73d01d9321e5ec95123e47617420e065ae6a",
+    "lines": 82,
+    "disposition": "Batas operasional historis; PR-01 tetap risiko terpisah. Tidak mengulang readiness/load/security atau menganggap SQLite membuktikan MySQL.",
+    "status_claims": [
+      {
+        "line": 12,
+        "text": "| Kesetaraan deployment dan versi server produksi | BLOCKED | VPS, TLS/proxy, supervisor/cron, supported MySQL dan release rollback belum diuji |"
+      },
+      {
+        "line": 18,
+        "text": "| Callback, kegagalan/timeout/replay provider end-to-end | BLOCKED | Receiver notifikasi audit tidak dapat dijangkau provider secara publik |"
+      },
+      {
+        "line": 23,
+        "text": "| RPO/RTO, offsite, crash pada side effect eksternal | NOT TESTED | Restore lokal bukan penerimaan recovery produksi |"
+      },
+      {
+        "line": 26,
+        "text": "| Human acceptance oleh staf klinik | NOT TESTED | Sign-off manusia dan shift nyata belum diuji |"
+      },
+      {
+        "line": 30,
+        "text": "Status memakai PASS, FAIL, BLOCKED, dan NOT TESTED pada subgate yang terukur. Tidak membuat persentase kesiapan karena bobot dan acceptance bisnis belum disepakati."
+      },
+      {
+        "line": 34,
+        "text": "| Suite / pengujian | PASS | FAIL | ERROR | BLOCKED / SKIP | Bukti |"
+      },
+      {
+        "line": 46,
+        "text": "| DOKU checkout + reconciliation sandbox | 1 skenario | 0 | 0 | Callback BLOCKED | [probe](evidence/doku-sandbox-probe.json) |"
+      },
+      {
+        "line": 56,
+        "text": "| PR-01 | P2 / Medium | OPEN | Pencabutan role/deactivation tidak mengakhiri private socket yang sudah aktif; tidak ditemukan payload medis pada event yang diuji |"
+      },
+      {
+        "line": 57,
+        "text": "| PR-02 | P3 / Low | OPEN | Assertion urutan key JSON tidak portabel pada MySQL; isi/value yang dibandingkan sama |"
+      },
+      {
+        "line": 58,
+        "text": "| PR-03 | P3 / Low | OPEN | Factory kode plan tidak dibatasi varchar(30); reproduksi seed 0 menghasilkan 31 karakter dan error MySQL |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/NEW_FINDINGS.md",
+    "sha256": "d1d1efc552901cf3486f631df85935c3e8615f3671b80771fd48b7328d3e7e3e",
+    "lines": 57,
+    "disposition": "Batas operasional historis; PR-01 tetap risiko terpisah. Tidak mengulang readiness/load/security atau menganggap SQLite membuktikan MySQL.",
+    "status_claims": [
+      {
+        "line": 7,
+        "text": "**OPEN — P2 / Medium — gate realtime FAIL.**"
+      },
+      {
+        "line": 27,
+        "text": "**OPEN — P3 / Low — regression suite FAIL, bukan bukti RME kehilangan data.**"
+      },
+      {
+        "line": 51,
+        "text": "**OPEN — P3 / Low — error fixture membuat suite MySQL tidak stabil.**"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/REALTIME_TEST_REPORT.md",
+    "sha256": "040ae5082bd129999479c122e8a7a603323665c01d84ff9cd7a9857e569d3cc2",
+    "lines": 40,
+    "disposition": "Batas operasional historis; PR-01 tetap risiko terpisah. Tidak mengulang readiness/load/security atau menganggap SQLite membuktikan MySQL.",
+    "status_claims": [
+      {
+        "line": 32,
+        "text": "**NOT TESTED:** revokasi channel user notification yang sudah aktif, perpindahan tenant ketika socket hidup, TLS/wss deployment, proxy idle timeout, horizontal Reverb/Redis, restart node Reverb saat event sedang dipublikasikan, dan koneksi ribuan socket. Tidak menyamakan authorization private clinic channel dengan audit semua channel."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/MISSING_FEATURES.md",
+    "sha256": "40a83c0b2b857a50e7bc6bab0e8cbf354ed0cab44939ddc70c0f93eb921dba9a",
+    "lines": 44,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "> **Status terbaru setelah P2, 11 November 2026:** Bugfix tidak menutup backlog fitur: kasir/billing pasien, discovery, multi-cabang, invitation/permission editor dan Resilient Edge Mode belum diimplementasikan. Bedakan feature gap dari 15 bug terkonfirmasi yang sudah FIXED. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md)."
+      },
+      {
+        "line": 9,
+        "text": "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka."
+      },
+      {
+        "line": 31,
+        "text": "| Edit role/permission umum | Role/permission seeded, policy tersedia; form staf membatasi Doctor/Receptionist | NOT TESTED sebagai UI karena UI tidak tersedia | Permission matrix bukan halaman editor akses. Jangan menambah bypass medis untuk mengisi gap ini |"
+      },
+      {
+        "line": 32,
+        "text": "| Appointment reschedule | Permission appointment.update ada; route UI hanya create/list/detail/cancel | NOT TESTED sebagai fitur karena tidak ditemukan action | Perubahan appointment bukan CRUD lengkap; perlu keputusan requirement sebelum menambah |"
+      },
+      {
+        "line": 33,
+        "text": "| Katalog obat/interaksi obat | Resep free text dan acknowledgement alergi tersedia | NOT TESTED sebagai engine karena tidak ada domain | Tidak ada klaim sistem sudah memvalidasi keselamatan kombinasi obat |"
+      },
+      {
+        "line": 36,
+        "text": "| Rekonsiliasi pembayaran terjadwal | Tombol owner/platform dan service tersedia; scheduler hanya subscription reminder | NOT TESTED sebagai scheduled workflow karena tidak ada | Pemulihan pembayaran bergantung notification atau tindakan manual |"
+      },
+      {
+        "line": 38,
+        "text": "| Delivery/infrastruktur nyata | Config Reverb, job, scheduler, SMTP, DOKU, Google dan deploy tersedia | BLOCKED untuk pembuktian operasional | Config dan fake bukan bukti proses/service berjalan |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/FINAL_QA_REPORT.md",
+    "sha256": "205feed5093a60bfb63c22bb133d535d5f450b884a75de90ab76cc0e289b0d9d",
+    "lines": 74,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "**Laporan terbaru: [Production readiness scorecard](production-readiness/PRODUCTION_READINESS_SCORECARD.md) — NO-GO untuk produksi multi-user.** Run MySQL terbaru: PHP 361 PASS / 1 FAIL / 1 ERROR; JavaScript 7 PASS; Playwright 13 PASS / 2 FAIL. Concurrency 9/9 dan recovery 7/7 lulus. Tiga temuan baru OPEN tercatat pada [NEW_FINDINGS.md](production-readiness/NEW_FINDINGS.md). Bagian di bawah mempertahankan hasil historis P2 dan bukan hasil MySQL/readiness terbaru."
+      },
+      {
+        "line": 5,
+        "text": "11 November 2026, Asia/Bangkok. **QA-01 sampai QA-15 FIXED pada skenario yang diuji; 0 temuan terkonfirmasi OPEN.** QA-15 adalah bug baru pada kegagalan notifikasi create staf. Sesi lama setelah reset admin dan verifikasi ulang email juga sudah ditangani. Perbaikan P1 dipertahankan dan diuji kembali."
+      },
+      {
+        "line": 44,
+        "text": "| Bug terkonfirmasi QA-01 sampai QA-15 | FIXED dalam scope regression |"
+      },
+      {
+        "line": 45,
+        "text": "| MySQL lock/concurrency dua proses | BLOCKED: probe localhost:3306 terbaru tidak menerima koneksi; [bukti](evidence/p2-retest/mysql-probe.json) |"
+      },
+      {
+        "line": 46,
+        "text": "| SMTP/inbox, Reverb/socket aktif, DOKU nyata | BLOCKED/NOT TESTED; yang dijalankan memakai fake, mailer array atau transport null |"
+      },
+      {
+        "line": 47,
+        "text": "| Staging, cron/worker deployment dan observability | NOT TESTED pada environment target |"
+      },
+      {
+        "line": 48,
+        "text": "| Backup/restore, storage failure deployment, load/soak/UAT | NOT TESTED |"
+      },
+      {
+        "line": 49,
+        "text": "| Keyboard native dan screen reader/perangkat fisik | NOT TESTED; Chrome DOM keyboard diuji, CDP native tidak mengirim event pada sesi ini |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/P1_FIX_REPORT.md",
+    "sha256": "f6c9a0ddc21e108127502d348e805d0f5dfbc3d560fe1bacde3b98f270d4c469",
+    "lines": 52,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 5,
+        "text": "Pengujian ulang 11 November 2026, Asia/Bangkok. Acuan audit awal: `b82237d932478df9ed02240cb698acff9b4ec669`. Keempat P1 **FIXED pada skenario yang diuji**, setelah reproduksi pada source sebelum perbaikan, perubahan terbatas, regression PHP, dan Chrome E2E. Perbaikan P2 belum dimulai."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/FEATURE_TEST_MATRIX.md",
+    "sha256": "2cf4762c4a4deddb1ed9e95ee612a651a8745feae924efda166c176ae5d5d54b",
+    "lines": 733,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 9,
+        "text": "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka."
+      },
+      {
+        "line": 18,
+        "text": "| Chrome P1 dan staf | 1 | 1 | 0 | [hasil](evidence/p1-browser-run.txt); observasi sesi OPEN terpisah |"
+      },
+      {
+        "line": 29,
+        "text": "Audit 11 November 2026. Status yang dipakai: **PASS**, **FAIL**, **BLOCKED**, **NOT TESTED**. PASS berlaku untuk assertion/skenario yang dieksekusi, bukan seluruh fitur. Source statis tidak dihitung sebagai eksekusi browser."
+      },
+      {
+        "line": 50,
+        "text": "| Auth/profil | PASS login/logout lima role, register, verify/reset/password/profile melalui test | PASS wrong password, inactive session, portal salah, rate limit, signed token, XSS nama | FAIL owner deletion; transport email/Google BLOCKED |"
+      },
+      {
+        "line": 51,
+        "text": "| Onboarding | PASS resume, clinic/settings, Free/trial dan katalog | PASS one owner/clinic, terms, akses sebelum verify | FAIL add-on sebelum klinik; full email journey BLOCKED |"
+      },
+      {
+        "line": 52,
+        "text": "| Clinic/staff | PASS create/edit clinic, create staff, password, service assignment, status gate | PASS foreign tenant edit, invalid role/service/seat | Semua edge logo/role transition/deactivate cascades NOT TESTED |"
+      },
+      {
+        "line": 53,
+        "text": "| Schedule/service | PASS create, overlap rejection, create service dan harga | PASS jam/tenant terpilih; FAIL reassignment sesi terpakai | Semua update/quota race/jam berubah NOT TESTED; MySQL concurrency BLOCKED |"
+      },
+      {
+        "line": 54,
+        "text": "| Patient/duplicates | PASS create/search/review/token/tenant, patient existing booking | PASS changed duplicate token dan foreign candidates ditolak | Semua edit/phone normalization/pagination extremes NOT TESTED |"
+      },
+      {
+        "line": 55,
+        "text": "| Booking | PASS endpoint atomik, idempotency, snapshot, invalid relasi, quota; PASS UI staf | PASS guest ditolak, salah sesi/layanan, status tanpa token, target subscription | FAIL UI pasien publik; MySQL parallel quota BLOCKED |"
+      },
+      {
+        "line": 58,
+        "text": "| Alergi/odontogram | PASS persistence, edit/deactivate history, critical acknowledgement, paid entitlement/read-only | PASS wrong tenant/Doctor/role, inactive addon, expiry/refund, malformed dental values | Versi alergi dihilangkan dan race dua request NOT TESTED |"
+      },
+      {
+        "line": 60,
+        "text": "| ETA/public queue | PASS riwayat/fallback/confidence, payload nonmedis, tanggal dan own tracker | PASS history dokter lain diabaikan, patient ownership | Accuracy/calibration/beban polling NOT TESTED |"
+      },
+      {
+        "line": 61,
+        "text": "| Notification/audit/jobs | PASS DB transaction, failure/retry, safe metadata, foreign notification denial, filter audit | PASS enqueue/storage failure rollback; 15 job lokal selesai dengan broadcaster null | Read-all ownership tambahan PASS; delivery Reverb/mail nyata BLOCKED |"
+      },
+      {
+        "line": 62,
+        "text": "| SaaS/payment/add-on/platform | PASS pricing snapshots, periods, refund, grants, expiry/seat exceptions, DOKU fake/dedup/reconcile | PASS invalid signature/amount/request/invoice/tenant, redirect bukan aktivasi | Checkout/reconcile nyata BLOCKED; katalog add-on update dan reconcile platform PENDING fake PASS; variasi UI lain NOT TESTED |"
+      },
+      {
+        "line": 63,
+        "text": "| UX/browser | PASS lima menu role, empat viewport dashboard; RME/booking staf/tracker existing responsive | FAIL public booking, Escape drawer, 7 accessible labels | Screen reader, seluruh halaman di seluruh viewport, soak NOT TESTED |"
+      },
+      {
+        "line": 71,
+        "text": "Execution coverage pada himpunan charter E2E yang sebanding: **23/25 (92%)**, terdiri dari 17 PASS, 6 FAIL, 2 BLOCKED; metode/batas tiap charter ada di E2E_WORKFLOW_REPORT. Seluruh 335 automated test dijalankan dengan pass rate **97,31%**. Delapan belas charter lanjutan di bawah tidak dijumlahkan dengan jumlah automated test karena granularitasnya berbeda. Tidak ada satu persentase yang diklaim mewakili seluruh kemungkinan perilaku ClinicOS."
+      },
+      {
+        "line": 79,
+        "text": "| U01 | Booking dua proses pada kuota terakhir di MySQL | BLOCKED | MySQL lokal menolak koneksi; database aplikasi tidak diubah/diseed |"
+      },
+      {
+        "line": 80,
+        "text": "| U02 | Dua call/start/finalize/checkout bersamaan pada MySQL | BLOCKED | Sama; SQLite dan request berurutan tidak membuktikan row lock/deadlock |"
+      },
+      {
+        "line": 81,
+        "text": "| U03 | DOKU sandbox lengkap checkout → notify → reconcile → refund | BLOCKED | Tidak menggunakan kredensial/transaksi eksternal nyata; fake saja |"
+      },
+      {
+        "line": 82,
+        "text": "| U04 | Google OAuth nyata dan callback browser | BLOCKED | Provider/session eksternal tidak dijalankan; Socialite fake saja |"
+      },
+      {
+        "line": 83,
+        "text": "| U05 | SMTP verifikasi, reset, dan reminder sampai inbox | BLOCKED | Mail array/fake; tidak mengirim pesan eksternal |"
+      },
+      {
+        "line": 84,
+        "text": "| U06 | Reverb nyata lintas browser, putus/pulih, revoke channel aktif | BLOCKED | Tidak ada transport WebSocket aktif dalam harness; broadcaster null/fake |"
+      },
+      {
+        "line": 85,
+        "text": "| U07 | Staging/production HTTPS, domain, deployment, restore backup | BLOCKED | Tidak mengakses atau mengubah deployment/data produksi |"
+      },
+      {
+        "line": 86,
+        "text": "| U08 | Pembaca layar dan perangkat sentuh fisik seluruh role | NOT TESTED | DOM/keyboard Chrome dan emulasi viewport saja |"
+      },
+      {
+        "line": 87,
+        "text": "| U09 | Soak beberapa jam/hari, suspend OS, expiry sesi alami | NOT TESTED | Sesi audit bukan pengujian endurance |"
+      },
+      {
+        "line": 88,
+        "text": "| U10 | Seluruh search/filter/sort/page, first/last/empty di semua list | NOT TESTED | Beberapa kasus existing dan menu smoke saja; sebagian list memang fixed sort |"
+      },
+      {
+        "line": 89,
+        "text": "| U11 | Seluruh input ekstrem, file limits, charset/collation, malformed payload | NOT TESTED | Validasi terpilih diuji; bukan fuzz menyeluruh |"
+      },
+      {
+        "line": 90,
+        "text": "| U12 | Seluruh form double click, refresh, Back/Forward, offline dan retry | NOT TESTED | Booking/idempotency dan RME offline diuji; tidak semua form |"
+      },
+      {
+        "line": 91,
+        "text": "| U13 | Setiap permission dicabut × role × resource/status, semua multi-role | NOT TESTED | 65 kombinasi endpoint baru, existing boundaries, dan satu live role change |"
+      },
+      {
+        "line": 92,
+        "text": "| U14 | Dampak semua deaktivasi/edit jam/dokter/layanan pada booking masa depan | NOT TESTED | Reassignment dokter terbukti; seluruh kombinasi lain belum dijalankan |"
+      },
+      {
+        "line": 93,
+        "text": "| U15 | Upgrade/rollback migration MySQL pada data historis terisi | BLOCKED | Migrasi hanya pada SQLite fixture baru; tidak menyentuh DB aplikasi |"
+      },
+      {
+        "line": 94,
+        "text": "| U16 | Akurasi ETA dan latency/load pada penggunaan klinik nyata | NOT TESTED | Data sintetis; belum benchmark/conformance lapangan |"
+      },
+      {
+        "line": 95,
+        "text": "| U17 | Pentest/fuzz komprehensif, rate limit multi-worker, polyglot uploads | NOT TESTED | Audit terarah dan dependency scan; bukan penetrasi lengkap |"
+      },
+      {
+        "line": 96,
+        "text": "| U18 | Lifecycle delete dokter/pasien/SSO dan recovery seluruh peran | NOT TESTED | Owner deletion dan akun inactive diuji; matriks deletion lain belum lengkap |"
+      },
+      {
+        "line": 497,
+        "text": "| B-MOBILE-HIDDEN-FOCUS | NOT TESTED | {\"reason\":\"Complete tab-order and focus-return sequence was not established; Escape has separate reproduced evidence.\"} |"
+      },
+      {
+        "line": 508,
+        "text": "| boost.browser-logs | POST | F33 | NOT TESTED pada recorder PHP |  |  |"
+      },
+      {
+        "line": 536,
+        "text": "| (unnamed) | GET\\|POST\\|HEAD | F33 | NOT TESTED pada recorder PHP |  |  |"
+      },
+      {
+        "line": 554,
+        "text": "| (unnamed) | GET\\|HEAD | F33 | NOT TESTED pada recorder PHP |  |  |"
+      },
+      {
+        "line": 555,
+        "text": "| (unnamed) | GET\\|HEAD | F33 | NOT TESTED pada recorder PHP |  |  |"
+      },
+      {
+        "line": 556,
+        "text": "| livewire.preview-file | GET\\|HEAD | F33 | NOT TESTED pada recorder PHP |  |  |"
+      },
+      {
+        "line": 558,
+        "text": "| livewire.upload-file | POST | F33 | NOT TESTED pada recorder PHP |  |  |"
+      },
+      {
+        "line": 613,
+        "text": "| storage.local | GET\\|HEAD | F33 | NOT TESTED pada recorder PHP |  |  |"
+      },
+      {
+        "line": 614,
+        "text": "| storage.local.upload | PUT | F33 | NOT TESTED pada recorder PHP |  |  |"
+      },
+      {
+        "line": 620,
+        "text": "| (unnamed) | GET\\|HEAD | F33 | NOT TESTED pada recorder PHP |  |  |"
+      },
+      {
+        "line": 630,
+        "text": "| boost.browser-logs | POST | _boost/browser-logs | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 631,
+        "text": "| (unnamed) | GET\\|POST\\|HEAD | broadcasting/auth | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 632,
+        "text": "| (unnamed) | GET\\|HEAD | livewire/livewire.js | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 633,
+        "text": "| (unnamed) | GET\\|HEAD | livewire/livewire.min.js.map | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 634,
+        "text": "| livewire.preview-file | GET\\|HEAD | livewire/preview-file/{filename} | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 635,
+        "text": "| livewire.upload-file | POST | livewire/upload-file | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 636,
+        "text": "| storage.local | GET\\|HEAD | storage/{path} | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 637,
+        "text": "| storage.local.upload | PUT | storage/{path} | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 638,
+        "text": "| (unnamed) | GET\\|HEAD | up | NOT TESTED pada recorder PHP |"
+      },
+      {
+        "line": 642,
+        "text": "PASS render berarti request 200 tercatat; bukan bukti seluruh state/role. Komponen yang tidak diuji independen tetap NOT TESTED untuk seluruh state-nya."
+      },
+      {
+        "line": 646,
+        "text": "| resources/views/admin/audit-logs/index.blade.php | admin.audit-logs.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 647,
+        "text": "| resources/views/admin/clinic/form.blade.php | admin.clinic.create, admin.clinic.edit, onboarding.clinic.create | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 648,
+        "text": "| resources/views/admin/dashboard.blade.php | admin.dashboard | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 649,
+        "text": "| resources/views/admin/schedules/form.blade.php | admin.doctor-schedules.create, admin.doctor-schedules.edit | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 650,
+        "text": "| resources/views/admin/schedules/index.blade.php | admin.doctor-schedules.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 651,
+        "text": "| resources/views/admin/services/form.blade.php | admin.services.create, admin.services.edit | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 652,
+        "text": "| resources/views/admin/services/index.blade.php | admin.services.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 653,
+        "text": "| resources/views/admin/staff/form.blade.php | admin.staff.create, admin.staff.edit | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 654,
+        "text": "| resources/views/admin/staff/index.blade.php | admin.staff.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 655,
+        "text": "| resources/views/components/action-message.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 656,
+        "text": "| resources/views/components/application-logo.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 657,
+        "text": "| resources/views/components/appointment-queue-status.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 658,
+        "text": "| resources/views/components/auth-session-status.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 659,
+        "text": "| resources/views/components/booking-fields.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 660,
+        "text": "| resources/views/components/clinic-button.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 661,
+        "text": "| resources/views/components/critical-allergy-banner.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 662,
+        "text": "| resources/views/components/danger-button.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 663,
+        "text": "| resources/views/components/dental-chart.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 664,
+        "text": "| resources/views/components/dropdown.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 665,
+        "text": "| resources/views/components/dropdown-link.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 666,
+        "text": "| resources/views/components/input-error.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 667,
+        "text": "| resources/views/components/input-label.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 668,
+        "text": "| resources/views/components/medical-record-modification.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 669,
+        "text": "| resources/views/components/modal.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 670,
+        "text": "| resources/views/components/nav-link.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 671,
+        "text": "| resources/views/components/patient-duplicate-review.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 672,
+        "text": "| resources/views/components/primary-button.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 673,
+        "text": "| resources/views/components/public-layout.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 674,
+        "text": "| resources/views/components/public-queue-screen.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 675,
+        "text": "| resources/views/components/queue-card.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 676,
+        "text": "| resources/views/components/queue-number-display.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 677,
+        "text": "| resources/views/components/receptionist/search-select.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 678,
+        "text": "| resources/views/components/responsive-nav-link.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 679,
+        "text": "| resources/views/components/rme/allergy-editor.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 680,
+        "text": "| resources/views/components/rme/allergy-fields.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 681,
+        "text": "| resources/views/components/rme/autosave-status.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 682,
+        "text": "| resources/views/components/rme/input-field.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 683,
+        "text": "| resources/views/components/rme/section.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 684,
+        "text": "| resources/views/components/rme/textarea-field.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 685,
+        "text": "| resources/views/components/secondary-button.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 686,
+        "text": "| resources/views/components/status-badge.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 687,
+        "text": "| resources/views/components/text-input.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 688,
+        "text": "| resources/views/components/visit-summary.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 689,
+        "text": "| resources/views/dashboard.blade.php | dashboard, patient.dashboard | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 690,
+        "text": "| resources/views/doctor/dashboard.blade.php | doctor.dashboard | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 691,
+        "text": "| resources/views/doctor/medical-records/index.blade.php | doctor.medical-records.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 692,
+        "text": "| resources/views/doctor/visits/show.blade.php | doctor.visits.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 693,
+        "text": "| resources/views/errors/404.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 694,
+        "text": "| resources/views/layouts/app.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 695,
+        "text": "| resources/views/layouts/guest.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 697,
+        "text": "| resources/views/livewire/pages/auth/confirm-password.blade.php | password.confirm | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 698,
+        "text": "| resources/views/livewire/pages/auth/forgot-password.blade.php | password.request | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 699,
+        "text": "| resources/views/livewire/pages/auth/login.blade.php | login, admin.login | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 700,
+        "text": "| resources/views/livewire/pages/auth/register.blade.php | register | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 701,
+        "text": "| resources/views/livewire/pages/auth/register-clinic.blade.php | register.clinic | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 702,
+        "text": "| resources/views/livewire/pages/auth/reset-password.blade.php | password.reset | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 703,
+        "text": "| resources/views/livewire/pages/auth/verify-email.blade.php | verification.notice | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 704,
+        "text": "| resources/views/livewire/profile/delete-user-form.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 705,
+        "text": "| resources/views/livewire/profile/update-password-form.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 706,
+        "text": "| resources/views/livewire/profile/update-profile-information-form.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 707,
+        "text": "| resources/views/livewire/welcome/navigation.blade.php | Komposisi layout/page; bukan route mandiri | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 708,
+        "text": "| resources/views/notifications/index.blade.php | notifications.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 709,
+        "text": "| resources/views/onboarding/plans/index.blade.php | onboarding.plans.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 710,
+        "text": "| resources/views/patient/appointments/index.blade.php | patient.appointments.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 711,
+        "text": "| resources/views/patient/appointments/show.blade.php | patient.appointments.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 712,
+        "text": "| resources/views/platform/dashboard.blade.php | platform.dashboard | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 713,
+        "text": "| resources/views/platform/subscription-plans/index.blade.php | platform.subscription-plans.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 714,
+        "text": "| resources/views/platform/tenants/index.blade.php | platform.tenants.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 715,
+        "text": "| resources/views/platform/tenants/show.blade.php | platform.tenants.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 716,
+        "text": "| resources/views/previews/visit-summary.blade.php | previews.visit-summary | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 717,
+        "text": "| resources/views/profile.blade.php | profile | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 719,
+        "text": "| resources/views/public/booking-status.blade.php | public.booking.status | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 720,
+        "text": "| resources/views/public/clinic.blade.php | public.clinic.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 721,
+        "text": "| resources/views/public/queue.blade.php | public.queue.index, public.queue.display | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 722,
+        "text": "| resources/views/queues/index.blade.php | doctor.queues.index, receptionist.queues.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 724,
+        "text": "| resources/views/receptionist/appointments/index.blade.php | receptionist.appointments.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 725,
+        "text": "| resources/views/receptionist/appointments/show.blade.php | receptionist.appointments.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 726,
+        "text": "| resources/views/receptionist/dashboard.blade.php | receptionist.dashboard | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 727,
+        "text": "| resources/views/receptionist/patients/form.blade.php | receptionist.patients.create, receptionist.patients.edit | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 728,
+        "text": "| resources/views/receptionist/patients/index.blade.php | receptionist.patients.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 729,
+        "text": "| resources/views/receptionist/patients/show.blade.php | receptionist.patients.show | NOT TESTED sebagai halaman/state independen; lihat assertion/bukti browser terkait |"
+      },
+      {
+        "line": 730,
+        "text": "| resources/views/subscription/addons/index.blade.php | subscription.addons.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 731,
+        "text": "| resources/views/subscription/payments/index.blade.php | subscription.payments.index, platform.payments.index | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 732,
+        "text": "| resources/views/subscription/payments/show.blade.php | subscription.payments.show, platform.payments.show | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      },
+      {
+        "line": 733,
+        "text": "| resources/views/welcome.blade.php | welcome | PASS render pada request 200 teramati; seluruh state NOT TESTED |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/P2_RETEST_REPORT.md",
+    "sha256": "42f080c13f0aa54a34964dff212d4cf072c97ccdac5bc3d5e7f78403c4bd58f6",
+    "lines": 69,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "11 November 2026, Asia/Bangkok. Acuan audit awal: `b82237d932478df9ed02240cb698acff9b4ec669`; checkpoint P1 dipertahankan. QA-05 sampai QA-14 dan temuan baru QA-15 sekarang **FIXED pada skenario yang diuji**. Kebijakan revokasi sesi dan verifikasi ulang email staf juga sudah diterapkan. Tidak ada commit, push, deploy, migrasi data pengguna, atau pembayaran nyata."
+      },
+      {
+        "line": 61,
+        "text": "- Input.dispatchKeyEvent tidak menghasilkan event pada halaman dalam Chrome headless lokal. Probe yang tidak menerima keydown tidak dipakai sebagai bukti kegagalan aplikasi. Source navigasi lama direproduksi ulang dengan KeyboardEvent DOM yang sama: FAIL sebelum fix, PASS sesudah. Bukti: qa09-before-keyboard-steps.json dan browser-audit-steps.json. Keyboard native/perangkat fisik dan screen reader **NOT TESTED**; tidak disamakan dengan keyboard DOM."
+      },
+      {
+        "line": 64,
+        "text": "- MySQL localhost:3306 tidak menerima koneksi pada probe terbaru: concurrency/locking dua proses **BLOCKED**. SQLite membuktikan perilaku transaksi yang diuji, bukan lock MySQL."
+      },
+      {
+        "line": 65,
+        "text": "- SMTP/inbox nyata, Reverb/socket aktif, DOKU nyata, cron produksi dan staging **BLOCKED/NOT TESTED** pada sesi lokal. Backup/restore, load/soak dan seluruh kombinasi permission custom **NOT TESTED**. File yang hilang sebelum fix foto P1 memerlukan backup untuk pemulihan."
+      },
+      {
+        "line": 69,
+        "text": "Seluruh 15 temuan terkonfirmasi sekarang FIXED; **0 temuan terkonfirmasi OPEN**. Aplikasi layak melanjutkan pengujian production-readiness pada staging untuk cakupan yang ada. Persetujuan produksi masih memerlukan pembuktian MySQL concurrency, delivery/provider nyata, revokasi koneksi aktif, storage/backup restore, observability dan load/UAT. Feature gap pada MISSING_FEATURES tidak dianggap selesai oleh hasil test ini."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/UX_PROBLEMS_REPORT.md",
+    "sha256": "d73ee3d711f741f08b8149bfb0a2fb29fa2bba88a3f9c180abcab042bde55c70",
+    "lines": 204,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 1,
+        "text": "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/FINAL_COVERAGE_REPORT.md",
+    "sha256": "fc583c95fe87f3d2400dce2fe08f0c3f565f6a5655e7a9235264bab0c9d741c8",
+    "lines": 65,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "Coverage gap closure selesai mengklasifikasikan **77/77 skenario terdaftar** (72 tambahan+5 BLOCKED historis). Hasil: **52 PASS, 8 FAIL, 11 BLOCKED, 6 NOT TESTED**. Ada **8 akar masalah baru**, masih OPEN. Seluruh skenario mempunyai hasil aktual atau alasan eksplisit; ini bukan pernyataan bahwa seluruh fitur bebas bug."
+      },
+      {
+        "line": 11,
+        "text": "| Parent tambahan72 | 51 PASS; 8 FAIL; 7 BLOCKED; 6 NOT TESTED |"
+      },
+      {
+        "line": 12,
+        "text": "| 5 BLOCKED sebelumnya | WS-RECOVERY menjadi PASS; Google OAuth dan3 skenario DOKU tetap BLOCKED |"
+      },
+      {
+        "line": 21,
+        "text": "**Cara menghitung coverage:** deduplikasi tuple eksplisit pada [executed-tuples.json](closure/evidence/executed-tuples.json), bukan route, halaman atau jumlah klik. Parent72 pada baseline berisi deskripsi luas, tanpa denominator semua tuple atomik. Karena itu persentase seluruh kombinasi produk tidak dapat dihitung dengan jujur.77/77=100% disposisi daftar, bukan100% functional coverage. Dental192 dilaporkan terpisah agar tidak menggandakan6 workflow kondisi. Parent BLOCKED/NOT TESTED tetap demikian walau mempunyai subkasus PASS."
+      },
+      {
+        "line": 45,
+        "text": "DFU-01–DFU-12 tetap menggunakan [FIX_REGRESSION_REPORT](FIX_REGRESSION_REPORT.md): backend378 PASS/2572 assertion, JavaScript10 PASS, browser65 PASS dan dental yang sebelumnya NOT TESTED. Angka tersebut **historis, tidak dijalankan ulang dalam audit ini** dan tidak digabung dengan hitungan closure. Placeholder dental lama kini ditutup bukti baru G44/G45. Pesan pembatalan resepsionis menggunakan REG-LATE-receptionist yang sudah verified. Perubahan kode produksi selama closure nol, sehingga suite backend tidak diulang tanpa alasan; ini tidak menyatakan ada run backend baru."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/FEATURE_INVENTORY.md",
+    "sha256": "62a9fa2ce92fbcdf77fb3f1ad7ec0a081cbcbdca586119bdf42b30b71b442c1e",
+    "lines": 656,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 1,
+        "text": "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis."
+      },
+      {
+        "line": 79,
+        "text": "| Bisa selesai end-to-end? | Aksi terpilih terbukti; belum menyeluruh. Bukti terpilih: DISC-LOGIN-admin PASS; DISC-LOGOUT-admin PASS; DISC-LOGIN-receptionist PASS; DISC-LOGOUT-receptionist PASS; DISC-LOGIN-doctor PASS; DISC-LOGOUT-doctor PASS; DISC-LOGIN-dentist PASS; DISC-LOGOUT-dentist PASS; DISC-LOGIN-patient PASS; DISC-LOGOUT-patient PASS; DISC-LOGIN-platform PASS; DISC-LOGOUT-platform PASS; DISC-LOGIN-free-owner PASS; DISC-LOGOUT-free-owner PASS; DISC-LOGIN-expired-owner PASS; DISC-LOGOUT-expired-owner PASS; DISC-LOGIN-suspended-owner PASS; DISC-LOGOUT-suspended-owner PASS; RETEST-01 PASS"
+      },
+      {
+        "line": 274,
+        "text": "| Bisa selesai end-to-end? | Aksi terpilih terbukti; belum menyeluruh. Bukti terpilih: BOOK-07 PASS; WS-RECOVERY BLOCKED. |"
+      },
+      {
+        "line": 454,
+        "text": "| Bisa selesai end-to-end? | Aksi terpilih terbukti; belum menyeluruh. Bukti terpilih: SUB-02 PASS; DOKU-SUCCESS BLOCKED; DOKU-RECONCILE BLOCKED; DOKU-WEBHOOK BLOCKED. |"
+      },
+      {
+        "line": 574,
+        "text": "| Bisa selesai end-to-end? | BLOCKED. Bukti terpilih: AUTH-GOOGLE BLOCKED. |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/EXPLORATORY_FINDINGS.md",
+    "sha256": "e58b2c895a4997532fe3ba5479845e4bed22adbb44b158ba122859d8c6d13ebc",
+    "lines": 26,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 1,
+        "text": "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/SCENARIO_TEST_MATRIX.md",
+    "sha256": "9a98fa097ec84bfa6713b5ae36e9a1e1dd413db91336ef4de7d37cfff4d37151",
+    "lines": 265,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 1,
+        "text": "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis."
+      },
+      {
+        "line": 11,
+        "text": "124 skenario aktif setelah supersession: **102 PASS, 17 FAIL, 5 BLOCKED, 0 NOT TESTED**. 41 attempt awal disimpan terpisah sebagai histori harness, tidak dihitung lagi. FAIL adalah ekspektasi skenario yang tidak terpenuhi, bukan jumlah bug unik."
+      },
+      {
+        "line": 37,
+        "text": "| ADM-05 | F06 | Receptionist | Staf baru diarahkan ke verifikasi, tidak terjebak login | PASS | Login akun staf baru → Periksa verifikasi dan tombol kirim ulang → Logout | {\"awaiting_verification\":true,\"mail_delivery\":\"BLOCKED: array mail sink, external delivery excluded\"} |"
+      },
+      {
+        "line": 53,
+        "text": "| AUTH-GOOGLE | F01 | Patient | OAuth Google end-to-end | BLOCKED |  | BLOCKED: kredensial eksternal sengaja dikosongkan; tidak memakai akun pengguna. |"
+      },
+      {
+        "line": 96,
+        "text": "| DOKU-SUCCESS | F26 | Clinic Owner | Checkout dan pembayaran DOKU sukses end-to-end | BLOCKED |  | BLOCKED: tidak ada kredensial provider dummy untuk audit ini; tidak melakukan pembayaran nyata. |"
+      },
+      {
+        "line": 97,
+        "text": "| DOKU-RECONCILE | F26 | Clinic Owner / Platform Admin | Reconciliation dari provider lewat UI | BLOCKED |  | BLOCKED: provider sengaja dinonaktifkan; regression fake-provider berjalan terpisah. |"
+      },
+      {
+        "line": 98,
+        "text": "| DOKU-WEBHOOK | F26 | System | Notification valid provider mengaktifkan paket | BLOCKED |  | BLOCKED: tidak ada provider callback nyata pada audit fungsional browser ini; tests/backend saja. |"
+      },
+      {
+        "line": 109,
+        "text": "| WS-RECOVERY | F14 | All queue roles | Socket Reverb putus/pulih nyata | BLOCKED |  | BLOCKED: realtime dinonaktifkan di lingkungan audit; polling dan offline editor diuji, socket tidak. |"
+      },
+      {
+        "line": 146,
+        "text": "| GAP-F00-1 | F00 | Guest, Patient, Clinic Owner | Navigasi Back/Forward landing pada seluruh anchor | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 147,
+        "text": "| GAP-F00-2 | F00 | Guest, Patient, Clinic Owner | Katalog harga kosong/nonaktif seluruhnya dan pemulihan | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 148,
+        "text": "| GAP-F01-1 | F01 | All roles | Remember-only session dan revokasi password pada browser baru | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 149,
+        "text": "| GAP-F01-2 | F01 | All roles | Reset/verification link kedaluwarsa dan pemakaian ulang lewat UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 150,
+        "text": "| GAP-F02-1 | F02 | Guest | Email registrasi duplikat/case variant melalui UI pasien dan owner | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 151,
+        "text": "| GAP-F02-2 | F02 | Guest | Terms tidak disetujui serta refresh di setiap tahap registrasi | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 152,
+        "text": "| GAP-F03-1 | F03 | All roles | Email duplikat dan batas panjang nama pada seluruh role | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 153,
+        "text": "| GAP-F03-2 | F03 | All roles | Dua sesi profil aktif saat password/email berubah | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 154,
+        "text": "| GAP-F04-1 | F04 | Clinic Owner | Lanjut onboarding yang ditinggalkan setelah logout/login | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 155,
+        "text": "| GAP-F04-2 | F04 | Clinic Owner | Preferred plan dari setiap CTA landing sampai aktivasi | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 156,
+        "text": "| GAP-F05-1 | F05 | Clinic Admin, Clinic Owner | Timezone WITA/WIT dan perubahan jam operasional terhadap sesi existing | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 157,
+        "text": "| GAP-F05-2 | F05 | Clinic Admin, Clinic Owner | Logo tipe salah, ukuran lebih dari2MB, dan penggantian gagal | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 158,
+        "text": "| GAP-F06-1 | F06 | Clinic Admin, Clinic Owner | Admin mengganti email/password staf dengan sesi remember aktif | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 159,
+        "text": "| GAP-F06-2 | F06 | Clinic Admin, Clinic Owner | Batas doctor seat dari UI dan semua variasi entitlement paket | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 160,
+        "text": "| GAP-F07-1 | F07 | Clinic Admin, Clinic Owner | Tarif pecahan/nonkelipatan1000 dan batas nominal server | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 161,
+        "text": "| GAP-F07-2 | F07 | Clinic Admin, Clinic Owner | Layanan dinonaktifkan ketika tab booking lama masih terbuka | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 162,
+        "text": "| GAP-F08-1 | F08 | Clinic Admin, Clinic Owner | Perubahan jam sesi terpakai serta quota diturunkan di bawah reservasi | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 163,
+        "text": "| GAP-F08-2 | F08 | Clinic Admin, Clinic Owner | Batas quota0/501, akhir sebelum mulai, dan jam di luar operasional melalui UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 164,
+        "text": "| GAP-F09-1 | F09 | Clinic Admin, Clinic Owner, Receptionist | Tanggal lahir masa depan dan seluruh field kosong melalui submit UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 165,
+        "text": "| GAP-F09-2 | F09 | Clinic Admin, Clinic Owner, Receptionist | Pasien dengan histori sangat panjang dan setiap filter pencarian identitas | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 166,
+        "text": "| GAP-F10-1 | F10 | Guest, Patient | Semua CTA dokter/layanan website klinik dalam kondisi tanpa dokter/sesi | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 167,
+        "text": "| GAP-F10-2 | F10 | Guest, Patient | Alur pengguna pertama tanpa URL klinik dalam studi awam langsung | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 168,
+        "text": "| GAP-F11-1 | F11 | Patient, Clinic Admin, Clinic Owner, Receptionist | Tanggal tepat+30/+31 dan sesi baru saja berakhir | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 169,
+        "text": "| GAP-F11-2 | F11 | Patient, Clinic Admin, Clinic Owner, Receptionist | Dua form/tab dengan UUID berbeda untuk pasien/sesi sama | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 170,
+        "text": "| GAP-F12-1 | F12 | Patient, Clinic Admin, Clinic Owner, Receptionist, Token holder | Replay cancel dari tab stale untuk seluruh status terminal | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 171,
+        "text": "| GAP-F12-2 | F12 | Patient, Clinic Admin, Clinic Owner, Receptionist, Token holder | Tautan status tanpa/salah token dan cancellation error pada template resepsionis lewat browser | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 172,
+        "text": "| GAP-F13-1 | F13 | Clinic Admin, Clinic Owner, Receptionist, Doctor | Aksi stale dari dua tab resepsionis dan dokter terhadap queue sama | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 173,
+        "text": "| GAP-F13-2 | F13 | Clinic Admin, Clinic Owner, Receptionist, Doctor | Filter dokter/sesi dikombinasikan dengan pagination dan status terminal | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 174,
+        "text": "| GAP-F14-1 | F14 | Guest, All roles | Display klinik kosong dan seluruh kontrol filter/kiosk | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 175,
+        "text": "| GAP-F14-2 | F14 | Guest, All roles | Public display putus/pulih dari socket nyata | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 176,
+        "text": "| GAP-F15-1 | F15 | Doctor | Ulang Mulai periksa dari tab lama sesudah visit selesai | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 177,
+        "text": "| GAP-F15-2 | F15 | Doctor | Semua kombinasi pencarian/filter index rekam medis | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 178,
+        "text": "| GAP-F16-1 | F16 | Doctor | HTTP419/sesi berakhir saat autosave dan pemulihan isi editor | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 179,
+        "text": "| GAP-F16-2 | F16 | Doctor | Batas20 diagnosis/30 tindakan serta seluruh nilai vital ekstrem | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 180,
+        "text": "| GAP-F16-3 | F16 | Doctor | Refresh/Back/leave sebelum debounce autosave selesai dan ketika foto belum disimpan | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 181,
+        "text": "| GAP-F17-1 | F17 | Doctor | Edit severity lain dan dua editor alergi bersamaan melalui UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 182,
+        "text": "| GAP-F17-2 | F17 | Doctor | Semua variasi acknowledgement alergi pada resep baru/koreksi | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 183,
+        "text": "| GAP-F18-1 | F18 | Doctor, Patient | Hapus/tambah30 obat, jumlah9999/10000, serta resep kosong final | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 184,
+        "text": "| GAP-F18-2 | F18 | Doctor, Patient | Seluruh variasi preview, instruksi panjang dan koreksi yang mengubah resep pasien | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 185,
+        "text": "| GAP-F19-1 | F19 | Doctor | Paste clipboard, batas10 foto/5MB, tipe salah dan abort upload | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 186,
+        "text": "| GAP-F19-2 | F19 | Doctor | Akses foto revisi oleh setiap role/tenant asing melalui browser | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 187,
+        "text": "| GAP-F20-1 | F20 | Doctor | Dua submit finalisasi bersamaan dan tab koreksi stale melalui UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 188,
+        "text": "| GAP-F20-2 | F20 | Doctor | Semua perbedaan array panjang pada histori koreksi di mobile | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 189,
+        "text": "| GAP-F21-1 | F21 | Doctor | Seluruh32 gigi×6 kondisi dan correction-final dental melalui UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 190,
+        "text": "| GAP-F21-2 | F21 | Doctor | Expiry berdasarkan ends_at; pencabutan revoked_at sudah diuji, keduanya tidak disamakan | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 191,
+        "text": "| GAP-F22-1 | F22 | Clinic Admin, Clinic Owner, Receptionist, Doctor, Patient, Platform Admin | Rekonsiliasi angka seluruh dashboard terhadap fixture setiap periode/timezone | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 192,
+        "text": "| GAP-F22-2 | F22 | Clinic Admin, Clinic Owner, Receptionist, Doctor, Patient, Platform Admin | Semua shortcut, empty/loading dan variasi data panjang per role | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 193,
+        "text": "| GAP-F23-1 | F23 | All roles | Pagination/empty notification center untuk setiap role | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 194,
+        "text": "| GAP-F23-2 | F23 | All roles | Notifikasi masuk socket dan badge realtime lintas browser | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 195,
+        "text": "| GAP-F24-1 | F24 | Clinic Admin, Clinic Owner | Kombinasi filter aktor/tanggal, pagination, serta tidak ada hasil | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 196,
+        "text": "| GAP-F24-2 | F24 | Clinic Admin, Clinic Owner | Validasi semua metadata audit yang ditampilkan di browser | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 197,
+        "text": "| GAP-F25-1 | F25 | Clinic Owner, All roles (banner/operational rules) | Transisi expiry oleh waktu serta reminder subscription yang dipicu command | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 198,
+        "text": "| GAP-F25-2 | F25 | Clinic Owner, All roles (banner/operational rules) | Seluruh kombinasi paket, renewal terjadwal dan seat overage pada UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 199,
+        "text": "| GAP-F26-1 | F26 | Clinic Owner, Platform Admin, System | Successful checkout/notification/reconcile provider nyata | BLOCKED | Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna. |"
+      },
+      {
+        "line": 200,
+        "text": "| GAP-F26-2 | F26 | Clinic Owner, Platform Admin, System | Repeat/delay callback dan browser-return nyata bersama provider | BLOCKED | Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna. |"
+      },
+      {
+        "line": 201,
+        "text": "| GAP-F27-1 | F27 | Clinic Owner | Prorata akhir hari/bulan dan renewal gabungan lewat UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 202,
+        "text": "| GAP-F27-2 | F27 | Clinic Owner | Refund yang mencabut add-on melalui flow provider; fixture revoke saja sudah diuji | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 203,
+        "text": "| GAP-F28-1 | F28 | Platform Admin | Pencarian owner-email, pagination banyak tenant, dan tenant inactive | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 204,
+        "text": "| GAP-F28-2 | F28 | Platform Admin | Semua metadata commercial history di setiap state tenant | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 205,
+        "text": "| GAP-F29-1 | F29 | Platform Admin | Harga invalid, price toggle inactive dan addon toggle inactive lewat UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 206,
+        "text": "| GAP-F29-2 | F29 | Platform Admin | Katalog diubah ketika owner masih memegang tab checkout lama | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 207,
+        "text": "| GAP-F30-1 | F30 | Platform Admin | Grant lebih tinggi/setara terjadwal dan downgrade paid dengan overlap | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 208,
+        "text": "| GAP-F30-2 | F30 | Platform Admin | Pemulihan grant ganda dan kebijakan revoke grant yang belum tersedia di UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 209,
+        "text": "| GAP-F31-1 | F31 | Platform Admin | Refund ulang pada tab stale dan seluruh status yang tidak refundable | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 210,
+        "text": "| GAP-F31-2 | F31 | Platform Admin | Reconcile+refund lintas role/tenant pada UI, tanpa transaksi provider nyata | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 211,
+        "text": "| GAP-F32-1 | F32 | Patient, Token holder, Guest | Confidence medium/high dengan data historis terkontrol di browser | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 212,
+        "text": "| GAP-F32-2 | F32 | Patient, Token holder, Guest | ETA untuk CALLED/IN_PROGRESS/terminal dan seluruh kombinasi antrian depan | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 213,
+        "text": "| GAP-F33-1 | F33 | All queue users | Socket aktif putus/pulih, missed-event dan permission revoked pada koneksi aktif | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 214,
+        "text": "| GAP-F33-2 | F33 | All queue users | Fokus input saat refetch/pagination dan semua offline queue actions | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 215,
+        "text": "| GAP-F34-1 | F34 | Guest, Patient | Google OAuth success/callback/error/relink dengan akun dummy provider | BLOCKED | Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna. |"
+      },
+      {
+        "line": 216,
+        "text": "| GAP-F35-1 | F35 | Clinic Admin, Clinic Owner, Receptionist | NIK format/normalisasi telepon berbagai negara dan lebih dari8 kandidat | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 217,
+        "text": "| GAP-F35-2 | F35 | Clinic Admin, Clinic Owner, Receptionist | Review token stale setelah kandidat berubah dan navigasi ulang ke profil inactive | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 232,
+        "text": "| QUEUE-01 | BLOCKED | QUEUE-01-R1 | Retest after correction of browser synchronization or scenario setup; see replacement evidence. |"
+      },
+      {
+        "line": 233,
+        "text": "| QUEUE-02 | BLOCKED | QUEUE-02-R1 | Retest after correction of browser synchronization or scenario setup; see replacement evidence. |"
+      },
+      {
+        "line": 241,
+        "text": "| BOOK-06 | BLOCKED | BOOK-06-R1 | Retest after correction of browser synchronization or scenario setup; see replacement evidence. |"
+      },
+      {
+        "line": 242,
+        "text": "| BOOK-06-R1 | BLOCKED | CROSS-05 | Missing initial fixture was replaced by a real UI booking in a started session. |"
+      },
+      {
+        "line": 246,
+        "text": "| RME-DENTAL | NOT TESTED | DENT-01 | Entitlement fixture and browser persistence were subsequently executed. |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/ROLE_ACTION_MATRIX.md",
+    "sha256": "7bab762b9c1a2e98866058e393470d819086c6695ce83d099da3b8ac71f650d9",
+    "lines": 280,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 1,
+        "text": "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis."
+      },
+      {
+        "line": 23,
+        "text": "Setiap row memuat feature, persona, aksi, dan state yang relevan. Daftar state adalah himpunan domain, **bukan klaim seluruh kombinasi telah diuji**. Kolom bukti mengarah ke skenario aktual; sel tanpa eksekusi tepat adalah NOT TESTED."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/REMAINING_GAPS.md",
+    "sha256": "55c3b2b72724e1441fbe2e7587f759baaab93919051b334260c90e4c67dfa5a6",
+    "lines": 47,
+    "disposition": "Daftar keputusan historis dinilai ulang di laporan ini; CCL FAIL digantikan laporan fix; provider dibaca bersama integrasi 11 November.",
+    "status_claims": [
+      {
+        "line": 7,
+        "text": "| G10 | BLOCKED | Ketiga CTA Free/Individual/Team menjaga preferred plan sampai halaman paket, termasuk refresh. Free aktif melalui UI. | Aktivasi Individual/Team melalui provider belum dapat dieksekusi tanpa kredensial sandbox DOKU; initial paid fixtures bukan bukti checkout. |"
+      },
+      {
+        "line": 8,
+        "text": "| G22 | NOT TESTED | Navigasi agen telah diamati, tetapi bukan studi partisipan awam. | Tidak ada partisipan manusia untuk studi first-use tanpa pengetahuan URL/kode klinik; waktu, keberhasilan mandiri dan pemahaman tidak boleh disimulasikan oleh agen. |"
+      },
+      {
+        "line": 9,
+        "text": "| G29 | NOT TESTED | Display klinik kosong dan kontrol yang benar-benar tersedia sudah diuji; link booking menuju login. | Tidak ditemukan kontrol kiosk/filter display khusus pada UI/source saat ini. Tidak menganggap kontrol fiktif sebagai PASS; requirement/desain kontrol perlu ditetapkan. |"
+      },
+      {
+        "line": 11,
+        "text": "| G47 | NOT TESTED | Seluruh tujuan shortcut berbeda diklik pada5 role; nama255 diperiksa375px pada5 role; notifikasi empty5 role ada di G48. | Empty/loading dashboard lintas seluruh role belum terbukti. Platform memiliki tenant pada initial fixture dan tidak menyediakan UI hapus seluruh tenant untuk membuat state global kosong; menghapus langsung DB selama audit melanggar metode. Diperlukan initial fixture terpisah untuk dashboard global kosong dan kontrak loading (Blade tidak memiliki state loading aplikasi khusus). Shortcut/profile PASS tidak menutup subkasus ini. |"
+      },
+      {
+        "line": 12,
+        "text": "| G54 | BLOCKED | Guard lokal dan fixture pembayaran sah tersedia; tidak ada bukti pembayaran eksternal sukses. | Kredensial sandbox DOKU dan transaksi sandbox tervalidasi tidak tersedia; tidak memakai akun atau pembayaran pengguna. |"
+      },
+      {
+        "line": 13,
+        "text": "| G55 | BLOCKED | Snapshot invoice dan stale UI katalog diuji pada G60/G61. | Repeat/delay callback serta browser-return dengan provider nyata memerlukan DOKU sandbox; backend fake-provider historis tidak dihitung sebagai browser provider PASS. |"
+      },
+      {
+        "line": 14,
+        "text": "| G56 | BLOCKED | Prorata satu hari akhir bulan dan8 kombinasi plan/addon/durasi dihitung lewat UI. | Pembayaran renewal gabungan sampai aktivasi menunggu provider sandbox; pemilihan dan total UI PASS, settlement tidak diuji. |"
+      },
+      {
+        "line": 15,
+        "text": "| G57 | BLOCKED | Refund lokal manual lewat UI membatalkan entitlement dan menjaga histori pada G64. | Aplikasi merekam refund manual; tidak ditemukan flow refund eksternal dari browser. Refund oleh provider dan delivery eventnya memerlukan kontrak serta kredensial sandbox, tidak disamakan dengan revoke fixture/manual. |"
+      },
+      {
+        "line": 16,
+        "text": "| G59 | NOT TESTED | Metadata subscription saat ini terlihat untuk Free/Individual/Team/trial/expiry. | Detail tenant hanya menampilkan subscription saat ini; tidak ada viewer seluruh periode commercial history. Schema/history backend bukan bukti UI. Perlu keputusan tampilan histori dan field yang memang boleh dibuka Platform. |"
+      },
+      {
+        "line": 17,
+        "text": "| G63 | NOT TESTED | Pencegahan grant duplikat DFU-12 tetap FIXED & VERIFIED dan tidak dijalankan ulang. | Tidak ada UI pemulihan duplicate grant historis atau single-grant revoke. Keputusan revoke/refund/penyesuaian periode dibutuhkan; tidak menghapus atau mengubah histori melalui DB saat audit. |"
+      },
+      {
+        "line": 18,
+        "text": "| G65 | BLOCKED | Foreign owner/admin/doctor/receptionist/Patient mendapat403/404 pada GET invoice asing dan tidak melihat tombol refund; tidak ada POST reconcile/refund negatif yang dilakukan lewat form yang tidak tersedia. | Reconcile yang diizinkan kepada Platform Admin memerlukan provider sandbox. Pemeriksaan akses/visibilitas negatif tidak membuktikan authorization POST atau reconcile positif; refund lokal ditutup G64. |"
+      },
+      {
+        "line": 19,
+        "text": "| G68 | NOT TESTED | Socket aktif disconnected/reconnected dan missed-event dibuktikan WS-REAL-RECOVERY-R2. | UI staf mengubah akun, bukan permission role aktif secara terpisah; tidak ada editor custom permission. Revokasi permission pada koneksi socket yang sama belum dapat dibuktikan tanpa mutasi langsung permission DB atau fitur pengelolaan yang belum ada. |"
+      },
+      {
+        "line": 20,
+        "text": "| G70 | BLOCKED | Konfigurasi provider audit sengaja kosong; jalur lokal auth telah diuji terpisah. | Tidak tersedia Google OAuth client sandbox/akun dummy/callback yang diotorisasi; tidak memakai akun pengguna atau menciptakan hasil callback provider. |"
+      },
+      {
+        "line": 21,
+        "text": "| AUTH-GOOGLE | BLOCKED | Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna. | kredensial eksternal sengaja dikosongkan; tidak memakai akun pengguna. |"
+      },
+      {
+        "line": 22,
+        "text": "| DOKU-SUCCESS | BLOCKED | Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna. | tidak ada kredensial provider dummy untuk audit ini; tidak melakukan pembayaran nyata. |"
+      },
+      {
+        "line": 23,
+        "text": "| DOKU-RECONCILE | BLOCKED | Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna. | provider sengaja dinonaktifkan; regression fake-provider berjalan terpisah. |"
+      },
+      {
+        "line": 24,
+        "text": "| DOKU-WEBHOOK | BLOCKED | Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna. | tidak ada provider callback nyata pada audit fungsional browser ini; tests/backend saja. |"
+      },
+      {
+        "line": 28,
+        "text": "Delapan akar masalah CCL-01–CCL-08 tetap OPEN.9 assertion FAIL tidak diperbaiki karena audit melarang perubahan produksi. [Reproduksi dan bukti](NEW_FUNCTIONAL_FINDINGS.md). Sesudah perbaikan terpisah, ulangi case FAIL terkait dan dependensinya; tidak perlu mengulang semua PASS."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/NEW_FUNCTIONAL_FINDINGS.md",
+    "sha256": "17f7018bf8accf2b162d09b200178b9c03884db8cea038058c1779088e4d1f66",
+    "lines": 115,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "Run 13–14 November 2026 (Asia/Bangkok), database SQLite dan seluruh identitas/isi klinis dummy terisolasi. **8 akar masalah OPEN**, terwakili9 assertion browser FAIL. Source produksi tidak diperbaiki. Ini temuan baru dari kombinasi yang sebelumnya belum diuji, bukan pembukaan ulang DFU-01–DFU-12 yang sudah FIXED & VERIFIED."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/MISSING_FEATURES_REPORT.md",
+    "sha256": "a3051a5f4537729638cadd0743cee7f7ec91387af994dc78212683c91ac1e088",
+    "lines": 145,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 1,
+        "text": "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis."
+      },
+      {
+        "line": 40,
+        "text": "| Status pengujian | NOT TESTED untuk workflow yang tidak mempunyai implementasi; ketiadaan UI/source adalah hasil penemuan, bukan PASS end-to-end. |"
+      },
+      {
+        "line": 56,
+        "text": "| Status pengujian | NOT TESTED untuk workflow yang tidak mempunyai implementasi; ketiadaan UI/source adalah hasil penemuan, bukan PASS end-to-end. |"
+      },
+      {
+        "line": 72,
+        "text": "| Status pengujian | NOT TESTED untuk workflow yang tidak mempunyai implementasi; ketiadaan UI/source adalah hasil penemuan, bukan PASS end-to-end. |"
+      },
+      {
+        "line": 88,
+        "text": "| Status pengujian | NOT TESTED untuk workflow yang tidak mempunyai implementasi; ketiadaan UI/source adalah hasil penemuan, bukan PASS end-to-end. |"
+      },
+      {
+        "line": 104,
+        "text": "| Status pengujian | NOT TESTED untuk workflow yang tidak mempunyai implementasi; ketiadaan UI/source adalah hasil penemuan, bukan PASS end-to-end. |"
+      },
+      {
+        "line": 120,
+        "text": "| Status pengujian | NOT TESTED untuk workflow yang tidak mempunyai implementasi; ketiadaan UI/source adalah hasil penemuan, bukan PASS end-to-end. |"
+      },
+      {
+        "line": 136,
+        "text": "| Status pengujian | NOT TESTED untuk workflow yang tidak mempunyai implementasi; ketiadaan UI/source adalah hasil penemuan, bukan PASS end-to-end. |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/FUNCTIONAL_BUG_REPORT.md",
+    "sha256": "a4154adf2de6bdbed27fad11e357e2b0e2e089a6e135f48285d605c8d42702c4",
+    "lines": 166,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 1,
+        "text": "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis."
+      },
+      {
+        "line": 9,
+        "text": "Temuan terkonfirmasi OPEN; tidak ada perbaikan source pada tugas audit ini. Kelompok akar masalah dipakai agar empat assertion feedback queue tidak dihitung empat bug."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/FIX_REGRESSION_REPORT.md",
+    "sha256": "bc658ce80abbb571eccdb5f30f47934dc1665a65e459fc29bf0ba8a259678af5",
+    "lines": 67,
+    "disposition": "Acuan fix DFU-01–12; tetap dipertahankan.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "Run 13 November 2026. Seluruh DFU-01–DFU-12 berstatus **FIXED & VERIFIED** pada checkout ini, terbatas pada skenario dan assertion yang dijalankan. Laporan audit awal dipertahankan sebagai baseline historis; kesimpulan OPEN pada bagian historis tidak mewakili status run ini."
+      },
+      {
+        "line": 9,
+        "text": "- Chrome nyata headless 158.0.8127.36 / Playwright 1.65.0: **65 PASS, 0 FAIL, 0 BLOCKED, 1 NOT TESTED** pada skenario aktif. Termasuk **12/12 retest final DFU**, role Clinic Owner, Clinic Admin operasional, Receptionist, Doctor, Patient, Platform Admin dan token holder. [Skenario lengkap](fixes/evidence/scenarios.json), [ringkasan final](fixes/evidence/final-regression-summary.json), [screenshot](fixes/evidence/screenshots/), [snapshot/responsif](fixes/evidence/pages.json)."
+      },
+      {
+        "line": 17,
+        "text": "| DFU-01 | FIXED & VERIFIED | BookingService.cancel hanya memeriksa appointment BOOKED dan waktu sesi. | Lock queue dan tolak jika queue IN_PROGRESS, terminal, atau visit sudah ada; semua caller memakai aturan bersama. | Empat jalur cancel ditolak tanpa mutasi; dokter tetap dapat finalisasi. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 18,
+        "text": "| DFU-12 | FIXED & VERIFIED | Form dan service tidak membawa identitas maksud grant. | UUID request unik tersimpan pada periode, replay payload yang sama mengembalikan periode lama; key dengan maksud lain ditolak. Tombol dikunci saat submit; audit grant hanya sekali. | Replay, key berbeda, payload/tenant berbeda dan double-click pointer diuji. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 19,
+        "text": "| DFU-02 | FIXED & VERIFIED | Guard sesi terpakai hanya membekukan dokter. | Bekukan dokter, hari, mulai, dan selesai dalam transaksi untuk sesi yang punya appointment/queue. Kuota/aktif tetap dapat diubah; perubahan waktu menggunakan sesi baru. | Hari dan dua jam ditolak; tanggal appointment/queue tidak berubah; CRUD sesi kosong tetap berjalan. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 20,
+        "text": "| DFU-11 | FIXED & VERIFIED | Dashboard dan riwayat hanya menyediakan baca booking. | Kedua halaman memberi Booking baru → klinik yang terhubung atau kode klinik eksplisit → form booking yang sudah ada. Ikuti batas akun clinic_id pada policy pasien yang sudah berlaku. | Pasien pertama tanpa profile membuat booking; kode salah dapat dikoreksi; booking ulang memakai satu profile milik user yang sama. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 21,
+        "text": "| DFU-05 | FIXED & VERIFIED | JS review duplikat membuang errors.phone pada 422. | Tampilkan pesan field dari respons validasi; tetap blok submit. Respons non-JSON memiliki pesan pemulihan, respons lama tidak menimpa review terbaru. | 31 digit ditolak tanpa patient baru; detail phone/30 terlihat; JS menguji error server dan respons usang. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 22,
+        "text": "| DFU-06 | FIXED & VERIFIED | Trust boundary hanya string/max30, sehingga abc diterima. | PhoneNumber bersama pada create/update pasien, review duplikat, walk-in baru, dan booking publik. Input tel/autocomplete/maxlength30. | abc ditolak pada seluruh endpoint; +, spasi, kurung, titik, dan hubung diterima. Tidak mewajibkan nomor unik. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 23,
+        "text": "| DFU-07 | FIXED & VERIFIED | Dashboard menolak rentang namun tidak menampilkan errors/old input. Default tanggal parsial juga dapat membentuk rentang terbalik. | Validasi rentang efektif setelah default tanggal klinik diterapkan; pesan Indonesia, ringkasan alert, pertahankan kedua input. | Rentang terbalik, hanya tanggal awal masa depan, hanya tanggal akhir lampau ditolak; rentang default tetap dapat dibuka. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 24,
+        "text": "| DFU-08 | FIXED & VERIFIED | Cast timestamp UTC langsung diformat pada visit dan beberapa tampilan terkait. | Konversi timestamp ke timezone klinik saat render pada visit, histori/koreksi, daftar RME, kartu antrean, resep pasien, dan pembayaran. Calendar date/sesi serta waktu tersimpan tetap sama. | WIB/WITA/WIT lintas tengah malam diuji backend; waktu lokal visit diuji Chrome; instant database tidak berubah. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 25,
+        "text": "| DFU-03 | FIXED & VERIFIED | Feedback berada di region yang diganti refetch 250 ms. | Pindahkan feedback di luar region refresh. | No-show 422 tetap terbaca setelah 1,5 detik/refetch; FIFO dan batas panggilan aktif tetap ditolak. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 26,
+        "text": "| DFU-04 | FIXED & VERIFIED | Template pembatalan tidak merender error validasi; input hilang. | Ringkasan error reusable untuk AppLayout dan token status, simpan pesan sebelum navigasi Livewire dirender, pertahankan alasan pembatalan. | Validasi panjang alasan terlihat dan input utuh; penolakan setelah awal sesi terlihat pada Patient, Receptionist, dan token holder. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 27,
+        "text": "| DFU-09 | FIXED & VERIFIED | Filter dan alasan batal memiliki label visual/placeholder tanpa asosiasi programatis. | Hubungkan for/id pada empat filter audit, pencarian pasien, tanggal booking, dua alasan batal, dan pencarian pembayaran platform. | Sembilan kontrol bernama diuji pada role terkait; klik label/fokus dan Enter diuji pada booking baru. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 28,
+        "text": "| DFU-10 | FIXED & VERIFIED | Reveal animation kanan menggeser elemen 24px melewati gutter mobile. | Gerakan reveal kiri/kanan menjadi vertikal pada <=700px. Tidak menutup overflow global. | Lebar dokumen sesuai 375/768/1024/1440; baseline375 sebelumnya385px. [Browser](fixes/evidence/scenarios.json), [backend](fixes/evidence/final-backend-r3.xml) |"
+      },
+      {
+        "line": 34,
+        "text": "Skenario awal ADM-09 memakai regex yang tidak mengenali kata **bertabrakan**, ADM-15 mengasumsikan event tertentu ada di halaman pertama, QUEUE-05 memakai staf yang baru dibuat dan belum terverifikasi. Retest memperbaiki prasyarat/assertion, mempertahankan hasil awal dengan superseded_by. RME-08/09/12 awal gagal karena acknowledgement alergi tidak dipenuhi setelah reload; REG-FINALIZE/MODIFICATION/REOPEN melengkapi prasyarat dan lulus. Tidak ada failure aktif yang disembunyikan sebagai PASS. Skenario sebelum perbaikan sengaja tetap merah dan dipisahkan dari hitungan regresi aktif."
+      },
+      {
+        "line": 55,
+        "text": "- NOT TESTED browser: **RME-DENTAL** — Dijalankan pada fase add-on/dental, membutuhkan fixture entitlement dummy.. Ini placeholder cakupan dental terpisah dari DFU; backend odontogram tetap tercakup full suite."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/CCL_FIX_REGRESSION_REPORT.md",
+    "sha256": "1997a75d18358ce0f6f9ddfc8b32a339888e6d855817e7252c9d2176a1ad9d08",
+    "lines": 86,
+    "disposition": "Acuan terbaru CCL-01–08 FIXED & VERIFIED; hasil regression 14 November, tidak dijalankan ulang.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "Run **14 November 2026, Asia/Bangkok**. Kedelapan temuan **CCL-01–CCL-08: FIXED & VERIFIED**, terbatas pada skenario yang dijelaskan di bawah. **0 temuan CCL masih OPEN.** Hasil audit sebelumnya tetap merupakan bukti historis; laporan ini menjadi pembaruan status delapan temuan, bukan penggantian isi audit lama."
+      },
+      {
+        "line": 22,
+        "text": "| CCL-05 | BookingService memeriksa tanggal/hari/akhir sesi, tetapi tidak membandingkan sesi dengan jam klinik terbaru. | Booking baru di luar jam diterima dan menambah appointment/queue. | Periksa jam sesi terhadap setting klinik di BookingService sebelum penulisan pasien/appointment. Batas jam inklusif; replay UUID lama tetap mengembalikan appointment yang sudah ada. Tidak memindahkan atau membatalkan appointment lama. [Source](../../app/Services/BookingService.php) | 3 skenario browser aktif PASS; **FIXED & VERIFIED** |"
+      },
+      {
+        "line": 23,
+        "text": "| CCL-03 | Validator menerima titik; query normalisasi kolom lama tidak menghapus titik dan sebagian whitespace. Penyimpanan juga belum canonical. | Nomor bertitik tersimpan, tetapi lookup digit tidak menemukan kandidat. | PhoneNumber menyediakan satu daftar separator/normalizer. Validator dan input lookup menggunakannya; mutator Patient menormalisasi saat penyimpanan. Query legacy memakai daftar separator yang sama dengan parameter binding; tidak melakukan bulk rewrite, merge atau account linking. [Source](../../app/Rules/PhoneNumber.php) | 3 skenario browser aktif PASS; **FIXED & VERIFIED** "
+      },
+      {
+        "line": 24,
+        "text": "| CCL-04 | Prefill pasien difilter aktif lalu null diperlakukan sebagai pasien baru. | URL pasien nonaktif membuka form pasien baru tanpa alasan. | Prefill harus resource tenant yang ada. Nonaktif diarahkan ke profil dengan alasan dan langkah Edit pasien; CTA booking disembunyikan. ID asing/tidak ada404. Reaktivasi tetap tindakan pengguna melalui fitur existing. [Source](../../app/Http/Controllers/Receptionist/AppointmentController.php) | 2 skenario browser aktif PASS; **FIXED & VERIFIED** |"
+      },
+      {
+        "line": 25,
+        "text": "| CCL-06 | List dan agregat Platform membaca status cache Subscription tanpa refresh periode efektif. | List tetap active setelah ends_at; detail/owner baru memicu refresh. | List memakai refreshStatus pada tenant halaman tersebut; dashboard merefresh cache lewat SubscriptionService pada instant yang sama sebelum agregasi. Metode domain existing menentukan expired/trial→Free/suspended/periode terjadwal. SubscriptionPeriod dan Payment tidak ditulis ulang. [Source](../../app/Http/Controllers/Platform/DashboardController.php) | 2 skenario browser aktif PASS; **FIXED & VERIFIED** |"
+      },
+      {
+        "line": 26,
+        "text": "| CCL-07 | Refetch mengganti seluruh region; focus identity dipulihkan, tetapi nilai input/Alpine dan selection tidak. | Fokus kembali tetapi draft filter menjadi kosong. | Pertahankan DOM form GET filter yang ditandai saat mengganti rows/stats region, sehingga nilai dan state Alpine tetap ada. Tangkap/pulihkan selectionStart, selectionEnd dan direction. Form aksi tulis tidak ditandai untuk dipertahankan. [Source](../../resources/js/realtime.js) | 3 skenario browser aktif PASS; **FIXED & VERIFIED** |"
+      },
+      {
+        "line": 27,
+        "text": "| CCL-02 | 401 jatuh ke pesan koneksi; manual submit tidak membedakan401/419. | Editor menyarankan periksa koneksi walau autentikasi telah berakhir. | 401/419 menjadi state expired dan memblok retry otomatis. Teks/foto pending tetap pada form, tanpa redirect/reload otomatis. Link Masuk kembali menuju portal staf /admin di tab baru; instruksi copy dan pemulihan manual. Offline tetap error yang dapat dicoba ulang;409 tetap konflik. [Source](../../resources/js/rme-autosave.js) | 10 skenario browser aktif PASS; **FIXED & VERIFIED** |"
+      },
+      {
+        "line": 28,
+        "text": "| CCL-01 | Input memakai step1000, sedangkan request backend menerima numeric0..9999999999.99. | 123456 dan123.45 diblok native stepMismatch sebelum POST. | Min0/max9999999999.99/step any mengikuti kontrak backend yang sudah ada, termasuk pada form edit yang sama. Tidak menambah kebijakan kelipatan atau presisi mata uang baru. [Source](../../resources/views/admin/services/form.blade.php) | 3 skenario browser aktif PASS; **FIXED & VERIFIED** |"
+      },
+      {
+        "line": 29,
+        "text": "| CCL-08 | Loop paket aktif tidak mempunyai empty branch. | Seluruh paket nonaktif menghasilkan halaman kosong dengan ajakan aktivasi yang tidak sesuai. | Forelse menampilkan alasan ketersediaan, panduan menghubungi administrator dan link reload. Header menyesuaikan kondisi kosong; checkout tidak ditawarkan. Katalog normal kembali tampil ketika diaktifkan. [Source](../../resources/views/onboarding/plans/index.blade.php) | 2 skenario browser aktif PASS; **FIXED & VERIFIED** |"
+      },
+      {
+        "line": 78,
+        "text": "**Dalam lingkup delapan CCL: tidak ada yang masih OPEN.** Gap provider DOKU/Google, studi partisipan manusia, kontrol/history UI lain dan permission-revoke socket dari [Coverage Closure](REMAINING_GAPS.md) tidak diperluas dalam tugas ini. Tidak mengklaim legacy browser sungguhan telah diuji hanya berdasarkan mode proxy QA."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/fixes/RUN_SEQUENCE.md",
+    "sha256": "8c1956860db5aa31451febc39be7080f2b876884bc8d5817236c9ca369bc6b61",
+    "lines": 16,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 12,
+        "text": "8. `fixes/report.mjs` memverifikasi hasil final dan menghasilkan laporan/status. Ia menolak membuat kesimpulan hijau jika retest final DFU tidak PASS, suite backend tidak hijau, atau ada FAIL/BLOCKED aktif. Nama file backend run ini tetap dicantumkan secara eksplisit untuk traceability."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/COVERAGE_GAPS.md",
+    "sha256": "6d048de7ae12ddcb0f846a106215218934e91c30f185e7a2ab101e1c8ac594c5",
+    "lines": 110,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 1,
+        "text": "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis."
+      },
+      {
+        "line": 18,
+        "text": "| Skenario belum selesai | 5 aktif BLOCKED; 72 gap lanjutan terdaftar dengan status/alasan. | Gap tambahan tidak ditambahkan ke jumlah eksekusi browser. |"
+      },
+      {
+        "line": 26,
+        "text": "| F00 | Navigasi Back/Forward landing pada seluruh anchor | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 27,
+        "text": "| F00 | Katalog harga kosong/nonaktif seluruhnya dan pemulihan | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 28,
+        "text": "| F01 | Remember-only session dan revokasi password pada browser baru | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 29,
+        "text": "| F01 | Reset/verification link kedaluwarsa dan pemakaian ulang lewat UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 30,
+        "text": "| F02 | Email registrasi duplikat/case variant melalui UI pasien dan owner | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 31,
+        "text": "| F02 | Terms tidak disetujui serta refresh di setiap tahap registrasi | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 32,
+        "text": "| F03 | Email duplikat dan batas panjang nama pada seluruh role | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 33,
+        "text": "| F03 | Dua sesi profil aktif saat password/email berubah | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 34,
+        "text": "| F04 | Lanjut onboarding yang ditinggalkan setelah logout/login | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 35,
+        "text": "| F04 | Preferred plan dari setiap CTA landing sampai aktivasi | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 36,
+        "text": "| F05 | Timezone WITA/WIT dan perubahan jam operasional terhadap sesi existing | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 37,
+        "text": "| F05 | Logo tipe salah, ukuran lebih dari2MB, dan penggantian gagal | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 38,
+        "text": "| F06 | Admin mengganti email/password staf dengan sesi remember aktif | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 39,
+        "text": "| F06 | Batas doctor seat dari UI dan semua variasi entitlement paket | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 40,
+        "text": "| F07 | Tarif pecahan/nonkelipatan1000 dan batas nominal server | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 41,
+        "text": "| F07 | Layanan dinonaktifkan ketika tab booking lama masih terbuka | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 42,
+        "text": "| F08 | Perubahan jam sesi terpakai serta quota diturunkan di bawah reservasi | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 43,
+        "text": "| F08 | Batas quota0/501, akhir sebelum mulai, dan jam di luar operasional melalui UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 44,
+        "text": "| F09 | Tanggal lahir masa depan dan seluruh field kosong melalui submit UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 45,
+        "text": "| F09 | Pasien dengan histori sangat panjang dan setiap filter pencarian identitas | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 46,
+        "text": "| F10 | Semua CTA dokter/layanan website klinik dalam kondisi tanpa dokter/sesi | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 47,
+        "text": "| F10 | Alur pengguna pertama tanpa URL klinik dalam studi awam langsung | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 48,
+        "text": "| F11 | Tanggal tepat+30/+31 dan sesi baru saja berakhir | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 49,
+        "text": "| F11 | Dua form/tab dengan UUID berbeda untuk pasien/sesi sama | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 50,
+        "text": "| F12 | Replay cancel dari tab stale untuk seluruh status terminal | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 51,
+        "text": "| F12 | Tautan status tanpa/salah token dan cancellation error pada template resepsionis lewat browser | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 52,
+        "text": "| F13 | Aksi stale dari dua tab resepsionis dan dokter terhadap queue sama | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 53,
+        "text": "| F13 | Filter dokter/sesi dikombinasikan dengan pagination dan status terminal | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 54,
+        "text": "| F14 | Display klinik kosong dan seluruh kontrol filter/kiosk | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 55,
+        "text": "| F14 | Public display putus/pulih dari socket nyata | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 56,
+        "text": "| F15 | Ulang Mulai periksa dari tab lama sesudah visit selesai | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 57,
+        "text": "| F15 | Semua kombinasi pencarian/filter index rekam medis | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 58,
+        "text": "| F16 | HTTP419/sesi berakhir saat autosave dan pemulihan isi editor | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 59,
+        "text": "| F16 | Batas20 diagnosis/30 tindakan serta seluruh nilai vital ekstrem | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 60,
+        "text": "| F16 | Refresh/Back/leave sebelum debounce autosave selesai dan ketika foto belum disimpan | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 61,
+        "text": "| F17 | Edit severity lain dan dua editor alergi bersamaan melalui UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 62,
+        "text": "| F17 | Semua variasi acknowledgement alergi pada resep baru/koreksi | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 63,
+        "text": "| F18 | Hapus/tambah30 obat, jumlah9999/10000, serta resep kosong final | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 64,
+        "text": "| F18 | Seluruh variasi preview, instruksi panjang dan koreksi yang mengubah resep pasien | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 65,
+        "text": "| F19 | Paste clipboard, batas10 foto/5MB, tipe salah dan abort upload | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 66,
+        "text": "| F19 | Akses foto revisi oleh setiap role/tenant asing melalui browser | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 67,
+        "text": "| F20 | Dua submit finalisasi bersamaan dan tab koreksi stale melalui UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 68,
+        "text": "| F20 | Semua perbedaan array panjang pada histori koreksi di mobile | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 69,
+        "text": "| F21 | Seluruh32 gigi×6 kondisi dan correction-final dental melalui UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 70,
+        "text": "| F21 | Expiry berdasarkan ends_at; pencabutan revoked_at sudah diuji, keduanya tidak disamakan | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 71,
+        "text": "| F22 | Rekonsiliasi angka seluruh dashboard terhadap fixture setiap periode/timezone | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 72,
+        "text": "| F22 | Semua shortcut, empty/loading dan variasi data panjang per role | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 73,
+        "text": "| F23 | Pagination/empty notification center untuk setiap role | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 74,
+        "text": "| F23 | Notifikasi masuk socket dan badge realtime lintas browser | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 75,
+        "text": "| F24 | Kombinasi filter aktor/tanggal, pagination, serta tidak ada hasil | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 76,
+        "text": "| F24 | Validasi semua metadata audit yang ditampilkan di browser | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 77,
+        "text": "| F25 | Transisi expiry oleh waktu serta reminder subscription yang dipicu command | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 78,
+        "text": "| F25 | Seluruh kombinasi paket, renewal terjadwal dan seat overage pada UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 79,
+        "text": "| F26 | Successful checkout/notification/reconcile provider nyata | BLOCKED | Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna. |"
+      },
+      {
+        "line": 80,
+        "text": "| F26 | Repeat/delay callback dan browser-return nyata bersama provider | BLOCKED | Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna. |"
+      },
+      {
+        "line": 81,
+        "text": "| F27 | Prorata akhir hari/bulan dan renewal gabungan lewat UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 82,
+        "text": "| F27 | Refund yang mencabut add-on melalui flow provider; fixture revoke saja sudah diuji | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 83,
+        "text": "| F28 | Pencarian owner-email, pagination banyak tenant, dan tenant inactive | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 84,
+        "text": "| F28 | Semua metadata commercial history di setiap state tenant | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 85,
+        "text": "| F29 | Harga invalid, price toggle inactive dan addon toggle inactive lewat UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 86,
+        "text": "| F29 | Katalog diubah ketika owner masih memegang tab checkout lama | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 87,
+        "text": "| F30 | Grant lebih tinggi/setara terjadwal dan downgrade paid dengan overlap | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 88,
+        "text": "| F30 | Pemulihan grant ganda dan kebijakan revoke grant yang belum tersedia di UI | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 89,
+        "text": "| F31 | Refund ulang pada tab stale dan seluruh status yang tidak refundable | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 90,
+        "text": "| F31 | Reconcile+refund lintas role/tenant pada UI, tanpa transaksi provider nyata | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 91,
+        "text": "| F32 | Confidence medium/high dengan data historis terkontrol di browser | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 92,
+        "text": "| F32 | ETA untuk CALLED/IN_PROGRESS/terminal dan seluruh kombinasi antrian depan | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 93,
+        "text": "| F33 | Socket aktif putus/pulih, missed-event dan permission revoked pada koneksi aktif | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 94,
+        "text": "| F33 | Fokus input saat refetch/pagination dan semua offline queue actions | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 95,
+        "text": "| F34 | Google OAuth success/callback/error/relink dengan akun dummy provider | BLOCKED | Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna. |"
+      },
+      {
+        "line": 96,
+        "text": "| F35 | NIK format/normalisasi telepon berbagai negara dan lebih dari8 kandidat | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      },
+      {
+        "line": 97,
+        "text": "| F35 | Review token stale setelah kandidat berubah dan navigasi ulang ke profil inactive | NOT TESTED | Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini. |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/COVERAGE_CLOSURE_MATRIX.md",
+    "sha256": "38c5764295d96ab8d5c4269825a03d19220f87cdc8e57ecb031e25fefe70ace9",
+    "lines": 361,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 3,
+        "text": "Run13–14 November2026 Asia/Bangkok. Melanjutkan [72 gap](COVERAGE_GAPS.md) dan [matrix historis](SCENARIO_TEST_MATRIX.md), dengan [DFU FIXED & VERIFIED](FIX_REGRESSION_REPORT.md) sebagai bukti yang dipertahankan. ID G01–G72 mengikuti urutan72 baris gap lama;5 BLOCKED historis mempertahankan ID aslinya."
+      },
+      {
+        "line": 5,
+        "text": "Status parent konservatif: **PASS** memenuhi kelas ekuivalensi/kontrak yang dijelaskan pada baris; **FAIL** ada assertion perilaku yang gagal; **BLOCKED** subalur penting memerlukan provider eksternal; **NOT TESTED** bagian penting belum memiliki bukti atau jalur produk belum tersedia. Parent BLOCKED/NOT TESTED dapat mempunyai subkasus PASS; itu tidak mengubah keseluruhan parent menjadi PASS. FAIL yang juga punya subgap (G33/419) tetap menampilkan subgap tersebut."
+      },
+      {
+        "line": 7,
+        "text": "| Kelompok | PASS | FAIL | BLOCKED | NOT TESTED |"
+      },
+      {
+        "line": 10,
+        "text": "| 5 BLOCKED sebelumnya | 1 | 0 | 4 | 0 |"
+      },
+      {
+        "line": 26,
+        "text": "| G10 / F04 | Preferred plan dari setiap CTA landing sampai aktivasi | BLOCKED | Ketiga CTA Free/Individual/Team menjaga preferred plan sampai halaman paket, termasuk refresh. Free aktif melalui UI. | Aktivasi Individual/Team melalui provider belum dapat dieksekusi tanpa kredensial sandbox DOKU; initial paid fixtures bukan bukti checkout. | [CTA-PREFERRED-free](closure/evidence/scenarios.json), [CTA-PREFERRED-individual](closure/evidence/scenarios.json), [CTA-PREFERRED-team](closure/evidence/scenarios.json); [source saat ini](../../app/Http/Controllers/Onboarding/PlanController.php) |"
+      },
+      {
+        "line": 38,
+        "text": "| G22 / F10 | Alur pengguna pertama tanpa URL klinik dalam studi awam langsung | NOT TESTED | Navigasi agen telah diamati, tetapi bukan studi partisipan awam. | Tidak ada partisipan manusia untuk studi first-use tanpa pengetahuan URL/kode klinik; waktu, keberhasilan mandiri dan pemahaman tidak boleh disimulasikan oleh agen. | Tidak ada eksekusi provider/partisipan yang sah; [source saat ini](../../resources/views/public/clinic.blade.php) |"
+      },
+      {
+        "line": 42,
+        "text": "| G26 / F12 | Tautan status tanpa/salah token dan cancellation error pada template resepsionis lewat browser | PASS | Guest tanpa/salah token mendapat404; pesan pembatalan resepsionis memakai bukti FIXED & VERIFIED REG-LATE-receptionist, tidak diulang. | — | [TOKEN-missing-R2](closure/evidence/scenarios.json), [TOKEN-wrong-R2](closure/evidence/scenarios.json), [REG-LATE-receptionist](fixes/evidence/scenarios.json); [source saat ini](../../app/Services/BookingService.php) |"
+      },
+      {
+        "line": 45,
+        "text": "| G29 / F14 | Display klinik kosong dan seluruh kontrol filter/kiosk | NOT TESTED | Display klinik kosong dan kontrol yang benar-benar tersedia sudah diuji; link booking menuju login. | Tidak ditemukan kontrol kiosk/filter display khusus pada UI/source saat ini. Tidak menganggap kontrol fiktif sebagai PASS; requirement/desain kontrol perlu ditetapkan. | [DISPLAY-EMPTY-CONTROLS](closure/evidence/scenarios.json); [source saat ini](../../resources/js/realtime.js) |"
+      },
+      {
+        "line": 63,
+        "text": "| G47 / F22 | Semua shortcut, empty/loading dan variasi data panjang per role | NOT TESTED | Seluruh tujuan shortcut berbeda diklik pada5 role; nama255 diperiksa375px pada5 role; notifikasi empty5 role ada di G48. | Empty/loading dashboard lintas seluruh role belum terbukti. Platform memiliki tenant pada initial fixture dan tidak menyediakan UI hapus seluruh tenant untuk membuat state global kosong; menghapus langsung DB selama audit melanggar metode. Diperlukan initial fixture terpisah untuk dashboard global kosong dan kontrak loading (Blade tidak memiliki state loading aplikasi khusus). Shor"
+      },
+      {
+        "line": 70,
+        "text": "| G54 / F26 | Successful checkout/notification/reconcile provider nyata | BLOCKED | Guard lokal dan fixture pembayaran sah tersedia; tidak ada bukti pembayaran eksternal sukses. | Kredensial sandbox DOKU dan transaksi sandbox tervalidasi tidak tersedia; tidak memakai akun atau pembayaran pengguna. | Tidak ada eksekusi provider/partisipan yang sah; [source saat ini](../../app/Services/DokuPaymentService.php) |"
+      },
+      {
+        "line": 71,
+        "text": "| G55 / F26 | Repeat/delay callback dan browser-return nyata bersama provider | BLOCKED | Snapshot invoice dan stale UI katalog diuji pada G60/G61. | Repeat/delay callback serta browser-return dengan provider nyata memerlukan DOKU sandbox; backend fake-provider historis tidak dihitung sebagai browser provider PASS. | Tidak ada eksekusi provider/partisipan yang sah; [source saat ini](../../app/Services/DokuPaymentService.php) |"
+      },
+      {
+        "line": 72,
+        "text": "| G56 / F27 | Prorata akhir hari/bulan dan renewal gabungan lewat UI | BLOCKED | Prorata satu hari akhir bulan dan8 kombinasi plan/addon/durasi dihitung lewat UI. | Pembayaran renewal gabungan sampai aktivasi menunggu provider sandbox; pemilihan dan total UI PASS, settlement tidak diuji. | [RENEWAL-COMBINED-SELECTION](closure/evidence/scenarios.json), [ADDON-PRORATA-MONTH-END](closure/evidence/scenarios.json); [source saat ini](../../app/Services/AddonService.php) |"
+      },
+      {
+        "line": 73,
+        "text": "| G57 / F27 | Refund yang mencabut add-on melalui flow provider; fixture revoke saja sudah diuji | BLOCKED | Refund lokal manual lewat UI membatalkan entitlement dan menjaga histori pada G64. | Aplikasi merekam refund manual; tidak ditemukan flow refund eksternal dari browser. Refund oleh provider dan delivery eventnya memerlukan kontrak serta kredensial sandbox, tidak disamakan dengan revoke fixture/manual. | [REFUND-STALE](closure/evidence/scenarios.json); [source saat ini](../../app/Services/AddonService.php) |"
+      },
+      {
+        "line": 75,
+        "text": "| G59 / F28 | Semua metadata commercial history di setiap state tenant | NOT TESTED | Metadata subscription saat ini terlihat untuk Free/Individual/Team/trial/expiry. | Detail tenant hanya menampilkan subscription saat ini; tidak ada viewer seluruh periode commercial history. Schema/history backend bukan bukti UI. Perlu keputusan tampilan histori dan field yang memang boleh dibuka Platform. | [TENANT-COMMERCIAL-free](closure/evidence/scenarios.json), [TENANT-COMMERCIAL-individual](closure/evidence/scenarios.json), [TENANT-COMMERCIAL-dental](closure/evidence/scenarios.json), [TENANT-COMMERCIAL-"
+      },
+      {
+        "line": 79,
+        "text": "| G63 / F30 | Pemulihan grant ganda dan kebijakan revoke grant yang belum tersedia di UI | NOT TESTED | Pencegahan grant duplikat DFU-12 tetap FIXED & VERIFIED dan tidak dijalankan ulang. | Tidak ada UI pemulihan duplicate grant historis atau single-grant revoke. Keputusan revoke/refund/penyesuaian periode dibutuhkan; tidak menghapus atau mengubah histori melalui DB saat audit. | Tidak ada eksekusi provider/partisipan yang sah; [source saat ini](../../app/Services/SubscriptionService.php) |"
+      },
+      {
+        "line": 81,
+        "text": "| G65 / F31 | Reconcile+refund lintas role/tenant pada UI, tanpa transaksi provider nyata | BLOCKED | Foreign owner/admin/doctor/receptionist/Patient mendapat403/404 pada GET invoice asing dan tidak melihat tombol refund; tidak ada POST reconcile/refund negatif yang dilakukan lewat form yang tidak tersedia. | Reconcile yang diizinkan kepada Platform Admin memerlukan provider sandbox. Pemeriksaan akses/visibilitas negatif tidak membuktikan authorization POST atau reconcile positif; refund lokal ditutup G64. | [PAYMENT-ROLE-Foreign-Owner](closure/evidence/scenarios.json), [PAYMENT-ROLE-Clinic-Ad"
+      },
+      {
+        "line": 84,
+        "text": "| G68 / F33 | Socket aktif putus/pulih, missed-event dan permission revoked pada koneksi aktif | NOT TESTED | Socket aktif disconnected/reconnected dan missed-event dibuktikan WS-REAL-RECOVERY-R2. | UI staf mengubah akun, bukan permission role aktif secara terpisah; tidak ada editor custom permission. Revokasi permission pada koneksi socket yang sama belum dapat dibuktikan tanpa mutasi langsung permission DB atau fitur pengelolaan yang belum ada. | [WS-REAL-RECOVERY-R2](closure/evidence/scenarios.json); [source saat ini](../../resources/js/realtime.js) |"
+      },
+      {
+        "line": 86,
+        "text": "| G70 / F34 | Google OAuth success/callback/error/relink dengan akun dummy provider | BLOCKED | Konfigurasi provider audit sengaja kosong; jalur lokal auth telah diuji terpisah. | Tidak tersedia Google OAuth client sandbox/akun dummy/callback yang diotorisasi; tidak memakai akun pengguna atau menciptakan hasil callback provider. | Tidak ada eksekusi provider/partisipan yang sah; [source saat ini](../../routes/auth.php) |"
+      },
+      {
+        "line": 90,
+        "text": "## 5 BLOCKED sebelumnya"
+      },
+      {
+        "line": 94,
+        "text": "| AUTH-GOOGLE | F01 / Patient | OAuth Google end-to-end | BLOCKED | Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna. kredensial eksternal sengaja dikosongkan; tidak memakai akun pengguna. | Tidak ada eksekusi provider/partisipan yang sah |"
+      },
+      {
+        "line": 95,
+        "text": "| DOKU-SUCCESS | F26 / Clinic Owner | Checkout dan pembayaran DOKU sukses end-to-end | BLOCKED | Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna. tidak ada kredensial provider dummy untuk audit ini; tidak melakukan pembayaran nyata. | Tidak ada eksekusi provider/partisipan yang sah |"
+      },
+      {
+        "line": 96,
+        "text": "| DOKU-RECONCILE | F26 / Clinic Owner / Platform Admin | Reconciliation dari provider lewat UI | BLOCKED | Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna. provider sengaja dinonaktifkan; regression fake-provider berjalan terpisah. | Tidak ada eksekusi provider/partisipan yang sah |"
+      },
+      {
+        "line": 97,
+        "text": "| DOKU-WEBHOOK | F26 / System | Notification valid provider mengaktifkan paket | BLOCKED | Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna. tidak ada provider callback nyata pada audit fungsional browser ini; tests/backend saja. | Tidak ada eksekusi provider/partisipan yang sah |"
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/CROSS_FEATURE_REPORT.md",
+    "sha256": "0a8bb08538210180964a6e7c56baf1ad0318ff577c467583c5403f5af7bf92fc",
+    "lines": 110,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 1,
+        "text": "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis."
+      }
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/FINAL_FUNCTIONAL_UX_REPORT.md",
+    "sha256": "2ebdd34f01fc392feac2bb1b2fcf2fe686b1fe5bfb6f0e79999b7ce12a29e9fe",
+    "lines": 64,
+    "disposition": "Referensi historis; hasil per fitur tunduk pada laporan fix terbaru dan source saat audit.",
+    "status_claims": [
+      {
+        "line": 1,
+        "text": "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis."
+      },
+      {
+        "line": 11,
+        "text": "**Belum dapat dinyatakan seluruh fitur aman dipakai manusia pada seluruh kondisi.** Jalur utama terpilih berjalan, tetapi audit menemukan **12 kelompok temuan terkonfirmasi OPEN: 1 P1, 10 P2, 1 P3**. Cakupan inventaris sudah memuat seluruh kelompok fitur/role yang ditemukan; eksekusi exhaustive dan layanan eksternal tetap mempunyai gap eksplisit. Ini kesimpulan fungsional/UX, bukan penilaian kesiapan production."
+      },
+      {
+        "line": 41,
+        "text": "| Browser terbaru | 124 skenario aktif: 102 PASS, 17 FAIL, 5 BLOCKED, 0 NOT TESTED |"
+      }
+    ]
+  }
+]

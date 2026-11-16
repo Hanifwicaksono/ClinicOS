@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn, execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -14,11 +14,15 @@ test('clinical and booking workflows in Chrome with an isolated demo database', 
     const root = resolve(import.meta.dirname, '..');
     const baseUrl = 'http://127.0.0.1:18947';
     const env = { ...process.env, APP_ENV: 'local', APP_DEBUG: 'false', APP_URL: baseUrl,
+        LARAVEL_STORAGE_PATH: join(directory, 'storage'),
         APP_CONFIG_CACHE: join(directory, 'config.php'), APP_ROUTES_CACHE: join(directory, 'routes.php'),
         DB_CONNECTION: 'sqlite', DB_DATABASE: database, DB_URL: '', QUEUE_CONNECTION: 'sync',
         BROADCAST_CONNECTION: 'null', CACHE_STORE: 'array', SESSION_DRIVER: 'database',
         SESSION_DOMAIN: 'null', SESSION_SECURE_COOKIE: 'false', MAIL_MAILER: 'array' };
     const php = ['-d', 'extension=pdo_sqlite', '-d', 'extension=sqlite3', '-d', 'extension=gd'];
+    for (const path of ['framework/views', 'framework/cache', 'framework/sessions', 'logs', 'app/private', 'app/public']) {
+        mkdirSync(join(env.LARAVEL_STORAGE_PATH, path), { recursive: true });
+    }
     for (const command of [['migrate', '--force'], ['db:seed', '--class=DemoSeeder', '--force']]) {
         execFileSync('php', [...php, 'artisan', ...command, '--no-interaction'], { cwd: root, env, stdio: 'pipe' });
     }

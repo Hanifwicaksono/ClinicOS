@@ -1,0 +1,19 @@
+(node:55816) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Scenario IDs must be unique: after-PG18-validation
+    at check (file:///C:/laragon/www/ClinicOS/qa-audit/deep-functional-ux/scripts/common.mjs:52:12)
+    at run (file:///C:/laragon/www/ClinicOS/qa-audit/product-completeness/f1-implementation/browser.mjs:7:116)
+    at file:///C:/laragon/www/ClinicOS/qa-audit/product-completeness/f1-implementation/browser.mjs:23:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.14.1

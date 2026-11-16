@@ -1,0 +1,3453 @@
+[
+  {
+    "table": "addon_periods",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "subscription_period_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "payment_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "code",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "amount",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "starts_at",
+        "type": "datetime",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "ends_at",
+        "type": "datetime",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "revoked_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "payments",
+        "from": "payment_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "subscription_periods",
+        "from": "subscription_period_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "addon_prices",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "code",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "monthly_amount",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "is_active",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "appointments",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "patient_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "doctor_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "service_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "doctor_schedule_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_by_user_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "appointment_date",
+        "type": "date",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "booking_code",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "access_token_hash",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "idempotency_key",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "status",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "source",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "service_name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "service_price",
+        "type": "numeric",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "notes",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "cancelled_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "cancel_reason",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "users",
+        "from": "created_by_user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "doctor_schedules",
+        "from": "doctor_schedule_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "services",
+        "from": "service_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 3,
+        "seq": 0,
+        "table": "doctors",
+        "from": "doctor_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 4,
+        "seq": 0,
+        "table": "patients",
+        "from": "patient_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 5,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "audit_logs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "user_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "actor_name",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "action",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "entity_type",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "entity_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "ip_address",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "metadata",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 1,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "users",
+        "from": "user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "cache",
+    "columns": [
+      {
+        "name": "key",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "value",
+        "type": "TEXT",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "expiration",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "cache_locks",
+    "columns": [
+      {
+        "name": "key",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "owner",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "expiration",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "clinic_settings",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "opening_time",
+        "type": "time",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "closing_time",
+        "type": "time",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "timezone",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "queue_prefix",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "clinics",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "slug",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "address",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "phone",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "email",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "description",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "logo_path",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "is_active",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "owner_user_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "users",
+        "from": "owner_user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "diagnoses",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "medical_record_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "code",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "notes",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "is_primary",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "sort_order",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "medical_records",
+        "from": "medical_record_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "doctor_schedules",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "doctor_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "day_of_week",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "start_time",
+        "type": "time",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "end_time",
+        "type": "time",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "quota",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "is_active",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "doctors",
+        "from": "doctor_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "doctor_service",
+    "columns": [
+      {
+        "name": "doctor_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "service_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 2
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "services",
+        "from": "service_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "doctors",
+        "from": "doctor_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "doctors",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "user_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "specialization",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "license_number",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "bio",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "is_active",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "users",
+        "from": "user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "failed_jobs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "uuid",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "connection",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "queue",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "payload",
+        "type": "TEXT",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "exception",
+        "type": "TEXT",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "failed_at",
+        "type": "datetime",
+        "notnull": 1,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "job_batches",
+    "columns": [
+      {
+        "name": "id",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "total_jobs",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "pending_jobs",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "failed_jobs",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "failed_job_ids",
+        "type": "TEXT",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "options",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "cancelled_at",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "finished_at",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "jobs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "queue",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "payload",
+        "type": "TEXT",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "attempts",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "reserved_at",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "available_at",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "medical_record_revisions",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "medical_record_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "corrected_by_user_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "reason",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "before_data",
+        "type": "TEXT",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "after_data",
+        "type": "TEXT",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 1,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "users",
+        "from": "corrected_by_user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "medical_records",
+        "from": "medical_record_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "medical_records",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "visit_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "patient_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "doctor_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_by_user_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "status",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "chief_complaint",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "subjective",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "objective",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "assessment",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "plan",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "physical_examination",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "doctor_notes",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "finalized_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "photos",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "odontogram",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "allergy_acknowledged_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "allergy_acknowledged_by_user_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "lock_version",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "users",
+        "from": "allergy_acknowledged_by_user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "visits",
+        "from": "visit_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "patients",
+        "from": "patient_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 3,
+        "seq": 0,
+        "table": "doctors",
+        "from": "doctor_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 4,
+        "seq": 0,
+        "table": "users",
+        "from": "created_by_user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "migrations",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "migration",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "batch",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "model_has_permissions",
+    "columns": [
+      {
+        "name": "permission_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "model_type",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 3
+      },
+      {
+        "name": "model_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 2
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "permissions",
+        "from": "permission_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "model_has_roles",
+    "columns": [
+      {
+        "name": "role_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "model_type",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 3
+      },
+      {
+        "name": "model_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 2
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "roles",
+        "from": "role_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "notifications",
+    "columns": [
+      {
+        "name": "id",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "type",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "notifiable_type",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "notifiable_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "data",
+        "type": "TEXT",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "read_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "password_reset_tokens",
+    "columns": [
+      {
+        "name": "email",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "token",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "patient_allergies",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "patient_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "substance",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "reaction",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "severity",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "is_active",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "recorded_by_user_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "users",
+        "from": "recorded_by_user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "patients",
+        "from": "patient_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "patients",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "user_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "medical_record_number",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "nik",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "birth_date",
+        "type": "date",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "gender",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "phone",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "email",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "address",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "is_active",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "users",
+        "from": "user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "payment_events",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "payment_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "provider_request_id",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "source",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "invoice_number",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "provider_status",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "payload_hash",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "result",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "received_at",
+        "type": "datetime",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "processed_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "payments",
+        "from": "payment_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "payment_items",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "payment_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "kind",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "code",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "amount",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "duration_months",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "monthly_amount",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "subscription_price_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "addon_price_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "target_subscription_period_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "starts_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "ends_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "subscription_periods",
+        "from": "target_subscription_period_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "addon_prices",
+        "from": "addon_price_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "subscription_prices",
+        "from": "subscription_price_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 3,
+        "seq": 0,
+        "table": "payments",
+        "from": "payment_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "payments",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "subscription_price_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "invoice_number",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "request_id",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "provider",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "plan_code",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "plan_name",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "duration_months",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "amount",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "status",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "payment_url",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "expires_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "paid_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "provider_reference",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "subscription_prices",
+        "from": "subscription_price_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "permissions",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "guard_name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "prescription_items",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "prescription_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "medicine_name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "dosage",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "frequency",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "quantity",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "unit",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "instructions",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "sort_order",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "prescriptions",
+        "from": "prescription_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "prescriptions",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "medical_record_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "notes",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "medical_records",
+        "from": "medical_record_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "queues",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "appointment_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "doctor_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "doctor_schedule_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "queue_date",
+        "type": "date",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "queue_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "display_number",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "status",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "checked_in_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "called_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "completed_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "skipped_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "no_show_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "cancelled_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "doctor_schedules",
+        "from": "doctor_schedule_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "doctors",
+        "from": "doctor_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "appointments",
+        "from": "appointment_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      },
+      {
+        "id": 3,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "role_has_permissions",
+    "columns": [
+      {
+        "name": "permission_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "role_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 2
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "roles",
+        "from": "role_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "permissions",
+        "from": "permission_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "roles",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "guard_name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "services",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "description",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "price",
+        "type": "numeric",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "duration_minutes",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "is_active",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "sessions",
+    "columns": [
+      {
+        "name": "id",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "user_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "ip_address",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "user_agent",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "payload",
+        "type": "TEXT",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "last_activity",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "subscription_periods",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "subscription_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "subscription_plan_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "payment_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "granted_by_user_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "plan_code",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "plan_name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "duration_months",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "amount",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "source",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "starts_at",
+        "type": "datetime",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "ends_at",
+        "type": "datetime",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "reason",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "revoked_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "grant_request_id",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "users",
+        "from": "granted_by_user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "payments",
+        "from": "payment_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "subscription_plans",
+        "from": "subscription_plan_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 3,
+        "seq": 0,
+        "table": "subscriptions",
+        "from": "subscription_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      },
+      {
+        "id": 4,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "subscription_plans",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "code",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "doctor_limit",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "staff_limit",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "monthly_visit_limit",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "features",
+        "type": "TEXT",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "is_active",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": []
+  },
+  {
+    "table": "subscription_prices",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "subscription_plan_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "duration_months",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "amount",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "is_active",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "subscription_plans",
+        "from": "subscription_plan_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "subscription_reminders",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "subscription_period_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "owner_user_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "milestone_days",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "due_on",
+        "type": "date",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "notification_id",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "database_notified_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "mailed_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "sent_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "failed_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "error_type",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "users",
+        "from": "owner_user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "subscription_periods",
+        "from": "subscription_period_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "subscriptions",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "subscription_plan_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "status",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "source",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "starts_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "ends_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "trial_used_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "subscription_plans",
+        "from": "subscription_plan_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "treatments",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "medical_record_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "description",
+        "type": "TEXT",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "sort_order",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "quantity",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "medical_records",
+        "from": "medical_record_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "users",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "email",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "phone",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "is_active",
+        "type": "tinyint(1)",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "email_verified_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "password",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "remember_token",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "account_type",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "google_id",
+        "type": "varchar",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "terms_accepted_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "visits",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "clinic_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "appointment_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "patient_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "doctor_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "service_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "started_by_user_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "completed_by_user_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "status",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "service_name",
+        "type": "varchar",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "service_price",
+        "type": "numeric",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "total_amount",
+        "type": "numeric",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "started_at",
+        "type": "datetime",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "completed_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "users",
+        "from": "completed_by_user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "users",
+        "from": "started_by_user_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "services",
+        "from": "service_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 3,
+        "seq": 0,
+        "table": "doctors",
+        "from": "doctor_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 4,
+        "seq": 0,
+        "table": "patients",
+        "from": "patient_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 5,
+        "seq": 0,
+        "table": "appointments",
+        "from": "appointment_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 6,
+        "seq": 0,
+        "table": "clinics",
+        "from": "clinic_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  },
+  {
+    "table": "vital_signs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 1
+      },
+      {
+        "name": "medical_record_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "primary_key": 0
+      },
+      {
+        "name": "weight_kg",
+        "type": "numeric",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "height_cm",
+        "type": "numeric",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "systolic",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "diastolic",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "pulse",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "respiratory_rate",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "temperature_c",
+        "type": "numeric",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "oxygen_saturation",
+        "type": "INTEGER",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "notnull": 0,
+        "primary_key": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "medical_records",
+        "from": "medical_record_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ]
+  }
+]

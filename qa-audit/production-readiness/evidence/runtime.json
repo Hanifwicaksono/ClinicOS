@@ -1,0 +1,15 @@
+{
+  "root": "C:\\Users\\User\\AppData\\Local\\Temp\\clinicos-readiness-0_thp4gu",
+  "mysql_base": "C:/laragon/bin/mysql/mysql-8.0.30-winx64",
+  "mysql_port": 13316,
+  "database": "clinicos_pr_0thp4gu",
+  "app_port": 13110,
+  "backend_ports": [
+    13111,
+    13112,
+    13113,
+    13114
+  ],
+  "reverb_port": 13411,
+  "smtp_port": 13225
+}

@@ -136,6 +136,7 @@ class SubscriptionEnforcementTest extends TestCase
     public function test_existing_booking_can_start_after_free_quota_closes_new_booking(): void
     {
         [$clinic] = $this->ownedClinic();
+        $clinic->settings()->update(['opening_time' => '00:00', 'closing_time' => '23:59']);
         app(SubscriptionService::class)->activateFree($clinic);
         $doctorUser = User::factory()->forClinic($clinic)->create();
         $doctorUser->assignRole('Doctor');
@@ -257,11 +258,12 @@ class SubscriptionEnforcementTest extends TestCase
         $this->actingAs($doctorUser)->get(route('doctor.visits.show', $visit))->assertOk();
         $this->actingAs($doctorUser)
             ->put(route('doctor.visits.save', $visit), [
+                ...$this->recordVersions($visit),
                 'subjective' => 'Keluhan masih sama.',
                 'assessment' => 'Observasi.',
                 'plan' => 'Lanjutkan pemeriksaan.',
             ])
-            ->assertRedirect();
+            ->assertRedirect()->assertSessionHasNoErrors();
     }
 
     public function test_banner_hides_pending_payment_details_from_non_owner_staff(): void

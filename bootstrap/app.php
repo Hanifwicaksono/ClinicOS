@@ -4,11 +4,13 @@ use App\Http\Middleware\CheckUserIsActive;
 use App\Http\Middleware\EnsureClinicOwner;
 use App\Http\Middleware\EnsureOnboardingComplete;
 use App\Http\Middleware\EnsureSubscriptionWritable;
+use App\Http\Middleware\RefreshRealtimeSession;
 use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Session\Middleware\AuthenticateSession;
 use Spatie\Permission\Middleware\PermissionMiddleware;
 use Spatie\Permission\Middleware\RoleMiddleware;
 use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
@@ -30,6 +32,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->web(append: [
             CheckUserIsActive::class,
+            AuthenticateSession::class,
+            RefreshRealtimeSession::class,
             SecurityHeaders::class,
         ]);
 

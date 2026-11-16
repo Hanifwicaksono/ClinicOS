@@ -1,0 +1,32 @@
+✖ all role menus, logout, responsive dashboards and mobile keyboard navigation (33128.9953ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 33306.8302
+
+✖ failing tests:
+
+test at qa-audit\tests\browser-audit.test.mjs:9:1
+✖ all role menus, logout, responsive dashboards and mobile keyboard navigation (33128.9953ms)
+  AssertionError [ERR_ASSERTION]: The supported browser workflows must remain usable
+  + actual - expected
+  
+  + [
+  +   'Escape does not close mobile navigation'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///C:/laragon/www/ClinicOS/qa-audit/tests/browser-audit.test.mjs:174:16)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'Escape does not close mobile navigation' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

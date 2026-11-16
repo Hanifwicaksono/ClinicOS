@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\DeepFunctionalRegressionTest" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" tests="9" assertions="66" errors="0" failures="0" skipped="0" time="1.509290">
+    <testsuite name="Tests\Feature\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized" tests="4" assertions="32" errors="0" failures="0" skipped="0" time="1.019547">
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;patient&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.682329"/>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;receptionist&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.116080"/>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;admin&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.107593"/>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;token&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.113546"/>
+    </testsuite>
+    <testsuite name="Tests\Feature\DeepFunctionalRegressionTest::test_used_session_keeps_its_day_and_times" tests="3" assertions="18" errors="0" failures="0" skipped="0" time="0.294208">
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;day&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="81" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="6" time="0.098471"/>
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;start&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="81" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="6" time="0.104348"/>
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;end&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="81" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="6" time="0.091389"/>
+    </testsuite>
+    <testcase name="test_replayed_grant_creates_one_period_and_one_audit_event" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="98" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="12" time="0.112001"/>
+    <testcase name="test_http_grant_requires_a_request_identifier" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="117" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="4" time="0.083534"/>
+  </testsuite>
+</testsuites>

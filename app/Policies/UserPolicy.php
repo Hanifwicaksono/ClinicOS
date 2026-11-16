@@ -27,9 +27,14 @@ class UserPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, mixed $role = null): bool
     {
-        return $user->clinic_id !== null && $user->canAny(['doctor.create', 'receptionist.create']);
+        return $user->clinic_id !== null && match ($role) {
+            'Doctor' => $user->can('doctor.create'),
+            'Receptionist' => $user->can('receptionist.create'),
+            null => $user->canAny(['doctor.create', 'receptionist.create']),
+            default => false,
+        };
     }
 
     /**

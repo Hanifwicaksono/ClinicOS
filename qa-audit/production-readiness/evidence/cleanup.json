@@ -1,0 +1,45 @@
+{
+  "owned_processes": [
+    {
+      "service": "worker",
+      "pid": 235448,
+      "stopped": true
+    },
+    {
+      "service": "reverb",
+      "pid": 213340,
+      "stopped": true
+    },
+    {
+      "service": "infra",
+      "pid": 200464,
+      "stopped": true
+    },
+    {
+      "service": "http0",
+      "pid": 173092,
+      "stopped": true
+    },
+    {
+      "service": "http1",
+      "pid": 81820,
+      "stopped": true
+    },
+    {
+      "service": "http2",
+      "pid": 233004,
+      "stopped": true
+    },
+    {
+      "service": "http3",
+      "pid": 235352,
+      "stopped": true
+    }
+  ],
+  "mysql_stopped": true,
+  "application_port_closed": true,
+  "smtp_port_closed": true,
+  "reverb_port_closed": true,
+  "temporary_data_retained": true,
+  "user_mysql_service_touched": false
+}

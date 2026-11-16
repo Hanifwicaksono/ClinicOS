@@ -58,8 +58,8 @@
             <form method="GET" class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div><p class="text-sm font-bold text-clinic-950">Periode operasional</p><p class="mt-1 text-xs text-slate-500">Menggunakan zona waktu {{ $timezone }}.</p></div>
                 <div class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
-                    <div><label class="clinic-label" for="from">Dari</label><input id="from" class="clinic-input" name="from" type="date" value="{{ $from }}"></div>
-                    <div><label class="clinic-label" for="to">Sampai</label><input id="to" class="clinic-input" name="to" type="date" value="{{ $to }}"></div>
+                    <div><label class="clinic-label" for="from">Dari</label><input id="from" class="clinic-input" name="from" type="date" value="{{ old('from', $from) }}"></div>
+                    <div><label class="clinic-label" for="to">Sampai</label><input id="to" class="clinic-input" name="to" type="date" value="{{ old('to', $to) }}"></div>
                     <x-clinic-button variant="secondary" class="w-full self-end sm:w-auto">Terapkan</x-clinic-button>
                 </div>
             </form>

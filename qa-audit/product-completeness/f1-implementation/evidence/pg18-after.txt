@@ -1,0 +1,8 @@
+PHPUnit 12.5.37 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.5
+Configuration: C:\laragon\www\ClinicOS\phpunit.xml
+
+Time: 00:01.207, Memory: 66.00 MB
+
+[30;42mOK (1 test, 3 assertions)[0m

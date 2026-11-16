@@ -1,0 +1,11 @@
+{
+  "phase": "9-dental-entitlement-and-cancel-impact",
+  "at": "2026-11-13T07:46:01.146Z",
+  "counts": {
+    "PASS": 84,
+    "FAIL": 40,
+    "BLOCKED": 9,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

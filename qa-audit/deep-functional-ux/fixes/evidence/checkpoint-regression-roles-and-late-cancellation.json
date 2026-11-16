@@ -1,0 +1,11 @@
+{
+  "phase": "regression-roles-and-late-cancellation",
+  "at": "2026-11-13T09:14:40.571Z",
+  "counts": {
+    "PASS": 51,
+    "FAIL": 15,
+    "BLOCKED": 1,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

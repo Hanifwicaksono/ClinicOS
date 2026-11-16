@@ -1,0 +1,11 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {join,relative} from 'node:path';
+import {spawnSync} from 'node:child_process';
+const e=join(import.meta.dirname,'../evidence'),r=JSON.parse(readFileSync(join(e,'runtime.json'))),env=JSON.parse(readFileSync(r.root+'/mysql-env.json'));
+env.APP_URL='http://localhost';
+for(const [key,value] of Object.entries(env))if(/^APP_.*_CACHE$/.test(key)&&typeof value==='string'&&value.startsWith(r.root))env[key]=relative(r.repo,value);
+if(!env.DB_DATABASE.startsWith('clinicos_s2_')||env.DB_PORT!=='13318')throw new Error('MySQL isolation guard');
+const full=process.argv.includes('--full'),label=process.env.S2_MYSQL_RUN||(full?'mysql-full':'mysql-realtime');
+const args=full?['tests','qa-audit/tests']:['tests/Feature/RealtimeRevocationTest.php'];
+const result=spawnSync('php',['-d','extension=gd','vendor/bin/phpunit',...args,'--no-progress','--do-not-cache-result','--log-junit',join(e,label+'.xml')],{cwd:r.repo,env,encoding:'utf8'});
+writeFileSync(join(e,label+'.txt'),result.stdout+result.stderr);console.log(JSON.stringify({label,exit:result.status,output:result.stdout.slice(-2600)}));

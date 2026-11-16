@@ -1,0 +1,890 @@
+[
+  {
+    "file": "qa-audit/UX_AUDIT.md",
+    "sha256": "70392391d527ee5aa45b86da4d3b5bc3cdfbc6f12f81061a1b875ac655a98426",
+    "lines": 57,
+    "headings": [
+      "# UX dan accessibility audit\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "## Pengalaman pengguna setelah perbaikan P1\r",
+      "## Baseline audit sebelum perbaikan\r",
+      "## Perbaikan UX yang paling mendesak\r",
+      "## Cakupan per halaman\r"
+    ],
+    "opening": [
+      "# UX dan accessibility audit\r",
+      "> **Status terbaru setelah P2, 11 November 2026:** QA-09 dan QA-10 FIXED: drawer/fokus/inert/Tab/Escape pada lima role melalui DOM Chrome, tujuh label form pada dua role pendaftaran. Pesan self-delete/verification menjelaskan langkah berikut tanpa error FK atau klaim delivery palsu. Native keyboard dan screen reader NOT TESTED. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md).\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "Bagian di bawah mempertahankan checkpoint P1 dan baseline audit; status/angka historis tidak menggantikan hasil terbaru di atas.\r",
+      "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka.\r"
+    ]
+  },
+  {
+    "file": "qa-audit/SYSTEM_INVENTORY.md",
+    "sha256": "91fca573bf71f50649ca9eaca4833a85620ddd0841f5c50fec279186978785a9",
+    "lines": 399,
+    "headings": [
+      "# System inventory ClinicOS\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "## Baseline audit sebelum perbaikan\r",
+      "## Sumber dan baseline\r",
+      "## Katalog fitur, dependensi, dan alur\r",
+      "## Perbandingan backend, UI, database\r",
+      "## Model dan proses lintas fitur\r",
+      "## Lampiran inventaris terhitung\r",
+      "### Registry route lengkap\r",
+      "### Seluruh view (88 file)\r",
+      "### Model dan relasi (29 Eloquent model)\r",
+      "### Schema/migration (40 file)\r"
+    ],
+    "opening": [
+      "# System inventory ClinicOS\r",
+      "> **Status terbaru setelah P2, 11 November 2026:** Tidak ada model, migration atau route baru. Middleware AuthenticateSession ditambahkan; gate add-on diperketat dan lima dependency Symfony berubah pada patch 7.4. Arsitektur Laravel/Blade/Volt tetap. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md).\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "Bagian di bawah mempertahankan checkpoint P1 dan baseline audit; status/angka historis tidak menggantikan hasil terbaru di atas.\r",
+      "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka.\r"
+    ]
+  },
+  {
+    "file": "qa-audit/STAFF_LIFECYCLE_REPORT.md",
+    "sha256": "6b88b90314e6411b528287b3d13163e2d9095080657890d69176b1b51eabf635",
+    "lines": 38,
+    "headings": [
+      "# Pemeriksaan ulang siklus staf - setelah P2\r",
+      "## Akar masalah dan kebijakan saat ini\r",
+      "## Batas pengujian\r"
+    ],
+    "opening": [
+      "# Pemeriksaan ulang siklus staf - setelah P2\r",
+      "11 November 2026. Current source dan bukti terakhir: [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md), [PHP](evidence/p2-retest/php-all.txt), [Chrome](evidence/p2-retest/p1-browser-steps.json). Hasil P1 sebelumnya dipakai sebagai baseline, bukan dianggap status terbaru.\r",
+      "| Tahap | Doctor | Receptionist | Bukti dan batas |\r",
+      "| --- | --- | --- | --- |\r",
+      "| Create tenant/role/password | PASS | PASS | UI dan HTTP; klinik dari actor, hash password, profil Doctor/pivot layanan. |\r"
+    ]
+  },
+  {
+    "file": "qa-audit/SECURITY_AUDIT.md",
+    "sha256": "c9a02c94625d7dd0cd73198a5474bea5b8efe8c84c6c99c48d70eb4ef8845fc8",
+    "lines": 76,
+    "headings": [
+      "# Security dan data isolation audit\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "## Hasil keamanan pengujian ulang\r",
+      "## Baseline audit sebelum perbaikan\r",
+      "## Kontrol yang diuji\r",
+      "## Advisory terverifikasi (QA-11)\r",
+      "## Yang belum dibuktikan\r"
+    ],
+    "opening": [
+      "# Security dan data isolation audit\r",
+      "> **Status terbaru setelah P2, 11 November 2026:** QA-13/QA-14 FIXED, sesi/remember lama ditolak setelah reset, email baru wajib verifikasi dan tautan lama ditolak. Composer/npm audit 0 setelah lima patch 7.4; seluruh PHP/Node/Chrome dan HEAD boundary PASS. Provider nyata, concurrency, socket aktif dan pentest menyeluruh belum dibuktikan. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md).\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "Bagian di bawah mempertahankan checkpoint P1 dan baseline audit; status/angka historis tidak menggantikan hasil terbaru di atas.\r",
+      "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka.\r"
+    ]
+  },
+  {
+    "file": "qa-audit/ROLE_PERMISSION_MATRIX.md",
+    "sha256": "b23f4ebb20177e067bb720bf9cf1a0511e0f97d5aea91b26a28a27e165a29e46",
+    "lines": 108,
+    "headings": [
+      "# Role × feature × action\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "## Baseline audit sebelum perbaikan\r",
+      "## Aksi dan batas resource\r",
+      "## Bukti enforcement\r",
+      "## Permission tanpa aksi UI khusus\r",
+      "## Grant aktual per permission\r"
+    ],
+    "opening": [
+      "# Role × feature × action\r",
+      "> **Status terbaru setelah P2, 11 November 2026:** Tidak menambah nama role/permission. Create staf sekarang memeriksa permission sesuai role target; self-delete melihat referensi aktual; perubahan sesi berlaku pada web guard semua role. Matrix policy dan HEAD boundary lima role PASS. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md).\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "Bagian di bawah mempertahankan checkpoint P1 dan baseline audit; status/angka historis tidak menggantikan hasil terbaru di atas.\r",
+      "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka.\r"
+    ]
+  },
+  {
+    "file": "qa-audit/EXPLORATORY_TEST_REPORT.md",
+    "sha256": "2ecc5ed36472be09301fb39e9d837d4ab3af6ab338604cb3a0fa6d548e61b8d2",
+    "lines": 45,
+    "headings": [
+      "# Exploratory test report\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "## Baseline audit sebelum perbaikan\r",
+      "## Persona dan charter\r",
+      "## Temuan dan counterexample\r",
+      "## Batas eksperimen\r"
+    ],
+    "opening": [
+      "# Exploratory test report\r",
+      "> **Status terbaru setelah P2, 11 November 2026:** Penelusuran jalur gagal email menemukan QA-15 / P2; direproduksi 500 setelah commit dan diperbaiki dengan regression. Probe keyboard tanpa event dan run bersamaan dengan build dipisahkan sebagai masalah harness, bukan bug aplikasi tambahan. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md).\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "Bagian di bawah mempertahankan checkpoint P1 dan baseline audit; status/angka historis tidak menggantikan hasil terbaru di atas.\r",
+      "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka.\r"
+    ]
+  },
+  {
+    "file": "qa-audit/BUG_REPORT.md",
+    "sha256": "3561b1bc261da528a521d450066bc1ef7a683874a594ec7082ce1a80931e4c45",
+    "lines": 194,
+    "headings": [
+      "# Bug report ClinicOS\r",
+      "## QA-01 — Pasien tidak dapat memilih dokter pada booking publik\r",
+      "## QA-02 — Koreksi menghapus file foto yang masih dirujuk histori final\r",
+      "## QA-03 — Hapus akun owner meninggalkan klinik tanpa pemilik\r",
+      "## QA-04 — Mengganti dokter jadwal terpakai merusak konsistensi relasi\r",
+      "## QA-05 — Pemeriksaan versi koreksi dapat dilewati dengan menghilangkan field\r",
+      "## QA-06 — Array klinis nullable menghasilkan HTTP 500\r",
+      "## QA-07 — Add-on crash untuk owner yang belum mempunyai klinik\r",
+      "## QA-08 — Rollback draft meninggalkan upload tanpa referensi\r",
+      "## QA-09 — Escape tidak menutup navigasi mobile\r",
+      "## QA-10 — Tujuh field pasien baru tidak mempunyai label programatis\r",
+      "## QA-11 — Lima paket terpasang masuk rentang advisory keamanan\r",
+      "## QA-12 — README memberi prasyarat dan gambaran fitur yang keliru\r",
+      "## QA-13 - Permission create staf tidak mengikuti role target\r",
+      "## QA-14 - Self-delete dokter yang mempunyai booking menghasilkan error server\r",
+      "## QA-15 - Kegagalan verifikasi saat create staf menghasilkan 500 setelah akun commit\r",
+      "## Retest akhir\r"
+    ],
+    "opening": [
+      "# Bug report ClinicOS\r",
+      "**Audit terbaru setelah P2 — production readiness:** **NO-GO untuk produksi multi-user**. QA-01–QA-15 tetap FIXED pada cakupan semula. Ada tiga temuan baru OPEN: PR-01 (P2, revokasi socket aktif), PR-02 (P3, assertion JSON MySQL), dan PR-03 (P3, factory melampaui panjang kolom). [Reproduksi/akar masalah](production-readiness/NEW_FINDINGS.md), [scorecard dan bukti run](production-readiness/PRODUCTION_READINESS_SCORECARD.md). Angka 0 OPEN pada paragraf P2 di bawah adalah status historis sebelum audit operasional ini.\r",
+      "**Status setelah perbaikan P2, 11 November 2026:** QA-01 sampai QA-15 FIXED pada skenario yang diuji; 0 temuan terkonfirmasi OPEN. QA-15 adalah temuan baru kegagalan notifikasi setelah akun staf commit. Kebijakan revokasi sesi dan verifikasi ulang email juga selesai. Bukti terbaru: [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Expected/actual audit awal di bawah adalah histori, bukan status source terbaru.\r",
+      "Audit awal 11 November 2026, Asia/Bangkok. Baseline `b82237d932478df9ed02240cb698acff9b4ec669`, working tree awal bersih. Source produksi tidak diubah. Semua reproduksi memakai fixture sintetis dan SQLite terisolasi.\r",
+      "Severity: P1 = menghalangi alur utama atau merusak integritas/histori; P2 = kegagalan skenario tertentu, aksesibilitas, atau risiko dependency yang perlu ditangani; P3 = informasi pengembangan keliru. Tidak ada P0 yang terbukti. Satu bug dapat menghasilkan beberapa assertion gagal.\r"
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/ENVIRONMENT_REPORT.md",
+    "sha256": "db56dca1cc79669ee6bd52a8eb70d247b8f2613d6df646553e7805250e0453eb",
+    "lines": 61,
+    "headings": [
+      "# Environment report",
+      "## Lingkungan yang benar-benar dijalankan",
+      "## Migration, foreign key, transaction, index",
+      "## Koreksi isolasi yang ditemukan selama audit",
+      "## Deployment dan dependency",
+      "## Reproduksi"
+    ],
+    "opening": [
+      "# Environment report",
+      "Run: 11 November 2026, Windows lokal. Status lingkungan audit: **PASS setelah koreksi isolasi storage**. Kesetaraan dengan deployment produksi: **BLOCKED**.",
+      "## Lingkungan yang benar-benar dijalankan",
+      "| Komponen | Aktual | Bukti / batas |",
+      "| --- | --- | --- |"
+    ]
+  },
+  {
+    "file": "qa-audit/E2E_WORKFLOW_REPORT.md",
+    "sha256": "ad5e475060dff11ef177a2de9618c71925484beadc32233735567b5ef942ca76",
+    "lines": 66,
+    "headings": [
+      "# E2E workflow report\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "## Pengujian ulang yang dijalankan\r",
+      "## Baseline audit sebelum perbaikan\r",
+      "## Integritas yang terbukti dan batasnya\r"
+    ],
+    "opening": [
+      "# E2E workflow report\r",
+      "> **Status terbaru setelah P2, 11 November 2026:** Chrome: P1, create/verifikasi/password/email/staff lifecycle, role/permission, deaktivasi/reaktivasi, self-delete, menu lima role, responsive dan keyboard DOM PASS. Native keyboard/provider nyata tidak diklaim diuji. Bukti langkah ada pada evidence/p2-retest/. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md).\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "Bagian di bawah mempertahankan checkpoint P1 dan baseline audit; status/angka historis tidak menggantikan hasil terbaru di atas.\r",
+      "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka.\r"
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/MYSQL_CONCURRENCY_REPORT.md",
+    "sha256": "4d37ff2a8efdee86b430c6674170dcd8f20fada4ab4e8e9ddf8030596eb78448",
+    "lines": 44,
+    "headings": [
+      "# MySQL concurrency report",
+      "## Metode dan bukti concurrency",
+      "## Integritas dan batas"
+    ],
+    "opening": [
+      "# MySQL concurrency report",
+      "Status skenario yang dijalankan: **PASS, 9/9**. Aktivasi subscription dari callback provider saat operasional: **BLOCKED**.",
+      "## Metode dan bukti concurrency",
+      "Setiap kasus membuat fixture klinik tersendiri. Dua proses PHP melakukan bootstrap aplikasi dan membuka koneksi MySQL independen, menulis PID serta `CONNECTION_ID()`, menunggu barrier, lalu dilepas bersama. Semua sembilan pasangan mempunyai waktu eksekusi yang overlap dan connection ID berbeda. Bukan request berurutan dan bukan SQLite.",
+      "Pada perebutan slot terakhir dan replay identik, observer ketiga membaca `performance_schema.data_lock_waits`; penantian lock InnoDB terbukti. Hold lock 400 ms sengaja ditambahkan oleh harness pada query lock pertama untuk membuat observasi deterministik. Angka ini tidak dimasukkan ke pengukuran performa."
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/HUMAN_UAT_REPORT.md",
+    "sha256": "625c3af23f23f5e9a0678210cf6880eb84d580f96fdf1844fe177b707558ba8f",
+    "lines": 55,
+    "headings": [
+      "# Human acceptance and clinic-day simulation",
+      "## Skenario normal melalui Playwright",
+      "## Skenario pendamping",
+      "## Yang belum diterima"
+    ],
+    "opening": [
+      "# Human acceptance and clinic-day simulation",
+      "Alur hari klinik terkompresi melalui UI: **PASS**. Gate penerimaan menyeluruh: **FAIL karena PR-01**. Acceptance oleh manusia klinisi dan shift delapan jam nyata: **NOT TESTED**.",
+      "## Skenario normal melalui Playwright",
+      "Satu klinik sintetis baru dengan seluruh role tersimpan: Clinic Admin, Receptionist, Doctor, Patient dan Platform Admin, ditambah owner persona pada role Clinic Admin. Enam konteks browser berjalan bersamaan. Tidak mengubah database lewat SQL untuk memperbaiki atau melompati langkah workflow.",
+      "| Tahap | Aksi UI yang benar-benar dilakukan | Status |"
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/DISASTER_RECOVERY_REPORT.md",
+    "sha256": "aea19a65962ab447abe14df9b1e79f82cb6b23c340fc98169ff05c56bd5cbfa8",
+    "lines": 41,
+    "headings": [
+      "# Disaster recovery report",
+      "## Bukti aktual",
+      "## Cara reproduksi",
+      "## Batas yang belum terbukti"
+    ],
+    "opening": [
+      "# Disaster recovery report",
+      "Gate pemulihan lokal terisolasi: **PASS, 7/7 pemeriksaan**. RPO/RTO produksi dan runbook operasional: **NOT TESTED**.",
+      "## Bukti aktual",
+      "| Pemeriksaan | Hasil | Gate |",
+      "| --- | --- | --- |"
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/LOAD_TEST_REPORT.md",
+    "sha256": "d3bc3f4fbc1156725af8935cb246c3c38b0733ac8708b22c3a660daa6495ca64",
+    "lines": 56,
+    "headings": [
+      "# Load and reliability report",
+      "## Asumsi SLO",
+      "## Workload dan lingkungan",
+      "## Hasil aktual",
+      "## CPU, memori dan konsistensi",
+      "## Batas dan rekomendasi"
+    ],
+    "opening": [
+      "# Load and reliability report",
+      "Gate: **FAIL terhadap asumsi realtime p95**. Bukan sertifikasi kapasitas produksi. Semua angka di bawah berasal dari run, bukan target yang diklaim sudah disepakati bisnis.",
+      "## Asumsi SLO",
+      "Pengguna tidak mempunyai target operasional dan meminta nilai standar. Tidak ada satu angka universal untuk semua klinik. Asumsi awal: request interaktif p95 <= 2 s, p99 <= 5 s; 5xx/network error <= 0,1%; event antrean p95 <= 2 s; nol pelanggaran integritas/akses. Target availability bulanan, pengguna unik produksi, booking/jam dan RPO/RTO belum ditetapkan. Pendekatan SLI/SLO mengikuti [Google SRE](https://sre.google/sre-book/service-level-objectives/); **angka target adalah asumsi audit ini**, bukan angka baku dari sumber tersebut.",
+      "## Workload dan lingkungan"
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/INTEGRATION_TEST_REPORT.md",
+    "sha256": "cd9e6c5ccebd39058803f0dcb52ad727bf45ce4e9b05a43214aa33a317255df9",
+    "lines": 41,
+    "headings": [
+      "# Integration test report",
+      "## Keamanan dan metode",
+      "## Reproduksi dan sisa pekerjaan"
+    ],
+    "opening": [
+      "# Integration test report",
+      "Gate keseluruhan: **BLOCKED** untuk integrasi provider end-to-end. SMTP lokal, workflow autentikasi, scheduler/worker, checkout dan reconciliation sandbox telah diuji nyata.",
+      "| Integrasi / skenario | Status | Bukti dan batas |",
+      "| --- | --- | --- |",
+      "| SMTP TCP dan penerimaan inbox testing | PASS | Symfony mailer mengirim MIME ke sink loopback; sink tidak meneruskan email |"
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/CLINICOS_PRODUCTION_READINESS_FULL_REPORT.md",
+    "sha256": "d5cf5316eed007e32418442e0f91d9b1389d1a0345ed45065e44045ab7df7edf",
+    "lines": 608,
+    "headings": [
+      "# ClinicOS - Laporan Lengkap Production Readiness dan Stress Testing",
+      "## Daftar isi",
+      "## 1. Production readiness scorecard",
+      "### Gate",
+      "### Jumlah test dan skenario",
+      "### Temuan tersisa",
+      "### Risiko regresi dan syarat melanjutkan",
+      "### Laporan pendukung",
+      "## 2. Environment report",
+      "### Lingkungan yang benar-benar dijalankan",
+      "### Migration, foreign key, transaction, index",
+      "### Koreksi isolasi yang ditemukan selama audit",
+      "### Deployment dan dependency",
+      "### Reproduksi",
+      "## 3. MySQL concurrency report",
+      "### Metode dan bukti concurrency",
+      "### Integritas dan batas",
+      "## 4. Realtime test report",
+      "### Reproduksi PR-01 dan akar masalah",
+      "### Batas dan tindak lanjut",
+      "## 5. Integration test report",
+      "### Keamanan dan metode",
+      "### Reproduksi dan sisa pekerjaan",
+      "## 6. Load and reliability report",
+      "### Asumsi SLO",
+      "### Workload dan lingkungan",
+      "### Hasil aktual",
+      "### CPU, memori dan konsistensi",
+      "### Batas dan rekomendasi",
+      "## 7. Disaster recovery report",
+      "### Bukti aktual",
+      "### Cara reproduksi",
+      "### Batas yang belum terbukti",
+      "## 8. Human acceptance and clinic-day simulation",
+      "### Skenario normal melalui Playwright",
+      "### Skenario pendamping",
+      "### Yang belum diterima",
+      "## 9. Temuan baru production readiness",
+      "### PR-01 — Revokasi akses tidak mencabut subscription WebSocket yang sudah aktif",
+      "### PR-02 — Assertion urutan key JSON tidak portabel pada MySQL",
+      "### Catatan harness, bukan bug aplikasi",
+      "### Risiko performa dan deployment yang belum terselesaikan",
+      "### PR-03 — Factory subscription dapat melampaui panjang kolom MySQL",
+      "## 10. Rekap hasil pengujian (JSON)"
+    ],
+    "opening": [
+      "# ClinicOS - Laporan Lengkap Production Readiness dan Stress Testing",
+      "Tanggal hasil audit: **11 November 2026**. Tanggal penggabungan: **12 November 2026, Asia/Bangkok**.",
+      "Dokumen ini menggabungkan delapan laporan production-readiness, seluruh temuan baru, dan rekap hasil pengujian. Keputusan **NO-GO**, angka test, bukti, langkah reproduksi, rekomendasi, serta batas PASS/FAIL/BLOCKED/NOT TESTED dipertahankan dari laporan asal. Penggabungan ini tidak menjalankan ulang test atau mengubah status temuan.",
+      "Seluruh isi laporan ada di file ini; tautan antarlaporan diarahkan ke bagian dalam dokumen. Bukti mentah dan harness tetap tersedia melalui tautan ke folder [evidence/](evidence/) dan [tests/](tests/). Sertakan kedua folder tersebut bila memerlukan verifikasi bukti saat membagikan dokumen. File asal dipertahankan.",
+      "## Daftar isi"
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/PRODUCTION_READINESS_SCORECARD.md",
+    "sha256": "c95690c43dfae4f9ad4bc3f39f6c73d01d9321e5ec95123e47617420e065ae6a",
+    "lines": 83,
+    "headings": [
+      "# Production readiness scorecard",
+      "## Gate",
+      "## Jumlah test dan skenario",
+      "## Temuan tersisa",
+      "## Risiko regresi dan syarat melanjutkan",
+      "## Laporan pendukung"
+    ],
+    "opening": [
+      "# Production readiness scorecard",
+      "**Keputusan: NO-GO untuk penggunaan produksi multi-user.**",
+      "Audit operasional lokal selesai pada 11 November 2026. Alur klinik utama, transaksi MySQL, SMTP inbox, checkout/reconciliation DOKU sandbox dan pemulihan lokal sudah memiliki bukti nyata. Namun revokasi socket aktif gagal, asumsi latency realtime belum tercapai, suite MySQL masih gagal, serta callback provider dan lingkungan deployment belum terverifikasi. Tidak memberi CONDITIONAL GO hanya berdasarkan banyaknya test yang lulus.",
+      "## Gate",
+      "| Gate | Status | Alasan / bukti |"
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/NEW_FINDINGS.md",
+    "sha256": "d1d1efc552901cf3486f631df85935c3e8615f3671b80771fd48b7328d3e7e3e",
+    "lines": 58,
+    "headings": [
+      "# Temuan baru production readiness",
+      "## PR-01 — Revokasi akses tidak mencabut subscription WebSocket yang sudah aktif",
+      "## PR-02 — Assertion urutan key JSON tidak portabel pada MySQL",
+      "## Catatan harness, bukan bug aplikasi",
+      "## Risiko performa dan deployment yang belum terselesaikan",
+      "## PR-03 — Factory subscription dapat melampaui panjang kolom MySQL"
+    ],
+    "opening": [
+      "# Temuan baru production readiness",
+      "Status per run 11 November 2026. QA-01–QA-15 tidak diimplementasikan ulang. Source produksi tidak diubah oleh audit ini.",
+      "## PR-01 — Revokasi akses tidak mencabut subscription WebSocket yang sudah aktif",
+      "**OPEN — P2 / Medium — gate realtime FAIL.**",
+      "Reproduksi nyata menggunakan Playwright, Reverb 1.12.0, database MySQL audit, dan database queue worker:"
+    ]
+  },
+  {
+    "file": "qa-audit/production-readiness/REALTIME_TEST_REPORT.md",
+    "sha256": "040ae5082bd129999479c122e8a7a603323665c01d84ff9cd7a9857e569d3cc2",
+    "lines": 41,
+    "headings": [
+      "# Realtime test report",
+      "## Reproduksi PR-01 dan akar masalah",
+      "## Batas dan tindak lanjut"
+    ],
+    "opening": [
+      "# Realtime test report",
+      "Gate keseluruhan: **FAIL**. Koneksi, delivery normal, reconnect, dan isolasi tenant baru lulus; revokasi socket aktif gagal.",
+      "| Pemeriksaan | Bukti aktual | Status |",
+      "| --- | --- | --- |",
+      "| Reverb dan database worker benar-benar hidup | TCP/WebSocket nyata, Echo browser menerima `queue.updated` dari worker | PASS |"
+    ]
+  },
+  {
+    "file": "qa-audit/MISSING_FEATURES.md",
+    "sha256": "40a83c0b2b857a50e7bc6bab0e8cbf354ed0cab44939ddc70c0f93eb921dba9a",
+    "lines": 45,
+    "headings": [
+      "# Missing dan partial features\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "## Baseline audit sebelum perbaikan\r",
+      "## Kesenjangan historis yang sudah ditutup\r"
+    ],
+    "opening": [
+      "# Missing dan partial features\r",
+      "> **Status terbaru setelah P2, 11 November 2026:** Bugfix tidak menutup backlog fitur: kasir/billing pasien, discovery, multi-cabang, invitation/permission editor dan Resilient Edge Mode belum diimplementasikan. Bedakan feature gap dari 15 bug terkonfirmasi yang sudah FIXED. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md).\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "Bagian di bawah mempertahankan checkpoint P1 dan baseline audit; status/angka historis tidak menggantikan hasil terbaru di atas.\r",
+      "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka.\r"
+    ]
+  },
+  {
+    "file": "qa-audit/FINAL_QA_REPORT.md",
+    "sha256": "205feed5093a60bfb63c22bb133d535d5f450b884a75de90ab76cc0e289b0d9d",
+    "lines": 75,
+    "headings": [
+      "# Final QA report - hasil setelah P2\r",
+      "## Hasil pengujian terakhir\r",
+      "## Perubahan dan integrasi yang diverifikasi\r",
+      "## Keputusan production-readiness\r",
+      "## Menjalankan kembali\r"
+    ],
+    "opening": [
+      "# Final QA report - hasil setelah P2\r",
+      "**Laporan terbaru: [Production readiness scorecard](production-readiness/PRODUCTION_READINESS_SCORECARD.md) — NO-GO untuk produksi multi-user.** Run MySQL terbaru: PHP 361 PASS / 1 FAIL / 1 ERROR; JavaScript 7 PASS; Playwright 13 PASS / 2 FAIL. Concurrency 9/9 dan recovery 7/7 lulus. Tiga temuan baru OPEN tercatat pada [NEW_FINDINGS.md](production-readiness/NEW_FINDINGS.md). Bagian di bawah mempertahankan hasil historis P2 dan bukan hasil MySQL/readiness terbaru.\r",
+      "11 November 2026, Asia/Bangkok. **QA-01 sampai QA-15 FIXED pada skenario yang diuji; 0 temuan terkonfirmasi OPEN.** QA-15 adalah bug baru pada kegagalan notifikasi create staf. Sesi lama setelah reset admin dan verifikasi ulang email juga sudah ditangani. Perbaikan P1 dipertahankan dan diuji kembali.\r",
+      "## Hasil pengujian terakhir\r",
+      "| Pemeriksaan | PASS | FAIL / ERROR / SKIP | Bukti |\r"
+    ]
+  },
+  {
+    "file": "qa-audit/P1_FIX_REPORT.md",
+    "sha256": "f6c9a0ddc21e108127502d348e805d0f5dfbc3d560fe1bacde3b98f270d4c469",
+    "lines": 53,
+    "headings": [
+      "# Perbaikan QA-01–QA-04\r",
+      "## Hasil per masalah\r",
+      "## Regression dan dampak antarfitur\r",
+      "## Bukti run terbaru\r",
+      "## Skill Volt\r",
+      "## Batas hasil dan tahap berikut\r"
+    ],
+    "opening": [
+      "# Perbaikan QA-01–QA-04\r",
+      "> **Checkpoint P1 historis.** QA-01 sampai QA-04 tetap PASS pada pengujian akhir P2. P2 kemudian diselesaikan; status terbaru ada pada [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Pernyataan bahwa P2 belum dimulai di bawah merujuk checkpoint P1.\r",
+      "Pengujian ulang 11 November 2026, Asia/Bangkok. Acuan audit awal: `b82237d932478df9ed02240cb698acff9b4ec669`. Keempat P1 **FIXED pada skenario yang diuji**, setelah reproduksi pada source sebelum perbaikan, perubahan terbatas, regression PHP, dan Chrome E2E. Perbaikan P2 belum dimulai.\r",
+      "## Hasil per masalah\r",
+      "| ID | Akar masalah yang diverifikasi | Perubahan aktual | Bukti hasil |\r"
+    ]
+  },
+  {
+    "file": "qa-audit/FEATURE_TEST_MATRIX.md",
+    "sha256": "2cf4762c4a4deddb1ed9e95ee612a651a8745feae924efda166c176ae5d5d54b",
+    "lines": 734,
+    "headings": [
+      "# Feature test matrix\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "## Run pengujian ulang terbaru\r",
+      "## Baseline audit sebelum perbaikan\r",
+      "## Hasil run terbaru\r",
+      "## Pemetaan fitur dan jenis pemeriksaan\r",
+      "## Coverage yang dapat dihitung\r",
+      "## Skenario lanjutan yang belum dieksekusi\r",
+      "## Hasil setiap automated test\r",
+      "### JavaScript dan browser\r",
+      "### Eksperimen browser tambahan\r",
+      "### Pemetaan seluruh route\r",
+      "### Route tanpa observasi PHP\r",
+      "### Pemetaan seluruh view\r"
+    ],
+    "opening": [
+      "# Feature test matrix\r",
+      "> **Status terbaru setelah P2, 11 November 2026:** Run terakhir: 363 PHP PASS (2.438 assertion), 7 JavaScript PASS dan 3 Chrome PASS; total 373, 0 FAIL/ERROR/SKIP. Seluruh 22 regression audit lama juga PASS. Bukti: evidence/p2-retest/php-all.xml dan node-all.txt. Lihat [P2_RETEST_REPORT.md](P2_RETEST_REPORT.md) dan [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md).\r",
+      "## Riwayat laporan sebelum perbaikan P2\r",
+      "Bagian di bawah mempertahankan checkpoint P1 dan baseline audit; status/angka historis tidak menggantikan hasil terbaru di atas.\r",
+      "> **Pembaruan setelah perbaikan P1, 11 November 2026:** QA-01 - QA-04 sudah FIXED pada pengujian ulang; P2 belum diperbaiki. Hasil terbaru: [P1_FIX_REPORT.md](P1_FIX_REPORT.md), [STAFF_LIFECYCLE_REPORT.md](STAFF_LIFECYCLE_REPORT.md), [FINAL_QA_REPORT.md](FINAL_QA_REPORT.md). Dua bug staf baru QA-13/QA-14 dan risiko sesi setelah reset admin tetap terbuka.\r"
+    ]
+  },
+  {
+    "file": "qa-audit/P2_RETEST_REPORT.md",
+    "sha256": "42f080c13f0aa54a34964dff212d4cf072c97ccdac5bc3d5e7f78403c4bd58f6",
+    "lines": 70,
+    "headings": [
+      "# Perbaikan dan pengujian ulang P2\r",
+      "## Hasil per masalah\r",
+      "## Sesi dan verifikasi staf\r",
+      "## Dependency\r",
+      "## Hasil run terakhir\r",
+      "## Koreksi harness dan batas klaim\r",
+      "## Keputusan tahap berikut\r"
+    ],
+    "opening": [
+      "# Perbaikan dan pengujian ulang P2\r",
+      "11 November 2026, Asia/Bangkok. Acuan audit awal: `b82237d932478df9ed02240cb698acff9b4ec669`; checkpoint P1 dipertahankan. QA-05 sampai QA-14 dan temuan baru QA-15 sekarang **FIXED pada skenario yang diuji**. Kebijakan revokasi sesi dan verifikasi ulang email staf juga sudah diterapkan. Tidak ada commit, push, deploy, migrasi data pengguna, atau pembayaran nyata.\r",
+      "## Hasil per masalah\r",
+      "| ID | Reproduksi sebelum perbaikan dan akar masalah | Perbaikan aktual | Regression/bukti |\r",
+      "| --- | --- | --- | --- |\r"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/UX_PROBLEMS_REPORT.md",
+    "sha256": "d73ee3d711f741f08b8149bfb0a2fb29fa2bba88a3f9c180abcab042bde55c70",
+    "lines": 205,
+    "headings": [
+      "# UX Problems Report",
+      "## DFU-12 — Double-click grant memberi dua periode dari satu tindakan pengguna",
+      "## DFU-01 — Pembatalan pasien memutus pemeriksaan yang sudah berjalan",
+      "## DFU-02 — Edit hari sesi terpakai membuat tanggal appointment tidak sesuai sesi",
+      "## DFU-03 — Refresh otomatis menghapus alasan penolakan aksi antrean",
+      "## DFU-04 — Pembatalan yang ditolak tidak memberi penjelasan pada halaman booking",
+      "## DFU-05 — Error format telepon disamarkan sebagai kegagalan pemeriksaan kandidat pasien",
+      "## DFU-07 — Filter dashboard dengan rentang tanggal terbalik gagal tanpa pesan",
+      "## DFU-08 — Waktu visit tampil UTC sementara konteks klinik memakai WIB",
+      "## DFU-09 — Sejumlah kontrol filter dan alasan pembatalan tidak mempunyai label programatis",
+      "## DFU-10 — Landing mobile mempunyai overflow horizontal",
+      "## DFU-11 — Portal pasien tidak menyediakan jalur untuk membuat booking baru",
+      "## Observasi UX dengan dampak lebih rendah"
+    ],
+    "opening": [
+      "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis.",
+      "# UX Problems Report",
+      "Run: **13 November 2026, Asia/Bangkok (UTC+7)**. Checkout lokal termasuk perubahan pengguna yang sudah ada. Source aplikasi tidak diperbaiki. Browser: **Playwright + Google Chrome 158.0.8127.36, headless nyata**; database/storage/sesi/build disposable.",
+      "PASS hanya berlaku untuk skenario dan assertion yang dijalankan. Halaman terbuka, snapshot DOM, test backend, fixture status, dan pengujian browser end-to-end adalah bukti berbeda. Tidak ada penilaian production-readiness, beban, stress, benchmark server, deployment, commit, push, atau pembayaran nyata.",
+      "## DFU-12 — Double-click grant memberi dua periode dari satu tindakan pengguna"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/FINAL_COVERAGE_REPORT.md",
+    "sha256": "fc583c95fe87f3d2400dce2fe08f0c3f565f6a5655e7a9235264bab0c9d741c8",
+    "lines": 66,
+    "headings": [
+      "# Final Coverage Report",
+      "## Angka yang dapat dipertanggungjawabkan",
+      "## Hasil utama",
+      "## Temuan baru",
+      "## Menjaga bukti perbaikan sebelumnya",
+      "## Lingkungan, isolasi dan batas",
+      "## Artefak dan pengulangan terarah"
+    ],
+    "opening": [
+      "# Final Coverage Report",
+      "Coverage gap closure selesai mengklasifikasikan **77/77 skenario terdaftar** (72 tambahan+5 BLOCKED historis). Hasil: **52 PASS, 8 FAIL, 11 BLOCKED, 6 NOT TESTED**. Ada **8 akar masalah baru**, masih OPEN. Seluruh skenario mempunyai hasil aktual atau alasan eksplisit; ini bukan pernyataan bahwa seluruh fitur bebas bug.",
+      "[Matrix lengkap](COVERAGE_CLOSURE_MATRIX.md) · [Temuan baru](NEW_FUNCTIONAL_FINDINGS.md) · [Gap tersisa](REMAINING_GAPS.md) · [Ringkasan terstruktur](closure/evidence/coverage-summary.json)",
+      "## Angka yang dapat dipertanggungjawabkan",
+      "| Ukuran | Hasil / arti |"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/FEATURE_INVENTORY.md",
+    "sha256": "62a9fa2ce92fbcdf77fb3f1ad7ec0a081cbcbdca586119bdf42b30b71b442c1e",
+    "lines": 657,
+    "headings": [
+      "# Feature Inventory — penemuan independen",
+      "## Cakupan penemuan",
+      "## Kelengkapan per fitur",
+      "### F00 — Landing, harga publik, navigasi awal",
+      "### F01 — Login, logout, portal, password recovery",
+      "### F02 — Registrasi pasien dan pemilik",
+      "### F03 — Profil dan lifecycle akun sendiri",
+      "### F04 — Onboarding klinik dan aktivasi awal",
+      "### F05 — Profil klinik, jam, logo dan status",
+      "### F06 — Akun dokter/resepsionis dan relasi layanan",
+      "### F07 — Katalog layanan klinik",
+      "### F08 — Sesi praktik dokter",
+      "### F09 — Pasien administratif",
+      "### F10 — Website klinik dan penemuan booking",
+      "### F11 — Booking online, walk-in dan pasien terdaftar",
+      "### F12 — Detail dan pembatalan appointment",
+      "### F13 — Operasional antrean dan filter",
+      "### F14 — Display antrean publik",
+      "### F15 — Mulai, buka dan cari pemeriksaan sendiri",
+      "### F16 — RME General, vital, diagnosis/tindakan dan autosave",
+      "### F17 — Alergi longitudinal pasien",
+      "### F18 — Resep dokter dan resep final milik pasien",
+      "### F19 — Foto medis privat dan retensi revisi",
+      "### F20 — Finalisasi, Modification dan version history",
+      "### F21 — Odontogram dan entitlement",
+      "### F22 — Dashboard setiap role dan filter periode",
+      "### F23 — Notification center",
+      "### F24 — Audit aktivitas tenant",
+      "### F25 — Subscription tenant, invoice dan pembatasan operasional",
+      "### F26 — DOKU checkout, notification dan reconciliation",
+      "### F27 — Pembelian, status dan histori add-on owner",
+      "### F28 — Tenant directory dan detail platform",
+      "### F29 — Katalog paket, harga dan add-on platform",
+      "### F30 — Grant dan downgrade manual platform",
+      "### F31 — Pencatatan refund dan event pembayaran",
+      "### F32 — ETA/confidence pada tracker pasien dan board",
+      "### F33 — Pembaruan antrean, polling dan reconnect UI",
+      "### F34 — Login/registrasi Google",
+      "### F35 — Review kandidat pasien duplikat",
+      "## Inventaris halaman, formulir dan kontrol",
+      "## Entitas/lifecycle yang sengaja tidak diperlakukan sebagai CRUD hapus"
+    ],
+    "opening": [
+      "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis.",
+      "# Feature Inventory — penemuan independen",
+      "Run: **13 November 2026, Asia/Bangkok (UTC+7)**. Checkout lokal termasuk perubahan pengguna yang sudah ada. Source aplikasi tidak diperbaiki. Browser: **Playwright + Google Chrome 158.0.8127.36, headless nyata**; database/storage/sesi/build disposable.",
+      "PASS hanya berlaku untuk skenario dan assertion yang dijalankan. Halaman terbuka, snapshot DOM, test backend, fixture status, dan pengujian browser end-to-end adalah bukti berbeda. Tidak ada penilaian production-readiness, beban, stress, benchmark server, deployment, commit, push, atau pembayaran nyata.",
+      "## Cakupan penemuan"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/EXPLORATORY_FINDINGS.md",
+    "sha256": "e58b2c895a4997532fe3ba5479845e4bed22adbb44b158ba122859d8c6d13ebc",
+    "lines": 27,
+    "headings": [
+      "# Exploratory Findings — charter dan langkah aktual",
+      "## Catatan bias dan harness"
+    ],
+    "opening": [
+      "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis.",
+      "# Exploratory Findings — charter dan langkah aktual",
+      "Run: **13 November 2026, Asia/Bangkok (UTC+7)**. Checkout lokal termasuk perubahan pengguna yang sudah ada. Source aplikasi tidak diperbaiki. Browser: **Playwright + Google Chrome 158.0.8127.36, headless nyata**; database/storage/sesi/build disposable.",
+      "PASS hanya berlaku untuk skenario dan assertion yang dijalankan. Halaman terbuka, snapshot DOM, test backend, fixture status, dan pengujian browser end-to-end adalah bukti berbeda. Tidak ada penilaian production-readiness, beban, stress, benchmark server, deployment, commit, push, atau pembayaran nyata.",
+      "| Charter | Persona/tujuan | Langkah aktual dan data | Hasil/evidence |"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/SCENARIO_TEST_MATRIX.md",
+    "sha256": "9a98fa097ec84bfa6713b5ae36e9a1e1dd413db91336ef4de7d37cfff4d37151",
+    "lines": 266,
+    "headings": [
+      "# Scenario Test Matrix",
+      "## Eksekusi browser terbaru",
+      "## Skenario lanjutan yang dipetakan tetapi belum dijalankan",
+      "## Histori attempt dan koreksi harness"
+    ],
+    "opening": [
+      "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis.",
+      "# Scenario Test Matrix",
+      "Run: **13 November 2026, Asia/Bangkok (UTC+7)**. Checkout lokal termasuk perubahan pengguna yang sudah ada. Source aplikasi tidak diperbaiki. Browser: **Playwright + Google Chrome 158.0.8127.36, headless nyata**; database/storage/sesi/build disposable.",
+      "PASS hanya berlaku untuk skenario dan assertion yang dijalankan. Halaman terbuka, snapshot DOM, test backend, fixture status, dan pengujian browser end-to-end adalah bukti berbeda. Tidak ada penilaian production-readiness, beban, stress, benchmark server, deployment, commit, push, atau pembayaran nyata.",
+      "## Eksekusi browser terbaru"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/ROLE_ACTION_MATRIX.md",
+    "sha256": "7bab762b9c1a2e98866058e393470d819086c6695ce83d099da3b8ac71f650d9",
+    "lines": 281,
+    "headings": [
+      "# Role × Action × State Matrix",
+      "## Permission aktual",
+      "## Matriks kewenangan dan bukti"
+    ],
+    "opening": [
+      "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis.",
+      "# Role × Action × State Matrix",
+      "Run: **13 November 2026, Asia/Bangkok (UTC+7)**. Checkout lokal termasuk perubahan pengguna yang sudah ada. Source aplikasi tidak diperbaiki. Browser: **Playwright + Google Chrome 158.0.8127.36, headless nyata**; database/storage/sesi/build disposable.",
+      "PASS hanya berlaku untuk skenario dan assertion yang dijalankan. Halaman terbuka, snapshot DOM, test backend, fixture status, dan pengujian browser end-to-end adalah bukti berbeda. Tidak ada penilaian production-readiness, beban, stress, benchmark server, deployment, commit, push, atau pembayaran nyata.",
+      "Lima role tersimpan: **Clinic Admin, Doctor, Patient, Platform Admin, Receptionist**. Clinic Owner adalah persona dari Clinic Admin, bukan role keenam. Guest/token holder adalah konteks akses. Dokter lain dibedakan oleh assignment resource."
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/REMAINING_GAPS.md",
+    "sha256": "55c3b2b72724e1441fbe2e7587f759baaab93919051b334260c90e4c67dfa5a6",
+    "lines": 48,
+    "headings": [
+      "# Remaining Gaps",
+      "## Temuan yang masih gagal",
+      "## Keputusan produk yang belum boleh diasumsikan",
+      "## Batas bukti yang berlaku pada PASS"
+    ],
+    "opening": [
+      "# Remaining Gaps",
+      "Status ini adalah hasil aktual penutupan daftar, bukan klaim seluruh aplikasi sudah tertutup100%. Seluruh77 parent sudah mempunyai hasil atau alasan; subalur yang belum terbukti tetap terbuka di bawah.",
+      "| Parent | Status | Bukti parsial yang sudah ada | Yang belum bisa dinyatakan selesai / cara menutup |",
+      "| --- | --- | --- | --- |",
+      "| G10 | BLOCKED | Ketiga CTA Free/Individual/Team menjaga preferred plan sampai halaman paket, termasuk refresh. Free aktif melalui UI. | Aktivasi Individual/Team melalui provider belum dapat dieksekusi tanpa kredensial sandbox DOKU; initial paid fixtures bukan bukti checkout. |"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/NEW_FUNCTIONAL_FINDINGS.md",
+    "sha256": "17f7018bf8accf2b162d09b200178b9c03884db8cea038058c1779088e4d1f66",
+    "lines": 116,
+    "headings": [
+      "# Temuan baru dari coverage closure",
+      "## CCL-01 — Tarif valid diblok input step1000",
+      "## CCL-02 — Sesi berakhir401 diberi saran periksa koneksi",
+      "## CCL-03 — Format titik lolos validasi tetapi hilang dari pencarian kandidat",
+      "## CCL-04 — Booking dari profil nonaktif kehilangan konteks pasien",
+      "## CCL-05 — Perubahan jam klinik tidak membatasi booking baru pada sesi existing",
+      "## CCL-06 — List Platform menampilkan active sesudah masa berlaku berakhir",
+      "## CCL-07 — Refetch memulihkan fokus tetapi menghapus teks filter",
+      "## CCL-08 — Seluruh paket nonaktif menghasilkan halaman tanpa penjelasan",
+      "## Observasi yang memerlukan keputusan, bukan bug yang diasumsikan"
+    ],
+    "opening": [
+      "# Temuan baru dari coverage closure",
+      "Run 13–14 November 2026 (Asia/Bangkok), database SQLite dan seluruh identitas/isi klinis dummy terisolasi. **8 akar masalah OPEN**, terwakili9 assertion browser FAIL. Source produksi tidak diperbaiki. Ini temuan baru dari kombinasi yang sebelumnya belum diuji, bukan pembukaan ulang DFU-01–DFU-12 yang sudah FIXED & VERIFIED.",
+      "Bukti utama: [hasil browser](closure/evidence/scenarios.json), [runner kasus](closure/), [matrix](COVERAGE_CLOSURE_MATRIX.md). Hanya hasil tanpa `superseded_by` yang aktif. Screenshot bernama khusus di bawah lebih tepat daripada screenshot otomatis kegagalan yang kadang menangkap tab lain.",
+      "| ID | Prioritas / jenis | Role dan state | Hasil |",
+      "| --- | --- | --- | --- |"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/MISSING_FEATURES_REPORT.md",
+    "sha256": "a3051a5f4537729638cadd0743cee7f7ec91387af994dc78212683c91ac1e088",
+    "lines": 146,
+    "headings": [
+      "# Missing Features, Incomplete Workflow & Product Decisions",
+      "## DFU-11 — Portal pasien tidak menyediakan jalur untuk membuat booking baru",
+      "## MF-02 — Kasir, billing dan receipt pasien",
+      "## MF-03 — Ekspor laporan dan cetak resep/receipt",
+      "## MF-04 — Discovery lintas klinik",
+      "## MF-05 — Suspend/unsuspend tenant melalui UI platform",
+      "## MF-06 — Reminder appointment/mendekati giliran pasien",
+      "## MF-07 — Multi-cabang dan beberapa klinik per owner",
+      "## MF-08 — Resilient Edge/offline operasional penuh",
+      "## Keputusan produk lain yang belum boleh dianggap bug"
+    ],
+    "opening": [
+      "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis.",
+      "# Missing Features, Incomplete Workflow & Product Decisions",
+      "Run: **13 November 2026, Asia/Bangkok (UTC+7)**. Checkout lokal termasuk perubahan pengguna yang sudah ada. Source aplikasi tidak diperbaiki. Browser: **Playwright + Google Chrome 158.0.8127.36, headless nyata**; database/storage/sesi/build disposable.",
+      "PASS hanya berlaku untuk skenario dan assertion yang dijalankan. Halaman terbuka, snapshot DOM, test backend, fixture status, dan pengujian browser end-to-end adalah bukti berbeda. Tidak ada penilaian production-readiness, beban, stress, benchmark server, deployment, commit, push, atau pembayaran nyata.",
+      "## DFU-11 — Portal pasien tidak menyediakan jalur untuk membuat booking baru"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/FUNCTIONAL_BUG_REPORT.md",
+    "sha256": "a4154adf2de6bdbed27fad11e357e2b0e2e089a6e135f48285d605c8d42702c4",
+    "lines": 167,
+    "headings": [
+      "# Functional Bug Report",
+      "## DFU-12 — Double-click grant memberi dua periode dari satu tindakan pengguna",
+      "## DFU-01 — Pembatalan pasien memutus pemeriksaan yang sudah berjalan",
+      "## DFU-02 — Edit hari sesi terpakai membuat tanggal appointment tidak sesuai sesi",
+      "## DFU-03 — Refresh otomatis menghapus alasan penolakan aksi antrean",
+      "## DFU-04 — Pembatalan yang ditolak tidak memberi penjelasan pada halaman booking",
+      "## DFU-05 — Error format telepon disamarkan sebagai kegagalan pemeriksaan kandidat pasien",
+      "## DFU-06 — Telepon yang sama sekali bukan nomor diterima sebagai data pasien",
+      "## DFU-07 — Filter dashboard dengan rentang tanggal terbalik gagal tanpa pesan",
+      "## DFU-08 — Waktu visit tampil UTC sementara konteks klinik memakai WIB",
+      "## Authorization/Role Issue"
+    ],
+    "opening": [
+      "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis.",
+      "# Functional Bug Report",
+      "Run: **13 November 2026, Asia/Bangkok (UTC+7)**. Checkout lokal termasuk perubahan pengguna yang sudah ada. Source aplikasi tidak diperbaiki. Browser: **Playwright + Google Chrome 158.0.8127.36, headless nyata**; database/storage/sesi/build disposable.",
+      "PASS hanya berlaku untuk skenario dan assertion yang dijalankan. Halaman terbuka, snapshot DOM, test backend, fixture status, dan pengujian browser end-to-end adalah bukti berbeda. Tidak ada penilaian production-readiness, beban, stress, benchmark server, deployment, commit, push, atau pembayaran nyata.",
+      "Temuan terkonfirmasi OPEN; tidak ada perbaikan source pada tugas audit ini. Kelompok akar masalah dipakai agar empat assertion feedback queue tidak dihitung empat bug."
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/FIX_REGRESSION_REPORT.md",
+    "sha256": "bc658ce80abbb571eccdb5f30f47934dc1665a65e459fc29bf0ba8a259678af5",
+    "lines": 68,
+    "headings": [
+      "# ClinicOS — Perbaikan DFU dan Functional & UX Regression",
+      "## Bukti dan hasil",
+      "## Status per temuan",
+      "## Cakupan regresi lintas fitur",
+      "## Keputusan dan batas produk",
+      "## Batas verifikasi dan penerapan",
+      "## Mengulang pengujian"
+    ],
+    "opening": [
+      "# ClinicOS — Perbaikan DFU dan Functional & UX Regression",
+      "Run 13 November 2026. Seluruh DFU-01–DFU-12 berstatus **FIXED & VERIFIED** pada checkout ini, terbatas pada skenario dan assertion yang dijalankan. Laporan audit awal dipertahankan sebagai baseline historis; kesimpulan OPEN pada bagian historis tidak mewakili status run ini.",
+      "## Bukti dan hasil",
+      "- Backend: **378/378 PASS, 2572 assertion**, SQLite :memory:, storage/cache/session proses terisolasi. [JUnit](fixes/evidence/final-backend-r3.xml), [ringkasan](fixes/evidence/final-backend-r3-summary.json).",
+      "- JavaScript: **10/10 PASS**, termasuk 3 regresi duplicate review, autosave/offline/conflict, booking selector dan notifikasi. [Output](fixes/evidence/javascript-tests.txt)."
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/CCL_FIX_REGRESSION_REPORT.md",
+    "sha256": "1997a75d18358ce0f6f9ddfc8b32a339888e6d855817e7252c9d2176a1ad9d08",
+    "lines": 87,
+    "headings": [
+      "# CCL Fix & Regression Report",
+      "## Hasil aktual",
+      "## Status dan perubahan per temuan",
+      "## Bukti before / after",
+      "## Aturan bisnis dan integritas yang dipertahankan",
+      "## Verifikasi terkait dan perlindungan DFU",
+      "## Catatan percobaan yang tetap dipertahankan",
+      "## Masalah masih terbuka dan batas hasil",
+      "## Integritas artefak"
+    ],
+    "opening": [
+      "# CCL Fix & Regression Report",
+      "Run **14 November 2026, Asia/Bangkok**. Kedelapan temuan **CCL-01–CCL-08: FIXED & VERIFIED**, terbatas pada skenario yang dijelaskan di bawah. **0 temuan CCL masih OPEN.** Hasil audit sebelumnya tetap merupakan bukti historis; laporan ini menjadi pembaruan status delapan temuan, bukan penggantian isi audit lama.",
+      "## Hasil aktual",
+      "| Lapisan | PASS | FAIL / error | Bukti dan cakupan |",
+      "| --- | --- | --- | --- |"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/fixes/RUN_SEQUENCE.md",
+    "sha256": "8c1956860db5aa31451febc39be7080f2b876884bc8d5817236c9ca369bc6b61",
+    "lines": 17,
+    "headings": [
+      "# Urutan pengujian browser terisolasi"
+    ],
+    "opening": [
+      "# Urutan pengujian browser terisolasi",
+      "Semua fixture hanya boleh memakai runtime SQLite/storage disposable dari `scripts/runtime.mjs`. Jangan menjalankannya terhadap `.env` atau database aplikasi. Bukti run ini berada pada `fixes/evidence`; untuk run baru, gunakan direktori bukti baru melalui `CLINICOS_AUDIT_EVIDENCE` agar ID skenario tetap unik.",
+      "1. Set `CLINICOS_AUDIT_EVIDENCE` ke direktori bukti absolut, lalu jalankan `node qa-audit/deep-functional-ux/scripts/runtime.mjs` di terminal terpisah. Runtime menyiapkan migration/seed/build **hanya pada direktori temp** dan menyimpan metadata `runtime.json`.",
+      "2. `DFU_BROWSER_LABEL=before`: `fixes/browser-phase1.mjs` dan `DFU_BROWSER_LABEL=before-ux`: `fixes/browser-ux.mjs` adalah bukti sebelum fix pada run ini. Source sekarang sudah diperbaiki; hasil merah itu tidak diharapkan berulang pada source terkini.",
+      "3. Jalankan `fixes/build.mjs` untuk rebuild JavaScript ke public/build runtime disposable. CSS landing disajikan dari source repository oleh router."
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/COVERAGE_GAPS.md",
+    "sha256": "6d048de7ae12ddcb0f846a106215218934e91c30f185e7a2ab101e1c8ac594c5",
+    "lines": 111,
+    "headings": [
+      "# Coverage Gaps & Resume Checkpoint",
+      "## Cakupan yang dapat dipertanggungjawabkan",
+      "## Gap prioritas",
+      "## Batas lingkungan dan cara melanjutkan"
+    ],
+    "opening": [
+      "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis.",
+      "# Coverage Gaps & Resume Checkpoint",
+      "Run: **13 November 2026, Asia/Bangkok (UTC+7)**. Checkout lokal termasuk perubahan pengguna yang sudah ada. Source aplikasi tidak diperbaiki. Browser: **Playwright + Google Chrome 158.0.8127.36, headless nyata**; database/storage/sesi/build disposable.",
+      "PASS hanya berlaku untuk skenario dan assertion yang dijalankan. Halaman terbuka, snapshot DOM, test backend, fixture status, dan pengujian browser end-to-end adalah bukti berbeda. Tidak ada penilaian production-readiness, beban, stress, benchmark server, deployment, commit, push, atau pembayaran nyata.",
+      "## Cakupan yang dapat dipertanggungjawabkan"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/COVERAGE_CLOSURE_MATRIX.md",
+    "sha256": "38c5764295d96ab8d5c4269825a03d19220f87cdc8e57ecb031e25fefe70ace9",
+    "lines": 362,
+    "headings": [
+      "# Coverage Closure Matrix",
+      "## 72 skenario tambahan",
+      "## 5 BLOCKED sebelumnya",
+      "## Kombinasi fitur × role × aksi × state yang dieksekusi"
+    ],
+    "opening": [
+      "# Coverage Closure Matrix",
+      "Run13–14 November2026 Asia/Bangkok. Melanjutkan [72 gap](COVERAGE_GAPS.md) dan [matrix historis](SCENARIO_TEST_MATRIX.md), dengan [DFU FIXED & VERIFIED](FIX_REGRESSION_REPORT.md) sebagai bukti yang dipertahankan. ID G01–G72 mengikuti urutan72 baris gap lama;5 BLOCKED historis mempertahankan ID aslinya.",
+      "Status parent konservatif: **PASS** memenuhi kelas ekuivalensi/kontrak yang dijelaskan pada baris; **FAIL** ada assertion perilaku yang gagal; **BLOCKED** subalur penting memerlukan provider eksternal; **NOT TESTED** bagian penting belum memiliki bukti atau jalur produk belum tersedia. Parent BLOCKED/NOT TESTED dapat mempunyai subkasus PASS; itu tidak mengubah keseluruhan parent menjadi PASS. FAIL yang juga punya subgap (G33/419) tetap menampilkan subgap tersebut.",
+      "| Kelompok | PASS | FAIL | BLOCKED | NOT TESTED |",
+      "| --- | --- | --- | --- | --- |"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/CROSS_FEATURE_REPORT.md",
+    "sha256": "0a8bb08538210180964a6e7c56baf1ad0318ff577c467583c5403f5af7bf92fc",
+    "lines": 111,
+    "headings": [
+      "# Cross-Feature Functional Report",
+      "## DFU-12 — Double-click grant memberi dua periode dari satu tindakan pengguna",
+      "## DFU-01 — Pembatalan pasien memutus pemeriksaan yang sudah berjalan",
+      "## DFU-02 — Edit hari sesi terpakai membuat tanggal appointment tidak sesuai sesi",
+      "## DFU-03 — Refresh otomatis menghapus alasan penolakan aksi antrean",
+      "## DFU-08 — Waktu visit tampil UTC sementara konteks klinik memakai WIB",
+      "## Integrasi yang terbukti pada skenario terpilih"
+    ],
+    "opening": [
+      "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis.",
+      "# Cross-Feature Functional Report",
+      "Run: **13 November 2026, Asia/Bangkok (UTC+7)**. Checkout lokal termasuk perubahan pengguna yang sudah ada. Source aplikasi tidak diperbaiki. Browser: **Playwright + Google Chrome 158.0.8127.36, headless nyata**; database/storage/sesi/build disposable.",
+      "PASS hanya berlaku untuk skenario dan assertion yang dijalankan. Halaman terbuka, snapshot DOM, test backend, fixture status, dan pengujian browser end-to-end adalah bukti berbeda. Tidak ada penilaian production-readiness, beban, stress, benchmark server, deployment, commit, push, atau pembayaran nyata.",
+      "## DFU-12 — Double-click grant memberi dua periode dari satu tindakan pengguna"
+    ]
+  },
+  {
+    "file": "qa-audit/deep-functional-ux/FINAL_FUNCTIONAL_UX_REPORT.md",
+    "sha256": "2ebdd34f01fc392feac2bb1b2fcf2fe686b1fe5bfb6f0e79999b7ce12a29e9fe",
+    "lines": 65,
+    "headings": [
+      "# Final Functional & UX Report",
+      "## Kesimpulan",
+      "## Prioritas perbaikan",
+      "## Apa yang sudah terbukti berfungsi",
+      "## Angka dan bukti run",
+      "## Belum lengkap atau belum terverifikasi",
+      "## Laporan pendamping"
+    ],
+    "opening": [
+      "> **Pembaruan perbaikan 13 November 2026:** DFU-01–DFU-12 telah diperbaiki dan diverifikasi ulang. Lihat [status dan bukti terbaru](FIX_REGRESSION_REPORT.md). Isi di bawah dipertahankan sebagai **baseline audit sebelum perbaikan**, termasuk status OPEN dan hasil run historis.",
+      "# Final Functional & UX Report",
+      "Run: **13 November 2026, Asia/Bangkok (UTC+7)**. Checkout lokal termasuk perubahan pengguna yang sudah ada. Source aplikasi tidak diperbaiki. Browser: **Playwright + Google Chrome 158.0.8127.36, headless nyata**; database/storage/sesi/build disposable.",
+      "PASS hanya berlaku untuk skenario dan assertion yang dijalankan. Halaman terbuka, snapshot DOM, test backend, fixture status, dan pengujian browser end-to-end adalah bukti berbeda. Tidak ada penilaian production-readiness, beban, stress, benchmark server, deployment, commit, push, atau pembayaran nyata.",
+      "## Kesimpulan"
+    ]
+  }
+]

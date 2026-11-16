@@ -1,0 +1,17 @@
+{
+  "serviceId": 5,
+  "staffId": 14,
+  "doctorId": 4,
+  "doctorUserId": 15,
+  "scheduleId": 16,
+  "patientId": 15,
+  "todayScheduleId": 17,
+  "staffAppointmentId": 26,
+  "staffQueueId": 26,
+  "patientAppointmentId": 27,
+  "patientQueueId": 27,
+  "existingAppointmentId": 28,
+  "existingQueueId": 28,
+  "journeyVisitId": 17,
+  "allergyId": 3
+}

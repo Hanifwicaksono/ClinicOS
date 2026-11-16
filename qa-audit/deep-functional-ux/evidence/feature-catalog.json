@@ -1,0 +1,676 @@
+[
+  {
+    "id": "F00",
+    "title": "Landing, harga publik, navigasi awal",
+    "roles": [
+      "Guest",
+      "Patient",
+      "Clinic Owner"
+    ],
+    "actions": "lihat manfaat/paket; pilih pendaftaran/login",
+    "states": "anonymous; authenticated; 375/768/1024/1440",
+    "entry": "/; welcome.blade.php",
+    "evidence": [
+      "UX-01"
+    ],
+    "finding_ids": [
+      "DFU-10"
+    ]
+  },
+  {
+    "id": "F01",
+    "title": "Login, logout, portal, password recovery",
+    "roles": [
+      "All roles"
+    ],
+    "actions": "login; wrong password; remember; logout; forgot/reset; role revoked",
+    "states": "active/inactive; verified/unverified; role present/revoked",
+    "entry": "/login; /admin; /forgot-password; /reset-password/{token}",
+    "evidence": [
+      "DISC-LOGIN-admin",
+      "DISC-LOGOUT-admin",
+      "DISC-LOGIN-receptionist",
+      "DISC-LOGOUT-receptionist",
+      "DISC-LOGIN-doctor",
+      "DISC-LOGOUT-doctor",
+      "DISC-LOGIN-dentist",
+      "DISC-LOGOUT-dentist",
+      "DISC-LOGIN-patient",
+      "DISC-LOGOUT-patient",
+      "DISC-LOGIN-platform",
+      "DISC-LOGOUT-platform",
+      "DISC-LOGIN-free-owner",
+      "DISC-LOGOUT-free-owner",
+      "DISC-LOGIN-expired-owner",
+      "DISC-LOGOUT-expired-owner",
+      "DISC-LOGIN-suspended-owner",
+      "DISC-LOGOUT-suspended-owner",
+      "RETEST-01",
+      "AUTH-GOOGLE",
+      "AUTH-01-R2",
+      "AUTH-07-R3",
+      "KEY-01",
+      "ROLE-CHANGE"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F02",
+    "title": "Registrasi pasien dan pemilik",
+    "roles": [
+      "Guest"
+    ],
+    "actions": "daftar; terms; validasi duplicate/mismatch; verify/resend",
+    "states": "patient/clinic_owner; unverified/verified",
+    "entry": "/register; /register/clinic; /verify-email",
+    "evidence": [
+      "AUTH-02",
+      "AUTH-05"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F03",
+    "title": "Profil dan lifecycle akun sendiri",
+    "roles": [
+      "All roles"
+    ],
+    "actions": "edit nama/email; ganti password; verifikasi ulang; delete dengan password",
+    "states": "email changed/unverified; no history/clinical history; owner with clinic",
+    "entry": "/profile; livewire/profile/*",
+    "evidence": [
+      "AUTH-06-R1",
+      "AUTH-10",
+      "AUTH-09-R2",
+      "PROFILE-EMAIL-R1",
+      "DOCTOR-DELETE-GUARD"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F04",
+    "title": "Onboarding klinik dan aktivasi awal",
+    "roles": [
+      "Clinic Owner"
+    ],
+    "actions": "buat klinik; pilih Free; trial Team sekali; pilih paket berbayar",
+    "states": "no clinic; no subscription; free; trialing; active",
+    "entry": "/onboarding/clinic; /onboarding/plans",
+    "evidence": [
+      "AUTH-03",
+      "AUTH-04-R1"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F05",
+    "title": "Profil klinik, jam, logo dan status",
+    "roles": [
+      "Clinic Admin",
+      "Clinic Owner"
+    ],
+    "actions": "lihat/edit identitas; logo upload/remove; slug; jam; timezone; aktif/nonaktif",
+    "states": "active/inactive; logo absent/present; reserved/valid slug",
+    "entry": "/admin/clinic; /admin/clinic/{id}/edit",
+    "evidence": [
+      "ADM-14",
+      "CLINIC-LOGO",
+      "CLINIC-STATE",
+      "CLINIC-SLUG"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F06",
+    "title": "Akun dokter/resepsionis dan relasi layanan",
+    "roles": [
+      "Clinic Admin",
+      "Clinic Owner"
+    ],
+    "actions": "create; edit profil/password/email; assignment layanan; deactivate/reactivate; kapasitas",
+    "states": "Doctor/Receptionist; unverified/verified; active/inactive; seat available/full",
+    "entry": "/admin/staff; /admin/staff/create; /admin/staff/{id}/edit",
+    "evidence": [
+      "ADM-04",
+      "ADM-05",
+      "ADM-06",
+      "ADM-07",
+      "ADM-08",
+      "AUTH-08",
+      "SUB-SEATS"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F07",
+    "title": "Katalog layanan klinik",
+    "roles": [
+      "Clinic Admin",
+      "Clinic Owner"
+    ],
+    "actions": "create; edit tarif/durasi/deskripsi; deactivate/reactivate; duplicate validation",
+    "states": "active/inactive; unused/booked snapshot; duration5..480",
+    "entry": "/admin/services; /admin/services/create; /admin/services/{id}/edit",
+    "evidence": [
+      "ADM-01",
+      "ADM-02",
+      "ADM-03",
+      "SERVICE-05",
+      "BROWSER-01"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F08",
+    "title": "Sesi praktik dokter",
+    "roles": [
+      "Clinic Admin",
+      "Clinic Owner"
+    ],
+    "actions": "create; edit doctor/day/time/quota; overlap; deactivate; booked-session guard",
+    "states": "active/inactive; empty/referenced; quota1..500; day0..6",
+    "entry": "/admin/doctor-schedules; create; {id}/edit",
+    "evidence": [
+      "RETEST-02",
+      "BOOK-01",
+      "CROSS-08"
+    ],
+    "finding_ids": [
+      "DFU-02"
+    ]
+  },
+  {
+    "id": "F09",
+    "title": "Pasien administratif",
+    "roles": [
+      "Clinic Admin",
+      "Clinic Owner",
+      "Receptionist"
+    ],
+    "actions": "create; detail/history; edit; search; pagination; deactivate/reactivate",
+    "states": "active/inactive; no/one/many records; identity validation",
+    "entry": "/receptionist/patients; create; {id}; {id}/edit; search",
+    "evidence": [
+      "ADM-10",
+      "ADM-11",
+      "ADM-13",
+      "PAT-05",
+      "LIST-01-R1",
+      "UX-05-R1"
+    ],
+    "finding_ids": [
+      "DFU-05",
+      "DFU-06"
+    ]
+  },
+  {
+    "id": "F10",
+    "title": "Website klinik dan penemuan booking",
+    "roles": [
+      "Guest",
+      "Patient"
+    ],
+    "actions": "lihat klinik/dokter/layanan/sesi; masuk dari booking; cari aksi booking ulang",
+    "states": "active/inactive clinic; logged out/in; no prior booking/history",
+    "entry": "{clinic}.localhost/; /clinic/{slug}/booking",
+    "evidence": [
+      "ADM-12",
+      "UX-02",
+      "DISCOVERY-NEGATIVE"
+    ],
+    "finding_ids": [
+      "DFU-11"
+    ]
+  },
+  {
+    "id": "F11",
+    "title": "Booking online, walk-in dan pasien terdaftar",
+    "roles": [
+      "Patient",
+      "Clinic Admin",
+      "Clinic Owner",
+      "Receptionist"
+    ],
+    "actions": "pilih dokter/date/service/session; new/existing patient; submit; idempotency; quota; snapshot",
+    "states": "BOOKED; date today..+30; matching session; full/inactive/unavailable",
+    "entry": "/clinic/{slug}/booking; /receptionist/appointments/create",
+    "evidence": [
+      "BOOK-02-R1",
+      "BOOK-03-R1",
+      "BOOK-04-R1",
+      "CROSS-01-R1",
+      "BOOK-QUOTA",
+      "JOURNEY-02-R1"
+    ],
+    "finding_ids": [
+      "DFU-02",
+      "DFU-11"
+    ]
+  },
+  {
+    "id": "F12",
+    "title": "Detail dan pembatalan appointment",
+    "roles": [
+      "Patient",
+      "Clinic Admin",
+      "Clinic Owner",
+      "Receptionist",
+      "Token holder"
+    ],
+    "actions": "list/detail; cancel with reason; confirm/dismiss; reopen",
+    "states": "BOOKED/CANCELLED/COMPLETED/NO_SHOW; before/after session; queue IN_PROGRESS",
+    "entry": "/patient/appointments; /receptionist/appointments; /booking/{id}/status",
+    "evidence": [
+      "BOOK-05-R1",
+      "CROSS-04",
+      "CROSS-05",
+      "CROSS-06"
+    ],
+    "finding_ids": [
+      "DFU-01",
+      "DFU-02",
+      "DFU-04"
+    ]
+  },
+  {
+    "id": "F13",
+    "title": "Operasional antrean dan filter",
+    "roles": [
+      "Clinic Admin",
+      "Clinic Owner",
+      "Receptionist",
+      "Doctor"
+    ],
+    "actions": "check-in; call FIFO; skip; return; no-show; cancel; filter date/doctor/session/status",
+    "states": "BOOKED/WAITING/CALLED/IN_PROGRESS/COMPLETED/SKIPPED/CANCELLED/NO_SHOW",
+    "entry": "/receptionist/queues; /doctor/queues; /queues/{id}/{action}",
+    "evidence": [
+      "QUEUE-01-R1",
+      "QUEUE-02-R1",
+      "QUEUE-03-R1",
+      "QUEUE-04-R1",
+      "QUEUE-06-R1",
+      "QUEUE-07-R1",
+      "CROSS-02",
+      "CROSS-07",
+      "QUEUE-08",
+      "CROSS-03"
+    ],
+    "finding_ids": [
+      "DFU-01",
+      "DFU-03"
+    ]
+  },
+  {
+    "id": "F14",
+    "title": "Display antrean publik",
+    "roles": [
+      "Guest",
+      "All roles"
+    ],
+    "actions": "lihat board/display; filter yang tersedia; status nonmedis; responsive",
+    "states": "queue empty/active/terminal; no patient identifiers",
+    "entry": "/display/{slugOrToken}; {clinic}.localhost/queue",
+    "evidence": [
+      "BOOK-07",
+      "WS-RECOVERY"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F15",
+    "title": "Mulai, buka dan cari pemeriksaan sendiri",
+    "roles": [
+      "Doctor"
+    ],
+    "actions": "start dari CALLED; reopen active/final; medical-record index; assigned-doctor policy",
+    "states": "CALLED→IN_PROGRESS; IN_PROGRESS/COMPLETED; assigned/unrelated doctor",
+    "entry": "/doctor/queues; /doctor/medical-records; /doctor/visits/{id}",
+    "evidence": [
+      "QUEUE-05-R1",
+      "RME-11",
+      "RME-12-R2",
+      "CROSS-03",
+      "CROSS-09"
+    ],
+    "finding_ids": [
+      "DFU-01",
+      "DFU-08"
+    ]
+  },
+  {
+    "id": "F16",
+    "title": "RME General, vital, diagnosis/tindakan dan autosave",
+    "roles": [
+      "Doctor"
+    ],
+    "actions": "SOAP; vitals; structured add/remove; autosave/manual draft; retry; stale version; offline recovery",
+    "states": "DRAFT/FINAL; dirty/saving/saved/error/conflict; numeric bounds",
+    "entry": "/doctor/visits/{id}; /draft; resources/js/rme-autosave.js",
+    "evidence": [
+      "RME-01",
+      "RME-02",
+      "RME-05",
+      "RME-06",
+      "DENT-03",
+      "JOURNEY-02-R1"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F17",
+    "title": "Alergi longitudinal pasien",
+    "roles": [
+      "Doctor"
+    ],
+    "actions": "create; edit severity/reaction; deactivate; critical banner; acknowledge prescription",
+    "states": "MILD/MODERATE/SEVERE/CRITICAL; active/inactive; stale allergy version",
+    "entry": "/doctor/visits/{id}/allergies; allergy editor",
+    "evidence": [
+      "RME-03",
+      "RME-10"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F18",
+    "title": "Resep dokter dan resep final milik pasien",
+    "roles": [
+      "Doctor",
+      "Patient"
+    ],
+    "actions": "add/remove item; dosage/frequency/quantity/unit/instructions/notes; preview; own final prescription",
+    "states": "draft/incomplete/complete; final/modified; critical-allergy acknowledgement",
+    "entry": "/doctor/visits/{id}; /patient/dashboard (Rx only)",
+    "evidence": [
+      "RME-04",
+      "JOURNEY-02-R1"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F19",
+    "title": "Foto medis privat dan retensi revisi",
+    "roles": [
+      "Doctor"
+    ],
+    "actions": "select/paste; preview/remove; manual upload; private view; historical view",
+    "states": "pending/saved/removed; draft/final/revision before/after",
+    "entry": "/doctor/visits/{id}/photos/{index}; revision photo links",
+    "evidence": [
+      "RME-07",
+      "PHOTO-HISTORY"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F20",
+    "title": "Finalisasi, Modification dan version history",
+    "roles": [
+      "Doctor"
+    ],
+    "actions": "confirm/dismiss finalize; complete; correction reason; revision compare; preserve history",
+    "states": "DRAFT→FINAL; COMPLETED; FINAL remains FINAL after correction",
+    "entry": "/doctor/visits/{id}/complete; /correct; version history",
+    "evidence": [
+      "RME-08-R2",
+      "RME-09-R3",
+      "CROSS-12",
+      "JOURNEY-02-R1"
+    ],
+    "finding_ids": [
+      "DFU-01"
+    ]
+  },
+  {
+    "id": "F21",
+    "title": "Odontogram dan entitlement",
+    "roles": [
+      "Doctor"
+    ],
+    "actions": "select FDI tooth; apply condition; persist; edit correction; read-only history",
+    "states": "32 permanent teeth; unknown/healthy/caries/filled/missing/crown; active/revoked/expired addon",
+    "entry": "dental-chart.blade.php; medical_records.odontogram",
+    "evidence": [
+      "DENT-01",
+      "DENT-02"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F22",
+    "title": "Dashboard setiap role dan filter periode",
+    "roles": [
+      "Clinic Admin",
+      "Clinic Owner",
+      "Receptionist",
+      "Doctor",
+      "Patient",
+      "Platform Admin"
+    ],
+    "actions": "lihat tugas/status; periode; shortcut; operational/service-value metrics; prescriptions",
+    "states": "empty/populated; valid/reversed range; role-specific content",
+    "entry": "/admin/dashboard; /receptionist/dashboard; /doctor/dashboard; /patient/dashboard; /platform/dashboard",
+    "evidence": [
+      "UX-04",
+      "JOURNEY-02-R1"
+    ],
+    "finding_ids": [
+      "DFU-07",
+      "DFU-08"
+    ]
+  },
+  {
+    "id": "F23",
+    "title": "Notification center",
+    "roles": [
+      "All roles"
+    ],
+    "actions": "list; open/mark read; read-all; badge; navigate resource",
+    "states": "unread/read; empty/paginated; own/foreign notification",
+    "entry": "/notifications; /notifications/read-all; /notifications/{id}/read",
+    "evidence": [
+      "CROSS-10"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F24",
+    "title": "Audit aktivitas tenant",
+    "roles": [
+      "Clinic Admin",
+      "Clinic Owner"
+    ],
+    "actions": "filter tanggal/aksi/aktor; pagination; inspect safe references",
+    "states": "empty/populated; filtered/unfiltered; tenant scoped",
+    "entry": "/admin/audit-logs",
+    "evidence": [
+      "RETEST-03",
+      "UX-03"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F25",
+    "title": "Subscription tenant, invoice dan pembatasan operasional",
+    "roles": [
+      "Clinic Owner",
+      "All roles (banner/operational rules)"
+    ],
+    "actions": "history/detail; plan selection/renewal; read-only banner; seat/booking limits; finish-active-visit exception; reminders",
+    "states": "free/trialing/active/expired/suspended; pending/paid/failed/expired/cancelled/review/refunded invoices",
+    "entry": "/subscription/payments; /onboarding/plans; SubscriptionService",
+    "evidence": [
+      "SUB-01",
+      "SUB-04",
+      "SUB-05",
+      "SUB-SEATS",
+      "JOURNEY-02-R1"
+    ],
+    "finding_ids": [
+      "DFU-12"
+    ]
+  },
+  {
+    "id": "F26",
+    "title": "DOKU checkout, notification dan reconciliation",
+    "roles": [
+      "Clinic Owner",
+      "Platform Admin",
+      "System"
+    ],
+    "actions": "checkout; return display; validated notification; reconcile; failure recovery",
+    "states": "pending/paid/failed/expired/cancelled/review/refunded; valid/invalid callback",
+    "entry": "DokuPaymentService; DokuClient; /payments/doku/notification; payments/{id}/reconcile",
+    "evidence": [
+      "SUB-02",
+      "DOKU-SUCCESS",
+      "DOKU-RECONCILE",
+      "DOKU-WEBHOOK"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F27",
+    "title": "Pembelian, status dan histori add-on owner",
+    "roles": [
+      "Clinic Owner"
+    ],
+    "actions": "eligibility; prorated quote; combined/separate checkout; active/history/invoice; refund/revocation",
+    "states": "unavailable/free/trial; paid eligible; pending/review; active/revoked/expired",
+    "entry": "/subscription/addons; /subscription/addons/odontogram",
+    "evidence": [
+      "SUB-03",
+      "ADDON-OWNER",
+      "DENT-02"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F28",
+    "title": "Tenant directory dan detail platform",
+    "roles": [
+      "Platform Admin"
+    ],
+    "actions": "search; list; metadata/detail; commercial history",
+    "states": "no match/many tenants; free/trialing/active/expired/suspended",
+    "entry": "/platform/tenants; /platform/tenants/{id}",
+    "evidence": [
+      "PLAT-01"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F29",
+    "title": "Katalog paket, harga dan add-on platform",
+    "roles": [
+      "Platform Admin"
+    ],
+    "actions": "toggle plans; edit/toggle prices; edit/toggle addon; keep invoice snapshots",
+    "states": "active/inactive; valid/invalid amount; old/new checkout snapshot",
+    "entry": "/platform/subscription-plans; subscription-prices/{id}; addon-prices/{id}",
+    "evidence": [
+      "PLAT-02",
+      "PLAT-03",
+      "PLAT-04"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F30",
+    "title": "Grant dan downgrade manual platform",
+    "roles": [
+      "Platform Admin"
+    ],
+    "actions": "paid grant with reason; schedule equal/higher grant; immediate downgrade Free; retain periods",
+    "states": "no/current/future periods; active/revoked; reason absent/present",
+    "entry": "/platform/tenants/{id}/subscription-grants",
+    "evidence": [
+      "PLAT-05",
+      "GRANT-DOUBLE"
+    ],
+    "finding_ids": [
+      "DFU-12"
+    ]
+  },
+  {
+    "id": "F31",
+    "title": "Pencatatan refund dan event pembayaran",
+    "roles": [
+      "Platform Admin"
+    ],
+    "actions": "find invoice; review/paid detail; record manual refund; inspect events/history",
+    "states": "paid/review→refunded; repeated/invalid-state refund",
+    "entry": "/platform/payments; /platform/payments/{id}/refund",
+    "evidence": [
+      "PLAT-06"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F32",
+    "title": "ETA/confidence pada tracker pasien dan board",
+    "roles": [
+      "Patient",
+      "Token holder",
+      "Guest"
+    ],
+    "actions": "view ETA after check-in; fallback duration; history/confidence; terminal suppression",
+    "states": "BOOKED(no ETA); WAITING/CALLED/IN_PROGRESS; terminal; low/medium/high sample confidence",
+    "entry": "QueueEtaService; appointment-queue-status; public queue",
+    "evidence": [
+      "ETA-01-R2"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F33",
+    "title": "Pembaruan antrean, polling dan reconnect UI",
+    "roles": [
+      "All queue users"
+    ],
+    "actions": "subscribe; refetch; polling; online/offline/reconnect; preserve focus and feedback",
+    "states": "connected/reconnecting/disconnected/offline/refetching; stale/current DOM",
+    "entry": "resources/js/realtime.js; queue-realtime.js",
+    "evidence": [
+      "ETA-01-R2",
+      "CROSS-02"
+    ],
+    "finding_ids": [
+      "DFU-03"
+    ]
+  },
+  {
+    "id": "F34",
+    "title": "Login/registrasi Google",
+    "roles": [
+      "Guest",
+      "Patient"
+    ],
+    "actions": "terms acknowledgement; OAuth redirect/callback; linked-account handling",
+    "states": "provider configured/unavailable; new/existing account; callback success/failure",
+    "entry": "/auth/google; /auth/google/callback",
+    "evidence": [
+      "AUTH-GOOGLE"
+    ],
+    "finding_ids": []
+  },
+  {
+    "id": "F35",
+    "title": "Review kandidat pasien duplikat",
+    "roles": [
+      "Clinic Admin",
+      "Clinic Owner",
+      "Receptionist"
+    ],
+    "actions": "detect candidate; identity review; choose existing profile; confirm different person; signed review token",
+    "states": "no/one/many candidates; reviewed/unreviewed; shared family phone; inactive candidate",
+    "entry": "PatientDuplicateService; /receptionist/patients/duplicates; patient-duplicate-review",
+    "evidence": [
+      "ADM-12"
+    ],
+    "finding_ids": [
+      "DFU-05"
+    ]
+  }
+]

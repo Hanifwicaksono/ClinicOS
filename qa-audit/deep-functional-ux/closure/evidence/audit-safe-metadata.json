@@ -1,0 +1,44 @@
+[
+  {
+    "key": "from",
+    "value": "CALLED",
+    "action": "queue.status_changed",
+    "clinic": 12
+  },
+  {
+    "key": "to",
+    "value": "IN_PROGRESS",
+    "action": "queue.status_changed",
+    "clinic": 12
+  },
+  {
+    "key": "source",
+    "value": "ONLINE",
+    "action": "appointment.created",
+    "clinic": 13
+  },
+  {
+    "key": "appointment_id",
+    "value": "75",
+    "action": "visit.completed",
+    "clinic": 12
+  },
+  {
+    "key": "queue_id",
+    "value": "75",
+    "action": "visit.started",
+    "clinic": 12
+  },
+  {
+    "key": "visit_id",
+    "value": "17",
+    "action": "medical_record.draft_saved",
+    "clinic": 6
+  },
+  {
+    "key": "revision_id",
+    "value": "7",
+    "action": "medical_record.corrected",
+    "clinic": 6
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "duration_ms": 30598,
+  "steps": [
+    "Opening: owner reviews subscription, admin reviews schedules, platform reviews tenants",
+    "Patient books through the actual public form and receives queue confirmation",
+    "Receptionist checks in, calls, skips a missed patient, returns and calls again through UI",
+    "Human error: incomplete finalization is refused without corrupting the draft",
+    "Doctor finalizes; appointment, visit, record and queue reach final states",
+    "Closing: patient reviews own appointment, admin/owner review operational dashboards"
+  ],
+  "roles": 5,
+  "owner_persona": true,
+  "developer_data_repairs_during_workflow": 0,
+  "business_clock_advanced": false,
+  "real_eight_hour_shift": "NOT TESTED",
+  "page_errors": []
+}

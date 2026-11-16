@@ -1,0 +1,78 @@
+[
+  {
+    "label": "ClinicOS",
+    "href": "/dashboard"
+  },
+  {
+    "label": "ClinicOS\n                    Clinic workspace",
+    "href": "/dashboard"
+  },
+  {
+    "label": "Dashboard",
+    "href": "/patient/dashboard"
+  },
+  {
+    "label": "Booking saya",
+    "href": "/patient/appointments"
+  },
+  {
+    "label": "Notifikasi\n                0",
+    "href": "/notifications"
+  },
+  {
+    "label": "A\n                Ahmad Fauzipatient@clinicos.test",
+    "href": "/profile"
+  },
+  {
+    "label": "Lihat booking saya",
+    "href": "/patient/appointments"
+  },
+  {
+    "label": "Kelola profil akun",
+    "href": "/profile"
+  },
+  {
+    "label": "ClinicOS",
+    "href": "/dashboard"
+  },
+  {
+    "label": "ClinicOS\n                    Clinic workspace",
+    "href": "/dashboard"
+  },
+  {
+    "label": "Dashboard",
+    "href": "/patient/dashboard"
+  },
+  {
+    "label": "Booking saya",
+    "href": "/patient/appointments"
+  },
+  {
+    "label": "Notifikasi\n                0",
+    "href": "/notifications"
+  },
+  {
+    "label": "A\n                Ahmad Fauzipatient@clinicos.test",
+    "href": "/profile"
+  },
+  {
+    "label": "Klinik Sehat Sentosa13 November 2026 · dr. Budi SantosoKonsultasi Umum · DEMO-Q-001KS-101BOOKED",
+    "href": "/patient/appointments/13"
+  },
+  {
+    "label": "Klinik Sehat Sentosa13 November 2026 · QA Deep DokterQA Deep Konsultasi · KLI-DB8FRL6GKS-002CANCELLED",
+    "href": "/patient/appointments/23"
+  },
+  {
+    "label": "Klinik Sehat Sentosa13 November 2026 · QA Deep DokterQA Deep Konsultasi · KLI-VWCWRRRMKS-004CANCELLED",
+    "href": "/patient/appointments/25"
+  },
+  {
+    "label": "Klinik Sehat Sentosa13 November 2026 · dr. Budi SantosoKonsultasi Umum · KLI-XXIPNNG0KS-109NO_SHOW",
+    "href": "/patient/appointments/26"
+  },
+  {
+    "label": "Klinik Sehat Sentosa01 November 2026 · dr. Budi SantosoKonsultasi Umum · KLI-RM-001KS-001COMPLETED",
+    "href": "/patient/appointments/2"
+  }
+]

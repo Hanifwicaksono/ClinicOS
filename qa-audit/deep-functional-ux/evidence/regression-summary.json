@@ -1,0 +1,7 @@
+{
+  "exit": 0,
+  "signal": null,
+  "database": "SQLite :memory:",
+  "storage": "disposable",
+  "at": "2026-11-13T07:24:49.818Z"
+}

@@ -1,0 +1,19 @@
+{
+  "javascript_initial": {
+    "passed": 13,
+    "failed": 2,
+    "reason": "Native HTMLElement.inert defaults false; fake Form lacked this property. Added inert=false to test fixture; same tests preserved and passed."
+  },
+  "legacy_chrome_initial": {
+    "tests": 2,
+    "passed": 1,
+    "failed": 1,
+    "reason": "P1 assertion expected pre-DFU message. Kept data-integrity assertions; aligned message with existing frozen-session policy."
+  },
+  "backend_initial_full": {
+    "tests": 401,
+    "passed": 400,
+    "errors": 1,
+    "reason": "One subscription fixture used00:00-23:59 session outside its clinic hours. Explicit clinic hours now match its intended all-day session; no assertion removed."
+  }
+}

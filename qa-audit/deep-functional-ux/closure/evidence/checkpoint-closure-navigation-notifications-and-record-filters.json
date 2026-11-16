@@ -1,0 +1,11 @@
+{
+  "phase": "closure-navigation-notifications-and-record-filters",
+  "at": "2026-11-13T16:32:34.603Z",
+  "counts": {
+    "PASS": 133,
+    "FAIL": 59,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

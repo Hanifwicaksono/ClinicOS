@@ -1,0 +1,11 @@
+{
+  "phase": "final-phase1",
+  "at": "2026-11-13T09:16:58.860Z",
+  "counts": {
+    "PASS": 63,
+    "FAIL": 18,
+    "BLOCKED": 1,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

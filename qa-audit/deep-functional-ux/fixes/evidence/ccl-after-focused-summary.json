@@ -1,0 +1,33 @@
+{
+  "tests": 23,
+  "passed": 17,
+  "failed": 6,
+  "result": "failed",
+  "assertions": 139,
+  "failures": [
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_new_booking_obeys_changed_hours_without_rewriting_history_or_replay",
+      "message": "Failed asserting that two arrays are identical."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set \"expired\"",
+      "message": "Failed asserting that two arrays are identical."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set \"trial\"",
+      "message": "Failed asserting that two arrays are identical."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set \"scheduled\"",
+      "message": "Failed asserting that two arrays are identical."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set \"future\"",
+      "message": "Failed asserting that two arrays are identical."
+    },
+    {
+      "test": "Tests\\Feature\\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set \"suspended\"",
+      "message": "Failed asserting that two arrays are identical."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-13",
+  "timezone": "Asia/Bangkok",
+  "features": 36,
+  "roles": [
+    "Clinic Admin",
+    "Doctor",
+    "Patient",
+    "Platform Admin",
+    "Receptionist"
+  ],
+  "page_observations": 213,
+  "page_families": 51,
+  "route_registry": 119,
+  "active_scenarios": 124,
+  "counts": {
+    "PASS": 102,
+    "FAIL": 17,
+    "BLOCKED": 5,
+    "NOT TESTED": 0
+  },
+  "attempts": 165,
+  "superseded_attempts": 41,
+  "planned_gap_scenarios": 72,
+  "unique_findings": 12,
+  "severity": {
+    "P1": 1,
+    "P2": 10,
+    "P3": 1
+  },
+  "backend": {
+    "tests": 363,
+    "assertions": 2438,
+    "result": "passed"
+  },
+  "coverage_claim": "Inventory complete for discovered groups; exhaustive execution incomplete; see explicit gaps."
+}

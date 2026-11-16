@@ -39,7 +39,7 @@ class RmeGeneralDentalTest extends TestCase
     {
         $context = $this->inProgressVisitContext();
         $this->enableOdontogram($context['clinic']);
-        $payload = $this->medicalPayload();
+        $payload = $this->medicalPayload($context['visit']);
         $payload['odontogram'] = [
             ['tooth_number' => 11, 'condition' => 'caries'],
             ['tooth_number' => 26, 'condition' => 'filled'],
@@ -53,10 +53,15 @@ class RmeGeneralDentalTest extends TestCase
         $record = $context['visit']->medicalRecord->refresh();
         $this->assertSame(MedicalRecordStatus::Draft, $record->status);
         $this->assertSame('Nyeri gigi kanan atas.', $record->chief_complaint);
+        $odontogram = array_map(static function (array $tooth): array {
+            ksort($tooth);
+
+            return $tooth;
+        }, $record->odontogram);
         $this->assertSame([
-            ['tooth_number' => 11, 'condition' => 'caries'],
-            ['tooth_number' => 26, 'condition' => 'filled'],
-        ], $record->odontogram);
+            ['condition' => 'caries', 'tooth_number' => 11],
+            ['condition' => 'filled', 'tooth_number' => 26],
+        ], $odontogram);
 
         $this->actingAs($context['doctor_user'])
             ->get(route('doctor.visits.show', $context['visit']))
@@ -69,7 +74,7 @@ class RmeGeneralDentalTest extends TestCase
     {
         $context = $this->inProgressVisitContext();
         $this->enableOdontogram($context['clinic']);
-        $payload = $this->medicalPayload();
+        $payload = $this->medicalPayload($context['visit']);
         $payload['vital_signs'] = ['systolic' => 999];
         $payload['odontogram'] = [
             ['tooth_number' => 99, 'condition' => 'fractured'],
@@ -107,7 +112,7 @@ class RmeGeneralDentalTest extends TestCase
             ->assertSeeText('Penisilin')
             ->assertSeeText('Saya telah meninjau alergi kritis pasien');
 
-        $payload = $this->medicalPayload();
+        $payload = $this->medicalPayload($context['visit']);
         $payload['prescription_items'] = [[
             'medicine_name' => 'Amoxicillin 500 mg',
             'dosage' => '1 kapsul',
@@ -141,7 +146,7 @@ class RmeGeneralDentalTest extends TestCase
         $otherDoctor = User::factory()->forClinic($otherClinic)->create();
         $otherDoctor->assignRole('Doctor');
         Doctor::factory()->for($otherClinic)->for($otherDoctor)->create();
-        $payload = $this->medicalPayload();
+        $payload = $this->medicalPayload($context['visit']);
         $payload['odontogram'] = [['tooth_number' => 11, 'condition' => 'caries']];
 
         $this->actingAs($otherDoctor)
@@ -155,7 +160,7 @@ class RmeGeneralDentalTest extends TestCase
     {
         $context = $this->inProgressVisitContext();
         $this->enableOdontogram($context['clinic']);
-        $payload = $this->medicalPayload();
+        $payload = $this->medicalPayload($context['visit']);
         $payload['odontogram'] = [['tooth_number' => 11, 'condition' => 'caries']];
 
         $this->actingAs($context['doctor_user'])
@@ -174,6 +179,7 @@ class RmeGeneralDentalTest extends TestCase
             ->put(route('doctor.visits.correct', $context['visit']), $payload)
             ->assertSessionHasErrors('correction_reason');
 
+        $payload = [...$payload, ...$this->recordVersions($context['visit'])];
         $payload['correction_reason'] = 'Karies telah ditangani dengan restorasi permanen.';
         $this->actingAs($context['doctor_user'])
             ->put(route('doctor.visits.correct', $context['visit']), $payload)
@@ -190,7 +196,7 @@ class RmeGeneralDentalTest extends TestCase
     {
         $context = $this->inProgressVisitContext();
         $this->enableOdontogram($context['clinic']);
-        $payload = $this->medicalPayload();
+        $payload = $this->medicalPayload($context['visit']);
         $payload['odontogram'] = [['tooth_number' => 11, 'condition' => 'caries']];
 
         $this->actingAs($context['doctor_user'])
@@ -210,6 +216,7 @@ class RmeGeneralDentalTest extends TestCase
             ->assertSessionHasErrors('odontogram');
 
         unset($payload['odontogram']);
+        $payload = [...$payload, ...$this->recordVersions($context['visit'])];
         $payload['assessment'] = 'Rencana pemeriksaan umum dilanjutkan.';
         $this->actingAs($context['doctor_user'])
             ->put(route('doctor.visits.complete', $context['visit']), $payload)
@@ -292,9 +299,10 @@ class RmeGeneralDentalTest extends TestCase
     }
 
     /** @return array<string, mixed> */
-    private function medicalPayload(): array
+    private function medicalPayload(Visit $visit): array
     {
         return [
+            ...$this->recordVersions($visit),
             'chief_complaint' => 'Nyeri gigi kanan atas.',
             'subjective' => 'Nyeri saat mengunyah sejak tiga hari.',
             'objective' => 'Karies tampak pada gigi 11.',

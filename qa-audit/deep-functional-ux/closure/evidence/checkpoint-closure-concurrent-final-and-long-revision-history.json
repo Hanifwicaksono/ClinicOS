@@ -1,0 +1,11 @@
+{
+  "phase": "closure-concurrent-final-and-long-revision-history",
+  "at": "2026-11-13T16:53:11.489Z",
+  "counts": {
+    "PASS": 188,
+    "FAIL": 65,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

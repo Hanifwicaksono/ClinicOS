@@ -1,0 +1,10 @@
+{
+  "mode": "js",
+  "status": 0,
+  "error": null,
+  "command": "js",
+  "args": [
+    "tests/patient-duplicates.test.mjs"
+  ],
+  "finished": "2026-11-15T04:49:04.552Z"
+}

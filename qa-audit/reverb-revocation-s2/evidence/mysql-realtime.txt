@@ -1,0 +1,317 @@
+PHPUnit 12.5.37 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.5
+Configuration: C:\laragon\www\ClinicOS\phpunit.xml
+
+Time: 00:00.353, Memory: 38.00 MB
+
+There were 18 errors:
+
+1) Tests\Feature\RealtimeRevocationTest::test_security_save_epoch_and_request_are_atomic
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+2) Tests\Feature\RealtimeRevocationTest::test_inactive_broadcast_authorization_returns_401_instead_of_a_login_document
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+3) Tests\Feature\RealtimeRevocationTest::test_password_change_invalidates_old_version_in_same_save
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+4) Tests\Feature\RealtimeRevocationTest::test_noop_and_nonsecurity_profile_save_do_not_revoke
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+5) Tests\Feature\RealtimeRevocationTest::test_stale_models_cannot_reuse_or_decrease_epoch
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+6) Tests\Feature\RealtimeRevocationTest::test_outer_rollback_restores_user_epoch_requests_and_jobs
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+7) Tests\Feature\RealtimeRevocationTest::test_role_revoke_and_restore_do_not_restore_old_epoch
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+8) Tests\Feature\RealtimeRevocationTest::test_role_permission_change_fans_out_to_members_only
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+9) Tests\Feature\RealtimeRevocationTest::test_direct_revoke_preserves_inherited_permission_but_bumps_epoch
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+10) Tests\Feature\RealtimeRevocationTest::test_permission_and_role_delete_invalidate_members
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+11) Tests\Feature\RealtimeRevocationTest::test_tenant_change_and_reactivation_each_invalidate_epoch
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+12) Tests\Feature\RealtimeRevocationTest::test_fence_cancels_deferred_old_write_without_rechecking_authority
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+13) Tests\Feature\RealtimeRevocationTest::test_fence_cannot_acknowledge_an_admitted_active_send
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+14) Tests\Feature\RealtimeRevocationTest::test_transport_http_success_cannot_manufacture_a_fence_ack
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+15) Tests\Feature\RealtimeRevocationTest::test_acknowledged_retry_is_idempotent_and_does_not_contact_transport
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+16) Tests\Feature\RealtimeRevocationTest::test_signed_identity_binds_user_epoch_tenant_application_and_channel
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+17) Tests\Feature\RealtimeRevocationTest::test_different_queue_database_or_sync_driver_rolls_back_security_change
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+18) Tests\Feature\RealtimeRevocationTest::test_configured_role_side_assignment_and_permission_side_sync_are_versioned
+Exception: The C:\laragon\www\ClinicOS\C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv directory must be present and writable.
+
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:179
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RealtimeRevocationTest.php:29
+
+[37;41mERRORS![0m
+[37;41mTests: 18[0m[37;41m, Assertions: 0[0m[37;41m, Errors: 18[0m[37;41m.[0m

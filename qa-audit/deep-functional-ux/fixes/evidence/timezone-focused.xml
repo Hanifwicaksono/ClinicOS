@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\DeepFunctionalRegressionTest" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" tests="15" assertions="109" errors="3" failures="0" skipped="0" time="2.515736">
+    <testsuite name="Tests\Feature\DeepFunctionalRegressionTest::test_started_visit_cannot_be_cancelled_and_can_still_be_finalized" tests="4" assertions="32" errors="0" failures="0" skipped="0" time="1.028058">
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;patient&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.689817"/>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;receptionist&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.113671"/>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;admin&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.111858"/>
+      <testcase name="test_started_visit_cannot_be_cancelled_and_can_still_be_finalized with data set &quot;token&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="45" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="8" time="0.112713"/>
+    </testsuite>
+    <testsuite name="Tests\Feature\DeepFunctionalRegressionTest::test_used_session_keeps_its_day_and_times" tests="3" assertions="18" errors="0" failures="0" skipped="0" time="0.312178">
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;day&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="81" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="6" time="0.094689"/>
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;start&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="81" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="6" time="0.106941"/>
+      <testcase name="test_used_session_keeps_its_day_and_times with data set &quot;end&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="81" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="6" time="0.110548"/>
+    </testsuite>
+    <testcase name="test_replayed_grant_creates_one_period_and_one_audit_event" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="98" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="12" time="0.108847"/>
+    <testcase name="test_http_grant_requires_a_request_identifier" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="117" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="4" time="0.091641"/>
+    <testcase name="test_patient_phone_validation_is_shared_by_all_entry_points" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="128" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="22" time="0.125152"/>
+    <testcase name="test_rejected_forms_render_errors_and_retain_input" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="146" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="11" time="0.099961"/>
+    <testcase name="test_patient_can_choose_a_known_clinic_or_use_an_explicit_clinic_code" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="162" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="10" time="0.505131"/>
+    <testsuite name="Tests\Feature\DeepFunctionalRegressionTest::test_visit_and_queue_instants_use_clinic_timezone" tests="3" assertions="0" errors="3" failures="0" skipped="0" time="0.244768">
+      <testcase name="test_visit_and_queue_instants_use_clinic_timezone with data set &quot;WIB&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="183" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="0" time="0.085750">
+        <error type="BadMethodCallException">Tests\Feature\DeepFunctionalRegressionTest::test_visit_and_queue_instants_use_clinic_timezone with data set "WIB"&#13;
+BadMethodCallException: Call to undefined method Illuminate\Database\Eloquent\Relations\HasOne::getOwnerKeyName()
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:67
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:36
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:52
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Relation.php:625
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\BelongsToRelationship.php:57
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:578
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Arr.php:858
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Collection.php:834
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:578
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:559
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:566
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:850
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:561
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:546
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:530
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\GuardsAttributes.php:188
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:529
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:442
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:331
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:328
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:188</error>
+      </testcase>
+      <testcase name="test_visit_and_queue_instants_use_clinic_timezone with data set &quot;WITA&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="183" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="0" time="0.079112">
+        <error type="BadMethodCallException">Tests\Feature\DeepFunctionalRegressionTest::test_visit_and_queue_instants_use_clinic_timezone with data set "WITA"&#13;
+BadMethodCallException: Call to undefined method Illuminate\Database\Eloquent\Relations\HasOne::getOwnerKeyName()
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:67
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:36
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:52
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Relation.php:625
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\BelongsToRelationship.php:57
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:578
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Arr.php:858
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Collection.php:834
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:578
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:559
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:566
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:850
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:561
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:546
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:530
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\GuardsAttributes.php:188
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:529
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:442
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:331
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:328
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:188</error>
+      </testcase>
+      <testcase name="test_visit_and_queue_instants_use_clinic_timezone with data set &quot;WIT&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php" line="183" class="Tests\Feature\DeepFunctionalRegressionTest" classname="Tests.Feature.DeepFunctionalRegressionTest" assertions="0" time="0.079905">
+        <error type="BadMethodCallException">Tests\Feature\DeepFunctionalRegressionTest::test_visit_and_queue_instants_use_clinic_timezone with data set "WIT"&#13;
+BadMethodCallException: Call to undefined method Illuminate\Database\Eloquent\Relations\HasOne::getOwnerKeyName()
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:67
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:36
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:52
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Relation.php:625
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\BelongsToRelationship.php:57
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:578
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Arr.php:858
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Collection.php:834
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:578
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:559
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:566
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:850
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:561
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:546
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:530
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\GuardsAttributes.php:188
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:529
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:442
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:331
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:328
+C:\laragon\www\ClinicOS\tests\Feature\DeepFunctionalRegressionTest.php:188</error>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testsuites>

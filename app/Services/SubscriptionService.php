@@ -99,6 +99,7 @@ class SubscriptionService
         User $actor,
         string $reason,
         ?CarbonImmutable $at = null,
+        ?string $grantRequestId = null,
     ): SubscriptionPeriod {
         $reason = trim($reason);
 
@@ -106,9 +107,23 @@ class SubscriptionService
             throw new DomainException('Alasan grant wajib diisi.');
         }
 
-        return DB::transaction(function () use ($clinic, $price, $actor, $reason, $at): SubscriptionPeriod {
+        return DB::transaction(function () use ($clinic, $price, $actor, $reason, $at, $grantRequestId): SubscriptionPeriod {
+            Clinic::query()->lockForUpdate()->findOrFail($clinic->id);
             $at = ($at ?? CarbonImmutable::now())->utc();
             $price = SubscriptionPrice::query()->with('plan')->lockForUpdate()->findOrFail($price->id);
+
+            if ($grantRequestId !== null) {
+                $existing = SubscriptionPeriod::query()->where('grant_request_id', $grantRequestId)->lockForUpdate()->first();
+                if ($existing !== null) {
+                    if ($existing->clinic_id !== $clinic->id || $existing->granted_by_user_id !== $actor->id
+                        || $existing->subscription_plan_id !== $price->subscription_plan_id
+                        || $existing->duration_months !== $price->duration_months || $existing->reason !== $reason) {
+                        throw new DomainException('Identitas request grant sudah dipakai untuk permintaan yang berbeda. Muat ulang formulir.');
+                    }
+
+                    return $existing;
+                }
+            }
 
             if (! $price->is_active || ! $price->plan->is_active) {
                 throw new DomainException('Paket atau harga tidak aktif.');
@@ -130,6 +145,7 @@ class SubscriptionService
                 'clinic_id' => $clinic->id,
                 'subscription_plan_id' => $price->plan->id,
                 'granted_by_user_id' => $actor->id,
+                'grant_request_id' => $grantRequestId,
                 'plan_code' => $price->plan->code,
                 'plan_name' => $price->plan->name,
                 'duration_months' => $price->duration_months,

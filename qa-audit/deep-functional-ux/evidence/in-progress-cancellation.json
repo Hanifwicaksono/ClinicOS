@@ -1,0 +1,7 @@
+{
+  "appointment_id": 25,
+  "visit_id": 16,
+  "appointment": "CANCELLED",
+  "queue": "CANCELLED",
+  "visit": "IN_PROGRESS"
+}

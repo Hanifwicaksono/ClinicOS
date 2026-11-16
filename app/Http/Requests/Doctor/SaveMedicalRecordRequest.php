@@ -34,8 +34,8 @@ class SaveMedicalRecordRequest extends FormRequest
             : ['nullable', 'boolean'];
 
         return [
-            'record_version' => [Rule::requiredIf($this->expectsJson() && $this->routeIs('doctor.visits.save')), 'nullable', 'integer', 'min:0'],
-            'allergy_version' => ['nullable', 'string', 'size:64'],
+            'record_version' => ['required', 'integer', 'min:0'],
+            'allergy_version' => ['required', 'string', 'size:64'],
             'chief_complaint' => ['nullable', 'string', 'max:5000'],
             'subjective' => ['nullable', 'string', 'max:10000'],
             'objective' => ['nullable', 'string', 'max:10000'],

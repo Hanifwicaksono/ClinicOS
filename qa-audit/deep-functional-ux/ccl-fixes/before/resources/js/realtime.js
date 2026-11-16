@@ -1,0 +1,368 @@
+import { QueueRealtimeClient } from './queue-realtime';
+
+window.QueueRealtimeClient = QueueRealtimeClient;
+
+const subscriptions = new Set();
+const queueClients = new Map();
+const receivedNotificationIds = new Set();
+let refreshTimer;
+let connectionState = 'reconnecting';
+let highlightedQueueId = null;
+
+const connectionPresentations = {
+    connected: {
+        label: 'Terhubung · diperbarui otomatis',
+        dotClasses: ['bg-emerald-400'],
+    },
+    refetching: {
+        label: 'Memperbarui data…',
+        dotClasses: ['bg-sky-400', 'animate-pulse'],
+    },
+    reconnecting: {
+        label: 'Menghubungkan kembali…',
+        dotClasses: ['bg-amber-400', 'animate-pulse'],
+    },
+    disconnected: {
+        label: 'Koneksi terputus · menampilkan data terakhir',
+        dotClasses: ['bg-red-400'],
+    },
+    offline: {
+        label: 'Realtime tidak tersedia · diperbarui berkala',
+        dotClasses: ['bg-amber-400'],
+    },
+};
+
+function renderConnectionState() {
+    const presentation = connectionPresentations[connectionState] ?? connectionPresentations.disconnected;
+
+    document.querySelectorAll('[data-realtime-connection-state]').forEach((element) => {
+        const label = element.querySelector('[data-realtime-connection-label]');
+        const dot = element.querySelector('[data-realtime-connection-dot]');
+
+        element.dataset.realtimeConnectionState = connectionState;
+
+        if (label) {
+            label.textContent = presentation.label;
+        }
+
+        if (dot) {
+            dot.classList.remove('bg-emerald-400', 'bg-sky-400', 'bg-amber-400', 'bg-red-400', 'animate-pulse');
+            dot.classList.add(...presentation.dotClasses);
+        }
+    });
+}
+
+function setConnectionState(state) {
+    connectionState = state;
+    renderConnectionState();
+}
+
+function isRealtimeConnected() {
+    return window.Echo?.connector?.pusher?.connection?.state === 'connected';
+}
+
+function captureRealtimeFocus(region) {
+    const activeElement = document.activeElement;
+
+    if (! activeElement || ! region.contains(activeElement)) {
+        return null;
+    }
+
+    if (activeElement.id) {
+        return { id: activeElement.id };
+    }
+
+    const container = activeElement.closest('a[href], form[action]');
+
+    if (! container || ! region.contains(container)) {
+        return null;
+    }
+
+    const tag = container.tagName.toLowerCase();
+    const attribute = tag === 'form' ? 'action' : 'href';
+    const value = container.getAttribute(attribute);
+    const matches = [...region.querySelectorAll(`${tag}[${attribute}]`)]
+        .filter((candidate) => candidate.getAttribute(attribute) === value);
+
+    return { tag, attribute, value, index: matches.indexOf(container) };
+}
+
+function restoreRealtimeFocus(region, focusState) {
+    if (! focusState) {
+        return;
+    }
+
+    if (focusState.id) {
+        [...region.querySelectorAll('[id]')]
+            .find((candidate) => candidate.id === focusState.id)
+            ?.focus({ preventScroll: true });
+
+        return;
+    }
+
+    const matches = [...region.querySelectorAll(`${focusState.tag}[${focusState.attribute}]`)]
+        .filter((candidate) => candidate.getAttribute(focusState.attribute) === focusState.value);
+    const container = matches[focusState.index];
+    const target = focusState.tag === 'form'
+        ? container?.querySelector('button, input, select, textarea')
+        : container;
+
+    target?.focus({ preventScroll: true });
+}
+
+async function refreshRealtimeRegion(showRefetching = true) {
+    const currentRegion = document.querySelector('[data-realtime-refresh-root]');
+
+    if (! currentRegion) {
+        return false;
+    }
+
+    try {
+        if (showRefetching) {
+            setConnectionState('refetching');
+        }
+
+        const response = await fetch(window.location.href, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            credentials: 'same-origin',
+        });
+
+        if (! response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const documentFromServer = new DOMParser().parseFromString(await response.text(), 'text/html');
+        const freshRegion = documentFromServer.querySelector('[data-realtime-refresh-root]');
+
+        if (! freshRegion) {
+            throw new Error('Realtime refresh region tidak ditemukan.');
+        }
+
+        const focusState = captureRealtimeFocus(currentRegion);
+        currentRegion.replaceWith(freshRegion);
+        restoreRealtimeFocus(freshRegion, focusState);
+        setConnectionState(window.Echo
+            ? (isRealtimeConnected() ? 'connected' : 'disconnected')
+            : 'offline');
+
+        if (Number.isInteger(highlightedQueueId)) {
+            const highlightedQueue = freshRegion.querySelector(`[data-queue-id="${highlightedQueueId}"]`);
+
+            if (highlightedQueue) {
+                highlightedQueue.classList.add('queue-realtime-highlight');
+                window.setTimeout(() => highlightedQueue.classList.remove('queue-realtime-highlight'), 1400);
+            }
+
+            highlightedQueueId = null;
+        }
+
+        // Re-subscribe if new elements or channels appeared
+        subscribeQueues();
+
+        return true;
+    } catch (error) {
+        setConnectionState('disconnected');
+        console.warn('ClinicOS realtime refresh gagal.', error);
+
+        return false;
+    }
+}
+
+function showQueueActionFeedback(message, type = 'error') {
+    const feedback = document.querySelector('[data-queue-action-feedback]');
+
+    if (! feedback) {
+        return;
+    }
+
+    feedback.classList.remove(
+        'hidden',
+        'border-clinic-200',
+        'bg-clinic-50',
+        'text-clinic-800',
+        'border-red-200',
+        'bg-red-50',
+        'text-red-700',
+    );
+    feedback.classList.add(...(type === 'success'
+        ? ['border-clinic-200', 'bg-clinic-50', 'text-clinic-800']
+        : ['border-red-200', 'bg-red-50', 'text-red-700']));
+    feedback.textContent = message;
+}
+
+function setQueueActionPending(form, isPending) {
+    form.dataset.submitting = String(isPending);
+    form.querySelectorAll('button[type="submit"]').forEach((button) => {
+        button.disabled = isPending;
+
+        if (! button.dataset.defaultLabel) {
+            button.dataset.defaultLabel = button.textContent.trim();
+        }
+
+        button.textContent = isPending ? 'Memproses…' : button.dataset.defaultLabel;
+    });
+}
+
+function validationMessage(payload) {
+    const messages = Object.values(payload.errors ?? {}).flat();
+
+    return messages[0] ?? payload.message ?? 'Data aksi tidak valid.';
+}
+
+async function handleQueueActionSubmit(event) {
+    const form = event.target.closest?.('form[data-queue-action]');
+
+    if (! form || event.defaultPrevented) {
+        return;
+    }
+
+    event.preventDefault();
+
+    if (form.dataset.submitting === 'true') {
+        return;
+    }
+
+    setQueueActionPending(form, true);
+
+    try {
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: new FormData(form),
+            headers: {
+                Accept: 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            credentials: 'same-origin',
+        });
+        const payload = await response.json().catch(() => ({}));
+
+        if (! response.ok) {
+            const message = response.status === 403
+                ? (payload.message ?? 'Anda tidak memiliki izin untuk aksi ini.')
+                : response.status === 409
+                    ? (payload.message ?? 'Status antrean telah berubah atau terjadi konflik antrean. Memuat ulang data...')
+                    : response.status === 422
+                        ? validationMessage(payload)
+                        : (payload.message ?? 'Aksi belum dapat dipastikan. Muat ulang data sebelum mencoba lagi.');
+
+            showQueueActionFeedback(message);
+            setQueueActionPending(form, false);
+
+            if (response.status === 409 || response.status === 422) {
+                scheduleRefresh(false);
+            }
+
+            return;
+        }
+
+        if (payload.redirect) {
+            window.location.assign(payload.redirect);
+
+            return;
+        }
+
+        if (await refreshRealtimeRegion(false)) {
+            showQueueActionFeedback(payload.message ?? 'Status antrean berhasil diperbarui.', 'success');
+        } else {
+            showQueueActionFeedback('Aksi berhasil, tetapi data terbaru belum dapat dimuat. Muat ulang halaman.');
+        }
+    } catch (error) {
+        showQueueActionFeedback('Aksi belum dapat dipastikan. Muat ulang data sebelum mencoba lagi.');
+        setQueueActionPending(form, false);
+        console.warn('ClinicOS queue action gagal.', error);
+    }
+}
+
+function scheduleRefresh(showRefetching = true) {
+    window.clearTimeout(refreshTimer);
+    refreshTimer = window.setTimeout(() => refreshRealtimeRegion(showRefetching), 250);
+}
+
+function subscribeQueues() {
+    document.querySelectorAll('[data-realtime-queue-channel]').forEach((element) => {
+        const channelName = element.dataset.realtimeQueueChannel;
+        const isPublic = element.hasAttribute('data-realtime-public');
+        const key = `${isPublic ? 'public' : 'private'}:${channelName}`;
+
+        if (! channelName || queueClients.has(key)) {
+            return;
+        }
+
+        const client = new QueueRealtimeClient({
+            channelName,
+            isPublic,
+            onSnapshotRequest: (showRefetching) => scheduleRefresh(showRefetching),
+            onStateChange: (state) => setConnectionState(state),
+        });
+
+        queueClients.set(key, client);
+        subscriptions.add(key);
+    });
+}
+
+function cleanupQueues() {
+    queueClients.forEach((client) => client.destroy());
+    queueClients.clear();
+    subscriptions.clear();
+}
+
+function subscribeNotifications() {
+    const element = document.querySelector('[data-user-notification-channel]');
+    const channelName = element?.dataset.userNotificationChannel;
+    const key = `notification:${channelName}`;
+
+    if (! channelName || subscriptions.has(key)) {
+        return;
+    }
+
+    window.Echo.private(channelName).notification((notification) => {
+        if (notification.id) {
+            const deliveryKey = `${channelName}:${notification.id}`;
+
+            if (receivedNotificationIds.has(deliveryKey)) {
+                return;
+            }
+
+            receivedNotificationIds.add(deliveryKey);
+        }
+
+        const counter = document.querySelector('[data-notification-count]');
+
+        if (counter) {
+            counter.textContent = String(Number(counter.textContent || 0) + 1);
+            counter.classList.remove('hidden');
+        }
+
+        window.dispatchEvent(new CustomEvent('clinicos:notification', { detail: notification }));
+    });
+    subscriptions.add(key);
+}
+
+function initializeRealtime() {
+    setConnectionState(window.Echo
+        ? (isRealtimeConnected() ? 'connected' : 'reconnecting')
+        : 'offline');
+    subscribeQueues();
+
+    if (window.Echo) {
+        subscribeNotifications();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initializeRealtime);
+document.addEventListener('livewire:navigated', initializeRealtime);
+document.addEventListener('livewire:navigating', cleanupQueues);
+window.addEventListener('pagehide', cleanupQueues);
+window.addEventListener('beforeunload', cleanupQueues);
+document.addEventListener('submit', handleQueueActionSubmit);
+
+window.addEventListener('clinicos:queue-connection-state', (event) => {
+    if (event.detail?.state) {
+        setConnectionState(event.detail.state);
+    }
+});
+
+window.addEventListener('clinicos:queue-updated', (event) => {
+    const queueId = Number(event.detail?.queue_id);
+    highlightedQueueId = Number.isInteger(queueId) ? queueId : null;
+});

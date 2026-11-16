@@ -17,6 +17,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -95,17 +96,28 @@ class VisitController extends Controller
         return view('doctor.visits.show', compact('visit', 'history', 'dentalChart', 'criticalAllergies', 'canEditOdontogram', 'hasOdontogram'));
     }
 
-    public function photo(Visit $visit, int $photo): StreamedResponse
+    public function photo(Request $request, Visit $visit, int $photo): StreamedResponse
     {
         $this->authorize('view', $visit);
         $record = $visit->medicalRecord;
         $this->authorize('view', $record);
-        $photoData = $record->photos[$photo] ?? null;
+        $validated = $request->validate([
+            'revision' => ['sometimes', 'integer', 'min:1'],
+            'snapshot' => ['sometimes', Rule::in(['before', 'after'])],
+        ]);
+        $photos = $record->photos ?? [];
+        if (isset($validated['revision'])) {
+            $revision = $record->revisions()->findOrFail($validated['revision']);
+            $snapshot = ($validated['snapshot'] ?? 'before') === 'before' ? $revision->before_data : $revision->after_data;
+            $photos = $snapshot['record']['photos'] ?? [];
+        }
+        $photoData = $photos[$photo] ?? null;
 
         abort_unless(is_array($photoData) && isset($photoData['path']), 404);
         abort_unless(Storage::disk('local')->exists($photoData['path']), 404);
 
-        return Storage::disk('local')->response($photoData['path'], $photoData['name'] ?? null);
+        return Storage::disk('local')->response($photoData['path'], $photoData['name'] ?? null,
+            ['Cache-Control' => 'private, no-store']);
     }
 
     public function save(

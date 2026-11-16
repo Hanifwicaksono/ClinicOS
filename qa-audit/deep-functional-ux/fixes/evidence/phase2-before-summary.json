@@ -1,0 +1,17 @@
+{
+  "tests": 12,
+  "passed": 9,
+  "failed": 2,
+  "result": "failed",
+  "assertions": 72,
+  "failures": [
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_patient_phone_validation_is_shared_by_all_entry_points",
+      "message": "Expected response status code [422] but received 302."
+    },
+    {
+      "test": "Tests\\Feature\\DeepFunctionalRegressionTest::test_rejected_forms_render_errors_and_retain_input",
+      "message": "Failed asserting that '<!DOCTYPE html>\\n"
+    }
+  ]
+}

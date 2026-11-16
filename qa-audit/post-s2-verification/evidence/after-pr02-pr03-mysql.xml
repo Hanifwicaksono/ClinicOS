@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="CLI Arguments" tests="8" assertions="56" errors="0" failures="0" skipped="0" time="7.362332">
+    <testsuite name="Tests\Feature\RmeGeneralDentalTest" file="C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php" tests="6" assertions="52" errors="0" failures="0" skipped="0" time="7.274770">
+      <testcase name="test_assigned_doctor_can_persist_general_rme_and_odontogram_in_draft" file="C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php" line="38" class="Tests\Feature\RmeGeneralDentalTest" classname="Tests.Feature.RmeGeneralDentalTest" assertions="8" time="5.494289"/>
+      <testcase name="test_invalid_general_and_odontogram_payload_is_rejected_without_mutating_record" file="C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php" line="73" class="Tests\Feature\RmeGeneralDentalTest" classname="Tests.Feature.RmeGeneralDentalTest" assertions="9" time="0.284139"/>
+      <testcase name="test_critical_allergy_is_visible_and_prescription_requires_recorded_acknowledgement" file="C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php" line="100" class="Tests\Feature\RmeGeneralDentalTest" classname="Tests.Feature.RmeGeneralDentalTest" assertions="12" time="0.377524"/>
+      <testcase name="test_doctor_from_another_tenant_cannot_write_general_or_dental_record" file="C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php" line="142" class="Tests\Feature\RmeGeneralDentalTest" classname="Tests.Feature.RmeGeneralDentalTest" assertions="2" time="0.284042"/>
+      <testcase name="test_final_record_rejects_direct_edit_and_dental_correction_creates_revision" file="C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php" line="159" class="Tests\Feature\RmeGeneralDentalTest" classname="Tests.Feature.RmeGeneralDentalTest" assertions="11" time="0.407296"/>
+      <testcase name="test_general_rme_stays_writable_and_existing_odontogram_is_read_only_after_refund" file="C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php" line="195" class="Tests\Feature\RmeGeneralDentalTest" classname="Tests.Feature.RmeGeneralDentalTest" assertions="10" time="0.427481"/>
+    </testsuite>
+    <testsuite name="Tests\Feature\SubscriptionPlanFactoryTest" file="C:\laragon\www\ClinicOS\tests\Feature\SubscriptionPlanFactoryTest.php" tests="2" assertions="4" errors="0" failures="0" skipped="0" time="0.087562">
+      <testcase name="test_generated_code_fits_schema_for_the_previous_overflow_seed" file="C:\laragon\www\ClinicOS\tests\Feature\SubscriptionPlanFactoryTest.php" line="13" class="Tests\Feature\SubscriptionPlanFactoryTest" classname="Tests.Feature.SubscriptionPlanFactoryTest" assertions="3" time="0.041502"/>
+      <testcase name="test_a_deterministic_code_at_the_schema_boundary_is_preserved" file="C:\laragon\www\ClinicOS\tests\Feature\SubscriptionPlanFactoryTest.php" line="28" class="Tests\Feature\SubscriptionPlanFactoryTest" classname="Tests.Feature.SubscriptionPlanFactoryTest" assertions="1" time="0.046059"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

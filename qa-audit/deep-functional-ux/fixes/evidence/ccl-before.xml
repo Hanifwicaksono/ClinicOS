@@ -1,0 +1,1510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\CoverageClosureRegressionTest" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" tests="23" assertions="48" errors="0" failures="22" skipped="0" time="4.653041">
+    <testcase name="test_new_booking_obeys_changed_hours_without_rewriting_history_or_replay" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="27" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="1" time="0.681301">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_new_booking_obeys_changed_hours_without_rewriting_history_or_replay&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:34</failure>
+    </testcase>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_booking_boundaries_match_current_hours" tests="3" assertions="4" errors="0" failures="2" skipped="0" time="0.277241">
+      <testcase name="test_booking_boundaries_match_current_hours with data set &quot;inclusive&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="49" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.093136"/>
+      <testcase name="test_booking_boundaries_match_current_hours with data set &quot;opening&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="49" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="1" time="0.092020">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_booking_boundaries_match_current_hours with data set "opening"&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:54</failure>
+      </testcase>
+      <testcase name="test_booking_boundaries_match_current_hours with data set &quot;closing&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="49" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="1" time="0.092086">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_booking_boundaries_match_current_hours with data set "closing"&#13;
+Expected response status code [422] but received 302.
+Failed asserting that 302 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:54</failure>
+      </testcase>
+    </testsuite>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_phone_validation_storage_and_legacy_candidates_share_normalization" tests="4" assertions="12" errors="0" failures="4" skipped="0" time="0.353030">
+      <testcase name="test_phone_validation_storage_and_legacy_candidates_share_normalization with data set &quot;dots&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="64" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="3" time="0.088995">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_phone_validation_storage_and_legacy_candidates_share_normalization with data set "dots"&#13;
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'081288889999'
++'0812.8888.9999'
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:68</failure>
+      </testcase>
+      <testcase name="test_phone_validation_storage_and_legacy_candidates_share_normalization with data set &quot;ID&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="64" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="3" time="0.089577">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_phone_validation_storage_and_legacy_candidates_share_normalization with data set "ID"&#13;
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'+6281288889999'
++'+62 (812) 8888-9999'
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:68</failure>
+      </testcase>
+      <testcase name="test_phone_validation_storage_and_legacy_candidates_share_normalization with data set &quot;US&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="64" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="3" time="0.089272">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_phone_validation_storage_and_legacy_candidates_share_normalization with data set "US"&#13;
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'+12025550123'
++'+1 (202) 555-0123'
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:68</failure>
+      </testcase>
+      <testcase name="test_phone_validation_storage_and_legacy_candidates_share_normalization with data set &quot;whitespace&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="64" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="3" time="0.085187">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_phone_validation_storage_and_legacy_candidates_share_normalization with data set "whitespace"&#13;
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'081288889999'
++'0812	8888
++9999'
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:68</failure>
+      </testcase>
+    </testsuite>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_inactive_patient_keeps_context_and_has_recovery" tests="2" assertions="2" errors="0" failures="2" skipped="0" time="0.833418">
+      <testcase name="test_inactive_patient_keeps_context_and_has_recovery with data set &quot;admin&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="81" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="1" time="0.738634">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_inactive_patient_keeps_context_and_has_recovery with data set "admin"&#13;
+Expected response status code [201, 301, 302, 303, 307, 308] but received 200.
+Failed asserting that false is true.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:208
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:85</failure>
+      </testcase>
+      <testcase name="test_inactive_patient_keeps_context_and_has_recovery with data set &quot;receptionist&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="81" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="1" time="0.094783">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_inactive_patient_keeps_context_and_has_recovery with data set "receptionist"&#13;
+Expected response status code [201, 301, 302, 303, 307, 308] but received 200.
+Failed asserting that false is true.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:208
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:85</failure>
+      </testcase>
+    </testsuite>
+    <testcase name="test_foreign_or_missing_patient_never_falls_back_to_new_patient" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="93" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="1" time="0.092178">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_foreign_or_missing_patient_never_falls_back_to_new_patient&#13;
+Expected response status code [404] but received 200.
+Failed asserting that 200 is identical to 404.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:151
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:96</failure>
+    </testcase>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history" tests="5" assertions="15" errors="0" failures="5" skipped="0" time="0.775902">
+      <testcase name="test_platform_reads_effective_subscription_without_changing_history with data set &quot;expired&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="103" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.098338">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set "expired"&#13;
+Failed asserting that the value at [tenants] fulfills the expectations defined by the closure.
+Failed asserting that false is true.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:1356
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:115</failure>
+      </testcase>
+      <testcase name="test_platform_reads_effective_subscription_without_changing_history with data set &quot;trial&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="103" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.092636">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set "trial"&#13;
+Failed asserting that the value at [tenants] fulfills the expectations defined by the closure.
+Failed asserting that false is true.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:1356
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:115</failure>
+      </testcase>
+      <testcase name="test_platform_reads_effective_subscription_without_changing_history with data set &quot;scheduled&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="103" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="3" time="0.091775">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set "scheduled"&#13;
+Failed asserting that '&lt;!DOCTYPE html&gt;\n
+&lt;html lang="en"&gt;\n
+    &lt;head&gt;\n
+        &lt;meta charset="utf-8"&gt;\n
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;\n
+        &lt;meta name="csrf-token" content="[token omitted]"&gt;\n
+\n
+        &lt;title&gt;ClinicOS&lt;/title&gt;\n
+\n
+        &lt;link rel="preconnect" href="https://fonts.bunny.net"&gt;\n
+        &lt;link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;family=plus-jakarta-sans:600,700,800&amp;display=swap" rel="stylesheet" /&gt;\n
+\n
+        &lt;link rel="preload" as="style" href="http://localhost/build/assets/app-60tHKeNr.css" /&gt;&lt;link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BMtnh1Cm.js" /&gt;&lt;link rel="stylesheet" href="http://localhost/build/assets/app-60tHKeNr.css" data-navigate-track="reload" /&gt;&lt;script type="module" src="http://localhost/build/assets/app-BMtnh1Cm.js" data-navigate-track="reload"&gt;&lt;/script&gt;    &lt;!-- Livewire Styles --&gt;&lt;style &gt;[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak="x-cloak"],[x-cloak=""] {display: none !important;}[wire\:cloak="wire:cloak"],[wire\:cloak=""] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}&lt;/style&gt;\n
+&lt;/head&gt;\n
+    &lt;body class="font-sans antialiased"&gt;\n
+                &lt;div class="min-h-screen"&gt;\n
+            &lt;div wire:snapshot="{&amp;quot;data&amp;quot;:[],&amp;quot;memo&amp;quot;:{&amp;quot;id&amp;quot;:&amp;quot;lPdPEx8A5O41lMFKS5cb&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;layout.navigation&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;platform\/tenants&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;release&amp;quot;:&amp;quot;a-a-a&amp;quot;,&amp;quot;children&amp;quot;:[],&amp;quot;scripts&amp;quot;:[],&amp;quot;assets&amp;quot;:[],&amp;quot;errors&amp;quot;:[],&amp;quot;locale&amp;quot;:&amp;quot;en&amp;quot;},&amp;quot;checksum&amp;quot;:&amp;quot;[hash omitted]&amp;quot;}" wire:effects="[]" wire:id="lPdPEx8A5O41lMFKS5cb" x-data="{\n
+    open: false,\n
+    desktop: window.matchMedia('(min-width: 1024px)').matches,\n
+    close() { this.open = false; this.$nextTick(() =&gt; this.$refs.trigger.focus()); },\n
+}" @keydown.escape.window="if (open) { $event.preventDefault(); close(); }"\n
+    @resize.window="desktop = window.matchMedia('(min-width: 1024px)').matches; if (desktop) open = false"\n
+    data-user-notification-channel="users.4"&gt;\n
+    &lt;div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden"&gt;\n
+        &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+            &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-9 w-9" /&gt;\n
+            &lt;span class="font-display text-lg font-extrabold text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/span&gt;\n
+        &lt;/a&gt;\n
+        &lt;button x-ref="trigger" type="button" @click="open = true" aria-controls="workspace-navigation" :aria-expanded="open.toString()" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi"&gt;\n
+            &lt;svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+        &lt;/button&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;div x-show="open" x-cloak @click="close()" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"&gt;&lt;/div&gt;\n
+\n
+    &lt;aside id="workspace-navigation" x-trap.inert.noscroll.noreturn="open &amp;&amp; !desktop" :inert="!open &amp;&amp; !desktop" :aria-hidden="!open &amp;&amp; !desktop" :role="desktop ? 'complementary' : 'dialog'" :aria-modal="open &amp;&amp; !desktop ? 'true' : null" aria-label="Navigasi utama" :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0"&gt;\n
+        &lt;div class="flex h-20 items-center justify-between border-b border-slate-100 px-6"&gt;\n
+            &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+                &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-11 w-11" /&gt;\n
+                &lt;div&gt;\n
+                    &lt;div class="font-display text-xl font-extrabold tracking-tight text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/div&gt;\n
+                    &lt;div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400"&gt;Clinic workspace&lt;/div&gt;\n
+                &lt;/div&gt;\n
+            &lt;/a&gt;\n
+            &lt;button type="button" @click="close()" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi"&gt;✕&lt;/button&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;div class="border-b border-slate-100 px-6 py-5"&gt;\n
+            &lt;p class="truncate text-sm font-bold text-slate-900"&gt;ClinicOS Platform&lt;/p&gt;\n
+                        &lt;p class="mt-1 text-xs text-slate-500"&gt;Platform Admin&lt;/p&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5"&gt;\n
+            \n
+            &lt;!--[if BLOCK]&gt;&lt;![endif]--&gt;                &lt;a href="http://localhost/platform/dashboard" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z"/&gt;&lt;/svg&gt;\n
+                    Dashboard\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/platform/tenants" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition bg-clinic-50 text-clinic-700"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-5 7v-3h4v3"/&gt;&lt;/svg&gt;\n
+                    Tenant klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/platform/subscription-plans" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 7h16M4 12h16M4 17h10"/&gt;&lt;/svg&gt;\n
+                    Paket &amp;amp; harga\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/platform/payments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 6h18M3 10h18M7 15h4"/&gt;&lt;/svg&gt;\n
+                    Pembayaran\n
+                &lt;/a&gt;\n
+            &lt;!--[if ENDBLOCK]&gt;&lt;![endif]--&gt;\n
+            &lt;a href="http://localhost/notifications" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/&gt;&lt;/svg&gt;\n
+                &lt;span class="flex-1"&gt;Notifikasi&lt;/span&gt;\n
+                &lt;span data-notification-count class="rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white hidden"&gt;0&lt;/span&gt;\n
+            &lt;/a&gt;\n
+        &lt;/nav&gt;\n
+\n
+        &lt;div class="border-t border-slate-100 p-4"&gt;\n
+            &lt;a href="http://localhost/profile" wire:navigate class="mb-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"&gt;\n
+                &lt;span class="flex h-9 w-9 items-center justify-center rounded-full bg-clinic-100 font-bold text-clinic-700"&gt;C&lt;/span&gt;\n
+                &lt;span class="min-w-0 flex-1"&gt;&lt;span class="block truncate text-slate-900"&gt;Cesar Powlowski&lt;/span&gt;&lt;span class="block truncate text-xs font-normal text-slate-500"&gt;shea26@example.net&lt;/span&gt;&lt;/span&gt;\n
+            &lt;/a&gt;\n
+            &lt;button wire:click="logout" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-500 hover:bg-red-50 hover:text-red-600"&gt;\n
+                &lt;svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M10 17l5-5-5-5M15 12H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/&gt;&lt;/svg&gt;\n
+                Keluar\n
+            &lt;/button&gt;\n
+        &lt;/div&gt;\n
+    &lt;/aside&gt;\n
+\n
+    &lt;div class="h-16 lg:hidden"&gt;&lt;/div&gt;\n
+&lt;/div&gt;\n
+            &lt;div class="lg:pl-72"&gt;\n
+                                    &lt;header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0"&gt;\n
+                        &lt;div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10"&gt;\n
+                            &lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600"&gt;Platform&lt;/p&gt;&lt;h1 class="mt-1 text-xl font-extrabold text-clinic-950"&gt;Tenant klinik&lt;/h1&gt;&lt;/div&gt;\n
+                        &lt;/div&gt;\n
+                    &lt;/header&gt;\n
+                \n
+                &lt;main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10"&gt;\n
+                    \n
+                    \n
+                    \n
+                                        &lt;form method="GET" class="clinic-card mb-6 flex gap-3 p-5"&gt;\n
+        &lt;div class="flex-1"&gt;&lt;label class="clinic-label" for="search"&gt;Cari tenant&lt;/label&gt;&lt;input id="search" class="clinic-input" name="search" value="ipsam-alias-sit-ex-et-eius-quidem" placeholder="Nama, slug, atau email owner"&gt;&lt;/div&gt;\n
+        &lt;button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 border border-slate-300 bg-white text-slate-700 hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-700 self-end"&gt;\n
+        Cari\n
+    &lt;/button&gt;\n
+    &lt;/form&gt;\n
+\n
+    &lt;section class="clinic-card overflow-hidden"&gt;\n
+        &lt;div class="overflow-x-auto"&gt;&lt;table class="min-w-full text-sm"&gt;&lt;thead class="bg-slate-50 text-left text-xs font-bold uppercase tracking-wider text-slate-500"&gt;&lt;tr&gt;&lt;th class="px-5 py-4"&gt;Klinik&lt;/th&gt;&lt;th class="px-5 py-4"&gt;Owner&lt;/th&gt;&lt;th class="px-5 py-4"&gt;Status&lt;/th&gt;&lt;th class="px-5 py-4"&gt;Paket&lt;/th&gt;&lt;th class="px-5 py-4"&gt;Dokter&lt;/th&gt;&lt;th class="px-5 py-4"&gt;Akun tenant&lt;/th&gt;&lt;th class="px-5 py-4"&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody class="divide-y divide-slate-100"&gt;\n
+                            &lt;tr&gt;&lt;td class="px-5 py-4"&gt;&lt;p class="font-semibold text-slate-900"&gt;Donnelly, Ondricka and Boehm Clinic&lt;/p&gt;&lt;p class="text-xs text-slate-400"&gt;ipsam-alias-sit-ex-et-eius-quidem&lt;/p&gt;&lt;/td&gt;&lt;td class="px-5 py-4"&gt;&lt;p class="text-slate-700"&gt;Wade Raynor&lt;/p&gt;&lt;p class="text-xs text-slate-400"&gt;bruen.bertrand@example.org&lt;/p&gt;&lt;/td&gt;&lt;td class="px-5 py-4"&gt;&lt;span class="rounded-full px-2.5 py-1 text-xs font-bold bg-clinic-50 text-clinic-700"&gt;Aktif&lt;/span&gt;&lt;/td&gt;&lt;td class="px-5 py-4"&gt;&lt;p class="font-semibold text-slate-700"&gt;Team&lt;/p&gt;&lt;p class="text-xs text-slate-400"&gt;active&lt;/p&gt;&lt;/td&gt;&lt;td class="px-5 py-4 text-slate-600"&gt;1&lt;/td&gt;&lt;td class="px-5 py-4 text-slate-600"&gt;3&lt;/td&gt;&lt;td class="px-5 py-4 text-right"&gt;&lt;a href="http://localhost/platform/tenants/1" class="font-bold text-clinic-600 hover:text-clinic-700" wire:navigate&gt;Detail&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;\n
+                    &lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;\n
+    &lt;/section&gt;\n
+                &lt;/main&gt;\n
+            &lt;/div&gt;\n
+        &lt;/div&gt;\n
+    &lt;!-- Livewire Scripts --&gt;\n
+&lt;script src="/livewire/livewire.js?id=dfa5f5ee"   data-csrf="[token omitted]" data-update-uri="/livewire/update" data-navigate-once="true"&gt;&lt;/script&gt;\n
+&lt;/body&gt;\n
+&lt;/html&gt;\n
+' [UTF-8](length: 13291) contains "Individual" [ASCII](length: 10).
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:720
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:116</failure>
+      </testcase>
+      <testcase name="test_platform_reads_effective_subscription_without_changing_history with data set &quot;future&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="103" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.098420">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set "future"&#13;
+Failed asserting that the value at [tenants] fulfills the expectations defined by the closure.
+Failed asserting that false is true.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:1356
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:115</failure>
+      </testcase>
+      <testcase name="test_platform_reads_effective_subscription_without_changing_history with data set &quot;suspended&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="103" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="6" time="0.394734">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_platform_reads_effective_subscription_without_changing_history with data set "suspended"&#13;
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+ Array &amp;0 [
++    'id' =&gt; 1,
+     'clinic_id' =&gt; 1,
+     'subscription_price_id' =&gt; 7,
+     'invoice_number' =&gt; 'INV-5000056080',
+@@ @@
+     'expires_at' =&gt; '2026-11-14 03:00:00',
+     'paid_at' =&gt; null,
+     'provider_reference' =&gt; null,
++    'created_at' =&gt; '2026-11-14 02:00:00',
+     'updated_at' =&gt; '2026-11-14 02:00:00',
+-    'created_at' =&gt; '2026-11-14 02:00:00',
+-    'id' =&gt; 1,
+ ]
+&#13;
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:118</failure>
+      </testcase>
+    </testsuite>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_service_ui_and_server_share_numeric_price_contract" tests="3" assertions="6" errors="0" failures="3" skipped="0" time="0.585402">
+      <testcase name="test_service_ui_and_server_share_numeric_price_contract with data set &quot;nonmultiple&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="125" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.398024">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_service_ui_and_server_share_numeric_price_contract with data set "nonmultiple"&#13;
+Failed asserting that '&lt;!DOCTYPE html&gt;\n
+&lt;html lang="en"&gt;\n
+    &lt;head&gt;\n
+        &lt;meta charset="utf-8"&gt;\n
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;\n
+        &lt;meta name="csrf-token" content="[token omitted]"&gt;\n
+\n
+        &lt;title&gt;ClinicOS&lt;/title&gt;\n
+\n
+        &lt;link rel="preconnect" href="https://fonts.bunny.net"&gt;\n
+        &lt;link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;family=plus-jakarta-sans:600,700,800&amp;display=swap" rel="stylesheet" /&gt;\n
+\n
+        &lt;link rel="preload" as="style" href="http://localhost/build/assets/app-60tHKeNr.css" /&gt;&lt;link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BMtnh1Cm.js" /&gt;&lt;link rel="stylesheet" href="http://localhost/build/assets/app-60tHKeNr.css" data-navigate-track="reload" /&gt;&lt;script type="module" src="http://localhost/build/assets/app-BMtnh1Cm.js" data-navigate-track="reload"&gt;&lt;/script&gt;    &lt;!-- Livewire Styles --&gt;&lt;style &gt;[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak="x-cloak"],[x-cloak=""] {display: none !important;}[wire\:cloak="wire:cloak"],[wire\:cloak=""] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}&lt;/style&gt;\n
+&lt;/head&gt;\n
+    &lt;body class="font-sans antialiased"&gt;\n
+                &lt;div class="min-h-screen"&gt;\n
+            &lt;div wire:snapshot="{&amp;quot;data&amp;quot;:[],&amp;quot;memo&amp;quot;:{&amp;quot;id&amp;quot;:&amp;quot;iwQcmiftNjdESxVfrVJG&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;layout.navigation&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;admin\/services\/create&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;release&amp;quot;:&amp;quot;a-a-a&amp;quot;,&amp;quot;children&amp;quot;:[],&amp;quot;scripts&amp;quot;:[],&amp;quot;assets&amp;quot;:[],&amp;quot;errors&amp;quot;:[],&amp;quot;locale&amp;quot;:&amp;quot;en&amp;quot;},&amp;quot;checksum&amp;quot;:&amp;quot;[hash omitted]&amp;quot;}" wire:effects="[]" wire:id="iwQcmiftNjdESxVfrVJG" x-data="{\n
+    open: false,\n
+    desktop: window.matchMedia('(min-width: 1024px)').matches,\n
+    close() { this.open = false; this.$nextTick(() =&gt; this.$refs.trigger.focus()); },\n
+}" @keydown.escape.window="if (open) { $event.preventDefault(); close(); }"\n
+    @resize.window="desktop = window.matchMedia('(min-width: 1024px)').matches; if (desktop) open = false"\n
+    data-user-notification-channel="users.1"&gt;\n
+    &lt;div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden"&gt;\n
+        &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+            &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-9 w-9" /&gt;\n
+            &lt;span class="font-display text-lg font-extrabold text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/span&gt;\n
+        &lt;/a&gt;\n
+        &lt;button x-ref="trigger" type="button" @click="open = true" aria-controls="workspace-navigation" :aria-expanded="open.toString()" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi"&gt;\n
+            &lt;svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+        &lt;/button&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;div x-show="open" x-cloak @click="close()" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"&gt;&lt;/div&gt;\n
+\n
+    &lt;aside id="workspace-navigation" x-trap.inert.noscroll.noreturn="open &amp;&amp; !desktop" :inert="!open &amp;&amp; !desktop" :aria-hidden="!open &amp;&amp; !desktop" :role="desktop ? 'complementary' : 'dialog'" :aria-modal="open &amp;&amp; !desktop ? 'true' : null" aria-label="Navigasi utama" :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0"&gt;\n
+        &lt;div class="flex h-20 items-center justify-between border-b border-slate-100 px-6"&gt;\n
+            &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+                &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-11 w-11" /&gt;\n
+                &lt;div&gt;\n
+                    &lt;div class="font-display text-xl font-extrabold tracking-tight text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/div&gt;\n
+                    &lt;div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400"&gt;Clinic workspace&lt;/div&gt;\n
+                &lt;/div&gt;\n
+            &lt;/a&gt;\n
+            &lt;button type="button" @click="close()" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi"&gt;✕&lt;/button&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;div class="border-b border-slate-100 px-6 py-5"&gt;\n
+            &lt;p class="truncate text-sm font-bold text-slate-900"&gt;Zboncak-Rice Clinic&lt;/p&gt;\n
+                        &lt;p class="mt-1 text-xs text-slate-500"&gt;Clinic Admin&lt;/p&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5"&gt;\n
+            \n
+            &lt;!--[if BLOCK]&gt;&lt;![endif]--&gt;                &lt;a href="http://localhost/admin/dashboard" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z"/&gt;&lt;/svg&gt;\n
+                    Dashboard\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/subscription/payments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 7h16M4 12h16M4 17h10"/&gt;&lt;/svg&gt;\n
+                    Subscription\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/subscription/addons" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+                    Add-on odontogram\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/clinic" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-5 7v-3h4v3"/&gt;&lt;/svg&gt;\n
+                    Profil klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/staff" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm13 10v-2a4 4 0 0 0-3-3.87m-2-12a4 4 0 0 1 0 7.75"/&gt;&lt;/svg&gt;\n
+                    Tim klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/services" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition bg-clinic-50 text-clinic-700"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10h6m-3-3v6"/&gt;&lt;/svg&gt;\n
+                    Layanan\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/doctor-schedules" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 9h18M7 3v4m10-4v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm3 8h3v3H8v-3Z"/&gt;&lt;/svg&gt;\n
+                    Jadwal dokter\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/patients" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/&gt;&lt;/svg&gt;\n
+                    Pasien\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/appointments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6"/&gt;&lt;/svg&gt;\n
+                    Booking &amp;amp; antrean\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/queues" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M5 6h14M5 12h14M5 18h9"/&gt;&lt;/svg&gt;\n
+                    Antrean hari ini\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/audit-logs" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 4h16v16H4V4Zm4 5h8m-8 4h8m-8 4h5"/&gt;&lt;/svg&gt;\n
+                    Audit aktivitas\n
+                &lt;/a&gt;\n
+            &lt;!--[if ENDBLOCK]&gt;&lt;![endif]--&gt;\n
+            &lt;a href="http://localhost/notifications" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/&gt;&lt;/svg&gt;\n
+                &lt;span class="flex-1"&gt;Notifikasi&lt;/span&gt;\n
+                &lt;span data-notification-count class="rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white hidden"&gt;0&lt;/span&gt;\n
+            &lt;/a&gt;\n
+        &lt;/nav&gt;\n
+\n
+        &lt;div class="border-t border-slate-100 p-4"&gt;\n
+            &lt;a href="http://localhost/profile" wire:navigate class="mb-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"&gt;\n
+                &lt;span class="flex h-9 w-9 items-center justify-center rounded-full bg-clinic-100 font-bold text-clinic-700"&gt;B&lt;/span&gt;\n
+                &lt;span class="min-w-0 flex-1"&gt;&lt;span class="block truncate text-slate-900"&gt;Bonnie Casper&lt;/span&gt;&lt;span class="block truncate text-xs font-normal text-slate-500"&gt;lexi05@example.net&lt;/span&gt;&lt;/span&gt;\n
+            &lt;/a&gt;\n
+            &lt;button wire:click="logout" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-500 hover:bg-red-50 hover:text-red-600"&gt;\n
+                &lt;svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M10 17l5-5-5-5M15 12H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/&gt;&lt;/svg&gt;\n
+                Keluar\n
+            &lt;/button&gt;\n
+        &lt;/div&gt;\n
+    &lt;/aside&gt;\n
+\n
+    &lt;div class="h-16 lg:hidden"&gt;&lt;/div&gt;\n
+&lt;/div&gt;\n
+            &lt;div class="lg:pl-72"&gt;\n
+                                    &lt;header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0"&gt;\n
+                        &lt;div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10"&gt;\n
+                            &lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600"&gt;Katalog klinik&lt;/p&gt;&lt;h1 class="mt-1 text-xl font-extrabold text-clinic-950"&gt;Tambah layanan&lt;/h1&gt;&lt;/div&gt;\n
+                        &lt;/div&gt;\n
+                    &lt;/header&gt;\n
+                \n
+                &lt;main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10"&gt;\n
+                    \n
+                                            \n
+                                                    &lt;div class="mb-6 flex items-center justify-between gap-4 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold text-amber-900" role="status"&gt;\n
+                                &lt;span&gt;Paket Free aktif.&lt;/span&gt;\n
+                                                                    &lt;a href="http://localhost/onboarding/plans" class="shrink-0 font-extrabold text-amber-950 underline underline-offset-4" wire:navigate&gt;\n
+                                        Lihat paket\n
+                                    &lt;/a&gt;\n
+                                                            &lt;/div&gt;\n
+                                            \n
+                    \n
+                                        &lt;div class="mx-auto max-w-3xl"&gt;&lt;div class="mb-7"&gt;&lt;h2 class="text-2xl font-extrabold text-clinic-950"&gt;Layanan baru&lt;/h2&gt;&lt;p class="mt-2 text-sm text-slate-500"&gt;Tentukan nama, tarif, dan durasi standar pelayanan.&lt;/p&gt;&lt;/div&gt;\n
+        &lt;form method="POST" action="http://localhost/admin/services" class="space-y-6" x-data="{ submitting: false }" @submit="submitting = true"&gt;&lt;input type="hidden" name="_token" value="[redacted]" autocomplete="off"&gt;             &lt;section class="clinic-card p-6 sm:p-8"&gt;&lt;div class="grid gap-6 md:grid-cols-2"&gt;\n
+                &lt;div class="md:col-span-2"&gt;&lt;label class="clinic-label" for="name"&gt;Nama layanan&lt;/label&gt;&lt;input class="clinic-input" id="name" name="name" value="" required&gt;&lt;/div&gt;\n
+                &lt;div&gt;&lt;label class="clinic-label" for="price"&gt;Biaya (Rp)&lt;/label&gt;&lt;input class="clinic-input" id="price" name="price" type="number" min="0" step="1000" value="" required&gt;&lt;/div&gt;\n
+                &lt;div&gt;&lt;label class="clinic-label" for="duration_minutes"&gt;Durasi&lt;/label&gt;&lt;div class="relative"&gt;&lt;input class="clinic-input pr-16" id="duration_minutes" name="duration_minutes" type="number" min="5" max="480" value="30" required&gt;&lt;span class="pointer-events-none absolute right-4 top-3 text-sm text-slate-400"&gt;menit&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;\n
+                &lt;div class="md:col-span-2"&gt;&lt;label class="clinic-label" for="description"&gt;Deskripsi&lt;/label&gt;&lt;textarea class="clinic-input" id="description" name="description" rows="4"&gt;&lt;/textarea&gt;&lt;/div&gt;\n
+                &lt;div class="md:col-span-2"&gt;&lt;input type="hidden" name="is_active" value="0"&gt;&lt;label class="inline-flex items-center gap-3 text-sm font-semibold text-slate-700"&gt;&lt;input type="checkbox" name="is_active" value="1" checked class="rounded border-slate-300 text-clinic-500 focus:ring-clinic-500"&gt;Layanan aktif dan dapat dipilih&lt;/label&gt;&lt;/div&gt;\n
+            &lt;/div&gt;&lt;/section&gt;\n
+            &lt;div class="flex justify-end gap-3"&gt;&lt;a href="http://localhost/admin/services" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 border border-slate-300 bg-white text-slate-700 hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-700" wire:navigate=""&gt;\n
+        Batal\n
+    &lt;/a&gt;\n
+&lt;button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 bg-clinic-500 text-white hover:bg-clinic-600 disabled:cursor-wait disabled:opacity-60" x-bind:disabled="submitting"&gt;\n
+        &lt;span x-show="! submitting"&gt;Tambah layanan&lt;/span&gt;&lt;span x-show="submitting" x-cloak&gt;Menyimpan…&lt;/span&gt;\n
+    &lt;/button&gt;\n
+&lt;/div&gt;\n
+        &lt;/form&gt;\n
+    &lt;/div&gt;\n
+                &lt;/main&gt;\n
+            &lt;/div&gt;\n
+        &lt;/div&gt;\n
+    &lt;!-- Livewire Scripts --&gt;\n
+&lt;script src="/livewire/livewire.js?id=dfa5f5ee"   data-csrf="[token omitted]" data-update-uri="/livewire/update" data-navigate-once="true"&gt;&lt;/script&gt;\n
+&lt;/body&gt;\n
+&lt;/html&gt;\n
+' [UTF-8](length: 18728) contains "step="any"" [ASCII](length: 10).
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:720
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:127</failure>
+      </testcase>
+      <testcase name="test_service_ui_and_server_share_numeric_price_contract with data set &quot;fraction&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="125" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.095870">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_service_ui_and_server_share_numeric_price_contract with data set "fraction"&#13;
+Failed asserting that '&lt;!DOCTYPE html&gt;\n
+&lt;html lang="en"&gt;\n
+    &lt;head&gt;\n
+        &lt;meta charset="utf-8"&gt;\n
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;\n
+        &lt;meta name="csrf-token" content="[token omitted]"&gt;\n
+\n
+        &lt;title&gt;ClinicOS&lt;/title&gt;\n
+\n
+        &lt;link rel="preconnect" href="https://fonts.bunny.net"&gt;\n
+        &lt;link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;family=plus-jakarta-sans:600,700,800&amp;display=swap" rel="stylesheet" /&gt;\n
+\n
+        &lt;link rel="preload" as="style" href="http://localhost/build/assets/app-60tHKeNr.css" /&gt;&lt;link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BMtnh1Cm.js" /&gt;&lt;link rel="stylesheet" href="http://localhost/build/assets/app-60tHKeNr.css" data-navigate-track="reload" /&gt;&lt;script type="module" src="http://localhost/build/assets/app-BMtnh1Cm.js" data-navigate-track="reload"&gt;&lt;/script&gt;    &lt;!-- Livewire Styles --&gt;&lt;style &gt;[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak="x-cloak"],[x-cloak=""] {display: none !important;}[wire\:cloak="wire:cloak"],[wire\:cloak=""] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}&lt;/style&gt;\n
+&lt;/head&gt;\n
+    &lt;body class="font-sans antialiased"&gt;\n
+                &lt;div class="min-h-screen"&gt;\n
+            &lt;div wire:snapshot="{&amp;quot;data&amp;quot;:[],&amp;quot;memo&amp;quot;:{&amp;quot;id&amp;quot;:&amp;quot;XDsqmRJ8QtCjdNulC6nR&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;layout.navigation&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;admin\/services\/create&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;release&amp;quot;:&amp;quot;a-a-a&amp;quot;,&amp;quot;children&amp;quot;:[],&amp;quot;scripts&amp;quot;:[],&amp;quot;assets&amp;quot;:[],&amp;quot;errors&amp;quot;:[],&amp;quot;locale&amp;quot;:&amp;quot;en&amp;quot;},&amp;quot;checksum&amp;quot;:&amp;quot;[hash omitted]&amp;quot;}" wire:effects="[]" wire:id="XDsqmRJ8QtCjdNulC6nR" x-data="{\n
+    open: false,\n
+    desktop: window.matchMedia('(min-width: 1024px)').matches,\n
+    close() { this.open = false; this.$nextTick(() =&gt; this.$refs.trigger.focus()); },\n
+}" @keydown.escape.window="if (open) { $event.preventDefault(); close(); }"\n
+    @resize.window="desktop = window.matchMedia('(min-width: 1024px)').matches; if (desktop) open = false"\n
+    data-user-notification-channel="users.1"&gt;\n
+    &lt;div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden"&gt;\n
+        &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+            &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-9 w-9" /&gt;\n
+            &lt;span class="font-display text-lg font-extrabold text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/span&gt;\n
+        &lt;/a&gt;\n
+        &lt;button x-ref="trigger" type="button" @click="open = true" aria-controls="workspace-navigation" :aria-expanded="open.toString()" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi"&gt;\n
+            &lt;svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+        &lt;/button&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;div x-show="open" x-cloak @click="close()" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"&gt;&lt;/div&gt;\n
+\n
+    &lt;aside id="workspace-navigation" x-trap.inert.noscroll.noreturn="open &amp;&amp; !desktop" :inert="!open &amp;&amp; !desktop" :aria-hidden="!open &amp;&amp; !desktop" :role="desktop ? 'complementary' : 'dialog'" :aria-modal="open &amp;&amp; !desktop ? 'true' : null" aria-label="Navigasi utama" :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0"&gt;\n
+        &lt;div class="flex h-20 items-center justify-between border-b border-slate-100 px-6"&gt;\n
+            &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+                &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-11 w-11" /&gt;\n
+                &lt;div&gt;\n
+                    &lt;div class="font-display text-xl font-extrabold tracking-tight text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/div&gt;\n
+                    &lt;div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400"&gt;Clinic workspace&lt;/div&gt;\n
+                &lt;/div&gt;\n
+            &lt;/a&gt;\n
+            &lt;button type="button" @click="close()" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi"&gt;✕&lt;/button&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;div class="border-b border-slate-100 px-6 py-5"&gt;\n
+            &lt;p class="truncate text-sm font-bold text-slate-900"&gt;Thiel PLC Clinic&lt;/p&gt;\n
+                        &lt;p class="mt-1 text-xs text-slate-500"&gt;Clinic Admin&lt;/p&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5"&gt;\n
+            \n
+            &lt;!--[if BLOCK]&gt;&lt;![endif]--&gt;                &lt;a href="http://localhost/admin/dashboard" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z"/&gt;&lt;/svg&gt;\n
+                    Dashboard\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/subscription/payments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 7h16M4 12h16M4 17h10"/&gt;&lt;/svg&gt;\n
+                    Subscription\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/subscription/addons" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+                    Add-on odontogram\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/clinic" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-5 7v-3h4v3"/&gt;&lt;/svg&gt;\n
+                    Profil klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/staff" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm13 10v-2a4 4 0 0 0-3-3.87m-2-12a4 4 0 0 1 0 7.75"/&gt;&lt;/svg&gt;\n
+                    Tim klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/services" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition bg-clinic-50 text-clinic-700"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10h6m-3-3v6"/&gt;&lt;/svg&gt;\n
+                    Layanan\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/doctor-schedules" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 9h18M7 3v4m10-4v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm3 8h3v3H8v-3Z"/&gt;&lt;/svg&gt;\n
+                    Jadwal dokter\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/patients" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/&gt;&lt;/svg&gt;\n
+                    Pasien\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/appointments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6"/&gt;&lt;/svg&gt;\n
+                    Booking &amp;amp; antrean\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/queues" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M5 6h14M5 12h14M5 18h9"/&gt;&lt;/svg&gt;\n
+                    Antrean hari ini\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/audit-logs" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 4h16v16H4V4Zm4 5h8m-8 4h8m-8 4h5"/&gt;&lt;/svg&gt;\n
+                    Audit aktivitas\n
+                &lt;/a&gt;\n
+            &lt;!--[if ENDBLOCK]&gt;&lt;![endif]--&gt;\n
+            &lt;a href="http://localhost/notifications" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/&gt;&lt;/svg&gt;\n
+                &lt;span class="flex-1"&gt;Notifikasi&lt;/span&gt;\n
+                &lt;span data-notification-count class="rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white hidden"&gt;0&lt;/span&gt;\n
+            &lt;/a&gt;\n
+        &lt;/nav&gt;\n
+\n
+        &lt;div class="border-t border-slate-100 p-4"&gt;\n
+            &lt;a href="http://localhost/profile" wire:navigate class="mb-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"&gt;\n
+                &lt;span class="flex h-9 w-9 items-center justify-center rounded-full bg-clinic-100 font-bold text-clinic-700"&gt;E&lt;/span&gt;\n
+                &lt;span class="min-w-0 flex-1"&gt;&lt;span class="block truncate text-slate-900"&gt;Eric Heidenreich I&lt;/span&gt;&lt;span class="block truncate text-xs font-normal text-slate-500"&gt;paucek.devante@example.com&lt;/span&gt;&lt;/span&gt;\n
+            &lt;/a&gt;\n
+            &lt;button wire:click="logout" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-500 hover:bg-red-50 hover:text-red-600"&gt;\n
+                &lt;svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M10 17l5-5-5-5M15 12H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/&gt;&lt;/svg&gt;\n
+                Keluar\n
+            &lt;/button&gt;\n
+        &lt;/div&gt;\n
+    &lt;/aside&gt;\n
+\n
+    &lt;div class="h-16 lg:hidden"&gt;&lt;/div&gt;\n
+&lt;/div&gt;\n
+            &lt;div class="lg:pl-72"&gt;\n
+                                    &lt;header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0"&gt;\n
+                        &lt;div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10"&gt;\n
+                            &lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600"&gt;Katalog klinik&lt;/p&gt;&lt;h1 class="mt-1 text-xl font-extrabold text-clinic-950"&gt;Tambah layanan&lt;/h1&gt;&lt;/div&gt;\n
+                        &lt;/div&gt;\n
+                    &lt;/header&gt;\n
+                \n
+                &lt;main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10"&gt;\n
+                    \n
+                                            \n
+                                                    &lt;div class="mb-6 flex items-center justify-between gap-4 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold text-amber-900" role="status"&gt;\n
+                                &lt;span&gt;Paket Free aktif.&lt;/span&gt;\n
+                                                                    &lt;a href="http://localhost/onboarding/plans" class="shrink-0 font-extrabold text-amber-950 underline underline-offset-4" wire:navigate&gt;\n
+                                        Lihat paket\n
+                                    &lt;/a&gt;\n
+                                                            &lt;/div&gt;\n
+                                            \n
+                    \n
+                                        &lt;div class="mx-auto max-w-3xl"&gt;&lt;div class="mb-7"&gt;&lt;h2 class="text-2xl font-extrabold text-clinic-950"&gt;Layanan baru&lt;/h2&gt;&lt;p class="mt-2 text-sm text-slate-500"&gt;Tentukan nama, tarif, dan durasi standar pelayanan.&lt;/p&gt;&lt;/div&gt;\n
+        &lt;form method="POST" action="http://localhost/admin/services" class="space-y-6" x-data="{ submitting: false }" @submit="submitting = true"&gt;&lt;input type="hidden" name="_token" value="[redacted]" autocomplete="off"&gt;             &lt;section class="clinic-card p-6 sm:p-8"&gt;&lt;div class="grid gap-6 md:grid-cols-2"&gt;\n
+                &lt;div class="md:col-span-2"&gt;&lt;label class="clinic-label" for="name"&gt;Nama layanan&lt;/label&gt;&lt;input class="clinic-input" id="name" name="name" value="" required&gt;&lt;/div&gt;\n
+                &lt;div&gt;&lt;label class="clinic-label" for="price"&gt;Biaya (Rp)&lt;/label&gt;&lt;input class="clinic-input" id="price" name="price" type="number" min="0" step="1000" value="" required&gt;&lt;/div&gt;\n
+                &lt;div&gt;&lt;label class="clinic-label" for="duration_minutes"&gt;Durasi&lt;/label&gt;&lt;div class="relative"&gt;&lt;input class="clinic-input pr-16" id="duration_minutes" name="duration_minutes" type="number" min="5" max="480" value="30" required&gt;&lt;span class="pointer-events-none absolute right-4 top-3 text-sm text-slate-400"&gt;menit&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;\n
+                &lt;div class="md:col-span-2"&gt;&lt;label class="clinic-label" for="description"&gt;Deskripsi&lt;/label&gt;&lt;textarea class="clinic-input" id="description" name="description" rows="4"&gt;&lt;/textarea&gt;&lt;/div&gt;\n
+                &lt;div class="md:col-span-2"&gt;&lt;input type="hidden" name="is_active" value="0"&gt;&lt;label class="inline-flex items-center gap-3 text-sm font-semibold text-slate-700"&gt;&lt;input type="checkbox" name="is_active" value="1" checked class="rounded border-slate-300 text-clinic-500 focus:ring-clinic-500"&gt;Layanan aktif dan dapat dipilih&lt;/label&gt;&lt;/div&gt;\n
+            &lt;/div&gt;&lt;/section&gt;\n
+            &lt;div class="flex justify-end gap-3"&gt;&lt;a href="http://localhost/admin/services" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 border border-slate-300 bg-white text-slate-700 hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-700" wire:navigate=""&gt;\n
+        Batal\n
+    &lt;/a&gt;\n
+&lt;button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 bg-clinic-500 text-white hover:bg-clinic-600 disabled:cursor-wait disabled:opacity-60" x-bind:disabled="submitting"&gt;\n
+        &lt;span x-show="! submitting"&gt;Tambah layanan&lt;/span&gt;&lt;span x-show="submitting" x-cloak&gt;Menyimpan…&lt;/span&gt;\n
+    &lt;/button&gt;\n
+&lt;/div&gt;\n
+        &lt;/form&gt;\n
+    &lt;/div&gt;\n
+                &lt;/main&gt;\n
+            &lt;/div&gt;\n
+        &lt;/div&gt;\n
+    &lt;!-- Livewire Scripts --&gt;\n
+&lt;script src="/livewire/livewire.js?id=dfa5f5ee"   data-csrf="[token omitted]" data-update-uri="/livewire/update" data-navigate-once="true"&gt;&lt;/script&gt;\n
+&lt;/body&gt;\n
+&lt;/html&gt;\n
+' [UTF-8](length: 18738) contains "step="any"" [ASCII](length: 10).
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:720
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:127</failure>
+      </testcase>
+      <testcase name="test_service_ui_and_server_share_numeric_price_contract with data set &quot;maximum&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="125" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.091508">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_service_ui_and_server_share_numeric_price_contract with data set "maximum"&#13;
+Failed asserting that '&lt;!DOCTYPE html&gt;\n
+&lt;html lang="en"&gt;\n
+    &lt;head&gt;\n
+        &lt;meta charset="utf-8"&gt;\n
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;\n
+        &lt;meta name="csrf-token" content="[token omitted]"&gt;\n
+\n
+        &lt;title&gt;ClinicOS&lt;/title&gt;\n
+\n
+        &lt;link rel="preconnect" href="https://fonts.bunny.net"&gt;\n
+        &lt;link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;family=plus-jakarta-sans:600,700,800&amp;display=swap" rel="stylesheet" /&gt;\n
+\n
+        &lt;link rel="preload" as="style" href="http://localhost/build/assets/app-60tHKeNr.css" /&gt;&lt;link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BMtnh1Cm.js" /&gt;&lt;link rel="stylesheet" href="http://localhost/build/assets/app-60tHKeNr.css" data-navigate-track="reload" /&gt;&lt;script type="module" src="http://localhost/build/assets/app-BMtnh1Cm.js" data-navigate-track="reload"&gt;&lt;/script&gt;    &lt;!-- Livewire Styles --&gt;&lt;style &gt;[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak="x-cloak"],[x-cloak=""] {display: none !important;}[wire\:cloak="wire:cloak"],[wire\:cloak=""] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}&lt;/style&gt;\n
+&lt;/head&gt;\n
+    &lt;body class="font-sans antialiased"&gt;\n
+                &lt;div class="min-h-screen"&gt;\n
+            &lt;div wire:snapshot="{&amp;quot;data&amp;quot;:[],&amp;quot;memo&amp;quot;:{&amp;quot;id&amp;quot;:&amp;quot;UKrdx5m7BcNkpIvvvsIY&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;layout.navigation&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;admin\/services\/create&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;release&amp;quot;:&amp;quot;a-a-a&amp;quot;,&amp;quot;children&amp;quot;:[],&amp;quot;scripts&amp;quot;:[],&amp;quot;assets&amp;quot;:[],&amp;quot;errors&amp;quot;:[],&amp;quot;locale&amp;quot;:&amp;quot;en&amp;quot;},&amp;quot;checksum&amp;quot;:&amp;quot;[hash omitted]&amp;quot;}" wire:effects="[]" wire:id="UKrdx5m7BcNkpIvvvsIY" x-data="{\n
+    open: false,\n
+    desktop: window.matchMedia('(min-width: 1024px)').matches,\n
+    close() { this.open = false; this.$nextTick(() =&gt; this.$refs.trigger.focus()); },\n
+}" @keydown.escape.window="if (open) { $event.preventDefault(); close(); }"\n
+    @resize.window="desktop = window.matchMedia('(min-width: 1024px)').matches; if (desktop) open = false"\n
+    data-user-notification-channel="users.1"&gt;\n
+    &lt;div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden"&gt;\n
+        &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+            &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-9 w-9" /&gt;\n
+            &lt;span class="font-display text-lg font-extrabold text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/span&gt;\n
+        &lt;/a&gt;\n
+        &lt;button x-ref="trigger" type="button" @click="open = true" aria-controls="workspace-navigation" :aria-expanded="open.toString()" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi"&gt;\n
+            &lt;svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+        &lt;/button&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;div x-show="open" x-cloak @click="close()" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"&gt;&lt;/div&gt;\n
+\n
+    &lt;aside id="workspace-navigation" x-trap.inert.noscroll.noreturn="open &amp;&amp; !desktop" :inert="!open &amp;&amp; !desktop" :aria-hidden="!open &amp;&amp; !desktop" :role="desktop ? 'complementary' : 'dialog'" :aria-modal="open &amp;&amp; !desktop ? 'true' : null" aria-label="Navigasi utama" :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0"&gt;\n
+        &lt;div class="flex h-20 items-center justify-between border-b border-slate-100 px-6"&gt;\n
+            &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+                &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-11 w-11" /&gt;\n
+                &lt;div&gt;\n
+                    &lt;div class="font-display text-xl font-extrabold tracking-tight text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/div&gt;\n
+                    &lt;div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400"&gt;Clinic workspace&lt;/div&gt;\n
+                &lt;/div&gt;\n
+            &lt;/a&gt;\n
+            &lt;button type="button" @click="close()" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi"&gt;✕&lt;/button&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;div class="border-b border-slate-100 px-6 py-5"&gt;\n
+            &lt;p class="truncate text-sm font-bold text-slate-900"&gt;Hegmann, Sanford and Kuphal Clinic&lt;/p&gt;\n
+                        &lt;p class="mt-1 text-xs text-slate-500"&gt;Clinic Admin&lt;/p&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5"&gt;\n
+            \n
+            &lt;!--[if BLOCK]&gt;&lt;![endif]--&gt;                &lt;a href="http://localhost/admin/dashboard" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z"/&gt;&lt;/svg&gt;\n
+                    Dashboard\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/subscription/payments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 7h16M4 12h16M4 17h10"/&gt;&lt;/svg&gt;\n
+                    Subscription\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/subscription/addons" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+                    Add-on odontogram\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/clinic" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-5 7v-3h4v3"/&gt;&lt;/svg&gt;\n
+                    Profil klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/staff" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm13 10v-2a4 4 0 0 0-3-3.87m-2-12a4 4 0 0 1 0 7.75"/&gt;&lt;/svg&gt;\n
+                    Tim klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/services" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition bg-clinic-50 text-clinic-700"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10h6m-3-3v6"/&gt;&lt;/svg&gt;\n
+                    Layanan\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/doctor-schedules" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 9h18M7 3v4m10-4v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm3 8h3v3H8v-3Z"/&gt;&lt;/svg&gt;\n
+                    Jadwal dokter\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/patients" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/&gt;&lt;/svg&gt;\n
+                    Pasien\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/appointments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6"/&gt;&lt;/svg&gt;\n
+                    Booking &amp;amp; antrean\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/queues" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M5 6h14M5 12h14M5 18h9"/&gt;&lt;/svg&gt;\n
+                    Antrean hari ini\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/audit-logs" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 4h16v16H4V4Zm4 5h8m-8 4h8m-8 4h5"/&gt;&lt;/svg&gt;\n
+                    Audit aktivitas\n
+                &lt;/a&gt;\n
+            &lt;!--[if ENDBLOCK]&gt;&lt;![endif]--&gt;\n
+            &lt;a href="http://localhost/notifications" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/&gt;&lt;/svg&gt;\n
+                &lt;span class="flex-1"&gt;Notifikasi&lt;/span&gt;\n
+                &lt;span data-notification-count class="rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white hidden"&gt;0&lt;/span&gt;\n
+            &lt;/a&gt;\n
+        &lt;/nav&gt;\n
+\n
+        &lt;div class="border-t border-slate-100 p-4"&gt;\n
+            &lt;a href="http://localhost/profile" wire:navigate class="mb-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"&gt;\n
+                &lt;span class="flex h-9 w-9 items-center justify-center rounded-full bg-clinic-100 font-bold text-clinic-700"&gt;M&lt;/span&gt;\n
+                &lt;span class="min-w-0 flex-1"&gt;&lt;span class="block truncate text-slate-900"&gt;Mackenzie Bruen&lt;/span&gt;&lt;span class="block truncate text-xs font-normal text-slate-500"&gt;jaida34@example.org&lt;/span&gt;&lt;/span&gt;\n
+            &lt;/a&gt;\n
+            &lt;button wire:click="logout" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-500 hover:bg-red-50 hover:text-red-600"&gt;\n
+                &lt;svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M10 17l5-5-5-5M15 12H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/&gt;&lt;/svg&gt;\n
+                Keluar\n
+            &lt;/button&gt;\n
+        &lt;/div&gt;\n
+    &lt;/aside&gt;\n
+\n
+    &lt;div class="h-16 lg:hidden"&gt;&lt;/div&gt;\n
+&lt;/div&gt;\n
+            &lt;div class="lg:pl-72"&gt;\n
+                                    &lt;header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0"&gt;\n
+                        &lt;div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10"&gt;\n
+                            &lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600"&gt;Katalog klinik&lt;/p&gt;&lt;h1 class="mt-1 text-xl font-extrabold text-clinic-950"&gt;Tambah layanan&lt;/h1&gt;&lt;/div&gt;\n
+                        &lt;/div&gt;\n
+                    &lt;/header&gt;\n
+                \n
+                &lt;main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10"&gt;\n
+                    \n
+                                            \n
+                                                    &lt;div class="mb-6 flex items-center justify-between gap-4 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold text-amber-900" role="status"&gt;\n
+                                &lt;span&gt;Paket Free aktif.&lt;/span&gt;\n
+                                                                    &lt;a href="http://localhost/onboarding/plans" class="shrink-0 font-extrabold text-amber-950 underline underline-offset-4" wire:navigate&gt;\n
+                                        Lihat paket\n
+                                    &lt;/a&gt;\n
+                                                            &lt;/div&gt;\n
+                                            \n
+                    \n
+                                        &lt;div class="mx-auto max-w-3xl"&gt;&lt;div class="mb-7"&gt;&lt;h2 class="text-2xl font-extrabold text-clinic-950"&gt;Layanan baru&lt;/h2&gt;&lt;p class="mt-2 text-sm text-slate-500"&gt;Tentukan nama, tarif, dan durasi standar pelayanan.&lt;/p&gt;&lt;/div&gt;\n
+        &lt;form method="POST" action="http://localhost/admin/services" class="space-y-6" x-data="{ submitting: false }" @submit="submitting = true"&gt;&lt;input type="hidden" name="_token" value="[redacted]" autocomplete="off"&gt;             &lt;section class="clinic-card p-6 sm:p-8"&gt;&lt;div class="grid gap-6 md:grid-cols-2"&gt;\n
+                &lt;div class="md:col-span-2"&gt;&lt;label class="clinic-label" for="name"&gt;Nama layanan&lt;/label&gt;&lt;input class="clinic-input" id="name" name="name" value="" required&gt;&lt;/div&gt;\n
+                &lt;div&gt;&lt;label class="clinic-label" for="price"&gt;Biaya (Rp)&lt;/label&gt;&lt;input class="clinic-input" id="price" name="price" type="number" min="0" step="1000" value="" required&gt;&lt;/div&gt;\n
+                &lt;div&gt;&lt;label class="clinic-label" for="duration_minutes"&gt;Durasi&lt;/label&gt;&lt;div class="relative"&gt;&lt;input class="clinic-input pr-16" id="duration_minutes" name="duration_minutes" type="number" min="5" max="480" value="30" required&gt;&lt;span class="pointer-events-none absolute right-4 top-3 text-sm text-slate-400"&gt;menit&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;\n
+                &lt;div class="md:col-span-2"&gt;&lt;label class="clinic-label" for="description"&gt;Deskripsi&lt;/label&gt;&lt;textarea class="clinic-input" id="description" name="description" rows="4"&gt;&lt;/textarea&gt;&lt;/div&gt;\n
+                &lt;div class="md:col-span-2"&gt;&lt;input type="hidden" name="is_active" value="0"&gt;&lt;label class="inline-flex items-center gap-3 text-sm font-semibold text-slate-700"&gt;&lt;input type="checkbox" name="is_active" value="1" checked class="rounded border-slate-300 text-clinic-500 focus:ring-clinic-500"&gt;Layanan aktif dan dapat dipilih&lt;/label&gt;&lt;/div&gt;\n
+            &lt;/div&gt;&lt;/section&gt;\n
+            &lt;div class="flex justify-end gap-3"&gt;&lt;a href="http://localhost/admin/services" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 border border-slate-300 bg-white text-slate-700 hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-700" wire:navigate=""&gt;\n
+        Batal\n
+    &lt;/a&gt;\n
+&lt;button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 bg-clinic-500 text-white hover:bg-clinic-600 disabled:cursor-wait disabled:opacity-60" x-bind:disabled="submitting"&gt;\n
+        &lt;span x-show="! submitting"&gt;Tambah layanan&lt;/span&gt;&lt;span x-show="submitting" x-cloak&gt;Menyimpan…&lt;/span&gt;\n
+    &lt;/button&gt;\n
+&lt;/div&gt;\n
+        &lt;/form&gt;\n
+    &lt;/div&gt;\n
+                &lt;/main&gt;\n
+            &lt;/div&gt;\n
+        &lt;/div&gt;\n
+    &lt;!-- Livewire Scripts --&gt;\n
+&lt;script src="/livewire/livewire.js?id=dfa5f5ee"   data-csrf="[token omitted]" data-update-uri="/livewire/update" data-navigate-once="true"&gt;&lt;/script&gt;\n
+&lt;/body&gt;\n
+&lt;/html&gt;\n
+' [UTF-8](length: 18746) contains "step="any"" [ASCII](length: 10).
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:720
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:127</failure>
+      </testcase>
+    </testsuite>
+    <testcase name="test_empty_catalog_has_explanation_and_recovery_without_checkout" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="134" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.424891">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_empty_catalog_has_explanation_and_recovery_without_checkout&#13;
+Failed asserting that '&lt;!DOCTYPE html&gt;\n
+&lt;html lang="en"&gt;\n
+    &lt;head&gt;\n
+        &lt;meta charset="utf-8"&gt;\n
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;\n
+        &lt;meta name="csrf-token" content="[token omitted]"&gt;\n
+\n
+        &lt;title&gt;ClinicOS&lt;/title&gt;\n
+\n
+        &lt;link rel="preconnect" href="https://fonts.bunny.net"&gt;\n
+        &lt;link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;family=plus-jakarta-sans:600,700,800&amp;display=swap" rel="stylesheet" /&gt;\n
+\n
+        &lt;link rel="preload" as="style" href="http://localhost/build/assets/app-60tHKeNr.css" /&gt;&lt;link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BMtnh1Cm.js" /&gt;&lt;link rel="stylesheet" href="http://localhost/build/assets/app-60tHKeNr.css" data-navigate-track="reload" /&gt;&lt;script type="module" src="http://localhost/build/assets/app-BMtnh1Cm.js" data-navigate-track="reload"&gt;&lt;/script&gt;    &lt;!-- Livewire Styles --&gt;&lt;style &gt;[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak="x-cloak"],[x-cloak=""] {display: none !important;}[wire\:cloak="wire:cloak"],[wire\:cloak=""] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}&lt;/style&gt;\n
+&lt;/head&gt;\n
+    &lt;body class="font-sans antialiased"&gt;\n
+                &lt;div class="min-h-screen"&gt;\n
+            &lt;div wire:snapshot="{&amp;quot;data&amp;quot;:[],&amp;quot;memo&amp;quot;:{&amp;quot;id&amp;quot;:&amp;quot;i5xe9j3z5qK5bWOgUIEY&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;layout.navigation&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;onboarding\/plans&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;release&amp;quot;:&amp;quot;a-a-a&amp;quot;,&amp;quot;children&amp;quot;:[],&amp;quot;scripts&amp;quot;:[],&amp;quot;assets&amp;quot;:[],&amp;quot;errors&amp;quot;:[],&amp;quot;locale&amp;quot;:&amp;quot;en&amp;quot;},&amp;quot;checksum&amp;quot;:&amp;quot;[hash omitted]&amp;quot;}" wire:effects="[]" wire:id="i5xe9j3z5qK5bWOgUIEY" x-data="{\n
+    open: false,\n
+    desktop: window.matchMedia('(min-width: 1024px)').matches,\n
+    close() { this.open = false; this.$nextTick(() =&gt; this.$refs.trigger.focus()); },\n
+}" @keydown.escape.window="if (open) { $event.preventDefault(); close(); }"\n
+    @resize.window="desktop = window.matchMedia('(min-width: 1024px)').matches; if (desktop) open = false"\n
+    data-user-notification-channel="users.1"&gt;\n
+    &lt;div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden"&gt;\n
+        &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+            &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-9 w-9" /&gt;\n
+            &lt;span class="font-display text-lg font-extrabold text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/span&gt;\n
+        &lt;/a&gt;\n
+        &lt;button x-ref="trigger" type="button" @click="open = true" aria-controls="workspace-navigation" :aria-expanded="open.toString()" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi"&gt;\n
+            &lt;svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+        &lt;/button&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;div x-show="open" x-cloak @click="close()" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"&gt;&lt;/div&gt;\n
+\n
+    &lt;aside id="workspace-navigation" x-trap.inert.noscroll.noreturn="open &amp;&amp; !desktop" :inert="!open &amp;&amp; !desktop" :aria-hidden="!open &amp;&amp; !desktop" :role="desktop ? 'complementary' : 'dialog'" :aria-modal="open &amp;&amp; !desktop ? 'true' : null" aria-label="Navigasi utama" :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0"&gt;\n
+        &lt;div class="flex h-20 items-center justify-between border-b border-slate-100 px-6"&gt;\n
+            &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+                &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-11 w-11" /&gt;\n
+                &lt;div&gt;\n
+                    &lt;div class="font-display text-xl font-extrabold tracking-tight text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/div&gt;\n
+                    &lt;div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400"&gt;Clinic workspace&lt;/div&gt;\n
+                &lt;/div&gt;\n
+            &lt;/a&gt;\n
+            &lt;button type="button" @click="close()" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi"&gt;✕&lt;/button&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;div class="border-b border-slate-100 px-6 py-5"&gt;\n
+            &lt;p class="truncate text-sm font-bold text-slate-900"&gt;Kilback-Cremin Clinic&lt;/p&gt;\n
+                        &lt;p class="mt-1 text-xs text-slate-500"&gt;Clinic Admin&lt;/p&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5"&gt;\n
+            \n
+            &lt;!--[if BLOCK]&gt;&lt;![endif]--&gt;                &lt;a href="http://localhost/admin/dashboard" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z"/&gt;&lt;/svg&gt;\n
+                    Dashboard\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/subscription/payments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 7h16M4 12h16M4 17h10"/&gt;&lt;/svg&gt;\n
+                    Subscription\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/subscription/addons" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+                    Add-on odontogram\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/clinic" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-5 7v-3h4v3"/&gt;&lt;/svg&gt;\n
+                    Profil klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/staff" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm13 10v-2a4 4 0 0 0-3-3.87m-2-12a4 4 0 0 1 0 7.75"/&gt;&lt;/svg&gt;\n
+                    Tim klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/services" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10h6m-3-3v6"/&gt;&lt;/svg&gt;\n
+                    Layanan\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/doctor-schedules" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 9h18M7 3v4m10-4v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm3 8h3v3H8v-3Z"/&gt;&lt;/svg&gt;\n
+                    Jadwal dokter\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/patients" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/&gt;&lt;/svg&gt;\n
+                    Pasien\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/appointments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6"/&gt;&lt;/svg&gt;\n
+                    Booking &amp;amp; antrean\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/queues" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M5 6h14M5 12h14M5 18h9"/&gt;&lt;/svg&gt;\n
+                    Antrean hari ini\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/audit-logs" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 4h16v16H4V4Zm4 5h8m-8 4h8m-8 4h5"/&gt;&lt;/svg&gt;\n
+                    Audit aktivitas\n
+                &lt;/a&gt;\n
+            &lt;!--[if ENDBLOCK]&gt;&lt;![endif]--&gt;\n
+            &lt;a href="http://localhost/notifications" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/&gt;&lt;/svg&gt;\n
+                &lt;span class="flex-1"&gt;Notifikasi&lt;/span&gt;\n
+                &lt;span data-notification-count class="rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white hidden"&gt;0&lt;/span&gt;\n
+            &lt;/a&gt;\n
+        &lt;/nav&gt;\n
+\n
+        &lt;div class="border-t border-slate-100 p-4"&gt;\n
+            &lt;a href="http://localhost/profile" wire:navigate class="mb-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"&gt;\n
+                &lt;span class="flex h-9 w-9 items-center justify-center rounded-full bg-clinic-100 font-bold text-clinic-700"&gt;M&lt;/span&gt;\n
+                &lt;span class="min-w-0 flex-1"&gt;&lt;span class="block truncate text-slate-900"&gt;Miss Madie Becker Sr.&lt;/span&gt;&lt;span class="block truncate text-xs font-normal text-slate-500"&gt;nankunding@example.net&lt;/span&gt;&lt;/span&gt;\n
+            &lt;/a&gt;\n
+            &lt;button wire:click="logout" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-500 hover:bg-red-50 hover:text-red-600"&gt;\n
+                &lt;svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M10 17l5-5-5-5M15 12H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/&gt;&lt;/svg&gt;\n
+                Keluar\n
+            &lt;/button&gt;\n
+        &lt;/div&gt;\n
+    &lt;/aside&gt;\n
+\n
+    &lt;div class="h-16 lg:hidden"&gt;&lt;/div&gt;\n
+&lt;/div&gt;\n
+            &lt;div class="lg:pl-72"&gt;\n
+                                    &lt;header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0"&gt;\n
+                        &lt;div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10"&gt;\n
+                            &lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600"&gt;Subscription&lt;/p&gt;&lt;h1 class="mt-1 text-xl font-extrabold text-clinic-950"&gt;Pilih paket klinik&lt;/h1&gt;&lt;/div&gt;\n
+                        &lt;/div&gt;\n
+                    &lt;/header&gt;\n
+                \n
+                &lt;main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10"&gt;\n
+                    \n
+                                            \n
+                                                    &lt;div class="mb-6 flex items-center justify-between gap-4 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold text-amber-900" role="status"&gt;\n
+                                &lt;span&gt;Paket Free aktif.&lt;/span&gt;\n
+                                                                    &lt;a href="http://localhost/onboarding/plans" class="shrink-0 font-extrabold text-amber-950 underline underline-offset-4" wire:navigate&gt;\n
+                                        Lihat paket\n
+                                    &lt;/a&gt;\n
+                                                            &lt;/div&gt;\n
+                                            \n
+                    \n
+                                        &lt;div class="mx-auto max-w-7xl"&gt;\n
+        &lt;div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"&gt;\n
+            &lt;div class="max-w-2xl"&gt;&lt;h2 class="text-3xl font-extrabold text-clinic-950"&gt;Perpanjang akses ClinicOS&lt;/h2&gt;&lt;p class="mt-3 text-sm leading-7 text-slate-500"&gt;Mulai gratis, coba kapasitas Team selama 14 hari, atau pilih durasi paket berbayar.&lt;/p&gt;&lt;/div&gt;\n
+            &lt;a href="http://localhost/subscription/payments" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 border border-slate-300 bg-white text-slate-700 hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-700" wire:navigate=""&gt;\n
+        Riwayat pembayaran\n
+    &lt;/a&gt;\n
+        &lt;/div&gt;\n
+\n
+                                &lt;div class="grid gap-5 lg:grid-cols-3"&gt;\n
+                    &lt;/div&gt;\n
+        &lt;p class="mt-6 text-center text-xs text-slate-500"&gt;Harga adalah total pembayaran. Akses berbayar aktif hanya setelah notification DOKU terverifikasi.&lt;/p&gt;\n
+    &lt;/div&gt;\n
+                &lt;/main&gt;\n
+            &lt;/div&gt;\n
+        &lt;/div&gt;\n
+    &lt;!-- Livewire Scripts --&gt;\n
+&lt;script src="/livewire/livewire.js?id=dfa5f5ee"   data-csrf="[token omitted]" data-update-uri="/livewire/update" data-navigate-once="true"&gt;&lt;/script&gt;\n
+&lt;/body&gt;\n
+&lt;/html&gt;\n
+' [UTF-8](length: 17031) contains "Belum ada paket tersedia" [ASCII](length: 24).
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:720
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:137</failure>
+    </testcase>
+    <testcase name="test_expired_editor_exposes_login_recovery_without_losing_data" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="140" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="1" time="0.132006">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_expired_editor_exposes_login_recovery_without_losing_data&#13;
+Failed asserting that '&lt;div\n
+    data-rme-autosave-status="" data-initial-state="draft" role="status" aria-live="polite" aria-atomic="true" class="min-w-48"\n
+    x-data="{\n
+        state: 'draft',\n
+        message: null,\n
+        setState(detail) {\n
+            if (! detail || ! JSON.parse('[\u0022draft\u0022,\u0022saving\u0022,\u0022saved\u0022,\u0022error\u0022,\u0022conflict\u0022,\u0022finalized\u0022]').includes(detail.state)) {\n
+                return;\n
+            }\n
+\n
+            this.state = detail.state;\n
+            this.message = detail.message ?? null;\n
+        },\n
+    }"\n
+    x-on:rme-autosave-state.window="setState($event.detail)"\n
+&gt;\n
+            &lt;div\n
+            x-show="state === 'draft'"\n
+            x-cloak\n
+            class="flex items-start gap-2 rounded-xl border px-3 py-2 text-xs border-slate-200 bg-slate-50 text-slate-700"\n
+        &gt;\n
+            &lt;span class="mt-1 size-2 shrink-0 rounded-full bg-slate-400" aria-hidden="true"&gt;&lt;/span&gt;\n
+            &lt;span&gt;\n
+                &lt;span class="block font-extrabold"&gt;Draft&lt;/span&gt;\n
+                &lt;span\n
+                    class="mt-0.5 block leading-5"\n
+                                    &gt;Ada perubahan yang belum disimpan.&lt;/span&gt;\n
+                            &lt;/span&gt;\n
+        &lt;/div&gt;\n
+            &lt;div\n
+            x-show="state === 'saving'"\n
+            x-cloak\n
+            class="flex items-start gap-2 rounded-xl border px-3 py-2 text-xs border-amber-200 bg-amber-50 text-amber-900"\n
+        &gt;\n
+            &lt;span class="mt-1 size-2 shrink-0 rounded-full animate-pulse bg-amber-500" aria-hidden="true"&gt;&lt;/span&gt;\n
+            &lt;span&gt;\n
+                &lt;span class="block font-extrabold"&gt;Menyimpan…&lt;/span&gt;\n
+                &lt;span\n
+                    class="mt-0.5 block leading-5"\n
+                                    &gt;Data sedang dikirim.&lt;/span&gt;\n
+                            &lt;/span&gt;\n
+        &lt;/div&gt;\n
+            &lt;div\n
+            x-show="state === 'saved'"\n
+            x-cloak\n
+            class="flex items-start gap-2 rounded-xl border px-3 py-2 text-xs border-emerald-200 bg-emerald-50 text-emerald-800"\n
+        &gt;\n
+            &lt;span class="mt-1 size-2 shrink-0 rounded-full bg-emerald-500" aria-hidden="true"&gt;&lt;/span&gt;\n
+            &lt;span&gt;\n
+                &lt;span class="block font-extrabold"&gt;Tersimpan&lt;/span&gt;\n
+                &lt;span\n
+                    class="mt-0.5 block leading-5"\n
+                                    &gt;Perubahan terakhir sudah tersimpan.&lt;/span&gt;\n
+                            &lt;/span&gt;\n
+        &lt;/div&gt;\n
+            &lt;div\n
+            x-show="state === 'error'"\n
+            x-cloak\n
+            class="flex items-start gap-2 rounded-xl border px-3 py-2 text-xs border-red-200 bg-red-50 text-red-800"\n
+        &gt;\n
+            &lt;span class="mt-1 size-2 shrink-0 rounded-full bg-red-500" aria-hidden="true"&gt;&lt;/span&gt;\n
+            &lt;span&gt;\n
+                &lt;span class="block font-extrabold"&gt;Gagal disimpan&lt;/span&gt;\n
+                &lt;span\n
+                    class="mt-0.5 block leading-5"\n
+                     x-text="message || 'Periksa field yang ditandai.'"                 &gt;Periksa field yang ditandai.&lt;/span&gt;\n
+                                    &lt;button type="button" class="mt-1 min-h-11 font-bold underline focus-visible:ring-2 focus-visible:ring-clinic-500" @click="$dispatch('rme-retry')"&gt;Coba simpan lagi&lt;/button&gt;\n
+                            &lt;/span&gt;\n
+        &lt;/div&gt;\n
+            &lt;div\n
+            x-show="state === 'conflict'"\n
+            x-cloak\n
+            class="flex items-start gap-2 rounded-xl border px-3 py-2 text-xs border-amber-300 bg-amber-50 text-amber-950"\n
+        &gt;\n
+            &lt;span class="mt-1 size-2 shrink-0 rounded-full bg-amber-500" aria-hidden="true"&gt;&lt;/span&gt;\n
+            &lt;span&gt;\n
+                &lt;span class="block font-extrabold"&gt;Perlu ditinjau&lt;/span&gt;\n
+                &lt;span\n
+                    class="mt-0.5 block leading-5"\n
+                     x-text="message || 'Salin perubahan Anda lalu muat ulang halaman untuk melanjutkan.'"                 &gt;Salin perubahan Anda lalu muat ulang halaman untuk melanjutkan.&lt;/span&gt;\n
+                            &lt;/span&gt;\n
+        &lt;/div&gt;\n
+            &lt;div\n
+            x-show="state === 'finalized'"\n
+            x-cloak\n
+            class="flex items-start gap-2 rounded-xl border px-3 py-2 text-xs border-clinic-200 bg-clinic-50 text-clinic-800"\n
+        &gt;\n
+            &lt;span class="mt-1 size-2 shrink-0 rounded-full bg-clinic-500" aria-hidden="true"&gt;&lt;/span&gt;\n
+            &lt;span&gt;\n
+                &lt;span class="block font-extrabold"&gt;Finalized&lt;/span&gt;\n
+                &lt;span\n
+                    class="mt-0.5 block leading-5"\n
+                                    &gt;Perubahan berikutnya menjadi Modification.&lt;/span&gt;\n
+                            &lt;/span&gt;\n
+        &lt;/div&gt;\n
+    &lt;/div&gt;\n
+' [UTF-8](length: 4625) contains "Sesi berakhir" [ASCII](length: 13).
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestView.php:136
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:142</failure>
+    </testcase>
+    <testsuite name="Tests\Feature\CoverageClosureRegressionTest::test_queue_filters_are_preserved_separately_from_refreshed_rows" tests="2" assertions="4" errors="0" failures="2" skipped="0" time="0.497670">
+      <testcase name="test_queue_filters_are_preserved_separately_from_refreshed_rows with data set &quot;admin&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="149" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.401193">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_queue_filters_are_preserved_separately_from_refreshed_rows with data set "admin"&#13;
+Failed asserting that '&lt;!DOCTYPE html&gt;\n
+&lt;html lang="en"&gt;\n
+    &lt;head&gt;\n
+        &lt;meta charset="utf-8"&gt;\n
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;\n
+        &lt;meta name="csrf-token" content="[token omitted]"&gt;\n
+\n
+        &lt;title&gt;ClinicOS&lt;/title&gt;\n
+\n
+        &lt;link rel="preconnect" href="https://fonts.bunny.net"&gt;\n
+        &lt;link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;family=plus-jakarta-sans:600,700,800&amp;display=swap" rel="stylesheet" /&gt;\n
+\n
+        &lt;link rel="preload" as="style" href="http://localhost/build/assets/app-60tHKeNr.css" /&gt;&lt;link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BMtnh1Cm.js" /&gt;&lt;link rel="stylesheet" href="http://localhost/build/assets/app-60tHKeNr.css" data-navigate-track="reload" /&gt;&lt;script type="module" src="http://localhost/build/assets/app-BMtnh1Cm.js" data-navigate-track="reload"&gt;&lt;/script&gt;    &lt;!-- Livewire Styles --&gt;&lt;style &gt;[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak="x-cloak"],[x-cloak=""] {display: none !important;}[wire\:cloak="wire:cloak"],[wire\:cloak=""] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}&lt;/style&gt;\n
+&lt;/head&gt;\n
+    &lt;body class="font-sans antialiased"&gt;\n
+                &lt;div class="min-h-screen"&gt;\n
+            &lt;div wire:snapshot="{&amp;quot;data&amp;quot;:[],&amp;quot;memo&amp;quot;:{&amp;quot;id&amp;quot;:&amp;quot;kHUveZH6krOGk6DGJkys&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;layout.navigation&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;receptionist\/queues&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;release&amp;quot;:&amp;quot;a-a-a&amp;quot;,&amp;quot;children&amp;quot;:[],&amp;quot;scripts&amp;quot;:[],&amp;quot;assets&amp;quot;:[],&amp;quot;errors&amp;quot;:[],&amp;quot;locale&amp;quot;:&amp;quot;en&amp;quot;},&amp;quot;checksum&amp;quot;:&amp;quot;[hash omitted]&amp;quot;}" wire:effects="[]" wire:id="kHUveZH6krOGk6DGJkys" x-data="{\n
+    open: false,\n
+    desktop: window.matchMedia('(min-width: 1024px)').matches,\n
+    close() { this.open = false; this.$nextTick(() =&gt; this.$refs.trigger.focus()); },\n
+}" @keydown.escape.window="if (open) { $event.preventDefault(); close(); }"\n
+    @resize.window="desktop = window.matchMedia('(min-width: 1024px)').matches; if (desktop) open = false"\n
+    data-user-notification-channel="users.1"&gt;\n
+    &lt;div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden"&gt;\n
+        &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+            &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-9 w-9" /&gt;\n
+            &lt;span class="font-display text-lg font-extrabold text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/span&gt;\n
+        &lt;/a&gt;\n
+        &lt;button x-ref="trigger" type="button" @click="open = true" aria-controls="workspace-navigation" :aria-expanded="open.toString()" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi"&gt;\n
+            &lt;svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+        &lt;/button&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;div x-show="open" x-cloak @click="close()" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"&gt;&lt;/div&gt;\n
+\n
+    &lt;aside id="workspace-navigation" x-trap.inert.noscroll.noreturn="open &amp;&amp; !desktop" :inert="!open &amp;&amp; !desktop" :aria-hidden="!open &amp;&amp; !desktop" :role="desktop ? 'complementary' : 'dialog'" :aria-modal="open &amp;&amp; !desktop ? 'true' : null" aria-label="Navigasi utama" :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0"&gt;\n
+        &lt;div class="flex h-20 items-center justify-between border-b border-slate-100 px-6"&gt;\n
+            &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+                &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-11 w-11" /&gt;\n
+                &lt;div&gt;\n
+                    &lt;div class="font-display text-xl font-extrabold tracking-tight text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/div&gt;\n
+                    &lt;div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400"&gt;Clinic workspace&lt;/div&gt;\n
+                &lt;/div&gt;\n
+            &lt;/a&gt;\n
+            &lt;button type="button" @click="close()" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi"&gt;✕&lt;/button&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;div class="border-b border-slate-100 px-6 py-5"&gt;\n
+            &lt;p class="truncate text-sm font-bold text-slate-900"&gt;Willms-Kuphal Clinic&lt;/p&gt;\n
+                        &lt;p class="mt-1 text-xs text-slate-500"&gt;Clinic Admin&lt;/p&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5"&gt;\n
+            \n
+            &lt;!--[if BLOCK]&gt;&lt;![endif]--&gt;                &lt;a href="http://localhost/admin/dashboard" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z"/&gt;&lt;/svg&gt;\n
+                    Dashboard\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/subscription/payments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 7h16M4 12h16M4 17h10"/&gt;&lt;/svg&gt;\n
+                    Subscription\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/subscription/addons" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+                    Add-on odontogram\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/clinic" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-5 7v-3h4v3"/&gt;&lt;/svg&gt;\n
+                    Profil klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/staff" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm13 10v-2a4 4 0 0 0-3-3.87m-2-12a4 4 0 0 1 0 7.75"/&gt;&lt;/svg&gt;\n
+                    Tim klinik\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/services" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10h6m-3-3v6"/&gt;&lt;/svg&gt;\n
+                    Layanan\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/doctor-schedules" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 9h18M7 3v4m10-4v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm3 8h3v3H8v-3Z"/&gt;&lt;/svg&gt;\n
+                    Jadwal dokter\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/patients" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/&gt;&lt;/svg&gt;\n
+                    Pasien\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/appointments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6"/&gt;&lt;/svg&gt;\n
+                    Booking &amp;amp; antrean\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/queues" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition bg-clinic-50 text-clinic-700"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M5 6h14M5 12h14M5 18h9"/&gt;&lt;/svg&gt;\n
+                    Antrean hari ini\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/admin/audit-logs" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 4h16v16H4V4Zm4 5h8m-8 4h8m-8 4h5"/&gt;&lt;/svg&gt;\n
+                    Audit aktivitas\n
+                &lt;/a&gt;\n
+            &lt;!--[if ENDBLOCK]&gt;&lt;![endif]--&gt;\n
+            &lt;a href="http://localhost/notifications" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/&gt;&lt;/svg&gt;\n
+                &lt;span class="flex-1"&gt;Notifikasi&lt;/span&gt;\n
+                &lt;span data-notification-count class="rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white hidden"&gt;0&lt;/span&gt;\n
+            &lt;/a&gt;\n
+        &lt;/nav&gt;\n
+\n
+        &lt;div class="border-t border-slate-100 p-4"&gt;\n
+            &lt;a href="http://localhost/profile" wire:navigate class="mb-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"&gt;\n
+                &lt;span class="flex h-9 w-9 items-center justify-center rounded-full bg-clinic-100 font-bold text-clinic-700"&gt;D&lt;/span&gt;\n
+                &lt;span class="min-w-0 flex-1"&gt;&lt;span class="block truncate text-slate-900"&gt;Dr. Giovanna Rempel IV&lt;/span&gt;&lt;span class="block truncate text-xs font-normal text-slate-500"&gt;alessandra88@example.org&lt;/span&gt;&lt;/span&gt;\n
+            &lt;/a&gt;\n
+            &lt;button wire:click="logout" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-500 hover:bg-red-50 hover:text-red-600"&gt;\n
+                &lt;svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M10 17l5-5-5-5M15 12H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/&gt;&lt;/svg&gt;\n
+                Keluar\n
+            &lt;/button&gt;\n
+        &lt;/div&gt;\n
+    &lt;/aside&gt;\n
+\n
+    &lt;div class="h-16 lg:hidden"&gt;&lt;/div&gt;\n
+&lt;/div&gt;\n
+            &lt;div class="lg:pl-72"&gt;\n
+                                    &lt;header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0"&gt;\n
+                        &lt;div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10"&gt;\n
+                            &lt;div class="flex w-full items-center justify-between gap-4"&gt;&lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600"&gt;Operasional hari ini&lt;/p&gt;&lt;h1 class="mt-1 text-xl font-extrabold text-clinic-950"&gt;Antrean pasien&lt;/h1&gt;&lt;/div&gt;&lt;a href="http://localhost/receptionist/appointments/create" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 bg-clinic-500 text-white hover:bg-clinic-600" wire:navigate=""&gt;\n
+        + Booking walk-in\n
+    &lt;/a&gt;\n
+&lt;/div&gt;\n
+                        &lt;/div&gt;\n
+                    &lt;/header&gt;\n
+                \n
+                &lt;main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10"&gt;\n
+                    \n
+                                            \n
+                                                    &lt;div class="mb-6 flex items-center justify-between gap-4 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold text-amber-900" role="status"&gt;\n
+                                &lt;span&gt;Paket Free aktif.&lt;/span&gt;\n
+                                                                    &lt;a href="http://localhost/onboarding/plans" class="shrink-0 font-extrabold text-amber-950 underline underline-offset-4" wire:navigate&gt;\n
+                                        Lihat paket\n
+                                    &lt;/a&gt;\n
+                                                            &lt;/div&gt;\n
+                                            \n
+                    \n
+                                        &lt;div class="mb-6 hidden rounded-2xl border px-5 py-4 text-sm font-semibold" data-queue-action-feedback role="status" aria-live="polite"&gt;&lt;/div&gt;\r\n
+    &lt;div data-realtime-queue-channel="clinic.1.queues" data-realtime-refresh-root&gt;\r\n
+    \r\n
+    &lt;div class="mb-7"&gt;&lt;h2 class="text-2xl font-extrabold text-clinic-950"&gt;Antrean 14 November 2026&lt;/h2&gt;&lt;p class="mt-2 text-sm text-slate-500"&gt;Check-in pasien sesuai kedatangan, lalu panggil satu per satu dalam setiap sesi dokter.&lt;/p&gt;&lt;/div&gt;\r\n
+\r\n
+    &lt;div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6"&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Terdaftar&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Menunggu&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Dipanggil&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Diperiksa&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Selesai&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Dilewati&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+            &lt;/div&gt;\r\n
+\r\n
+    &lt;form method="GET" class="clinic-card mb-6 grid gap-4 p-5 md:grid-cols-4"&gt;\r\n
+        &lt;div&gt;&lt;label class="clinic-label" for="date"&gt;Tanggal&lt;/label&gt;&lt;input class="clinic-input" id="date" name="date" type="date" value="2026-11-14"&gt;&lt;/div&gt;\r\n
+        &lt;div  x-modelable="selectedId" x-data="{\n
+    options: JSON.parse('[{\u0022id\u0022:1,\u0022label\u0022:\u0022Prof. Hope Stoltenberg\u0022}]'), selectedId: String(null ?? ''), query: '', open: false,\n
+    init() { this.query = this.options.find((option) =&gt; String(option.id) === this.selectedId)?.label ?? ''; },\n
+    get results() { const query = this.query.toLowerCase(); return this.options.filter((option) =&gt; option.label.toLowerCase().includes(query)).slice(0, 8); },\n
+    search() { this.selectedId = ''; this.open = true; },\n
+    select(option) { this.selectedId = option.id; this.query = option.label; this.open = false; },\n
+    clear() { this.selectedId = ''; this.query = ''; this.open = false; },\n
+    setOptions(options) {\n
+        this.options = options;\n
+        const selected = this.options.find(option =&gt; String(option.id) === String(this.selectedId));\n
+        if (selected) { this.query = selected.label; }\n
+        else if (this.selectedId) { this.clear(); }\n
+    },\n
+}"&gt;\n
+    &lt;label class="clinic-label" for="doctor_id_search"&gt;Dokter&lt;/label&gt;\n
+    &lt;input type="hidden" name="doctor_id" :value="selectedId"&gt;\n
+    &lt;div class="relative"&gt;\n
+        &lt;input class="clinic-input pr-10" id="doctor_id_search" type="search" x-model="query" @input="search()" @focus="open = true" @keydown.escape="open = false" @keydown.down.prevent="const results = $event.target.parentElement.querySelector('[x-ref=results]'); open = true; $nextTick(() =&gt; results.querySelector('button')?.focus())" autocomplete="off" placeholder="Cari dokter" &gt;\n
+        &lt;button x-cloak x-show="selectedId" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400 hover:text-slate-700" @click="clear()" aria-label="Hapus pilihan dokter"&gt;×&lt;/button&gt;        &lt;div x-ref="results" x-cloak x-show="open" @click.outside="open = false" @keydown.escape="open = false; $el.parentElement.querySelector('input[type=search]').focus()" class="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg"&gt;\n
+            &lt;template x-for="option in results" :key="option.id"&gt;&lt;button type="button" class="block w-full px-4 py-3 text-left text-sm text-slate-700 hover:bg-clinic-50" @click="select(option)" x-text="option.label"&gt;&lt;/button&gt;&lt;/template&gt;\n
+            &lt;p x-show="!results.length" class="px-4 py-3 text-sm text-slate-500"&gt;Dokter tidak ditemukan.&lt;/p&gt;\n
+        &lt;/div&gt;\n
+    &lt;/div&gt;\n
+&lt;/div&gt;\n
+        &lt;div  x-modelable="selectedId" x-data="{\n
+    options: JSON.parse('[{\u0022id\u0022:1,\u0022label\u0022:\u0022Prof. Hope Stoltenberg · Sabtu 12:00\u0022}]'), selectedId: String(null ?? ''), query: '', open: false,\n
+    init() { this.query = this.options.find((option) =&gt; String(option.id) === this.selectedId)?.label ?? ''; },\n
+    get results() { const query = this.query.toLowerCase(); return this.options.filter((option) =&gt; option.label.toLowerCase().includes(query)).slice(0, 8); },\n
+    search() { this.selectedId = ''; this.open = true; },\n
+    select(option) { this.selectedId = option.id; this.query = option.label; this.open = false; },\n
+    clear() { this.selectedId = ''; this.query = ''; this.open = false; },\n
+    setOptions(options) {\n
+        this.options = options;\n
+        const selected = this.options.find(option =&gt; String(option.id) === String(this.selectedId));\n
+        if (selected) { this.query = selected.label; }\n
+        else if (this.selectedId) { this.clear(); }\n
+    },\n
+}"&gt;\n
+    &lt;label class="clinic-label" for="doctor_schedule_id_search"&gt;Sesi&lt;/label&gt;\n
+    &lt;input type="hidden" name="doctor_schedule_id" :value="selectedId"&gt;\n
+    &lt;div class="relative"&gt;\n
+        &lt;input class="clinic-input pr-10" id="doctor_schedule_id_search" type="search" x-model="query" @input="search()" @focus="open = true" @keydown.escape="open = false" @keydown.down.prevent="const results = $event.target.parentElement.querySelector('[x-ref=results]'); open = true; $nextTick(() =&gt; results.querySelector('button')?.focus())" autocomplete="off" placeholder="Cari sesi" &gt;\n
+        &lt;button x-cloak x-show="selectedId" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400 hover:text-slate-700" @click="clear()" aria-label="Hapus pilihan sesi"&gt;×&lt;/button&gt;        &lt;div x-ref="results" x-cloak x-show="open" @click.outside="open = false" @keydown.escape="open = false; $el.parentElement.querySelector('input[type=search]').focus()" class="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg"&gt;\n
+            &lt;template x-for="option in results" :key="option.id"&gt;&lt;button type="button" class="block w-full px-4 py-3 text-left text-sm text-slate-700 hover:bg-clinic-50" @click="select(option)" x-text="option.label"&gt;&lt;/button&gt;&lt;/template&gt;\n
+            &lt;p x-show="!results.length" class="px-4 py-3 text-sm text-slate-500"&gt;Sesi tidak ditemukan.&lt;/p&gt;\n
+        &lt;/div&gt;\n
+    &lt;/div&gt;\n
+&lt;/div&gt;\n
+        &lt;div&gt;&lt;label class="clinic-label" for="status"&gt;Status&lt;/label&gt;&lt;select class="clinic-input" id="status" name="status"&gt;&lt;option value=""&gt;Semua status&lt;/option&gt;&lt;option value="BOOKED" &gt;Terdaftar&lt;/option&gt;&lt;option value="WAITING" selected&gt;Menunggu&lt;/option&gt;&lt;option value="CALLED" &gt;Dipanggil&lt;/option&gt;&lt;option value="IN_PROGRESS" &gt;Diperiksa&lt;/option&gt;&lt;option value="COMPLETED" &gt;Selesai&lt;/option&gt;&lt;option value="CANCELLED" &gt;Dibatalkan&lt;/option&gt;&lt;option value="SKIPPED" &gt;Dilewati&lt;/option&gt;&lt;option value="NO_SHOW" &gt;Tidak hadir&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;\r\n
+        &lt;div class="flex items-end"&gt;&lt;button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 border border-slate-300 bg-white text-slate-700 hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-700 w-full"&gt;\n
+        Terapkan filter\n
+    &lt;/button&gt;\n
+&lt;/div&gt;\r\n
+    &lt;/form&gt;\r\n
+\r\n
+    &lt;div class="space-y-4"&gt;\r\n
+                    &lt;div class="clinic-card p-14 text-center"&gt;&lt;div class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-clinic-50 text-xl text-clinic-600"&gt;✓&lt;/div&gt;&lt;p class="mt-4 font-bold text-slate-800"&gt;Tidak ada antrean&lt;/p&gt;&lt;p class="mt-1 text-sm text-slate-500"&gt;Belum ada antrean yang sesuai dengan filter ini.&lt;/p&gt;&lt;/div&gt;\r\n
+            &lt;/div&gt;\r\n
+        &lt;/div&gt;\n
+                &lt;/main&gt;\n
+            &lt;/div&gt;\n
+        &lt;/div&gt;\n
+    &lt;!-- Livewire Scripts --&gt;\n
+&lt;script src="/livewire/livewire.js?id=dfa5f5ee"   data-csrf="[token omitted]" data-update-uri="/livewire/update" data-navigate-once="true"&gt;&lt;/script&gt;\n
+&lt;/body&gt;\n
+&lt;/html&gt;\n
+' [UTF-8](length: 24633) contains "data-realtime-preserve="queue-filters"" [ASCII](length: 38).
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:720
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:151</failure>
+      </testcase>
+      <testcase name="test_queue_filters_are_preserved_separately_from_refreshed_rows with data set &quot;receptionist&quot;" file="C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php" line="149" class="Tests\Feature\CoverageClosureRegressionTest" classname="Tests.Feature.CoverageClosureRegressionTest" assertions="2" time="0.096477">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\CoverageClosureRegressionTest::test_queue_filters_are_preserved_separately_from_refreshed_rows with data set "receptionist"&#13;
+Failed asserting that '&lt;!DOCTYPE html&gt;\n
+&lt;html lang="en"&gt;\n
+    &lt;head&gt;\n
+        &lt;meta charset="utf-8"&gt;\n
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;\n
+        &lt;meta name="csrf-token" content="[token omitted]"&gt;\n
+\n
+        &lt;title&gt;ClinicOS&lt;/title&gt;\n
+\n
+        &lt;link rel="preconnect" href="https://fonts.bunny.net"&gt;\n
+        &lt;link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;family=plus-jakarta-sans:600,700,800&amp;display=swap" rel="stylesheet" /&gt;\n
+\n
+        &lt;link rel="preload" as="style" href="http://localhost/build/assets/app-60tHKeNr.css" /&gt;&lt;link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BMtnh1Cm.js" /&gt;&lt;link rel="stylesheet" href="http://localhost/build/assets/app-60tHKeNr.css" data-navigate-track="reload" /&gt;&lt;script type="module" src="http://localhost/build/assets/app-BMtnh1Cm.js" data-navigate-track="reload"&gt;&lt;/script&gt;    &lt;!-- Livewire Styles --&gt;&lt;style &gt;[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak="x-cloak"],[x-cloak=""] {display: none !important;}[wire\:cloak="wire:cloak"],[wire\:cloak=""] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}&lt;/style&gt;\n
+&lt;/head&gt;\n
+    &lt;body class="font-sans antialiased"&gt;\n
+                &lt;div class="min-h-screen"&gt;\n
+            &lt;div wire:snapshot="{&amp;quot;data&amp;quot;:[],&amp;quot;memo&amp;quot;:{&amp;quot;id&amp;quot;:&amp;quot;cl5XKdRGMnGbHeHp07rS&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;layout.navigation&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;receptionist\/queues&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;release&amp;quot;:&amp;quot;a-a-a&amp;quot;,&amp;quot;children&amp;quot;:[],&amp;quot;scripts&amp;quot;:[],&amp;quot;assets&amp;quot;:[],&amp;quot;errors&amp;quot;:[],&amp;quot;locale&amp;quot;:&amp;quot;en&amp;quot;},&amp;quot;checksum&amp;quot;:&amp;quot;[hash omitted]&amp;quot;}" wire:effects="[]" wire:id="cl5XKdRGMnGbHeHp07rS" x-data="{\n
+    open: false,\n
+    desktop: window.matchMedia('(min-width: 1024px)').matches,\n
+    close() { this.open = false; this.$nextTick(() =&gt; this.$refs.trigger.focus()); },\n
+}" @keydown.escape.window="if (open) { $event.preventDefault(); close(); }"\n
+    @resize.window="desktop = window.matchMedia('(min-width: 1024px)').matches; if (desktop) open = false"\n
+    data-user-notification-channel="users.2"&gt;\n
+    &lt;div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden"&gt;\n
+        &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+            &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-9 w-9" /&gt;\n
+            &lt;span class="font-display text-lg font-extrabold text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/span&gt;\n
+        &lt;/a&gt;\n
+        &lt;button x-ref="trigger" type="button" @click="open = true" aria-controls="workspace-navigation" :aria-expanded="open.toString()" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi"&gt;\n
+            &lt;svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M4 6h16M4 12h16M4 18h16"/&gt;&lt;/svg&gt;\n
+        &lt;/button&gt;\n
+    &lt;/div&gt;\n
+\n
+    &lt;div x-show="open" x-cloak @click="close()" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"&gt;&lt;/div&gt;\n
+\n
+    &lt;aside id="workspace-navigation" x-trap.inert.noscroll.noreturn="open &amp;&amp; !desktop" :inert="!open &amp;&amp; !desktop" :aria-hidden="!open &amp;&amp; !desktop" :role="desktop ? 'complementary' : 'dialog'" :aria-modal="open &amp;&amp; !desktop ? 'true' : null" aria-label="Navigasi utama" :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0"&gt;\n
+        &lt;div class="flex h-20 items-center justify-between border-b border-slate-100 px-6"&gt;\n
+            &lt;a href="http://localhost/dashboard" class="flex items-center gap-3" wire:navigate&gt;\n
+                &lt;img src="http://localhost/assets/logo/ClinicOS green ribbon C symbol.png" alt="ClinicOS logo" class="h-11 w-11 object-contain h-11 w-11" /&gt;\n
+                &lt;div&gt;\n
+                    &lt;div class="font-display text-xl font-extrabold tracking-tight text-clinic-950"&gt;Clinic&lt;span class="text-clinic-500"&gt;OS&lt;/span&gt;&lt;/div&gt;\n
+                    &lt;div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400"&gt;Clinic workspace&lt;/div&gt;\n
+                &lt;/div&gt;\n
+            &lt;/a&gt;\n
+            &lt;button type="button" @click="close()" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi"&gt;✕&lt;/button&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;div class="border-b border-slate-100 px-6 py-5"&gt;\n
+            &lt;p class="truncate text-sm font-bold text-slate-900"&gt;Bartell, Mayert and Collins Clinic&lt;/p&gt;\n
+                        &lt;p class="mt-1 text-xs text-slate-500"&gt;Receptionist&lt;/p&gt;\n
+        &lt;/div&gt;\n
+\n
+        &lt;nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5"&gt;\n
+            \n
+            &lt;!--[if BLOCK]&gt;&lt;![endif]--&gt;                &lt;a href="http://localhost/receptionist/dashboard" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z"/&gt;&lt;/svg&gt;\n
+                    Dashboard\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/patients" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/&gt;&lt;/svg&gt;\n
+                    Pasien\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/appointments" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6"/&gt;&lt;/svg&gt;\n
+                    Booking &amp;amp; antrean\n
+                &lt;/a&gt;\n
+                            &lt;a href="http://localhost/receptionist/queues" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition bg-clinic-50 text-clinic-700"&gt;\n
+                    &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M5 6h14M5 12h14M5 18h9"/&gt;&lt;/svg&gt;\n
+                    Antrean hari ini\n
+                &lt;/a&gt;\n
+            &lt;!--[if ENDBLOCK]&gt;&lt;![endif]--&gt;\n
+            &lt;a href="http://localhost/notifications" wire:navigate @click="open = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"&gt;\n
+                &lt;svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/&gt;&lt;/svg&gt;\n
+                &lt;span class="flex-1"&gt;Notifikasi&lt;/span&gt;\n
+                &lt;span data-notification-count class="rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white hidden"&gt;0&lt;/span&gt;\n
+            &lt;/a&gt;\n
+        &lt;/nav&gt;\n
+\n
+        &lt;div class="border-t border-slate-100 p-4"&gt;\n
+            &lt;a href="http://localhost/profile" wire:navigate class="mb-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"&gt;\n
+                &lt;span class="flex h-9 w-9 items-center justify-center rounded-full bg-clinic-100 font-bold text-clinic-700"&gt;B&lt;/span&gt;\n
+                &lt;span class="min-w-0 flex-1"&gt;&lt;span class="block truncate text-slate-900"&gt;Beverly Rippin&lt;/span&gt;&lt;span class="block truncate text-xs font-normal text-slate-500"&gt;nina.berge@example.com&lt;/span&gt;&lt;/span&gt;\n
+            &lt;/a&gt;\n
+            &lt;button wire:click="logout" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-500 hover:bg-red-50 hover:text-red-600"&gt;\n
+                &lt;svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M10 17l5-5-5-5M15 12H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/&gt;&lt;/svg&gt;\n
+                Keluar\n
+            &lt;/button&gt;\n
+        &lt;/div&gt;\n
+    &lt;/aside&gt;\n
+\n
+    &lt;div class="h-16 lg:hidden"&gt;&lt;/div&gt;\n
+&lt;/div&gt;\n
+            &lt;div class="lg:pl-72"&gt;\n
+                                    &lt;header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0"&gt;\n
+                        &lt;div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10"&gt;\n
+                            &lt;div class="flex w-full items-center justify-between gap-4"&gt;&lt;div&gt;&lt;p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600"&gt;Operasional hari ini&lt;/p&gt;&lt;h1 class="mt-1 text-xl font-extrabold text-clinic-950"&gt;Antrean pasien&lt;/h1&gt;&lt;/div&gt;&lt;a href="http://localhost/receptionist/appointments/create" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 bg-clinic-500 text-white hover:bg-clinic-600" wire:navigate=""&gt;\n
+        + Booking walk-in\n
+    &lt;/a&gt;\n
+&lt;/div&gt;\n
+                        &lt;/div&gt;\n
+                    &lt;/header&gt;\n
+                \n
+                &lt;main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10"&gt;\n
+                    \n
+                                            \n
+                                                    &lt;div class="mb-6 flex items-center justify-between gap-4 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold text-amber-900" role="status"&gt;\n
+                                &lt;span&gt;Paket Free aktif.&lt;/span&gt;\n
+                                                            &lt;/div&gt;\n
+                                            \n
+                    \n
+                                        &lt;div class="mb-6 hidden rounded-2xl border px-5 py-4 text-sm font-semibold" data-queue-action-feedback role="status" aria-live="polite"&gt;&lt;/div&gt;\r\n
+    &lt;div data-realtime-queue-channel="clinic.1.queues" data-realtime-refresh-root&gt;\r\n
+    \r\n
+    &lt;div class="mb-7"&gt;&lt;h2 class="text-2xl font-extrabold text-clinic-950"&gt;Antrean 14 November 2026&lt;/h2&gt;&lt;p class="mt-2 text-sm text-slate-500"&gt;Check-in pasien sesuai kedatangan, lalu panggil satu per satu dalam setiap sesi dokter.&lt;/p&gt;&lt;/div&gt;\r\n
+\r\n
+    &lt;div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6"&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Terdaftar&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Menunggu&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Dipanggil&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Diperiksa&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Selesai&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+                    &lt;div class="clinic-card p-4"&gt;&lt;p class="text-xs font-bold uppercase tracking-wider text-slate-400"&gt;Dilewati&lt;/p&gt;&lt;p class="mt-2 text-2xl font-extrabold text-clinic-950"&gt;0&lt;/p&gt;&lt;/div&gt;\r\n
+            &lt;/div&gt;\r\n
+\r\n
+    &lt;form method="GET" class="clinic-card mb-6 grid gap-4 p-5 md:grid-cols-4"&gt;\r\n
+        &lt;div&gt;&lt;label class="clinic-label" for="date"&gt;Tanggal&lt;/label&gt;&lt;input class="clinic-input" id="date" name="date" type="date" value="2026-11-14"&gt;&lt;/div&gt;\r\n
+        &lt;div  x-modelable="selectedId" x-data="{\n
+    options: JSON.parse('[{\u0022id\u0022:1,\u0022label\u0022:\u0022Marlene Gusikowski\u0022}]'), selectedId: String(null ?? ''), query: '', open: false,\n
+    init() { this.query = this.options.find((option) =&gt; String(option.id) === this.selectedId)?.label ?? ''; },\n
+    get results() { const query = this.query.toLowerCase(); return this.options.filter((option) =&gt; option.label.toLowerCase().includes(query)).slice(0, 8); },\n
+    search() { this.selectedId = ''; this.open = true; },\n
+    select(option) { this.selectedId = option.id; this.query = option.label; this.open = false; },\n
+    clear() { this.selectedId = ''; this.query = ''; this.open = false; },\n
+    setOptions(options) {\n
+        this.options = options;\n
+        const selected = this.options.find(option =&gt; String(option.id) === String(this.selectedId));\n
+        if (selected) { this.query = selected.label; }\n
+        else if (this.selectedId) { this.clear(); }\n
+    },\n
+}"&gt;\n
+    &lt;label class="clinic-label" for="doctor_id_search"&gt;Dokter&lt;/label&gt;\n
+    &lt;input type="hidden" name="doctor_id" :value="selectedId"&gt;\n
+    &lt;div class="relative"&gt;\n
+        &lt;input class="clinic-input pr-10" id="doctor_id_search" type="search" x-model="query" @input="search()" @focus="open = true" @keydown.escape="open = false" @keydown.down.prevent="const results = $event.target.parentElement.querySelector('[x-ref=results]'); open = true; $nextTick(() =&gt; results.querySelector('button')?.focus())" autocomplete="off" placeholder="Cari dokter" &gt;\n
+        &lt;button x-cloak x-show="selectedId" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400 hover:text-slate-700" @click="clear()" aria-label="Hapus pilihan dokter"&gt;×&lt;/button&gt;        &lt;div x-ref="results" x-cloak x-show="open" @click.outside="open = false" @keydown.escape="open = false; $el.parentElement.querySelector('input[type=search]').focus()" class="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg"&gt;\n
+            &lt;template x-for="option in results" :key="option.id"&gt;&lt;button type="button" class="block w-full px-4 py-3 text-left text-sm text-slate-700 hover:bg-clinic-50" @click="select(option)" x-text="option.label"&gt;&lt;/button&gt;&lt;/template&gt;\n
+            &lt;p x-show="!results.length" class="px-4 py-3 text-sm text-slate-500"&gt;Dokter tidak ditemukan.&lt;/p&gt;\n
+        &lt;/div&gt;\n
+    &lt;/div&gt;\n
+&lt;/div&gt;\n
+        &lt;div  x-modelable="selectedId" x-data="{\n
+    options: JSON.parse('[{\u0022id\u0022:1,\u0022label\u0022:\u0022Marlene Gusikowski · Sabtu 12:00\u0022}]'), selectedId: String(null ?? ''), query: '', open: false,\n
+    init() { this.query = this.options.find((option) =&gt; String(option.id) === this.selectedId)?.label ?? ''; },\n
+    get results() { const query = this.query.toLowerCase(); return this.options.filter((option) =&gt; option.label.toLowerCase().includes(query)).slice(0, 8); },\n
+    search() { this.selectedId = ''; this.open = true; },\n
+    select(option) { this.selectedId = option.id; this.query = option.label; this.open = false; },\n
+    clear() { this.selectedId = ''; this.query = ''; this.open = false; },\n
+    setOptions(options) {\n
+        this.options = options;\n
+        const selected = this.options.find(option =&gt; String(option.id) === String(this.selectedId));\n
+        if (selected) { this.query = selected.label; }\n
+        else if (this.selectedId) { this.clear(); }\n
+    },\n
+}"&gt;\n
+    &lt;label class="clinic-label" for="doctor_schedule_id_search"&gt;Sesi&lt;/label&gt;\n
+    &lt;input type="hidden" name="doctor_schedule_id" :value="selectedId"&gt;\n
+    &lt;div class="relative"&gt;\n
+        &lt;input class="clinic-input pr-10" id="doctor_schedule_id_search" type="search" x-model="query" @input="search()" @focus="open = true" @keydown.escape="open = false" @keydown.down.prevent="const results = $event.target.parentElement.querySelector('[x-ref=results]'); open = true; $nextTick(() =&gt; results.querySelector('button')?.focus())" autocomplete="off" placeholder="Cari sesi" &gt;\n
+        &lt;button x-cloak x-show="selectedId" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400 hover:text-slate-700" @click="clear()" aria-label="Hapus pilihan sesi"&gt;×&lt;/button&gt;        &lt;div x-ref="results" x-cloak x-show="open" @click.outside="open = false" @keydown.escape="open = false; $el.parentElement.querySelector('input[type=search]').focus()" class="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg"&gt;\n
+            &lt;template x-for="option in results" :key="option.id"&gt;&lt;button type="button" class="block w-full px-4 py-3 text-left text-sm text-slate-700 hover:bg-clinic-50" @click="select(option)" x-text="option.label"&gt;&lt;/button&gt;&lt;/template&gt;\n
+            &lt;p x-show="!results.length" class="px-4 py-3 text-sm text-slate-500"&gt;Sesi tidak ditemukan.&lt;/p&gt;\n
+        &lt;/div&gt;\n
+    &lt;/div&gt;\n
+&lt;/div&gt;\n
+        &lt;div&gt;&lt;label class="clinic-label" for="status"&gt;Status&lt;/label&gt;&lt;select class="clinic-input" id="status" name="status"&gt;&lt;option value=""&gt;Semua status&lt;/option&gt;&lt;option value="BOOKED" &gt;Terdaftar&lt;/option&gt;&lt;option value="WAITING" selected&gt;Menunggu&lt;/option&gt;&lt;option value="CALLED" &gt;Dipanggil&lt;/option&gt;&lt;option value="IN_PROGRESS" &gt;Diperiksa&lt;/option&gt;&lt;option value="COMPLETED" &gt;Selesai&lt;/option&gt;&lt;option value="CANCELLED" &gt;Dibatalkan&lt;/option&gt;&lt;option value="SKIPPED" &gt;Dilewati&lt;/option&gt;&lt;option value="NO_SHOW" &gt;Tidak hadir&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;\r\n
+        &lt;div class="flex items-end"&gt;&lt;button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 border border-slate-300 bg-white text-slate-700 hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-700 w-full"&gt;\n
+        Terapkan filter\n
+    &lt;/button&gt;\n
+&lt;/div&gt;\r\n
+    &lt;/form&gt;\r\n
+\r\n
+    &lt;div class="space-y-4"&gt;\r\n
+                    &lt;div class="clinic-card p-14 text-center"&gt;&lt;div class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-clinic-50 text-xl text-clinic-600"&gt;✓&lt;/div&gt;&lt;p class="mt-4 font-bold text-slate-800"&gt;Tidak ada antrean&lt;/p&gt;&lt;p class="mt-1 text-sm text-slate-500"&gt;Belum ada antrean yang sesuai dengan filter ini.&lt;/p&gt;&lt;/div&gt;\r\n
+            &lt;/div&gt;\r\n
+        &lt;/div&gt;\n
+                &lt;/main&gt;\n
+            &lt;/div&gt;\n
+        &lt;/div&gt;\n
+    &lt;!-- Livewire Scripts --&gt;\n
+&lt;script src="/livewire/livewire.js?id=dfa5f5ee"   data-csrf="[token omitted]" data-update-uri="/livewire/update" data-navigate-once="true"&gt;&lt;/script&gt;\n
+&lt;/body&gt;\n
+&lt;/html&gt;\n
+' [UTF-8](length: 20458) contains "data-realtime-preserve="queue-filters"" [ASCII](length: 38).
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:720
+C:\laragon\www\ClinicOS\tests\Feature\CoverageClosureRegressionTest.php:151</failure>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testsuites>

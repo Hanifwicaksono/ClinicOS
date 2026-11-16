@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync,mkdirSync,mkdtempSync,cpSync,existsSync} from 'node:fs';
+import {join} from 'node:path';
+import {tmpdir} from 'node:os';
+import {randomBytes} from 'node:crypto';
+const evidence=join(import.meta.dirname,'../evidence'),previous=JSON.parse(readFileSync(join(evidence,'runtime.json'))),source=JSON.parse(readFileSync(join(previous.repo,'qa-audit/product-completeness/f1-implementation/evidence/final/runtime.json')));
+mkdirSync(join(evidence,'candidate'),{recursive:true});for(const name of ['runtime.json','fixture.json','processes.json','migrate.txt','build.txt','control-failure-visible.png','editor-preserved.png','public-display.png'])if(existsSync(join(evidence,name)))cpSync(join(evidence,name),join(evidence,'candidate',name),{errorOnExist:true,force:false});
+const root=mkdtempSync(join(tmpdir(),'clinicos-deep-s2-final-')).replaceAll('\\','/');cpSync(source.root,root,{recursive:true});
+const env=JSON.parse(readFileSync(previous.root+'/env.json'));for(const [k,v]of Object.entries(env))if(typeof v==='string')env[k]=v.replaceAll(previous.root,root);Object.assign(env,{AUDIT_ROOT:root,DB_DATABASE:root+'/audit.sqlite',APP_KEY:'base64:'+randomBytes(32).toString('base64'),S2_RUN_ID:'verified-final'});writeFileSync(root+'/env.json',JSON.stringify(env));
+const mysql=JSON.parse(readFileSync(previous.root+'/mysql-env.json'));for(const [k,v]of Object.entries(mysql))if(typeof v==='string')mysql[k]=v.replaceAll(previous.root,root);mysql.APP_KEY=env.APP_KEY;writeFileSync(root+'/mysql-env.json',JSON.stringify(mysql));for(const dir of ['logs','framework/views','framework/cache/data','framework/sessions'])mkdirSync(root+'/storage-mysql/'+dir,{recursive:true});mkdirSync(root+'/mysql',{recursive:true});
+writeFileSync(join(evidence,'runtime.json'),JSON.stringify({...previous,root,database:env.DB_DATABASE,started:new Date().toISOString(),provenance:'Fresh pristine synthetic F1 clone for final S2 verification; S1 and earlier S2 evidence retained'},null,2));console.log(JSON.stringify({isolated:true,root}));

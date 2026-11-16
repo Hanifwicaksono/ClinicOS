@@ -1,0 +1,11 @@
+{
+  "phase": "13-photo-retention-eta",
+  "at": "2026-11-13T07:59:13.655Z",
+  "counts": {
+    "PASS": 103,
+    "FAIL": 50,
+    "BLOCKED": 9,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "kind": "console",
+    "message": "Alpine Expression Error: Invalid or unexpected token\n\nExpression: \"submitting || @js($subscriptionPrices->isEmpty())\"\n\n JSHandle@node",
+    "location": {
+      "url": "http://127.0.0.1:18961/platform/tenants/6",
+      "line": 106,
+      "column": 36,
+      "lineNumber": 106,
+      "columnNumber": 36
+    }
+  },
+  {
+    "kind": "pageerror",
+    "message": "Invalid or unexpected token",
+    "stack": "SyntaxError: Invalid or unexpected token\n    at new AsyncFunction (<anonymous>)\n    at http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:747\n    at pu (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:971)\n    at hu (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:1016)\n    at fu (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:335)\n    at z (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:181)\n    at ba (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:35624)\n    at r (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:3087)\n    at n (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:3117)\n    at yu (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:3127)"
+  },
+  {
+    "kind": "console",
+    "message": "WebSocket connection to 'ws://127.0.0.1:18962/app/qa-deep-isolated?protocol=7&client=js&version=8.6.0&flash=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+    "location": {
+      "url": "http://127.0.0.1:18961/build/assets/app-Bs0RkN8L.js",
+      "line": 1,
+      "column": 0,
+      "lineNumber": 1,
+      "columnNumber": 0
+    }
+  },
+  {
+    "attempt": 1,
+    "status": 200,
+    "title": "ClinicOS",
+    "bindings": [
+      {
+        "tag": "DIV",
+        "data": "{\n    open: false,\n    desktop: window.matchMedia('(min-width: 1024px)').matches,\n    close() { this.open = false; this.$nextTick(() => this.$refs.trigger.focus()); },\n}",
+        "disabled": null
+      },
+      {
+        "tag": "FORM",
+        "data": "{ submitting: false }",
+        "disabled": null
+      },
+      {
+        "tag": "BUTTON",
+        "data": null,
+        "disabled": "submitting || @js($subscriptionPrices->isEmpty())"
+      }
+    ],
+    "body_ready": "QA Closure Dental"
+  },
+  {
+    "kind": "console",
+    "message": "Alpine Expression Error: Invalid or unexpected token\n\nExpression: \"submitting || @js($subscriptionPrices->isEmpty())\"\n\n JSHandle@node",
+    "location": {
+      "url": "http://127.0.0.1:18961/platform/tenants/6",
+      "line": 106,
+      "column": 36,
+      "lineNumber": 106,
+      "columnNumber": 36
+    }
+  },
+  {
+    "kind": "pageerror",
+    "message": "Invalid or unexpected token",
+    "stack": "SyntaxError: Invalid or unexpected token\n    at new AsyncFunction (<anonymous>)\n    at http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:747\n    at pu (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:971)\n    at hu (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:1016)\n    at fu (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:335)\n    at z (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:181)\n    at ba (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:35624)\n    at r (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:3087)\n    at n (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:3117)\n    at yu (http://127.0.0.1:18961/livewire/livewire.min.js?id=dfa5f5ee:5:3127)"
+  },
+  {
+    "kind": "console",
+    "message": "WebSocket connection to 'ws://127.0.0.1:18962/app/qa-deep-isolated?protocol=7&client=js&version=8.6.0&flash=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+    "location": {
+      "url": "http://127.0.0.1:18961/build/assets/app-Bs0RkN8L.js",
+      "line": 1,
+      "column": 0,
+      "lineNumber": 1,
+      "columnNumber": 0
+    }
+  },
+  {
+    "attempt": 2,
+    "status": 200,
+    "title": "ClinicOS",
+    "bindings": [
+      {
+        "tag": "DIV",
+        "data": "{\n    open: false,\n    desktop: window.matchMedia('(min-width: 1024px)').matches,\n    close() { this.open = false; this.$nextTick(() => this.$refs.trigger.focus()); },\n}",
+        "disabled": null
+      },
+      {
+        "tag": "FORM",
+        "data": "{ submitting: false }",
+        "disabled": null
+      },
+      {
+        "tag": "BUTTON",
+        "data": null,
+        "disabled": "submitting || @js($subscriptionPrices->isEmpty())"
+      }
+    ],
+    "body_ready": "QA Closure Dental"
+  },
+  {
+    "pending_ui": {
+      "intercepted_requests": 1,
+      "submitting": true,
+      "button_disabled": false,
+      "backend_request_blocked": true
+    },
+    "screenshot": "screenshots/UI-28.png",
+    "screenshot_note": "Captured immediately before submit; submit state proven by event observer JSON, not network settlement."
+  }
+]

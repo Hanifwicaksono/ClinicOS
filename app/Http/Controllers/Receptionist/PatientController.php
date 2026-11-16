@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Receptionist\StorePatientRequest;
 use App\Http\Requests\Receptionist\UpdatePatientRequest;
 use App\Models\Patient;
+use App\Rules\PhoneNumber;
 use App\Services\AuditLogger;
 use App\Services\MedicalRecordNumberGenerator;
 use App\Services\PatientDuplicateService;
@@ -81,17 +82,19 @@ class PatientController extends Controller
             'name' => ['nullable', 'string', 'max:150'],
             'birth_date' => ['nullable', 'date_format:Y-m-d'],
             'nik' => ['nullable', 'string', 'max:30'],
-            'phone' => ['nullable', 'string', 'max:30'],
+            'phone' => [new PhoneNumber, 'nullable', 'string', 'max:30'],
+            'cursor' => ['nullable', 'string', 'max:4096'],
         ]);
-        $candidates = $duplicates->candidates($request->user()->clinic_id, $data);
+        $page = $duplicates->candidatePage($request->user()->clinic_id, $data, $data['cursor'] ?? null);
 
         return response()->json([
-            'candidates' => $candidates->map(fn (Patient $patient): array => [
+            'candidates' => $page['candidates']->map(fn (Patient $patient): array => [
                 'id' => $patient->id,
                 'label' => $patient->medical_record_number.' · '.$patient->name.' · '.$patient->birth_date->format('d/m/Y').' · '.$patient->phone.($patient->is_active ? '' : ' · Nonaktif'),
                 'url' => route('receptionist.patients.show', $patient),
             ]),
-            'token' => $duplicates->reviewToken($request->user()->clinic_id, $data, $candidates),
+            'token' => $page['token'],
+            'next_cursor' => $page['next_cursor'],
         ])->header('Cache-Control', 'no-store');
     }
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\RmeGeneralDentalTest" file="C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php" tests="1" assertions="0" errors="1" failures="0" skipped="0" time="0.000000">
+    <testcase name="test_assigned_doctor_can_persist_general_rme_and_odontogram_in_draft" file="C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php" line="38" class="Tests\Feature\RmeGeneralDentalTest" classname="Tests.Feature.RmeGeneralDentalTest" assertions="0" time="0.000000">
+      <error type="ErrorException">Tests\Feature\RmeGeneralDentalTest::test_assigned_doctor_can_persist_general_rme_and_odontogram_in_draft&#13;
+ErrorException: rename(C:\Users\User\AppData\Local\Temp\clinicos-post-s2-4vjgpq\suite-cache\APP78D7.tmp,C:\laragon\www\ClinicOS\..\..\..\Users\User\AppData\Local\Temp\clinicos-post-s2-4vjgpq\suite-cache\APP_PACKAGES_CACHE.php): Access is denied (code: 5)
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php:265
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Filesystem\Filesystem.php:233
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:182
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:132
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:108
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:90
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php:79
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterFacades.php:26
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:350
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:507
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:59
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:85
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle.php:101
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php:75
+C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php:34</error>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,14 @@
+[
+  {
+    "suite": "php-main",
+    "exit": 2
+  },
+  {
+    "suite": "php-audit",
+    "exit": 0
+  },
+  {
+    "suite": "javascript",
+    "exit": 0
+  }
+]

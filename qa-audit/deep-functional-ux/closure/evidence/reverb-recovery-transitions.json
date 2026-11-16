@@ -1,0 +1,46 @@
+[
+  {
+    "event": "socket-open",
+    "at": "2026-11-13T17:06:31.727Z"
+  },
+  {
+    "event": "socket-close",
+    "at": "2026-11-13T17:06:31.727Z"
+  },
+  {
+    "event": "disconnected",
+    "at": "2026-11-13T17:06:31.732Z"
+  },
+  {
+    "event": "socket-open",
+    "at": "2026-11-13T17:06:31.743Z"
+  },
+  {
+    "event": "socket-close",
+    "at": "2026-11-13T17:06:31.743Z"
+  },
+  {
+    "event": "socket-open",
+    "at": "2026-11-13T17:06:48.733Z"
+  },
+  {
+    "event": "socket-close",
+    "at": "2026-11-13T17:06:48.733Z"
+  },
+  {
+    "event": "socket-open",
+    "at": "2026-11-13T17:06:48.746Z"
+  },
+  {
+    "event": "socket-open",
+    "at": "2026-11-13T17:06:48.760Z"
+  },
+  {
+    "event": "socket-close",
+    "at": "2026-11-13T17:06:48.761Z"
+  },
+  {
+    "event": "reconnected",
+    "at": "2026-11-13T17:06:48.761Z"
+  }
+]

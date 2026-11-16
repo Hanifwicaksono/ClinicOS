@@ -71,8 +71,8 @@
                         @php($primaryDiagnosis = $medicalRecord->diagnoses->firstWhere('is_primary', true) ?? $medicalRecord->diagnoses->first())
                         <tr>
                             <td>
-                                <p class="font-bold text-slate-900">{{ $medicalRecord->visit->started_at->format('d M Y') }}</p>
-                                <p class="mt-1 text-xs text-slate-500">{{ $medicalRecord->visit->started_at->format('H:i') }}</p>
+                                <p class="font-bold text-slate-900">{{ $medicalRecord->visit->started_at->timezone(auth()->user()->clinic->settings?->timezone ?? 'Asia/Jakarta')->format('d M Y') }}</p>
+                                <p class="mt-1 text-xs text-slate-500">{{ $medicalRecord->visit->started_at->timezone(auth()->user()->clinic->settings?->timezone ?? 'Asia/Jakarta')->format('H:i') }}</p>
                             </td>
                             <td>
                                 <p class="font-bold text-slate-900">{{ $medicalRecord->patient->name }}</p>

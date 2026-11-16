@@ -1,0 +1,7 @@
+ Running ["artisan" subscriptions:queue-reminders] .. 671.46ms DONE
+ ⇂ "C:\PHP\php.exe" "artisan" subscriptions:queue-reminders > "NUL" 2>&1 
+
+
+ Running ["artisan" subscriptions:queue-reminders] .. 649.95ms DONE
+ ⇂ "C:\PHP\php.exe" "artisan" subscriptions:queue-reminders > "NUL" 2>&1 
+

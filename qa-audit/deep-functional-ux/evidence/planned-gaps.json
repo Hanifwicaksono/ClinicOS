@@ -1,0 +1,578 @@
+[
+  {
+    "id": "GAP-F00-1",
+    "feature": "F00",
+    "role": "Guest, Patient, Clinic Owner",
+    "scenario": "Navigasi Back/Forward landing pada seluruh anchor",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F00-2",
+    "feature": "F00",
+    "role": "Guest, Patient, Clinic Owner",
+    "scenario": "Katalog harga kosong/nonaktif seluruhnya dan pemulihan",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F01-1",
+    "feature": "F01",
+    "role": "All roles",
+    "scenario": "Remember-only session dan revokasi password pada browser baru",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F01-2",
+    "feature": "F01",
+    "role": "All roles",
+    "scenario": "Reset/verification link kedaluwarsa dan pemakaian ulang lewat UI",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F02-1",
+    "feature": "F02",
+    "role": "Guest",
+    "scenario": "Email registrasi duplikat/case variant melalui UI pasien dan owner",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F02-2",
+    "feature": "F02",
+    "role": "Guest",
+    "scenario": "Terms tidak disetujui serta refresh di setiap tahap registrasi",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F03-1",
+    "feature": "F03",
+    "role": "All roles",
+    "scenario": "Email duplikat dan batas panjang nama pada seluruh role",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F03-2",
+    "feature": "F03",
+    "role": "All roles",
+    "scenario": "Dua sesi profil aktif saat password/email berubah",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F04-1",
+    "feature": "F04",
+    "role": "Clinic Owner",
+    "scenario": "Lanjut onboarding yang ditinggalkan setelah logout/login",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F04-2",
+    "feature": "F04",
+    "role": "Clinic Owner",
+    "scenario": "Preferred plan dari setiap CTA landing sampai aktivasi",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F05-1",
+    "feature": "F05",
+    "role": "Clinic Admin, Clinic Owner",
+    "scenario": "Timezone WITA/WIT dan perubahan jam operasional terhadap sesi existing",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F05-2",
+    "feature": "F05",
+    "role": "Clinic Admin, Clinic Owner",
+    "scenario": "Logo tipe salah, ukuran lebih dari2MB, dan penggantian gagal",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F06-1",
+    "feature": "F06",
+    "role": "Clinic Admin, Clinic Owner",
+    "scenario": "Admin mengganti email/password staf dengan sesi remember aktif",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F06-2",
+    "feature": "F06",
+    "role": "Clinic Admin, Clinic Owner",
+    "scenario": "Batas doctor seat dari UI dan semua variasi entitlement paket",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F07-1",
+    "feature": "F07",
+    "role": "Clinic Admin, Clinic Owner",
+    "scenario": "Tarif pecahan/nonkelipatan1000 dan batas nominal server",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F07-2",
+    "feature": "F07",
+    "role": "Clinic Admin, Clinic Owner",
+    "scenario": "Layanan dinonaktifkan ketika tab booking lama masih terbuka",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F08-1",
+    "feature": "F08",
+    "role": "Clinic Admin, Clinic Owner",
+    "scenario": "Perubahan jam sesi terpakai serta quota diturunkan di bawah reservasi",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F08-2",
+    "feature": "F08",
+    "role": "Clinic Admin, Clinic Owner",
+    "scenario": "Batas quota0/501, akhir sebelum mulai, dan jam di luar operasional melalui UI",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F09-1",
+    "feature": "F09",
+    "role": "Clinic Admin, Clinic Owner, Receptionist",
+    "scenario": "Tanggal lahir masa depan dan seluruh field kosong melalui submit UI",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F09-2",
+    "feature": "F09",
+    "role": "Clinic Admin, Clinic Owner, Receptionist",
+    "scenario": "Pasien dengan histori sangat panjang dan setiap filter pencarian identitas",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F10-1",
+    "feature": "F10",
+    "role": "Guest, Patient",
+    "scenario": "Semua CTA dokter/layanan website klinik dalam kondisi tanpa dokter/sesi",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F10-2",
+    "feature": "F10",
+    "role": "Guest, Patient",
+    "scenario": "Alur pengguna pertama tanpa URL klinik dalam studi awam langsung",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F11-1",
+    "feature": "F11",
+    "role": "Patient, Clinic Admin, Clinic Owner, Receptionist",
+    "scenario": "Tanggal tepat+30/+31 dan sesi baru saja berakhir",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F11-2",
+    "feature": "F11",
+    "role": "Patient, Clinic Admin, Clinic Owner, Receptionist",
+    "scenario": "Dua form/tab dengan UUID berbeda untuk pasien/sesi sama",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F12-1",
+    "feature": "F12",
+    "role": "Patient, Clinic Admin, Clinic Owner, Receptionist, Token holder",
+    "scenario": "Replay cancel dari tab stale untuk seluruh status terminal",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F12-2",
+    "feature": "F12",
+    "role": "Patient, Clinic Admin, Clinic Owner, Receptionist, Token holder",
+    "scenario": "Tautan status tanpa/salah token dan cancellation error pada template resepsionis lewat browser",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F13-1",
+    "feature": "F13",
+    "role": "Clinic Admin, Clinic Owner, Receptionist, Doctor",
+    "scenario": "Aksi stale dari dua tab resepsionis dan dokter terhadap queue sama",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F13-2",
+    "feature": "F13",
+    "role": "Clinic Admin, Clinic Owner, Receptionist, Doctor",
+    "scenario": "Filter dokter/sesi dikombinasikan dengan pagination dan status terminal",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F14-1",
+    "feature": "F14",
+    "role": "Guest, All roles",
+    "scenario": "Display klinik kosong dan seluruh kontrol filter/kiosk",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F14-2",
+    "feature": "F14",
+    "role": "Guest, All roles",
+    "scenario": "Public display putus/pulih dari socket nyata",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F15-1",
+    "feature": "F15",
+    "role": "Doctor",
+    "scenario": "Ulang Mulai periksa dari tab lama sesudah visit selesai",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F15-2",
+    "feature": "F15",
+    "role": "Doctor",
+    "scenario": "Semua kombinasi pencarian/filter index rekam medis",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F16-1",
+    "feature": "F16",
+    "role": "Doctor",
+    "scenario": "HTTP419/sesi berakhir saat autosave dan pemulihan isi editor",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F16-2",
+    "feature": "F16",
+    "role": "Doctor",
+    "scenario": "Batas20 diagnosis/30 tindakan serta seluruh nilai vital ekstrem",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F16-3",
+    "feature": "F16",
+    "role": "Doctor",
+    "scenario": "Refresh/Back/leave sebelum debounce autosave selesai dan ketika foto belum disimpan",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F17-1",
+    "feature": "F17",
+    "role": "Doctor",
+    "scenario": "Edit severity lain dan dua editor alergi bersamaan melalui UI",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F17-2",
+    "feature": "F17",
+    "role": "Doctor",
+    "scenario": "Semua variasi acknowledgement alergi pada resep baru/koreksi",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F18-1",
+    "feature": "F18",
+    "role": "Doctor, Patient",
+    "scenario": "Hapus/tambah30 obat, jumlah9999/10000, serta resep kosong final",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F18-2",
+    "feature": "F18",
+    "role": "Doctor, Patient",
+    "scenario": "Seluruh variasi preview, instruksi panjang dan koreksi yang mengubah resep pasien",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F19-1",
+    "feature": "F19",
+    "role": "Doctor",
+    "scenario": "Paste clipboard, batas10 foto/5MB, tipe salah dan abort upload",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F19-2",
+    "feature": "F19",
+    "role": "Doctor",
+    "scenario": "Akses foto revisi oleh setiap role/tenant asing melalui browser",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F20-1",
+    "feature": "F20",
+    "role": "Doctor",
+    "scenario": "Dua submit finalisasi bersamaan dan tab koreksi stale melalui UI",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F20-2",
+    "feature": "F20",
+    "role": "Doctor",
+    "scenario": "Semua perbedaan array panjang pada histori koreksi di mobile",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F21-1",
+    "feature": "F21",
+    "role": "Doctor",
+    "scenario": "Seluruh32 gigi×6 kondisi dan correction-final dental melalui UI",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F21-2",
+    "feature": "F21",
+    "role": "Doctor",
+    "scenario": "Expiry berdasarkan ends_at; pencabutan revoked_at sudah diuji, keduanya tidak disamakan",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F22-1",
+    "feature": "F22",
+    "role": "Clinic Admin, Clinic Owner, Receptionist, Doctor, Patient, Platform Admin",
+    "scenario": "Rekonsiliasi angka seluruh dashboard terhadap fixture setiap periode/timezone",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F22-2",
+    "feature": "F22",
+    "role": "Clinic Admin, Clinic Owner, Receptionist, Doctor, Patient, Platform Admin",
+    "scenario": "Semua shortcut, empty/loading dan variasi data panjang per role",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F23-1",
+    "feature": "F23",
+    "role": "All roles",
+    "scenario": "Pagination/empty notification center untuk setiap role",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F23-2",
+    "feature": "F23",
+    "role": "All roles",
+    "scenario": "Notifikasi masuk socket dan badge realtime lintas browser",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F24-1",
+    "feature": "F24",
+    "role": "Clinic Admin, Clinic Owner",
+    "scenario": "Kombinasi filter aktor/tanggal, pagination, serta tidak ada hasil",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F24-2",
+    "feature": "F24",
+    "role": "Clinic Admin, Clinic Owner",
+    "scenario": "Validasi semua metadata audit yang ditampilkan di browser",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F25-1",
+    "feature": "F25",
+    "role": "Clinic Owner, All roles (banner/operational rules)",
+    "scenario": "Transisi expiry oleh waktu serta reminder subscription yang dipicu command",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F25-2",
+    "feature": "F25",
+    "role": "Clinic Owner, All roles (banner/operational rules)",
+    "scenario": "Seluruh kombinasi paket, renewal terjadwal dan seat overage pada UI",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F26-1",
+    "feature": "F26",
+    "role": "Clinic Owner, Platform Admin, System",
+    "scenario": "Successful checkout/notification/reconcile provider nyata",
+    "status": "BLOCKED",
+    "reason": "Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna."
+  },
+  {
+    "id": "GAP-F26-2",
+    "feature": "F26",
+    "role": "Clinic Owner, Platform Admin, System",
+    "scenario": "Repeat/delay callback dan browser-return nyata bersama provider",
+    "status": "BLOCKED",
+    "reason": "Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna."
+  },
+  {
+    "id": "GAP-F27-1",
+    "feature": "F27",
+    "role": "Clinic Owner",
+    "scenario": "Prorata akhir hari/bulan dan renewal gabungan lewat UI",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F27-2",
+    "feature": "F27",
+    "role": "Clinic Owner",
+    "scenario": "Refund yang mencabut add-on melalui flow provider; fixture revoke saja sudah diuji",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F28-1",
+    "feature": "F28",
+    "role": "Platform Admin",
+    "scenario": "Pencarian owner-email, pagination banyak tenant, dan tenant inactive",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F28-2",
+    "feature": "F28",
+    "role": "Platform Admin",
+    "scenario": "Semua metadata commercial history di setiap state tenant",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F29-1",
+    "feature": "F29",
+    "role": "Platform Admin",
+    "scenario": "Harga invalid, price toggle inactive dan addon toggle inactive lewat UI",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F29-2",
+    "feature": "F29",
+    "role": "Platform Admin",
+    "scenario": "Katalog diubah ketika owner masih memegang tab checkout lama",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F30-1",
+    "feature": "F30",
+    "role": "Platform Admin",
+    "scenario": "Grant lebih tinggi/setara terjadwal dan downgrade paid dengan overlap",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F30-2",
+    "feature": "F30",
+    "role": "Platform Admin",
+    "scenario": "Pemulihan grant ganda dan kebijakan revoke grant yang belum tersedia di UI",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F31-1",
+    "feature": "F31",
+    "role": "Platform Admin",
+    "scenario": "Refund ulang pada tab stale dan seluruh status yang tidak refundable",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F31-2",
+    "feature": "F31",
+    "role": "Platform Admin",
+    "scenario": "Reconcile+refund lintas role/tenant pada UI, tanpa transaksi provider nyata",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F32-1",
+    "feature": "F32",
+    "role": "Patient, Token holder, Guest",
+    "scenario": "Confidence medium/high dengan data historis terkontrol di browser",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F32-2",
+    "feature": "F32",
+    "role": "Patient, Token holder, Guest",
+    "scenario": "ETA untuk CALLED/IN_PROGRESS/terminal dan seluruh kombinasi antrian depan",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F33-1",
+    "feature": "F33",
+    "role": "All queue users",
+    "scenario": "Socket aktif putus/pulih, missed-event dan permission revoked pada koneksi aktif",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F33-2",
+    "feature": "F33",
+    "role": "All queue users",
+    "scenario": "Fokus input saat refetch/pagination dan semua offline queue actions",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F34-1",
+    "feature": "F34",
+    "role": "Guest, Patient",
+    "scenario": "Google OAuth success/callback/error/relink dengan akun dummy provider",
+    "status": "BLOCKED",
+    "reason": "Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna."
+  },
+  {
+    "id": "GAP-F35-1",
+    "feature": "F35",
+    "role": "Clinic Admin, Clinic Owner, Receptionist",
+    "scenario": "NIK format/normalisasi telepon berbagai negara dan lebih dari8 kandidat",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  },
+  {
+    "id": "GAP-F35-2",
+    "feature": "F35",
+    "role": "Clinic Admin, Clinic Owner, Receptionist",
+    "scenario": "Review token stale setelah kandidat berubah dan navigasi ulang ke profil inactive",
+    "status": "NOT TESTED",
+    "reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini."
+  }
+]

@@ -30,6 +30,15 @@ class OdontogramAddonTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_owner_without_clinic_is_redirected_before_addon_read_or_checkout(): void
+    {
+        Http::preventStrayRequests();
+        $owner = User::factory()->clinicOwnerCandidate()->create();
+        $this->actingAs($owner)->get(route('subscription.addons.index'))->assertRedirect(route('onboarding.clinic.create'));
+        $this->post(route('subscription.addons.store'))->assertRedirect(route('onboarding.clinic.create'));
+        $this->assertDatabaseCount('payments', 0);
+    }
+
     protected function setUp(): void
     {
         parent::setUp();

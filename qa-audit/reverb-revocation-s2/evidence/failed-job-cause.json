@@ -1,0 +1,10 @@
+[
+  {
+    "job": "App\\Jobs\\DeliverClinicNotification",
+    "sqlite_locked": true,
+    "missing_authority_fault": false,
+    "missing_table": false,
+    "connection_refused": false,
+    "sqlstate": "HY000"
+  }
+]

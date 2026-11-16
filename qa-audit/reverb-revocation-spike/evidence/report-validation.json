@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "reports": 6,
+  "local_links_checked": 42,
+  "missing_links": [],
+  "latest_browser": {
+    "PASS": 36,
+    "FAIL": 0
+  },
+  "backend": {
+    "PASS": 15,
+    "FAIL": 0
+  },
+  "source_integrity": {
+    "checked": 1094,
+    "changed": []
+  },
+  "process_ports_closed": true,
+  "raw_sensitive_fields_persisted": false,
+  "at": "2026-11-15T08:42:37.886Z"
+}

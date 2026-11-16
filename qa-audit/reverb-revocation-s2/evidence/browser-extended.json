@@ -1,0 +1,30 @@
+[
+  {
+    "id": "S2-07",
+    "title": "Authorized disconnect/reconnect keeps HTTP session and private delivery",
+    "started": "2026-11-15T09:45:27.723Z",
+    "status": "FAIL",
+    "error": "Control queue delivery missing: authorized-reconnect"
+  },
+  {
+    "id": "S2-08",
+    "title": "Revoked reconnect cannot obtain fresh private subscriptions",
+    "started": "2026-11-15T09:45:47.236Z",
+    "status": "FAIL",
+    "error": "No durable fence ACK"
+  },
+  {
+    "id": "S2-09",
+    "title": "Same-socket stale epoch, identity tamper and cross-socket replay rejected",
+    "started": "2026-11-15T09:46:06.870Z",
+    "status": "FAIL",
+    "error": "No durable fence ACK"
+  },
+  {
+    "id": "S2-10",
+    "title": "Two tabs sharing a session are revoked together",
+    "started": "2026-11-15T09:46:25.936Z",
+    "status": "FAIL",
+    "error": "Control queue delivery missing: tabs-before"
+  }
+]

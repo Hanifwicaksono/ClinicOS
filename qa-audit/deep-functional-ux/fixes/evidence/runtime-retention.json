@@ -1,0 +1,8 @@
+{
+  "inherited_environment_removed": true,
+  "private_dummy_mail_removed": false,
+  "opaque_values_redacted_this_pass": 40,
+  "database": "retained disposable SQLite only",
+  "owned_server_stopped": true,
+  "stopped_at": "2026-11-13T09:26:28.531027+00:00"
+}

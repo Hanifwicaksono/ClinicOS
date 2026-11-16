@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuditLogController;
 use App\Http\Controllers\Admin\ClinicController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DoctorScheduleController;
+use App\Http\Controllers\Admin\RealtimeRevocationController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
@@ -115,9 +116,9 @@ Route::domain($baseDomain)->group(function (): void {
     });
 
     Route::prefix('subscription')->name('subscription.')->middleware(['auth', 'verified', 'clinic_owner', 'throttle:payment-status'])->group(function () {
-        Route::get('addons', [SubscriptionAddonController::class, 'index'])->name('addons.index');
+        Route::get('addons', [SubscriptionAddonController::class, 'index'])->middleware('onboarding.complete')->name('addons.index');
         Route::post('addons/odontogram', [SubscriptionAddonController::class, 'store'])
-            ->middleware('throttle:checkout')->name('addons.store');
+            ->middleware(['onboarding.complete', 'throttle:checkout'])->name('addons.store');
         Route::get('payments', [SubscriptionPaymentController::class, 'index'])->name('payments.index');
         Route::get('payments/{payment}', [SubscriptionPaymentController::class, 'show'])->name('payments.show');
         Route::post('payments/{payment}/reconcile', [SubscriptionPaymentController::class, 'reconcile'])
@@ -155,6 +156,8 @@ Route::domain($baseDomain)->group(function (): void {
         Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
         Route::resource('clinic', ClinicController::class)->only(['index', 'create', 'store', 'edit', 'update']);
         Route::resource('staff', StaffController::class)->except(['show', 'destroy']);
+        Route::post('realtime-revocations/{revocation}/retry', [RealtimeRevocationController::class, 'retry'])
+            ->withoutMiddleware('subscription.writable')->name('realtime-revocations.retry');
         Route::resource('services', ServiceController::class)->except(['show', 'destroy']);
         Route::resource('doctor-schedules', DoctorScheduleController::class)
             ->parameters(['doctor-schedules' => 'doctor_schedule'])
@@ -200,7 +203,7 @@ Route::domain($baseDomain)->group(function (): void {
     });
 
     Route::prefix('patient')->name('patient.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Patient', 'subscription.writable'])->group(function () {
-        Route::resource('appointments', PatientAppointmentController::class)->only(['index', 'show']);
+        Route::resource('appointments', PatientAppointmentController::class)->only(['index', 'create', 'show']);
         Route::post('appointments/{appointment}/cancel', [PatientAppointmentController::class, 'cancel'])->name('appointments.cancel');
     });
 

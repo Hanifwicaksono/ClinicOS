@@ -58,7 +58,7 @@ class QueueController extends Controller
             ->orderBy('id')
             ->get();
 
-        return view('queues.index', compact('queues', 'doctors', 'date', 'statusCounts'));
+        return view('queues.index', compact('queues', 'doctors', 'date', 'statusCounts', 'timezone'));
     }
 
     public function checkIn(Request $request, Queue $queue, QueueWorkflowService $workflow): RedirectResponse|JsonResponse

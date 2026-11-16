@@ -1,0 +1,11 @@
+{
+  "phase": "ccl-ui-boundaries-and-pending-files",
+  "at": "2026-11-14T07:28:59.895Z",
+  "counts": {
+    "PASS": 34,
+    "FAIL": 17,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

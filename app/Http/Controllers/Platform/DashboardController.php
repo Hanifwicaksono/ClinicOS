@@ -8,13 +8,20 @@ use App\Models\Payment;
 use App\Models\Subscription;
 use App\Models\User;
 use App\PaymentStatus;
+use App\Services\SubscriptionService;
 use App\SubscriptionStatus;
+use Carbon\CarbonImmutable;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(): View
+    public function index(SubscriptionService $subscriptionService): View
     {
+        $at = CarbonImmutable::now();
+        Clinic::query()->whereHas('subscription')->each(function (Clinic $clinic) use ($subscriptionService, $at): void {
+            $subscriptionService->refreshStatus($clinic, $at);
+        });
+
         $subscriptionCounts = Subscription::query()
             ->selectRaw('status, count(*) as total')
             ->groupBy('status')

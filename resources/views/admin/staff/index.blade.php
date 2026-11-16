@@ -29,4 +29,22 @@
         </div>
         @if ($staffMembers->hasPages()) <div class="border-t border-slate-100 px-5 py-4">{{ $staffMembers->links() }}</div> @endif
     </div>
+    @if ($realtimeRevocations->isNotEmpty())
+        <section class="clinic-card mt-6 p-5" aria-labelledby="realtime-revocations-title">
+            <h2 id="realtime-revocations-title" class="font-bold text-clinic-950">Revokasi akses realtime</h2>
+            <p class="mt-2 text-sm text-slate-600">Perubahan hak HTTP langsung berlaku. Konfirmasi berikut berasal dari fence server Reverb satu node, bukan konfirmasi request transport saja.</p>
+            <ul class="mt-4 divide-y divide-slate-100">
+                @foreach ($realtimeRevocations as $revocation)
+                    <li class="flex flex-wrap items-center justify-between gap-3 py-3" data-realtime-revocation="{{ $revocation->id }}">
+                        <p class="text-sm">Akun #{{ $revocation->user_id }} · versi {{ $revocation->auth_version }}:
+                            <strong>{{ $revocation->acknowledged_at ? 'Dikonfirmasi server' : ($revocation->failed_at ? 'Transport gagal; revokasi menunggu konfirmasi' : 'Menunggu konfirmasi server') }}</strong>
+                        </p>
+                        @if (! $revocation->acknowledged_at && auth()->user()->canAny(['doctor.update', 'receptionist.update']))
+                            <form method="POST" action="{{ route('admin.realtime-revocations.retry', $revocation) }}">@csrf<button type="submit" class="text-sm font-bold text-clinic-700 underline">Coba konfirmasi lagi</button></form>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+        </section>
+    @endif
 </x-app-layout>

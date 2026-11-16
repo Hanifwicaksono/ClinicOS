@@ -1,0 +1,17 @@
+{
+  "at": "2026-11-15T11:18:35.284Z",
+  "isolated": true,
+  "pending_jobs": 0,
+  "failed_jobs": 1,
+  "revocations": 82,
+  "unacknowledged": 0,
+  "transport_failures_pending": 0,
+  "scopes": 57,
+  "logout_tombstones": 3,
+  "failed_job_history": [
+    {
+      "job": "App\\Jobs\\DeliverClinicNotification",
+      "revocation_now_acknowledged": null
+    }
+  ]
+}

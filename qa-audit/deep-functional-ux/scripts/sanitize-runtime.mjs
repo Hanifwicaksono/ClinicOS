@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync,existsSync,unlinkSync} from 'node:fs';
+import {join,resolve} from 'node:path';
+import {tmpdir} from 'node:os';
+const repo=resolve(import.meta.dirname,'../../..'),evidence=join(repo,'qa-audit/deep-functional-ux/evidence');
+const runtime=JSON.parse(readFileSync(join(evidence,'runtime.json'))),root=resolve(runtime.root);
+assert.ok(root.toLowerCase().startsWith(resolve(tmpdir(),'clinicos-deep-').toLowerCase()),'Only owned disposable runtime may be sanitized');
+const file=join(root,'env.json'),old=JSON.parse(readFileSync(file));assert.equal(old.APP_URL,'http://127.0.0.1:18961');assert.equal(resolve(old.DB_DATABASE),resolve(runtime.database));
+const keys=['APP_ENV','APP_DEBUG','APP_URL','APP_KEY','AUDIT_ROOT','AUDIT_REPO','APP_CONFIG_CACHE','APP_ROUTES_CACHE','APP_SERVICES_CACHE','APP_PACKAGES_CACHE','LARAVEL_STORAGE_PATH','DB_CONNECTION','DB_DATABASE','DB_URL','QUEUE_CONNECTION','BROADCAST_CONNECTION','CACHE_STORE','SESSION_DRIVER','SESSION_COOKIE','SESSION_DOMAIN','SESSION_SECURE_COOKIE','MAIL_MAILER','DOKU_CLIENT_ID','DOKU_SECRET_KEY','GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET','VITE_REVERB_APP_KEY','VITE_REVERB_HOST','VITE_REVERB_PORT','VITE_REVERB_SCHEME'];
+const env=Object.fromEntries(keys.filter(key=>Object.hasOwn(old,key)).map(key=>[key,old[key]]));
+assert.equal(env.DOKU_SECRET_KEY,'');assert.equal(env.GOOGLE_CLIENT_SECRET,'');assert.equal(env.BROADCAST_CONNECTION,'null');writeFileSync(file,JSON.stringify(env));
+const mail=join(root,'mail.jsonl');const mailRemoved=existsSync(mail);if(mailRemoved)unlinkSync(mail);
+writeFileSync(join(evidence,'runtime-retention.json'),JSON.stringify({at:new Date().toISOString(),inherited_process_environment_removed:true,private_dummy_mail_removed:mailRemoved,isolated_database_retained_for_checkpoint:true,private_env_retained:'Only explicit disposable application values, with external credentials empty',resume:'node qa-audit/deep-functional-ux/scripts/resume-runtime.mjs'},null,2));
+console.log('Private dummy mail removed; only explicit disposable environment retained for resume.');

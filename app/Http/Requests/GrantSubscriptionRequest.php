@@ -25,6 +25,7 @@ class GrantSubscriptionRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'grant_request_id' => [Rule::requiredIf($this->input('plan_code') !== 'free'), 'nullable', 'uuid'],
             'subscription_price_id' => [
                 Rule::requiredIf($this->input('plan_code') !== 'free'),
                 Rule::prohibitedIf($this->input('plan_code') === 'free'),

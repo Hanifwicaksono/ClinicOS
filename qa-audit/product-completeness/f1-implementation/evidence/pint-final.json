@@ -1,0 +1,19 @@
+{
+  "exit": 0,
+  "result": {
+    "tool": "pint",
+    "result": "fixed",
+    "files": [
+      {
+        "path": "qa-audit\\product-completeness\\f1-implementation\\legacy-browser-router.php",
+        "fixers": [
+          "fully_qualified_strict_types",
+          "unary_operator_spaces",
+          "not_operator_with_successor_space",
+          "single_line_after_imports"
+        ]
+      }
+    ]
+  },
+  "command": "php vendor/bin/pint --dirty --format agent (only scoped PHP paths)"
+}

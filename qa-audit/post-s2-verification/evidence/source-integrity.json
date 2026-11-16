@@ -1,0 +1,17 @@
+{
+  "at": "2026-11-15T13:58:38.104Z",
+  "baseline_files": 1923,
+  "changed": [
+    "config/database.php",
+    "database/factories/SubscriptionPlanFactory.php",
+    "tests/Feature/RmeGeneralDentalTest.php"
+  ],
+  "missing": [],
+  "unexpected": [],
+  "new_source": [
+    "tests/Feature/SubscriptionPlanFactoryTest.php"
+  ],
+  "protected_s2_unchanged": true,
+  "original_tests_preserved": true,
+  "pass": true
+}

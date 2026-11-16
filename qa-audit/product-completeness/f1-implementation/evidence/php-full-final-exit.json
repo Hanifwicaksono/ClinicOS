@@ -1,0 +1,8 @@
+{
+  "mode": "php",
+  "status": 0,
+  "error": null,
+  "command": "phpunit",
+  "args": [],
+  "finished": "2026-11-15T04:58:47.900Z"
+}

@@ -1,0 +1,48 @@
+
+ INFO Preparing database. 
+
+ Creating migration table .. 6.35ms DONE
+
+ INFO Running migrations. 
+
+ 0001_01_01_000000_create_users_table .. 11.90ms DONE
+ 0001_01_01_000001_create_cache_table .. 7.37ms DONE
+ 0001_01_01_000002_create_jobs_table .. 11.02ms DONE
+ 2026_10_04_035335_create_permission_tables .. 17.83ms DONE
+ 2026_10_04_044942_create_audit_logs_table .. 8.32ms DONE
+ 2026_10_04_072450_create_clinics_table .. 5.46ms DONE
+ 2026_10_04_072451_create_clinic_settings_table .. 4.33ms DONE
+ 2026_10_04_072452_create_doctors_table .. 7.83ms DONE
+ 2026_10_04_072453_create_doctor_schedules_table .. 7.23ms DONE
+ 2026_10_04_072454_create_services_table .. 7.52ms DONE
+ 2026_10_04_072455_add_clinic_id_to_users_table .. 15.17ms DONE
+ 2026_10_04_072456_create_doctor_service_table .. 2.54ms DONE
+ 2026_10_04_072625_add_clinic_foreign_key_to_audit_logs_table .. 14.62ms DONE
+ 2026_10_04_081710_create_patients_table .. 12.93ms DONE
+ 2026_10_04_081712_create_appointments_table .. 12.85ms DONE
+ 2026_10_04_081713_create_queues_table .. 9.22ms DONE
+ 2026_10_04_101028_add_operational_timestamps_to_queues_table .. 5.93ms DONE
+ 2026_10_04_102739_create_visits_table .. 9.70ms DONE
+ 2026_10_04_102740_create_medical_records_table .. 8.15ms DONE
+ 2026_10_04_102741_create_vital_signs_table .. 4.03ms DONE
+ 2026_10_04_102742_create_diagnoses_table .. 4.06ms DONE
+ 2026_10_04_102743_create_treatments_table .. 2.45ms DONE
+ 2026_10_04_102744_create_prescriptions_table .. 4.20ms DONE
+ 2026_10_04_102745_create_prescription_items_table .. 2.57ms DONE
+ 2026_10_04_102746_create_medical_record_revisions_table .. 4.49ms DONE
+ 2026_10_04_110458_create_notifications_table .. 3.90ms DONE
+ 2026_10_14_092656_add_photos_to_medical_records_table .. 2.42ms DONE
+ 2026_10_15_085858_add_owner_user_id_to_clinics_table .. 17.06ms DONE
+ 2026_10_15_091158_create_subscription_domain_tables .. 27.39ms DONE
+ 2026_10_15_093119_add_account_type_to_users_table .. 4.69ms DONE
+ 2026_10_15_134420_create_payment_events_table .. 5.68ms DONE
+ 2026_10_16_042319_create_subscription_reminders_table .. 6.64ms DONE
+ 2026_10_16_042325_backfill_legacy_tenant_owners_and_team_subscriptions .. 8.24ms DONE
+ 2026_10_22_154014_add_google_id_to_users_table .. 4.51ms DONE
+ 2026_10_25_080114_add_terms_accepted_at_to_users_table .. 2.57ms DONE
+ 2026_11_01_143511_create_patient_allergies_table .. 4.13ms DONE
+ 2026_11_01_143513_add_odontogram_and_allergy_acknowledgement_to_medical_records_table .. 22.85ms DONE
+ 2026_11_03_023409_create_odontogram_addon_tables .. 36.13ms DONE
+ 2026_11_03_032012_add_revoked_at_to_subscription_periods_table .. 5.14ms DONE
+ 2026_11_10_131440_add_version_to_medical_records_and_quantity_to_treatments .. 17.59ms DONE
+

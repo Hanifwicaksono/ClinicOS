@@ -1,0 +1,35 @@
+[
+  {
+    "id": "S1-27",
+    "title": "AppointmentStatus and QueueStatus notifications both respect old-socket revocation",
+    "started": "2026-11-15T08:40:31.787Z",
+    "observed": {
+      "queue_id": 175,
+      "appointment_id": 175,
+      "mutation": {
+        "command": "role",
+        "barrier": 1794732037.450663,
+        "target_active": true,
+        "target_has_role": false,
+        "target_queue_permission": false,
+        "epoch": "252"
+      },
+      "patient_notification_types": [
+        "appointment.status",
+        "queue.status"
+      ],
+      "appointment_payload_keys": [
+        "appointment_id",
+        "booking_code",
+        "id",
+        "message",
+        "status",
+        "title",
+        "type",
+        "url"
+      ],
+      "revoked_private_frames_per_browser": 0
+    },
+    "status": "PASS"
+  }
+]

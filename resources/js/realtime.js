@@ -30,6 +30,8 @@ const connectionPresentations = {
         label: 'Realtime tidak tersedia · diperbarui berkala',
         dotClasses: ['bg-amber-400'],
     },
+    access_revoked: { label: 'Akses realtime berubah · data terakhir dipertahankan', dotClasses: ['bg-amber-400'] },
+    session_expired: { label: 'Sesi berakhir · perubahan belum tersimpan tetap ada', dotClasses: ['bg-amber-400'] },
 };
 
 function renderConnectionState() {
@@ -53,6 +55,9 @@ function renderConnectionState() {
 }
 
 function setConnectionState(state) {
+    if (window.ClinicOSRealtimeAccess?.blocked) {
+        state = window.ClinicOSRealtimeAccess.notice === 'expired' ? 'session_expired' : 'access_revoked';
+    }
     connectionState = state;
     renderConnectionState();
 }
@@ -69,7 +74,12 @@ function captureRealtimeFocus(region) {
     }
 
     if (activeElement.id) {
-        return { id: activeElement.id };
+        return {
+            id: activeElement.id,
+            selection: typeof activeElement.selectionStart === 'number'
+                ? [activeElement.selectionStart, activeElement.selectionEnd, activeElement.selectionDirection]
+                : null,
+        };
     }
 
     const container = activeElement.closest('a[href], form[action]');
@@ -93,9 +103,11 @@ function restoreRealtimeFocus(region, focusState) {
     }
 
     if (focusState.id) {
-        [...region.querySelectorAll('[id]')]
-            .find((candidate) => candidate.id === focusState.id)
-            ?.focus({ preventScroll: true });
+        const target = [...region.querySelectorAll('[id]')].find((candidate) => candidate.id === focusState.id);
+        target?.focus({ preventScroll: true });
+        if (target && focusState.selection) {
+            target.setSelectionRange(...focusState.selection);
+        }
 
         return;
     }
@@ -111,6 +123,7 @@ function restoreRealtimeFocus(region, focusState) {
 }
 
 async function refreshRealtimeRegion(showRefetching = true) {
+    if (window.ClinicOSRealtimeAccess?.blocked) return false;
     const currentRegion = document.querySelector('[data-realtime-refresh-root]');
 
     if (! currentRegion) {
@@ -128,6 +141,7 @@ async function refreshRealtimeRegion(showRefetching = true) {
         });
 
         if (! response.ok) {
+            if ([401, 403, 419].includes(response.status)) window.ClinicOSRealtimeAccess?.reject(response.status);
             throw new Error(`HTTP ${response.status}`);
         }
 
@@ -139,6 +153,11 @@ async function refreshRealtimeRegion(showRefetching = true) {
         }
 
         const focusState = captureRealtimeFocus(currentRegion);
+        for (const preserved of currentRegion.querySelectorAll('[data-realtime-preserve]')) {
+            const replacement = [...freshRegion.querySelectorAll('[data-realtime-preserve]')]
+                .find(candidate => candidate.dataset.realtimePreserve === preserved.dataset.realtimePreserve);
+            replacement?.replaceWith(preserved);
+        }
         currentRegion.replaceWith(freshRegion);
         restoreRealtimeFocus(freshRegion, focusState);
         setConnectionState(window.Echo

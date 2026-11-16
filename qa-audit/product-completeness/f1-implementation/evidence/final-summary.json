@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-15",
+  "timezone": "Asia/Bangkok",
+  "before_backend": {
+    "tests": 2,
+    "passed": 0,
+    "failures": 2,
+    "errors": 0,
+    "assertions": 5
+  },
+  "f1_backend": {
+    "tests": 22,
+    "passed": 22,
+    "failures": 0,
+    "errors": 0,
+    "assertions": 159
+  },
+  "related_backend": {
+    "tests": 57,
+    "passed": 57,
+    "failures": 0,
+    "errors": 0,
+    "assertions": 434
+  },
+  "full_php_including_historical_qa": {
+    "tests": 424,
+    "passed": 424,
+    "failures": 0,
+    "errors": 0,
+    "assertions": 2877
+  },
+  "javascript_unit": {
+    "passed": 20,
+    "failed": 0
+  },
+  "existing_chrome_workflows": {
+    "passed": 2,
+    "failed": 0
+  },
+  "playwright_f1": {
+    "passed": 12,
+    "failed": 0
+  },
+  "status": {
+    "PG-17": "FIXED & VERIFIED",
+    "PG-18": "FIXED & VERIFIED",
+    "PR-01": "OPEN — excluded from this implementation"
+  }
+}

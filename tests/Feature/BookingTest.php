@@ -29,13 +29,19 @@ class BookingTest extends TestCase
 
     public function test_public_booking_form_has_a_submit_button(): void
     {
-        [$clinic] = $this->bookingContext();
+        [$clinic, $doctor, $service] = $this->bookingContext();
         $patient = $this->patientUser();
+        $inactiveService = Service::factory()->for($clinic)->create(['is_active' => false]);
+        $doctor->services()->attach($inactiveService);
 
         $this->actingAs($patient)->get(route('public.booking.create', $clinic))
             ->assertOk()
             ->assertSee('type="submit"', false)
             ->assertSee('Konfirmasi booking')
+            ->assertSee('data-update-uri="/livewire/update"', false)
+            ->assertViewHas('clinic', fn (Clinic $loadedClinic): bool => $loadedClinic->doctors->first()
+                ->services->where('is_active', true)->modelKeys() === [$service->id])
+            ->assertDontSee($inactiveService->name)
             ->assertDontSee('name="nik"', false)
             ->assertSee('name="address"', false);
     }

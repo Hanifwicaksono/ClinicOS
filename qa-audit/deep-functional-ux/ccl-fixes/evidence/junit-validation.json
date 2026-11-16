@@ -1,0 +1,38 @@
+{
+    "ccl-before": {
+        "tests": 23,
+        "failures": 22,
+        "errors": 0,
+        "assertions": 48
+    },
+    "ccl-after-focused": {
+        "tests": 23,
+        "failures": 6,
+        "errors": 0,
+        "assertions": 139
+    },
+    "ccl-after-focused-r2": {
+        "tests": 23,
+        "failures": 0,
+        "errors": 0,
+        "assertions": 143
+    },
+    "ccl-focused-final": {
+        "tests": 30,
+        "failures": 0,
+        "errors": 0,
+        "assertions": 191
+    },
+    "ccl-full": {
+        "tests": 401,
+        "failures": 0,
+        "errors": 1,
+        "assertions": 2712
+    },
+    "ccl-full-final": {
+        "tests": 402,
+        "failures": 0,
+        "errors": 0,
+        "assertions": 2718
+    }
+}

@@ -30,7 +30,7 @@ class PublicBookingController extends Controller
                 ->whereHas('user', fn ($userQuery) => $userQuery->where('is_active', true))
                 ->with([
                     'user:id,name',
-                    'services:id,name,price,duration_minutes',
+                    'services' => fn ($serviceQuery) => $serviceQuery->where('is_active', true),
                     'schedules' => fn ($scheduleQuery) => $scheduleQuery->where('is_active', true)->orderBy('day_of_week')->orderBy('start_time'),
                 ]),
         ]);

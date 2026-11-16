@@ -1,0 +1,30 @@
+[
+  {
+    "page": "reception",
+    "event": "queue.updated",
+    "keys": [
+      "queue_id",
+      "display_number",
+      "status",
+      "doctor_id",
+      "queue_date",
+      "updated_at"
+    ],
+    "queue_id": 33,
+    "status": "WAITING"
+  },
+  {
+    "page": "public",
+    "event": "queue.updated",
+    "keys": [
+      "queue_id",
+      "display_number",
+      "status",
+      "doctor_id",
+      "queue_date",
+      "updated_at"
+    ],
+    "queue_id": 33,
+    "status": "WAITING"
+  }
+]

@@ -14,6 +14,7 @@ use App\Models\Service;
 use App\Models\User;
 use App\Models\Visit;
 use App\QueueStatus;
+use App\Services\AuditLogger;
 use App\Services\BookingService;
 use App\Services\QueueWorkflowService;
 use App\VisitStatus;
@@ -23,6 +24,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
+use RuntimeException;
 use Tests\TestCase;
 
 class VisitWorkflowTest extends TestCase
@@ -73,7 +76,7 @@ class VisitWorkflowTest extends TestCase
         $visit = Visit::query()->sole();
 
         $this->actingAs($context['doctor_user'])
-            ->putJson(route('doctor.visits.complete', $visit), $this->medicalPayload())
+            ->putJson(route('doctor.visits.complete', $visit), $this->medicalPayload($visit))
             ->assertOk()
             ->assertJson([
                 'message' => 'Kunjungan selesai dan rekam medis telah difinalisasi.',
@@ -91,7 +94,7 @@ class VisitWorkflowTest extends TestCase
         $visit = Visit::query()->sole();
 
         $this->actingAs($context['doctor_user'])
-            ->put(route('doctor.visits.save', $visit), $this->medicalPayload())
+            ->put(route('doctor.visits.save', $visit), $this->medicalPayload($visit))
             ->assertRedirect();
 
         $record = $visit->medicalRecord()->firstOrFail();
@@ -167,6 +170,7 @@ class VisitWorkflowTest extends TestCase
             ->actingAs($context['doctor_user'])
             ->from(route('doctor.visits.show', $visit))
             ->put(route('doctor.visits.complete', $visit), [
+                ...$this->recordVersions($visit),
                 'subjective' => 'Keluhan lama tetap tampil setelah validasi gagal.',
                 'plan' => 'Observasi dan kontrol.',
             ])
@@ -188,6 +192,7 @@ class VisitWorkflowTest extends TestCase
 
         $this->actingAs($context['doctor_user'])
             ->put(route('doctor.visits.save', $visit), [
+                ...$this->recordVersions($visit),
                 'subjective' => 'Ruam merah sejak dua hari.',
                 'assessment' => 'Dermatitis kontak.',
                 'plan' => 'Hindari pencetus dan gunakan salep.',
@@ -199,6 +204,7 @@ class VisitWorkflowTest extends TestCase
         $this->assertNull($record->vitalSign);
         $this->assertSame('Dermatitis kontak.', $record->assessment);
         $this->assertCount(1, $record->photos);
+        $photoPath = $record->photos[0]['path'];
         Storage::disk('local')->assertExists($record->photos[0]['path']);
 
         $this->actingAs($context['doctor_user'])
@@ -211,6 +217,7 @@ class VisitWorkflowTest extends TestCase
 
         $this->actingAs($context['doctor_user'])
             ->put(route('doctor.visits.save', $visit), [
+                ...$this->recordVersions($visit),
                 'subjective' => 'Ruam merah sejak dua hari.',
                 'assessment' => 'Dermatitis kontak.',
                 'plan' => 'Hindari pencetus dan gunakan salep.',
@@ -219,6 +226,7 @@ class VisitWorkflowTest extends TestCase
             ->assertRedirect();
 
         $this->assertSame([], $record->refresh()->photos);
+        Storage::disk('local')->assertMissing($photoPath);
         $this->actingAs($context['doctor_user'])
             ->get(route('doctor.visits.photos.show', [$visit, 0]))
             ->assertNotFound();
@@ -233,7 +241,7 @@ class VisitWorkflowTest extends TestCase
         $context['service']->update(['price' => 150000]);
 
         $this->actingAs($context['doctor_user'])
-            ->put(route('doctor.visits.complete', $visit), $this->medicalPayload())
+            ->put(route('doctor.visits.complete', $visit), $this->medicalPayload($visit))
             ->assertRedirect(route('doctor.visits.show', $visit));
 
         $visit->refresh();
@@ -258,7 +266,7 @@ class VisitWorkflowTest extends TestCase
             ->assertSeeText('Odontogram belum aktif');
 
         $this->actingAs($context['doctor_user'])
-            ->put(route('doctor.visits.complete', $visit), $this->medicalPayload())
+            ->put(route('doctor.visits.complete', $visit), $this->medicalPayload($visit))
             ->assertRedirect();
         $this->assertDatabaseCount('visits', 1);
         $this->assertDatabaseCount('medical_records', 1);
@@ -272,6 +280,7 @@ class VisitWorkflowTest extends TestCase
 
         $this->actingAs($context['doctor_user'])
             ->put(route('doctor.visits.complete', $visit), [
+                ...$this->recordVersions($visit),
                 'chief_complaint' => 'Demam',
                 'subjective' => 'Demam sejak pagi',
             ])
@@ -291,7 +300,7 @@ class VisitWorkflowTest extends TestCase
         $visit->queue()->update(['status' => QueueStatus::Waiting]);
 
         $this->actingAs($context['doctor_user'])
-            ->put(route('doctor.visits.complete', $visit), $this->medicalPayload())
+            ->put(route('doctor.visits.complete', $visit), $this->medicalPayload($visit))
             ->assertSessionHasErrors('queue');
 
         $visit->refresh();
@@ -305,6 +314,79 @@ class VisitWorkflowTest extends TestCase
             'action' => 'visit.completed',
             'entity_id' => $visit->id,
         ]);
+    }
+
+    /** @return array<string, array{string, string}> */
+    public static function requiredVersions(): array
+    {
+        $cases = [];
+        foreach (['save', 'complete', 'correct'] as $action) {
+            foreach (['record_version', 'allergy_version'] as $field) {
+                $cases[$action.' without '.$field] = [$action, $field];
+            }
+        }
+
+        return $cases;
+    }
+
+    #[DataProvider('requiredVersions')]
+    public function test_every_record_write_rejects_missing_versions_with_422(string $action, string $field): void
+    {
+        $context = $this->calledQueueContext();
+        $this->actingAs($context['doctor_user'])->post(route('doctor.visits.start', $context['queue']));
+        $visit = Visit::query()->sole();
+        if ($action === 'correct') {
+            $this->putJson(route('doctor.visits.complete', $visit), $this->medicalPayload($visit))->assertOk();
+        }
+        $payload = [...$this->medicalPayload($visit), 'correction_reason' => 'Synthetic version regression'];
+        unset($payload[$field]);
+        $version = $visit->medicalRecord()->value('lock_version');
+
+        $this->putJson(route('doctor.visits.'.$action, $visit), $payload)
+            ->assertUnprocessable()->assertJsonValidationErrors($field);
+
+        $this->assertSame($version, $visit->medicalRecord()->value('lock_version'));
+        $this->assertDatabaseCount('medical_record_revisions', 0);
+    }
+
+    public function test_null_clinical_arrays_clear_rows_while_omitted_arrays_preserve_them(): void
+    {
+        $context = $this->calledQueueContext();
+        $this->actingAs($context['doctor_user'])->post(route('doctor.visits.start', $context['queue']));
+        $visit = Visit::query()->sole();
+        $this->putJson(route('doctor.visits.save', $visit), $this->medicalPayload($visit))->assertOk();
+        $payload = $this->medicalPayload($visit);
+        unset($payload['diagnoses'], $payload['treatments']);
+
+        $this->putJson(route('doctor.visits.save', $visit), $payload)->assertOk();
+        $this->assertSame(2, $visit->medicalRecord->diagnoses()->count());
+        $this->assertSame(1, $visit->medicalRecord->treatments()->count());
+        $this->putJson(route('doctor.visits.save', $visit), [...$payload, ...$this->recordVersions($visit),
+            'diagnoses' => null, 'treatments' => null,
+        ])->assertOk();
+        $this->assertSame(0, $visit->medicalRecord->diagnoses()->count());
+        $this->assertSame(0, $visit->medicalRecord->treatments()->count());
+    }
+
+    public function test_rollback_cleans_new_uploads_and_preserves_existing_photos(): void
+    {
+        Storage::fake('local');
+        $context = $this->calledQueueContext();
+        $this->actingAs($context['doctor_user'])->post(route('doctor.visits.start', $context['queue']));
+        $visit = Visit::query()->sole();
+        $this->putJson(route('doctor.visits.save', $visit), [...$this->medicalPayload($visit),
+            'photos' => [UploadedFile::fake()->image('existing.png', 1, 1)],
+        ])->assertOk();
+        $existing = $visit->medicalRecord->refresh()->photos;
+        $this->mock(AuditLogger::class)->shouldReceive('recordForClinic')->once()->andThrow(new RuntimeException('Synthetic failure'));
+
+        $this->putJson(route('doctor.visits.save', $visit), [...$this->medicalPayload($visit),
+            'removed_photos' => [0], 'photos' => [UploadedFile::fake()->image('new.png', 1, 1)],
+        ])->assertStatus(500);
+
+        $this->assertSame($existing, $visit->medicalRecord->refresh()->photos);
+        Storage::disk('local')->assertExists($existing[0]['path']);
+        $this->assertCount(1, Storage::disk('local')->allFiles());
     }
 
     /**
@@ -350,9 +432,10 @@ class VisitWorkflowTest extends TestCase
     }
 
     /** @return array<string, mixed> */
-    private function medicalPayload(): array
+    private function medicalPayload(Visit $visit): array
     {
         return [
+            ...$this->recordVersions($visit),
             'chief_complaint' => 'Demam dan batuk sejak dua hari.',
             'subjective' => 'Demam terutama malam hari dan nafsu makan berkurang.',
             'objective' => 'Pasien sadar penuh dengan keadaan umum cukup.',

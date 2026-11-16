@@ -1,0 +1,10 @@
+{
+  "http": 422,
+  "message": "Pasien baru dapat ditandai tidak hadir setelah sesi dimulai.",
+  "errors": {
+    "queue": [
+      "Pasien baru dapat ditandai tidak hadir setelah sesi dimulai."
+    ]
+  },
+  "feedback": ""
+}

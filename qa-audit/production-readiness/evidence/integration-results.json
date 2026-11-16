@@ -1,0 +1,54 @@
+{
+  "scheduler_queue_smtp": {
+    "gate": "PASS",
+    "method": "schedule:test executes the actual scheduled entry twice; due date arranged in disposable fixture",
+    "first": {
+      "rows": 1,
+      "sent": 1,
+      "mailed": 1,
+      "failed": 0,
+      "queued_jobs": 0
+    },
+    "second": {
+      "rows": 1,
+      "sent": 1,
+      "mailed": 1,
+      "failed": 0,
+      "queued_jobs": 0
+    },
+    "smtp_inbox_messages_to_test_owner": 1,
+    "external_cron_daemon": "NOT TESTED"
+  },
+  "doku_sandbox": {
+    "gate": "BLOCKED",
+    "credentials_present_in_local_configuration": true,
+    "sandbox_host_configured": true,
+    "isolated_runtime_doku_credentials_disabled": true,
+    "reason": "Actual sandbox checkout/status probe attempted; end-to-end provider callbacks and payment simulations remain blocked without a publicly reachable isolated notification endpoint.",
+    "actual_probe": {
+      "sandbox_only": true,
+      "real_payment_performed": false,
+      "public_webhook_receiver": "BLOCKED",
+      "checkout_http": "success",
+      "payment_status": "pending",
+      "https_checkout_url_received": true,
+      "status_reconciliation": "success",
+      "subscription_unchanged": true
+    }
+  },
+  "external_smtp": {
+    "gate": "NOT TESTED",
+    "local_smtp_tcp_and_inbox": "PASS",
+    "external_delivery_tls_dkim_dmarc": "NOT TESTED"
+  },
+  "diagnostics": {
+    "environment": "local",
+    "mail_driver": "smtp",
+    "mail_host": "127.0.0.1",
+    "mail_port": "13225",
+    "mail_scheme": "smtp",
+    "mail_url_set": false,
+    "storage_isolated": true,
+    "log_channel": "stack"
+  }
+}

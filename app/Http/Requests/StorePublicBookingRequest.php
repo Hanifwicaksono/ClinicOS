@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Clinic;
+use App\Rules\PhoneNumber;
 use App\UserAccountType;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -41,7 +42,7 @@ class StorePublicBookingRequest extends FormRequest
             'name' => ['required', 'string', 'max:150'],
             'birth_date' => ['required', 'date', 'before_or_equal:today'],
             'gender' => ['required', 'in:MALE,FEMALE'],
-            'phone' => ['required', 'string', 'max:30'],
+            'phone' => [new PhoneNumber, 'required', 'string', 'max:30'],
             'email' => ['required', 'email', 'max:255'],
             'address' => ['required', 'string', 'max:1500'],
             'notes' => ['nullable', 'string', 'max:1000'],

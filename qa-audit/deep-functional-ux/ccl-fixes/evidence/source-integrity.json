@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-11-14T07:40:43.641Z",
+  "env_unchanged": true,
+  "production_reference_files_checked": 377,
+  "changed_production_paths": [
+    "app/Services/BookingService.php",
+    "app/Rules/PhoneNumber.php",
+    "app/Services/PatientDuplicateService.php",
+    "app/Models/Patient.php",
+    "app/Http/Controllers/Receptionist/AppointmentController.php",
+    "app/Http/Controllers/Platform/TenantController.php",
+    "app/Http/Controllers/Platform/DashboardController.php",
+    "resources/views/receptionist/patients/show.blade.php",
+    "resources/views/queues/index.blade.php",
+    "resources/js/realtime.js",
+    "resources/js/rme-autosave.js",
+    "resources/views/components/rme/autosave-status.blade.php",
+    "resources/views/admin/services/form.blade.php",
+    "resources/views/onboarding/plans/index.blade.php"
+  ],
+  "unexpected_production_changes": [],
+  "historical_reports_unchanged": [
+    "NEW_FUNCTIONAL_FINDINGS.md",
+    "COVERAGE_CLOSURE_MATRIX.md",
+    "REMAINING_GAPS.md",
+    "FINAL_COVERAGE_REPORT.md",
+    "FIX_REGRESSION_REPORT.md",
+    "COVERAGE_GAPS.md",
+    "SCENARIO_TEST_MATRIX.md"
+  ],
+  "new_migrations": 0
+}

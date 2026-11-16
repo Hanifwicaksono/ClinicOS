@@ -1,0 +1,13 @@
+{
+  "mode": "php",
+  "status": 0,
+  "error": null,
+  "command": "phpunit",
+  "args": [
+    "tests/Feature/PlatformSubscriptionManagementTest.php",
+    "tests/Feature/DeepFunctionalRegressionTest.php",
+    "tests/Feature/CoverageClosureRegressionTest.php",
+    "tests/Feature/PartialWorkflowCompletionTest.php"
+  ],
+  "finished": "2026-11-15T04:49:57.784Z"
+}

@@ -30,11 +30,17 @@ class AppointmentController extends Controller
         return view('receptionist.appointments.index', compact('appointments'));
     }
 
-    public function create(Request $request): View
+    public function create(Request $request): View|RedirectResponse
     {
         $this->authorize('create', Appointment::class);
         $clinicId = $request->user()->clinic_id;
         $selectedPatientId = (int) old('patient_id', $request->integer('patient_id'));
+        $selectedPatient = $selectedPatientId > 0
+            ? Patient::query()->where('clinic_id', $clinicId)->findOrFail($selectedPatientId)
+            : null;
+        if ($selectedPatient !== null && ! $selectedPatient->is_active) {
+            return redirect()->route('receptionist.patients.show', $selectedPatient);
+        }
         $doctors = Doctor::query()->where('clinic_id', $clinicId)->where('is_active', true)
             ->whereHas('user', fn ($query) => $query->where('is_active', true))
             ->with(['user:id,name', 'services' => fn ($query) => $query->where('is_active', true), 'schedules' => fn ($query) => $query->where('is_active', true)])->get();
@@ -42,9 +48,7 @@ class AppointmentController extends Controller
         return view('receptionist.appointments.form', [
             'doctors' => $doctors,
             'timezone' => $request->user()->clinic->settings?->timezone ?? 'Asia/Jakarta',
-            'selectedPatient' => $selectedPatientId > 0
-                ? Patient::query()->where('clinic_id', $clinicId)->where('is_active', true)->find($selectedPatientId)
-                : null,
+            'selectedPatient' => $selectedPatient,
             'idempotencyKey' => Str::uuid()->toString(),
         ]);
     }

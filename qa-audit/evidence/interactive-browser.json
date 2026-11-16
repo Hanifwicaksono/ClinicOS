@@ -1,0 +1,688 @@
+[
+  {
+    "id": "B-ROLE-admin",
+    "status": "PASS",
+    "detail": {
+      "dashboard": "/admin/dashboard",
+      "pages": [
+        {
+          "path": "/admin/dashboard",
+          "resolved": "/admin/dashboard",
+          "status": 200,
+          "heading": "Dashboard"
+        },
+        {
+          "path": "/subscription/payments",
+          "resolved": "/subscription/payments",
+          "status": 200,
+          "heading": "Riwayat pembayaran"
+        },
+        {
+          "path": "/subscription/addons",
+          "resolved": "/subscription/addons",
+          "status": 200,
+          "heading": "Add-on Odontogram"
+        },
+        {
+          "path": "/admin/clinic",
+          "resolved": "/admin/clinic/1/edit",
+          "status": 200,
+          "heading": "Profil klinik"
+        },
+        {
+          "path": "/admin/staff",
+          "resolved": "/admin/staff",
+          "status": 200,
+          "heading": "Dokter & resepsionis"
+        },
+        {
+          "path": "/admin/services",
+          "resolved": "/admin/services",
+          "status": 200,
+          "heading": "Layanan"
+        },
+        {
+          "path": "/admin/doctor-schedules",
+          "resolved": "/admin/doctor-schedules",
+          "status": 200,
+          "heading": "Jadwal dokter"
+        },
+        {
+          "path": "/receptionist/patients",
+          "resolved": "/receptionist/patients",
+          "status": 200,
+          "heading": "Pasien"
+        },
+        {
+          "path": "/receptionist/appointments",
+          "resolved": "/receptionist/appointments",
+          "status": 200,
+          "heading": "Booking & antrean"
+        },
+        {
+          "path": "/receptionist/queues",
+          "resolved": "/receptionist/queues",
+          "status": 200,
+          "heading": "Antrean pasien"
+        },
+        {
+          "path": "/admin/audit-logs",
+          "resolved": "/admin/audit-logs",
+          "status": 200,
+          "heading": "Audit aktivitas"
+        },
+        {
+          "path": "/notifications",
+          "resolved": "/notifications",
+          "status": 200,
+          "heading": "Notifikasi"
+        }
+      ]
+    }
+  },
+  {
+    "id": "B-ROLE-receptionist",
+    "status": "PASS",
+    "detail": {
+      "dashboard": "/receptionist/dashboard",
+      "pages": [
+        {
+          "path": "/receptionist/dashboard",
+          "resolved": "/receptionist/dashboard",
+          "status": 200,
+          "heading": "Dashboard Resepsionis"
+        },
+        {
+          "path": "/receptionist/patients",
+          "resolved": "/receptionist/patients",
+          "status": 200,
+          "heading": "Pasien"
+        },
+        {
+          "path": "/receptionist/appointments",
+          "resolved": "/receptionist/appointments",
+          "status": 200,
+          "heading": "Booking & antrean"
+        },
+        {
+          "path": "/receptionist/queues",
+          "resolved": "/receptionist/queues",
+          "status": 200,
+          "heading": "Antrean pasien"
+        },
+        {
+          "path": "/notifications",
+          "resolved": "/notifications",
+          "status": 200,
+          "heading": "Notifikasi"
+        }
+      ]
+    }
+  },
+  {
+    "id": "B-ROLE-doctor",
+    "status": "PASS",
+    "detail": {
+      "dashboard": "/doctor/dashboard",
+      "pages": [
+        {
+          "path": "/doctor/dashboard",
+          "resolved": "/doctor/dashboard",
+          "status": 200,
+          "heading": "Dashboard Dokter"
+        },
+        {
+          "path": "/doctor/queues",
+          "resolved": "/doctor/queues",
+          "status": 200,
+          "heading": "Antrean pasien"
+        },
+        {
+          "path": "/doctor/medical-records",
+          "resolved": "/doctor/medical-records",
+          "status": 200,
+          "heading": "Rekam medis"
+        },
+        {
+          "path": "/notifications",
+          "resolved": "/notifications",
+          "status": 200,
+          "heading": "Notifikasi"
+        }
+      ]
+    }
+  },
+  {
+    "id": "B-ROLE-patient",
+    "status": "PASS",
+    "detail": {
+      "dashboard": "/patient/dashboard",
+      "pages": [
+        {
+          "path": "/patient/dashboard",
+          "resolved": "/patient/dashboard",
+          "status": 200,
+          "heading": "Dashboard Pasien"
+        },
+        {
+          "path": "/patient/appointments",
+          "resolved": "/patient/appointments",
+          "status": 200,
+          "heading": "Booking saya"
+        },
+        {
+          "path": "/notifications",
+          "resolved": "/notifications",
+          "status": 200,
+          "heading": "Notifikasi"
+        }
+      ]
+    }
+  },
+  {
+    "id": "B-ROLE-platform",
+    "status": "PASS",
+    "detail": {
+      "dashboard": "/platform/dashboard",
+      "pages": [
+        {
+          "path": "/platform/dashboard",
+          "resolved": "/platform/dashboard",
+          "status": 200,
+          "heading": "Dashboard platform"
+        },
+        {
+          "path": "/platform/tenants",
+          "resolved": "/platform/tenants",
+          "status": 200,
+          "heading": "Tenant klinik"
+        },
+        {
+          "path": "/platform/subscription-plans",
+          "resolved": "/platform/subscription-plans",
+          "status": 200,
+          "heading": "Paket & harga"
+        },
+        {
+          "path": "/platform/payments",
+          "resolved": "/platform/payments",
+          "status": 200,
+          "heading": "Riwayat pembayaran"
+        },
+        {
+          "path": "/notifications",
+          "resolved": "/notifications",
+          "status": 200,
+          "heading": "Notifikasi"
+        }
+      ]
+    }
+  },
+  {
+    "id": "B-DENY-admin",
+    "status": "PASS",
+    "detail": [
+      {
+        "target": "receptionist",
+        "status": 403
+      },
+      {
+        "target": "doctor",
+        "status": 403
+      },
+      {
+        "target": "patient",
+        "status": 403
+      },
+      {
+        "target": "platform",
+        "status": 403
+      }
+    ]
+  },
+  {
+    "id": "B-RESP-admin",
+    "status": "PASS",
+    "detail": [
+      {
+        "width": 375,
+        "overflow": -15
+      },
+      {
+        "width": 768,
+        "overflow": -15
+      },
+      {
+        "width": 1024,
+        "overflow": -15
+      },
+      {
+        "width": 1440,
+        "overflow": -15
+      }
+    ]
+  },
+  {
+    "id": "B-LOGOUT-admin",
+    "status": "PASS",
+    "detail": {
+      "redirect": "/admin"
+    }
+  },
+  {
+    "id": "B-DENY-receptionist",
+    "status": "PASS",
+    "detail": [
+      {
+        "target": "admin",
+        "status": 403
+      },
+      {
+        "target": "doctor",
+        "status": 403
+      },
+      {
+        "target": "patient",
+        "status": 403
+      },
+      {
+        "target": "platform",
+        "status": 403
+      }
+    ]
+  },
+  {
+    "id": "B-RESP-receptionist",
+    "status": "PASS",
+    "detail": [
+      {
+        "width": 375,
+        "overflow": -15
+      },
+      {
+        "width": 768,
+        "overflow": -15
+      },
+      {
+        "width": 1024,
+        "overflow": -15
+      },
+      {
+        "width": 1440,
+        "overflow": -15
+      }
+    ]
+  },
+  {
+    "id": "B-LOGOUT-receptionist",
+    "status": "PASS",
+    "detail": {
+      "redirect": "/admin"
+    }
+  },
+  {
+    "id": "B-DENY-doctor",
+    "status": "PASS",
+    "detail": [
+      {
+        "target": "admin",
+        "status": 403
+      },
+      {
+        "target": "receptionist",
+        "status": 403
+      },
+      {
+        "target": "patient",
+        "status": 403
+      },
+      {
+        "target": "platform",
+        "status": 403
+      }
+    ]
+  },
+  {
+    "id": "B-RESP-doctor",
+    "status": "PASS",
+    "detail": [
+      {
+        "width": 375,
+        "overflow": -15
+      },
+      {
+        "width": 768,
+        "overflow": -15
+      },
+      {
+        "width": 1024,
+        "overflow": 0
+      },
+      {
+        "width": 1440,
+        "overflow": 0
+      }
+    ]
+  },
+  {
+    "id": "B-LOGOUT-doctor",
+    "status": "PASS",
+    "detail": {
+      "redirect": "/admin"
+    }
+  },
+  {
+    "id": "B-DENY-patient",
+    "status": "PASS",
+    "detail": [
+      {
+        "target": "admin",
+        "status": 403
+      },
+      {
+        "target": "receptionist",
+        "status": 403
+      },
+      {
+        "target": "doctor",
+        "status": 403
+      },
+      {
+        "target": "platform",
+        "status": 403
+      }
+    ]
+  },
+  {
+    "id": "B-RESP-patient",
+    "status": "PASS",
+    "detail": [
+      {
+        "width": 375,
+        "overflow": -15
+      },
+      {
+        "width": 768,
+        "overflow": -15
+      },
+      {
+        "width": 1024,
+        "overflow": 0
+      },
+      {
+        "width": 1440,
+        "overflow": 0
+      }
+    ]
+  },
+  {
+    "id": "B-LOGOUT-patient",
+    "status": "PASS",
+    "detail": {
+      "redirect": "/login"
+    }
+  },
+  {
+    "id": "B-DENY-platform",
+    "status": "PASS",
+    "detail": [
+      {
+        "target": "admin",
+        "status": 403
+      },
+      {
+        "target": "receptionist",
+        "status": 403
+      },
+      {
+        "target": "doctor",
+        "status": 403
+      },
+      {
+        "target": "patient",
+        "status": 403
+      }
+    ]
+  },
+  {
+    "id": "B-RESP-platform",
+    "status": "PASS",
+    "detail": [
+      {
+        "width": 375,
+        "overflow": -15
+      },
+      {
+        "width": 768,
+        "overflow": -15
+      },
+      {
+        "width": 1024,
+        "overflow": -15
+      },
+      {
+        "width": 1440,
+        "overflow": -15
+      }
+    ]
+  },
+  {
+    "id": "B-LOGOUT-platform",
+    "status": "PASS",
+    "detail": {
+      "redirect": "/admin"
+    }
+  },
+  {
+    "id": "B-MOBILE-ESCAPE",
+    "status": "FAIL",
+    "detail": {
+      "drawerOpen": true
+    }
+  },
+  {
+    "id": "B-STAFF-CREATE",
+    "status": "PASS",
+    "detail": {
+      "created": true,
+      "verified": false
+    }
+  },
+  {
+    "id": "B-SCHEDULE-REASSIGN",
+    "status": "FAIL",
+    "detail": {
+      "appointment_doctor": 1,
+      "queue_doctor": 1,
+      "schedule_doctor": 3
+    }
+  },
+  {
+    "id": "B-SCHEDULE-CREATE",
+    "status": "PASS",
+    "detail": {
+      "created": true
+    }
+  },
+  {
+    "id": "B-BOOKING-EXISTING-PATIENT",
+    "status": "PASS",
+    "detail": {
+      "created": true,
+      "queueStatus": "BOOKED"
+    }
+  },
+  {
+    "id": "B-CHECKIN-CALL",
+    "status": "PASS",
+    "detail": {
+      "queueStatus": "CALLED",
+      "visitsBeforeStart": 0
+    }
+  },
+  {
+    "id": "B-VISIT-DRAFT",
+    "status": "PASS",
+    "detail": {
+      "visitCount": 1,
+      "recordStatus": "DRAFT"
+    }
+  },
+  {
+    "id": "B-PHOTO-SAVE",
+    "status": "PASS",
+    "detail": {
+      "fileExists": true
+    }
+  },
+  {
+    "id": "B-E2E-FINALIZE",
+    "status": "PASS",
+    "detail": {
+      "visit": "COMPLETED",
+      "record": "FINAL",
+      "appointment": "COMPLETED",
+      "queue": "COMPLETED"
+    }
+  },
+  {
+    "id": "B-PHOTO-HISTORY",
+    "status": "FAIL",
+    "detail": {
+      "revisionRetainsReference": true,
+      "fileExists": false
+    }
+  },
+  {
+    "id": "B-INACTIVE-admin",
+    "status": "PASS",
+    "detail": {
+      "redirect": "/admin"
+    }
+  },
+  {
+    "id": "B-INACTIVE-receptionist",
+    "status": "PASS",
+    "detail": {
+      "redirect": "/admin"
+    }
+  },
+  {
+    "id": "B-INACTIVE-doctor",
+    "status": "PASS",
+    "detail": {
+      "redirect": "/admin"
+    }
+  },
+  {
+    "id": "B-INACTIVE-patient",
+    "status": "PASS",
+    "detail": {
+      "redirect": "/login"
+    }
+  },
+  {
+    "id": "B-INACTIVE-platform",
+    "status": "PASS",
+    "detail": {
+      "redirect": "/admin"
+    }
+  },
+  {
+    "id": "B-ROLE-CHANGED",
+    "status": "PASS",
+    "detail": {
+      "status": 403
+    }
+  },
+  {
+    "id": "B-CSRF",
+    "status": "PASS",
+    "detail": {
+      "crossSiteWithoutToken": 419,
+      "sameOriginReachedValidation": 422
+    }
+  },
+  {
+    "id": "B-PUBLIC-SUBDOMAIN",
+    "status": "PASS",
+    "detail": {
+      "status": 200
+    }
+  },
+  {
+    "id": "B-OWNER-REGISTER",
+    "status": "PASS",
+    "detail": {
+      "verificationRequired": true,
+      "created": true
+    }
+  },
+  {
+    "id": "B-OWNER-ONBOARD-FREE",
+    "status": "PASS",
+    "detail": {
+      "subscriptionStatus": "free"
+    }
+  },
+  {
+    "id": "B-OWNER-DELETE",
+    "status": "FAIL",
+    "detail": {
+      "userExists": false,
+      "clinicRemains": true,
+      "ownerIsNull": true
+    }
+  },
+  {
+    "id": "B-PUBLIC-BOOKING-UI",
+    "status": "FAIL",
+    "detail": {
+      "httpStatus": 200,
+      "alpineAvailable": false,
+      "selectionFactoryAvailable": true,
+      "initialized": false,
+      "renderedDoctorOptions": 0
+    }
+  },
+  {
+    "id": "B-BOOKING-LABELS",
+    "status": "FAIL",
+    "detail": {
+      "unlabelledFields": [
+        "name",
+        "nik",
+        "birth_date",
+        "gender",
+        "phone",
+        "email",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "B-WORKER-LOCAL",
+    "status": "PASS",
+    "detail": {
+      "pendingBefore": 15,
+      "pendingAfter": 0,
+      "failedJobs": 0,
+      "broadcastTransport": "null"
+    }
+  },
+  {
+    "id": "B-MOBILE-HIDDEN-FOCUS",
+    "status": "NOT TESTED",
+    "detail": {
+      "reason": "Complete tab-order and focus-return sequence was not established; Escape has separate reproduced evidence."
+    }
+  },
+  {
+    "id": "B-SEED-PERMISSIONS",
+    "status": "PASS",
+    "detail": {
+      "roles": 5,
+      "permissions": 40
+    }
+  }
+]

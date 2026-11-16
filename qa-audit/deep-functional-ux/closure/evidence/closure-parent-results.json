@@ -1,0 +1,1188 @@
+[
+  {
+    "id": "G01",
+    "feature": "F00",
+    "scenario": "Navigasi Back/Forward landing pada seluruh anchor",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Back/Forward seluruh anchor navbar landing; URL hash dan posisi dipulihkan.",
+    "remaining": "",
+    "cases": [
+      "LANDING-HISTORY"
+    ]
+  },
+  {
+    "id": "G02",
+    "feature": "F00",
+    "scenario": "Katalog harga kosong/nonaktif seluruhnya dan pemulihan",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "FAIL",
+    "observed": "Katalog seluruhnya nonaktif menutup formulir pembelian dengan aman, tetapi halaman paket tidak menjelaskan keadaan kosong atau pemulihan. CCL-08.",
+    "remaining": "",
+    "cases": [
+      "CATALOG-ALL-INACTIVE",
+      "CATALOG-EMPTY-EXPLANATION"
+    ]
+  },
+  {
+    "id": "G03",
+    "feature": "F01",
+    "scenario": "Remember-only session dan revokasi password pada browser baru",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Context baru hanya dengan remember cookie berhasil; cookie lama ditolak setelah perubahan password.",
+    "remaining": "",
+    "cases": [
+      "REMEMBER-NEW-CONTEXT",
+      "REMEMBER-REVOKED"
+    ]
+  },
+  {
+    "id": "G04",
+    "feature": "F01",
+    "scenario": "Reset/verification link kedaluwarsa dan pemakaian ulang lewat UI",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Link verification/reset kedaluwarsa ditolak; link baru sah; reuse tidak mengubah akun lagi. Mail ditangkap privat, bukan delivery eksternal.",
+    "remaining": "",
+    "cases": [
+      "VERIFY-EXPIRED-REUSED",
+      "RESET-EXPIRED-REUSED"
+    ]
+  },
+  {
+    "id": "G05",
+    "feature": "F02",
+    "scenario": "Email registrasi duplikat/case variant melalui UI pasien dan owner",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Registrasi Patient dan owner menolak email existing serta uppercase; jumlah akun tetap.",
+    "remaining": "",
+    "cases": [
+      "REGISTER-patient-duplicate",
+      "REGISTER-patient-uppercase",
+      "REGISTER-owner-duplicate",
+      "REGISTER-owner-uppercase"
+    ]
+  },
+  {
+    "id": "G06",
+    "feature": "F02",
+    "scenario": "Terms tidak disetujui serta refresh di setiap tahap registrasi",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Patient/owner: terms unchecked memblok submit; refresh mereset password/terms dan tidak membuat akun.",
+    "remaining": "",
+    "cases": [
+      "REGISTER-patient-terms-refresh",
+      "REGISTER-owner-terms-refresh"
+    ]
+  },
+  {
+    "id": "G07",
+    "feature": "F03",
+    "scenario": "Email duplikat dan batas panjang nama pada seluruh role",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Lima role: email duplikat dan nama256 ditolak; nama255 tersimpan dan diperiksa pada375px.",
+    "remaining": "",
+    "cases": [
+      "PROFILE-Clinic-Admin-duplicate-email-R2",
+      "PROFILE-Clinic-Admin-name256-R2",
+      "PROFILE-Receptionist-duplicate-email-R2",
+      "PROFILE-Receptionist-name256-R2",
+      "PROFILE-Doctor-duplicate-email-R2",
+      "PROFILE-Doctor-name256-R2",
+      "PROFILE-Patient-duplicate-email-R2",
+      "PROFILE-Patient-name256-R2",
+      "PROFILE-Platform-Admin-duplicate-email-R2",
+      "PROFILE-Platform-Admin-name256-R2",
+      "PROFILE-MAX255-Clinic-Admin",
+      "PROFILE-MAX255-Receptionist",
+      "PROFILE-MAX255-Doctor",
+      "PROFILE-MAX255-Patient",
+      "PROFILE-MAX255-Platform-Admin"
+    ]
+  },
+  {
+    "id": "G08",
+    "feature": "F03",
+    "scenario": "Dua sesi profil aktif saat password/email berubah",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Dua sesi Patient: password berubah dan recaller lama ditolak; email baru memerlukan verifikasi pada sesi kedua; verifikasi sah memulihkan akses pada user ID yang sama.",
+    "remaining": "",
+    "cases": [
+      "PROFILE-TWO-PASSWORD-SESSIONS",
+      "PROFILE-TWO-EMAIL-SESSIONS"
+    ]
+  },
+  {
+    "id": "G09",
+    "feature": "F04",
+    "scenario": "Lanjut onboarding yang ditinggalkan setelah logout/login",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Logout/login memulihkan tahap pembuatan klinik dan pemilihan paket; aktivasi Free tidak menduplikasi klinik.",
+    "remaining": "",
+    "cases": [
+      "ONBOARDING-RESUME"
+    ]
+  },
+  {
+    "id": "G10",
+    "feature": "F04",
+    "scenario": "Preferred plan dari setiap CTA landing sampai aktivasi",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "BLOCKED",
+    "observed": "Ketiga CTA Free/Individual/Team menjaga preferred plan sampai halaman paket, termasuk refresh. Free aktif melalui UI.",
+    "remaining": "Aktivasi Individual/Team melalui provider belum dapat dieksekusi tanpa kredensial sandbox DOKU; initial paid fixtures bukan bukti checkout.",
+    "cases": [
+      "CTA-PREFERRED-free",
+      "CTA-PREFERRED-individual",
+      "CTA-PREFERRED-team"
+    ]
+  },
+  {
+    "id": "G11",
+    "feature": "F05",
+    "scenario": "Timezone WITA/WIT dan perubahan jam operasional terhadap sesi existing",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "FAIL",
+    "observed": "Simpan WITA/WIT dan label dashboard lulus. Perubahan tutup10:00 membiarkan sesi12:00–23:59 menerima booking baru. CCL-05.",
+    "remaining": "",
+    "cases": [
+      "CLINIC-TZ-8",
+      "CLINIC-TZ-9",
+      "CLINIC-HOURS-EXISTING"
+    ]
+  },
+  {
+    "id": "G12",
+    "feature": "F05",
+    "scenario": "Logo tipe salah, ukuran lebih dari2MB, dan penggantian gagal",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Logo bukan gambar dan >2MB ditolak melalui form; logo sebelumnya tetap utuh ketika penggantian gagal.",
+    "remaining": "",
+    "cases": [
+      "LOGO-REPLACE-invalid-type",
+      "LOGO-REPLACE-over2mb"
+    ]
+  },
+  {
+    "id": "G13",
+    "feature": "F06",
+    "scenario": "Admin mengganti email/password staf dengan sesi remember aktif",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Owner mengubah email/password staf; browser dengan recaller lama ditolak; email baru melalui verifikasi UI.",
+    "remaining": "",
+    "cases": [
+      "STAFF-REMEMBER-CHANGE"
+    ]
+  },
+  {
+    "id": "G14",
+    "feature": "F06",
+    "scenario": "Batas doctor seat dari UI dan semua variasi entitlement paket",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Free/Individual menolak dokter kedua; Team/trial menerima; deaktivasi membuka seat dan reaktivasi lama ditolak saat kapasitas kembali penuh.",
+    "remaining": "",
+    "cases": [
+      "DOCTOR-SEAT-free",
+      "DOCTOR-SEAT-individual",
+      "DOCTOR-SEAT-dental",
+      "DOCTOR-SEAT-trial",
+      "DOCTOR-SEAT-REACTIVATION"
+    ]
+  },
+  {
+    "id": "G15",
+    "feature": "F07",
+    "scenario": "Tarif pecahan/nonkelipatan1000 dan batas nominal server",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "FAIL",
+    "observed": "123.45 dan123456 diblok step1000 walau valid pada request domain; batas maksimum tetap ditolak. CCL-01.",
+    "remaining": "",
+    "cases": [
+      "SERVICE-PRICE-123_45",
+      "SERVICE-PRICE-123456",
+      "SERVICE-MAX"
+    ]
+  },
+  {
+    "id": "G16",
+    "feature": "F07",
+    "scenario": "Layanan dinonaktifkan ketika tab booking lama masih terbuka",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Layanan dinonaktifkan dari tab lain; tab booking lama ditolak server tanpa appointment baru.",
+    "remaining": "",
+    "cases": [
+      "BOOK-SERVICE-STALE-R2"
+    ]
+  },
+  {
+    "id": "G17",
+    "feature": "F08",
+    "scenario": "Perubahan jam sesi terpakai serta quota diturunkan di bawah reservasi",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Jam mulai/akhir sesi terpakai tidak dapat diubah. Quota di bawah reservasi lama mempertahankan data dan memblok booking tambahan.",
+    "remaining": "",
+    "cases": [
+      "USED-SESSION-start_time",
+      "USED-SESSION-end_time",
+      "SCHEDULE-LOWER-QUOTA-R3"
+    ]
+  },
+  {
+    "id": "G18",
+    "feature": "F08",
+    "scenario": "Batas quota0/501, akhir sebelum mulai, dan jam di luar operasional melalui UI",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Quota0/501, akhir sebelum mulai, dan awal di luar operasional ditolak melalui UI.",
+    "remaining": "",
+    "cases": [
+      "SCHEDULE-BOUND-quota-0",
+      "SCHEDULE-BOUND-quota-501",
+      "SCHEDULE-BOUND-end_time-1100",
+      "SCHEDULE-BOUND-start_time-0700"
+    ]
+  },
+  {
+    "id": "G19",
+    "feature": "F09",
+    "scenario": "Tanggal lahir masa depan dan seluruh field kosong melalui submit UI",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Form pasien kosong dan tanggal lahir masa depan ditolak tanpa menyimpan pasien.",
+    "remaining": "",
+    "cases": [
+      "PATIENT-EMPTY",
+      "PATIENT-FUTURE-DOB"
+    ]
+  },
+  {
+    "id": "G20",
+    "feature": "F09",
+    "scenario": "Pasien dengan histori sangat panjang dan setiap filter pencarian identitas",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Pencarian nama/NIK/telepon/RM serta pagination histori >30 appointment dan membuka entri lama.",
+    "remaining": "",
+    "cases": [
+      "PATIENT-SEARCH-name",
+      "PATIENT-SEARCH-nik",
+      "PATIENT-SEARCH-phone",
+      "PATIENT-SEARCH-medical_record_number",
+      "PATIENT-LONG-HISTORY"
+    ]
+  },
+  {
+    "id": "G21",
+    "feature": "F10",
+    "scenario": "Semua CTA dokter/layanan website klinik dalam kondisi tanpa dokter/sesi",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Seluruh CTA booking yang terlihat pada website klinik tanpa dokter aktif dan tanpa sesi aktif dibuka; selector tidak memilih resource yang tidak tersedia.",
+    "remaining": "",
+    "cases": [
+      "CLINIC-NO-ACTIVE-DOCTOR-R2",
+      "CLINIC-NO-ACTIVE-SESSIONS"
+    ]
+  },
+  {
+    "id": "G22",
+    "feature": "F10",
+    "scenario": "Alur pengguna pertama tanpa URL klinik dalam studi awam langsung",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "NOT TESTED",
+    "observed": "Navigasi agen telah diamati, tetapi bukan studi partisipan awam.",
+    "remaining": "Tidak ada partisipan manusia untuk studi first-use tanpa pengetahuan URL/kode klinik; waktu, keberhasilan mandiri dan pemahaman tidak boleh disimulasikan oleh agen.",
+    "cases": []
+  },
+  {
+    "id": "G23",
+    "feature": "F11",
+    "scenario": "Tanggal tepat+30/+31 dan sesi baru saja berakhir",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Tanggal+30 diterima, +31 ditolak; sesi yang sudah berakhir ditolak.",
+    "remaining": "",
+    "cases": [
+      "BOOK-DAY30",
+      "BOOK-DAY31",
+      "BOOK-ENDED-SESSION-R2"
+    ]
+  },
+  {
+    "id": "G24",
+    "feature": "F11",
+    "scenario": "Dua form/tab dengan UUID berbeda untuk pasien/sesi sama",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Dua form UUID berbeda untuk pasien/sesi sama menghasilkan dua booking sah dan nomor queue unik; tidak mengarang aturan satu booking per hari.",
+    "remaining": "",
+    "cases": [
+      "BOOK-TWO-UUIDS-R3"
+    ]
+  },
+  {
+    "id": "G25",
+    "feature": "F12",
+    "scenario": "Replay cancel dari tab stale untuk seluruh status terminal",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Replay pembatalan dari tab Patient lama pada COMPLETED/CANCELLED/NO_SHOW tidak mengubah state atau menambah event cancel.",
+    "remaining": "",
+    "cases": [
+      "CANCEL-STALE-COMPLETED",
+      "CANCEL-STALE-CANCELLED-R3",
+      "CANCEL-STALE-NOSHOW"
+    ]
+  },
+  {
+    "id": "G26",
+    "feature": "F12",
+    "scenario": "Tautan status tanpa/salah token dan cancellation error pada template resepsionis lewat browser",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Guest tanpa/salah token mendapat404; pesan pembatalan resepsionis memakai bukti FIXED & VERIFIED REG-LATE-receptionist, tidak diulang.",
+    "remaining": "",
+    "cases": [
+      "TOKEN-missing-R2",
+      "TOKEN-wrong-R2",
+      "fixes/evidence/scenarios.json#REG-LATE-receptionist"
+    ]
+  },
+  {
+    "id": "G27",
+    "feature": "F13",
+    "scenario": "Aksi stale dari dua tab resepsionis dan dokter terhadap queue sama",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Dua tab resepsionis: check-in/call stale ditolak422 dan state tetap; stale Mulai dokter setelah final menggunakan bukti G31.",
+    "remaining": "",
+    "cases": [
+      "QUEUE-TWO-TABS-R2",
+      "START-STALE-AFTER-FINAL-R3"
+    ]
+  },
+  {
+    "id": "G28",
+    "feature": "F13",
+    "scenario": "Filter dokter/sesi dikombinasikan dengan pagination dan status terminal",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Dokter+sesi+status terminal dengan >20 baris: pagination mempertahankan query; kombinasi tanpa hasil tetap jelas.",
+    "remaining": "",
+    "cases": [
+      "QUEUE-FILTER-PAGINATION"
+    ]
+  },
+  {
+    "id": "G29",
+    "feature": "F14",
+    "scenario": "Display klinik kosong dan seluruh kontrol filter/kiosk",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "NOT TESTED",
+    "observed": "Display klinik kosong dan kontrol yang benar-benar tersedia sudah diuji; link booking menuju login.",
+    "remaining": "Tidak ditemukan kontrol kiosk/filter display khusus pada UI/source saat ini. Tidak menganggap kontrol fiktif sebagai PASS; requirement/desain kontrol perlu ditetapkan.",
+    "cases": [
+      "DISPLAY-EMPTY-CONTROLS"
+    ]
+  },
+  {
+    "id": "G30",
+    "feature": "F14",
+    "scenario": "Public display putus/pulih dari socket nyata",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Frame queue.updated nyata diterima public/private, display berubah, payload nonmedis; disconnect/reconnect dan missed-event memakai WS-REAL-RECOVERY-R2.",
+    "remaining": "",
+    "cases": [
+      "WS-PUBLIC-DELIVERY",
+      "WS-REAL-RECOVERY-R2"
+    ]
+  },
+  {
+    "id": "G31",
+    "feature": "F15",
+    "scenario": "Ulang Mulai periksa dari tab lama sesudah visit selesai",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Mulai periksa dari tab lama sesudah final ditolak policy403; hanya satu visit dan final tetap utuh.",
+    "remaining": "",
+    "cases": [
+      "START-STALE-AFTER-FINAL-R3"
+    ]
+  },
+  {
+    "id": "G32",
+    "feature": "F15",
+    "scenario": "Semua kombinasi pencarian/filter index rekam medis",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Enam keluarga pencarian × ALL/DRAFT/FINAL, rentang tanggal dan empty state; pencarian layanan memakai snapshot historis, bukan katalog saat ini.",
+    "remaining": "",
+    "cases": [
+      "RME-SEARCH-name-ALL",
+      "RME-SEARCH-name-DRAFT",
+      "RME-SEARCH-name-FINAL",
+      "RME-SEARCH-RM-ALL",
+      "RME-SEARCH-RM-DRAFT",
+      "RME-SEARCH-RM-FINAL",
+      "RME-SEARCH-diagnosis-ALL",
+      "RME-SEARCH-diagnosis-DRAFT",
+      "RME-SEARCH-diagnosis-FINAL",
+      "RME-SEARCH-code-ALL",
+      "RME-SEARCH-code-DRAFT",
+      "RME-SEARCH-code-FINAL",
+      "RME-SEARCH-assessment-ALL",
+      "RME-SEARCH-assessment-DRAFT",
+      "RME-SEARCH-assessment-FINAL",
+      "RME-SEARCH-service-FINAL",
+      "RME-SEARCH-service-ALL-R2",
+      "RME-SEARCH-service-DRAFT-R2",
+      "RME-SEARCH-EMPTY-R2"
+    ]
+  },
+  {
+    "id": "G33",
+    "feature": "F16",
+    "scenario": "HTTP419/sesi berakhir saat autosave dan pemulihan isi editor",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "FAIL",
+    "observed": "Logout tab lain menghasilkan401 nyata; editor mempertahankan teks tetapi menyarankan periksa koneksi. Relogin same-origin menghasilkan200. CCL-02.",
+    "remaining": "419 nyata belum diperoleh: Laravel13 menerima Sec-Fetch-Site same-origin; logout saja berhenti di auth401. Skenario browser/proxy tanpa Fetch Metadata memerlukan lingkungan tersendiri; tidak memalsukan respons419.",
+    "cases": [
+      "SESSION-401-FEEDBACK",
+      "SESSION-RELOGIN-SAME-ORIGIN"
+    ]
+  },
+  {
+    "id": "G34",
+    "feature": "F16",
+    "scenario": "Batas20 diagnosis/30 tindakan serta seluruh nilai vital ekstrem",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Delapan vital: minimum/maksimum serta dua sisi di luar batas; diagnosis20/tindakan30 tersimpan dan penambahan berlebih dibatasi.",
+    "remaining": "",
+    "cases": [
+      "VITAL-BOUND-weight_kg",
+      "VITAL-BOUND-height_cm",
+      "VITAL-BOUND-systolic",
+      "VITAL-BOUND-diastolic",
+      "VITAL-BOUND-pulse",
+      "VITAL-BOUND-respiratory_rate",
+      "VITAL-BOUND-temperature_c",
+      "VITAL-BOUND-oxygen_saturation",
+      "DIAGNOSIS-20",
+      "TREATMENT-30"
+    ]
+  },
+  {
+    "id": "G35",
+    "feature": "F16",
+    "scenario": "Refresh/Back/leave sebelum debounce autosave selesai dan ketika foto belum disimpan",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Leave melalui navigasi aplikasi serta native refresh/Back sebelum debounce dan saat foto pending: dismiss menjaga teks/foto, penyimpanan berikutnya berhasil.",
+    "remaining": "",
+    "cases": [
+      "PHOTO-LEAVE-BEFORE-SAVE",
+      "LEAVE-draft-refresh-R3",
+      "LEAVE-draft-back-R3",
+      "LEAVE-pending-photo-refresh-R3",
+      "LEAVE-pending-photo-back-R3"
+    ]
+  },
+  {
+    "id": "G36",
+    "feature": "F17",
+    "scenario": "Edit severity lain dan dua editor alergi bersamaan melalui UI",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Keempat severity disimpan dengan histori append-only. Dua editor mempertahankan kedua perubahan sebagai versi; versi lama tetap immutable.",
+    "remaining": "",
+    "cases": [
+      "ALLERGY-SEVERITY-MODERATE-R2",
+      "ALLERGY-SEVERITY-SEVERE-R2",
+      "ALLERGY-SEVERITY-CRITICAL-R2",
+      "ALLERGY-SEVERITY-MILD-R2",
+      "ALLERGY-TWO-EDITORS-VERSIONS"
+    ]
+  },
+  {
+    "id": "G37",
+    "feature": "F17",
+    "scenario": "Semua variasi acknowledgement alergi pada resep baru/koreksi",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Acknowledgement alergi kritis checked/unchecked pada draft dan koreksi; resep kosong final tidak memerlukan obat. Scope adalah cabang kewajiban acknowledgement, bukan seluruh nilai teks alergi.",
+    "remaining": "",
+    "cases": [
+      "PRESCRIPTION-ACK-DRAFT",
+      "PRESCRIPTION-ACK-CORRECTION-R3",
+      "PRESCRIPTION-EMPTY-FINAL-R2"
+    ]
+  },
+  {
+    "id": "G38",
+    "feature": "F18",
+    "scenario": "Hapus/tambah30 obat, jumlah9999/10000, serta resep kosong final",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Obat30 tersimpan/31 ditolak;9999 diterima/10000 ditolak; hapus semua obat dan finalisasi resep kosong berhasil.",
+    "remaining": "",
+    "cases": [
+      "PRESCRIPTION-30-31-R2",
+      "PRESCRIPTION-QUANTITY-R2",
+      "PRESCRIPTION-EMPTY-FINAL-R2"
+    ]
+  },
+  {
+    "id": "G39",
+    "feature": "F18",
+    "scenario": "Seluruh variasi preview, instruksi panjang dan koreksi yang mengubah resep pasien",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Instruksi panjang tampil pada preview; resep kosong difinalkan; resep hasil Modification terlihat pada portal pasien. Tidak mengklaim semua panjang teks/layout yang mungkin.",
+    "remaining": "",
+    "cases": [
+      "PATIENT-CORRECTED-PRESCRIPTION-R3",
+      "PRESCRIPTION-QUANTITY-R2",
+      "PRESCRIPTION-EMPTY-FINAL-R2"
+    ]
+  },
+  {
+    "id": "G40",
+    "feature": "F19",
+    "scenario": "Paste clipboard, batas10 foto/5MB, tipe salah dan abort upload",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Tipe salah, pilihan11 dibatasi10, clipboard nyata, >5MB ditolak, tepat5MB diterima; putus upload saat transfer menjaga DB/pilihan dan retry berhasil. Batas10 adalah per selection/request, bukan klaim total lifetime foto.",
+    "remaining": "",
+    "cases": [
+      "PHOTO-TYPE",
+      "PHOTO-COUNT",
+      "PHOTO-SIZE-R2",
+      "PHOTO-CLIPBOARD-R2",
+      "PHOTO-OFFLINE-RETRY-R2",
+      "PHOTO-EXACT5MB-MIDTRANSFER-ABORT-R2"
+    ]
+  },
+  {
+    "id": "G41",
+    "feature": "F19",
+    "scenario": "Akses foto revisi oleh setiap role/tenant asing melalui browser",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Dokter ditugaskan membuka foto revisi setelah dihapus dari versi kini; owner, non-owner admin, resepsionis, dokter tenant lain, Patient dan Platform Admin ditolak403/404.",
+    "remaining": "",
+    "cases": [
+      "PHOTO-REVISION-SETUP-R3",
+      "PHOTO-REVISION-DENY-Clinic-Owner-R3",
+      "PHOTO-REVISION-DENY-Clinic-Admin-R3",
+      "PHOTO-REVISION-DENY-Receptionist-R3",
+      "PHOTO-REVISION-DENY-Doctor-other-tenant-R3",
+      "PHOTO-REVISION-DENY-Patient-R3",
+      "PHOTO-REVISION-DENY-Platform-Admin-R3"
+    ]
+  },
+  {
+    "id": "G42",
+    "feature": "F20",
+    "scenario": "Dua submit finalisasi bersamaan dan tab koreksi stale melalui UI",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Dua browser submit final menghasilkan satu final/audit; koreksi stale409 tidak menimpa revisi pertama. Server PHP tunggal/SQLite, bukan bukti locking MySQL.",
+    "remaining": "",
+    "cases": [
+      "FINALIZE-TWO-SUBMITS",
+      "CORRECTION-TWO-TABS"
+    ]
+  },
+  {
+    "id": "G43",
+    "feature": "F20",
+    "scenario": "Semua perbedaan array panjang pada histori koreksi di mobile",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Histori koreksi32 odontogram dan20 diagnosis/30 tindakan/30 obat pada375px tanpa overflow dokumen; seluruh keluarga array panjang saat ini tercakup.",
+    "remaining": "",
+    "cases": [
+      "DENT-HISTORY-MOBILE",
+      "LONG-ARRAY-HISTORY-MOBILE"
+    ]
+  },
+  {
+    "id": "G44",
+    "feature": "F21",
+    "scenario": "Seluruh32 gigi×6 kondisi dan correction-final dental melalui UI",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "192 sel32 gigi ×6 kondisi dipilih melalui UI, disimpan dan dimuat ulang; koreksi FINAL menyimpan snapshot sebelum/sesudah dan status tetap FINAL.",
+    "remaining": "",
+    "cases": [
+      "DENT-32-unknown",
+      "DENT-32-healthy",
+      "DENT-32-caries",
+      "DENT-32-filled",
+      "DENT-32-missing",
+      "DENT-32-crown",
+      "DENT-FINAL-CORRECTION-R2"
+    ]
+  },
+  {
+    "id": "G45",
+    "feature": "F21",
+    "scenario": "Expiry berdasarkan ends_at; pencabutan revoked_at sudah diuji, keduanya tidak disamakan",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Entitlement benar-benar kedaluwarsa lewat ends_at tanpa revoked_at: chart read-only, stale edit ditolak, RME General visit aktif tetap dapat disimpan.",
+    "remaining": "",
+    "cases": [
+      "DENT-EXPIRES-ENDS-AT"
+    ]
+  },
+  {
+    "id": "G46",
+    "feature": "F22",
+    "scenario": "Rekonsiliasi angka seluruh dashboard terhadap fixture setiap periode/timezone",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Admin:3 timezone ×3 periode termasuk batas tengah malam; Doctor/Receptionist dua hari; jumlah tenant Platform direkonsiliasi. Patient menampilkan resep terkoreksi (G39), bukan metrik kas.",
+    "remaining": "",
+    "cases": [
+      "DASHBOARD-DATE-EDGE",
+      "DASH-ADMIN-7-day-before",
+      "DASH-ADMIN-7-day-after",
+      "DASH-ADMIN-7-month",
+      "DASH-ADMIN-8-day-before",
+      "DASH-ADMIN-8-day-after",
+      "DASH-ADMIN-8-month",
+      "DASH-ADMIN-9-day-before",
+      "DASH-ADMIN-9-day-after",
+      "DASH-ADMIN-9-month",
+      "DASH-OPS-Doctor-2026-11-13",
+      "DASH-OPS-Doctor-2026-11-14",
+      "DASH-OPS-Receptionist-2026-11-13",
+      "DASH-OPS-Receptionist-2026-11-14",
+      "DASH-PLATFORM-COUNTS",
+      "PATIENT-CORRECTED-PRESCRIPTION-R3"
+    ]
+  },
+  {
+    "id": "G47",
+    "feature": "F22",
+    "scenario": "Semua shortcut, empty/loading dan variasi data panjang per role",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "NOT TESTED",
+    "observed": "Seluruh tujuan shortcut berbeda diklik pada5 role; nama255 diperiksa375px pada5 role; notifikasi empty5 role ada di G48.",
+    "remaining": "Empty/loading dashboard lintas seluruh role belum terbukti. Platform memiliki tenant pada initial fixture dan tidak menyediakan UI hapus seluruh tenant untuk membuat state global kosong; menghapus langsung DB selama audit melanggar metode. Diperlukan initial fixture terpisah untuk dashboard global kosong dan kontrak loading (Blade tidak memiliki state loading aplikasi khusus). Shortcut/profile PASS tidak menutup subkasus ini.",
+    "cases": [
+      "DASHBOARD-SHORTCUTS-Receptionist-R2",
+      "DASHBOARD-SHORTCUTS-Doctor-R2",
+      "DASHBOARD-SHORTCUTS-Patient-R2",
+      "DASHBOARD-SHORTCUTS-Platform-Admin-R3",
+      "DASHBOARD-SHORTCUTS-Clinic-Admin-R4",
+      "PROFILE-MAX255-Clinic-Admin",
+      "PROFILE-MAX255-Receptionist",
+      "PROFILE-MAX255-Doctor",
+      "PROFILE-MAX255-Patient",
+      "PROFILE-MAX255-Platform-Admin"
+    ]
+  },
+  {
+    "id": "G48",
+    "feature": "F23",
+    "scenario": "Pagination/empty notification center untuk setiap role",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Lima role: pagination22 notifikasi, read state dan empty center pada akun terpisah.",
+    "remaining": "",
+    "cases": [
+      "NOTIFICATION-PAGINATION-Clinic-Admin-(owner)",
+      "NOTIFICATION-PAGINATION-Receptionist",
+      "NOTIFICATION-PAGINATION-Doctor",
+      "NOTIFICATION-PAGINATION-Patient",
+      "NOTIFICATION-PAGINATION-Platform-Admin",
+      "NOTIFICATION-EMPTY-Clinic-Admin",
+      "NOTIFICATION-EMPTY-Receptionist",
+      "NOTIFICATION-EMPTY-Doctor",
+      "NOTIFICATION-EMPTY-Patient",
+      "NOTIFICATION-EMPTY-Platform-Admin"
+    ]
+  },
+  {
+    "id": "G49",
+    "feature": "F23",
+    "scenario": "Notifikasi masuk socket dan badge realtime lintas browser",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Database worker+socket nyata mengirim notifikasi; badge Doctor/Patient naik tanpa reload setelah check-in UI lintas browser.",
+    "remaining": "",
+    "cases": [
+      "WS-NOTIFICATION-BADGES"
+    ]
+  },
+  {
+    "id": "G50",
+    "feature": "F24",
+    "scenario": "Kombinasi filter aktor/tanggal, pagination, serta tidak ada hasil",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Filter action+aktor+tanggal, pagination mempertahankan parameter dan empty result.",
+    "remaining": "",
+    "cases": [
+      "AUDIT-COMBINATION"
+    ]
+  },
+  {
+    "id": "G51",
+    "feature": "F24",
+    "scenario": "Validasi semua metadata audit yang ditampilkan di browser",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Ketujuh whitelist from/to/source/appointment_id/queue_id/visit_id/revision_id benar-benar terlihat pada browser owner tenant terkait; metadata ekstra disembunyikan.",
+    "remaining": "",
+    "cases": [
+      "AUDIT-METADATA",
+      "AUDIT-ALL-SAFE-METADATA-R3"
+    ]
+  },
+  {
+    "id": "G52",
+    "feature": "F25",
+    "scenario": "Transisi expiry oleh waktu serta reminder subscription yang dipicu command",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "FAIL",
+    "observed": "Owner expired dibatasi tulis dan command reminder nyata idempotent dengan notifikasi UI. List Platform tetap active sesudah ends_at sampai refresh tenant. CCL-06.",
+    "remaining": "",
+    "cases": [
+      "EXPIRY-OWNER-RESTRICTED",
+      "SUBSCRIPTION-REMINDER-COMMAND",
+      "EXPIRY-PLATFORM-LIST-R2"
+    ]
+  },
+  {
+    "id": "G53",
+    "feature": "F25",
+    "scenario": "Seluruh kombinasi paket, renewal terjadwal dan seat overage pada UI",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "UI Free/Individual/Team+addon/trial, renewal pilihan, downgrade seat overage lalu deaktivasi seat; histori trial dipertahankan. Future grant G62 membuktikan periode terjadwal, bukan pembayaran provider baru.",
+    "remaining": "",
+    "cases": [
+      "PLAN-UI-STATE-free",
+      "PLAN-UI-STATE-individual",
+      "PLAN-UI-STATE-dental",
+      "PLAN-UI-STATE-trial",
+      "PLAN-SEAT-OVERAGE-DOWNGRADE",
+      "GRANT-HIGHER-EQUAL",
+      "RENEWAL-COMBINED-SELECTION"
+    ]
+  },
+  {
+    "id": "G54",
+    "feature": "F26",
+    "scenario": "Successful checkout/notification/reconcile provider nyata",
+    "previous_status": "BLOCKED",
+    "previous_reason": "Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna.",
+    "status": "BLOCKED",
+    "observed": "Guard lokal dan fixture pembayaran sah tersedia; tidak ada bukti pembayaran eksternal sukses.",
+    "remaining": "Kredensial sandbox DOKU dan transaksi sandbox tervalidasi tidak tersedia; tidak memakai akun atau pembayaran pengguna.",
+    "cases": []
+  },
+  {
+    "id": "G55",
+    "feature": "F26",
+    "scenario": "Repeat/delay callback dan browser-return nyata bersama provider",
+    "previous_status": "BLOCKED",
+    "previous_reason": "Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna.",
+    "status": "BLOCKED",
+    "observed": "Snapshot invoice dan stale UI katalog diuji pada G60/G61.",
+    "remaining": "Repeat/delay callback serta browser-return dengan provider nyata memerlukan DOKU sandbox; backend fake-provider historis tidak dihitung sebagai browser provider PASS.",
+    "cases": []
+  },
+  {
+    "id": "G56",
+    "feature": "F27",
+    "scenario": "Prorata akhir hari/bulan dan renewal gabungan lewat UI",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "BLOCKED",
+    "observed": "Prorata satu hari akhir bulan dan8 kombinasi plan/addon/durasi dihitung lewat UI.",
+    "remaining": "Pembayaran renewal gabungan sampai aktivasi menunggu provider sandbox; pemilihan dan total UI PASS, settlement tidak diuji.",
+    "cases": [
+      "RENEWAL-COMBINED-SELECTION",
+      "ADDON-PRORATA-MONTH-END"
+    ]
+  },
+  {
+    "id": "G57",
+    "feature": "F27",
+    "scenario": "Refund yang mencabut add-on melalui flow provider; fixture revoke saja sudah diuji",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "BLOCKED",
+    "observed": "Refund lokal manual lewat UI membatalkan entitlement dan menjaga histori pada G64.",
+    "remaining": "Aplikasi merekam refund manual; tidak ditemukan flow refund eksternal dari browser. Refund oleh provider dan delivery eventnya memerlukan kontrak serta kredensial sandbox, tidak disamakan dengan revoke fixture/manual.",
+    "cases": [
+      "REFUND-STALE"
+    ]
+  },
+  {
+    "id": "G58",
+    "feature": "F28",
+    "scenario": "Pencarian owner-email, pagination banyak tenant, dan tenant inactive",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Pencarian email owner, pagination >15 tenant dan detail tenant inactive melalui UI.",
+    "remaining": "",
+    "cases": [
+      "TENANT-OWNER-SEARCH",
+      "TENANT-PAGINATION-INACTIVE-R2"
+    ]
+  },
+  {
+    "id": "G59",
+    "feature": "F28",
+    "scenario": "Semua metadata commercial history di setiap state tenant",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "NOT TESTED",
+    "observed": "Metadata subscription saat ini terlihat untuk Free/Individual/Team/trial/expiry.",
+    "remaining": "Detail tenant hanya menampilkan subscription saat ini; tidak ada viewer seluruh periode commercial history. Schema/history backend bukan bukti UI. Perlu keputusan tampilan histori dan field yang memang boleh dibuka Platform.",
+    "cases": [
+      "TENANT-COMMERCIAL-free",
+      "TENANT-COMMERCIAL-individual",
+      "TENANT-COMMERCIAL-dental",
+      "TENANT-COMMERCIAL-trial",
+      "TENANT-COMMERCIAL-expiry"
+    ]
+  },
+  {
+    "id": "G60",
+    "feature": "F29",
+    "scenario": "Harga invalid, price toggle inactive dan addon toggle inactive lewat UI",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Harga0/1e9/fraction ditolak; price/addon inactive memengaruhi pilihan checkout; perubahan katalog menjaga snapshot invoice lama dan entitlement yang sudah dibeli.",
+    "remaining": "",
+    "cases": [
+      "CATALOG-INVALID-0",
+      "CATALOG-INVALID-1000000000",
+      "CATALOG-INVALID-1.5",
+      "CATALOG-PRICE-SNAPSHOT",
+      "CATALOG-ADDON-INACTIVE"
+    ]
+  },
+  {
+    "id": "G61",
+    "feature": "F29",
+    "scenario": "Katalog diubah ketika owner masih memegang tab checkout lama",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Checkout dari tab harga yang sudah nonaktif ditolak404 tanpa invoice tambahan.",
+    "remaining": "",
+    "cases": [
+      "CATALOG-STALE-CHECKOUT"
+    ]
+  },
+  {
+    "id": "G62",
+    "feature": "F30",
+    "scenario": "Grant lebih tinggi/setara terjadwal dan downgrade paid dengan overlap",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Grant higher/equal dijadwalkan; downgrade paid langsung menangani overlap tanpa mengubah invoice lama.",
+    "remaining": "",
+    "cases": [
+      "GRANT-HIGHER-EQUAL",
+      "GRANT-PAID-DOWNGRADE"
+    ]
+  },
+  {
+    "id": "G63",
+    "feature": "F30",
+    "scenario": "Pemulihan grant ganda dan kebijakan revoke grant yang belum tersedia di UI",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "NOT TESTED",
+    "observed": "Pencegahan grant duplikat DFU-12 tetap FIXED & VERIFIED dan tidak dijalankan ulang.",
+    "remaining": "Tidak ada UI pemulihan duplicate grant historis atau single-grant revoke. Keputusan revoke/refund/penyesuaian periode dibutuhkan; tidak menghapus atau mengubah histori melalui DB saat audit.",
+    "cases": []
+  },
+  {
+    "id": "G64",
+    "feature": "F31",
+    "scenario": "Refund ulang pada tab stale dan seluruh status yang tidak refundable",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Refund tab stale tidak menduplikasi audit; entitlement addon dicabut dan histori tetap; pending/expired/failed/refunded tidak menawarkan refund. Ini catatan refund manual, bukan transfer uang provider.",
+    "remaining": "",
+    "cases": [
+      "REFUND-STALE",
+      "REFUND-UNAVAILABLE-pending",
+      "REFUND-UNAVAILABLE-expired",
+      "REFUND-UNAVAILABLE-failed",
+      "REFUND-UNAVAILABLE-refunded"
+    ]
+  },
+  {
+    "id": "G65",
+    "feature": "F31",
+    "scenario": "Reconcile+refund lintas role/tenant pada UI, tanpa transaksi provider nyata",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "BLOCKED",
+    "observed": "Foreign owner/admin/doctor/receptionist/Patient mendapat403/404 pada GET invoice asing dan tidak melihat tombol refund; tidak ada POST reconcile/refund negatif yang dilakukan lewat form yang tidak tersedia.",
+    "remaining": "Reconcile yang diizinkan kepada Platform Admin memerlukan provider sandbox. Pemeriksaan akses/visibilitas negatif tidak membuktikan authorization POST atau reconcile positif; refund lokal ditutup G64.",
+    "cases": [
+      "PAYMENT-ROLE-Foreign-Owner",
+      "PAYMENT-ROLE-Clinic-Admin",
+      "PAYMENT-ROLE-Doctor",
+      "PAYMENT-ROLE-Receptionist",
+      "PAYMENT-ROLE-Patient",
+      "REFUND-STALE"
+    ]
+  },
+  {
+    "id": "G66",
+    "feature": "F32",
+    "scenario": "Confidence medium/high dengan data historis terkontrol di browser",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "10/20 histori20 menit menghasilkan confidence sedang/tinggi dan ETA20 untuk satu antrean di depan.",
+    "remaining": "",
+    "cases": [
+      "ETA-CONFIDENCE-sedang",
+      "ETA-CONFIDENCE-tinggi"
+    ]
+  },
+  {
+    "id": "G67",
+    "feature": "F32",
+    "scenario": "ETA untuk CALLED/IN_PROGRESS/terminal dan seluruh kombinasi antrian depan",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "PASS",
+    "observed": "Seluruh8 queue state ditampilkan di tracker; ETA hanya pada WAITING/CALLED/IN_PROGRESS. Front CALLED/IN_PROGRESS/COMPLETED,0/1/2 antrean aktif dan campuran CALLED+WAITING diperiksa. Ini kelas ekuivalensi count/status, bukan semua permutasi jumlah antrean tak terbatas.",
+    "remaining": "",
+    "cases": [
+      "ETA-FRONT-CALLED",
+      "ETA-FRONT-IN_PROGRESS",
+      "ETA-FRONT-COMPLETED",
+      "ETA-TARGET-CALLED",
+      "ETA-TARGET-IN_PROGRESS",
+      "ETA-TARGET-COMPLETED",
+      "ETA-STATE-BOOKED",
+      "ETA-STATE-WAITING",
+      "ETA-STATE-IN_PROGRESS",
+      "ETA-STATE-COMPLETED",
+      "ETA-STATE-SKIPPED",
+      "ETA-STATE-CANCELLED",
+      "ETA-STATE-NO_SHOW",
+      "ETA-TWO-WAITING-FRONT-R2",
+      "ETA-STATE-CALLED-R2"
+    ]
+  },
+  {
+    "id": "G68",
+    "feature": "F33",
+    "scenario": "Socket aktif putus/pulih, missed-event dan permission revoked pada koneksi aktif",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "NOT TESTED",
+    "observed": "Socket aktif disconnected/reconnected dan missed-event dibuktikan WS-REAL-RECOVERY-R2.",
+    "remaining": "UI staf mengubah akun, bukan permission role aktif secara terpisah; tidak ada editor custom permission. Revokasi permission pada koneksi socket yang sama belum dapat dibuktikan tanpa mutasi langsung permission DB atau fitur pengelolaan yang belum ada.",
+    "cases": [
+      "WS-REAL-RECOVERY-R2"
+    ]
+  },
+  {
+    "id": "G69",
+    "feature": "F33",
+    "scenario": "Fokus input saat refetch/pagination dan semua offline queue actions",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "FAIL",
+    "observed": "Tujuh aksi queue offline mempertahankan state dan feedback tidak pasti. Saat socket refetch, fokus filter kembali tetapi teks yang belum dikirim hilang. CCL-07.",
+    "remaining": "",
+    "cases": [
+      "QUEUE-FOCUS-REFETCH",
+      "OFFLINE-QUEUE-check-in",
+      "OFFLINE-QUEUE-call",
+      "OFFLINE-QUEUE-cancel",
+      "OFFLINE-QUEUE-no-show",
+      "OFFLINE-QUEUE-skip",
+      "OFFLINE-QUEUE-start",
+      "OFFLINE-QUEUE-return"
+    ]
+  },
+  {
+    "id": "G70",
+    "feature": "F34",
+    "scenario": "Google OAuth success/callback/error/relink dengan akun dummy provider",
+    "previous_status": "BLOCKED",
+    "previous_reason": "Memerlukan provider/kredensial dummy eksternal; sengaja tidak memakai akun/transaksi pengguna.",
+    "status": "BLOCKED",
+    "observed": "Konfigurasi provider audit sengaja kosong; jalur lokal auth telah diuji terpisah.",
+    "remaining": "Tidak tersedia Google OAuth client sandbox/akun dummy/callback yang diotorisasi; tidak memakai akun pengguna atau menciptakan hasil callback provider.",
+    "cases": []
+  },
+  {
+    "id": "G71",
+    "feature": "F35",
+    "scenario": "NIK format/normalisasi telepon berbagai negara dan lebih dari8 kandidat",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "FAIL",
+    "observed": "US/UK/ID, NIK sesuai kontrak string opsional max30, >8 kandidat diuji. Nomor bertitik diterima tetapi tidak ditemukan kembali. CCL-03.",
+    "remaining": "",
+    "cases": [
+      "PHONE-NORMALIZE-US",
+      "PHONE-NORMALIZE-UK",
+      "PHONE-NORMALIZE-ID",
+      "PHONE-DOT-NORMALIZATION",
+      "DUPLICATES-MORE-THAN8",
+      "DUPLICATE-NIK-CONTRACT"
+    ]
+  },
+  {
+    "id": "G72",
+    "feature": "F35",
+    "scenario": "Review token stale setelah kandidat berubah dan navigasi ulang ke profil inactive",
+    "previous_status": "NOT TESTED",
+    "previous_reason": "Belum dieksekusi dalam run ini. Kombinasi dan aksi telah dipetakan; test backend/source bukan pengganti bukti browser skenario ini.",
+    "status": "FAIL",
+    "observed": "Review stale mereset consent saat kandidat berubah. Memilih pasien Nonaktif lalu Buat booking berubah diam-diam ke form pasien baru. CCL-04.",
+    "remaining": "",
+    "cases": [
+      "DUPLICATE-STALE-REVIEW",
+      "INACTIVE-CANDIDATE-BOOKING"
+    ]
+  },
+  {
+    "id": "AUTH-GOOGLE",
+    "feature": "F01",
+    "role": "Patient",
+    "scenario": "OAuth Google end-to-end",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: kredensial eksternal sengaja dikosongkan; tidak memakai akun pengguna.",
+    "observed": "Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna.",
+    "remaining": "kredensial eksternal sengaja dikosongkan; tidak memakai akun pengguna.",
+    "cases": []
+  },
+  {
+    "id": "DOKU-SUCCESS",
+    "feature": "F26",
+    "role": "Clinic Owner",
+    "scenario": "Checkout dan pembayaran DOKU sukses end-to-end",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: tidak ada kredensial provider dummy untuk audit ini; tidak melakukan pembayaran nyata.",
+    "observed": "Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna.",
+    "remaining": "tidak ada kredensial provider dummy untuk audit ini; tidak melakukan pembayaran nyata.",
+    "cases": []
+  },
+  {
+    "id": "DOKU-RECONCILE",
+    "feature": "F26",
+    "role": "Clinic Owner / Platform Admin",
+    "scenario": "Reconciliation dari provider lewat UI",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: provider sengaja dinonaktifkan; regression fake-provider berjalan terpisah.",
+    "observed": "Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna.",
+    "remaining": "provider sengaja dinonaktifkan; regression fake-provider berjalan terpisah.",
+    "cases": []
+  },
+  {
+    "id": "DOKU-WEBHOOK",
+    "feature": "F26",
+    "role": "System",
+    "scenario": "Notification valid provider mengaktifkan paket",
+    "status": "BLOCKED",
+    "reason": "BLOCKED: tidak ada provider callback nyata pada audit fungsional browser ini; tests/backend saja.",
+    "observed": "Provider eksternal belum tersedia; tidak memakai akun atau transaksi pengguna.",
+    "remaining": "tidak ada provider callback nyata pada audit fungsional browser ini; tests/backend saja.",
+    "cases": []
+  },
+  {
+    "id": "WS-RECOVERY",
+    "feature": "F14",
+    "role": "All queue roles",
+    "scenario": "Socket Reverb putus/pulih nyata",
+    "status": "PASS",
+    "reason": "BLOCKED: realtime dinonaktifkan di lingkungan audit; polling dan offline editor diuji, socket tidak.",
+    "observed": "Reverb/worker nyata, disconnect/reconnect dan missed-event tanpa reload berhasil.",
+    "remaining": "",
+    "cases": [
+      "WS-REAL-RECOVERY-R2"
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "scope": "PG-18 browser observation only; production source unchanged",
+  "attempts": [
+    {"attempt": 1, "result": "Two reloads reproduced the same Alpine SyntaxError; console/DOM written to page-error-triage.json."},
+    {"attempt": 2, "result": "Click awaited deliberately held navigation and timed out; intercepted request never sent to backend. Not a new product finding."},
+    {"attempt": 3, "result": "Locator evaluation awaited deliberately held navigation and timed out; intercepted request never sent to backend. Not a new product finding."},
+    {"attempt": 4, "result": "Direct evaluation also waited behind held navigation; stopped only the owned triage Node process. No backend grant request was released."},
+    {"attempt": 5, "result": "Final event observer captured submitting=true/button_disabled=false. Exactly one intercepted POST was aborted before backend. Screenshot is before submit, not proof of transaction success."}
+  ],
+  "deduplication_limit": "No duplicate grant backend test was rerun; prior DFU-12 FIXED & VERIFIED evidence remains authoritative."
+}

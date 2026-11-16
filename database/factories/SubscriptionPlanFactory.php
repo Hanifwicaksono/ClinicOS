@@ -18,7 +18,7 @@ class SubscriptionPlanFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => fake()->unique()->slug(2),
+            'code' => fake()->unique()->lexify('plan-????????????????????'),
             'name' => fake()->words(2, true),
             'doctor_limit' => fake()->numberBetween(1, 10),
             'staff_limit' => fake()->numberBetween(1, 20),

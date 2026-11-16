@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDoctorScheduleRequest;
 use App\Http\Requests\UpdateDoctorScheduleRequest;
+use App\Models\Clinic;
 use App\Models\Doctor;
 use App\Models\DoctorSchedule;
 use App\Services\AuditLogger;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class DoctorScheduleController extends Controller
@@ -63,8 +66,25 @@ class DoctorScheduleController extends Controller
         DoctorSchedule $doctorSchedule,
         AuditLogger $auditLogger,
     ): RedirectResponse {
-        $doctorSchedule->update($request->validated());
-        $auditLogger->record($request->user(), 'doctor_schedule.updated', $doctorSchedule);
+        DB::transaction(function () use ($request, $doctorSchedule, $auditLogger): void {
+            Clinic::query()->lockForUpdate()->findOrFail($request->user()->clinic_id);
+            $schedule = DoctorSchedule::query()->lockForUpdate()->findOrFail($doctorSchedule->id);
+            $this->authorize('update', $schedule);
+            $data = $request->validated();
+            if ($schedule->appointments()->exists() || $schedule->queues()->exists()) {
+                $original = ['doctor_id' => $schedule->doctor_id, 'day_of_week' => $schedule->day_of_week,
+                    'start_time' => substr($schedule->start_time, 0, 5), 'end_time' => substr($schedule->end_time, 0, 5)];
+                foreach ($original as $field => $value) {
+                    if ((string) $data[$field] !== (string) $value) {
+                        throw ValidationException::withMessages([
+                            $field => 'Dokter, hari, dan jam sesi yang sudah memiliki booking atau antrean tidak dapat diganti. Buat sesi baru untuk perubahan jadwal.',
+                        ]);
+                    }
+                }
+            }
+            $schedule->update($data);
+            $auditLogger->record($request->user(), 'doctor_schedule.updated', $schedule);
+        }, 3);
 
         return redirect()->route('admin.doctor-schedules.index')
             ->with('status', 'Jadwal dokter berhasil diperbarui.');

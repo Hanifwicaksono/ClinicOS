@@ -1,0 +1,156 @@
+TAP version 13
+# (node:49508) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: P1 regressions and staff security lifecycle in Chrome
+not ok 1 - P1 regressions and staff security lifecycle in Chrome
+  ---
+  duration_ms: 27520.4541
+  type: 'test'
+  location: 'C:\\Users\\User\\AppData\\Local\\Temp\\clinicos-deep-f1-5UGb4q\\legacy-browser-tests\\browser-p1-regressions.test.mjs:9:1'
+  failureType: 'testCodeFailure'
+  error: 'Browser condition timed out'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    waitFor (file:///C:/Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/legacy-browser-tests/browser-p1-regressions.test.mjs:78:19)
+    async TestContext.<anonymous> (file:///C:/Users/User/AppData/Local/Temp/clinicos-deep-f1-5UGb4q/legacy-browser-tests/browser-p1-regressions.test.mjs:173:9)
+    async Test.run (node:internal/test_runner/test:1125:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3)
+  ...
+# (node:13140) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Browser screenshots: C:\\Users\\User\\AppData\\Local\\Temp\\clinicos-browser-zRsvKJ
+# Subtest: clinical and booking workflows in Chrome with an isolated demo database
+ok 2 - clinical and booking workflows in Chrome with an isolated demo database
+  ---
+  duration_ms: 28397.7143
+  type: 'test'
+  ...
+# Subtest: redelivery of the same notification increments the counter and emits the event once
+ok 3 - redelivery of the same notification increments the counter and emits the event once
+  ---
+  duration_ms: 1.931
+  type: 'test'
+  ...
+# Subtest: distinct notifications remain visible and messages without IDs preserve compatibility
+ok 4 - distinct notifications remain visible and messages without IDs preserve compatibility
+  ---
+  duration_ms: 1.531
+  type: 'test'
+  ...
+# Subtest: autosave HTTP401 retains editor data and offers session recovery
+ok 5 - autosave HTTP401 retains editor data and offers session recovery
+  ---
+  duration_ms: 1.9886
+  type: 'test'
+  ...
+# Subtest: manual HTTP401 retains editor data and offers session recovery
+ok 6 - manual HTTP401 retains editor data and offers session recovery
+  ---
+  duration_ms: 0.3464
+  type: 'test'
+  ...
+# Subtest: autosave HTTP419 retains editor data and offers session recovery
+ok 7 - autosave HTTP419 retains editor data and offers session recovery
+  ---
+  duration_ms: 0.1656
+  type: 'test'
+  ...
+# Subtest: manual HTTP419 retains editor data and offers session recovery
+ok 8 - manual HTTP419 retains editor data and offers session recovery
+  ---
+  duration_ms: 0.1789
+  type: 'test'
+  ...
+# Subtest: a network failure remains retryable and is distinct from session expiry
+ok 9 - a network failure remains retryable and is distinct from session expiry
+  ---
+  duration_ms: 0.3487
+  type: 'test'
+  ...
+# Subtest: autosave updates the version and keeps photos for the explicit save
+ok 10 - autosave updates the version and keeps photos for the explicit save
+  ---
+  duration_ms: 0.1605
+  type: 'test'
+  ...
+# Subtest: network failures retain changes and can be retried; conflict stops automatic writes
+ok 11 - network failures retain changes and can be retried; conflict stops automatic writes
+  ---
+  duration_ms: 0.2237
+  type: 'test'
+  ...
+# Subtest: typing during an autosave is saved in a following request with the new version
+ok 12 - typing during an autosave is saved in a following request with the new version
+  ---
+  duration_ms: 0.2975
+  type: 'test'
+  ...
+# Subtest: finalize waits for an active autosave and retains the form on a stale conflict
+ok 13 - finalize waits for an active autosave and retains the form on a stale conflict
+  ---
+  duration_ms: 0.3088
+  type: 'test'
+  ...
+# Subtest: booking filters services by doctor and sessions by the selected date
+ok 14 - booking filters services by doctor and sessions by the selected date
+  ---
+  duration_ms: 0.7202
+  type: 'test'
+  ...
+# Subtest: duplicate review preserves phone validation details and blocks submit
+ok 15 - duplicate review preserves phone validation details and blocks submit
+  ---
+  duration_ms: 0.949
+  type: 'test'
+  ...
+# Subtest: non-JSON server failure has actionable feedback
+ok 16 - non-JSON server failure has actionable feedback
+  ---
+  duration_ms: 0.214
+  type: 'test'
+  ...
+# Subtest: a later review wins over a stale failed request
+ok 17 - a later review wins over a stale failed request
+  ---
+  duration_ms: 0.2581
+  type: 'test'
+  ...
+# Subtest: pagination appends candidates, sends the cursor and requires review again
+ok 18 - pagination appends candidates, sends the cursor and requires review again
+  ---
+  duration_ms: 0.6099
+  type: 'test'
+  ...
+# Subtest: a stale cursor clears its authority and offers a fresh first-page check
+ok 19 - a stale cursor clears its authority and offers a fresh first-page check
+  ---
+  duration_ms: 0.2664
+  type: 'test'
+  ...
+# Subtest: an input change invalidates an in-flight page before the debounce runs
+ok 20 - an input change invalidates an in-flight page before the debounce runs
+  ---
+  duration_ms: 2.9204
+  type: 'test'
+  ...
+# Subtest: malformed cursor metadata is not installed in state
+ok 21 - malformed cursor metadata is not installed in state
+  ---
+  duration_ms: 0.3937
+  type: 'test'
+  ...
+# Subtest: out-of-order pagination cannot append stale candidates
+ok 22 - out-of-order pagination cannot append stale candidates
+  ---
+  duration_ms: 0.2664
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 21
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 57546.9214

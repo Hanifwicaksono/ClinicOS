@@ -1,0 +1,57 @@
+
+ INFO Seeding database. 
+
+ Database\Seeders\DemoSeeder .. RUNNING 
+ Database\Seeders\RoleAndPermissionSeeder .. RUNNING 
+ Database\Seeders\RoleAndPermissionSeeder .. 175 ms DONE 
+
+ Database\Seeders\SubscriptionPlanSeeder .. RUNNING 
+ Database\Seeders\SubscriptionPlanSeeder .. 25 ms DONE 
+
+ Database\Seeders\AddonPriceSeeder .. RUNNING 
+ Database\Seeders\AddonPriceSeeder .. 3 ms DONE 
+
+ Database\Seeders\DemoUserSeeder .. RUNNING 
+ Database\Seeders\DemoUserSeeder .. 881 ms DONE 
+
+ Database\Seeders\ClinicSeeder .. RUNNING 
+ Database\Seeders\ClinicSeeder .. 7 ms DONE 
+
+ Database\Seeders\ClinicSettingSeeder .. RUNNING 
+ Database\Seeders\ClinicSettingSeeder .. 5 ms DONE 
+
+ Database\Seeders\ServiceSeeder .. RUNNING 
+ Database\Seeders\ServiceSeeder .. 8 ms DONE 
+
+ Database\Seeders\DoctorSeeder .. RUNNING 
+ Database\Seeders\DoctorSeeder .. 9 ms DONE 
+
+ Database\Seeders\DoctorScheduleSeeder .. RUNNING 
+ Database\Seeders\DoctorScheduleSeeder .. 18 ms DONE 
+
+ Database\Seeders\PatientSeeder .. RUNNING 
+ Database\Seeders\PatientSeeder .. 64 ms DONE 
+
+ Database\Seeders\AppointmentSeeder .. RUNNING 
+ Database\Seeders\AppointmentSeeder .. 41 ms DONE 
+
+ Database\Seeders\QueueSeeder .. RUNNING 
+ Database\Seeders\QueueSeeder .. 1 ms DONE 
+
+ Database\Seeders\MedicalVisitSeeder .. RUNNING 
+ Database\Seeders\MedicalVisitSeeder .. 84 ms DONE 
+
+ Database\Seeders\DemoOperationalSeeder .. RUNNING 
+ Database\Seeders\DemoOperationalSeeder .. 234 ms DONE 
+
+ Database\Seeders\DemoClinicalSeeder .. RUNNING 
+ Database\Seeders\DemoClinicalSeeder .. 21 ms DONE 
+
+ Database\Seeders\DemoCommercialSeeder .. RUNNING 
+ Database\Seeders\DemoCommercialSeeder .. 803 ms DONE 
+
+ Database\Seeders\DemoActivitySeeder .. RUNNING 
+ Database\Seeders\DemoActivitySeeder .. 28 ms DONE 
+
+ Database\Seeders\DemoSeeder .. 2,428 ms DONE 
+

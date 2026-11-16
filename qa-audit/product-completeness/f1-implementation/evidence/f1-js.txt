@@ -1,0 +1,16 @@
+✔ duplicate review preserves phone validation details and blocks submit (1.0128ms)
+✔ non-JSON server failure has actionable feedback (0.2627ms)
+✔ a later review wins over a stale failed request (0.2946ms)
+✔ pagination appends candidates, sends the cursor and requires review again (0.6676ms)
+✔ a stale cursor clears its authority and offers a fresh first-page check (0.2938ms)
+✔ an input change invalidates an in-flight page before the debounce runs (2.5393ms)
+✔ malformed cursor metadata is not installed in state (0.8523ms)
+✔ out-of-order pagination cannot append stale candidates (0.2033ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 70.1917

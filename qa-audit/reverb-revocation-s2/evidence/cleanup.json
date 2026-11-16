@@ -1,0 +1,11 @@
+{
+    "at":  "2026-11-15T11:18:49.8967808Z",
+    "mysql_shutdown_exit":  0,
+    "owned_mysql_pids":  [
+                             51072,
+                             15432
+                         ],
+    "remaining_test_listeners":  [
+
+                                 ]
+}

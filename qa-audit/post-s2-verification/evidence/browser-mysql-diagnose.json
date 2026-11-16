@@ -1,0 +1,229 @@
+[
+  {
+    "id": "P-01",
+    "title": "Actual MySQL SELECT denial fails private authority closed and recovers without losing valid sockets",
+    "started": "2026-11-15T13:48:45.895Z",
+    "status": "FAIL",
+    "error": "Public positive control during DB privilege denial",
+    "clients": [
+      {
+        "role": "reception",
+        "auth": [
+          {
+            "at": 1794750509.349,
+            "status": 200
+          },
+          {
+            "at": 1794750509.362,
+            "status": 200
+          },
+          {
+            "at": 1794750542.946,
+            "status": 200
+          },
+          {
+            "at": 1794750543.12,
+            "status": 200
+          }
+        ],
+        "protocol": [
+          {
+            "event": "pusher_internal:subscription_succeeded",
+            "channel": "clinic.6.queue-board",
+            "at": 1794750521.406
+          },
+          {
+            "event": "pusher:connection_established",
+            "at": 1794750542.828
+          },
+          {
+            "event": "pusher_internal:subscription_succeeded",
+            "channel": "clinic.6.queue-board",
+            "at": 1794750542.835
+          },
+          {
+            "event": "pusher:error",
+            "code": 4009,
+            "at": 1794750542.948
+          },
+          {
+            "event": "pusher:error",
+            "code": 4009,
+            "at": 1794750543.121
+          }
+        ],
+        "state": {
+          "state": "connected",
+          "notice": null,
+          "channels": [
+            {
+              "name": "private-clinic.6.queues",
+              "subscribed": false,
+              "pending": true
+            },
+            {
+              "name": "private-users.13",
+              "subscribed": false,
+              "pending": true
+            },
+            {
+              "name": "clinic.6.queue-board",
+              "subscribed": true,
+              "pending": false
+            }
+          ]
+        }
+      },
+      {
+        "role": "patient",
+        "auth": [
+          {
+            "at": 1794750513.693,
+            "status": 200
+          },
+          {
+            "at": 1794750543.038,
+            "status": 200
+          }
+        ],
+        "protocol": [
+          {
+            "event": "pusher:connection_established",
+            "at": 1794750511.848
+          },
+          {
+            "event": "pusher_internal:subscription_succeeded",
+            "channel": "private-users.15",
+            "at": 1794750513.699
+          },
+          {
+            "event": "pusher:connection_established",
+            "at": 1794750542.828
+          },
+          {
+            "event": "pusher:error",
+            "code": 4009,
+            "at": 1794750543.04
+          }
+        ],
+        "state": {
+          "state": "connected",
+          "notice": null,
+          "channels": [
+            {
+              "name": "private-users.15",
+              "subscribed": false,
+              "pending": true
+            }
+          ]
+        }
+      },
+      {
+        "role": "doctor",
+        "auth": [
+          {
+            "at": 1794750530.673,
+            "status": 200
+          },
+          {
+            "at": 1794750530.704,
+            "status": 200
+          }
+        ],
+        "protocol": [
+          {
+            "event": "pusher:connection_established",
+            "at": 1794750529.047
+          },
+          {
+            "event": "pusher_internal:subscription_succeeded",
+            "channel": "private-clinic.6.queues",
+            "at": 1794750530.699
+          },
+          {
+            "event": "pusher_internal:subscription_succeeded",
+            "channel": "private-users.14",
+            "at": 1794750530.716
+          },
+          {
+            "event": "clinicos:access-unavailable",
+            "at": 1794750535.486
+          },
+          {
+            "event": "clinicos:access-unavailable",
+            "at": 1794750535.512
+          }
+        ],
+        "state": {
+          "state": "connected",
+          "notice": "offline",
+          "channels": [
+            {
+              "name": "private-clinic.6.queues",
+              "subscribed": true,
+              "pending": false
+            },
+            {
+              "name": "private-users.14",
+              "subscribed": true,
+              "pending": false
+            }
+          ]
+        }
+      },
+      {
+        "role": "doctor",
+        "auth": [
+          {
+            "at": 1794750534.406,
+            "status": 200
+          },
+          {
+            "at": 1794750534.466,
+            "status": 200
+          }
+        ],
+        "protocol": [
+          {
+            "event": "pusher:connection_established",
+            "at": 1794750532.441
+          },
+          {
+            "event": "pusher_internal:subscription_succeeded",
+            "channel": "private-clinic.6.queues",
+            "at": 1794750534.412
+          },
+          {
+            "event": "pusher_internal:subscription_succeeded",
+            "channel": "private-users.14",
+            "at": 1794750534.473
+          },
+          {
+            "event": "clinicos:access-unavailable",
+            "at": 1794750535.486
+          },
+          {
+            "event": "clinicos:access-unavailable",
+            "at": 1794750535.512
+          }
+        ],
+        "state": {
+          "state": "connected",
+          "notice": "offline",
+          "channels": [
+            {
+              "name": "private-clinic.6.queues",
+              "subscribed": true,
+              "pending": false
+            },
+            {
+              "name": "private-users.14",
+              "subscribed": true,
+              "pending": false
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

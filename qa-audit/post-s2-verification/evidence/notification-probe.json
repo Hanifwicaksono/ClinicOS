@@ -1,0 +1,109 @@
+[
+  {
+    "mode": "deferred",
+    "status": "PASS",
+    "setup": {
+      "action": "setup",
+      "notifications": 203,
+      "pending_jobs": 1,
+      "failed_target": false,
+      "locked": false,
+      "processed": 0
+    },
+    "beforeRecovery": {
+      "action": "worker",
+      "notifications": 203,
+      "pending_jobs": 0,
+      "failed_target": true,
+      "locked": true,
+      "processed": 0
+    },
+    "recovery": {
+      "action": "recovery",
+      "notifications": 203,
+      "pending_jobs": 0,
+      "failed_target": false,
+      "locked": false,
+      "processed": 1
+    },
+    "writerBlocked": false,
+    "released": 1794750610.323,
+    "writer_committed": 1794750610.313,
+    "database": "isolated SQLite WAL"
+  },
+  {
+    "mode": "immediate",
+    "status": "PASS",
+    "setup": {
+      "action": "setup",
+      "notifications": 203,
+      "pending_jobs": 1,
+      "failed_target": false,
+      "locked": false,
+      "processed": 0
+    },
+    "beforeRecovery": {
+      "action": "worker",
+      "notifications": 203,
+      "pending_jobs": 0,
+      "failed_target": false,
+      "locked": false,
+      "processed": 1
+    },
+    "recovery": null,
+    "writerBlocked": true,
+    "released": 1794750613.398,
+    "writer_committed": 1794750613.4611,
+    "database": "isolated SQLite WAL"
+  },
+  {
+    "mode": "configured",
+    "status": "PASS",
+    "setup": {
+      "action": "setup",
+      "notifications": 203,
+      "pending_jobs": 1,
+      "failed_target": false,
+      "locked": false,
+      "processed": 0
+    },
+    "beforeRecovery": {
+      "action": "worker",
+      "notifications": 203,
+      "pending_jobs": 0,
+      "failed_target": false,
+      "locked": false,
+      "processed": 1
+    },
+    "recovery": null,
+    "writerBlocked": true,
+    "released": 1794750614.868,
+    "writer_committed": 1794750614.9473,
+    "database": "isolated SQLite WAL"
+  },
+  {
+    "mode": "mysql",
+    "status": "PASS",
+    "setup": {
+      "action": "setup",
+      "notifications": 203,
+      "pending_jobs": 1,
+      "failed_target": false,
+      "locked": false,
+      "processed": 0
+    },
+    "beforeRecovery": {
+      "action": "worker",
+      "notifications": 203,
+      "pending_jobs": 0,
+      "failed_target": false,
+      "locked": false,
+      "processed": 1
+    },
+    "recovery": null,
+    "writerBlocked": false,
+    "released": 1794750623.353,
+    "writer_committed": 1794750623.3488,
+    "database": "dedicated MySQL"
+  }
+]

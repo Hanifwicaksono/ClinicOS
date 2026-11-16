@@ -1,0 +1,60 @@
+{
+  "at": "2026-11-14T07:40:43.935Z",
+  "finding_statuses": [
+    {
+      "id": "CCL-05",
+      "status": "FIXED & VERIFIED"
+    },
+    {
+      "id": "CCL-03",
+      "status": "FIXED & VERIFIED"
+    },
+    {
+      "id": "CCL-04",
+      "status": "FIXED & VERIFIED"
+    },
+    {
+      "id": "CCL-06",
+      "status": "FIXED & VERIFIED"
+    },
+    {
+      "id": "CCL-07",
+      "status": "FIXED & VERIFIED"
+    },
+    {
+      "id": "CCL-02",
+      "status": "FIXED & VERIFIED"
+    },
+    {
+      "id": "CCL-01",
+      "status": "FIXED & VERIFIED"
+    },
+    {
+      "id": "CCL-08",
+      "status": "FIXED & VERIFIED"
+    }
+  ],
+  "backend": {
+    "pass": 402,
+    "fail": 0,
+    "errors": 0,
+    "assertions": 2718
+  },
+  "javascript": {
+    "pass": 15,
+    "fail": 0
+  },
+  "playwright": {
+    "pass": 28,
+    "fail": 0
+  },
+  "chrome_workflows": {
+    "pass": 2,
+    "fail": 0
+  },
+  "syntax_checked_qa_modules": 8,
+  "report_links_valid": true,
+  "historical_reports_unchanged": true,
+  "env_unchanged": true,
+  "open_ccl_findings": 0
+}

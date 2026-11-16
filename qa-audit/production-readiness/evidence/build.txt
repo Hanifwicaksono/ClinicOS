@@ -1,0 +1,18 @@
+
+> build
+> vite build --outDir C:\Users\User\AppData\Local\Temp\clinicos-readiness-0_thp4gu\public\build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 11 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../Users/User/AppData/Local/Temp/clinicos-readiness-0_thp4gu/public/build/manifest.json              0.33 kB │ gzip:  0.16 kB
+../../../Users/User/AppData/Local/Temp/clinicos-readiness-0_thp4gu/public/build/assets/app-60tHKeNr.css   75.31 kB │ gzip: 12.83 kB
+../../../Users/User/AppData/Local/Temp/clinicos-readiness-0_thp4gu/public/build/assets/app-B-goslaN.js   113.16 kB │ gzip: 31.60 kB
+
+✓ built in 2.59s
+
+(!) outDir C:\Users\User\AppData\Local\Temp\clinicos-readiness-0_thp4gu\public\build is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+

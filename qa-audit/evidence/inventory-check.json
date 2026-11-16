@@ -1,0 +1,14 @@
+﻿{
+    "routes":  117,
+    "routeRows":  117,
+    "routesObserved":  108,
+    "missingRoutes":  9,
+    "views":  88,
+    "models":  29,
+    "migrations":  40,
+    "phpunitRows":  326,
+    "nodeRows":  7,
+    "permissionRows":  40,
+    "manualRows":  46,
+    "status":  "PASS"
+}

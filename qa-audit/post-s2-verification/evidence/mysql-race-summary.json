@@ -1,0 +1,100 @@
+[
+  {
+    "id": "S2-15",
+    "status": "PASS",
+    "commit": 1794750127.830404,
+    "ack": 1794750128.0633,
+    "transport_closed": [
+      {
+        "type": "transport_closed",
+        "at": 1794750128.060654,
+        "pid": 1740,
+        "run": "post-s2-mysql",
+        "socket": "0f0e89ec784ee3da"
+      },
+      {
+        "type": "transport_closed",
+        "at": 1794750128.061169,
+        "pid": 1740,
+        "run": "post-s2-mysql",
+        "socket": "a09eab983cf9b98b"
+      }
+    ],
+    "released": [
+      {
+        "type": "held_released",
+        "at": 1794750128.34524,
+        "pid": 1740,
+        "run": "post-s2-mysql",
+        "user": 14,
+        "version": 25,
+        "accepted": false,
+        "write_calls": 0
+      },
+      {
+        "type": "held_released",
+        "at": 1794750128.346308,
+        "pid": 1740,
+        "run": "post-s2-mysql",
+        "user": 14,
+        "version": 25,
+        "accepted": false,
+        "write_calls": 0
+      },
+      {
+        "type": "held_released",
+        "at": 1794750128.346575,
+        "pid": 1740,
+        "run": "post-s2-mysql",
+        "user": 14,
+        "version": 25,
+        "accepted": false,
+        "write_calls": 0
+      },
+      {
+        "type": "held_released",
+        "at": 1794750128.346811,
+        "pid": 1740,
+        "run": "post-s2-mysql",
+        "user": 14,
+        "version": 25,
+        "accepted": false,
+        "write_calls": 0
+      }
+    ],
+    "old_private_sends_after_ack": 0,
+    "new_event_started": 1794750128.433,
+    "new_queue": 123
+  },
+  {
+    "id": "S2-16",
+    "status": "PASS",
+    "commit": 1794750146.1172,
+    "ack": 1794750147.446141,
+    "transport_closed": [
+      {
+        "type": "transport_closed",
+        "at": 1794750147.441829,
+        "pid": 1740,
+        "run": "post-s2-mysql",
+        "socket": "024101e281bb56bc"
+      },
+      {
+        "type": "transport_closed",
+        "at": 1794750147.442816,
+        "pid": 1740,
+        "run": "post-s2-mysql",
+        "socket": "925d94d257afbf07"
+      }
+    ],
+    "admitted_sends": [
+      1794750146.789738,
+      1794750146.791417,
+      1794750146.792114,
+      1794750146.792774
+    ],
+    "pending_while_active": true,
+    "new_event_started": 1794750147.743,
+    "new_queue": 125
+  }
+]

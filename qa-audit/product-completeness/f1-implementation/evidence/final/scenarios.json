@@ -1,0 +1,259 @@
+[
+  {
+    "id": "after-PG18-validation",
+    "feature": "PG18-",
+    "role": "Platform Admin",
+    "scenario": "Native/server validation permits retry and retains UUID",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:07.273Z",
+    "observed": {
+      "uuid_retained": true,
+      "native_validation": true,
+      "server_validation": true,
+      "retry_enabled": true,
+      "periods_unchanged": true,
+      "page_errors": [],
+      "screenshot": "screenshots/PG18-validation.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG18-pending",
+    "feature": "PG18-",
+    "role": "Platform Admin",
+    "scenario": "Real double-click shows pending, creates one audited scheduled grant and preserves history",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:11.674Z",
+    "observed": {
+      "pending": {
+        "submitting": true,
+        "disabled": true,
+        "text": "Memproses…"
+      },
+      "post_requests": 1,
+      "grant_rows": 1,
+      "audit_rows": 1,
+      "history_unchanged": true,
+      "payments_unchanged": true,
+      "page_errors": [],
+      "screenshot": "screenshots/PG18-pending.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG18-empty",
+    "feature": "PG18-",
+    "role": "Platform Admin",
+    "scenario": "Empty catalog remains disabled after Alpine initialization",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:14.027Z",
+    "observed": {
+      "disabled": true,
+      "screenshot": "screenshots/PG18-empty.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG18-back",
+    "feature": "PG18-",
+    "role": "Platform Admin",
+    "scenario": "Back navigation after simulated HTTP failure resets pending and permits retry",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:18.249Z",
+    "observed": {
+      "simulated_http500": true,
+      "back_retry_enabled": true,
+      "no_backend_write": true,
+      "screenshot": "screenshots/PG18-back.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG17-more-booking",
+    "feature": "PG17-",
+    "role": "Receptionist",
+    "scenario": "Page 2 preserves draft and cursor, reaches candidates9/10 and books an existing profile",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:20.062Z",
+    "observed": {
+      "visible_ids_in_order": true,
+      "visible": 10,
+      "selection_preserved": true,
+      "input_preserved": true,
+      "keyboard_pagination": true,
+      "existing_profile_booked": true,
+      "no_new_patient": true,
+      "viewports": [
+        375,
+        768,
+        1024,
+        1440
+      ],
+      "screenshot": "screenshots/PG17-more.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG17-inactive",
+    "feature": "PG17-",
+    "role": "Receptionist",
+    "scenario": "An inactive later candidate opens its profile without activation, linking or data loss",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:26.239Z",
+    "observed": {
+      "inactive_remains_inactive": true,
+      "no_auto_link": true,
+      "draft_preserved": true,
+      "screenshot": "screenshots/PG17-inactive.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG17-forged",
+    "feature": "PG17-",
+    "role": "Receptionist",
+    "scenario": "A forged cursor receives real422, clears review authority and permits fresh retry",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:29.848Z",
+    "observed": {
+      "real_http_status": 422,
+      "cursor_rejected": true,
+      "token_cleared": true,
+      "fresh_retry": true,
+      "no_patient_write": true,
+      "screenshot": "screenshots/PG17-forged.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG17-stale",
+    "feature": "PG17-",
+    "role": "Receptionist",
+    "scenario": "Editing a later candidate in another browser invalidates the old cursor",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:32.313Z",
+    "observed": {
+      "real_http_status": 422,
+      "later_record_edit_invalidated_cursor": true,
+      "retry_uses_current_snapshot": true,
+      "input_preserved": true,
+      "screenshot": "screenshots/PG17-stale.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG17-foreign",
+    "feature": "PG17-",
+    "role": "Receptionist",
+    "scenario": "A valid cursor cannot be replayed by another tenant or overridden by clinic_id",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:36.481Z",
+    "observed": {
+      "real_http_status": 422,
+      "foreign_cursor_rejected": true,
+      "clinic_id_override_ignored": true,
+      "no_candidates_leaked": true,
+      "screenshot": "screenshots/PG17-foreign.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG17-roles",
+    "feature": "PG17-",
+    "role": "All stored roles",
+    "scenario": "Admin can review; Doctor, Patient and Platform cannot use receptionist candidate UI",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:39.611Z",
+    "observed": {
+      "roles": [
+        {
+          "role": "Clinic Admin",
+          "status": 200
+        },
+        {
+          "role": "Doctor",
+          "status": 403
+        },
+        {
+          "role": "Patient",
+          "status": 403
+        },
+        {
+          "role": "Platform Admin",
+          "status": 403
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG17-review-token",
+    "feature": "PG17-",
+    "role": "Receptionist",
+    "scenario": "Unreviewed and forged review tokens cannot silently create a patient; explicit review can create a distinct person",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T04:58:48.599Z",
+    "observed": {
+      "unreviewed_submit_blocked": true,
+      "forged_review_rejected": true,
+      "inputs_preserved": true,
+      "only_explicit_distinct_profile_created": true,
+      "no_auto_link": true,
+      "screenshot": "screenshots/PG17-reviewed-create.png"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "after-PG17-walk-in",
+    "feature": "PG17-",
+    "role": "Receptionist",
+    "scenario": "Paging in the shared walk-in form preserves patient, doctor, service and schedule inputs without creating records",
+    "steps": [
+      "Aksi UI pada fixture disposable; DB hanya verifikasi",
+      "Periksa outcome, negative state dan integritas"
+    ],
+    "started": "2026-11-15T05:18:11.409Z",
+    "observed": {
+      "visible": 11,
+      "patient_inputs_preserved": true,
+      "doctor_service_schedule_preserved": true,
+      "no_record_created": true,
+      "mobile375_no_overflow": true,
+      "screenshot": "screenshots/PG17-walk-in.png"
+    },
+    "status": "PASS"
+  }
+]

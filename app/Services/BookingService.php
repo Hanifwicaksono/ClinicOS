@@ -185,6 +185,16 @@ class BookingService
                 ]);
             }
 
+            $queue = $lockedAppointment->queue()->where('clinic_id', $clinic->id)->lockForUpdate()->firstOrFail();
+            if ($queue->status === QueueStatus::InProgress || $lockedAppointment->visit()->exists()) {
+                throw ValidationException::withMessages([
+                    'booking' => 'Pemeriksaan sudah dimulai. Booking tidak dapat dibatalkan.',
+                ]);
+            }
+            if ($queue->status->isTerminal()) {
+                throw ValidationException::withMessages(['booking' => 'Booking ini tidak dapat dibatalkan.']);
+            }
+
             $timezone = $lockedAppointment->clinic->settings?->timezone ?? 'Asia/Jakarta';
             $sessionStartsAt = CarbonImmutable::parse(
                 $lockedAppointment->appointment_date->toDateString().' '.$lockedAppointment->schedule->start_time,
@@ -202,7 +212,6 @@ class BookingService
                 'cancelled_at' => now(),
                 'cancel_reason' => $reason,
             ]);
-            $queue = $lockedAppointment->queue()->where('clinic_id', $clinic->id)->lockForUpdate()->firstOrFail();
             $previousQueueStatus = $queue->status;
             $queue->update(['status' => QueueStatus::Cancelled, 'cancelled_at' => now()]);
             $this->auditLogger->recordForClinic(
@@ -305,6 +314,14 @@ class BookingService
         if ($appointmentDate->dayOfWeek !== $schedule->day_of_week) {
             throw ValidationException::withMessages([
                 'appointment_date' => 'Tanggal tidak sesuai dengan hari praktik dokter.',
+            ]);
+        }
+
+        $settings = $clinic->settings;
+        if ($settings !== null && (substr($schedule->start_time, 0, 5) < substr($settings->opening_time, 0, 5)
+            || substr($schedule->end_time, 0, 5) > substr($settings->closing_time, 0, 5))) {
+            throw ValidationException::withMessages([
+                'doctor_schedule_id' => 'Sesi berada di luar jam operasional klinik saat ini. Pilih sesi lain atau hubungi klinik.',
             ]);
         }
 

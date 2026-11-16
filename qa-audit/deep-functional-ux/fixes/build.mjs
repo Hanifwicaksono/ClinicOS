@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {join,resolve} from 'node:path';
+import {execFileSync} from 'node:child_process';
+const repo=resolve(import.meta.dirname,'../../..');
+const runtime=JSON.parse(readFileSync(join(import.meta.dirname,'evidence/runtime.json')));
+const env=JSON.parse(readFileSync(join(runtime.root,'env.json')));
+if(env.DB_CONNECTION!=='sqlite'||!env.DB_DATABASE.startsWith(runtime.root))throw new Error('Disposable environment required');
+const output=execFileSync('node',['node_modules/vite/bin/vite.js','build','--outDir',join(runtime.root,'public/build')],{cwd:repo,env,encoding:'utf8'});
+writeFileSync(join(import.meta.dirname,'evidence/build-after.txt'),output);
+console.log('Build passed; assets installed in disposable runtime.');

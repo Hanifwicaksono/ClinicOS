@@ -1,0 +1,12 @@
+[
+  {
+    "issue": "QA-01",
+    "status": "PASS",
+    "action": "Patient selects doctor, service, session and submits booking; persisted ownership and queue verified; 375/768/1024/1440px"
+  },
+  {
+    "area": "public layout",
+    "status": "PASS",
+    "action": "Clinic subdomain and public queue display initialize; queue omits the active patient name"
+  }
+]

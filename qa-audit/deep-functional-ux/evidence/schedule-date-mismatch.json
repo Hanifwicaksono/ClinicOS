@@ -1,0 +1,12 @@
+{
+  "before": {
+    "day_of_week": 5,
+    "start_time": "16:00",
+    "end_time": "23:59"
+  },
+  "after": {
+    "id": 22,
+    "appointment_date": "2026-11-13 00:00:00",
+    "day_of_week": 6
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "stages": [
+    {
+      "concurrency": 1,
+      "duration_ms": 15041,
+      "requests": 172,
+      "throughput_rps": 11.435409879662256,
+      "response": {
+        "samples": 172,
+        "p50_ms": 73.53140000000712,
+        "p95_ms": 124.39340000000084,
+        "p99_ms": 340.4412999999913
+      },
+      "individual_query": {
+        "samples": 3617,
+        "p50_ms": 0.38,
+        "p95_ms": 1.87,
+        "p99_ms": 24.12
+      },
+      "database_per_request": {
+        "samples": 172,
+        "p50_ms": 20.95,
+        "p95_ms": 39.43,
+        "p99_ms": 111.74
+      },
+      "mean_query_count": 21.02906976744186,
+      "statuses": {
+        "200": 172
+      },
+      "network_errors": 0,
+      "server_error_rate": 0,
+      "provisional_latency_gate": "PASS",
+      "provisional_error_gate": "PASS"
+    },
+    {
+      "concurrency": 5,
+      "duration_ms": 15106,
+      "requests": 778,
+      "throughput_rps": 51.50271415331656,
+      "response": {
+        "samples": 778,
+        "p50_ms": 83.33849999999802,
+        "p95_ms": 155.81539999999222,
+        "p99_ms": 332.9841999999917
+      },
+      "individual_query": {
+        "samples": 16387,
+        "p50_ms": 0.44,
+        "p95_ms": 1.63,
+        "p99_ms": 20.56
+      },
+      "database_per_request": {
+        "samples": 778,
+        "p50_ms": 19.57,
+        "p95_ms": 36.64,
+        "p99_ms": 44.16
+      },
+      "mean_query_count": 21.06298200514139,
+      "statuses": {
+        "200": 725,
+        "429": 53
+      },
+      "network_errors": 0,
+      "server_error_rate": 0,
+      "provisional_latency_gate": "PASS",
+      "provisional_error_gate": "FAIL"
+    },
+    {
+      "concurrency": 10,
+      "duration_ms": 15349,
+      "requests": 845,
+      "throughput_rps": 55.05244641344713,
+      "response": {
+        "samples": 845,
+        "p50_ms": 166.5,
+        "p95_ms": 337.0893999999971,
+        "p99_ms": 507.8006000000023
+      },
+      "individual_query": {
+        "samples": 17362,
+        "p50_ms": 0.4,
+        "p95_ms": 1.65,
+        "p99_ms": 21.15
+      },
+      "database_per_request": {
+        "samples": 845,
+        "p50_ms": 22.92,
+        "p95_ms": 37.69,
+        "p99_ms": 156.28
+      },
+      "mean_query_count": 20.546745562130177,
+      "statuses": {
+        "200": 757,
+        "429": 88
+      },
+      "network_errors": 0,
+      "server_error_rate": 0,
+      "provisional_latency_gate": "PASS",
+      "provisional_error_gate": "FAIL"
+    },
+    {
+      "concurrency": 20,
+      "duration_ms": 15683,
+      "requests": 872,
+      "throughput_rps": 55.60160683542689,
+      "response": {
+        "samples": 872,
+        "p50_ms": 281.68129999999655,
+        "p95_ms": 721.4679999999935,
+        "p99_ms": 802.8875999999873
+      },
+      "individual_query": {
+        "samples": 17906,
+        "p50_ms": 0.43,
+        "p95_ms": 1.72,
+        "p99_ms": 21.23
+      },
+      "database_per_request": {
+        "samples": 872,
+        "p50_ms": 21.14,
+        "p95_ms": 37.32,
+        "p99_ms": 55.9
+      },
+      "mean_query_count": 20.53440366972477,
+      "statuses": {
+        "200": 777,
+        "429": 95
+      },
+      "network_errors": 0,
+      "server_error_rate": 0,
+      "provisional_latency_gate": "PASS",
+      "provisional_error_gate": "FAIL"
+    }
+  ],
+  "fixture_patients": 2003,
+  "unique_accounts": 5,
+  "independent_sessions": 20,
+  "load_shape": "closed loop; no think time; 15 seconds per stage; authenticated reads",
+  "state_after": {
+    "appointments": 44,
+    "queues": 44,
+    "visits": 2,
+    "queue_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+    ],
+    "mismatched_doctor": 0,
+    "plan": "team",
+    "visits_state": [
+      {
+        "id": 11,
+        "status": "COMPLETED",
+        "version": 3
+      },
+      {
+        "id": 12,
+        "status": "COMPLETED",
+        "version": 1
+      }
+    ]
+  },
+  "write_burst": {
+    "concurrent_sessions": 4,
+    "requests": 40,
+    "response": {
+      "samples": 40,
+      "p50_ms": 656.832699999999,
+      "p95_ms": 1617.4893000000156,
+      "p99_ms": 1646.297900000005
+    },
+    "statuses": {
+      "302": 40
+    },
+    "elapsed_ms_including_fixture_observations": 23616.0466,
+    "appointments_added": 40,
+    "queues_added": 40,
+    "websocket_latency": {
+      "samples": 40,
+      "p50_ms": 1270,
+      "p95_ms": 2283,
+      "p99_ms": 2590
+    },
+    "websocket_missing": 0,
+    "integrity_gate": "PASS"
+  }
+}

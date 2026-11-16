@@ -1,0 +1,11 @@
+{
+  "phase": "10-exploratory-keyboard-filters",
+  "at": "2026-11-13T07:49:08.872Z",
+  "counts": {
+    "PASS": 90,
+    "FAIL": 46,
+    "BLOCKED": 9,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

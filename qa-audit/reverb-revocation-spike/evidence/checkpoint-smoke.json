@@ -1,0 +1,10 @@
+{
+  "at": "2026-11-15T08:18:28.177Z",
+  "browser": "158.0.8127.36",
+  "queue_index": 10,
+  "counts": {
+    "PASS": 6,
+    "FAIL": 1
+  },
+  "failed_jobs": 0
+}

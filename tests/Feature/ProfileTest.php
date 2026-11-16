@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Clinic;
 use App\Models\User;
+use Database\Seeders\RoleAndPermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Volt\Volt;
 use Tests\TestCase;
@@ -97,5 +99,35 @@ class ProfileTest extends TestCase
             ->assertNoRedirect();
 
         $this->assertNotNull($user->fresh());
+    }
+
+    public function test_actual_clinic_ownership_blocks_self_deletion_without_logging_the_owner_out(): void
+    {
+        $this->seed(RoleAndPermissionSeeder::class);
+        $clinic = Clinic::factory()->create();
+        $owner = User::factory()->clinicOwner($clinic)->create();
+        $this->actingAs($owner);
+        Volt::test('profile.delete-user-form')->set('password', 'password')->call('deleteUser')
+            ->assertHasErrors('password')->assertNoRedirect();
+        $this->assertAuthenticatedAs($owner);
+        $this->assertNotNull($owner->fresh());
+        $this->assertSame($owner->id, $clinic->refresh()->owner_user_id);
+
+        $owner->update(['account_type' => null]);
+        Volt::test('profile.delete-user-form')->set('password', 'password')->call('deleteUser')
+            ->assertHasErrors('password')->assertNoRedirect();
+        $this->assertAuthenticatedAs($owner);
+        $this->assertSame($owner->id, $clinic->refresh()->owner_user_id);
+    }
+
+    public function test_owner_candidate_without_a_clinic_can_delete_their_account(): void
+    {
+        $this->seed(RoleAndPermissionSeeder::class);
+        $candidate = User::factory()->clinicOwnerCandidate()->create();
+        $this->actingAs($candidate);
+        Volt::test('profile.delete-user-form')->set('password', 'password')->call('deleteUser')
+            ->assertHasNoErrors()->assertRedirect('/');
+        $this->assertGuest();
+        $this->assertNull($candidate->fresh());
     }
 }

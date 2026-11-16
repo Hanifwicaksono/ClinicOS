@@ -1,0 +1,331 @@
+[
+  {
+    "role": "admin",
+    "path": "/admin/dashboard",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/subscription/payments",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/subscription/addons",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/admin/clinic",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/admin/staff",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/admin/services",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/admin/doctor-schedules",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/receptionist/patients",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/receptionist/appointments",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/receptionist/queues",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/admin/audit-logs",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "path": "/notifications",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "admin",
+    "width": 375,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "admin",
+    "width": 768,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "admin",
+    "width": 1024,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "admin",
+    "width": 1440,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "admin",
+    "action": "logout",
+    "status": "PASS"
+  },
+  {
+    "role": "receptionist",
+    "path": "/receptionist/dashboard",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "receptionist",
+    "path": "/receptionist/patients",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "receptionist",
+    "path": "/receptionist/appointments",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "receptionist",
+    "path": "/receptionist/queues",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "receptionist",
+    "path": "/notifications",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "receptionist",
+    "width": 375,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "receptionist",
+    "width": 768,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "receptionist",
+    "width": 1024,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "receptionist",
+    "width": 1440,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "receptionist",
+    "action": "logout",
+    "status": "PASS"
+  },
+  {
+    "role": "doctor",
+    "path": "/doctor/dashboard",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "doctor",
+    "path": "/doctor/queues",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "doctor",
+    "path": "/doctor/medical-records",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "doctor",
+    "path": "/notifications",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "doctor",
+    "width": 375,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "doctor",
+    "width": 768,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "doctor",
+    "width": 1024,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "doctor",
+    "width": 1440,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "doctor",
+    "action": "logout",
+    "status": "PASS"
+  },
+  {
+    "role": "patient",
+    "path": "/patient/dashboard",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "patient",
+    "path": "/patient/appointments",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "patient",
+    "path": "/notifications",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "patient",
+    "width": 375,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "patient",
+    "width": 768,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "patient",
+    "width": 1024,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "patient",
+    "width": 1440,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "patient",
+    "action": "logout",
+    "status": "PASS"
+  },
+  {
+    "role": "platform",
+    "path": "/platform/dashboard",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "platform",
+    "path": "/platform/tenants",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "platform",
+    "path": "/platform/subscription-plans",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "platform",
+    "path": "/platform/payments",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "platform",
+    "path": "/notifications",
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  {
+    "role": "platform",
+    "width": 375,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "platform",
+    "width": 768,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "platform",
+    "width": 1024,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "platform",
+    "width": 1440,
+    "status": "PASS",
+    "action": "dashboard overflow"
+  },
+  {
+    "role": "platform",
+    "action": "logout",
+    "status": "PASS"
+  },
+  {
+    "role": "patient",
+    "action": "choose a doctor in public booking",
+    "status": "PASS"
+  },
+  {
+    "role": "admin",
+    "action": "Escape closes mobile navigation",
+    "status": "FAIL"
+  }
+]

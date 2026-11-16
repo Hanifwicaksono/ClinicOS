@@ -1,0 +1,12 @@
+[
+  {
+    "stage": "post-Pint backend startup",
+    "at": "2026-11-15T08:32:27Z",
+    "status": "ERROR, corrected",
+    "command": "node qa-audit/reverb-revocation-spike/experiments/backend.mjs",
+    "observed": "Target class [Kernel] does not exist before any backend check ran",
+    "cause": "Pint shortened the fully qualified Kernel reference; the imports in the standalone experimental CLI were below the bootstrap statements",
+    "correction": "Moved imports before bootstrap statements in both experimental CLI files; reran Pint, backend checks and focused browser checks",
+    "production_files_changed": false
+  }
+]

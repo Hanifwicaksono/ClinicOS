@@ -1,0 +1,11 @@
+{
+  "phase": "5-medical-autosave-finalization",
+  "at": "2026-11-13T07:36:03.140Z",
+  "counts": {
+    "PASS": 59,
+    "FAIL": 27,
+    "BLOCKED": 5,
+    "NOT TESTED": 1
+  },
+  "browser": "158.0.8127.36"
+}

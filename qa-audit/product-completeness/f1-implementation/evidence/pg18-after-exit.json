@@ -1,0 +1,12 @@
+{
+  "mode": "php",
+  "status": 0,
+  "error": null,
+  "command": "phpunit",
+  "args": [
+    "tests/Feature/F1ImplementationTest.php",
+    "--filter",
+    "grant_form"
+  ],
+  "finished": "2026-11-15T04:40:09.716Z"
+}

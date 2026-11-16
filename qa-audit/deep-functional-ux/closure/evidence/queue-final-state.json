@@ -1,0 +1,14 @@
+{
+  "first": {
+    "appointment": 100,
+    "queue": 100
+  },
+  "second": {
+    "appointment": 101,
+    "queue": 101
+  },
+  "noShow": {
+    "appointment": 102,
+    "queue": 102
+  }
+}

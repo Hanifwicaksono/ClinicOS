@@ -1,0 +1,11 @@
+{
+  "phase": "closure-subscription-eligibility-and-prorata",
+  "at": "2026-11-13T17:03:30.837Z",
+  "counts": {
+    "PASS": 214,
+    "FAIL": 66,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

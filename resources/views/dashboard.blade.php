@@ -13,6 +13,7 @@
             <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-300">{{ $dashboardDescription ?? 'Akun Anda belum memiliki role. Hubungi administrator klinik untuk mendapatkan akses.' }}</p>
             <div class="mt-7 flex flex-col gap-3 sm:flex-row">
                 @if (auth()->user()->hasRole('Patient'))
+                    <x-clinic-button href="{{ route('patient.appointments.create') }}" wire:navigate>Booking baru</x-clinic-button>
                     <x-clinic-button href="{{ route('patient.appointments.index') }}" wire:navigate>Lihat booking saya</x-clinic-button>
                 @endif
                 <x-clinic-button href="{{ route('profile') }}" variant="secondary" wire:navigate class="border-white/20 bg-white/10 text-white hover:bg-white/20 hover:text-white">Kelola profil akun</x-clinic-button>
@@ -35,8 +36,8 @@
                                     <h3 class="font-extrabold text-clinic-950">{{ $medicalRecord->visit->clinic->name }}</h3>
                                     <p class="mt-1 text-sm text-slate-600">Dokter {{ $medicalRecord->doctor->user->name }}</p>
                                 </div>
-                                <time class="text-sm font-semibold text-clinic-700" datetime="{{ $medicalRecord->finalized_at->toDateString() }}">
-                                    {{ $medicalRecord->finalized_at->format('d M Y') }}
+                                <time class="text-sm font-semibold text-clinic-700" datetime="{{ $medicalRecord->finalized_at->timezone($medicalRecord->visit->clinic->settings?->timezone ?? 'Asia/Jakarta')->toDateString() }}">
+                                    {{ $medicalRecord->finalized_at->timezone($medicalRecord->visit->clinic->settings?->timezone ?? 'Asia/Jakarta')->format('d M Y') }}
                                 </time>
                             </div>
 

@@ -1,0 +1,11 @@
+{
+  "phase": "closure-clinical-boundaries",
+  "at": "2026-11-13T16:12:38.452Z",
+  "counts": {
+    "PASS": 60,
+    "FAIL": 19,
+    "BLOCKED": 0,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

@@ -1,0 +1,65 @@
+[
+  {
+    "issue": "QA-01",
+    "status": "PASS",
+    "action": "Patient selects doctor, service, session and submits booking; persisted ownership and queue verified; 375/768/1024/1440px"
+  },
+  {
+    "area": "public layout",
+    "status": "PASS",
+    "action": "Clinic subdomain and public queue display initialize; queue omits the active patient name"
+  },
+  {
+    "issue": "QA-02",
+    "status": "PASS",
+    "action": "Doctor uploads draft photo, finalizes, removes through reasoned correction and reads the historical private photo; current photo is 404"
+  },
+  {
+    "issue": "QA-03",
+    "status": "PASS",
+    "action": "Owner self-delete rejected with explanation; user, clinic ownership, subscription and logged-in commercial access retained"
+  },
+  {
+    "issue": "QA-04",
+    "status": "PASS",
+    "action": "Admin creates replacement staff, attempts booked-session reassignment and receives validation; doctor links unchanged; same-doctor quota update succeeds"
+  },
+  {
+    "area": "staff",
+    "role": "doctor",
+    "status": "PASS",
+    "action": "Creation, unverified login gate, resend, signed verification, self password setup/login, live permission and role revocation, deactivation revokes existing session/new login, reactivation"
+  },
+  {
+    "area": "staff password/session",
+    "role": "doctor",
+    "status": "OPEN",
+    "httpStatus": 200,
+    "action": "Existing session after admin password replacement; 200 means it remains authorized and requires explicit deactivation to revoke"
+  },
+  {
+    "area": "staff self-delete",
+    "role": "doctor",
+    "status": "PASS",
+    "action": "Staff without clinical references self-deletes; user is removed, dashboard requires login, existing unrelated booking remains"
+  },
+  {
+    "area": "staff",
+    "role": "receptionist",
+    "status": "PASS",
+    "action": "Creation, unverified login gate, resend, signed verification, self password setup/login, live permission and role revocation, deactivation revokes existing session/new login, reactivation"
+  },
+  {
+    "area": "staff password/session",
+    "role": "receptionist",
+    "status": "OPEN",
+    "httpStatus": 200,
+    "action": "Existing session after admin password replacement; 200 means it remains authorized and requires explicit deactivation to revoke"
+  },
+  {
+    "area": "staff self-delete",
+    "role": "receptionist",
+    "status": "PASS",
+    "action": "Staff without clinical references self-deletes; user is removed, dashboard requires login, existing unrelated booking remains"
+  }
+]

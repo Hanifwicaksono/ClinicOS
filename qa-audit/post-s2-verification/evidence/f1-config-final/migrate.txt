@@ -1,0 +1,7 @@
+
+   INFO  Running migrations.  
+
+  2026_11_15_091253_add_realtime_authorization_version_to_users .......................................... 7.28ms DONE
+  2026_11_15_091254_create_realtime_revocations_table ................................................... 10.55ms DONE
+  2026_11_15_102907_create_realtime_session_grants_table ................................................. 6.19ms DONE
+

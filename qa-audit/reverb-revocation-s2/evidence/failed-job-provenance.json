@@ -1,0 +1,11 @@
+{
+  "original_f1": [],
+  "s2_final": [
+    {
+      "uuid_hash": "318507bbec50d1d8",
+      "failed_at": "2026-11-14 02:02:02",
+      "exception_class": "PDOException",
+      "row_hash": "1dabd3a322bebc00ac4c7b073ca3f2e5b124d26ea77a969a914fe0d53b1cbc3e"
+    }
+  ]
+}

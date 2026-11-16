@@ -1,0 +1,376 @@
+{
+  "at": "2026-11-15T08:42:37.766Z",
+  "runs": {
+    "smoke": {
+      "PASS": 6,
+      "FAIL": 1
+    },
+    "main": {
+      "PASS": 18,
+      "FAIL": 1
+    },
+    "extended": {
+      "PASS": 14,
+      "FAIL": 0
+    },
+    "supplemental": {
+      "PASS": 3,
+      "FAIL": 1
+    },
+    "transport-r1": {
+      "PASS": 1,
+      "FAIL": 0
+    },
+    "final-guard": {
+      "PASS": 6,
+      "FAIL": 0
+    },
+    "post-format": {
+      "PASS": 2,
+      "FAIL": 0
+    },
+    "notification-types": {
+      "PASS": 1,
+      "FAIL": 0
+    }
+  },
+  "raw_browser": {
+    "PASS": 51,
+    "FAIL": 3
+  },
+  "latest_browser": {
+    "PASS": 36,
+    "FAIL": 0
+  },
+  "backend": {
+    "PASS": 15,
+    "FAIL": 0
+  },
+  "failures": [
+    {
+      "id": "S1-03",
+      "run": "smoke",
+      "error": "Expected values to be strictly equal:\n\n1 !== 0\n"
+    },
+    {
+      "id": "S1-G-password",
+      "run": "main",
+      "error": "Expected values to be strictly equal:\n\n2 !== 0\n"
+    },
+    {
+      "id": "S1-23",
+      "run": "supplemental",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Pusher\\\\ApiErrorException'\n- 'GuzzleHttp\\\\Exception\\\\ConnectException'\n"
+    }
+  ],
+  "matrix": [
+    {
+      "id": "S1-01",
+      "title": "Foreign tenant and foreign user channel authorization",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-B-role",
+      "title": "Baseline old sockets after role",
+      "assertion_status": "PASS",
+      "security_result": "FAIL",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-B-permission",
+      "title": "Baseline old sockets after permission",
+      "assertion_status": "PASS",
+      "security_result": "FAIL",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-B-inactive",
+      "title": "Baseline old sockets after inactive",
+      "assertion_status": "PASS",
+      "security_result": "FAIL",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-B-password",
+      "title": "Baseline old sockets after password",
+      "assertion_status": "PASS",
+      "security_result": "FAIL",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-02",
+      "title": "Native termination endpoint without signed user identity",
+      "assertion_status": "PASS",
+      "security_result": "FAIL",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-03",
+      "title": "Signed identity terminates old sockets; native user-channel reconnect remains authorized",
+      "assertion_status": "PASS",
+      "security_result": "FAIL as standalone revocation",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-04",
+      "title": "Subscribe-time reauthorization alone leaves old subscriptions live",
+      "assertion_status": "PASS",
+      "security_result": "FAIL",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-05",
+      "title": "Producer recipient check cannot protect shared clinic channel",
+      "assertion_status": "PASS",
+      "security_result": "FAIL",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-06",
+      "title": "MessageSent disconnect occurs after the first private frame",
+      "assertion_status": "PASS",
+      "security_result": "FAIL",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-07",
+      "title": "Derived authority fingerprint permits old binding after remove/restore",
+      "assertion_status": "PASS",
+      "security_result": "FAIL for monotonic epoch invalidation",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-G-role",
+      "title": "Before-send guard, both tabs, after role",
+      "assertion_status": "PASS",
+      "security_result": "PASS",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-G-permission",
+      "title": "Before-send guard, both tabs, after permission",
+      "assertion_status": "PASS",
+      "security_result": "PASS",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-G-direct",
+      "title": "Before-send guard, both tabs, after direct",
+      "assertion_status": "PASS",
+      "security_result": "PASS",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-G-inactive",
+      "title": "Corrected Eloquent security hook: inactive",
+      "assertion_status": "PASS",
+      "security_result": "PASS",
+      "evidence": "results-extended.json"
+    },
+    {
+      "id": "S1-G-password",
+      "title": "Corrected Eloquent security hook: password",
+      "assertion_status": "PASS",
+      "security_result": "PASS",
+      "evidence": "results-post-format.json"
+    },
+    {
+      "id": "S1-08",
+      "title": "Version invalidates old binding even after privilege is restored",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-09",
+      "title": "Rollback preserves authorization and socket delivery",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-10",
+      "title": "Legacy unsigned private subscriptions are denied by guard",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-main.json"
+    },
+    {
+      "id": "S1-11",
+      "title": "Auth issued before revoke, subscribed after revoke: denied",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-final-guard.json"
+    },
+    {
+      "id": "S1-12",
+      "title": "Tampered signed identity rejected by native HMAC verification",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-extended.json"
+    },
+    {
+      "id": "S1-13",
+      "title": "Guarded native termination and reconnect deny both revoked tabs",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-extended.json"
+    },
+    {
+      "id": "S1-14",
+      "title": "Authorized disconnect/reconnect and HTTP session continue working",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-extended.json"
+    },
+    {
+      "id": "S1-15",
+      "title": "Proactive server subscription invalidation removes four bindings",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-extended.json"
+    },
+    {
+      "id": "S1-16",
+      "title": "Five-second authorization lease leaves a revocation window",
+      "assertion_status": "PASS",
+      "security_result": "FAIL for immediate revocation",
+      "evidence": "results-extended.json"
+    },
+    {
+      "id": "S1-17",
+      "title": "All/except/internal private dispatch paths reach the guard",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-extended.json"
+    },
+    {
+      "id": "S1-18",
+      "title": "Actual authorization-store query failure fails private delivery closed",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-post-format.json"
+    },
+    {
+      "id": "S1-19",
+      "title": "Real database worker backlog published only after revocation",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-extended.json"
+    },
+    {
+      "id": "S1-20",
+      "title": "Check-to-send race proves commit alone is not the delivery barrier",
+      "assertion_status": "PASS",
+      "security_result": "FAIL if effective means HTTP commit; PASS for newly authorized frames after local server acknowledgement",
+      "evidence": "results-final-guard.json"
+    },
+    {
+      "id": "S1-21",
+      "title": "Authorized realtime refetch preserves typed filter and caret",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-final-guard.json"
+    },
+    {
+      "id": "S1-22",
+      "title": "Autosave and pending photo survive password revocation without reload",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-final-guard.json"
+    },
+    {
+      "id": "S1-23",
+      "title": "Transport failure of termination does not reopen private delivery",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-transport-r1.json"
+    },
+    {
+      "id": "S1-24",
+      "title": "Two tabs sharing one HTTP session are both guarded",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-supplemental.json"
+    },
+    {
+      "id": "S1-25",
+      "title": "Foreign tenant authorized delivery continues after main-tenant revocation",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-supplemental.json"
+    },
+    {
+      "id": "S1-26",
+      "title": "Installed Reverb rejects pusher:signin; it is not a usable hook",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-supplemental.json"
+    },
+    {
+      "id": "S1-27",
+      "title": "AppointmentStatus and QueueStatus notifications both respect old-socket revocation",
+      "assertion_status": "PASS",
+      "security_result": "See scenario assertion",
+      "evidence": "results-notification-types.json"
+    }
+  ],
+  "wire": {
+    "counts": {
+      "epoch_changed": 1038,
+      "subscribed": 416,
+      "sent": 872,
+      "postsend_disconnect": 2,
+      "delivery_denied": 104,
+      "invalidated": 88,
+      "subscribe_denied": 4,
+      "control_ack": 5,
+      "authority_read_failed": 18,
+      "authorized_before_pause": 2
+    },
+    "sent_queue_events": 74
+  },
+  "queue": {
+    "pending": 0,
+    "failed": 0
+  },
+  "versions": {
+    "php": "8.5.5",
+    "node": "v24.14.1",
+    "php_packages": [
+      {
+        "name": "laravel/framework",
+        "version": "v13.34.0"
+      },
+      {
+        "name": "laravel/reverb",
+        "version": "v1.12.0"
+      },
+      {
+        "name": "livewire/livewire",
+        "version": "v3.8.10"
+      },
+      {
+        "name": "pusher/pusher-php-server",
+        "version": "7.3.0"
+      },
+      {
+        "name": "spatie/laravel-permission",
+        "version": "8.3.0"
+      }
+    ],
+    "js_packages": {
+      "laravel-echo": "2.6.1",
+      "pusher-js": "8.6.0",
+      "vite": "8.3.4",
+      "tailwindcss": "3.4.17"
+    }
+  },
+  "source_integrity": {
+    "checked": 1094,
+    "changed": []
+  },
+  "pr01_status": "OPEN; S1 only; S2 not started"
+}

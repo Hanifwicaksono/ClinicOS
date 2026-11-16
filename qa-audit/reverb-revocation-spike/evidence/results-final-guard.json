@@ -1,0 +1,730 @@
+[
+  {
+    "id": "S1-G-password-R1",
+    "title": "Corrected Eloquent security hook: password",
+    "started": "2026-11-15T08:30:18.946Z",
+    "observed": {
+      "mutation": {
+        "command": "password",
+        "barrier": 1794731423.403869,
+        "target_active": true,
+        "target_has_role": true,
+        "target_queue_permission": true,
+        "epoch": "204"
+      },
+      "failed": {
+        "accepted": false,
+        "exception": "Pusher\\ApiErrorException",
+        "code": 401,
+        "cause": null,
+        "command": "terminate-failure",
+        "barrier": 1794731423.781818,
+        "target_active": true,
+        "target_has_role": true,
+        "target_queue_permission": true,
+        "epoch": "204"
+      },
+      "auth_status": 401,
+      "before": {
+        "queue_id": 162,
+        "published_after": 1794731422.846,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794731422.431,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 162,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731422.471,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 162,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794731422.431,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 162,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731422.471,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 162,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794731422.43,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 162,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731422.431,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 162,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794731422.463,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 162,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      },
+      "after": {
+        "queue_id": 163,
+        "published_after": 1794731424.974,
+        "views": {
+          "targetA": [],
+          "targetB": [],
+          "control": [
+            {
+              "at": 1794731424.502,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 163,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731424.502,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 163,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794731424.509,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 163,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      },
+      "security_result": "PASS"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-11",
+    "title": "Auth issued before revoke, subscribed after revoke: denied",
+    "started": "2026-11-15T08:30:24.976Z",
+    "observed": {
+      "mutation": {
+        "command": "role",
+        "barrier": 1794731429.621448,
+        "target_active": true,
+        "target_has_role": false,
+        "target_queue_permission": false,
+        "epoch": "210"
+      },
+      "errors": [
+        {
+          "event": "pusher:error",
+          "code": 4009,
+          "at": 1794731429.637
+        }
+      ],
+      "after": {
+        "queue_id": 164,
+        "published_after": 1794731431.051,
+        "views": {
+          "targetA": [],
+          "targetB": [],
+          "control": [
+            {
+              "at": 1794731430.588,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 164,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731430.588,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 164,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794731430.597,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 164,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-18",
+    "title": "Actual authorization-store query failure fails private delivery closed",
+    "started": "2026-11-15T08:30:31.052Z",
+    "observed": {
+      "queue_id": 165,
+      "private_frames_all_clients": 0,
+      "public_delivered": true,
+      "recovery_without_reload": {
+        "queue_id": 166,
+        "published_after": 1794731436.103,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794731435.683,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 166,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731435.699,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 166,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794731435.683,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 166,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731435.699,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 166,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794731435.683,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 166,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731435.683,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 166,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794731435.692,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 166,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      },
+      "availability_tradeoff": "Private frames during unknown authority are dropped; existing authorized bindings resume on next fresh event"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-20",
+    "title": "Check-to-send race proves commit alone is not the delivery barrier",
+    "started": "2026-11-15T08:30:36.104Z",
+    "observed": {
+      "security_result": "FAIL if effective means HTTP commit; PASS for newly authorized frames after local server acknowledgement",
+      "queue_id": 167,
+      "mutation": {
+        "command": "role",
+        "barrier": 1794731441.146325,
+        "target_active": true,
+        "target_has_role": false,
+        "target_queue_permission": false,
+        "epoch": "217"
+      },
+      "preauthorized_frame_received": 1794731441.161,
+      "server_barrier": {
+        "command": "fence",
+        "at": 1794731441.271106,
+        "target_epoch": "217",
+        "removed": 0
+      },
+      "after": {
+        "queue_id": 168,
+        "published_after": 1794731442.66,
+        "views": {
+          "targetA": [],
+          "targetB": [],
+          "control": [
+            {
+              "at": 1794731442.189,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 168,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731442.189,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 168,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794731442.196,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 168,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-21",
+    "title": "Authorized realtime refetch preserves typed filter and caret",
+    "started": "2026-11-15T08:30:42.661Z",
+    "observed": {
+      "position": {
+        "start": 3,
+        "end": 9,
+        "sameNode": true,
+        "focused": true
+      },
+      "after": {
+        "queue_id": 169,
+        "published_after": 1794731446.699,
+        "views": {
+          "targetA": [
+            {
+              "at": 1794731446.243,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 169,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731446.259,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 169,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "targetB": [
+            {
+              "at": 1794731446.243,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 169,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731446.259,
+              "channel": "private-users.14",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 169,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "control": [
+            {
+              "at": 1794731446.243,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 169,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731446.243,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 169,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794731446.25,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 169,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "S1-22",
+    "title": "Autosave and pending photo survive password revocation without reload",
+    "started": "2026-11-15T08:30:47.358Z",
+    "observed": {
+      "visit_id": 15,
+      "mutation": {
+        "command": "password",
+        "barrier": 1794731452.043014,
+        "target_active": true,
+        "target_has_role": true,
+        "target_queue_permission": true,
+        "epoch": "224"
+      },
+      "autosave_before": 200,
+      "autosave_after": 401,
+      "text_retained": true,
+      "pending_photo_retained": true,
+      "state": {
+        "blocked": true,
+        "expired": true,
+        "unsaved": true
+      },
+      "after": {
+        "queue_id": 170,
+        "published_after": 1794731454.805,
+        "views": {
+          "targetA": [],
+          "targetB": [],
+          "control": [
+            {
+              "at": 1794731454.343,
+              "channel": "private-clinic.6.queues",
+              "event": "queue.updated",
+              "queue_id": 170,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            },
+            {
+              "at": 1794731454.343,
+              "channel": "clinic.6.queue-board",
+              "event": "queue.updated",
+              "queue_id": 170,
+              "keys": [
+                "display_number",
+                "doctor_id",
+                "queue_date",
+                "queue_id",
+                "status",
+                "updated_at"
+              ]
+            }
+          ],
+          "patient": [
+            {
+              "at": 1794731454.351,
+              "channel": "private-users.15",
+              "event": "Illuminate\\Notifications\\Events\\BroadcastNotificationCreated",
+              "queue_id": 170,
+              "keys": [
+                "appointment_id",
+                "display_number",
+                "id",
+                "message",
+                "queue_id",
+                "status",
+                "title",
+                "type",
+                "url"
+              ]
+            }
+          ],
+          "foreign": []
+        }
+      }
+    },
+    "status": "PASS"
+  }
+]

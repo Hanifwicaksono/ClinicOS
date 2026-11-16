@@ -1,0 +1,7 @@
+[
+  {
+    "file": "phase2-after-r4.xml",
+    "reason": "not well-formed (invalid token): line 8670, column 95607",
+    "retained_as": "phase2-after-r4.xml.incomplete"
+  }
+]

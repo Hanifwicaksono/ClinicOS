@@ -1,0 +1,11 @@
+{
+  "phase": "3-auth-onboarding-profile",
+  "at": "2026-11-13T07:27:50.325Z",
+  "counts": {
+    "PASS": 37,
+    "FAIL": 8,
+    "BLOCKED": 1,
+    "NOT TESTED": 0
+  },
+  "browser": "158.0.8127.36"
+}

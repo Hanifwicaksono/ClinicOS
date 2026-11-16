@@ -1,0 +1,28 @@
+# PR-01 S1 — Perbandingan pendekatan
+
+**Pilihan rekomendasi:** signed user identity + monotonic authorization version, fresh authorization saat subscribe dan sebelum delivery, dengan invalidasi/terminasi server sebagai cleanup dan acknowledgement yang jelas. Hanya kombinasi itu yang menutup jalur yang diuji. Masih memerlukan desain/implementasi S2 dan keputusan PR-01/T.
+
+| Pendekatan | Kompatibilitas dan bukti aktual | Keamanan / kegagalan | Kompleksitas dan dampak | Migration / dependency |
+| --- | --- | --- | --- | --- |
+| Native terminate tanpa identity | Endpoint dan SDK tersedia; S1-02 menerima request | Tidak menemukan user pada private metadata default; socket lama menerima | Perubahan kecil tetapi tidak menyelesaikan akar masalah | Tidak perlu; tidak layak sendiri |
+| Signed identity + native terminate | SDK custom channel_data diteruskan pusher-js dan diverifikasi Reverb; dua old socket ditutup S1-03 | Reconnect users ownership masih diizinkan tanpa fresh guard; stale auth dapat hidup di sela terminasi | Menambah auth-response dan mutation cleanup; user-wide terminate juga dapat menutup socket sah yang baru reconnect | Tidak wajib migration untuk identity; tanpa dependency |
+| Reauthorization subscribe saja | Hook guarded channel benar-benar dipakai; existing subscriptions masih menerima S1-04 | Menolak subscription berikut tidak mengevaluasi ulang yang lama | Kecil–sedang; bukan endpoint “reauthorize all” native. Harus validasi pada server, bukan meminta browser bersedia logout | Epoch memerlukan state durable bila dipilih |
+| Producer recipient check | S1-05 memblokir notification inactive | Tidak dapat membedakan pengguna yang dicabut dalam shared clinic channel; event queue tetap diterima | Tambahan defense-in-depth pada DeliverClinicNotification; tidak menggantikan transport guard | Tidak perlu dependency/schema |
+| MessageSent disconnect | Hook tersedia; S1-06 menutup setelah first frame | Terlambat: frame sudah dikirim. Tidak dapat dipakai sebagai pre-delivery veto | Kecil, tetapi boundary salah | Tidak perlu |
+| Fingerprint authority tanpa epoch | Fresh DB + signed fingerprint bekerja, S1-07 | Cabut/restore state identik menerima binding lama lagi. Tidak memenuhi invalidasi monotonik. Bukan bukti akses salah ketika hak memang sudah dipulihkan | Menghindari column tetapi menghitung context; tidak dipilih untuk kontrak revocation epoch | Tidak perlu migration; tanpa dependency |
+| Signed short lease | S1-16 menerima dalam lima detik lalu menolak sesudah expiry | Sengaja memberi jendela akses; lease renewal/reconnect mengganggu semua client bila tidak dirancang | Perlu refresh auth berkala dan keputusan durasi; lima detik bukan kebijakan disetujui | Tidak wajib migration; tanpa dependency |
+| Server invalidation saja | Empat bindings dihapus lewat registry nyata S1-15 | Stale signature/reconnect tetap perlu guard. Unsubscribe tanpa pemberitahuan membuat client mengira masih subscribed; recovery perlu ditangani | Sedang; tidak ditemukan API native untuk reauthorize/invalidate berdasarkan permission. Eksperimen memakai app-owned registry hook | Tanpa dependency; durable retry/epoch tetap disarankan |
+| pusher:signin | Pesan nyata ditolak 4200 S1-26; handler tidak tersedia | Tidak dapat dijadikan asumsi identitas/terminasi pada versi ini | Mengubah protokol lebih besar; tidak dipilih | Tidak dilakukan upgrade/dependency |
+| **Signed epoch + subscribe/pre-send guard + cleanup/fence** | Seluruh channel family existing, tiga dispatch path, dua browser, shared-session tabs, reconnect, replay, tamper, real worker/backlog dan dua jenis terminate failure diuji | Menolak delivery baru setelah fresh denial meskipun terminate gagal. DB read unknown fail-closed. **Read-then-send tidak menjamin nol send sesudah commit**; fence/ack atau serialization wajib sesuai kontrak | Sedang–besar pada boundary auth, package binding, mutation/version, notification eligibility, recovery UI. Risiko upgrade internal Reverb dan kehilangan frame selama fault | Proposed additive users version column; durable status/retry perlu rancangan S2. Tidak memerlukan dependency/vendor patch |
+
+## Mengapa rekomendasi bukan terminasi saja
+
+Terbukti ada tiga masalah berbeda: signature lama tidak otomatis kedaluwarsa saat hak berubah; koneksi lama tidak terhubung otomatis dengan session; callback own-user tetap dapat menerima subscribe setelah role staf hilang. Identitas, fresh policy dan epoch menutup masalah itu pada server. Terminasi mempercepat pelepasan transport, tetapi kegagalannya tidak boleh membuka private delivery.
+
+Invalidasi definitif dan kegagalan pembacaan tidak disamakan. Pada definitive deny binding lama dapat dicabut. Pada authority-store failure, kiriman private ditolak, binding yang mungkin sah dipertahankan dan dievaluasi lagi pada event berikut; pemulihan ini diuji tanpa reload. Availability private sementara berkurang, sedangkan public board tetap nonmedis.
+
+## Risiko yang belum ditutup
+
+Single-node acknowledgement eksperimen hanya membuktikan urutan di event loop lokal. Redis/multiple node acknowledgement, restart saat pending, timeout/partition dan MySQL serialization belum diuji. Signed channel_data dan ChannelManager bekerja di versi terpasang, tetapi guard subclass bukan public API stabil yang dapat di-upgrade tanpa contract tests. Private-cache/presence tidak digunakan ClinicOS; eksperimen tidak membuktikan preservasi semantics package untuk channel itu. S2 harus mempertahankan factory/broadcast behavior atau menolak keluarga yang tidak didukung secara eksplisit.
+
+Tidak ada hasil load/performance, SLA lima detik, deployment, atau production readiness yang disimpulkan dari eksperimen ini.

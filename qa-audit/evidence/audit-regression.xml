@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Feature\FullSystemAuditTest" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" tests="20" assertions="124" errors="0" failures="8" skipped="0" time="4.794307">
+    <testcase name="test_schedule_edit_preserves_the_doctor_of_existing_bookings" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="43" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="2" time="0.752999">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\FullSystemAuditTest::test_schedule_edit_preserves_the_doctor_of_existing_bookings&#13;
+Editing a booked session must not leave appointments assigned to a different doctor.
+Failed asserting that 2 is identical to 1.
+&#13;
+C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php:58</failure>
+    </testcase>
+    <testcase name="test_final_record_photo_remains_available_in_revision_history" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="62" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="5" time="0.165938">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\FullSystemAuditTest::test_final_record_photo_remains_available_in_revision_history&#13;
+An attachment referenced by a final medical revision must remain available.
+Failed asserting that false is true.
+&#13;
+C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php:77</failure>
+    </testcase>
+    <testcase name="test_failed_draft_transaction_does_not_leave_an_unreferenced_upload" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="81" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="5" time="0.142966">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\FullSystemAuditTest::test_failed_draft_transaction_does_not_leave_an_unreferenced_upload&#13;
+A rolled-back draft must not leave its uploaded attachment on disk.
+Failed asserting that 1 is identical to 0.
+&#13;
+C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php:92</failure>
+    </testcase>
+    <testcase name="test_clinic_owner_cannot_delete_the_only_owner_account" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="96" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="1" time="0.741027">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\FullSystemAuditTest::test_clinic_owner_cannot_delete_the_only_owner_account&#13;
+Owner deletion needs a supported transfer or closure flow before it can orphan a clinic.
+Failed asserting that false is true.
+&#13;
+C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php:102</failure>
+    </testcase>
+    <testcase name="test_owner_without_a_clinic_is_guided_to_onboarding_from_addons" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="107" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="1" time="1.127529">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\FullSystemAuditTest::test_owner_without_a_clinic_is_guided_to_onboarding_from_addons&#13;
+Expected response status code [201, 301, 302, 303, 307, 308] but received 500.
+Failed asserting that false is true.&#13;
+&#13;
+The following exception occurred during the last request:
+
+TypeError: App\Services\AddonService::canEdit(): Argument #1 ($clinic) must be of type App\Models\Clinic, null given, called in C:\laragon\www\ClinicOS\app\Http\Controllers\SubscriptionAddonController.php on line 23 and defined in C:\laragon\www\ClinicOS\app\Services\AddonService.php:43
+Stack trace:
+#0 C:\laragon\www\ClinicOS\app\Http\Controllers\SubscriptionAddonController.php(23): App\Services\AddonService-&gt;canEdit(NULL)
+#1 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(46): App\Http\Controllers\SubscriptionAddonController-&gt;index(Object(Illuminate\Http\Request), Object(App\Services\AddonService))
+#2 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Route.php(276): Illuminate\Routing\ControllerDispatcher-&gt;dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\SubscriptionAddonController), 'index')
+#3 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Route.php(216): Illuminate\Routing\Route-&gt;runController()
+#4 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Router.php(822): Illuminate\Routing\Route-&gt;run()
+#5 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Routing\Router-&gt;{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#6 C:\laragon\www\ClinicOS\app\Http\Middleware\EnsureClinicOwner.php(20): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#7 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\EnsureClinicOwner-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#8 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Auth\Middleware\EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#9 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Auth\Middleware\EnsureEmailIsVerified-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#10 C:\laragon\www\ClinicOS\app\Http\Middleware\SecurityHeaders.php(18): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#11 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\SecurityHeaders-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#12 C:\laragon\www\ClinicOS\app\Http\Middleware\CheckUserIsActive.php(27): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#13 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\CheckUserIsActive-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#14 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php(52): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#15 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#16 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php(168): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#17 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php(129): Illuminate\Routing\Middleware\ThrottleRequests-&gt;handleRequest(Object(Illuminate\Http\Request), Object(Closure), Array)
+#18 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php(90): Illuminate\Routing\Middleware\ThrottleRequests-&gt;handleRequestUsingNamedLimiter(Object(Illuminate\Http\Request), Object(Closure), 'payment-status', Object(Closure))
+#19 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Routing\Middleware\ThrottleRequests-&gt;handle(Object(Illuminate\Http\Request), Object(Closure), 'payment-status')
+#20 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Auth\Middleware\Authenticate.php(63): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#21 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#22 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestForgery.php(104): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#23 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestForgery-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#24 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\View\Middleware\ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#25 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\View\Middleware\ShareErrorsFromSession-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#26 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Session\Middleware\StartSession.php(120): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#27 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Session\Middleware\StartSession.php(63): Illuminate\Session\Middleware\StartSession-&gt;handleStatefulRequest(Object(Illuminate\Http\Request), Object(Illuminate\Session\Store), Object(Closure))
+#28 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Session\Middleware\StartSession-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#29 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#30 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#31 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Cookie\Middleware\EncryptCookies.php(74): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#32 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Cookie\Middleware\EncryptCookies-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#33 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#34 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Router.php(821): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#35 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Router.php(800): Illuminate\Routing\Router-&gt;runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#36 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Router.php(764): Illuminate\Routing\Router-&gt;runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#37 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Routing\Router.php(753): Illuminate\Routing\Router-&gt;dispatchToRoute(Object(Illuminate\Http\Request))
+#38 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(200): Illuminate\Routing\Router-&gt;dispatch(Object(Illuminate\Http\Request))
+#39 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Foundation\Http\Kernel-&gt;{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#40 C:\laragon\www\ClinicOS\vendor\livewire\livewire\src\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware.php(19): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#41 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 C:\laragon\www\ClinicOS\vendor\laravel\mcp\src\Server\Middleware\AddWwwAuthenticateHeader.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Laravel\Mcp\Server\Middleware\AddWwwAuthenticateHeader-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#45 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#47 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#48 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#49 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#50 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#51 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#52 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php(110): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#53 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#54 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php(61): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#55 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\HandleCors-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#56 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php(58): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#57 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#58 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustHosts.php(78): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#59 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\TrustHosts-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#60 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#61 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#62 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePathEncoding.php(28): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#63 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#64 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#65 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(175): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#66 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(144): Illuminate\Foundation\Http\Kernel-&gt;sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#67 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(638): Illuminate\Foundation\Http\Kernel-&gt;handle(Object(Illuminate\Http\Request))
+#68 C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(368): Illuminate\Foundation\Testing\TestCase-&gt;call('GET', 'http://localhos...', Array, Array, Array, Array)
+#69 C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php(110): Illuminate\Foundation\Testing\TestCase-&gt;get('http://localhos...')
+#70 C:\laragon\www\ClinicOS\vendor\phpunit\phpunit\src\Framework\TestCase.php(1318): Tests\Feature\FullSystemAuditTest-&gt;test_owner_without_a_clinic_is_guided_to_onboarding_from_addons()
+#71 C:\laragon\www\ClinicOS\vendor\phpunit\phpunit\src\Framework\TestCase.php(1355): PHPUnit\Framework\TestCase-&gt;invokeTestMethod('test_owner_with...', Array)
+#72 C:\laragon\www\ClinicOS\vendor\phpunit\phpunit\src\Framework\TestCase.php(521): PHPUnit\Framework\TestCase-&gt;runTest()
+#73 C:\laragon\www\ClinicOS\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(99): PHPUnit\Framework\TestCase-&gt;runBare()
+#74 C:\laragon\www\ClinicOS\vendor\phpunit\phpunit\src\Framework\TestCase.php(361): PHPUnit\Framework\TestRunner-&gt;run(Object(Tests\Feature\FullSystemAuditTest))
+#75 C:\laragon\www\ClinicOS\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestCase-&gt;run()
+#76 C:\laragon\www\ClinicOS\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite-&gt;run()
+#77 C:\laragon\www\ClinicOS\vendor\phpunit\phpunit\src\TextUI\Application.php(229): PHPUnit\TextUI\TestRunner-&gt;run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\NullResultCache), Object(PHPUnit\Framework\TestSuite))
+#78 C:\laragon\www\ClinicOS\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application-&gt;run(Array)
+#79 C:\laragon\www\ClinicOS\vendor\bin\phpunit(122): include('C:\\laragon\\www\\...')
+#80 {main}
+
+----------------------------------------------------------------------------------
+
+App\Services\AddonService::canEdit(): Argument #1 ($clinic) must be of type App\Models\Clinic, null given, called in C:\laragon\www\ClinicOS\app\Http\Controllers\SubscriptionAddonController.php on line 23
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:208
+C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php:111</failure>
+    </testcase>
+    <testcase name="test_final_correction_requires_a_version_to_prevent_stale_overwrites" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="114" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="3" time="0.132516">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\FullSystemAuditTest::test_final_correction_requires_a_version_to_prevent_stale_overwrites&#13;
+Expected response status code [422] but received 200.
+Failed asserting that 200 is identical to 422.
+&#13;
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:46
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:183
+C:\laragon\www\ClinicOS\vendor\laravel\framework\src\Illuminate\Testing\Concerns\AssertsStatusCodes.php:221
+C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php:123</failure>
+    </testcase>
+    <testsuite name="Tests\Feature\FullSystemAuditTest::test_nested_fields_are_handled_without_a_server_error" tests="5" assertions="10" errors="0" failures="2" skipped="0" time="0.573187">
+      <testcase name="test_nested_fields_are_handled_without_a_server_error with data set &quot;nullable diagnoses&quot;" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="140" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="2" time="0.112195">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\FullSystemAuditTest::test_nested_fields_are_handled_without_a_server_error with data set "nullable diagnoses"&#13;
+A nullable field or malformed nested row must be accepted safely or rejected by validation.
+Failed asserting that an array contains 500.
+&#13;
+C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php:145</failure>
+      </testcase>
+      <testcase name="test_nested_fields_are_handled_without_a_server_error with data set &quot;nullable treatments&quot;" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="140" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="2" time="0.112822">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\FullSystemAuditTest::test_nested_fields_are_handled_without_a_server_error with data set "nullable treatments"&#13;
+A nullable field or malformed nested row must be accepted safely or rejected by validation.
+Failed asserting that an array contains 500.
+&#13;
+C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php:145</failure>
+      </testcase>
+      <testcase name="test_nested_fields_are_handled_without_a_server_error with data set &quot;scalar diagnosis item&quot;" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="140" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="2" time="0.117423"/>
+      <testcase name="test_nested_fields_are_handled_without_a_server_error with data set &quot;scalar treatment item&quot;" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="140" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="2" time="0.113582"/>
+      <testcase name="test_nested_fields_are_handled_without_a_server_error with data set &quot;scalar prescription item&quot;" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="140" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="2" time="0.117165"/>
+    </testsuite>
+    <testsuite name="Tests\Feature\FullSystemAuditTest::test_each_role_is_checked_at_operational_endpoints" tests="5" assertions="65" errors="0" failures="0" skipped="0" time="0.683517">
+      <testcase name="test_each_role_is_checked_at_operational_endpoints with data set &quot;Clinic Admin&quot;" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="171" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="13" time="0.199124"/>
+      <testcase name="test_each_role_is_checked_at_operational_endpoints with data set &quot;Receptionist&quot;" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="171" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="13" time="0.124949"/>
+      <testcase name="test_each_role_is_checked_at_operational_endpoints with data set &quot;Doctor&quot;" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="171" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="13" time="0.116808"/>
+      <testcase name="test_each_role_is_checked_at_operational_endpoints with data set &quot;Patient&quot;" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="171" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="13" time="0.112467"/>
+      <testcase name="test_each_role_is_checked_at_operational_endpoints with data set &quot;Platform Admin&quot;" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="171" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="13" time="0.130169"/>
+    </testsuite>
+    <testcase name="test_admin_without_a_clinic_can_open_the_setup_form" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="186" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="3" time="0.100316"/>
+    <testcase name="test_catalog_and_patient_updates_persist_without_repricing_an_existing_visit" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="195" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="14" time="0.165014"/>
+    <testcase name="test_read_all_notifications_does_not_mark_another_accounts_notifications" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="220" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="3" time="0.075348"/>
+    <testcase name="test_platform_commercial_actions_preserve_invoice_and_owner_history" file="C:\laragon\www\ClinicOS\qa-audit\tests\FullSystemAuditTest.php" line="235" class="Tests\Feature\FullSystemAuditTest" classname="Tests.Feature.FullSystemAuditTest" assertions="12" time="0.133950"/>
+  </testsuite>
+</testsuites>

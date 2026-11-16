@@ -1,0 +1,468 @@
+[
+  {
+    "case": "last-slot",
+    "gate": "PASS",
+    "workers": [
+      {
+        "pid": 230884,
+        "connection_id": 7436
+      },
+      {
+        "pid": 227364,
+        "connection_id": 7437
+      }
+    ],
+    "overlap": true,
+    "innodb_lock_wait_observed": true,
+    "results": [
+      {
+        "status": 302,
+        "validation_fields": [],
+        "redirect_path": "/receptionist/appointments/74",
+        "pid": 230884,
+        "connection_id": 7436,
+        "started": 1794407406.33446,
+        "ended": 1794407407.209404
+      },
+      {
+        "status": 422,
+        "validation_fields": [
+          "doctor_schedule_id"
+        ],
+        "redirect_path": "",
+        "pid": 227364,
+        "connection_id": 7437,
+        "started": 1794407406.334338,
+        "ended": 1794407407.256601
+      }
+    ],
+    "state": {
+      "appointments": 1,
+      "queues": 1,
+      "visits": 0,
+      "queue_numbers": [
+        1
+      ],
+      "mismatched_doctor": 0,
+      "plan": "team",
+      "pending_payments": 0,
+      "visits_state": []
+    }
+  },
+  {
+    "case": "patient-contention",
+    "gate": "PASS",
+    "workers": [
+      {
+        "pid": 214628,
+        "connection_id": 7442
+      },
+      {
+        "pid": 229356,
+        "connection_id": 7443
+      }
+    ],
+    "overlap": true,
+    "innodb_lock_wait_observed": false,
+    "results": [
+      {
+        "status": 302,
+        "validation_fields": [],
+        "redirect_path": "/booking/75/status",
+        "pid": 214628,
+        "connection_id": 7442,
+        "started": 1794407409.062961,
+        "ended": 1794407409.265104
+      },
+      {
+        "status": 422,
+        "validation_fields": [
+          "doctor_schedule_id"
+        ],
+        "redirect_path": "",
+        "pid": 229356,
+        "connection_id": 7443,
+        "started": 1794407409.062948,
+        "ended": 1794407409.306082
+      }
+    ],
+    "state": {
+      "appointments": 1,
+      "queues": 1,
+      "visits": 0,
+      "queue_numbers": [
+        1
+      ],
+      "mismatched_doctor": 0,
+      "plan": "team",
+      "pending_payments": 0,
+      "visits_state": []
+    }
+  },
+  {
+    "case": "duplicate-request",
+    "gate": "PASS",
+    "workers": [
+      {
+        "pid": 198716,
+        "connection_id": 7451
+      },
+      {
+        "pid": 205096,
+        "connection_id": 7452
+      }
+    ],
+    "overlap": true,
+    "innodb_lock_wait_observed": true,
+    "results": [
+      {
+        "status": 302,
+        "validation_fields": [],
+        "redirect_path": "/receptionist/appointments/76",
+        "pid": 198716,
+        "connection_id": 7451,
+        "started": 1794407411.534,
+        "ended": 1794407412.153836
+      },
+      {
+        "status": 302,
+        "validation_fields": [],
+        "redirect_path": "/receptionist/appointments/76",
+        "pid": 205096,
+        "connection_id": 7452,
+        "started": 1794407411.533925,
+        "ended": 1794407411.71279
+      }
+    ],
+    "state": {
+      "appointments": 1,
+      "queues": 1,
+      "visits": 0,
+      "queue_numbers": [
+        1
+      ],
+      "mismatched_doctor": 0,
+      "plan": "team",
+      "pending_payments": 0,
+      "visits_state": []
+    }
+  },
+  {
+    "case": "same-record",
+    "gate": "PASS",
+    "workers": [
+      {
+        "pid": 224268,
+        "connection_id": 7457
+      },
+      {
+        "pid": 233192,
+        "connection_id": 7456
+      }
+    ],
+    "overlap": true,
+    "innodb_lock_wait_observed": false,
+    "results": [
+      {
+        "status": 409,
+        "validation_fields": [],
+        "redirect_path": "",
+        "pid": 224268,
+        "connection_id": 7457,
+        "started": 1794407414.292706,
+        "ended": 1794407414.563724
+      },
+      {
+        "status": 200,
+        "validation_fields": [],
+        "redirect_path": "",
+        "pid": 233192,
+        "connection_id": 7456,
+        "started": 1794407414.29269,
+        "ended": 1794407414.544653
+      }
+    ],
+    "state": {
+      "appointments": 1,
+      "queues": 1,
+      "visits": 1,
+      "queue_numbers": [
+        1
+      ],
+      "mismatched_doctor": 0,
+      "plan": "team",
+      "pending_payments": 0,
+      "visits_state": [
+        {
+          "id": 16,
+          "status": "IN_PROGRESS",
+          "version": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "two-doctors",
+    "gate": "PASS",
+    "workers": [
+      {
+        "pid": 226532,
+        "connection_id": 7465
+      },
+      {
+        "pid": 234644,
+        "connection_id": 7466
+      }
+    ],
+    "overlap": true,
+    "innodb_lock_wait_observed": false,
+    "results": [
+      {
+        "status": 200,
+        "validation_fields": [],
+        "redirect_path": "",
+        "pid": 226532,
+        "connection_id": 7465,
+        "started": 1794407416.712965,
+        "ended": 1794407416.875053
+      },
+      {
+        "status": 403,
+        "validation_fields": [],
+        "redirect_path": "",
+        "pid": 234644,
+        "connection_id": 7466,
+        "started": 1794407416.712952,
+        "ended": 1794407416.831615
+      }
+    ],
+    "state": {
+      "appointments": 1,
+      "queues": 1,
+      "visits": 1,
+      "queue_numbers": [
+        1
+      ],
+      "mismatched_doctor": 0,
+      "plan": "team",
+      "pending_payments": 0,
+      "visits_state": [
+        {
+          "id": 17,
+          "status": "IN_PROGRESS",
+          "version": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "schedule-edit",
+    "gate": "PASS",
+    "workers": [
+      {
+        "pid": 220420,
+        "connection_id": 7474
+      },
+      {
+        "pid": 170088,
+        "connection_id": 7475
+      }
+    ],
+    "overlap": true,
+    "innodb_lock_wait_observed": false,
+    "results": [
+      {
+        "status": 302,
+        "validation_fields": [],
+        "redirect_path": "/admin/doctor-schedules",
+        "pid": 220420,
+        "connection_id": 7474,
+        "started": 1794407418.795347,
+        "ended": 1794407418.921802
+      },
+      {
+        "status": 422,
+        "validation_fields": [
+          "doctor_schedule_id"
+        ],
+        "redirect_path": "",
+        "pid": 170088,
+        "connection_id": 7475,
+        "started": 1794407418.795359,
+        "ended": 1794407418.932494
+      }
+    ],
+    "state": {
+      "appointments": 0,
+      "queues": 0,
+      "visits": 0,
+      "queue_numbers": [],
+      "mismatched_doctor": 0,
+      "plan": "team",
+      "pending_payments": 0,
+      "visits_state": []
+    }
+  },
+  {
+    "case": "staff-disabled",
+    "gate": "PASS",
+    "workers": [
+      {
+        "pid": 231352,
+        "connection_id": 7484
+      },
+      {
+        "pid": 226544,
+        "connection_id": 7483
+      }
+    ],
+    "overlap": true,
+    "innodb_lock_wait_observed": false,
+    "results": [
+      {
+        "status": 200,
+        "pid": 231352,
+        "connection_id": 7484,
+        "started": 1794407420.851153,
+        "ended": 1794407420.911135
+      },
+      {
+        "status": 302,
+        "validation_fields": [],
+        "redirect_path": "/receptionist/appointments/79",
+        "pid": 226544,
+        "connection_id": 7483,
+        "started": 1794407420.851155,
+        "ended": 1794407421.03694
+      }
+    ],
+    "next_request": {
+      "status": 302,
+      "validation_fields": [],
+      "redirect_path": "/admin"
+    },
+    "state": {
+      "appointments": 1,
+      "queues": 1,
+      "visits": 0,
+      "queue_numbers": [
+        1
+      ],
+      "mismatched_doctor": 0,
+      "plan": "team",
+      "pending_payments": 0,
+      "visits_state": []
+    }
+  },
+  {
+    "case": "subscription-active",
+    "gate": "PASS",
+    "workers": [
+      {
+        "pid": 165316,
+        "connection_id": 7493
+      },
+      {
+        "pid": 196276,
+        "connection_id": 7494
+      }
+    ],
+    "overlap": true,
+    "innodb_lock_wait_observed": false,
+    "results": [
+      {
+        "status": 200,
+        "pid": 165316,
+        "connection_id": 7493,
+        "started": 1794407423.303424,
+        "ended": 1794407423.33915
+      },
+      {
+        "status": 200,
+        "validation_fields": [],
+        "redirect_path": "",
+        "pid": 196276,
+        "connection_id": 7494,
+        "started": 1794407423.30343,
+        "ended": 1794407423.452052
+      }
+    ],
+    "new_booking": {
+      "status": 403,
+      "validation_fields": [],
+      "redirect_path": ""
+    },
+    "state": {
+      "appointments": 1,
+      "queues": 1,
+      "visits": 1,
+      "queue_numbers": [
+        1
+      ],
+      "mismatched_doctor": 0,
+      "plan": "free",
+      "pending_payments": 0,
+      "visits_state": [
+        {
+          "id": 18,
+          "status": "IN_PROGRESS",
+          "version": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "owner-checkout",
+    "gate": "PASS",
+    "workers": [
+      {
+        "pid": 121848,
+        "connection_id": 7504
+      },
+      {
+        "pid": 226340,
+        "connection_id": 7503
+      }
+    ],
+    "overlap": true,
+    "innodb_lock_wait_observed": false,
+    "results": [
+      {
+        "status": 302,
+        "validation_fields": [],
+        "redirect_path": "/subscription/payments/2",
+        "pid": 121848,
+        "connection_id": 7504,
+        "started": 1794407425.830239,
+        "ended": 1794407427.30782
+      },
+      {
+        "status": 200,
+        "validation_fields": [],
+        "redirect_path": "",
+        "pid": 226340,
+        "connection_id": 7503,
+        "started": 1794407425.830277,
+        "ended": 1794407425.966004
+      }
+    ],
+    "state": {
+      "appointments": 1,
+      "queues": 1,
+      "visits": 1,
+      "queue_numbers": [
+        1
+      ],
+      "mismatched_doctor": 0,
+      "plan": "team",
+      "pending_payments": 1,
+      "visits_state": [
+        {
+          "id": 19,
+          "status": "IN_PROGRESS",
+          "version": 1
+        }
+      ]
+    }
+  }
+]

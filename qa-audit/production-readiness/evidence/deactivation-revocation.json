@@ -1,0 +1,5 @@
+{
+  "http_denied": true,
+  "events_after_deactivation": 1,
+  "socket_state": "connected"
+}

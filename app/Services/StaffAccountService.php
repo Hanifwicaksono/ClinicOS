@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class StaffAccountService
@@ -59,7 +60,7 @@ class StaffAccountService
             return $user;
         });
 
-        event(new Registered($user));
+        rescue(fn () => event(new Registered($user)));
 
         return $user->load('doctor.services', 'roles');
     }
@@ -99,6 +100,7 @@ class StaffAccountService
 
             if (! empty($data['password'])) {
                 $staff->password = Hash::make($data['password']);
+                $staff->remember_token = Str::random(60);
             }
 
             if ($emailChanged) {
@@ -125,6 +127,10 @@ class StaffAccountService
                 'role' => $staff->roles()->value('name'),
                 'is_active' => $staff->is_active,
             ]);
+
+            if ($emailChanged) {
+                DB::afterCommit(fn () => rescue(fn () => $staff->sendEmailVerificationNotification()));
+            }
 
             return $staff->load('doctor.services', 'roles');
         });

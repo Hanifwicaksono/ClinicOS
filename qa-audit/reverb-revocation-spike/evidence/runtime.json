@@ -1,0 +1,10 @@
+{
+  "root": "C:/Users/User/AppData/Local/Temp/clinicos-deep-revocation-sj8svs",
+  "repo": "C:\\laragon\\www\\ClinicOS",
+  "base": "http://127.0.0.1:18961",
+  "ws": "ws://127.0.0.1:18962",
+  "database": "C:/Users/User/AppData/Local/Temp/clinicos-deep-revocation-sj8svs/audit.sqlite",
+  "playwright": "C:/Users/User/AppData/Local/Temp/clinicos-readiness-0_thp4gu/tools/node_modules/playwright/index.mjs",
+  "started": "2026-11-15T08:16:01.776Z",
+  "provenance": "Clone of retained synthetic F1 final SQLite/private storage; no user database connection"
+}

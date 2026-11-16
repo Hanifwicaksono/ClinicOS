@@ -1,0 +1,30 @@
+[
+  {
+    "name": "from",
+    "labels": [],
+    "aria_label": null,
+    "aria_labelledby": null,
+    "title": ""
+  },
+  {
+    "name": "to",
+    "labels": [],
+    "aria_label": null,
+    "aria_labelledby": null,
+    "title": ""
+  },
+  {
+    "name": "action",
+    "labels": [],
+    "aria_label": null,
+    "aria_labelledby": null,
+    "title": ""
+  },
+  {
+    "name": "actor",
+    "labels": [],
+    "aria_label": null,
+    "aria_labelledby": null,
+    "title": ""
+  }
+]

@@ -1,0 +1,290 @@
+[
+  {
+    "name": "Clinic Admin",
+    "permission": "appointment.cancel"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "appointment.create"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "appointment.update"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "appointment.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "audit_log.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "clinic.update"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "clinic.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "dashboard.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "doctor.create"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "doctor.delete"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "doctor.update"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "doctor.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "patient.create"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "patient.update"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "patient.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "queue.call"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "queue.manage"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "queue.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "receptionist.create"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "receptionist.update"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "receptionist.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "revenue.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "schedule.manage"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "schedule.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "service.create"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "service.delete"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "service.update"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "service.view"
+  },
+  {
+    "name": "Clinic Admin",
+    "permission": "visit.view"
+  },
+  {
+    "name": "Doctor",
+    "permission": "appointment.view"
+  },
+  {
+    "name": "Doctor",
+    "permission": "dashboard.view"
+  },
+  {
+    "name": "Doctor",
+    "permission": "doctor.view"
+  },
+  {
+    "name": "Doctor",
+    "permission": "medical_record.create"
+  },
+  {
+    "name": "Doctor",
+    "permission": "medical_record.update"
+  },
+  {
+    "name": "Doctor",
+    "permission": "medical_record.view"
+  },
+  {
+    "name": "Doctor",
+    "permission": "patient.view"
+  },
+  {
+    "name": "Doctor",
+    "permission": "queue.call"
+  },
+  {
+    "name": "Doctor",
+    "permission": "queue.view"
+  },
+  {
+    "name": "Doctor",
+    "permission": "schedule.view"
+  },
+  {
+    "name": "Doctor",
+    "permission": "service.view"
+  },
+  {
+    "name": "Doctor",
+    "permission": "visit.complete"
+  },
+  {
+    "name": "Doctor",
+    "permission": "visit.start"
+  },
+  {
+    "name": "Doctor",
+    "permission": "visit.view"
+  },
+  {
+    "name": "Patient",
+    "permission": "appointment.cancel"
+  },
+  {
+    "name": "Patient",
+    "permission": "appointment.create"
+  },
+  {
+    "name": "Patient",
+    "permission": "appointment.view"
+  },
+  {
+    "name": "Patient",
+    "permission": "dashboard.view"
+  },
+  {
+    "name": "Patient",
+    "permission": "doctor.view"
+  },
+  {
+    "name": "Patient",
+    "permission": "queue.view"
+  },
+  {
+    "name": "Patient",
+    "permission": "schedule.view"
+  },
+  {
+    "name": "Patient",
+    "permission": "service.view"
+  },
+  {
+    "name": "Platform Admin",
+    "permission": "platform.dashboard.view"
+  },
+  {
+    "name": "Platform Admin",
+    "permission": "platform.payment.manage"
+  },
+  {
+    "name": "Platform Admin",
+    "permission": "platform.payment.view"
+  },
+  {
+    "name": "Platform Admin",
+    "permission": "platform.plan.manage"
+  },
+  {
+    "name": "Platform Admin",
+    "permission": "platform.subscription.grant"
+  },
+  {
+    "name": "Platform Admin",
+    "permission": "platform.tenant.view"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "appointment.cancel"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "appointment.create"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "appointment.update"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "appointment.view"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "dashboard.view"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "doctor.view"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "patient.create"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "patient.update"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "patient.view"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "queue.call"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "queue.manage"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "queue.view"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "schedule.view"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "service.view"
+  },
+  {
+    "name": "Receptionist",
+    "permission": "visit.view"
+  }
+]

@@ -1,5 +1,6 @@
 @props([
     'queue',
+    'timezone' => 'Asia/Jakarta',
 ])
 
 @php
@@ -85,7 +86,7 @@
     </div>
     @if($queue->status === \App\QueueStatus::Called)
         <div class="border-t border-[#DDE5E1] bg-[#EEF3F2] px-5 py-3 text-sm font-bold text-[#287F78]">
-            Sedang dipanggil sejak {{ $queue->called_at?->format('H:i') }}
+            Sedang dipanggil sejak {{ $queue->called_at?->timezone($timezone)->format('H:i') }}
         </div>
     @endif
 </article>

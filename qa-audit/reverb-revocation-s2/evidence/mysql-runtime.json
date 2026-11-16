@@ -1,0 +1,8 @@
+{
+    "pid":  51072,
+    "port":  13318,
+    "database":  "clinicos_s2_1794735325920",
+    "datadir":  "C:/Users/User/AppData/Local/Temp/clinicos-deep-s2-NkDBSv/mysql/data",
+    "isolated":  true,
+    "version":  "8.0.30"
+}

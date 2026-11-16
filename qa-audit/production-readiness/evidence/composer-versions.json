@@ -1,0 +1,148 @@
+{
+    "installed": [
+        {
+            "name": "fakerphp/faker",
+            "direct-dependency": true,
+            "homepage": null,
+            "source": "https://github.com/FakerPHP/Faker/tree/v1.24.1",
+            "version": "v1.24.1",
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "abandoned": false
+        },
+        {
+            "name": "laravel/boost",
+            "direct-dependency": true,
+            "homepage": "https://github.com/laravel/boost",
+            "source": "https://github.com/laravel/boost",
+            "version": "v2.10.1",
+            "description": "Laravel Boost accelerates AI-assisted development by providing the essential context and structure that AI needs to generate high-quality, Laravel-specific code.",
+            "abandoned": false
+        },
+        {
+            "name": "laravel/breeze",
+            "direct-dependency": true,
+            "homepage": null,
+            "source": "https://github.com/laravel/breeze",
+            "version": "v2.4.2",
+            "description": "Minimal Laravel authentication scaffolding with Blade and Tailwind.",
+            "abandoned": false
+        },
+        {
+            "name": "laravel/framework",
+            "direct-dependency": true,
+            "homepage": "https://laravel.com",
+            "source": "https://github.com/laravel/framework",
+            "version": "v13.34.0",
+            "description": "The Laravel Framework.",
+            "abandoned": false
+        },
+        {
+            "name": "laravel/pail",
+            "direct-dependency": true,
+            "homepage": "https://github.com/laravel/pail",
+            "source": "https://github.com/laravel/pail",
+            "version": "v1.2.7",
+            "description": "Easily delve into your Laravel application's log files directly from the command line.",
+            "abandoned": false
+        },
+        {
+            "name": "laravel/pao",
+            "direct-dependency": true,
+            "homepage": null,
+            "source": "https://github.com/laravel/pao",
+            "version": "v1.1.5",
+            "description": "Agent-optimized output for PHP testing tools",
+            "abandoned": false
+        },
+        {
+            "name": "laravel/pint",
+            "direct-dependency": true,
+            "homepage": "https://laravel.com",
+            "source": "https://github.com/laravel/pint",
+            "version": "v1.32.1",
+            "description": "An opinionated code formatter for PHP.",
+            "abandoned": false
+        },
+        {
+            "name": "laravel/reverb",
+            "direct-dependency": true,
+            "homepage": null,
+            "source": "https://github.com/laravel/reverb/tree/v1.12.0",
+            "version": "v1.12.0",
+            "description": "Laravel Reverb provides a real-time WebSocket communication backend for Laravel applications.",
+            "abandoned": false
+        },
+        {
+            "name": "laravel/socialite",
+            "direct-dependency": true,
+            "homepage": "https://laravel.com",
+            "source": "https://github.com/laravel/socialite",
+            "version": "v5.31.0",
+            "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
+            "abandoned": false
+        },
+        {
+            "name": "laravel/tinker",
+            "direct-dependency": true,
+            "homepage": null,
+            "source": "https://github.com/laravel/tinker/tree/v3.0.2",
+            "version": "v3.0.2",
+            "description": "Powerful REPL for the Laravel framework.",
+            "abandoned": false
+        },
+        {
+            "name": "livewire/livewire",
+            "direct-dependency": true,
+            "homepage": null,
+            "source": "https://github.com/livewire/livewire/tree/v3.8.10",
+            "version": "v3.8.10",
+            "description": "A front-end framework for Laravel.",
+            "abandoned": false
+        },
+        {
+            "name": "livewire/volt",
+            "direct-dependency": true,
+            "homepage": "https://github.com/livewire/volt",
+            "source": "https://github.com/livewire/volt",
+            "version": "v1.11.2",
+            "description": "An elegantly crafted functional API for Laravel Livewire.",
+            "abandoned": false
+        },
+        {
+            "name": "mockery/mockery",
+            "direct-dependency": true,
+            "homepage": "https://github.com/mockery/mockery",
+            "source": "https://github.com/mockery/mockery",
+            "version": "1.6.15",
+            "description": "Mockery is a simple yet flexible PHP mock object framework",
+            "abandoned": false
+        },
+        {
+            "name": "nunomaduro/collision",
+            "direct-dependency": true,
+            "homepage": null,
+            "source": "https://github.com/nunomaduro/collision",
+            "version": "v8.9.5",
+            "description": "Cli error handling for console/command-line PHP applications.",
+            "abandoned": false
+        },
+        {
+            "name": "phpunit/phpunit",
+            "direct-dependency": true,
+            "homepage": "https://phpunit.de/",
+            "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.37",
+            "version": "12.5.37",
+            "description": "The PHP Unit Testing framework.",
+            "abandoned": false
+        },
+        {
+            "name": "spatie/laravel-permission",
+            "direct-dependency": true,
+            "homepage": "https://github.com/spatie/laravel-permission",
+            "source": "https://github.com/spatie/laravel-permission/tree/8.3.0",
+            "version": "8.3.0",
+            "description": "Permission handling for Laravel 12 and up",
+            "abandoned": false
+        }
+    ]
+}

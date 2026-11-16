@@ -1,0 +1,31 @@
+PHPUnit 12.5.37 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.5
+Configuration: C:\laragon\www\ClinicOS\phpunit.xml
+
+Time: 00:05.501, Memory: 66.00 MB
+
+There was 1 failure:
+
+1) Tests\Feature\RmeGeneralDentalTest::test_assigned_doctor_can_persist_general_rme_and_odontogram_in_draft
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+ Array &0 [
+     0 => Array &1 [
++        'condition' => 'caries',
+         'tooth_number' => 11,
+-        'condition' => 'caries',
+     ],
+     1 => Array &2 [
++        'condition' => 'filled',
+         'tooth_number' => 26,
+-        'condition' => 'filled',
+     ],
+ ]
+
+C:\laragon\www\ClinicOS\tests\Feature\RmeGeneralDentalTest.php:56
+
+[37;41mFAILURES![0m
+[37;41mTests: 1[0m[37;41m, Assertions: 5[0m[37;41m, Failures: 1[0m[37;41m.[0m

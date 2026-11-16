@@ -1,0 +1,10 @@
+﻿{
+    "stopped_at":  "2026-11-15T08:41:52.6990619Z",
+    "runtime_host_ids_stopped":  [
+                                     46648
+                                 ],
+    "loopback_ports_still_listening":  [
+
+                                       ],
+    "user_services_stopped":  false
+}

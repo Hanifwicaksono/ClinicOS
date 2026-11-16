@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreStaffRequest;
 use App\Http\Requests\Admin\UpdateStaffRequest;
+use App\Models\RealtimeRevocation;
 use App\Models\Service;
 use App\Models\User;
 use App\Services\StaffAccountService;
@@ -25,7 +26,11 @@ class StaffController extends Controller
             ->latest()
             ->paginate(12);
 
-        return view('admin.staff.index', compact('staffMembers'));
+        $realtimeRevocations = RealtimeRevocation::where('clinic_id', request()->user()->clinic_id)
+            ->whereRaw('auth_version = (select max(latest.auth_version) from realtime_revocations latest where latest.user_id = realtime_revocations.user_id)')
+            ->latest()->limit(20)->get();
+
+        return view('admin.staff.index', compact('staffMembers', 'realtimeRevocations'));
     }
 
     public function create(): View
@@ -42,7 +47,7 @@ class StaffController extends Controller
         $service->create($request->user(), $request->validated());
 
         return redirect()->route('admin.staff.index')
-            ->with('status', 'Akun staf berhasil dibuat. Email verifikasi telah dikirim ke staf.');
+            ->with('status', 'Akun staf berhasil dibuat. Staf wajib memverifikasi emailnya dan dapat meminta ulang tautan melalui halaman verifikasi jika belum diterima.');
     }
 
     public function edit(User $staff): View
@@ -60,10 +65,14 @@ class StaffController extends Controller
         User $staff,
         StaffAccountService $service,
     ): RedirectResponse {
-        $service->update($request->user(), $staff, $request->validated());
+        $updatedStaff = $service->update($request->user(), $staff, $request->validated());
+        $message = 'Data staf berhasil diperbarui.';
+        if ($updatedStaff->wasChanged('email')) {
+            $message .= ' Alamat email baru wajib diverifikasi. Staf dapat meminta ulang tautan melalui halaman verifikasi email.';
+        }
 
         return redirect()->route('admin.staff.index')
-            ->with('status', 'Data staf berhasil diperbarui.');
+            ->with('status', $message);
     }
 
     /** @return Collection<int, Service> */

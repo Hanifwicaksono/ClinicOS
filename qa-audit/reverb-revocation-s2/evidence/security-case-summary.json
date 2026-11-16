@@ -1,0 +1,132 @@
+[
+  {
+    "id": "S2-01",
+    "title": "Runtime signed auth, cross-tenant denial and actual delivery",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-role",
+    "title": "Committed role revokes old sockets, denies new clinic auth and persists ACK",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-permission",
+    "title": "Committed permission revokes old sockets, denies new clinic auth and persists ACK",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-direct",
+    "title": "Committed direct revokes old sockets, denies new clinic auth and persists ACK",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-inactive",
+    "title": "Committed inactive revokes old sockets, denies new clinic auth and persists ACK",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-password",
+    "title": "Committed password revokes old sockets, denies new clinic auth and persists ACK",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-07",
+    "title": "Authorized disconnect/reconnect keeps HTTP session and private delivery",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-08",
+    "title": "Revoked reconnect cannot obtain fresh private subscriptions",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-09",
+    "title": "Same-socket stale epoch, identity tamper and cross-socket replay rejected",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-10",
+    "title": "Two tabs sharing a session are revoked together",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-11",
+    "title": "Reactivation establishes a fresh epoch; old bindings stay revoked",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-12",
+    "title": "Delayed real database worker event respects committed rights before ACK",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-13",
+    "title": "Control API failure remains visible; UI retry ACKs without restoring rights",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-14",
+    "title": "Authority DB query failure closes private delivery; recovery preserves valid bindings",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-15",
+    "title": "Delivery authorized before revoke cannot pass an ACK when released later",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-16",
+    "title": "ACK stays pending while admitted writes are suspended; all finish before successful ACK",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-17",
+    "title": "Rollback neither bumps epoch nor terminates legitimate connections",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-18",
+    "title": "Ordinary logout denies retained socket of that session and preserves another browser",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-19",
+    "title": "Realtime refetch preserves CCL-07 filter value, node and caret",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-20",
+    "title": "Password revocation and ACK preserve unsaved RME and pending photo",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-21",
+    "title": "Other tenant remains authorized and receives its own queue event",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-22",
+    "title": "Real guest public display stays live with nonmedical metadata after staff revocation",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-23",
+    "title": "AppointmentStatus and QueueStatus private notifications both enforce revocation",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-24",
+    "title": "Network failure of control leaves pending state; fresh guard still denies; retry ACKs",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-25",
+    "title": "Expired/missing session grant is denied and explicit UI retry restores an authorized active subscription",
+    "status": "PASS"
+  },
+  {
+    "id": "S2-26",
+    "title": "Valid native unsigned HMAC is rejected; reserved control channel cannot be subscribed",
+    "status": "PASS"
+  }
+]

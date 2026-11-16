@@ -1,0 +1,373 @@
+[
+  {
+    "id": "DFU-12",
+    "severity": "P2",
+    "category": "Functional Bug / Cross-Feature Inconsistency",
+    "feature": "F30/F25",
+    "roles": "Platform Admin, Clinic Owner",
+    "title": "Double-click grant memberi dua periode dari satu tindakan pengguna",
+    "pre": "Tenant QA Free tersedia. Platform Admin memilih Individual satu bulan dan mengisi satu alasan grant.",
+    "steps": [
+      "Buka detail tenant QA.",
+      "Pilih Individual satu bulan dan isi satu alasan.",
+      "Double-click Berikan akses menggunakan input pointer Chrome dengan jarak 10 ms.",
+      "Hitung periode subscription yang baru tersimpan."
+    ],
+    "actual": "Satu double-click membuat dua periode subscription. Form grant tidak mengunci submit dan tidak membawa idempotency key; permintaan kedua dapat dianggap grant berikutnya dan menambah masa akses.",
+    "expected": "Satu maksud pemberian akses menghasilkan satu grant. Pengulangan transport/double-click tidak menambahkan periode kedua.",
+    "impact": "Klinik mendapat masa akses lebih panjang daripada yang dimaksud operator; histori komersial memuat grant ganda dan perlu koreksi administratif.",
+    "fix": "Tambahkan proteksi submit UI dan idempotency server untuk grant dengan identitas permintaan yang sama. Pertahankan kemungkinan operator melakukan grant baru secara sengaja dengan permintaan baru.",
+    "scenarios": [
+      "GRANT-DOUBLE"
+    ],
+    "evidence": [
+      "grant-double-click.json",
+      "screenshots/GRANT-DOUBLE-result.png"
+    ],
+    "source": [
+      "resources/views/platform/tenants/show.blade.php",
+      "app/Http/Controllers/Platform/SubscriptionGrantController.php",
+      "app/Services/SubscriptionService.php"
+    ]
+  },
+  {
+    "id": "DFU-01",
+    "severity": "P1",
+    "category": "Cross-Feature Inconsistency / Incomplete Workflow",
+    "feature": "F12/F13/F15/F20",
+    "roles": "Patient, Receptionist, Doctor",
+    "title": "Pembatalan pasien memutus pemeriksaan yang sudah berjalan",
+    "pre": "Klinik writable; sesi hari ini belum mencapai jam mulai; booking sudah di-check-in, dipanggil, dan dimulai dokter dari UI. Ini dapat terjadi karena start visit hanya mensyaratkan tanggal dan CALLED.",
+    "steps": [
+      "Pasien buat booking untuk sesi yang mulai dua jam lagi.",
+      "Resepsionis check-in dan panggil; dokter tekan Mulai periksa sebelum jam sesi.",
+      "Pasien buka Booking saya → detail → Batalkan booking → setujui.",
+      "Dokter lengkapi SOAP lalu Finalisasi kunjungan."
+    ],
+    "actual": "Appointment #25 dan queue menjadi CANCELLED, visit #16 tetap IN_PROGRESS. Finalisasi berikutnya ditolak: Status antrean tidak sesuai untuk finalisasi. Visit tertinggal tanpa jalur penyelesaian yang ditawarkan UI.",
+    "expected": "Pembatalan appointment harus memeriksa queue/visit di transaksi yang sama dan menolak saat pemeriksaan berlangsung, atau memakai workflow penghentian pelayanan yang secara eksplisit ditetapkan produk.",
+    "impact": "Pelayanan yang sudah dimulai tidak dapat ditutup oleh dokter; status dokter, pasien, antrean dan visit saling bertentangan.",
+    "fix": "Perbaiki aturan cancel bersama di BookingService untuk semua caller, dengan lock dan pemeriksaan visit/queue. Tentukan pemulihan data yang telanjur tidak konsisten; pertahankan histori medis.",
+    "scenarios": [
+      "CROSS-03",
+      "CROSS-04",
+      "CROSS-12"
+    ],
+    "evidence": [
+      "in-progress-cancellation.json",
+      "cancelled-visit-finalize.json",
+      "screenshots/CROSS-04-patient-cancelled-active.png",
+      "screenshots/CROSS-12-finalization-stuck.png"
+    ],
+    "source": [
+      "app/Services/BookingService.php:182",
+      "app/Services/BookingService.php:207",
+      "app/Services/VisitWorkflowService.php:143"
+    ]
+  },
+  {
+    "id": "DFU-02",
+    "severity": "P2",
+    "category": "Cross-Feature Inconsistency / Functional Bug",
+    "feature": "F08/F11/F12",
+    "roles": "Clinic Admin, Receptionist, Patient, Doctor",
+    "title": "Edit hari sesi terpakai membuat tanggal appointment tidak sesuai sesi",
+    "pre": "Sesi QA dokter telah dirujuk appointment dan visit selesai. Guard existing hanya melarang perubahan dokter.",
+    "steps": [
+      "Buka Jadwal dokter → edit sesi terpakai.",
+      "Dengan dokter tetap sama, ubah hari Jumat menjadi Sabtu dan simpan.",
+      "Buka detail booking Jumat yang sebelumnya memakai sesi tersebut.",
+      "Bandingkan appointment_date dan doctor_schedule.day_of_week."
+    ],
+    "actual": "Update diterima. Appointment tetap hari Jumat (5), sesi kini hari Sabtu (6); relasi yang awalnya wajib cocok saat booking menjadi tidak konsisten. Jadwal fixture dipulihkan melalui UI sesudah bukti disimpan.",
+    "expected": "Perubahan sesi yang dirujuk tidak boleh diam-diam mengubah makna booking/histori. Bekukan atribut sesi terpakai, simpan snapshot, atau lakukan reschedule eksplisit dengan konsekuensi yang ditetapkan produk.",
+    "impact": "Pasien dan staf dapat mengikuti tanggal yang berbeda dengan sesi dokter; filter sesi dan histori tidak lagi mempunyai acuan hari yang konsisten.",
+    "fix": "Perluas aturan sesi terpakai ke hari/jam, serta tetapkan apakah perubahan hanya berlaku untuk booking baru atau harus memigrasikan booking mendatang. Jangan mengubah histori final diam-diam.",
+    "scenarios": [
+      "CROSS-08"
+    ],
+    "evidence": [
+      "schedule-date-mismatch.json",
+      "screenshots/CROSS-08-old-booking-after-session-day-edit.png"
+    ],
+    "source": [
+      "app/Http/Controllers/Admin/DoctorScheduleController.php:71",
+      "app/Http/Requests/StoreDoctorScheduleRequest.php:72"
+    ]
+  },
+  {
+    "id": "DFU-03",
+    "severity": "P2",
+    "category": "UX/Usability Issue / Cross-Feature Inconsistency",
+    "feature": "F13/F33",
+    "roles": "Receptionist, Clinic Admin, Doctor",
+    "title": "Refresh otomatis menghapus alasan penolakan aksi antrean",
+    "pre": "Antrean menampilkan form aksi; lakukan aksi valid secara UI tetapi belum memenuhi prasyarat: FIFO, panggilan aktif, atau no-show sebelum jam sesi.",
+    "steps": [
+      "Klik No-show sebelum sesi mulai dan setujui dialog.",
+      "Server mengembalikan 422 dengan alasan yang benar.",
+      "Tunggu refresh region otomatis.",
+      "Coba membaca feedback; ulangi pada pelanggaran FIFO/panggilan aktif."
+    ],
+    "actual": "Alasan ditampilkan lalu region diganti setelah debounce 250 ms. Setelah 600 ms kotak feedback kosong. Respons 422 tersimpan di queue-error-feedback.json, sedangkan feedback hasil DOM adalah string kosong.",
+    "expected": "Pesan penolakan tetap tersedia hingga aksi pengguna berikutnya atau dismissal; refetch data tidak menghilangkan konteks error.",
+    "impact": "Staf tidak memahami mengapa klik tidak bekerja dan cenderung mengulang aksi atau salah menafsirkan state antrean.",
+    "fix": "Pertahankan feedback di luar region yang diganti atau pulihkan state feedback setelah refetch; uji FIFO, active-call dan no-show sebagai pesan yang tetap terbaca.",
+    "scenarios": [
+      "QUEUE-02-R1",
+      "QUEUE-04-R1",
+      "QUEUE-07-R1",
+      "CROSS-02"
+    ],
+    "evidence": [
+      "queue-error-feedback.json",
+      "screenshots/CROSS-02-error-disappeared.png"
+    ],
+    "source": [
+      "resources/js/realtime.js:142",
+      "resources/js/realtime.js:252",
+      "resources/js/realtime.js:278"
+    ]
+  },
+  {
+    "id": "DFU-04",
+    "severity": "P2",
+    "category": "Functional Bug / UX/Usability Issue",
+    "feature": "F12",
+    "roles": "Patient, Token holder; Receptionist template has same omission",
+    "title": "Pembatalan yang ditolak tidak memberi penjelasan pada halaman booking",
+    "pre": "Booking masih BOOKED, tetapi sesi telah dimulai. Tombol Batalkan booking masih tampil.",
+    "steps": [
+      "Buat booking sesi hari ini yang sudah dimulai tetapi belum berakhir.",
+      "Buka detail /patient/appointments/{id}.",
+      "Klik Batalkan booking dan setujui.",
+      "Ulangi melalui tautan konfirmasi bertoken milik sendiri."
+    ],
+    "actual": "Backend mempertahankan BOOKED dan mengirim validation error melalui redirect. Kedua halaman kembali tanpa menampilkan alasan setelah sesi dimulai. Form tetap menawarkan tombol yang sama.",
+    "expected": "Tampilkan alasan penolakan yang dapat dibaca, serta sesuaikan ketersediaan tombol dengan aturan waktu/status saat ini.",
+    "impact": "Pasien tidak tahu apakah pembatalan berhasil dan tidak mempunyai langkah pemulihan yang jelas.",
+    "fix": "Render validation summary/field errors pada detail pasien dan konfirmasi publik; gunakan aturan eligibility yang sama untuk tombol. Template resepsionis perlu ditinjau dan ditest terpisah.",
+    "scenarios": [
+      "CROSS-05",
+      "CROSS-06"
+    ],
+    "evidence": [
+      "screenshots/CROSS-05-no-cancellation-feedback.png",
+      "screenshots/CROSS-06-token-status-no-feedback.png"
+    ],
+    "source": [
+      "resources/views/patient/appointments/show.blade.php:3",
+      "resources/views/public/booking-status.blade.php:6",
+      "app/Services/BookingService.php:194"
+    ]
+  },
+  {
+    "id": "DFU-05",
+    "severity": "P2",
+    "category": "Functional Bug / UX/Usability Issue",
+    "feature": "F09/F35",
+    "roles": "Receptionist, Clinic Admin",
+    "title": "Error format telepon disamarkan sebagai kegagalan pemeriksaan kandidat pasien",
+    "pre": "Form Pasien baru, identitas lain valid dan tidak menyerupai kandidat duplikat.",
+    "steps": [
+      "Isi nama QA Invalid Phone Length, lahir valid, dan gender.",
+      "Isi telepon dengan 31 digit.",
+      "Klik Simpan pasien.",
+      "Periksa pesan serta row database."
+    ],
+    "actual": "Endpoint duplicate review menolak phone max:30 dengan422. JavaScript mengganti detail tersebut menjadi Kandidat pasien belum dapat diperiksa. Periksa data dan coba lagi. Submit pasien diblok sebelum mencapai store; tidak ada pasien baru. Tidak ada petunjuk field phone atau batas30. Attempt awal salah menunggu navigasi; reproduksi pengganti memeriksa respons duplicate review dan UI secara tepat.",
+    "expected": "Pesan panjang telepon tampil dekat kontrol dan/atau di summary, dengan fokus yang membantu pemulihan.",
+    "impact": "Resepsionis diarahkan mengulang pemeriksaan kandidat, padahal yang harus diperbaiki adalah panjang telepon.",
+    "fix": "Tampilkan detail validation errors dari endpoint pemeriksaan kandidat dan asosiasikan dengan field. Pertahankan pesan generik untuk kegagalan jaringan/server yang tidak mempunyai validasi aman.",
+    "scenarios": [
+      "UX-05",
+      "UX-05-R1"
+    ],
+    "evidence": [
+      "patient-phone-validation-feedback.json",
+      "screenshots/UX-05-patient-phone-generic-error.png"
+    ],
+    "source": [
+      "resources/js/patient-duplicates.js:50",
+      "app/Http/Controllers/Receptionist/PatientController.php:84",
+      "resources/views/receptionist/patients/form.blade.php:9"
+    ]
+  },
+  {
+    "id": "DFU-06",
+    "severity": "P2",
+    "category": "Functional Bug",
+    "feature": "F09",
+    "roles": "Receptionist, Clinic Admin",
+    "title": "Telepon yang sama sekali bukan nomor diterima sebagai data pasien",
+    "pre": "Pasien baru dengan nama, tanggal lahir dan gender valid.",
+    "steps": [
+      "Isi telepon abc.",
+      "Klik Simpan pasien.",
+      "Buka ulang detail pasien."
+    ],
+    "actual": "Pasien QA Deep Telepon Invalid berhasil dibuat dan telepon abc tersimpan. Rule hanya required/string/max:30.",
+    "expected": "Field kontak menolak teks tanpa nomor; batas format harus mendukung nomor lokal/internasional dan telepon bersama keluarga.",
+    "impact": "Data kontak tidak dapat dipakai untuk komunikasi atau pencocokan kandidat yang diharapkan staf.",
+    "fix": "Tetapkan format kontak yang diterima dan validasi server-side secara ramah. Jangan menjadikan telepon unik atau melakukan account linking otomatis.",
+    "scenarios": [
+      "ADM-11"
+    ],
+    "evidence": [
+      "screenshots/ADM-11-invalid-phone.png"
+    ],
+    "source": [
+      "app/Http/Requests/Receptionist/StorePatientRequest.php:35",
+      "app/Http/Requests/Receptionist/UpdatePatientRequest.php:39"
+    ]
+  },
+  {
+    "id": "DFU-07",
+    "severity": "P2",
+    "category": "Functional Bug / UX/Usability Issue",
+    "feature": "F22",
+    "roles": "Clinic Admin",
+    "title": "Filter dashboard dengan rentang tanggal terbalik gagal tanpa pesan",
+    "pre": "Dashboard admin dengan periode valid.",
+    "steps": [
+      "Isi Dari 14 November 2026 dan Sampai 13 November 2026.",
+      "Klik Terapkan.",
+      "Periksa halaman tujuan, nilai filter, dan pesan validasi spesifik tanggal."
+    ],
+    "actual": "Validasi controller menolak to < from, lalu halaman kembali ke dashboard tanpa pesan error tanggal. Assertion awal yang terlalu umum diperbaiki karena sempat cocok dengan kata diperiksa; UX-04 memakai assertion spesifik.",
+    "expected": "Jelaskan bahwa tanggal Sampai harus sama atau setelah Dari dan pertahankan input yang perlu dikoreksi.",
+    "impact": "Admin dapat membaca ringkasan periode lama sambil mengira filter baru sudah diterapkan.",
+    "fix": "Tampilkan summary/field error dan batasi pasangan tanggal pada UI; tetap pertahankan validasi backend.",
+    "scenarios": [
+      "UX-04"
+    ],
+    "evidence": [
+      "screenshots/UX-04-invalid-dashboard-no-feedback.png"
+    ],
+    "source": [
+      "app/Http/Controllers/Admin/DashboardController.php:28",
+      "resources/views/admin/dashboard.blade.php:52"
+    ]
+  },
+  {
+    "id": "DFU-08",
+    "severity": "P2",
+    "category": "Cross-Feature Inconsistency / UX/Usability Issue",
+    "feature": "F15/F22",
+    "roles": "Doctor, Clinic Admin",
+    "title": "Waktu visit tampil UTC sementara konteks klinik memakai WIB",
+    "pre": "Klinik timezone Asia/Jakarta. Visit dibuat dari UI pada instant 2026-11-13T07:31:04Z.",
+    "steps": [
+      "Buka pemeriksaan journey yang telah dibuat.",
+      "Lihat panel Kunjungan → Mulai.",
+      "Bandingkan dengan konversi instant DB ke timezone klinik dan tampilan dashboard admin."
+    ],
+    "actual": "Panel visit menampilkan 07:31; waktu yang sesuai Asia/Jakarta adalah 14:31. Template memformat started_at/completed_at langsung, sementara dashboard admin melakukan timezone($timezone).",
+    "expected": "Timestamp operasional memakai timezone klinik yang konsisten atau diberi label timezone yang jelas.",
+    "impact": "Dokter/pengelola dapat salah memahami jam layanan dan mencocokkan histori dengan antrean atau laporan.",
+    "fix": "Konversi timestamp pada presentasi visit dan audit titik tampilan waktu lain. Jangan mengubah instant UTC yang tersimpan. Queue-card juga memakai format langsung, tetapi cakupan browser utama temuan ini adalah panel visit.",
+    "scenarios": [
+      "CROSS-09"
+    ],
+    "evidence": [
+      "visit-timezone.json",
+      "screenshots/CROSS-09-visit-timezone.png"
+    ],
+    "source": [
+      "resources/views/doctor/visits/show.blade.php:411",
+      "resources/views/admin/dashboard.blade.php:122",
+      "resources/views/components/queue-card.blade.php:88"
+    ]
+  },
+  {
+    "id": "DFU-09",
+    "severity": "P2",
+    "category": "UX/Usability Issue",
+    "feature": "F24 and adjacent list/detail forms",
+    "roles": "Clinic Admin; Receptionist; Patient; Platform Admin",
+    "title": "Sejumlah kontrol filter dan alasan pembatalan tidak mempunyai label programatis",
+    "pre": "Audit aktivitas admin; temuan serupa ditemukan dalam inventaris DOM halaman daftar/detail lain.",
+    "steps": [
+      "Buka Audit aktivitas dan fokuskan empat filter dengan keyboard.",
+      "Periksa labels/aria-label/aria-labelledby/title pada masing-masing kontrol.",
+      "Bandingkan daftar pasien, tanggal booking, cancel_reason dan pencarian pembayaran platform."
+    ],
+    "actual": "Filter from/to/action/actor tidak terhubung ke label. Inventaris DOM juga menunjukkan kontrol search pasien, date appointment, cancel_reason staf/pasien dan search pembayaran platform tanpa nama programatis. Label visual terpisah atau placeholder bukan asosiasi label.",
+    "expected": "Setiap kontrol memiliki nama yang konsisten melalui label for/id, label pembungkus, atau aria yang tepat.",
+    "impact": "Pengguna keyboard/teknologi bantu sulit mengenali tujuan kontrol. Audit tidak mengklaim uji pembaca layar fisik.",
+    "fix": "Hubungkan label yang sudah tersedia; tambahkan label pada kontrol yang hanya mengandalkan placeholder. Verifikasi DOM dan keyboard kembali.",
+    "scenarios": [
+      "UX-03"
+    ],
+    "evidence": [
+      "audit-filter-accessible-names.json",
+      "pages.json",
+      "screenshots/UX-03-audit-filter-labels.png"
+    ],
+    "source": [
+      "resources/views/admin/audit-logs/index.blade.php:3",
+      "resources/views/receptionist/patients/index.blade.php:4",
+      "resources/views/patient/appointments/show.blade.php:3"
+    ]
+  },
+  {
+    "id": "DFU-10",
+    "severity": "P3",
+    "category": "UX/Usability Issue",
+    "feature": "F00",
+    "roles": "Guest, mobile user",
+    "title": "Landing mobile mempunyai overflow horizontal",
+    "pre": "Chrome viewport 375×900.",
+    "steps": [
+      "Buka landing.",
+      "Geser horizontal menggunakan input wheel.",
+      "Periksa document scrollWidth dan posisi elemen workflow."
+    ],
+    "actual": "Viewport 375, scrollWidth 385, scrollX bergerak 5 px. Elemen workflow melewati tepi viewport. Tidak ditemukan overflow dokumen pada 768/1024/1440 dalam probe yang sama.",
+    "expected": "Landing dapat dibaca pada 375 px tanpa halaman bergeser horizontal.",
+    "impact": "Geser halaman dan clipping kecil mengganggu kestabilan navigasi pada layar sempit.",
+    "fix": "Periksa elemen workflow/transform yang tercatat pada DOM offender evidence dan batasi lebarnya. Akar CSS persis belum dipastikan.",
+    "scenarios": [
+      "UX-01"
+    ],
+    "evidence": [
+      "landing-overflow.json",
+      "screenshots/UX-01-landing-375.png"
+    ],
+    "source": [
+      "resources/views/welcome.blade.php",
+      "public/css/clinicos-landing.css"
+    ]
+  },
+  {
+    "id": "DFU-11",
+    "severity": "P2",
+    "category": "Missing Functionality / UX Discoverability",
+    "feature": "F10/F11",
+    "roles": "Patient",
+    "title": "Portal pasien tidak menyediakan jalur untuk membuat booking baru",
+    "pre": "Pasien masuk melalui landing/login umum, atau kembali ke dashboard setelah kunjungan.",
+    "steps": [
+      "Login pasien → dashboard.",
+      "Periksa seluruh menu dan link dashboard.",
+      "Buka Booking saya.",
+      "Cari Buat booking, booking ulang, atau tautan ke website klinik sebelumnya."
+    ],
+    "actual": "Dashboard menawarkan Lihat booking saya dan profil; daftar hanya berisi detail booking. Tidak ditemukan tautan membuat booking atau kembali ke website klinik pada kedua layar. Booking tetap bekerja bila pasien sudah mengetahui URL website klinik dari luar portal.",
+    "expected": "Ada jalur yang jelas menuju booking berikutnya, setidaknya ke klinik yang telah dikenal pasien. Penemuan lintas klinik dapat tetap menjadi keputusan produk terpisah.",
+    "impact": "Pengguna baru/kembali harus mengetahui URL eksternal atau meminta bantuan untuk memulai tugas utama.",
+    "fix": "Tetapkan entry booking dari portal pasien dan empty state; tambahkan tautan klinik/booking ulang sesuai kepemilikan. Hindari menyamakan kebutuhan ini dengan keharusan membangun marketplace klinik.",
+    "scenarios": [
+      "UX-02"
+    ],
+    "evidence": [
+      "patient-booking-discovery.json",
+      "screenshots/UX-02-no-new-booking-action.png",
+      "navigation.json"
+    ],
+    "source": [
+      "resources/views/dashboard.blade.php:19",
+      "resources/views/patient/appointments/index.blade.php:3"
+    ]
+  }
+]

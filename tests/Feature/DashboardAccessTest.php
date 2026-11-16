@@ -114,4 +114,17 @@ class DashboardAccessTest extends TestCase
             ->assertSee('&lt;script&gt;alert(1)&lt;/script&gt;', false)
             ->assertDontSee('<script>alert(1)</script>', false);
     }
+
+    #[DataProvider('dashboards')]
+    public function test_head_requests_preserve_dashboard_role_and_authentication_boundaries(string $role, string $path, string $title): void
+    {
+        $this->seed(RoleAndPermissionSeeder::class);
+        $user = User::factory()->create();
+        $user->assignRole($role);
+
+        $this->actingAs($user)->head($path)->assertOk();
+        $this->head($role === 'Platform Admin' ? '/doctor/dashboard' : '/platform/dashboard')->assertForbidden();
+        auth()->logout();
+        $this->head($path)->assertRedirect($role === 'Patient' ? '/login' : '/admin');
+    }
 }

@@ -37,21 +37,23 @@ class SubscriptionGrantController extends Controller
             }
 
             $price = SubscriptionPrice::query()->with('plan')->findOrFail($validated['subscription_price_id']);
-            $period = $subscriptionService->grant($clinic, $price, $request->user(), $validated['reason']);
+            $period = $subscriptionService->grant($clinic, $price, $request->user(), $validated['reason'], grantRequestId: $validated['grant_request_id']);
         } catch (DomainException $exception) {
             throw ValidationException::withMessages([
                 ($validated['plan_code'] ?? null) === 'free' ? 'plan_code' : 'subscription_price_id' => $exception->getMessage(),
             ]);
         }
 
-        $auditLogger->recordForClinic($clinic, 'subscription.granted', $period, [
-            'previous_plan_code' => $previousPlanCode,
-            'plan_code' => $period->plan_code,
-            'duration_months' => $period->duration_months,
-            'starts_at' => $period->starts_at->toIso8601String(),
-            'ends_at' => $period->ends_at->toIso8601String(),
-            'reason' => $period->reason,
-        ], $request->user());
+        if ($period->wasRecentlyCreated) {
+            $auditLogger->recordForClinic($clinic, 'subscription.granted', $period, [
+                'previous_plan_code' => $previousPlanCode,
+                'plan_code' => $period->plan_code,
+                'duration_months' => $period->duration_months,
+                'starts_at' => $period->starts_at->toIso8601String(),
+                'ends_at' => $period->ends_at->toIso8601String(),
+                'reason' => $period->reason,
+            ], $request->user());
+        }
 
         return back()->with('status', $period->starts_at->isFuture()
             ? 'Grant subscription berhasil dijadwalkan.'

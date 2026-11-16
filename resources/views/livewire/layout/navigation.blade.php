@@ -13,20 +13,26 @@ new class extends Component
     }
 }; ?>
 
-<div x-data="{ open: false }" data-user-notification-channel="users.{{ auth()->id() }}">
+<div x-data="{
+    open: false,
+    desktop: window.matchMedia('(min-width: 1024px)').matches,
+    close() { this.open = false; this.$nextTick(() => this.$refs.trigger.focus()); },
+}" @keydown.escape.window="if (open) { $event.preventDefault(); close(); }"
+    @resize.window="desktop = window.matchMedia('(min-width: 1024px)').matches; if (desktop) open = false"
+    data-user-notification-channel="users.{{ auth()->id() }}">
     <div class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3" wire:navigate>
             <x-application-logo class="h-9 w-9" />
             <span class="font-display text-lg font-extrabold text-clinic-950">Clinic<span class="text-clinic-500">OS</span></span>
         </a>
-        <button type="button" @click="open = true" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi">
+        <button x-ref="trigger" type="button" @click="open = true" aria-controls="workspace-navigation" :aria-expanded="open.toString()" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500" aria-label="Buka navigasi">
             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
     </div>
 
-    <div x-show="open" x-cloak @click="open = false" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"></div>
+    <div x-show="open" x-cloak @click="close()" class="fixed inset-0 z-40 bg-clinic-950/40 lg:hidden"></div>
 
-    <aside :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0">
+    <aside id="workspace-navigation" x-trap.inert.noscroll.noreturn="open && !desktop" :inert="!open && !desktop" :aria-hidden="!open && !desktop" :role="desktop ? 'complementary' : 'dialog'" :aria-modal="open && !desktop ? 'true' : null" aria-label="Navigasi utama" :class="open ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform duration-200 lg:translate-x-0">
         <div class="flex h-20 items-center justify-between border-b border-slate-100 px-6">
             <a href="{{ route('dashboard') }}" class="flex items-center gap-3" wire:navigate>
                 <x-application-logo class="h-11 w-11" />
@@ -35,7 +41,7 @@ new class extends Component
                     <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Clinic workspace</div>
                 </div>
             </a>
-            <button type="button" @click="open = false" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi">✕</button>
+            <button type="button" @click="close()" class="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 lg:hidden" aria-label="Tutup navigasi">✕</button>
         </div>
 
         <div class="border-b border-slate-100 px-6 py-5">

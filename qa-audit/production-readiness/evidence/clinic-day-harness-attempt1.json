@@ -1,0 +1,13 @@
+{
+  "status": "FAIL",
+  "duration_ms": 64353,
+  "checkpoint": "doctor-finalize-ui",
+  "steps": [
+    "Opening: owner reviews subscription, admin reviews schedules, platform reviews tenants",
+    "Patient books through the actual public form and receives queue confirmation",
+    "Receptionist checks in, calls, skips a missed patient, returns and calls again through UI",
+    "Human error: incomplete finalization is refused without corrupting the draft"
+  ],
+  "error_class": "TimeoutError",
+  "page_errors": []
+}
