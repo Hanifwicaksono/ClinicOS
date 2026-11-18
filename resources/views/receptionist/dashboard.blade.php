@@ -59,10 +59,17 @@
                     <div class="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                         @foreach($calledQueues as $calledQueue)
                             <article data-queue-id="{{ $calledQueue->id }}" class="rounded-2xl border border-white/10 bg-white/10 p-4 transition">
-                                <div class="flex items-center justify-between gap-3">
-                                    <span class="font-display text-2xl font-extrabold">{{ $calledQueue->display_number }}</span>
-                                    <x-status-badge :status="$calledQueue->status" />
+                                
+                                <div class="relative flex min-h-10 items-center justify-center">
+                                    <span class="font-display text-center text-2xl font-extrabold whitespace-nowrap">
+                                        {{ $calledQueue->display_number }}
+                                    </span>
+
+                                    <div class="absolute right-0">
+                                        <x-status-badge :status="$calledQueue->status" />
+                                    </div>
                                 </div>
+
                                 <p class="mt-4 truncate font-bold text-white">{{ $calledQueue->appointment->patient->name }}</p>
                                 <p class="mt-1 truncate text-xs text-slate-300">{{ $calledQueue->doctor->user->name }} · Sesi {{ substr($calledQueue->schedule->start_time, 0, 5) }}</p>
                                 @if($calledQueue->called_at)
@@ -91,7 +98,16 @@
                                 <x-status-badge :status="$activeQueue->status" />
                             </div>
                             <div class="mt-7 grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center">
-                                <div @class(['flex h-24 w-24 items-center justify-center rounded-3xl font-display text-3xl font-extrabold', 'bg-white/10 text-white ring-1 ring-white/10' => $isCalled, 'bg-amber-50 text-amber-800 ring-1 ring-amber-200' => ! $isCalled])>{{ $activeQueue->display_number }}</div>
+                                <div @class([
+                                    'flex h-24 min-w-32 shrink-0 items-center justify-center
+                                    whitespace-nowrap rounded-3xl px-4
+                                    font-display text-3xl font-extrabold text-center',
+                                    'bg-white/10 text-white ring-1 ring-white/10' => $isCalled,
+                                    'bg-amber-50 text-amber-800 ring-1 ring-amber-200' => ! $isCalled,
+                                ])>
+                                    {{ $activeQueue->display_number }}
+                                </div>
+
                                 <div>
                                     <h3 @class(['text-2xl font-extrabold', 'text-white' => $isCalled, 'text-clinic-950' => ! $isCalled])>{{ $activeQueue->appointment->patient->name }}</h3>
                                     <p @class(['mt-2 text-sm', 'text-slate-300' => $isCalled, 'text-slate-600' => ! $isCalled])>{{ $activeQueue->appointment->service_name }} · {{ $activeQueue->doctor->user->name }}</p>
