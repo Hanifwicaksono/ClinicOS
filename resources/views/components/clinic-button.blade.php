@@ -4,7 +4,7 @@
 ])
 
 @php
-    $baseClasses = 'inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60';
+    $baseClasses = 'inline-flex min-h-11 max-w-full shrink-0 [overflow-wrap:normal] items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-clinic-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60';
 
     $variantClasses = match ($variant) {
         'primary' => 'bg-clinic-500 text-white hover:bg-clinic-600',

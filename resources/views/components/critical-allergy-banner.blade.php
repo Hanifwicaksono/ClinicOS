@@ -22,6 +22,9 @@
                     @foreach ($allergies as $allergy)
                         <li class="rounded-xl border border-red-200 bg-white px-4 py-3 text-sm [overflow-wrap:anywhere]">
                             <span class="font-extrabold">{{ $allergy['substance'] }}</span>
+                            @if($allergy['requires_review'] ?? false)
+                                <span class="ml-2 font-bold">Perlu verifikasi</span>
+                            @endif
                             @if (filled($allergy['reaction'] ?? null))
                                 <span> — {{ $allergy['reaction'] }}</span>
                             @endif

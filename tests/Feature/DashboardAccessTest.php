@@ -17,7 +17,7 @@ class DashboardAccessTest extends TestCase
         return [
             'platform' => ['Platform Admin', '/platform/dashboard', 'Dashboard platform'],
             'admin' => ['Clinic Admin', '/admin/dashboard', 'Siapkan identitas klinik Anda'],
-            'doctor' => ['Doctor', '/doctor/dashboard', 'Dashboard Dokter'],
+            'doctor' => ['Doctor', '/doctor/dashboard', 'Dashboard dokter'],
             'receptionist' => ['Receptionist', '/receptionist/dashboard', 'Dashboard Resepsionis'],
             'patient' => ['Patient', '/patient/dashboard', 'Dashboard Pasien'],
         ];
@@ -84,7 +84,7 @@ class DashboardAccessTest extends TestCase
         $user->assignRole(['Patient', 'Receptionist', 'Doctor', 'Clinic Admin', 'Platform Admin']);
 
         $this->actingAs($user)->get('/dashboard')->assertRedirect('/platform/dashboard');
-        $this->get('/doctor/dashboard')->assertSee('Dashboard Dokter');
+        $this->get('/doctor/dashboard')->assertSee('Dashboard dokter');
     }
 
     public function test_unverified_users_must_verify_email_before_opening_a_dashboard(): void

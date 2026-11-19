@@ -1,5 +1,6 @@
 @props(['doctors', 'timezone' => 'Asia/Jakarta'])
 @php
+    $blockedDates = app(\App\Services\DoctorAvailabilityService::class)->blockedDates($doctors, $timezone);
     $choices = $doctors->map(fn ($doctor) => [
         'id' => $doctor->id,
         'label' => $doctor->user->name.' — '.$doctor->specialization,
@@ -8,6 +9,7 @@
         ])->values()->all(),
         'schedules' => $doctor->schedules->where('is_active', true)->map(fn ($schedule) => [
             'id' => $schedule->id, 'day' => $schedule->day_of_week,
+            'blocked_dates' => $blockedDates[$schedule->id] ?? [],
             'label' => $schedule->day_name.' · '.substr($schedule->start_time, 0, 5).'–'.substr($schedule->end_time, 0, 5),
         ])->values()->all(),
     ])->values();

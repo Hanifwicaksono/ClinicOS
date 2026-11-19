@@ -1,6 +1,7 @@
 @php
     $timezone = $visit->clinic->settings?->timezone ?? 'Asia/Jakarta';
     $record = $visit->medicalRecord;
+    $isInterrupted = $visit->status === \App\VisitStatus::Interrupted;
     $isFinal = $record->status === \App\MedicalRecordStatus::Final;
     $ignoredRevisionKeys = ['id', 'medical_record_id', 'prescription_id', 'created_at', 'updated_at', 'sort_order'];
     $normalizeRevisionSnapshot = function (mixed $value) use (&$normalizeRevisionSnapshot, $ignoredRevisionKeys): mixed {
@@ -29,10 +30,14 @@
     };
 @endphp
 <x-app-layout>
-    <x-slot name="header"><div class="flex w-full items-center justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">{{ $visit->appointment->booking_code }} · {{ $visit->queue->display_number }}</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Pemeriksaan pasien</h1></div><span class="{{ $isFinal ? 'clinic-status-active' : 'rounded-full bg-[#F7F1EA] px-3 py-1.5 text-xs font-bold text-[#D89B68]' }}">{{ $isFinal ? ($hasModifications ? 'Finalized · Modification' : 'Finalized') : 'Draft' }}</span></div></x-slot>
+    <x-slot name="header"><div class="flex w-full flex-wrap items-center justify-between gap-3"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">{{ $visit->appointment->booking_code }} · {{ $visit->queue->display_number }}</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Pemeriksaan pasien</h1></div><span class="{{ $isFinal ? 'clinic-status-active' : 'rounded-full bg-[#F7F1EA] px-3 py-1.5 text-xs font-bold text-[#D89B68]' }}">{{ $isFinal ? ($hasModifications ? 'Final · dikoreksi' : 'Final') : 'Draft' }}</span></div></x-slot>
 
     @if($errors->any())<div class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-5 text-sm text-red-700"><p class="font-bold">Periksa kembali rekam medis:</p><ul class="mt-2 list-disc space-y-1 pl-5">@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
 
+    <details class="clinic-disclosure mb-5"><summary>Resep, rencana kontrol, dan validasi layanan</summary><p class="mt-4 text-sm leading-6 text-slate-500">Gunakan tindakan berikut sesuai tahap pemeriksaan. Penerbitan resep memerlukan dokumentasi final.</p><div class="mt-4 flex flex-wrap gap-3"><x-clinic-button variant="secondary" href="{{ route('clinical-documents.for-visit',$visit) }}">Kelola resep</x-clinic-button><x-clinic-button variant="secondary" href="{{ route('follow-ups.create',$visit) }}">Buat rencana kontrol</x-clinic-button><x-clinic-button variant="secondary" href="{{ route('care-continuity.show',$visit) }}">Koordinasi kasus</x-clinic-button>@if(in_array($visit->status,[\App\VisitStatus::Completed,\App\VisitStatus::Interrupted],true) && $visit->medicalRecord?->status===\App\MedicalRecordStatus::Final)<x-clinic-button variant="secondary" href="{{ route('patient-billing.clinical-form',$visit) }}">Validasi layanan diberikan</x-clinic-button>@else<p class="w-full text-xs leading-5 text-slate-500">Validasi biaya layanan tersedia setelah dokumentasi pelayanan disahkan.</p>@endif</div></details>
+    @if(in_array($visit->status,[\App\VisitStatus::Paused,\App\VisitStatus::Interrupted],true))
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4"><div><p class="font-extrabold text-amber-950">{{ $visit->status->label() }}</p><p class="mt-1 text-sm text-amber-900">{{ $isInterrupted ? 'Finalisasi dokumentasi interupsi tidak menyelesaikan pelayanan.' : 'Buka kelanjutan pelayanan untuk melanjutkan pemeriksaan ini.' }}</p></div><a class="clinic-button-secondary" href="{{ route('care-continuity.show',$visit) }}">{{ $isInterrupted ? 'Kelola kelanjutan' : 'Lanjutkan pemeriksaan' }}</a></div>
+    @endif
     <div class="grid gap-6 xl:grid-cols-[1fr_320px]">
         <form method="POST" enctype="multipart/form-data" action="{{ $isFinal ? route('doctor.visits.correct', $visit) : route('doctor.visits.save', $visit) }}" class="space-y-6" x-data="{
             medicines: @js($prescriptionRows),
@@ -69,6 +74,7 @@
             },
         }" data-rme-form @unless($isFinal) data-rme-autosave @endunless @input="$dispatch('rme-autosave-state', { state: 'draft' })" @paste.window="const images = [...$event.clipboardData.files].filter(file => file.type.startsWith('image/')); if (images.length) { $event.preventDefault(); addPhotos(images); }" @submit="submitting = true; $dispatch('rme-autosave-state', { state: 'saving' })">
             @csrf @method('PUT')
+            @if($isInterrupted)<input type="hidden" name="request_id" value="{{ (string) \Illuminate\Support\Str::uuid() }}"><input type="hidden" name="workflow_version" value="{{ $visit->workflow_version }}">@endif
             <input type="hidden" name="record_version" value="{{ old('record_version', $record->lock_version) }}">
             <input type="hidden" name="allergy_version" value="{{ old('allergy_version', $visit->patient->allergyVersion()) }}">
             <template x-for="index in removedPhotos" :key="index"><input type="hidden" name="removed_photos[]" :value="index"></template>
@@ -393,6 +399,8 @@
                         <h2 class="mt-2 text-2xl font-extrabold text-clinic-950">Jadikan rekam medis ini finalized?</h2>
                         <p class="mt-3 text-sm leading-6 text-slate-600">Setelah finalisasi, draft menjadi catatan resmi. Perubahan berikutnya hanya dapat disimpan sebagai Modification beralasan dan histori sebelum/sesudah akan tetap terlihat.</p>
 
+                        @if($isInterrupted)<label class="mt-4 flex gap-2"><input type="checkbox" name="documentation_attested" value="1" required>Saya penulis RME dan mengesahkan dokumentasi kejadian interupsi ini</label>@endif
+                        @if($visit->continuedFrom && \App\Models\FollowUp::query()->where('active_appointment_id',$visit->appointment_id)->where('status','BOOKED')->exists())<label class="mt-4 flex gap-2"><input type="checkbox" name="follow_up_goal_confirmed" value="1">Tujuan kontrol tertaut tercapai pada episode lanjutan ini. Tanpa konfirmasi, tugas kontrol tetap memerlukan review.</label>@endif
                         <dl class="mt-5 grid gap-3 rounded-2xl bg-slate-50 p-4 text-sm sm:grid-cols-2">
                             <div><dt class="font-semibold text-slate-500">Pasien</dt><dd class="mt-1 font-bold text-slate-900">{{ $visit->patient->name }}</dd></div>
                             <div><dt class="font-semibold text-slate-500">Jumlah obat</dt><dd class="mt-1 font-bold text-slate-900" x-text="`${filledMedicines.length} obat`"></dd></div>
@@ -400,7 +408,7 @@
 
                         <div class="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                             <x-clinic-button type="button" variant="secondary" x-on:click="$dispatch('close')">Kembali periksa</x-clinic-button>
-                            <x-clinic-button variant="primary" formaction="{{ route('doctor.visits.complete', $visit) }}" x-bind:disabled="submitting || incompleteMedicineCount > 0">Finalisasi kunjungan</x-clinic-button>
+                            <x-clinic-button variant="primary" formaction="{{ route($isInterrupted ? 'doctor.visits.finalize-interruption' : 'doctor.visits.complete', $visit) }}" x-bind:disabled="submitting || incompleteMedicineCount > 0">{{ $isInterrupted ? 'Finalisasi dokumentasi interupsi' : 'Finalisasi kunjungan' }}</x-clinic-button>
                         </div>
                     </div>
                 </x-modal>
@@ -408,6 +416,7 @@
         </form>
 
         <aside class="space-y-6">
+            @if($visit->status===\App\VisitStatus::InProgress)<section class="clinic-card p-5"><h2 class="font-bold">Jeda pemeriksaan</h2><form class="mt-4 space-y-3" method="POST" action="{{ route('care-continuity.workflow',[$visit,'pause']) }}" data-care-form>@include('care-continuity.version')<label class="clinic-label">Mode jeda<select class="clinic-input" name="pause_mode"><option value="HOLD">Pertahankan slot</option><option value="RELEASE">Lepas slot sementara</option></select></label><label class="clinic-label">Estimasi kembali ({{ $timezone }})<input class="clinic-input" type="datetime-local" name="estimated_return_at" required></label><label class="clinic-label">Alasan klinis<textarea class="clinic-input" name="reason" required maxlength="2000"></textarea></label><button class="clinic-button-secondary" type="submit">Jeda pemeriksaan</button></form></section>@endif
             <x-rme.allergy-editor :visit="$visit" />
             <section class="clinic-card p-6"><h2 class="font-extrabold text-clinic-950">Kunjungan</h2><dl class="mt-5 space-y-4 text-sm"><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Mulai</dt><dd class="mt-1 font-semibold">{{ $visit->started_at->timezone($timezone)->format('d M Y, H:i') }}</dd></div><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Dokter</dt><dd class="mt-1 font-semibold">{{ $visit->doctor->user->name }}</dd></div><div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Nilai layanan</dt><dd class="mt-1 font-semibold">Rp {{ number_format((float) $visit->total_amount, 0, ',', '.') }}</dd></div>@if($visit->completed_at)<div><dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Selesai</dt><dd class="mt-1 font-semibold">{{ $visit->completed_at->timezone($timezone)->format('d M Y, H:i') }}</dd></div>@endif</dl></section>
             <section class="clinic-card overflow-hidden"><div class="border-b border-slate-100 p-5"><h2 class="font-extrabold text-clinic-950">Riwayat dengan dokter ini</h2></div><div class="divide-y divide-slate-100">@forelse($history as $item)<a href="{{ route('doctor.visits.show', $item) }}" class="block p-5 hover:bg-slate-50" wire:navigate><p class="text-sm font-bold text-slate-900">{{ $item->started_at->timezone($timezone)->format('d M Y') }}</p><p class="mt-1 text-xs text-slate-500">{{ $item->service_name }} · {{ $item->status->value }}</p><p class="mt-2 text-xs font-semibold text-clinic-700">{{ $item->medicalRecord?->assessment ?: $item->medicalRecord?->diagnoses->pluck('name')->join(', ') ?: 'Belum ada diagnosa' }}</p></a>@empty<div class="p-6 text-sm text-slate-500">Belum ada kunjungan sebelumnya.</div>@endforelse</div></section>

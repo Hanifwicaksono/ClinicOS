@@ -33,7 +33,7 @@
                         <span class="co-clinic-eyebrow"><span class="co-clinic-live-dot" aria-hidden="true"></span> PROFIL KLINIK</span>
                     </div>
 
-                    <h1 id="clinic-heading">{{ $clinic->name }}</h1>
+                    <h1 id="clinic-heading" title="{{ $clinic->name }}">{{ $clinic->name }}</h1>
                     <p class="co-clinic-hero-description">{{ $clinic->description ?: 'Pelayanan kesehatan dengan pendaftaran yang mudah dan jadwal yang transparan.' }}</p>
 
                     @if ($clinic->address || $clinic->phone)
@@ -41,7 +41,7 @@
                             @if ($clinic->address)
                                 <span class="co-clinic-contact-item">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-                                    {{ $clinic->address }}
+                                    <span class="co-clinic-address-summary">{{ $clinic->address }}</span>
                                 </span>
                             @endif
                             @if ($clinic->phone)
@@ -51,6 +51,9 @@
                                 </span>
                             @endif
                         </div>
+                        @if(mb_strlen($clinic->address ?? '') > 100)
+                            <details class="co-clinic-address-details"><summary>Lihat alamat lengkap</summary><p>{{ $clinic->address }}</p></details>
+                        @endif
                     @endif
 
                     <div class="co-clinic-hero-actions">
@@ -132,7 +135,7 @@
                                 </span>
                                 <span class="co-clinic-service-index">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }} / LAYANAN</span>
                             </div>
-                            <h3>{{ $service->name }}</h3>
+                            <h3 title="{{ $service->name }}">{{ $service->name }}</h3>
                             <p>{{ $service->description ?: 'Informasi lengkap layanan dapat dilihat saat proses booking.' }}</p>
                             <div class="co-clinic-service-footer">
                                 <div><small>BIAYA LAYANAN</small><strong>Rp {{ number_format((float) $service->price, 0, ',', '.') }}</strong></div>
@@ -170,7 +173,7 @@
                             <div class="co-clinic-doctor-top">
                                 <div class="co-clinic-doctor-avatar" aria-hidden="true">{{ str($doctor->user?->name ?? 'Dokter')->substr(0, 1)->upper() }}</div>
                                 <div class="co-clinic-doctor-details">
-                                    <h3>{{ $doctor->user?->name ?? 'Dokter' }}</h3>
+                                    <h3 title="{{ $doctor->user?->name ?? 'Dokter' }}">{{ $doctor->user?->name ?? 'Dokter' }}</h3>
                                     <p>{{ $doctor->specialization ?: 'Dokter' }}</p>
                                 </div>
                                 <span class="co-clinic-doctor-tag">DOKTER</span>

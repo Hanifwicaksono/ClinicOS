@@ -14,7 +14,7 @@
     ];
 @endphp
 <x-app-layout>
-    <x-slot name="header"><div class="flex w-full items-center justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Operasional hari ini</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Antrean pasien</h1></div>@unless($isDoctor)<x-clinic-button href="{{ route('receptionist.appointments.create') }}" variant="primary" wire:navigate>+ Booking walk-in</x-clinic-button>@endunless</div></x-slot>
+    <x-slot name="header"><div class="flex w-full flex-wrap items-center justify-between gap-3"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Operasional hari ini</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Antrean pasien</h1></div>@unless($isDoctor)<x-clinic-button href="{{ route('receptionist.appointments.create') }}" variant="primary" wire:navigate>+ Booking walk-in</x-clinic-button>@endunless</div></x-slot>
 
     <div class="mb-6 hidden rounded-2xl border px-5 py-4 text-sm font-semibold" data-queue-action-feedback role="status" aria-live="polite"></div>
     <div data-realtime-queue-channel="clinic.{{ auth()->user()->clinic_id }}.queues" data-realtime-refresh-root>
@@ -28,12 +28,12 @@
         @endforeach
     </div>
 
-    <form method="GET" data-realtime-preserve="queue-filters" class="clinic-card mb-6 grid gap-4 p-5 md:grid-cols-4">
+    <form method="GET" data-realtime-preserve="queue-filters" class="clinic-card mb-6 grid items-end gap-4 p-5 sm:grid-cols-2 xl:grid-cols-4">
         <div><label class="clinic-label" for="date">Tanggal</label><input class="clinic-input" id="date" name="date" type="date" value="{{ $date }}"></div>
         @unless($isDoctor)<x-receptionist.search-select name="doctor_id" label="Dokter" placeholder="Cari dokter" :options="$doctorOptions" :selected="request('doctor_id')" :required="false" empty-label="Semua dokter" />@endunless
         <x-receptionist.search-select name="doctor_schedule_id" label="Sesi" placeholder="Cari sesi" :options="$scheduleOptions" :selected="request('doctor_schedule_id')" :required="false" empty-label="Semua sesi" />
         <div><label class="clinic-label" for="status">Status</label><select class="clinic-input" id="status" name="status"><option value="">Semua status</option>@foreach(\App\QueueStatus::cases() as $status)<option value="{{ $status->value }}" @selected(request('status') === $status->value)>{{ $status->label() }}</option>@endforeach</select></div>
-        <div class="flex items-end"><x-clinic-button variant="secondary" class="w-full">Terapkan filter</x-clinic-button></div>
+        <div class="flex flex-wrap gap-3 sm:col-span-2 xl:col-span-4"><x-clinic-button variant="primary">Terapkan filter</x-clinic-button><x-clinic-button variant="secondary" href="{{ route($isDoctor ? 'doctor.queues.index' : 'receptionist.queues.index') }}">Atur ulang</x-clinic-button></div>
     </form>
 
     <div class="space-y-4">

@@ -8,6 +8,8 @@ enum QueueStatus: string
     case Waiting = 'WAITING';
     case Called = 'CALLED';
     case InProgress = 'IN_PROGRESS';
+    case Paused = 'PAUSED';
+    case Interrupted = 'INTERRUPTED';
     case Completed = 'COMPLETED';
     case Cancelled = 'CANCELLED';
     case Skipped = 'SKIPPED';
@@ -20,6 +22,8 @@ enum QueueStatus: string
             self::Waiting => 'Menunggu',
             self::Called => 'Dipanggil',
             self::InProgress => 'Diperiksa',
+            self::Paused => 'Dijeda',
+            self::Interrupted => 'Pelayanan terinterupsi',
             self::Completed => 'Selesai',
             self::Cancelled => 'Dibatalkan',
             self::Skipped => 'Dilewati',
@@ -29,6 +33,6 @@ enum QueueStatus: string
 
     public function isTerminal(): bool
     {
-        return in_array($this, [self::Completed, self::Cancelled, self::NoShow], true);
+        return in_array($this, [self::Completed, self::Cancelled, self::NoShow, self::Interrupted], true);
     }
 }

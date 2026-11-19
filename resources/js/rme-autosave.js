@@ -171,6 +171,37 @@ if (typeof document !== 'undefined') {
         if (client?.unsaved && ! window.confirm('Ada perubahan atau foto yang belum tersimpan. Tinggalkan halaman?')) event.preventDefault();
     });
     document.addEventListener('submit', async (event) => {
+        const form = event.target.closest('[data-care-form]');
+        if (! form) return;
+        event.preventDefault();
+        if (form.dataset.submitting === 'true') return;
+        const feedback = form.querySelector('[data-care-error]');
+        const button = event.submitter;
+        feedback.textContent = '';
+        form.dataset.submitting = 'true';
+        if (button) button.disabled = true;
+        try {
+            if (client?.hasPendingPhotos()) throw new Error('Simpan foto melalui tombol Simpan draft sebelum mengubah alur pelayanan.');
+            if (client && ! await client.flush()) throw new Error('Simpan perubahan RME sebelum mengubah alur pelayanan.');
+            if (client?.form.elements.record_version && form.elements.record_version) form.elements.record_version.value = client.form.elements.record_version.value;
+            if (client) client.form.inert = true;
+            const response = await fetch(form.action, { method: 'POST', body: new FormData(form), credentials: 'same-origin',
+                headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(30000) });
+            const payload = await response.json().catch(() => ({}));
+            if (! response.ok) {
+                if (response.status === 409) form.querySelector('[data-care-review]')?.classList.remove('hidden');
+                throw new Error(Object.values(payload.errors ?? {}).flat()[0] ?? payload.message ?? 'Perubahan belum dikonfirmasi. Pertahankan isian dan coba lagi.');
+            }
+            if (client) { client.dirty = false; client.submitting = true; }
+            window.location.assign(payload.redirect || window.location.href);
+        } catch (error) {
+            feedback.textContent = error.message;
+            if (client) client.form.inert = false;
+            if (button) button.disabled = false;
+            form.dataset.submitting = 'false';
+        }
+    });
+    document.addEventListener('submit', async (event) => {
         const form = event.target.closest('[data-allergy-form]');
         if (! form) return;
         event.preventDefault();
@@ -192,7 +223,10 @@ if (typeof document !== 'undefined') {
                 headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(15000),
             });
             const payload = await response.json();
-            if (! response.ok) throw new Error(Object.values(payload.errors ?? {}).flat()[0] ?? 'Data alergi belum tersimpan. Coba lagi.');
+            if (! response.ok) {
+                if (response.status === 409) form.querySelector('[data-allergy-review]')?.classList.remove('hidden');
+                throw new Error(Object.values(payload.errors ?? {}).flat()[0] ?? payload.message ?? 'Data alergi belum tersimpan. Coba lagi.');
+            }
             window.location.reload();
         } catch (error) {
             feedback.textContent = error.message;

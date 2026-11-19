@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex w-full items-center justify-between gap-4">
+        <div class="flex w-full flex-wrap items-center justify-between gap-3">
             <div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Manajemen tim</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Dokter & resepsionis</h1></div>
             <x-clinic-button href="{{ route('admin.staff.create') }}" variant="primary" wire:navigate>+ Tambah staf</x-clinic-button>
         </div>
@@ -9,8 +9,8 @@
     <div class="mb-7"><h2 class="text-2xl font-extrabold text-clinic-950">Tim klinik</h2><p class="mt-2 text-sm text-slate-500">Kelola akses operasional dan profil dokter tanpa membuka data medis kepada admin.</p></div>
 
     <div class="clinic-card overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="clinic-table w-full">
+        <div class="overflow-x-auto clinic-table-scroll" tabindex="0" role="region" aria-label="Tabel data, geser untuk melihat kolom lainnya">
+            <table class="clinic-table w-full min-w-[56rem]"><colgroup><col><col style="width:10rem"><col style="width:12rem"><col style="width:8rem"><col style="width:6rem"></colgroup>
                 <thead><tr><th>Staf</th><th>Peran</th><th>Spesialisasi</th><th>Status</th><th class="text-right">Aksi</th></tr></thead>
                 <tbody>
                     @forelse ($staffMembers as $staff)

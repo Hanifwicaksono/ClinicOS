@@ -2,7 +2,11 @@
     <div class="mx-auto max-w-4xl px-5 py-12 sm:px-8">
         <div class="mb-8"><a href="{{ route('public.clinic.show', $clinic) }}" class="text-sm font-bold text-clinic-600">← {{ $clinic->name }}</a><h1 class="mt-4 text-3xl font-extrabold text-clinic-950">Buat booking kunjungan</h1><p class="mt-2 text-slate-500">Pilih layanan dan sesi praktik, lalu lengkapi data diri Anda.</p></div>
         @if($errors->any())<div class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-5 text-sm text-red-700"><p class="font-bold">Periksa kembali data berikut:</p><ul class="mt-2 list-disc space-y-1 pl-5">@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
+        @if($patientProfile && ! $patientProfile->is_active)
+            <div role="status" class="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-900">Profil pasien Anda di klinik ini nonaktif. Hubungi staf klinik untuk meninjau dan mengaktifkan kembali profil sebelum membuat booking baru. Booking sebelumnya tetap berlaku.</div>
+        @endif
         <form method="POST" action="{{ route('public.booking.store', $clinic) }}" class="space-y-6" x-data="{ submitting: false }" @submit="submitting = true">@csrf<input type="hidden" name="idempotency_key" value="{{ old('idempotency_key', $idempotencyKey) }}">
+            <fieldset class="space-y-6" @disabled($patientProfile && ! $patientProfile->is_active)>
             <section class="clinic-card p-6 sm:p-8"><h2 class="text-lg font-extrabold text-clinic-950">1. Jadwal kunjungan</h2><x-booking-fields :doctors="$clinic->doctors" :timezone="$clinic->settings?->timezone ?? 'Asia/Jakarta'" /></section>
             <section class="clinic-card p-6 sm:p-8"><h2 class="text-lg font-extrabold text-clinic-950">2. Data pasien</h2><p class="mt-2 text-sm text-slate-500">Data ini digunakan klinik untuk menyiapkan kunjungan Anda.</p><div class="mt-6 grid gap-5 md:grid-cols-2">
                 <div class="md:col-span-2"><label class="clinic-label" for="name">Nama lengkap</label><input class="clinic-input" id="name" name="name" value="{{ old('name', $patientProfile?->name ?? auth()->user()->name) }}" required></div>
@@ -12,6 +16,7 @@
                 <div class="md:col-span-2"><label class="clinic-label" for="notes">Catatan (opsional)</label><textarea class="clinic-input" id="notes" name="notes" rows="3">{{ old('notes') }}</textarea></div>
             </div></section>
             <div class="flex items-center justify-between gap-4"><p class="text-xs leading-5 text-slate-500">Simpan halaman konfirmasi setelah booking berhasil untuk melihat status atau membatalkan.</p><x-clinic-button type="submit" variant="primary" class="shrink-0 disabled:opacity-60" x-bind:disabled="submitting"><span x-show="!submitting">Konfirmasi booking</span><span x-show="submitting" x-cloak>Memproses…</span></x-clinic-button></div>
+            </fieldset>
         </form>
     </div>
 </x-public-layout>

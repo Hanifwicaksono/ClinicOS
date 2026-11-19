@@ -1,0 +1,7 @@
+<x-app-layout>
+    <x-slot name="header"><h1 class="text-xl font-extrabold text-clinic-950">{{ auth()->user()->hasRole('Patient') ? 'Resep saya' : 'Resep pasien' }}</h1></x-slot>
+    <x-page-intro eyebrow="Dokumen resep" title="Resep yang telah diterbitkan" description="Periksa status resep sebelum mencetak atau menyerahkannya. Resep yang ditarik atau diganti akan ditandai dengan jelas." />
+    <section aria-label="Daftar resep" class="space-y-3">@forelse($documents as $document)
+    <a class="clinic-list-link" href="{{ route('clinical-documents.show',$document) }}"><div class="min-w-0"><p class="font-extrabold text-clinic-950">{{ $document->patient->name }}</p><p class="mt-2 text-sm text-slate-500">{{ $document->document_number }} · Versi {{ $document->version_number }}</p></div><div class="flex shrink-0 items-center gap-4"><x-status-badge :status="$document->status" /><span class="text-sm font-bold text-clinic-700">Lihat resep <span aria-hidden="true">→</span></span></div></a>
+    @empty<div class="clinic-card px-6 py-12 text-center"><h2 class="font-extrabold text-clinic-950">Belum ada resep yang tersedia</h2><p class="mx-auto mt-2 max-w-lg text-sm leading-6 text-slate-500">{{ auth()->user()->hasRole('Doctor') ? 'Terbitkan resep dari rekam medis pasien yang sudah difinalisasi.' : 'Resep muncul setelah dokter menerbitkan dan merilisnya untuk pasien.' }}</p></div>@endforelse</section><div class="mt-6">{{ $documents->links() }}</div>
+</x-app-layout>

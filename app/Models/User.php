@@ -179,6 +179,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return [
             'email_verified_at' => 'datetime',
+            'reminder_preferences' => 'array',
             'terms_accepted_at' => 'datetime',
             'account_type' => UserAccountType::class,
             'password' => 'hashed',

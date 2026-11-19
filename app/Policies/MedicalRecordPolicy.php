@@ -23,7 +23,10 @@ class MedicalRecordPolicy
     {
         return $user->hasRole('Doctor')
             && $user->can('medical_record.view')
-            && $medicalRecord->doctor->user_id === $user->id;
+            && $user->clinic_id === $medicalRecord->visit->clinic_id
+            && $medicalRecord->patient_id === $medicalRecord->visit->patient_id
+            && $medicalRecord->doctor_id === $medicalRecord->visit->doctor_id
+            && ($medicalRecord->doctor->user_id === $user->id || $medicalRecord->visit->hasClinicalLead($user, 'CARE_COORDINATION'));
     }
 
     /**

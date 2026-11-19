@@ -11,6 +11,10 @@
         </div>
     </x-slot>
 
+
+
+
+
     <div data-realtime-queue-channel="clinic.{{ auth()->user()->clinic_id }}.queues">
         <div class="mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
@@ -60,12 +64,12 @@
                         @foreach($calledQueues as $calledQueue)
                             <article data-queue-id="{{ $calledQueue->id }}" class="rounded-2xl border border-white/10 bg-white/10 p-4 transition">
                                 
-                                <div class="relative flex min-h-10 items-center justify-center">
-                                    <span class="font-display text-center text-2xl font-extrabold whitespace-nowrap">
+                                <div class="flex min-h-10 flex-wrap items-center justify-between gap-3">
+                                    <span class="clinic-queue-number text-2xl">
                                         {{ $calledQueue->display_number }}
                                     </span>
 
-                                    <div class="absolute right-0">
+                                    <div class="shrink-0">
                                         <x-status-badge :status="$calledQueue->status" />
                                     </div>
                                 </div>
@@ -101,7 +105,7 @@
                                 <div @class([
                                     'flex h-24 min-w-32 shrink-0 items-center justify-center
                                     whitespace-nowrap rounded-3xl px-4
-                                    font-display text-3xl font-extrabold text-center',
+                                    clinic-queue-number text-3xl text-center',
                                     'bg-white/10 text-white ring-1 ring-white/10' => $isCalled,
                                     'bg-amber-50 text-amber-800 ring-1 ring-amber-200' => ! $isCalled,
                                 ])>
@@ -181,8 +185,8 @@
                         @php
                             $queueTime = $queue->checked_in_at ? \Carbon\CarbonImmutable::parse($queue->checked_in_at)->setTimezone($timezone)->format('H:i') : null;
                         @endphp
-                        <div data-queue-id="{{ $queue->id }}" class="grid gap-4 p-5 transition md:grid-cols-[90px_1fr_1fr_auto] md:items-center">
-                            <div><p class="font-display text-2xl font-extrabold text-clinic-700">{{ $queue->display_number }}</p><div class="mt-2"><x-status-badge :status="$queue->status" /></div></div>
+                        <div data-queue-id="{{ $queue->id }}" class="grid gap-4 p-5 transition xl:grid-cols-[10rem_minmax(0,1fr)_minmax(0,1fr)_12rem] xl:items-start">
+                            <div><p class="clinic-queue-number text-xl text-clinic-700">{{ $queue->display_number }}</p><div class="mt-2"><x-status-badge :status="$queue->status" /></div></div>
                             <div class="min-w-0">
                                 <p class="truncate font-bold text-slate-900">{{ $queue->appointment->patient->name }}</p>
                                 <p class="mt-1 truncate text-xs text-slate-500">{{ $queue->appointment->booking_code }} · {{ $queue->appointment->service_name }}</p>

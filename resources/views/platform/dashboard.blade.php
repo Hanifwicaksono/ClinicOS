@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex w-full items-center justify-between gap-4">
+        <div class="flex w-full flex-wrap items-center justify-between gap-3">
             <div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Platform</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Dashboard platform</h1></div>
             <x-clinic-button href="{{ route('platform.tenants.index') }}" variant="secondary" class="hidden sm:inline-flex" wire:navigate>Cari tenant</x-clinic-button>
         </div>

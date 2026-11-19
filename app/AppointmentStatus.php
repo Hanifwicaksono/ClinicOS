@@ -8,4 +8,5 @@ enum AppointmentStatus: string
     case Cancelled = 'CANCELLED';
     case Completed = 'COMPLETED';
     case NoShow = 'NO_SHOW';
+    case Interrupted = 'INTERRUPTED';
 }

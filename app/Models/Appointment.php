@@ -25,6 +25,7 @@ class Appointment extends Model
             'service_price' => 'decimal:2',
             'status' => AppointmentStatus::class,
             'cancelled_at' => 'datetime',
+            'entitlement_started_at' => 'datetime',
         ];
     }
 
@@ -66,5 +67,23 @@ class Appointment extends Model
     public function visit(): HasOne
     {
         return $this->hasOne(Visit::class);
+    }
+
+    public function replacedBy(): HasOne
+    {
+        return $this->hasOne(AppointmentReplacement::class, 'old_appointment_id');
+    }
+
+    public function replacementOf(): HasOne
+    {
+        return $this->hasOne(AppointmentReplacement::class, 'new_appointment_id');
+    }
+
+    public function replacementVersion(): string
+    {
+        return hash('sha256', json_encode([
+            $this->only(['id', 'clinic_id', 'patient_id', 'doctor_id', 'service_id', 'doctor_schedule_id', 'appointment_date', 'status', 'service_price']),
+            $this->queue?->only(['id', 'status', 'checked_in_at', 'called_at', 'skipped_at']), $this->visit()->exists(),
+        ], JSON_THROW_ON_ERROR));
     }
 }

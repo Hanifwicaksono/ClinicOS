@@ -7,15 +7,22 @@ use App\Http\Controllers\Admin\DoctorScheduleController;
 use App\Http\Controllers\Admin\RealtimeRevocationController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\AppointmentReplacementController;
+use App\Http\Controllers\CareContinuityController;
+use App\Http\Controllers\ClinicalDocumentController;
+use App\Http\Controllers\ClinicReportController;
 use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
 use App\Http\Controllers\Doctor\MedicalRecordController as DoctorMedicalRecordController;
 use App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
+use App\Http\Controllers\DoctorAbsenceController;
 use App\Http\Controllers\DokuNotificationController;
+use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Onboarding\ClinicController as OnboardingClinicController;
 use App\Http\Controllers\Onboarding\PlanController as OnboardingPlanController;
 use App\Http\Controllers\Patient\AppointmentController as PatientAppointmentController;
 use App\Http\Controllers\Patient\DashboardController as PatientDashboardController;
+use App\Http\Controllers\PatientBillingController;
 use App\Http\Controllers\Platform\DashboardController as PlatformDashboardController;
 use App\Http\Controllers\Platform\PaymentController as PlatformPaymentController;
 use App\Http\Controllers\Platform\SubscriptionGrantController as PlatformSubscriptionGrantController;
@@ -179,6 +186,78 @@ Route::domain($baseDomain)->group(function (): void {
         Route::get('queues', [QueueController::class, 'index'])->name('queues.index');
     });
 
+    Route::middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin|Receptionist', 'subscription.writable'])->group(function () {
+        Route::get('appointments/{appointment}/replace', [AppointmentReplacementController::class, 'create'])->name('appointments.replace.create');
+        Route::post('appointments/{appointment}/replace/preview', [AppointmentReplacementController::class, 'preview'])->name('appointments.replace.preview');
+        Route::post('appointments/{appointment}/replace', [AppointmentReplacementController::class, 'store'])->name('appointments.replace.store');
+    });
+    Route::prefix('doctor-absences')->name('doctor-absences.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin|Receptionist|Doctor', 'subscription.writable'])->group(function () {
+        Route::get('/', [DoctorAbsenceController::class, 'index'])->name('index');
+        Route::post('/', [DoctorAbsenceController::class, 'store'])->name('store');
+        Route::get('{absence}', [DoctorAbsenceController::class, 'show'])->name('show');
+        Route::post('{absence}/{action}', [DoctorAbsenceController::class, 'change'])->whereIn('action', ['verify', 'request-cancel', 'reopen'])->name('change');
+        Route::post('{absence}/appointments/{appointment}/contact', [DoctorAbsenceController::class, 'contact'])->name('contact');
+    });
+
+    Route::prefix('clinic-reports')->name('clinic-reports.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin|Receptionist', 'subscription.writable'])->group(function (): void {
+        Route::get('/', [ClinicReportController::class, 'index'])->name('index');
+        Route::post('/', [ClinicReportController::class, 'store'])->name('store');
+        Route::get('{report}', [ClinicReportController::class, 'show'])->name('show');
+        Route::get('{report}/download', [ClinicReportController::class, 'download'])->name('download');
+    });
+
+    Route::prefix('patient-billing')->name('patient-billing.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin|Receptionist|Doctor|Patient', 'subscription.writable'])->group(function (): void {
+        Route::get('/', [PatientBillingController::class, 'index'])->name('index');
+        Route::post('appointments/{appointment}/open', [PatientBillingController::class, 'open'])->name('open');
+        Route::get('visits/{visit}/clinical-review', [PatientBillingController::class, 'clinicalForm'])->name('clinical-form');
+        Route::post('visits/{visit}/clinical-review', [PatientBillingController::class, 'clinicalReview'])->name('clinical-review');
+        Route::get('closings', [PatientBillingController::class, 'closings'])->name('closings.index');
+        Route::post('closings', [PatientBillingController::class, 'close'])->name('closings.store');
+        Route::get('closings/{closing}', [PatientBillingController::class, 'closing'])->name('closings.show');
+        Route::post('closings/{closing}/{action}', [PatientBillingController::class, 'reviewClosing'])->whereIn('action', ['approve', 'reject'])->name('closings.review');
+        Route::get('bills/{bill}', [PatientBillingController::class, 'show'])->name('show');
+        Route::post('bills/{bill}/transactions', [PatientBillingController::class, 'receive'])->name('receive');
+        Route::post('bills/{bill}/requests', [PatientBillingController::class, 'propose'])->name('propose');
+        Route::post('bills/{bill}/correction', [PatientBillingController::class, 'correct'])->name('correct');
+        Route::post('transactions/{transaction}/{action}', [PatientBillingController::class, 'transaction'])->whereIn('action', ['verify', 'fail'])->name('transaction');
+        Route::post('requests/{proposal}/decide/{action}', [PatientBillingController::class, 'decide'])->whereIn('action', ['approve', 'reject'])->name('decide');
+        Route::post('requests/{proposal}/refund', [PatientBillingController::class, 'refund'])->name('refund');
+        Route::post('documents/{document}/print', [PatientBillingController::class, 'printDocument'])->name('documents.print');
+    });
+
+    Route::prefix('clinical-documents')->name('clinical-documents.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Doctor|Receptionist|Patient', 'subscription.writable'])->group(function (): void {
+        Route::get('/', [ClinicalDocumentController::class, 'index'])->name('index');
+        Route::get('visits/{visit}', [ClinicalDocumentController::class, 'forVisit'])->name('for-visit');
+        Route::get('visits/{visit}/preview', [ClinicalDocumentController::class, 'preview'])->name('preview');
+        Route::post('visits/{visit}/issue', [ClinicalDocumentController::class, 'issue'])->name('issue');
+        Route::get('{document}', [ClinicalDocumentController::class, 'show'])->whereNumber('document')->name('show');
+        Route::post('{document}/print', [ClinicalDocumentController::class, 'print'])->name('print');
+        Route::post('{document}/handover', [ClinicalDocumentController::class, 'handover'])->name('handover');
+        Route::post('{document}/{action}', [ClinicalDocumentController::class, 'change'])->whereIn('action', ['release', 'recall'])->name('change');
+    });
+    Route::prefix('follow-ups')->name('follow-ups.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin|Receptionist|Doctor|Patient', 'subscription.writable'])->group(function (): void {
+        Route::get('/', [FollowUpController::class, 'index'])->name('index');
+        Route::get('visits/{visit}/create', [FollowUpController::class, 'create'])->name('create');
+        Route::post('visits/{visit}', [FollowUpController::class, 'store'])->name('store');
+        Route::get('{followUp}', [FollowUpController::class, 'show'])->whereNumber('followUp')->name('show');
+        Route::post('{followUp}/book', [FollowUpController::class, 'book'])->name('book');
+        Route::post('{followUp}/print', [FollowUpController::class, 'print'])->name('print');
+        Route::post('{followUp}/{action}', [FollowUpController::class, 'change'])->whereIn('action', ['revise', 'transfer-request', 'transfer-accept', 'transfer-decline', 'decline', 'cancel', 'contact', 'complete'])->name('change');
+    });
+
+    Route::prefix('care-continuity')->name('care-continuity.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Clinic Admin|Receptionist|Doctor', 'subscription.writable'])->group(function (): void {
+        Route::get('/', [CareContinuityController::class, 'index'])->name('index');
+        Route::get('visits/{visit}', [CareContinuityController::class, 'show'])->name('show');
+        Route::post('visits/{visit}/workflow/{action}', [CareContinuityController::class, 'workflow'])->whereIn('action', ['pause', 'resume', 'ready', 'clear-ready', 'interrupt', 'note'])->name('workflow');
+        Route::post('visits/{visit}/leads', [CareContinuityController::class, 'appoint'])->name('leads.appoint');
+        Route::post('visits/{visit}/leads/{lead}/revoke', [CareContinuityController::class, 'revoke'])->name('leads.revoke');
+        Route::post('visits/{visit}/handoffs', [CareContinuityController::class, 'requestHandoff'])->name('handoffs.store');
+        Route::get('handoffs/{continuation}', [CareContinuityController::class, 'handoff'])->name('handoffs.show');
+        Route::post('handoffs/{continuation}/respond/{action}', [CareContinuityController::class, 'respond'])->whereIn('action', ['accept', 'decline', 'cancel'])->name('handoffs.respond');
+        Route::post('handoffs/{continuation}/book', [CareContinuityController::class, 'book'])->name('handoffs.book');
+        Route::post('tasks/{task}/{action}', [CareContinuityController::class, 'task'])->whereIn('action', ['status', 'resolve', 'cancel'])->name('tasks.change');
+    });
+
     Route::prefix('doctor')->name('doctor.')->middleware(['auth', 'verified', 'onboarding.complete', 'role:Doctor', 'subscription.writable'])->group(function () {
         Route::get('queues', [QueueController::class, 'index'])->name('queues.index');
         Route::get('medical-records', [DoctorMedicalRecordController::class, 'index'])->name('medical-records.index');
@@ -190,6 +269,7 @@ Route::domain($baseDomain)->group(function (): void {
         Route::post('visits/{visit}/allergies', [DoctorVisitController::class, 'storeAllergy'])->name('visits.allergies.store');
         Route::put('visits/{visit}/allergies/{allergy}', [DoctorVisitController::class, 'updateAllergy'])->name('visits.allergies.update');
         Route::put('visits/{visit}/complete', [DoctorVisitController::class, 'complete'])->name('visits.complete');
+        Route::put('visits/{visit}/finalize-interruption', [DoctorVisitController::class, 'finalizeInterruption'])->name('visits.finalize-interruption');
         Route::put('visits/{visit}/correct', [DoctorVisitController::class, 'correct'])->name('visits.correct');
     });
 
@@ -206,6 +286,8 @@ Route::domain($baseDomain)->group(function (): void {
         Route::resource('appointments', PatientAppointmentController::class)->only(['index', 'create', 'show']);
         Route::post('appointments/{appointment}/cancel', [PatientAppointmentController::class, 'cancel'])->name('appointments.cancel');
     });
+
+    Route::post('notifications/preferences', [NotificationController::class, 'preferences'])->middleware(['auth', 'verified'])->name('notifications.preferences');
 
     Route::view('profile', 'profile')
         ->middleware(['auth'])

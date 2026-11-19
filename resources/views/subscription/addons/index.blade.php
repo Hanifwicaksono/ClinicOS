@@ -38,7 +38,7 @@
 
         <section class="clinic-card overflow-hidden">
             <div class="border-b border-slate-100 p-6"><h2 class="font-bold text-clinic-950">Riwayat add-on</h2></div>
-            <div class="overflow-x-auto"><table class="clinic-table w-full"><thead><tr><th>Periode</th><th>Nominal</th><th>Status</th><th>Invoice</th></tr></thead><tbody>
+            <div class="overflow-x-auto clinic-table-scroll" tabindex="0" role="region" aria-label="Tabel data, geser untuk melihat kolom lainnya"><table class="clinic-table w-full"><thead><tr><th>Periode</th><th>Nominal</th><th>Status</th><th>Invoice</th></tr></thead><tbody>
                 @forelse ($periods as $period)
                     <tr><td>{{ $period->starts_at->format('d M Y') }} – {{ $period->ends_at->subSecond()->format('d M Y') }}</td><td>Rp {{ number_format($period->amount, 0, ',', '.') }}</td><td>{{ $period->revoked_at ? 'Refunded' : ($period->ends_at->isPast() ? 'Berakhir' : 'Aktif') }}</td><td><a class="font-bold text-clinic-600" href="{{ route('subscription.payments.show', $period->payment) }}">Lihat invoice</a></td></tr>
                 @empty

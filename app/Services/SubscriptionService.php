@@ -449,6 +449,9 @@ class SubscriptionService
         Appointment $appointment,
         ?CarbonImmutable $at = null,
     ): void {
+        if (app(BookingService::class)->protectedContinuation($appointment)) {
+            return;
+        }
         $at ??= CarbonImmutable::now();
         $subscription = $this->refreshStatus($clinic, $at);
 
@@ -474,7 +477,7 @@ class SubscriptionService
             ->skip($limit - 1)
             ->value('started_at');
 
-        if ($quotaReachedAt !== null && $appointment->created_at->lessThanOrEqualTo($quotaReachedAt)) {
+        if ($quotaReachedAt !== null && ($appointment->entitlement_started_at ?? $appointment->created_at)->lessThanOrEqualTo($quotaReachedAt)) {
             return;
         }
 
@@ -538,6 +541,7 @@ class SubscriptionService
         $localAt = $at->setTimezone($this->timezone($clinic));
 
         return $clinic->visits()
+            ->whereNull('quota_origin_visit_id')
             ->where('started_at', '<=', $at->utc())
             ->whereBetween('started_at', [
                 $localAt->startOfMonth()->utc(),

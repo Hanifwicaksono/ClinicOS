@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\DentalCondition;
+use App\Http\Controllers\CareContinuityController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Doctor\CompleteVisitRequest;
 use App\Http\Requests\Doctor\CorrectMedicalRecordRequest;
+use App\Http\Requests\Doctor\FinalizeInterruptionRequest;
 use App\Http\Requests\Doctor\SaveMedicalRecordRequest;
 use App\Http\Requests\Doctor\SavePatientAllergyRequest;
 use App\Models\PatientAllergy;
@@ -13,6 +15,7 @@ use App\Models\Queue;
 use App\Models\Visit;
 use App\Services\AddonService;
 use App\Services\VisitWorkflowService;
+use App\VisitStatus;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -43,13 +46,17 @@ class VisitController extends Controller
     public function show(Visit $visit): View
     {
         $this->authorize('view', $visit);
+        if ($visit->doctor->user_id !== auth()->id() || $visit->status === VisitStatus::Paused) {
+            return app(CareContinuityController::class)->show(request(), $visit);
+        }
         $visit->load([
-            'clinic', 'appointment', 'patient.criticalAllergies', 'patient.allergies', 'doctor.user', 'service', 'queue',
+            'clinic', 'appointment', 'patient.criticalAllergies', 'patient.allergies.recordedBy', 'doctor.user', 'service', 'queue',
             'medicalRecord.vitalSign', 'medicalRecord.diagnoses', 'medicalRecord.treatments',
             'medicalRecord.prescription.items', 'medicalRecord.revisions.correctedBy',
         ]);
         $this->authorize('view', $visit->medicalRecord);
         $history = Visit::query()
+            ->where('clinic_id', $visit->clinic_id)
             ->where('patient_id', $visit->patient_id)
             ->where('doctor_id', $visit->doctor_id)
             ->where('id', '!=', $visit->id)
@@ -91,6 +98,7 @@ class VisitController extends Controller
                 'substance' => $allergy->substance,
                 'reaction' => $allergy->reaction,
                 'severity' => $allergy->severity->label(),
+                'requires_review' => $allergy->lineage_id === null,
             ])->all();
 
         return view('doctor.visits.show', compact('visit', 'history', 'dentalChart', 'criticalAllergies', 'canEditOdontogram', 'hasOdontogram'));
@@ -154,6 +162,15 @@ class VisitController extends Controller
 
         return redirect()->route('doctor.visits.show', $visit)
             ->with('status', 'Kunjungan selesai dan rekam medis telah difinalisasi.');
+    }
+
+    public function finalizeInterruption(FinalizeInterruptionRequest $request, Visit $visit, VisitWorkflowService $workflow): RedirectResponse|JsonResponse
+    {
+        $workflow->finalizeInterruption($visit, $request->user(), $request->validated());
+        $url = route('doctor.visits.show', $visit);
+
+        return $request->expectsJson() ? response()->json(['message' => 'Dokumentasi interupsi final; pelayanan tetap terinterupsi.', 'redirect' => $url])->header('Cache-Control', 'no-store')
+            : redirect($url)->with('status', 'Dokumentasi interupsi final; pelayanan tetap terinterupsi.');
     }
 
     public function storeAllergy(SavePatientAllergyRequest $request, Visit $visit, VisitWorkflowService $workflow): JsonResponse

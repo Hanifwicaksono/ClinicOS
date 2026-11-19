@@ -9,3 +9,6 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('subscriptions:queue-reminders')->hourly()->withoutOverlapping();
+Schedule::command('care:queue-reminders')->everyMinute()->withoutOverlapping();
+
+Schedule::command('patients:queue-reminders')->everyMinute()->withoutOverlapping();

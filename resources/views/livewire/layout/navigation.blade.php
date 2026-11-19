@@ -45,17 +45,15 @@ new class extends Component
         </div>
 
         <div class="border-b border-slate-100 px-6 py-5">
-            <p class="truncate text-sm font-bold text-slate-900">{{ auth()->user()->hasRole('Platform Admin') ? 'ClinicOS Platform' : (auth()->user()->clinic?->name ?? 'Siapkan klinik Anda') }}</p>
+            <p class="truncate text-sm font-bold text-slate-900">{{ auth()->user()->hasRole('Platform Admin') ? 'ClinicOS Platform' : (auth()->user()->clinic?->name ?? (auth()->user()->hasRole('Patient') ? 'Portal pasien' : 'Siapkan klinik Anda')) }}</p>
             @php
-                $displayRole = auth()->user()->roles->first()?->name ?? 'Pengguna';
-                if ($displayRole === 'Patient') {
-                    $displayRole = 'Pasien';
-                }
+                $displayRole = collect(['Platform Admin'=>'Admin platform', 'Clinic Admin'=>'Admin klinik', 'Receptionist'=>'Resepsionis', 'Doctor'=>'Dokter', 'Patient'=>'Pasien'])
+                    ->first(fn ($label, $role) => auth()->user()->hasRole($role)) ?? 'Pengguna';
             @endphp
             <p class="mt-1 text-xs text-slate-500">{{ $displayRole }}</p>
         </div>
 
-        <nav class="flex-1 space-y-1 overflow-y-auto px-4 py-5">
+        <nav aria-label="Menu workspace" data-workspace-nav class="flex-1 space-y-5 overflow-y-auto px-4 py-5">
             @php
                 $links = auth()->user()->isClinicOwner() && ! auth()->user()->subscriptionExists()
                     ? [
@@ -77,19 +75,19 @@ new class extends Component
                         ['route' => 'admin.services.index', 'match' => 'admin.services.*', 'label' => 'Layanan', 'icon' => 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10h6m-3-3v6'],
                         ['route' => 'admin.doctor-schedules.index', 'match' => 'admin.doctor-schedules.*', 'label' => 'Jadwal dokter', 'icon' => 'M3 9h18M7 3v4m10-4v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm3 8h3v3H8v-3Z'],
                         ['route' => 'receptionist.patients.index', 'match' => 'receptionist.patients.*', 'label' => 'Pasien', 'icon' => 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z'],
-                        ['route' => 'receptionist.appointments.index', 'match' => 'receptionist.appointments.*', 'label' => 'Booking & antrean', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6'],
+                        ['route' => 'receptionist.appointments.index', 'match' => ['receptionist.appointments.*','appointments.replace.*'], 'label' => 'Booking & antrean', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6'],
                         ['route' => 'receptionist.queues.index', 'match' => '*.queues.*', 'label' => 'Antrean hari ini', 'icon' => 'M5 6h14M5 12h14M5 18h9'],
                         ['route' => 'admin.audit-logs.index', 'match' => 'admin.audit-logs.*', 'label' => 'Audit aktivitas', 'icon' => 'M4 4h16v16H4V4Zm4 5h8m-8 4h8m-8 4h5'],
                     ]
                     : (auth()->user()->hasRole('Receptionist') ? [
                         ['route' => 'receptionist.dashboard', 'match' => 'receptionist.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
                         ['route' => 'receptionist.patients.index', 'match' => 'receptionist.patients.*', 'label' => 'Pasien', 'icon' => 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z'],
-                        ['route' => 'receptionist.appointments.index', 'match' => 'receptionist.appointments.*', 'label' => 'Booking & antrean', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6'],
+                        ['route' => 'receptionist.appointments.index', 'match' => ['receptionist.appointments.*','appointments.replace.*'], 'label' => 'Booking & antrean', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm4 8h6'],
                         ['route' => 'receptionist.queues.index', 'match' => '*.queues.*', 'label' => 'Antrean hari ini', 'icon' => 'M5 6h14M5 12h14M5 18h9'],
                     ] : (auth()->user()->hasRole('Doctor') ? [
                         ['route' => 'doctor.dashboard', 'match' => 'doctor.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
                         ['route' => 'doctor.queues.index', 'match' => 'doctor.queues.*', 'label' => 'Antrean saya', 'icon' => 'M5 6h14M5 12h14M5 18h9'],
-                        ['route' => 'doctor.medical-records.index', 'match' => 'doctor.medical-records.*', 'label' => 'Rekam medis', 'icon' => 'M6 3h9l3 3v15H6V3Zm8 0v4h4M9 11h6m-6 4h6m-6 4h4'],
+                        ['route' => 'doctor.medical-records.index', 'match' => ['doctor.medical-records.*', 'doctor.visits.*', 'patient-billing.*'], 'label' => 'Rekam medis', 'icon' => 'M6 3h9l3 3v15H6V3Zm8 0v4h4M9 11h6m-6 4h6m-6 4h4'],
                     ] : (auth()->user()->hasRole('Patient') ? [
                         ['route' => 'patient.dashboard', 'match' => 'patient.dashboard', 'label' => 'Dashboard', 'icon' => 'M4 13h6V4H4v9Zm10 7h6V11h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z'],
                         ['route' => 'patient.appointments.index', 'match' => 'patient.appointments.*', 'label' => 'Booking saya', 'icon' => 'M6 3v3m12-3v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z'],
@@ -101,7 +99,7 @@ new class extends Component
                     array_splice($links, 1, 0, [[
                         'route' => 'subscription.payments.index',
                         'match' => 'subscription.payments.*',
-                        'label' => 'Subscription',
+                        'label' => 'Paket klinik',
                         'icon' => 'M4 7h16M4 12h16M4 17h10',
                     ], [
                         'route' => 'subscription.addons.index',
@@ -110,20 +108,67 @@ new class extends Component
                         'icon' => 'M4 6h16M4 12h16M4 18h16',
                     ]]);
                 }
+                $needsOnboarding = auth()->user()->isClinicOwner() && ! auth()->user()->subscriptionExists();
+                if (! $needsOnboarding && ! auth()->user()->hasRole('Platform Admin')) {
+                    $isOperations = auth()->user()->hasAnyRole(['Clinic Admin', 'Receptionist']);
+                    $isDoctor = ! $isOperations && auth()->user()->hasRole('Doctor');
+                    $isPatient = ! $isOperations && ! $isDoctor && auth()->user()->hasRole('Patient');
+                    if ($isOperations || $isDoctor) {
+                        $links[] = ['route'=>'care-continuity.index', 'match'=>'care-continuity.*', 'label'=>'Tugas pelayanan', 'icon'=>'M9 5H5v16h14V5h-4M9 3h6v4H9V3Zm-1 9h8m-8 4h5'];
+                        $links[] = ['route'=>'doctor-absences.index', 'match'=>'doctor-absences.*', 'label'=>'Dokter berhalangan', 'icon'=>'M3 9h18M7 3v4m10-4v4M5 5h14v16H5V5m4 8 6 5m0-5-6 5'];
+                    }
+                    if ($isOperations || $isDoctor || $isPatient) {
+                        $links[] = ['route'=>'follow-ups.index', 'match'=>'follow-ups.*', 'label'=>$isPatient?'Kontrol saya':'Kontrol pasien', 'icon'=>'M4 5h16v16H4V5m4-2v4m8-4v4M4 11h16m-11 5 2 2 4-4'];
+                    }
+                    if (auth()->user()->hasAnyRole(['Receptionist','Doctor','Patient'])) {
+                        $links[] = ['route'=>'clinical-documents.index', 'match'=>'clinical-documents.*', 'label'=>$isPatient?'Resep saya':'Resep pasien', 'icon'=>'M6 3h9l3 3v15H6V3m3 7h6m-6 4h6m-6 4h4'];
+                    }
+                    if ($isOperations || $isPatient) {
+                        $links[] = ['route'=>'patient-billing.index', 'match'=>'patient-billing.*', 'label'=>$isPatient?'Tagihan saya':'Tagihan pasien', 'icon'=>'M5 3h14v18l-3-2-4 2-4-2-3 2V3m4 5h6m-6 4h6'];
+                    }
+                    if ($isOperations) {
+                        $links[] = ['route'=>'clinic-reports.index', 'match'=>'clinic-reports.*', 'label'=>'Laporan klinik', 'icon'=>'M4 3v18h17M8 16v-5m5 5V7m5 9V4'];
+                    }
+                }
+                $links = array_values(array_filter($links, function ($link) {
+                    $user = auth()->user();
+                    return match ($link['route']) {
+                        'care-continuity.index' => $user->can('visit.view'),
+                        'doctor-absences.index' => $user->can('schedule.view'),
+                        'clinic-reports.index' => $user->can('queue.view') || ($user->hasRole('Clinic Admin') && $user->can('revenue.view')),
+                        'patient-billing.index' => $user->hasRole('Patient') || $user->can('appointment.update') || ($user->hasRole('Clinic Admin') && $user->can('revenue.view')),
+                        default => true,
+                    };
+                }));
+                $groupedLinks = collect($links)->groupBy(function ($link) use ($needsOnboarding) {
+                    if ($needsOnboarding) { return 'Mulai di sini'; }
+                    if (str_contains($link['route'], 'dashboard')) { return 'Utama'; }
+                    if (str_starts_with($link['route'], 'platform.')) { return 'Platform'; }
+                    if (str_starts_with($link['route'], 'subscription.')) { return 'Langganan'; }
+                    if (str_starts_with($link['route'], 'patient-billing.') || str_starts_with($link['route'], 'clinic-reports.')) { return 'Keuangan'; }
+                    if (str_starts_with($link['route'], 'admin.')) { return 'Pengaturan klinik'; }
+                    return 'Pelayanan';
+                });
             @endphp
 
-            @foreach ($links as $link)
-                <a href="{{ route($link['route']) }}" wire:navigate @click="open = false" @class([
-                    'flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition',
-                    'bg-clinic-50 text-clinic-700' => request()->routeIs($link['match']),
-                    'text-slate-600 hover:bg-slate-50 hover:text-slate-900' => ! request()->routeIs($link['match']),
+            @foreach (['Mulai di sini','Utama','Pelayanan','Keuangan','Pengaturan klinik','Langganan','Platform'] as $group)
+            @if($groupedLinks->has($group))
+            <div data-nav-group="{{ $group }}"><p class="mb-2 px-3 text-[11px] font-extrabold uppercase tracking-[0.16em] text-slate-500">{{ $group }}</p><div class="space-y-1">
+            @foreach ($groupedLinks[$group] as $link)
+                <a href="{{ route($link['route']) }}" aria-current="{{ request()->routeIs(...(array) $link['match']) ? 'page' : 'false' }}" wire:navigate @click="open = false" @class([
+                    'flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500',
+                    'bg-clinic-50 text-clinic-700' => request()->routeIs(...(array) $link['match']),
+                    'text-slate-600 hover:bg-slate-50 hover:text-slate-900' => ! request()->routeIs(...(array) $link['match']),
                 ])>
                     <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ $link['icon'] }}"/></svg>
                     {{ $link['label'] }}
                 </a>
             @endforeach
+            </div></div>
+            @endif
+            @endforeach
 
-            <a href="{{ route('notifications.index') }}" wire:navigate @click="open = false" @class(['flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition', 'bg-clinic-50 text-clinic-700' => request()->routeIs('notifications.*'), 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' => ! request()->routeIs('notifications.*')])>
+            <a href="{{ route('notifications.index') }}" aria-current="{{ request()->routeIs('notifications.*') ? 'page' : 'false' }}" wire:navigate @click="open = false" @class(['flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500', 'bg-clinic-50 text-clinic-700' => request()->routeIs('notifications.*'), 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' => ! request()->routeIs('notifications.*')])>
                 <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
                 <span class="flex-1">Notifikasi</span>
                 <span data-notification-count @class(['rounded-full bg-clinic-500 px-2 py-0.5 text-[10px] font-bold text-white', 'hidden' => auth()->user()->unreadNotifications()->count() === 0])>{{ auth()->user()->unreadNotifications()->count() }}</span>

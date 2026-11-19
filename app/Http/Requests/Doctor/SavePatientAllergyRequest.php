@@ -17,7 +17,7 @@ class SavePatientAllergyRequest extends FormRequest
     {
         $visit = $this->route('visit');
 
-        return $visit instanceof Visit && $this->user()->can('update', $visit);
+        return $visit instanceof Visit && $this->user()->can('updateAllergies', $visit);
     }
 
     /**
@@ -32,6 +32,9 @@ class SavePatientAllergyRequest extends FormRequest
             'reaction' => ['nullable', 'string', 'max:255'],
             'severity' => ['required', Rule::enum(AllergySeverity::class)],
             'is_active' => ['required', 'boolean'],
+            'request_id' => ['required', 'uuid'],
+            'expected_version' => [$this->route('allergy') ? 'required' : 'nullable', 'string', 'size:64'],
+            'revision_reason' => [$this->route('allergy') ? 'required' : 'nullable', 'string', 'max:2000'],
         ];
     }
 }

@@ -138,8 +138,16 @@ class PatientController extends Controller
 
     public function update(UpdatePatientRequest $request, Patient $patient, AuditLogger $auditLogger): RedirectResponse
     {
-        $patient->update($request->validated());
-        $auditLogger->record($request->user(), 'patient.updated', $patient);
+        DB::transaction(function () use ($request, $patient, $auditLogger): void {
+            $request->user()->clinic()->lockForUpdate()->firstOrFail();
+            $lockedPatient = Patient::query()->where('clinic_id', $request->user()->clinic_id)->lockForUpdate()->findOrFail($patient->id);
+            $wasActive = $lockedPatient->is_active;
+            $lockedPatient->update($request->validated());
+            $auditLogger->record($request->user(), 'patient.updated', $lockedPatient, [
+                'was_active' => $wasActive,
+                'is_active' => $lockedPatient->is_active,
+            ]);
+        }, 3);
 
         return redirect()->route('receptionist.patients.show', $patient)
             ->with('status', 'Data pasien berhasil diperbarui.');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Doctor;
 use App\Http\Controllers\Controller;
 use App\Models\DoctorSchedule;
 use App\Models\Queue;
+use App\Models\Visit;
 use App\QueueStatus;
 use App\Services\SubscriptionService;
 use Carbon\CarbonImmutable;
@@ -57,7 +58,12 @@ class DashboardController extends Controller
         $isToday = $date->isSameDay(CarbonImmutable::now($timezone));
         $canWrite = $user->clinic === null || $subscriptionService->allowsOperationalWrites($user->clinic);
 
+        $careAttention = Visit::query()->where('clinic_id', $user->clinic_id)->where('doctor_id', $doctor?->id)
+            ->whereIn('status', ['PAUSED', 'INTERRUPTED'])->with(['patient', 'doctor', 'queue', 'resumeReservation'])
+            ->latest('started_at')->limit(4)->get()->filter(fn (Visit $visit): bool => $user->can('view', $visit));
+
         return view('doctor.dashboard', [
+            'careAttention' => $careAttention,
             'metrics' => $metrics,
             'schedules' => $schedules,
             'activeQueue' => $activeQueue,

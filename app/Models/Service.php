@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['clinic_id', 'name', 'description', 'price', 'duration_minutes', 'is_active'])]
+#[Fillable(['clinic_id', 'name', 'description', 'price', 'duration_minutes', 'is_active', 'allows_patient_deposit'])]
 class Service extends Model
 {
     /** @use HasFactory<ServiceFactory> */
@@ -21,6 +21,7 @@ class Service extends Model
         return [
             'price' => 'decimal:2',
             'is_active' => 'boolean',
+            'allows_patient_deposit' => 'boolean',
         ];
     }
 

@@ -106,7 +106,7 @@ class DemoOperationalSeeder extends Seeder
                     $this->queueAttributes($clinic, $doctor, $schedule, $fixture['status'], $index, $today, $eventTime),
                 );
 
-                if (in_array($fixture['status'], [QueueStatus::InProgress, QueueStatus::Completed], true)) {
+                if (in_array($fixture['status'], [QueueStatus::InProgress, QueueStatus::Paused, QueueStatus::Interrupted, QueueStatus::Completed], true)) {
                     $this->seedVisit($appointment, $queue, $doctor, $service, $patient, $fixture['status'], $eventTime);
                 }
             });
@@ -181,6 +181,8 @@ class DemoOperationalSeeder extends Seeder
             ['patient' => 'Maria Christina', 'status' => QueueStatus::Skipped, 'use_dentist' => false],
             ['patient' => 'Yusuf Maulana', 'status' => QueueStatus::NoShow, 'use_dentist' => false],
             ['patient' => 'Lina Marlina', 'status' => QueueStatus::Cancelled, 'use_dentist' => false],
+            ['patient' => 'Ahmad Fauzi', 'status' => QueueStatus::Paused, 'use_dentist' => false],
+            ['patient' => 'Siti Aminah', 'status' => QueueStatus::Interrupted, 'use_dentist' => false],
         ];
     }
 
@@ -192,6 +194,7 @@ class DemoOperationalSeeder extends Seeder
     private function appointmentStatus(QueueStatus $status): AppointmentStatus
     {
         return match ($status) {
+            QueueStatus::Interrupted => AppointmentStatus::Interrupted,
             QueueStatus::Completed => AppointmentStatus::Completed,
             QueueStatus::Cancelled => AppointmentStatus::Cancelled,
             QueueStatus::NoShow => AppointmentStatus::NoShow,
@@ -235,7 +238,9 @@ class DemoOperationalSeeder extends Seeder
                 'service_id' => $service->id,
                 'started_by_user_id' => $doctor->user_id,
                 'completed_by_user_id' => $completed ? $doctor->user_id : null,
-                'status' => $completed ? VisitStatus::Completed : VisitStatus::InProgress,
+                'status' => match ($queueStatus) {
+                    QueueStatus::Paused => VisitStatus::Paused, QueueStatus::Interrupted => VisitStatus::Interrupted, QueueStatus::Completed => VisitStatus::Completed, default => VisitStatus::InProgress
+                },
                 'service_name' => $service->name,
                 'service_price' => $service->price,
                 'total_amount' => $service->price,
@@ -243,6 +248,16 @@ class DemoOperationalSeeder extends Seeder
                 'completed_at' => $completedAt,
             ],
         );
+
+        if ($queueStatus === QueueStatus::Paused) {
+            $visit->forceFill(['pause_mode' => 'RELEASE', 'paused_at' => $startedAt, 'paused_until' => $startedAt->addHour(), 'pause_generation' => 1])->save();
+        }
+        if ($queueStatus === QueueStatus::Interrupted) {
+            $visit->forceFill(['interrupted_at' => $startedAt])->save();
+            foreach (['CARE', 'DOCUMENTATION'] as $kind) {
+                $visit->interruptionTasks()->firstOrCreate(['kind' => $kind], ['clinic_id' => $visit->clinic_id, 'status' => 'OPEN']);
+            }
+        }
 
         $record = MedicalRecord::query()->updateOrCreate(
             ['visit_id' => $visit->id],

@@ -7,7 +7,8 @@ export function bookingSelection(doctors, initial = {}) {
         get availableServices() { return this.selectedDoctor?.services ?? []; },
         get availableSchedules() {
             const day = this.date ? new Date(`${this.date}T00:00:00Z`).getUTCDay() : null;
-            return (this.selectedDoctor?.schedules ?? []).filter(schedule => day === null || Number(schedule.day) === day);
+            return (this.selectedDoctor?.schedules ?? []).filter(schedule => (day === null || Number(schedule.day) === day)
+                && ! (schedule.blocked_dates ?? []).includes(this.date));
         },
     };
 }

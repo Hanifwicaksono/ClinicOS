@@ -106,7 +106,7 @@ class PartialWorkflowCompletionTest extends TestCase
         $visit = $this->visit();
         $other = $this->visit();
         $payload = $this->payload($visit);
-        $allergy = ['substance' => 'Pemicu uji', 'reaction' => 'Reaksi uji', 'severity' => 'CRITICAL', 'is_active' => true];
+        $allergy = ['request_id' => (string) Str::uuid(), 'substance' => 'Pemicu uji', 'reaction' => 'Reaksi uji', 'severity' => 'CRITICAL', 'is_active' => true];
         $this->actingAs($other->doctor->user)->postJson(route('doctor.visits.allergies.store', $visit), $allergy)->assertForbidden();
         $this->actingAs($visit->doctor->user)->postJson(route('doctor.visits.allergies.store', $visit), $allergy)->assertOk();
         $saved = $visit->patient->allergies()->sole();
@@ -114,11 +114,13 @@ class PartialWorkflowCompletionTest extends TestCase
         $this->get(route('doctor.visits.show', $visit))->assertOk()->assertSeeText('Pemicu uji');
         $this->putJson(route('doctor.visits.save', $visit), $payload)->assertConflict();
         $foreign = PatientAllergy::factory()->create(['patient_id' => $other->patient_id]);
-        $this->putJson(route('doctor.visits.allergies.update', [$visit, $foreign]), $allergy)->assertNotFound();
-        $this->putJson(route('doctor.visits.allergies.update', [$visit, $saved]), [...$allergy, 'is_active' => false])->assertOk();
-        $this->assertFalse($saved->refresh()->is_active);
-        $this->assertDatabaseHas('audit_logs', ['action' => 'patient_allergy.updated', 'entity_id' => $saved->id]);
-        $this->assertDatabaseCount('patient_allergies', 2);
+        $revision = [...$allergy, 'request_id' => (string) Str::uuid(), 'expected_version' => $saved->revisionToken(), 'revision_reason' => 'Peninjauan ulang riwayat alergi.', 'is_active' => false];
+        $this->putJson(route('doctor.visits.allergies.update', [$visit, $foreign]), $revision)->assertNotFound();
+        $this->putJson(route('doctor.visits.allergies.update', [$visit, $saved]), $revision)->assertOk();
+        $this->assertTrue($saved->refresh()->is_active);
+        $this->assertFalse($saved->supersededBy->is_active);
+        $this->assertDatabaseHas('audit_logs', ['action' => 'patient_allergy.updated', 'entity_id' => $saved->superseded_by_id]);
+        $this->assertDatabaseCount('patient_allergies', 3);
     }
 
     public function test_allergy_endpoints_reject_administrative_roles_and_invalid_values(): void
@@ -146,9 +148,11 @@ class PartialWorkflowCompletionTest extends TestCase
         $visit = $this->visit();
         $allergy = PatientAllergy::factory()->for($visit->patient)->critical()->create(['substance' => 'Pemicu lama']);
         $this->actingAs($visit->doctor->user)->putJson(route('doctor.visits.allergies.update', [$visit, $allergy]), [
+            'request_id' => (string) Str::uuid(), 'expected_version' => $allergy->revisionToken(), 'revision_reason' => 'Koreksi sesuai hasil konfirmasi pasien.',
             'substance' => 'Pemicu terkoreksi', 'reaction' => 'Reaksi terkoreksi', 'severity' => 'MODERATE', 'is_active' => true,
         ])->assertOk();
-        $this->assertFalse($allergy->refresh()->is_active);
+        $this->assertTrue($allergy->refresh()->is_active);
+        $this->assertNotNull($allergy->superseded_by_id);
         $this->assertSame('Pemicu lama', $allergy->substance);
         $this->assertDatabaseHas('patient_allergies', ['patient_id' => $visit->patient_id, 'substance' => 'Pemicu terkoreksi', 'is_active' => true]);
         $this->assertDatabaseCount('patient_allergies', 2);

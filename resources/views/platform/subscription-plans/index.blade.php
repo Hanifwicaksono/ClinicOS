@@ -27,7 +27,7 @@
                 @if ($plan->prices->isEmpty())
                     <p class="p-6 text-sm text-slate-500">Paket gratis tidak memerlukan harga checkout.</p>
                 @else
-                    <div class="overflow-x-auto"><table class="clinic-table w-full"><thead><tr><th>Durasi</th><th>Harga dan status</th><th class="text-right">Aksi</th></tr></thead><tbody>
+                    <div class="overflow-x-auto clinic-table-scroll" tabindex="0" role="region" aria-label="Tabel data, geser untuk melihat kolom lainnya"><table class="clinic-table w-full"><thead><tr><th>Durasi</th><th>Harga dan status</th><th class="text-right">Aksi</th></tr></thead><tbody>
                         @foreach ($plan->prices as $price)
                             <tr>
                                 <td>{{ $price->duration_months }} bulan</td>

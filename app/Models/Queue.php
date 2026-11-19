@@ -26,6 +26,7 @@ class Queue extends Model
             'no_show_at' => 'datetime',
             'cancelled_at' => 'datetime',
             'completed_at' => 'datetime',
+            'pause_holds_slot' => 'boolean',
         ];
     }
 

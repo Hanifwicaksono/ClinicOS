@@ -24,7 +24,7 @@
         @endforeach
     </section>
 
-    <form method="GET" class="clinic-card mb-6 grid gap-4 p-5 md:grid-cols-2 xl:grid-cols-[minmax(240px,1.5fr)_180px_170px_170px_auto]">
+    <form method="GET" class="clinic-card mb-6 grid gap-4 p-5 sm:grid-cols-2 xl:grid-cols-4">
         <div>
             <label class="clinic-label" for="search">Cari</label>
             <input class="clinic-input" id="search" name="search" value="{{ $search }}" placeholder="Nama, no. RM, diagnosis, layanan…">
@@ -45,7 +45,7 @@
             <label class="clinic-label" for="to">Sampai tanggal</label>
             <input class="clinic-input" id="to" name="to" type="date" value="{{ $to }}">
         </div>
-        <div class="flex items-end gap-2">
+        <div class="flex flex-wrap items-end gap-2 sm:col-span-2 xl:col-span-4">
             <x-clinic-button variant="primary" class="flex-1 px-4">Terapkan</x-clinic-button>
             @if ($search !== '' || $status !== '' || $from !== '' || $to !== '')
                 <x-clinic-button href="{{ route('doctor.medical-records.index') }}" variant="secondary" class="px-4" wire:navigate>Reset</x-clinic-button>
@@ -54,8 +54,8 @@
     </form>
 
     <div class="clinic-card overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="clinic-table w-full">
+        <div class="overflow-x-auto clinic-table-scroll" tabindex="0" role="region" aria-label="Tabel data, geser untuk melihat kolom lainnya">
+            <table class="clinic-table w-full min-w-[64rem]"><colgroup><col style="width:9rem"><col><col style="width:14rem"><col style="width:14rem"><col style="width:8rem"><col style="width:7rem"></colgroup>
                 <thead>
                     <tr>
                         <th>Tanggal</th>

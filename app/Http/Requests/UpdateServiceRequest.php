@@ -35,6 +35,7 @@ class UpdateServiceRequest extends FormRequest
             'price' => ['required', 'numeric', 'min:0', 'max:9999999999.99'],
             'duration_minutes' => ['required', 'integer', 'min:5', 'max:480'],
             'is_active' => ['required', 'boolean'],
+            'allows_patient_deposit' => ['sometimes', 'boolean'],
         ];
     }
 }

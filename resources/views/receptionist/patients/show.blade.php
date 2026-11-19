@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header"><div class="flex w-full items-center justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">{{ $patient->medical_record_number }}</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">{{ $patient->name }}</h1></div><x-clinic-button href="{{ route('receptionist.patients.edit', $patient) }}" variant="secondary" wire:navigate>Edit pasien</x-clinic-button></div></x-slot>
+    <x-slot name="header"><div class="flex w-full flex-wrap items-center justify-between gap-3"><div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">{{ $patient->medical_record_number }}</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">{{ $patient->name }}</h1></div><x-clinic-button href="{{ route('receptionist.patients.edit', $patient) }}" variant="secondary" wire:navigate>Edit pasien</x-clinic-button></div></x-slot>
     @unless($patient->is_active)
         <div class="mb-6 rounded-2xl border border-amber-300 bg-amber-50 px-5 py-4 text-sm text-amber-950" role="status">
             <p class="font-bold">Pasien nonaktif</p>

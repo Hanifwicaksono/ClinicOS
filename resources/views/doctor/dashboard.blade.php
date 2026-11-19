@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex w-full items-center justify-between gap-4">
-            <div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Workspace dokter</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Dashboard Dokter</h1></div>
+        <div class="flex w-full flex-wrap items-center justify-between gap-3">
+            <div><p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Pelayanan pasien</p><h1 class="mt-1 text-xl font-extrabold text-clinic-950">Dashboard dokter</h1></div>
             <div class="flex items-center gap-2 text-xs font-semibold text-slate-500" data-realtime-connection-state="reconnecting" role="status" aria-live="polite" title="Status pembaruan antrean">
                 <span class="h-2 w-2 rounded-full bg-amber-400 animate-pulse" data-realtime-connection-dot aria-hidden="true"></span>
                 <span class="hidden sm:inline" data-realtime-connection-label>Menghubungkan kembali…</span>
@@ -9,6 +9,9 @@
             </div>
         </div>
     </x-slot>
+
+
+
 
     <div data-realtime-queue-channel="clinic.{{ auth()->user()->clinic_id }}.queues">
         <div class="mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -34,6 +37,12 @@
         </div>
 
         <div data-realtime-refresh-root>
+            @if($careAttention->isNotEmpty())
+            <section class="mb-6 overflow-hidden rounded-3xl border border-amber-200 bg-white" aria-labelledby="care-attention-title" data-care-attention>
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-amber-100 bg-amber-50/70 p-5"><div><h3 id="care-attention-title" class="font-extrabold text-clinic-950">Perlu ditindaklanjuti</h3><p class="mt-1 text-sm text-slate-600">Pemeriksaan yang dijeda atau belum selesai ditangani.</p></div><a class="inline-flex min-h-11 items-center text-sm font-bold text-clinic-700" href="{{ route('care-continuity.index') }}">Semua tugas →</a></div>
+                <div class="divide-y divide-slate-100">@foreach($careAttention as $case)<a class="flex flex-col gap-3 p-5 transition hover:bg-clinic-50/40 focus-visible:ring-2 focus-visible:ring-clinic-500 sm:flex-row sm:items-center sm:justify-between" href="{{ route('care-continuity.show',$case) }}"><div><p class="font-extrabold text-clinic-950">{{ $case->patient->name }}</p><p class="mt-1 text-sm text-slate-500">{{ $case->service_name }}@if($case->resumeReservation?->state==='READY') · Pasien siap kembali @endif</p></div><div class="flex items-center gap-4"><x-status-badge :status="$case->status->value" /><span class="text-sm font-bold text-clinic-700">Tinjau →</span></div></a>@endforeach</div>
+            </section>
+            @endif
             <div class="mb-6 hidden rounded-2xl border px-5 py-4 text-sm font-semibold" data-queue-action-feedback role="status" aria-live="polite"></div>
             @if($errors->any())
                 <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm font-semibold text-red-700" role="alert">{{ $errors->first() }}</div>
@@ -60,8 +69,8 @@
                     'border-clinic-300 bg-clinic-50' => $activeQueue->status === \App\QueueStatus::Called,
                     'border-amber-200 bg-white ring-2 ring-amber-100' => $activeQueue->status === \App\QueueStatus::Waiting,
                 ]) aria-labelledby="active-queue-title">
-                    <div class="grid gap-6 lg:grid-cols-[auto_1fr_auto] lg:items-center">
-                        <div @class(['flex h-20 w-20 items-center justify-center rounded-2xl font-display text-2xl font-extrabold', 'bg-white/10 text-white' => $activeQueue->status === \App\QueueStatus::InProgress, 'bg-white text-clinic-700 shadow-sm' => $activeQueue->status !== \App\QueueStatus::InProgress])>{{ $activeQueue->display_number }}</div>
+                    <div class="grid gap-6 xl:grid-cols-[auto_minmax(0,1fr)_auto] xl:items-center">
+                        <div data-queue-number @class(['clinic-queue-number flex min-h-20 w-fit min-w-32 items-center justify-center rounded-2xl px-4 text-2xl', 'bg-white/10 text-white' => $activeQueue->status === \App\QueueStatus::InProgress, 'bg-white text-clinic-700 shadow-sm' => $activeQueue->status !== \App\QueueStatus::InProgress])>{{ $activeQueue->display_number }}</div>
                         <div>
                             <div class="flex flex-wrap items-center gap-3">
                                 <p @class(['text-xs font-bold uppercase tracking-[0.16em]', 'text-clinic-200' => $activeQueue->status === \App\QueueStatus::InProgress, 'text-clinic-700' => $activeQueue->status === \App\QueueStatus::Called, 'text-amber-800' => $activeQueue->status === \App\QueueStatus::Waiting])>{{ ! $isToday ? 'Status antrean pada tanggal ini' : ($activeQueue->status === \App\QueueStatus::InProgress ? 'Pemeriksaan sedang berlangsung' : ($activeQueue->status === \App\QueueStatus::Called ? 'Pasien sudah dipanggil' : 'Pasien berikutnya')) }}</p>
@@ -73,7 +82,7 @@
                                 <p @class(['mt-2 text-xs font-semibold', 'text-clinic-200' => $activeQueue->status === \App\QueueStatus::InProgress, 'text-amber-800' => $activeQueue->status === \App\QueueStatus::Waiting, 'text-clinic-700' => $activeQueue->status === \App\QueueStatus::Called])>{{ $activeQueue->status === \App\QueueStatus::Waiting ? 'Check-in' : ($activeQueue->status === \App\QueueStatus::Called ? 'Dipanggil' : 'Dimulai') }} pukul {{ $activeTime }}</p>
                             @endif
                         </div>
-                        <div class="flex flex-col gap-2 sm:flex-row lg:flex-col">
+                        <div class="flex flex-col gap-2 sm:flex-row xl:flex-col">
                             @if($isInteractive)
                                 @can('call', $activeQueue)
                                     @if($activeQueue->status === \App\QueueStatus::Waiting)
@@ -101,6 +110,8 @@
                         <h3 class="mt-4 font-extrabold text-clinic-950">Tidak ada antrean aktif pada tanggal ini</h3><p class="mt-1 text-sm text-slate-500">Gunakan daftar di bawah untuk melihat riwayat antrean yang tersimpan.</p>
                     @elseif($metrics['booked'] > 0)
                         <h3 class="mt-4 font-extrabold text-clinic-950">Belum ada pasien check-in</h3><p class="mt-1 text-sm text-slate-500">{{ $metrics['booked'] }} pasien masih terjadwal dan belum masuk antrean tunggu.</p>
+                    @elseif($careAttention->isNotEmpty())
+                        <h3 class="mt-4 font-extrabold text-clinic-950">Tidak ada antrean baru yang menunggu</h3><p class="mt-1 text-sm text-slate-500">Pemeriksaan yang dijeda atau terinterupsi tetap perlu ditindaklanjuti melalui kartu di atas.</p>
                     @elseif($metrics['completed'] > 0)
                         <h3 class="mt-4 font-extrabold text-clinic-950">Semua pemeriksaan selesai</h3><p class="mt-1 text-sm text-slate-500">{{ $metrics['completed'] }} pasien sudah dilayani pada tanggal ini.</p>
                     @else
@@ -133,7 +144,7 @@
                             $queueTime = $queueSince ? \Carbon\CarbonImmutable::parse($queueSince)->setTimezone($timezone)->format('H:i') : null;
                         @endphp
                         <div data-queue-id="{{ $queue->id }}" class="flex flex-col gap-3 p-5 transition sm:flex-row sm:items-center">
-                            <span class="font-display text-2xl font-extrabold text-clinic-700">{{ $queue->display_number }}</span>
+                            <span class="clinic-queue-number text-2xl text-clinic-700">{{ $queue->display_number }}</span>
                             <div class="min-w-0 flex-1">
                                 <p class="font-bold text-slate-900">{{ $queue->appointment->patient->name }}</p>
                                 <p class="mt-1 text-xs text-slate-500">

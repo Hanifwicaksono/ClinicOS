@@ -22,6 +22,10 @@ class SecurityHeaders
         $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
         $response->headers->set('Permissions-Policy', 'camera=(), geolocation=(), microphone=()');
 
+        if ($request->routeIs('doctor.visits.*', 'care-continuity.*', 'clinical-documents.*', 'follow-ups.*', 'patient-billing.*', 'clinic-reports.*')) {
+            $response->headers->set('Cache-Control', 'private, no-store');
+        }
+
         if ($request->isSecure()) {
             $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
         }

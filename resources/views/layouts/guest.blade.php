@@ -15,9 +15,9 @@
             $patientLoginPage = request()->routeIs('login');
         @endphp
         <main @class([
-            'grid min-h-screen lg:grid-cols-[1.05fr_1fr]',
+            'grid min-h-screen min-w-0 [overflow-wrap:anywhere] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]',
             'bg-clinic-background' => $adminLoginPage,
-            'bg-white lg:grid-cols-[1fr_1fr]' => $patientLoginPage,
+            'bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]' => $patientLoginPage,
             'bg-white' => ! $adminLoginPage && ! $patientLoginPage,
         ])>
             <section @class([
@@ -56,7 +56,7 @@
             </section>
 
             <section @class([
-                'flex items-center justify-center px-5 py-10 sm:px-10',
+                'flex min-w-0 items-center justify-center px-5 py-10 sm:px-10',
                 'bg-clinic-background' => ! $patientLoginPage,
                 'bg-white' => $patientLoginPage,
             ])>

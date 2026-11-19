@@ -29,7 +29,7 @@
             @if ($backUrl)
                 <a href="{{ $backUrl }}" class="inline-flex max-w-full items-center gap-2 break-words text-sm font-bold text-clinic-300 hover:text-white">
                     <span aria-hidden="true">←</span>
-                    <span>{{ $clinicName }}</span>
+                    <span class="clinic-queue-label min-w-0" title="{{ $clinicName }}">{{ $clinicName }}</span>
                 </a>
             @else
                 <p class="max-w-full break-words text-sm font-bold text-clinic-300">{{ $clinicName }}</p>

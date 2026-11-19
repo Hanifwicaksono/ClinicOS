@@ -16,6 +16,8 @@
         'WAITING' => 'Menunggu',
         'IN_PROGRESS' => 'Diperiksa',
         'BOOKED' => 'Belum check-in',
+        'PAUSED' => 'Dijeda',
+        'INTERRUPTED' => 'Pelayanan terinterupsi',
         'COMPLETED' => 'Selesai',
         'CANCELLED' => 'Dibatalkan',
         'NO_SHOW' => 'Tidak hadir',
@@ -47,25 +49,19 @@
 @endphp
 
 <article {{ $attributes->class([
-    'clinic-card min-w-0 overflow-hidden p-5 sm:p-6 2xl:p-8',
+    'clinic-card min-w-0 overflow-hidden p-5 sm:p-6',
     'ring-2 ring-clinic-200' => $status === 'CALLED',
 ]) }}>
-    <div class="flex min-w-0 items-start justify-between gap-3 sm:gap-5">
-        <div class="min-w-0">
-            <p class="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Nomor antrean</p>
-            <p class="mt-2 max-w-full break-words font-display text-4xl font-extrabold leading-none text-clinic-700 sm:text-5xl 2xl:text-6xl">
-                {{ $displayNumber }}
-            </p>
-        </div>
-        <span class="shrink-0 rounded-full px-3 py-1.5 text-xs font-bold sm:text-sm {{ $statusClasses }}">
-            {{ $statusLabel }}
-        </span>
+    <div class="flex min-w-0 items-start justify-between gap-3">
+        <p class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Nomor antrean</p>
+        <span class="shrink-0 rounded-full px-3 py-1.5 text-xs font-bold sm:text-sm {{ $statusClasses }}">{{ $statusLabel }}</span>
     </div>
+    <p class="clinic-queue-number mt-3 text-3xl text-clinic-700 sm:text-4xl">{{ $displayNumber }}</p>
 
     <dl class="mt-6 grid min-w-0 gap-4 border-t border-slate-100 pt-4 sm:grid-cols-2">
         <div class="min-w-0">
             <dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Poli</dt>
-            <dd class="mt-1 break-words text-lg font-extrabold text-slate-900">
+            <dd class="clinic-queue-label mt-1 break-words text-lg font-extrabold text-slate-900" title="{{ $poliLabel }}">
                 {{ $poliLabel ?: 'Poli belum ditentukan' }}
             </dd>
         </div>
@@ -73,7 +69,7 @@
             <div class="min-w-0 sm:text-right">
                 @if ($doctorLabel)
                     <dt class="text-xs font-bold uppercase tracking-wider text-slate-400">Dokter</dt>
-                    <dd class="mt-1 break-words font-bold text-slate-800">{{ $doctorLabel }}</dd>
+                    <dd class="clinic-queue-label mt-1 break-words font-bold text-slate-800" title="{{ $doctorLabel }}">{{ $doctorLabel }}</dd>
                 @endif
                 @if ($sessionLabel)
                     <dd class="mt-1 break-words text-sm text-slate-500">{{ $sessionLabel }}</dd>

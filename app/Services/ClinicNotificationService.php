@@ -5,14 +5,18 @@ namespace App\Services;
 use App\AppointmentStatus;
 use App\Events\QueueUpdated;
 use App\Jobs\BroadcastClinicQueueUpdate;
+use App\Jobs\DeliverCareNotification;
 use App\Jobs\DeliverClinicNotification;
 use App\Models\Appointment;
+use App\Models\CareNotificationDelivery;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Queue;
 use App\Models\Scopes\ClinicScope;
 use App\Models\User;
+use App\Models\Visit;
 use App\Notifications\AppointmentStatusNotification;
+use App\Notifications\CareWorkflowNotification;
 use App\Notifications\QueueStatusNotification;
 use App\QueueStatus;
 use Illuminate\Queue\DatabaseQueue;
@@ -65,6 +69,29 @@ class ClinicNotificationService
                 $queue->display_number,
                 $queue->status,
             ));
+        });
+    }
+
+    public function careWorkflow(Visit $visit, User $recipient, string $kind, int $generation): void
+    {
+        DB::transaction(function () use ($visit, $recipient, $kind, $generation): void {
+            $delivery = new CareNotificationDelivery([
+                'clinic_id' => $visit->clinic_id, 'visit_id' => $visit->id,
+                'recipient_user_id' => $recipient->id, 'kind' => $kind, 'generation' => $generation,
+                'notification_id' => (string) Str::uuid(),
+            ]);
+            $delivery->setRelation('visit', $visit);
+            if (! $delivery->canDeliver($recipient) || CareNotificationDelivery::query()
+                ->where('visit_id', $visit->id)->where('recipient_user_id', $recipient->id)->where('kind', $kind)->where('generation', $generation)->exists()) {
+                return;
+            }
+            $delivery->save();
+            $notification = new CareWorkflowNotification($visit->id, $kind);
+            $notification->id = $delivery->notification_id;
+            Notification::sendNow($recipient, $notification, ['database']);
+            $delivery->database_sent_at = now();
+            $delivery->save();
+            $this->databaseQueue()->push((new DeliverCareNotification($delivery->id))->beforeCommit());
         });
     }
 

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Appointment;
 use App\Models\Queue;
 use App\Models\Visit;
+use App\Models\VisitResumeReservation;
 use App\QueueStatus;
 use App\VisitStatus;
 
@@ -19,6 +20,12 @@ class QueueEtaService
         $timezone = $appointment->clinic->settings?->timezone ?? 'Asia/Jakarta';
         if ($queue === null || ! $queue->queue_date->isSameDay(now($timezone))
             || ! in_array($queue->status, [QueueStatus::Waiting, QueueStatus::Called, QueueStatus::InProgress], true)) {
+            return null;
+        }
+
+        if (Queue::query()->where('clinic_id', $queue->clinic_id)->where('doctor_schedule_id', $queue->doctor_schedule_id)->whereDate('queue_date', $queue->queue_date)
+            ->where('status', QueueStatus::Paused)->exists()
+            || VisitResumeReservation::query()->where('clinic_id', $queue->clinic_id)->where('doctor_schedule_id', $queue->doctor_schedule_id)->whereDate('resume_date', $queue->queue_date)->where('state', 'READY')->exists()) {
             return null;
         }
 
@@ -44,8 +51,8 @@ class QueueEtaService
             ->whereColumn('completed_at', '>', 'started_at')
             ->latest('completed_at')
             ->limit(self::HistoryLimit)
-            ->get(['started_at', 'completed_at'])
-            ->map(fn (Visit $visit): int => (int) round($visit->started_at->diffInMinutes($visit->completed_at)));
+            ->get(['started_at', 'completed_at', 'paused_seconds'])
+            ->map(fn (Visit $visit): int => max(0, (int) round(($visit->started_at->diffInSeconds($visit->completed_at) - $visit->paused_seconds) / 60)));
 
         $peopleInFront = Queue::query()
             ->where('clinic_id', $queue->clinic_id)

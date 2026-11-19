@@ -161,3 +161,12 @@ test('booking filters services by doctor and sessions by the selected date', () 
     state.date = '2026-11-11';
     assert.deepEqual(state.availableSchedules, []);
 });
+
+test('booking excludes dates blocked by doctor absence without hiding other sessions', () => {
+    const state = bookingSelection([{ id: 1, schedules: [
+        { id: 11, day: 3, blocked_dates: ['2026-11-18'] }, { id: 12, day: 3, blocked_dates: [] },
+    ] }], { doctor_id: 1, appointment_date: '2026-11-18' });
+    assert.deepEqual(state.availableSchedules.map(schedule => schedule.id), [12]);
+    state.date = '2026-11-25';
+    assert.deepEqual(state.availableSchedules.map(schedule => schedule.id), [11, 12]);
+});

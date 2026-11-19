@@ -20,10 +20,22 @@
 @layer base {
     html {
         scroll-behavior: smooth;
+        scrollbar-gutter: stable;
     }
 
     body {
+        overflow-wrap: anywhere;
         @apply bg-clinic-background text-clinic-text;
+    }
+
+    input, select, textarea {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    button, [role="button"] {
+        overflow-wrap: normal;
+        word-break: normal;
     }
 
     h1, h2, h3, h4 {
@@ -83,7 +95,14 @@
 
 @layer components {
     .clinic-card {
+        min-width: 0;
+        overflow-wrap: anywhere;
         @apply rounded-3xl border border-clinic-border bg-clinic-surface shadow-card;
+    }
+
+    .clinic-queue-number {
+        @apply inline-block shrink-0 whitespace-nowrap font-display font-extrabold leading-none tabular-nums;
+        overflow-wrap: normal;
     }
 
     .clinic-label {
@@ -98,32 +117,104 @@
         @apply border-red-400 focus:border-red-500 focus:ring-red-500;
     }
 
+    .clinic-button-primary, .clinic-button-secondary, .clinic-button-danger {
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+
     .clinic-button-primary {
-        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-clinic-primary px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-clinic-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
+        @apply inline-flex min-h-11 max-w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-clinic-primary px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-clinic-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     .clinic-button-secondary {
-        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-clinic-border bg-clinic-surface px-5 py-3 text-sm font-bold text-clinic-secondary transition hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
+        @apply inline-flex min-h-11 max-w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-clinic-border bg-clinic-surface px-5 py-3 text-sm font-bold text-clinic-secondary transition hover:border-clinic-200 hover:bg-clinic-50 hover:text-clinic-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     .clinic-button-danger {
-        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
+        @apply inline-flex min-h-11 max-w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .clinic-disclosure {
+        @apply rounded-2xl border border-slate-200 bg-white p-4 sm:p-5;
+    }
+
+    .clinic-disclosure > summary {
+        @apply min-h-11 cursor-pointer py-2 text-sm font-bold text-clinic-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500;
+    }
+
+    .clinic-disclosure[open] > summary {
+        @apply border-b border-slate-100 pb-4;
+    }
+
+    .clinic-list-link {
+        @apply flex min-h-20 flex-col gap-3 break-words rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-clinic-300 hover:bg-clinic-50/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clinic-500 sm:flex-row sm:items-center sm:justify-between;
+    }
+
+    .clinic-table-scroll {
+        max-width: 100%;
+        overscroll-behavior-x: contain;
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-clinic-500;
+    }
+
+    .clinic-table {
+        width: 100%;
+        min-width: 52rem;
+        table-layout: fixed;
+        overflow-wrap: anywhere;
     }
 
     .clinic-table th {
+        overflow-wrap: normal;
+        white-space: nowrap;
         @apply border-b border-slate-200 bg-slate-50 px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-slate-500;
     }
 
     .clinic-table td {
+        vertical-align: top;
         @apply border-b border-slate-100 px-5 py-4 text-sm text-slate-700;
     }
 
+    .clinic-queue-label,
+    .clinic-table td p:not([role="alert"]):not([data-care-error]),
+    .clinic-list-link > div:first-child > p,
+    [data-queue-patient] > p:nth-child(2),
+    #active-queue-title {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .clinic-table-scroll::before {
+        content: 'Geser tabel untuk melihat kolom lainnya';
+        position: sticky;
+        left: 0;
+        display: block;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.75rem;
+        color: var(--color-brand-secondary);
+        background: #f8fafc;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    @screen xl {
+        .clinic-table-scroll::before { display: none; }
+    }
+
+    .clinic-table td.text-right a {
+        display: inline-flex;
+        min-height: 2.75rem;
+        align-items: center;
+        white-space: nowrap;
+        overflow-wrap: normal;
+    }
+
     .clinic-status-active {
-        @apply inline-flex items-center gap-1.5 rounded-full bg-clinic-100 px-2.5 py-1 text-xs font-bold text-clinic-700;
+        @apply inline-flex max-w-full shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-clinic-100 px-2.5 py-1 text-xs font-bold text-clinic-700;
     }
 
     .clinic-status-inactive {
-        @apply inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600;
+        @apply inline-flex max-w-full shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600;
     }
 
     .clinic-badge-accent {

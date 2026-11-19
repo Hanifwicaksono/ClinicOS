@@ -17,6 +17,7 @@ class CompleteVisitRequest extends SaveMedicalRecordRequest
     {
         return [
             ...parent::rules(),
+            'follow_up_goal_confirmed' => ['sometimes', 'accepted'],
             'subjective' => ['required', 'string', 'max:10000'],
             'assessment' => ['required', 'string', 'max:10000'],
             'plan' => ['required', 'string', 'max:10000'],

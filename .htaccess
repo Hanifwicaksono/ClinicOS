@@ -1,0 +1,18 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule (^|/)\. - [F,L]
+
+    # Source files must not be served when Apache exposes the project directory.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^(?!public(?:/|$)).+ - [F,L]
+
+    RewriteRule ^$ %{REQUEST_URI}public/ [R=302,L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    Require all denied
+</IfModule>

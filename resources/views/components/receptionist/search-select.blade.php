@@ -19,8 +19,8 @@
     <div class="relative">
         <input class="clinic-input pr-10" id="{{ $name }}_search" type="search" x-model="query" @input="search()" @focus="open = true" @keydown.escape="open = false" @keydown.down.prevent="const results = $event.target.parentElement.querySelector('[x-ref=results]'); open = true; $nextTick(() => results.querySelector('button')?.focus())" autocomplete="off" placeholder="{{ $placeholder }}" @if ($required) required @endif>
         @if ($emptyLabel)<button x-cloak x-show="selectedId" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400 hover:text-slate-700" @click="clear()" aria-label="Hapus pilihan {{ strtolower($label) }}">×</button>@endif
-        <div x-ref="results" x-cloak x-show="open" @click.outside="open = false" @keydown.escape="open = false; $el.parentElement.querySelector('input[type=search]').focus()" class="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
-            <template x-for="option in results" :key="option.id"><button type="button" class="block w-full px-4 py-3 text-left text-sm text-slate-700 hover:bg-clinic-50" @click="select(option)" x-text="option.label"></button></template>
+        <div x-ref="results" x-cloak x-show="open" @click.outside="open = false" @keydown.escape="open = false; $el.parentElement.querySelector('input[type=search]').focus()" class="absolute z-20 mt-2 w-full max-h-64 overflow-y-auto overscroll-contain rounded-xl border border-slate-200 bg-white shadow-lg">
+            <template x-for="option in results" :key="option.id"><button type="button" class="block w-full whitespace-normal [overflow-wrap:anywhere] px-4 py-3 text-left text-sm text-slate-700 hover:bg-clinic-50" @click="select(option)" x-text="option.label"></button></template>
             <p x-show="!results.length" class="px-4 py-3 text-sm text-slate-500">{{ $label }} tidak ditemukan.</p>
         </div>
     </div>

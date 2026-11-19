@@ -67,6 +67,7 @@ class Patient extends Model
     public function criticalAllergies(): HasMany
     {
         return $this->allergies()
+            ->whereNull('superseded_by_id')
             ->where('is_active', true)
             ->where('severity', AllergySeverity::Critical);
     }
@@ -74,6 +75,6 @@ class Patient extends Model
     public function allergyVersion(): string
     {
         return hash('sha256', $this->allergies()->orderBy('id')
-            ->get(['id', 'substance', 'reaction', 'severity', 'is_active'])->toJson());
+            ->get(['id', 'substance', 'reaction', 'severity', 'is_active', 'superseded_by_id', 'revision_number'])->toJson());
     }
 }

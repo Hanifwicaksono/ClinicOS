@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex w-full items-center justify-between gap-4">
+        <div class="flex w-full flex-wrap items-center justify-between gap-3">
             <div>
                 <p class="text-xs font-bold uppercase tracking-[0.16em] text-clinic-600">Workspace admin</p>
                 <h1 class="mt-1 text-xl font-extrabold text-clinic-950">Dashboard</h1>
@@ -10,6 +10,10 @@
             @endif
         </div>
     </x-slot>
+
+
+
+
 
     @if (! $clinic)
         <section class="overflow-hidden rounded-3xl bg-clinic-950 px-6 py-10 text-white sm:px-10 lg:flex lg:items-center lg:justify-between">

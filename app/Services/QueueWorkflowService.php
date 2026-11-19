@@ -3,10 +3,13 @@
 namespace App\Services;
 
 use App\AppointmentStatus;
+use App\Models\Clinic;
 use App\Models\DoctorSchedule;
 use App\Models\Queue;
 use App\Models\User;
+use App\Models\VisitResumeReservation;
 use App\QueueStatus;
+use App\VisitStatus;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -28,6 +31,7 @@ class QueueWorkflowService
     public function call(Queue $queue, User $actor): Queue
     {
         return DB::transaction(function () use ($queue, $actor): Queue {
+            Clinic::query()->lockForUpdate()->findOrFail($queue->clinic_id);
             DoctorSchedule::query()->lockForUpdate()->findOrFail($queue->doctor_schedule_id);
             $lockedQueue = Queue::query()->lockForUpdate()->findOrFail($queue->id);
 
@@ -39,7 +43,8 @@ class QueueWorkflowService
                 ->where('doctor_id', $lockedQueue->doctor_id)
                 ->where('doctor_schedule_id', $lockedQueue->doctor_schedule_id)
                 ->whereDate('queue_date', $lockedQueue->queue_date)
-                ->whereIn('status', [QueueStatus::Called->value, QueueStatus::InProgress->value])
+                ->where(fn ($query) => $query->whereIn('status', [QueueStatus::Called->value, QueueStatus::InProgress->value])
+                    ->orWhere(fn ($paused) => $paused->where('status', QueueStatus::Paused)->where('pause_holds_slot', true)))
                 ->where('id', '!=', $lockedQueue->id)
                 ->exists();
 
@@ -47,6 +52,14 @@ class QueueWorkflowService
                 throw ValidationException::withMessages([
                     'queue' => 'Selesaikan atau lewati panggilan aktif sebelum memanggil antrean berikutnya.',
                 ]);
+            }
+
+            $hasReadyResume = VisitResumeReservation::query()->where('clinic_id', $lockedQueue->clinic_id)
+                ->where('doctor_schedule_id', $lockedQueue->doctor_schedule_id)->whereDate('resume_date', $lockedQueue->queue_date->toDateString())
+                ->where('state', 'READY')->whereHas('visit', fn ($query) => $query->where('status', VisitStatus::Paused)
+                ->whereColumn('visits.resume_reservation_id', 'visit_resume_reservations.id'))->exists();
+            if ($hasReadyResume) {
+                throw ValidationException::withMessages(['queue' => 'Ada pasien siap melanjutkan pemeriksaan pada sesi ini. Dokter perlu melanjutkan visit tersebut terlebih dahulu.']);
             }
 
             $nextQueueId = Queue::query()
@@ -85,6 +98,7 @@ class QueueWorkflowService
     public function cancel(Queue $queue, User $actor, ?string $reason = null): Queue
     {
         return DB::transaction(function () use ($queue, $actor, $reason): Queue {
+            Clinic::query()->lockForUpdate()->findOrFail($queue->clinic_id);
             $lockedQueue = Queue::query()->lockForUpdate()->findOrFail($queue->id);
 
             if (! in_array($lockedQueue->status, [
@@ -102,6 +116,8 @@ class QueueWorkflowService
                 'cancel_reason' => $reason,
             ]);
 
+            app(BookingService::class)->releaseContinuationBooking($lockedQueue->appointment, $actor);
+
             return $this->applyTransition($lockedQueue, $actor, QueueStatus::Cancelled, [
                 'cancelled_at' => now(),
             ], ['reason' => $reason]);
@@ -111,6 +127,7 @@ class QueueWorkflowService
     public function markNoShow(Queue $queue, User $actor): Queue
     {
         return DB::transaction(function () use ($queue, $actor): Queue {
+            Clinic::query()->lockForUpdate()->findOrFail($queue->clinic_id);
             $lockedQueue = Queue::query()
                 ->with(['appointment.clinic.settings', 'schedule'])
                 ->lockForUpdate()
@@ -139,6 +156,8 @@ class QueueWorkflowService
 
             $lockedQueue->appointment()->update(['status' => AppointmentStatus::NoShow]);
 
+            app(BookingService::class)->releaseContinuationBooking($lockedQueue->appointment, $actor);
+
             return $this->applyTransition($lockedQueue, $actor, QueueStatus::NoShow, [
                 'no_show_at' => now(),
             ]);
@@ -154,6 +173,7 @@ class QueueWorkflowService
         array $attributes = [],
     ): Queue {
         return DB::transaction(function () use ($queue, $actor, $from, $to, $attributes): Queue {
+            Clinic::query()->lockForUpdate()->findOrFail($queue->clinic_id);
             $lockedQueue = Queue::query()->lockForUpdate()->findOrFail($queue->id);
             $this->ensureOperationalDate($lockedQueue);
             $this->ensureStatus($lockedQueue, $from);
@@ -174,6 +194,9 @@ class QueueWorkflowService
         array $metadata = [],
     ): Queue {
         $previousStatus = $queue->status;
+        if ($previousStatus === QueueStatus::Skipped && $status === QueueStatus::Waiting) {
+            $queue->near_turn_return_pending = true;
+        }
         $queue->update(['status' => $status, ...$attributes]);
         $this->auditLogger->recordForClinic(
             $queue->clinic,

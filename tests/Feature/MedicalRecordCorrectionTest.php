@@ -77,7 +77,7 @@ class MedicalRecordCorrectionTest extends TestCase
         $this->actingAs($context['doctor_user'])
             ->get(route('doctor.visits.show', $visit))
             ->assertOk()
-            ->assertSeeText('Finalized · Modification')
+            ->assertSeeText('Final · dikoreksi')
             ->assertSeeText('Modification 1')
             ->assertSeeText($payload['correction_reason'])
             ->assertSee('<details class="mt-4">', false)

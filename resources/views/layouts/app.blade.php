@@ -13,6 +13,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+        <a href="#main-content" class="sr-only rounded-xl bg-white px-5 py-3 font-bold text-clinic-800 shadow-lg focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:outline-none focus:ring-2 focus:ring-clinic-500">Lewati ke konten utama</a>
         @php
             $validationMessages = session('errors')?->all() ?? $errors->all();
         @endphp
@@ -28,7 +29,7 @@
                     </header>
                 @endif
 
-                <main class="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10">
+                <main id="main-content" tabindex="-1" class="scroll-mt-24 mx-auto min-w-0 max-w-[1440px] [overflow-wrap:anywhere] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10">
                     @php
                         $subscriptionOverview = auth()->check()
                             ? app(\App\Services\SubscriptionService::class)->overviewFor(auth()->user())
