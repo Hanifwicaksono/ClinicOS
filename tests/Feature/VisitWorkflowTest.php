@@ -152,7 +152,7 @@ class VisitWorkflowTest extends TestCase
             ->assertSeeText('Finalized')
             ->assertSee('data-rme-form', false)
             ->assertSee('data-rme-autosave-status', false)
-            ->assertSee('data-initial-state="draft"', false)
+            ->assertSee('data-initial-state="ready"', false)
             ->assertSee('data-rme-field="subjective"', false)
             ->assertSee('aria-describedby="subjective_description"', false)
             ->assertSee('x-on:rme-autosave-state.window', false)

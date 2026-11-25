@@ -101,6 +101,32 @@ test('network failures retain changes and can be retried; conflict stops automat
     client.destroy();
 });
 
+test('text autosave keeps pending photos visible as unsaved work', async () => {
+    const form = new Form();
+    form.querySelector = selector => selector.includes('file') ? { files: [new Blob(['pending'])] } : null;
+    const states = [];
+    form.addEventListener('rme-autosave-state', event => states.push(event.detail.state));
+    const client = new RmeAutosave(form, { request: async () => response(200, { record_version: 1 }) });
+    client.markDirty();
+    await client.flush();
+    assert.equal(states.at(-1), 'photos');
+    assert.equal(client.unsaved, true);
+    client.destroy();
+});
+
+test('editing a final record is labelled as an unsaved correction without autosaving', () => {
+    const form = new Form();
+    form.hasAttribute = () => false;
+    const states = [];
+    form.addEventListener('rme-autosave-state', event => states.push(event.detail.state));
+    const client = new RmeAutosave(form, { request: () => assert.fail('Final records must never autosave') });
+    client.markDirty();
+    assert.equal(states.at(-1), 'amending');
+    assert.equal(client.timer, null);
+    assert.equal(client.unsaved, true);
+    client.destroy();
+});
+
 test('typing during an autosave is saved in a following request with the new version', async () => {
     let release;
     const sent = [];
@@ -145,6 +171,107 @@ test('finalize waits for an active autosave and retains the form on a stale conf
     await Promise.all([saving, submitting]);
     assert.equal(form.inert, false);
     assert.equal(client.blocked, true);
+    client.destroy();
+});
+
+test('manual save reuses a confirmed autosave and does not send the same draft twice', async () => {
+    let release;
+    let requests = 0;
+    const form = new Form();
+    const client = new RmeAutosave(form, { request: async () => {
+        requests++;
+        await new Promise(resolve => { release = resolve; });
+        return response(200, { record_version: 1 });
+    }, navigate: () => assert.fail('A clean confirmed draft does not need a reload') });
+    client.markDirty();
+    const saving = client.flush();
+    const event = { preventDefault() {}, stopImmediatePropagation() {}, submitter: null };
+    const manual = client.submit(event);
+    assert.equal(form.inert, true);
+    release();
+    await Promise.all([saving, manual]);
+    await client.submit(event);
+    assert.equal(requests, 1);
+    assert.equal(form.inert, false);
+    assert.equal(client.unsaved, false);
+    client.destroy();
+});
+
+test('manual save retains changes made during an autosave and uses its confirmed version', async () => {
+    let release;
+    const sent = [];
+    const form = new Form();
+    let navigated = false;
+    const client = new RmeAutosave(form, { request: async (url, options) => {
+        sent.push([...options.body]);
+        if (sent.length === 1) {
+            await new Promise(resolve => { release = resolve; });
+            return response(200, { record_version: 1 });
+        }
+        return response(200, { redirect: '/draft' });
+    }, navigate: () => { navigated = true; } });
+    client.markDirty();
+    const saving = client.flush();
+    form.fields.subjective = 'Newer manual changes';
+    client.markDirty();
+    const manual = client.submit({ preventDefault() {}, stopImmediatePropagation() {}, submitter: null });
+    release();
+    await Promise.all([saving, manual]);
+    assert.equal(sent.length, 2);
+    assert.equal(new Map(sent[1]).get('record_version'), 1);
+    assert.equal(new Map(sent[1]).get('subjective'), 'Newer manual changes');
+    assert.equal(navigated, true);
+    client.destroy();
+});
+
+test('concurrent flush callers wait for the next pending revision without duplicate requests', async () => {
+    const releases = [];
+    let requests = 0;
+    const client = new RmeAutosave(new Form(), { request: async () => {
+        const version = ++requests;
+        await new Promise(resolve => { releases.push(resolve); });
+        return response(200, { record_version: version });
+    } });
+    client.markDirty();
+    const first = client.flush();
+    client.markDirty();
+    const second = client.flush();
+    let thirdFinished = false;
+    const third = client.flush().then(() => { thirdFinished = true; });
+    releases[0]();
+    await first;
+    assert.equal(requests, 2);
+    assert.equal(thirdFinished, false);
+    releases[1]();
+    await Promise.all([second, third]);
+    assert.equal(requests, 2);
+    assert.equal(client.form.elements.record_version.value, 2);
+    client.destroy();
+});
+
+test('pending photos still require a manual request after text autosave', async () => {
+    const form = new Form();
+    form.querySelector = selector => selector.includes('file') ? { files: [new Blob(['pending'])] } : null;
+    let requests = 0;
+    const client = new RmeAutosave(form, { request: async () => ++requests === 1
+        ? response(200, { record_version: 1 }) : response(200, { redirect: '/draft' }), navigate() {} });
+    client.markDirty();
+    await client.flush();
+    await client.submit({ preventDefault() {}, stopImmediatePropagation() {}, submitter: null });
+    assert.equal(requests, 2);
+    client.destroy();
+});
+
+test('a successful HTTP status without a save confirmation retains the manual editor', async () => {
+    const form = new Form();
+    const states = [];
+    form.addEventListener('rme-autosave-state', event => states.push(event.detail.state));
+    const client = new RmeAutosave(form, { request: async () => response(200, {}), navigate: () => assert.fail('No valid acknowledgement') });
+    client.markDirty();
+    await client.submit({ preventDefault() {}, stopImmediatePropagation() {}, submitter: null });
+    assert.equal(states.at(-1), 'error');
+    assert.equal(client.unsaved, true);
+    assert.equal(form.inert, false);
     client.destroy();
 });
 

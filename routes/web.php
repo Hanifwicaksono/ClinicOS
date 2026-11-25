@@ -14,6 +14,7 @@ use App\Http\Controllers\ClinicReportController;
 use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
 use App\Http\Controllers\Doctor\MedicalRecordController as DoctorMedicalRecordController;
 use App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
+use App\Http\Controllers\Doctor\VoiceSessionController;
 use App\Http\Controllers\DoctorAbsenceController;
 use App\Http\Controllers\DokuNotificationController;
 use App\Http\Controllers\FollowUpController;
@@ -263,6 +264,14 @@ Route::domain($baseDomain)->group(function (): void {
         Route::get('medical-records', [DoctorMedicalRecordController::class, 'index'])->name('medical-records.index');
         Route::post('queues/{queue}/start', [DoctorVisitController::class, 'start'])->name('visits.start');
         Route::get('visits/{visit}', [DoctorVisitController::class, 'show'])->name('visits.show');
+        Route::prefix('visits/{visit}/voice')->name('voice.')->middleware('throttle:voice')->group(function (): void {
+            Route::get('/', [VoiceSessionController::class, 'index'])->name('index');
+            Route::post('/', [VoiceSessionController::class, 'store'])->name('store');
+            Route::get('{voiceSession}', [VoiceSessionController::class, 'show'])->name('show');
+            Route::post('{voiceSession}/segments', [VoiceSessionController::class, 'segment'])->name('segments');
+            Route::post('{voiceSession}/{action}', [VoiceSessionController::class, 'change'])
+                ->whereIn('action', ['pause', 'resume', 'stop', 'cancel', 'withdraw', 'retry', 'review', 'approve'])->name('change');
+        });
         Route::get('visits/{visit}/photos/{photo}', [DoctorVisitController::class, 'photo'])
             ->whereNumber('photo')->name('visits.photos.show');
         Route::put('visits/{visit}/draft', [DoctorVisitController::class, 'save'])->name('visits.save');

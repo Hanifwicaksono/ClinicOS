@@ -12,3 +12,4 @@ Schedule::command('subscriptions:queue-reminders')->hourly()->withoutOverlapping
 Schedule::command('care:queue-reminders')->everyMinute()->withoutOverlapping();
 
 Schedule::command('patients:queue-reminders')->everyMinute()->withoutOverlapping();
+Schedule::command('voice:purge')->hourly()->withoutOverlapping();

@@ -1,13 +1,14 @@
 @props(['visit'])
 <section class="clinic-card p-5" aria-labelledby="patient-allergies-heading">
     <h2 id="patient-allergies-heading" class="scroll-mt-40 font-extrabold text-clinic-950">Alergi pasien</h2>
-    <p class="mt-2 text-sm leading-6 text-slate-500">Catatan alergi mengikuti pasien. Nonaktifkan catatan yang tidak berlaku; riwayat tetap disimpan.</p>
+    <x-rme.allergy-status :allergies="$visit->patient->allergies" class="mt-3" />
+    <p class="mt-2 text-xs leading-5 text-slate-500">Tinjau zat pemicu, reaksi, dan keparahan sebelum memberi obat. Riwayat revisi tetap disimpan.</p>
     <div class="mt-4 space-y-4">
         @forelse($visit->patient->allergies as $allergy)
             <p class="text-xs text-slate-500">Revisi {{ $allergy->revision_number }} · {{ $allergy->created_at->timezone($visit->clinic->settings?->timezone ?? 'Asia/Jakarta')->format('d/m/Y H:i') }} · {{ $allergy->recordedBy?->name ?? 'Pencatat belum tersedia' }}</p>
             @if(auth()->user()->can('updateAllergies', $visit) && $allergy->superseded_by_id === null)
                 <details class="rounded-xl border border-slate-200 p-3">
-                    <summary class="min-h-11 cursor-pointer break-words text-sm font-bold text-slate-800">{{ $allergy->substance }} · {{ $allergy->severity->label() }}{{ $allergy->is_active ? '' : ' · Nonaktif' }}</summary>
+                    <summary @class(['min-h-11 cursor-pointer break-words text-sm font-bold', 'text-red-800' => $allergy->is_active && $allergy->severity === \App\AllergySeverity::Critical, 'text-slate-800' => ! ($allergy->is_active && $allergy->severity === \App\AllergySeverity::Critical)])>{{ $allergy->substance }} · {{ $allergy->severity->label() }}{{ $allergy->is_active ? '' : ' · Nonaktif' }}@if($allergy->reaction)<span class="mt-1 block text-xs font-normal leading-5">Reaksi: {{ $allergy->reaction }}</span>@endif</summary>
                     <form method="POST" action="{{ route('doctor.visits.allergies.update', [$visit, $allergy]) }}" class="mt-3 space-y-3" data-allergy-form>
                         @csrf @method('PUT')
                         <input type="hidden" name="request_id" value="{{ (string) \Illuminate\Support\Str::uuid() }}">

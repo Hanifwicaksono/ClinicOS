@@ -16,6 +16,7 @@ use App\Models\Visit;
 use App\Services\AddonService;
 use App\Services\VisitWorkflowService;
 use App\VisitStatus;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -60,7 +61,10 @@ class VisitController extends Controller
             ->where('patient_id', $visit->patient_id)
             ->where('doctor_id', $visit->doctor_id)
             ->where('id', '!=', $visit->id)
-            ->with(['medicalRecord.diagnoses'])
+            ->with(['medicalRecord' => function (HasOne $record) use ($visit): void {
+                $record->where('patient_id', $visit->patient_id)->where('doctor_id', $visit->doctor_id)
+                    ->with(['diagnoses', 'treatments', 'prescription.items']);
+            }])
             ->latest('started_at')
             ->limit(10)
             ->get();

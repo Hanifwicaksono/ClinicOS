@@ -25,7 +25,7 @@ class EnsureSubscriptionWritable
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->isMethodSafe()) {
+        if ($request->isMethodSafe() || ($request->routeIs('doctor.voice.change') && in_array($request->route('action'), ['cancel', 'withdraw'], true))) {
             return $next($request);
         }
 
@@ -65,7 +65,7 @@ class EnsureSubscriptionWritable
 
         return $visit instanceof Visit
             && in_array($visit->status, [VisitStatus::InProgress, VisitStatus::Paused, VisitStatus::Interrupted], true)
-            && $request->routeIs('doctor.visits.save', 'doctor.visits.complete', 'doctor.visits.allergies.*', 'doctor.visits.finalize-interruption', 'doctor.visits.correct');
+            && $request->routeIs('doctor.visits.save', 'doctor.visits.complete', 'doctor.visits.allergies.*', 'doctor.visits.finalize-interruption', 'doctor.visits.correct', 'doctor.voice.segments', 'doctor.voice.change');
     }
 
     private function canContinueCare(Request $request): bool

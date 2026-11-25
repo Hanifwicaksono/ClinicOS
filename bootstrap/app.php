@@ -6,14 +6,17 @@ use App\Http\Middleware\EnsureOnboardingComplete;
 use App\Http\Middleware\EnsureSubscriptionWritable;
 use App\Http\Middleware\RefreshRealtimeSession;
 use App\Http\Middleware\SecurityHeaders;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Middleware\PermissionMiddleware;
 use Spatie\Permission\Middleware\RoleMiddleware;
 use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
+use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -47,6 +50,23 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        $exceptions->reportable(function (QueryException $exception): ?bool {
+            if (request()->routeIs('doctor.voice.*')) {
+                Log::error('voice_database_failed', ['route' => request()->route()->getName()]);
+
+                return false;
+            }
+
+            return null;
+        });
+        $exceptions->respond(function (Response $response, Throwable $exception, Request $request): Response {
+            if ($request->routeIs('doctor.voice.*') && $response->getStatusCode() >= 500) {
+                return response()->json(['message' => 'ClinicOS Voice sedang mengalami gangguan. Coba lagi atau gunakan RME manual.'], $response->getStatusCode())
+                    ->header('Cache-Control', 'private, no-store');
+            }
+
+            return $response;
+        });
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );

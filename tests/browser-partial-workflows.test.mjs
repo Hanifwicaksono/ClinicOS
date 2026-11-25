@@ -5,6 +5,8 @@ import { mkdtempSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { auditWorkspacePresentation } from './workspace-presentation.mjs';
+import { auditVoiceScribe } from './voice-scribe-browser.mjs';
+import { auditRmeWorkspace } from './rme-workspace-browser.mjs';
 
 const enabled = process.env.CLINICOS_BROWSER_TEST === '1';
 
@@ -20,6 +22,7 @@ test('clinical and booking workflows in Chrome with an isolated demo database', 
         DB_CONNECTION: 'sqlite', DB_DATABASE: database, DB_URL: '', QUEUE_CONNECTION: 'sync',
         BROADCAST_CONNECTION: 'null', CACHE_STORE: 'array', SESSION_DRIVER: 'database',
         SESSION_DOMAIN: 'null', SESSION_SECURE_COOKIE: 'false', MAIL_MAILER: 'array' };
+    if (process.env.CLINICOS_VOICE_BROWSER_TEST === '1') Object.assign(env, { VOICE_ENABLED: 'true', VOICE_PROVIDER: 'fake', VOICE_CLINIC_IDS: '1' });
     const phpBinary = process.env.PHP_BINARY || 'php';
     const php = ['-d', 'opcache.enable=0', '-d', 'opcache.enable_cli=0', '-d', 'variables_order=EGPCS', '-d', 'extension=pdo_sqlite', '-d', 'extension=sqlite3', '-d', 'extension=gd'];
     for (const path of ['framework/views', 'framework/cache', 'framework/sessions', 'logs', 'app/private', 'app/public']) {
@@ -34,6 +37,7 @@ test('clinical and booking workflows in Chrome with an isolated demo database', 
     server.on('error',error=>{serverStartupError=error.message;});
     const browser = spawn(process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe', [
         '--headless=new', '--disable-gpu', '--no-first-run', '--remote-debugging-port=0',
+        ...(process.env.CLINICOS_VOICE_BROWSER_TEST === '1' ? ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream'] : []),
         `--user-data-dir=${join(directory, 'chrome')}`, 'about:blank',
     ], { stdio: ['ignore', 'ignore', 'pipe'] });
     let socket;
@@ -93,7 +97,7 @@ test('clinical and booking workflows in Chrome with an isolated demo database', 
             await call('Emulation.setFocusEmulationEnabled',{enabled:true});
         }
         async function fill(selector, value) {
-            await evaluate(`(() => { const field = document.querySelector(${JSON.stringify(selector)}); for (let parent = field.parentElement; parent; parent = parent.parentElement) { if (parent.tagName === 'DETAILS') parent.open = true; } field.value = ${JSON.stringify(value)}; field.dispatchEvent(new Event('input', {bubbles:true})); field.dispatchEvent(new Event('change', {bubbles:true})); })()`);
+            await evaluate(`(() => { const field = document.querySelector(${JSON.stringify(selector)}); field.closest('[data-rme-form]')?.rmeWorkspace?.reveal(field, false); for (let parent = field.parentElement; parent; parent = parent.parentElement) { if (parent.tagName === 'DETAILS') parent.open = true; } field.value = ${JSON.stringify(value)}; field.dispatchEvent(new Event('input', {bubbles:true})); field.dispatchEvent(new Event('change', {bubbles:true})); })()`);
         }
         async function checkQueuePresentation(label) {
             for (const width of [375,768,1024,1440]) {
@@ -137,6 +141,18 @@ test('clinical and booking workflows in Chrome with an isolated demo database', 
         await login('doctor');
         const visit = sql.prepare("SELECT v.id, v.medical_record_id FROM (SELECT visits.*, medical_records.id AS medical_record_id FROM visits JOIN medical_records ON medical_records.visit_id = visits.id) v JOIN doctors d ON d.id = v.doctor_id JOIN users u ON u.id = d.user_id JOIN queues q ON q.appointment_id=v.appointment_id WHERE date(q.queue_date)=date('now','+7 hours') AND v.status = 'IN_PROGRESS' AND u.email = 'doctor@clinicos.test' LIMIT 1").get();
         assert.ok(visit, 'Demo must contain an active doctor visit');
+        if (process.env.CLINICOS_RME_BROWSER_TEST) {
+            await auditRmeWorkspace({ sql, call, evaluate, go, waitFor, directory, visit });
+            assert.equal(errors.length, 0, 'RME workspace has no JavaScript exceptions');
+            console.log(`RME browser evidence: ${directory}`);
+            return;
+        }
+        if (process.env.CLINICOS_VOICE_BROWSER_TEST === '1') {
+            await auditVoiceScribe({ sql, call, evaluate, go, waitFor, directory, root, env, php, phpBinary, visit });
+            assert.equal(errors.length, 0, 'Voice workflow has no JavaScript exceptions');
+            console.log(`Voice browser screenshots: ${directory}`);
+            return;
+        }
         const activePatient=sql.prepare('SELECT p.id,p.name FROM patients p JOIN visits v ON v.patient_id=p.id WHERE v.id=?').get(visit.id);
         sql.prepare('UPDATE patients SET name=? WHERE id=?').run('Pasien'+ 'a'.repeat(230),activePatient.id);
         await go('/doctor/dashboard','Boolean(document.querySelector("[data-queue-number]"))');
@@ -151,7 +167,7 @@ test('clinical and booking workflows in Chrome with an isolated demo database', 
             assert.ok(await evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), `RME overflow at ${width}px`);
             const screenshot = await call('Page.captureScreenshot', { format: 'png' });
             writeFileSync(join(directory, `rme-${width}.png`), Buffer.from(screenshot.data, 'base64'));
-            await evaluate('document.querySelector("#structured-clinical-heading").scrollIntoView({block:"start"})');
+            await evaluate('document.querySelector("[data-rme-tab=clinical]").click(); document.querySelector("#structured-clinical-heading").scrollIntoView({block:"start"})');
             await evaluate('new Promise(resolve => setTimeout(resolve, 750))');
             const structured = await call('Page.captureScreenshot', { format: 'png' });
             writeFileSync(join(directory, `clinical-${width}.png`), Buffer.from(structured.data, 'base64'));
@@ -651,8 +667,8 @@ test('clinical and booking workflows in Chrome with an isolated demo database', 
         sql.prepare("UPDATE queues SET queue_date=date('now','+7 hours'),status='WAITING',checked_in_at=datetime('now') WHERE id=?").run(reminderQueue.id);
         sql.prepare("UPDATE appointments SET appointment_date=date('now','+7 hours') WHERE id=?").run(reminderQueue.appointment_id);
         // Self-cancellation is tested before the existing session-start cutoff in this isolated fixture.
-        const reminderStartsAt=localDateTime(20*60000);
-        assert.equal(reminderStartsAt.slice(0,10),localDateTime(0).slice(0,10),'The full browser journey needs at least 20 minutes before clinic-local midnight');
+        const reminderStartsAt=localDateTime(2*60000);
+        assert.equal(reminderStartsAt.slice(0,10),localDateTime(0).slice(0,10),'The reminder cancellation fixture needs two minutes before clinic-local midnight');
         sql.prepare("UPDATE doctor_schedules SET start_time=?,end_time='23:59',is_active=1 WHERE id=?").run(reminderStartsAt.slice(11),reminderQueue.doctor_schedule_id);
         sql.prepare("UPDATE queues SET status='SKIPPED' WHERE id<>? AND clinic_id=? AND doctor_schedule_id=? AND status='WAITING'").run(reminderQueue.id,reminderQueue.clinic_id,reminderQueue.doctor_schedule_id);
         execFileSync(phpBinary,[...php,'artisan','patients:queue-reminders','--no-interaction'],{cwd:root,env,stdio:'pipe',timeout:30000});

@@ -16,6 +16,7 @@
         <a href="#main-content" class="sr-only rounded-xl bg-white px-5 py-3 font-bold text-clinic-800 shadow-lg focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:outline-none focus:ring-2 focus:ring-clinic-500">Lewati ke konten utama</a>
         @php
             $validationMessages = session('errors')?->all() ?? $errors->all();
+            $isClinicalWorkspace = $attributes->has('clinical-workspace');
         @endphp
         <div class="min-h-screen">
             <livewire:layout.navigation />
@@ -23,13 +24,13 @@
             <div class="lg:pl-72">
                 @if (isset($header))
                     <header class="sticky top-16 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm lg:top-0">
-                        <div class="mx-auto flex min-h-16 max-w-[1440px] items-center px-4 sm:min-h-20 sm:px-6 lg:px-10">
+                        <div @class(['mx-auto flex min-h-16 items-center px-4 sm:min-h-20 sm:px-6', 'max-w-[1680px] lg:px-6' => $isClinicalWorkspace, 'max-w-[1440px] lg:px-10' => ! $isClinicalWorkspace])>
                             {{ $header }}
                         </div>
                     </header>
                 @endif
 
-                <main id="main-content" tabindex="-1" class="scroll-mt-24 mx-auto min-w-0 max-w-[1440px] [overflow-wrap:anywhere] px-4 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-10">
+                <main id="main-content" tabindex="-1" @if($isClinicalWorkspace) data-clinical-workspace @endif @class(['scroll-mt-24 mx-auto min-w-0 [overflow-wrap:anywhere] px-4 py-5 sm:px-6 sm:py-7', 'max-w-[1680px] lg:px-6 lg:py-6' => $isClinicalWorkspace, 'max-w-[1440px] lg:px-10 lg:py-10' => ! $isClinicalWorkspace])>
                     @php
                         $subscriptionOverview = auth()->check()
                             ? app(\App\Services\SubscriptionService::class)->overviewFor(auth()->user())

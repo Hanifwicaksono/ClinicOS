@@ -5,9 +5,15 @@
 
 @php
     $states = [
+        'ready' => [
+            'label' => 'Autosave aktif',
+            'message' => 'Manual dan foto: pilih Simpan draft.',
+            'class' => 'border-slate-200 bg-slate-50 text-slate-700',
+            'dot' => 'bg-slate-400',
+        ],
         'draft' => [
-            'label' => 'Draft',
-            'message' => 'Ada perubahan yang belum disimpan.',
+            'label' => 'Perubahan belum tersimpan',
+            'message' => 'Menunggu autosave atau pilih Simpan draft.',
             'class' => 'border-slate-200 bg-slate-50 text-slate-700',
             'dot' => 'bg-slate-400',
         ],
@@ -22,6 +28,12 @@
             'message' => 'Perubahan terakhir sudah tersimpan.',
             'class' => 'border-emerald-200 bg-emerald-50 text-emerald-800',
             'dot' => 'bg-emerald-500',
+        ],
+        'photos' => [
+            'label' => 'Foto belum disimpan',
+            'message' => 'Teks tersimpan. Simpan draft untuk menerapkan perubahan foto.',
+            'class' => 'border-amber-200 bg-amber-50 text-amber-900',
+            'dot' => 'bg-amber-500',
         ],
         'error' => [
             'label' => 'Gagal disimpan',
@@ -46,6 +58,12 @@
             'message' => 'Perubahan berikutnya menjadi Modification.',
             'class' => 'border-clinic-200 bg-clinic-50 text-clinic-800',
             'dot' => 'bg-clinic-500',
+        ],
+        'amending' => [
+            'label' => 'Koreksi belum disimpan',
+            'message' => 'Isi alasan, lalu simpan Modification untuk mencatat revisi.',
+            'class' => 'border-amber-200 bg-amber-50 text-amber-900',
+            'dot' => 'bg-amber-500',
         ],
     ];
     $state = array_key_exists($state, $states) ? $state : 'draft';

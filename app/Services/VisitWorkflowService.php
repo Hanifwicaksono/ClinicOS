@@ -255,6 +255,27 @@ class VisitWorkflowService
         }, 3);
     }
 
+    /** @param array<string, string|null> $fields */
+    public function applyVoiceSoap(Visit $visit, User $actor, array $fields, int $expectedVersion): MedicalRecord
+    {
+        return DB::transaction(function () use ($visit, $actor, $fields, $expectedVersion): MedicalRecord {
+            Clinic::query()->lockForUpdate()->findOrFail($visit->clinic_id);
+            $visit = Visit::query()->lockForUpdate()->findOrFail($visit->id);
+            $this->ensureDoctor($visit, $actor);
+            abort_unless($actor->fresh()->can('medical_record.update'), 403);
+            $this->ensureInProgress($visit);
+            $record = $visit->medicalRecord()->lockForUpdate()->firstOrFail();
+            abort_unless($record->status === MedicalRecordStatus::Draft && $record->lock_version === $expectedVersion, 409,
+                'RME telah berubah atau sudah final. Muat ulang dan tinjau sebelum menerapkan draft Voice.');
+            $record->fill(Arr::only($fields, ClinicalDraftValidator::SOAP_FIELDS));
+            $record->lock_version++;
+            $record->save();
+            $this->auditLogger->recordForClinic($visit->clinic, 'medical_record.voice_applied', $record, ['visit_id' => $visit->id], $actor);
+
+            return $record;
+        }, 3);
+    }
+
     /** @param array<string, mixed> $data */
     private function syncRecord(MedicalRecord $record, array $data, User $actor): void
     {

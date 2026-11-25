@@ -5,10 +5,28 @@ namespace Tests;
 use App\Models\Scopes\ClinicScope;
 use App\Models\Visit;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use RuntimeException;
 
 abstract class TestCase extends BaseTestCase
 {
+    public function createApplication(): Application
+    {
+        $app = parent::createApplication();
+        $connection = $app['config']->get('database.default');
+        $database = $app['db']->connection($connection)->getDatabaseName();
+
+        if (! $app->environment('testing') || ! (
+            ($connection === 'sqlite' && $database === ':memory:')
+            || ($connection === 'mysql' && $database === 'clinicos_testing')
+        )) {
+            throw new RuntimeException('Tests require an uncached testing configuration and an isolated test database. No migrations were run.');
+        }
+
+        return $app;
+    }
+
     public function actingAs(Authenticatable $user, mixed $guard = null): static
     {
         parent::actingAs($user, $guard);

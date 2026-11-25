@@ -9,5 +9,7 @@
 import './echo';
 import './realtime';
 import './rme-autosave';
+import './rme-workspace';
+import './voice-scribe';
 import './booking-form';
 import './patient-duplicates';

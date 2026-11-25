@@ -11,6 +11,7 @@ export class RmeAutosave {
         this.submitting = false;
         this.inFlight = null;
         this.timer = null;
+        this.confirmed = false;
         this.change = () => this.markDirty();
         form.addEventListener('input', this.change);
         form.addEventListener('change', this.change);
@@ -24,7 +25,7 @@ export class RmeAutosave {
         this.form.dispatchEvent(new CustomEvent('rme-autosave-state', { bubbles: true, detail: { state, message } }));
     }
 
-    showErrors(errors = {}) {
+    showErrors(errors = {}, focus = false) {
         for (const message of this.form.querySelectorAll('[data-rme-network-error]')) message.remove();
         for (const field of this.form.querySelectorAll('[data-rme-network-invalid]')) {
             field.removeAttribute('aria-invalid');
@@ -46,6 +47,7 @@ export class RmeAutosave {
             field.setAttribute('aria-describedby', `${field.dataset.previousDescription} ${message.id}`.trim());
             field.after(message);
         }
+        this.form.dispatchEvent(new CustomEvent('rme-validation-errors', { detail: { errors, focus } }));
     }
 
     markDirty() {
@@ -53,7 +55,7 @@ export class RmeAutosave {
         this.dirty = true;
         clearTimeout(this.timer);
         if (this.blocked) return;
-        this.state('draft');
+        this.state(this.enabled ? 'draft' : 'amending');
         if (this.enabled) this.timer = setTimeout(() => this.flush(), this.delay);
     }
 
@@ -64,7 +66,7 @@ export class RmeAutosave {
 
     async flush() {
         clearTimeout(this.timer);
-        if (this.inFlight) await this.inFlight;
+        while (this.inFlight) await this.inFlight;
         if (! this.dirty || this.blocked || this.submitting || ! this.form.isConnected || ! this.enabled) return ! this.blocked;
         this.dirty = false;
         this.state('saving');
@@ -91,7 +93,8 @@ export class RmeAutosave {
                 }
                 if (! Number.isInteger(payload.record_version)) throw new Error('Konfirmasi penyimpanan tidak valid. Coba lagi.');
                 this.form.elements.record_version.value = payload.record_version;
-                this.state(this.dirty ? 'draft' : 'saved');
+                this.confirmed = true;
+                this.state(this.dirty ? 'draft' : this.hasPendingPhotos() ? 'photos' : 'saved');
                 return true;
             } catch (error) {
                 this.dirty = true;
@@ -111,21 +114,29 @@ export class RmeAutosave {
         clearTimeout(this.timer);
         if (this.submitting || this.blocked) return;
         this.submitting = true;
-        if (this.inFlight) await this.inFlight;
+        this.form.inert = true;
+        while (this.inFlight) await this.inFlight;
         if (this.blocked) {
             this.submitting = false;
+            this.form.inert = false;
             return;
         }
-        this.form.inert = true;
+        const action = event.submitter?.getAttribute('formaction') || this.form.action;
+        if (this.enabled && action === this.form.action && this.confirmed && ! this.dirty && ! this.hasPendingPhotos()) {
+            this.submitting = false;
+            this.form.inert = false;
+            this.state('saved');
+            return;
+        }
         this.state('saving');
         try {
-            const response = await this.request(event.submitter?.getAttribute('formaction') || this.form.action, {
+            const response = await this.request(action, {
                 method: 'POST', body: new FormData(this.form), credentials: 'same-origin', cache: 'no-store',
                 headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
                 signal: AbortSignal.timeout(30000),
             });
             const payload = await response.json().catch(() => ({}));
-            this.showErrors(payload.errors);
+            this.showErrors(payload.errors, true);
             if (! response.ok) {
                 this.sessionExpired = [401, 419].includes(response.status);
                 this.blocked = [401, 403, 409, 419].includes(response.status);
@@ -134,6 +145,7 @@ export class RmeAutosave {
                     : response.status === 422 ? Object.values(payload.errors ?? {}).flat()[0]
                     : 'Data belum tersimpan. Periksa koneksi lalu coba lagi.');
             }
+            if (typeof payload.redirect !== 'string' || ! payload.redirect) throw new Error('Konfirmasi penyimpanan tidak valid. Pertahankan isian dan coba lagi.');
             this.dirty = false;
             this.navigate(payload.redirect || window.location.href);
         } catch (error) {
